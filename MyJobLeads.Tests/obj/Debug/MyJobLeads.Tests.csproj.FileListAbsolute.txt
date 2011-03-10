@@ -1,0 +1,8 @@
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.Tests\bin\Debug\MyJobLeads.Tests.dll.config
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.Tests\bin\Debug\MyJobLeads.Tests.dll
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.Tests\bin\Debug\MyJobLeads.Tests.pdb
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.Tests\bin\Debug\MyJobLeads.dll
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.Tests\bin\Debug\MyJobLeads.pdb
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.Tests\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.Tests\obj\Debug\MyJobLeads.Tests.dll
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.Tests\obj\Debug\MyJobLeads.Tests.pdb

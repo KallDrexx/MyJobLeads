@@ -1,0 +1,5 @@
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\bin\MyJobLeads.dll
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\bin\MyJobLeads.pdb
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\obj\Debug\MyJobLeads.dll
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\obj\Debug\MyJobLeads.pdb
