@@ -6,3 +6,6 @@ C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.Tests\bin\Debug\MyJo
 C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.Tests\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.Tests\obj\Debug\MyJobLeads.Tests.dll
 C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.Tests\obj\Debug\MyJobLeads.Tests.pdb
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.Tests\bin\Debug\EntityFramework.dll
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.Tests\bin\Debug\MyJobLeads.DomainModel.dll
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.Tests\bin\Debug\MyJobLeads.DomainModel.pdb

@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="ea6185ec-69f2-4a3d-86bf-aa174897f6e1" name="KallDrexx@KALLTOP 2011-03-11 00:26:53" runUser="KallTop\KallDrexx" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Default Test Settings" id="9c805060-40fb-4f76-83fb-c56756ed9656">
+    <Deployment runDeploymentRoot="KallDrexx_KALLTOP 2011-03-11 00_26_53">
+      <DeploymentItem filename="C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.DomainModel\bin\Debug\MyJobLeads.DomainModel.dll" />
+      <DeploymentItem filename="C:\Users\KallDrexx\Documents\Projects\MyJobLeads\packages\EFCodeFirst.0.8\lib\EntityFramework.dll" />
+      <DeploymentItem filename="C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\bin\MyJobLeads.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2011-03-11T00:26:53.3974511-05:00" queuing="2011-03-11T00:26:57.7406995-05:00" start="2011-03-11T00:26:57.9737128-05:00" finish="2011-03-11T00:27:19.2879319-05:00" />
+  <ResultSummary outcome="Completed">
+    <Counters total="24" executed="24" passed="24" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="ChangePassword_Post_ReturnsViewIfChangePasswordFails" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="fbd19a48-7a68-fded-3442-cb6112a2f1f3">
+      <Execution id="775723c4-60fb-40e8-bb47-cce88724fc6b" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.AccountControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ChangePassword_Post_ReturnsViewIfChangePasswordFails" />
+    </UnitTest>
+    <UnitTest name="Can_Remove_Entities" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="89b44fb1-4a4a-3ac6-c5d2-07735d6caf58">
+      <Execution id="1375edb7-9755-4846-8a4b-db3e70b6071c" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Data.EFUnitOfWorkTests, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Can_Remove_Entities" />
+    </UnitTest>
+    <UnitTest name="LogOn_Post_ReturnsViewIfValidateUserFails" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="c2c1a057-7101-79b9-9361-a52a534693ab">
+      <Execution id="e69805bc-1ac5-47c1-be8b-89b7f7d247ca" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.AccountControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="LogOn_Post_ReturnsViewIfValidateUserFails" />
+    </UnitTest>
+    <UnitTest name="LogOn_Post_ReturnsRedirectOnSuccess_WithoutReturnUrl" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="ab7f7f5b-55e8-6ffd-6347-15d9c75912f4">
+      <Execution id="372833da-bb51-4e41-be4f-c45df694093d" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.AccountControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="LogOn_Post_ReturnsRedirectOnSuccess_WithoutReturnUrl" />
+    </UnitTest>
+    <UnitTest name="Register_Get_ReturnsView" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="5e3e57f5-22b1-9097-019c-1ed0a8dbd9e8">
+      <Execution id="703bc84c-8ef3-4d23-ba58-a4fccda3b5f7" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.AccountControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Register_Get_ReturnsView" />
+    </UnitTest>
+    <UnitTest name="Can_Fetch_Entities" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="c244799b-8a61-8e17-25a8-0a4c528ad902">
+      <Execution id="6ece4cc4-0b14-4cf9-9944-ec3d7787dad3" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Data.InMemoryUnitOfWorkTests, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Can_Fetch_Entities" />
+    </UnitTest>
+    <UnitTest name="LogOn_Get_ReturnsView" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="a1263f6a-f52d-4942-3dc9-b6dc73eff97a">
+      <Execution id="cdf1f314-b59b-419d-9059-3e87a43473a6" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.AccountControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="LogOn_Get_ReturnsView" />
+    </UnitTest>
+    <UnitTest name="ChangePassword_Post_ReturnsViewIfModelStateIsInvalid" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="3fcceb79-5898-d701-ab2d-45d781ebc35f">
+      <Execution id="d3936792-419f-4f06-b3dd-0fbd5fab9ded" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.AccountControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ChangePassword_Post_ReturnsViewIfModelStateIsInvalid" />
+    </UnitTest>
+    <UnitTest name="Register_Post_ReturnsRedirectOnSuccess" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="e1c193c3-9156-446a-2ff0-d2eaba209e4f">
+      <Execution id="3319551c-64f2-4c08-a16a-719095a717a1" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.AccountControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Register_Post_ReturnsRedirectOnSuccess" />
+    </UnitTest>
+    <UnitTest name="Can_Remove_Entities" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="a7606f1a-26f9-89e5-ac83-8295978cd755">
+      <Execution id="f6259a0d-dfd0-4fa0-975b-db87b5a6b790" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Data.InMemoryUnitOfWorkTests, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Can_Remove_Entities" />
+    </UnitTest>
+    <UnitTest name="Register_Post_ReturnsViewIfRegistrationFails" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="236b0303-b6cf-bb08-6e37-1b911fc9242b">
+      <Execution id="2b61caee-be9b-4a19-b4c5-45accdf0f6c1" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.AccountControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Register_Post_ReturnsViewIfRegistrationFails" />
+    </UnitTest>
+    <UnitTest name="ChangePassword_Get_ReturnsView" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="d0415d33-68c4-ee72-6285-ecda0d1e640d">
+      <Execution id="db9af96b-d70f-48ee-b95b-e7c78c3745fc" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.AccountControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ChangePassword_Get_ReturnsView" />
+    </UnitTest>
+    <UnitTest name="LogOn_Post_ReturnsRedirectToHomeOnSuccess_WithExternalReturnUrl" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="9fa909be-c5b9-2b2d-b0f1-66ef51d6fd75">
+      <Execution id="4337d6be-2ac4-48d5-a89d-cdb05eafb7de" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.AccountControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="LogOn_Post_ReturnsRedirectToHomeOnSuccess_WithExternalReturnUrl" />
+    </UnitTest>
+    <UnitTest name="About" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="9a1b1a6f-fd04-c4ac-a7b3-ec48f825c6e3">
+      <Execution id="99f2a097-a297-42d1-b053-53cf400413a3" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.HomeControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="About" />
+    </UnitTest>
+    <UnitTest name="LogOff_LogsOutAndRedirects" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="d73f45f8-5b35-24f6-d567-696424f6f989">
+      <Execution id="1a6b1f09-281a-4b4a-80b8-c67c5a64317b" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.AccountControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="LogOff_LogsOutAndRedirects" />
+    </UnitTest>
+    <UnitTest name="ChangePassword_Post_ReturnsRedirectOnSuccess" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="97fafcc9-ac02-1604-461b-829b17b30ea9">
+      <Execution id="13c7619f-c872-44b7-a4b6-c4d57f939382" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.AccountControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ChangePassword_Post_ReturnsRedirectOnSuccess" />
+    </UnitTest>
+    <UnitTest name="Register_Post_ReturnsViewIfModelStateIsInvalid" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="66bdb291-f34b-51a9-3deb-89829e9281f1">
+      <Execution id="cde18ff5-b901-4ea5-995a-19671a6725d2" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.AccountControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Register_Post_ReturnsViewIfModelStateIsInvalid" />
+    </UnitTest>
+    <UnitTest name="Can_Add_New_Entities" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="6edf184e-fddc-d915-83ba-b25d6eeab8b6">
+      <Execution id="3280ca12-0c81-4ef4-8db9-bc22e0856397" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Data.EFUnitOfWorkTests, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Can_Add_New_Entities" />
+    </UnitTest>
+    <UnitTest name="ChangePasswordSuccess_ReturnsView" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="5c0fccc4-76c1-96a6-3fc6-5a6b8c1247fd">
+      <Execution id="72c382c7-7fdf-4258-bd4b-12bf82e11658" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.AccountControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ChangePasswordSuccess_ReturnsView" />
+    </UnitTest>
+    <UnitTest name="Can_Add_New_Entities" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="3d6025db-5d2a-dcbd-730d-34e5126c162c">
+      <Execution id="b8857a90-f74c-4450-b087-cb0d17f03ed1" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Data.InMemoryUnitOfWorkTests, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Can_Add_New_Entities" />
+    </UnitTest>
+    <UnitTest name="Index" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="c485999a-98a5-d88d-ff7d-ff049d92f51f">
+      <Execution id="ac643ceb-b659-4b57-b5b3-80cbfea72cc3" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.HomeControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Index" />
+    </UnitTest>
+    <UnitTest name="Can_Fetch_Entities" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="5c450de0-dc73-686e-449e-8eeb4f7e89ba">
+      <Execution id="bdd19b1a-3711-428b-8132-1f9075815e73" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Data.EFUnitOfWorkTests, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Can_Fetch_Entities" />
+    </UnitTest>
+    <UnitTest name="LogOn_Post_ReturnsViewIfModelStateIsInvalid" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="6493e1ce-5765-19c9-c90b-7f44fdeb08fa">
+      <Execution id="c543e37c-c037-4dfc-a7c6-b6f9081cff4e" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.AccountControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="LogOn_Post_ReturnsViewIfModelStateIsInvalid" />
+    </UnitTest>
+    <UnitTest name="LogOn_Post_ReturnsRedirectOnSuccess_WithLocalReturnUrl" storage="c:\users\kalldrexx\documents\projects\myjobleads\myjobleads.tests\bin\debug\myjobleads.tests.dll" id="a8c9a37e-6ad6-8b8e-dd15-13a173b700d1">
+      <Execution id="c7c8966e-ce75-471b-98a6-cbfd440aa6bd" />
+      <TestMethod codeBase="C:/Users/KallDrexx/Documents/Projects/MyJobLeads/MyJobLeads.Tests/bin/Debug/MyJobLeads.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MyJobLeads.Tests.Controllers.AccountControllerTest, MyJobLeads.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="LogOn_Post_ReturnsRedirectOnSuccess_WithLocalReturnUrl" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="d0415d33-68c4-ee72-6285-ecda0d1e640d" executionId="db9af96b-d70f-48ee-b95b-e7c78c3745fc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="97fafcc9-ac02-1604-461b-829b17b30ea9" executionId="13c7619f-c872-44b7-a4b6-c4d57f939382" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fbd19a48-7a68-fded-3442-cb6112a2f1f3" executionId="775723c4-60fb-40e8-bb47-cce88724fc6b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3fcceb79-5898-d701-ab2d-45d781ebc35f" executionId="d3936792-419f-4f06-b3dd-0fbd5fab9ded" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5c0fccc4-76c1-96a6-3fc6-5a6b8c1247fd" executionId="72c382c7-7fdf-4258-bd4b-12bf82e11658" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d73f45f8-5b35-24f6-d567-696424f6f989" executionId="1a6b1f09-281a-4b4a-80b8-c67c5a64317b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a1263f6a-f52d-4942-3dc9-b6dc73eff97a" executionId="cdf1f314-b59b-419d-9059-3e87a43473a6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ab7f7f5b-55e8-6ffd-6347-15d9c75912f4" executionId="372833da-bb51-4e41-be4f-c45df694093d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a8c9a37e-6ad6-8b8e-dd15-13a173b700d1" executionId="c7c8966e-ce75-471b-98a6-cbfd440aa6bd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9fa909be-c5b9-2b2d-b0f1-66ef51d6fd75" executionId="4337d6be-2ac4-48d5-a89d-cdb05eafb7de" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6493e1ce-5765-19c9-c90b-7f44fdeb08fa" executionId="c543e37c-c037-4dfc-a7c6-b6f9081cff4e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c2c1a057-7101-79b9-9361-a52a534693ab" executionId="e69805bc-1ac5-47c1-be8b-89b7f7d247ca" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5e3e57f5-22b1-9097-019c-1ed0a8dbd9e8" executionId="703bc84c-8ef3-4d23-ba58-a4fccda3b5f7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e1c193c3-9156-446a-2ff0-d2eaba209e4f" executionId="3319551c-64f2-4c08-a16a-719095a717a1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="236b0303-b6cf-bb08-6e37-1b911fc9242b" executionId="2b61caee-be9b-4a19-b4c5-45accdf0f6c1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="66bdb291-f34b-51a9-3deb-89829e9281f1" executionId="cde18ff5-b901-4ea5-995a-19671a6725d2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6edf184e-fddc-d915-83ba-b25d6eeab8b6" executionId="3280ca12-0c81-4ef4-8db9-bc22e0856397" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="89b44fb1-4a4a-3ac6-c5d2-07735d6caf58" executionId="1375edb7-9755-4846-8a4b-db3e70b6071c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5c450de0-dc73-686e-449e-8eeb4f7e89ba" executionId="bdd19b1a-3711-428b-8132-1f9075815e73" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c485999a-98a5-d88d-ff7d-ff049d92f51f" executionId="ac643ceb-b659-4b57-b5b3-80cbfea72cc3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9a1b1a6f-fd04-c4ac-a7b3-ec48f825c6e3" executionId="99f2a097-a297-42d1-b053-53cf400413a3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3d6025db-5d2a-dcbd-730d-34e5126c162c" executionId="b8857a90-f74c-4450-b087-cb0d17f03ed1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a7606f1a-26f9-89e5-ac83-8295978cd755" executionId="f6259a0d-dfd0-4fa0-975b-db87b5a6b790" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c244799b-8a61-8e17-25a8-0a4c528ad902" executionId="6ece4cc4-0b14-4cf9-9944-ec3d7787dad3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="db9af96b-d70f-48ee-b95b-e7c78c3745fc" testId="d0415d33-68c4-ee72-6285-ecda0d1e640d" testName="ChangePassword_Get_ReturnsView" computerName="KALLTOP" duration="00:00:00.1922489" startTime="2011-03-11T00:26:58.0527173-05:00" endTime="2011-03-11T00:26:58.6927540-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="db9af96b-d70f-48ee-b95b-e7c78c3745fc">
+    </UnitTestResult>
+    <UnitTestResult executionId="13c7619f-c872-44b7-a4b6-c4d57f939382" testId="97fafcc9-ac02-1604-461b-829b17b30ea9" testName="ChangePassword_Post_ReturnsRedirectOnSuccess" computerName="KALLTOP" duration="00:00:00.0022726" startTime="2011-03-11T00:26:58.6977542-05:00" endTime="2011-03-11T00:26:58.7067548-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="13c7619f-c872-44b7-a4b6-c4d57f939382">
+    </UnitTestResult>
+    <UnitTestResult executionId="775723c4-60fb-40e8-bb47-cce88724fc6b" testId="fbd19a48-7a68-fded-3442-cb6112a2f1f3" testName="ChangePassword_Post_ReturnsViewIfChangePasswordFails" computerName="KALLTOP" duration="00:00:00.0119245" startTime="2011-03-11T00:26:58.7097549-05:00" endTime="2011-03-11T00:26:58.7247558-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="775723c4-60fb-40e8-bb47-cce88724fc6b">
+    </UnitTestResult>
+    <UnitTestResult executionId="d3936792-419f-4f06-b3dd-0fbd5fab9ded" testId="3fcceb79-5898-d701-ab2d-45d781ebc35f" testName="ChangePassword_Post_ReturnsViewIfModelStateIsInvalid" computerName="KALLTOP" duration="00:00:00.0033365" startTime="2011-03-11T00:26:58.7267559-05:00" endTime="2011-03-11T00:26:58.7497572-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d3936792-419f-4f06-b3dd-0fbd5fab9ded">
+    </UnitTestResult>
+    <UnitTestResult executionId="72c382c7-7fdf-4258-bd4b-12bf82e11658" testId="5c0fccc4-76c1-96a6-3fc6-5a6b8c1247fd" testName="ChangePasswordSuccess_ReturnsView" computerName="KALLTOP" duration="00:00:00.0045326" startTime="2011-03-11T00:26:58.7547575-05:00" endTime="2011-03-11T00:26:58.7877594-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="72c382c7-7fdf-4258-bd4b-12bf82e11658">
+    </UnitTestResult>
+    <UnitTestResult executionId="1a6b1f09-281a-4b4a-80b8-c67c5a64317b" testId="d73f45f8-5b35-24f6-d567-696424f6f989" testName="LogOff_LogsOutAndRedirects" computerName="KALLTOP" duration="00:00:00.0048793" startTime="2011-03-11T00:26:58.7927597-05:00" endTime="2011-03-11T00:26:58.8137609-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1a6b1f09-281a-4b4a-80b8-c67c5a64317b">
+    </UnitTestResult>
+    <UnitTestResult executionId="cdf1f314-b59b-419d-9059-3e87a43473a6" testId="a1263f6a-f52d-4942-3dc9-b6dc73eff97a" testName="LogOn_Get_ReturnsView" computerName="KALLTOP" duration="00:00:00.0004656" startTime="2011-03-11T00:26:58.8177611-05:00" endTime="2011-03-11T00:26:58.8317619-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cdf1f314-b59b-419d-9059-3e87a43473a6">
+    </UnitTestResult>
+    <UnitTestResult executionId="372833da-bb51-4e41-be4f-c45df694093d" testId="ab7f7f5b-55e8-6ffd-6347-15d9c75912f4" testName="LogOn_Post_ReturnsRedirectOnSuccess_WithoutReturnUrl" computerName="KALLTOP" duration="00:00:00.0045487" startTime="2011-03-11T00:26:58.8357621-05:00" endTime="2011-03-11T00:26:58.8467628-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="372833da-bb51-4e41-be4f-c45df694093d">
+    </UnitTestResult>
+    <UnitTestResult executionId="c7c8966e-ce75-471b-98a6-cbfd440aa6bd" testId="a8c9a37e-6ad6-8b8e-dd15-13a173b700d1" testName="LogOn_Post_ReturnsRedirectOnSuccess_WithLocalReturnUrl" computerName="KALLTOP" duration="00:00:00.0005446" startTime="2011-03-11T00:26:58.8627637-05:00" endTime="2011-03-11T00:26:58.8727643-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c7c8966e-ce75-471b-98a6-cbfd440aa6bd">
+    </UnitTestResult>
+    <UnitTestResult executionId="4337d6be-2ac4-48d5-a89d-cdb05eafb7de" testId="9fa909be-c5b9-2b2d-b0f1-66ef51d6fd75" testName="LogOn_Post_ReturnsRedirectToHomeOnSuccess_WithExternalReturnUrl" computerName="KALLTOP" duration="00:00:00.0070988" startTime="2011-03-11T00:26:58.8767645-05:00" endTime="2011-03-11T00:26:58.8887652-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4337d6be-2ac4-48d5-a89d-cdb05eafb7de">
+    </UnitTestResult>
+    <UnitTestResult executionId="c543e37c-c037-4dfc-a7c6-b6f9081cff4e" testId="6493e1ce-5765-19c9-c90b-7f44fdeb08fa" testName="LogOn_Post_ReturnsViewIfModelStateIsInvalid" computerName="KALLTOP" duration="00:00:00.0038071" startTime="2011-03-11T00:26:58.8957656-05:00" endTime="2011-03-11T00:26:58.9037660-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c543e37c-c037-4dfc-a7c6-b6f9081cff4e">
+    </UnitTestResult>
+    <UnitTestResult executionId="e69805bc-1ac5-47c1-be8b-89b7f7d247ca" testId="c2c1a057-7101-79b9-9361-a52a534693ab" testName="LogOn_Post_ReturnsViewIfValidateUserFails" computerName="KALLTOP" duration="00:00:00.0005397" startTime="2011-03-11T00:26:58.9067662-05:00" endTime="2011-03-11T00:26:58.9167668-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e69805bc-1ac5-47c1-be8b-89b7f7d247ca">
+    </UnitTestResult>
+    <UnitTestResult executionId="703bc84c-8ef3-4d23-ba58-a4fccda3b5f7" testId="5e3e57f5-22b1-9097-019c-1ed0a8dbd9e8" testName="Register_Get_ReturnsView" computerName="KALLTOP" duration="00:00:00.0025476" startTime="2011-03-11T00:26:58.9227671-05:00" endTime="2011-03-11T00:26:58.9337677-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="703bc84c-8ef3-4d23-ba58-a4fccda3b5f7">
+    </UnitTestResult>
+    <UnitTestResult executionId="3319551c-64f2-4c08-a16a-719095a717a1" testId="e1c193c3-9156-446a-2ff0-d2eaba209e4f" testName="Register_Post_ReturnsRedirectOnSuccess" computerName="KALLTOP" duration="00:00:00.0033887" startTime="2011-03-11T00:26:58.9487686-05:00" endTime="2011-03-11T00:26:58.9587692-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3319551c-64f2-4c08-a16a-719095a717a1">
+    </UnitTestResult>
+    <UnitTestResult executionId="2b61caee-be9b-4a19-b4c5-45accdf0f6c1" testId="236b0303-b6cf-bb08-6e37-1b911fc9242b" testName="Register_Post_ReturnsViewIfRegistrationFails" computerName="KALLTOP" duration="00:00:00.0025895" startTime="2011-03-11T00:26:58.9727700-05:00" endTime="2011-03-11T00:26:58.9827705-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2b61caee-be9b-4a19-b4c5-45accdf0f6c1">
+    </UnitTestResult>
+    <UnitTestResult executionId="cde18ff5-b901-4ea5-995a-19671a6725d2" testId="66bdb291-f34b-51a9-3deb-89829e9281f1" testName="Register_Post_ReturnsViewIfModelStateIsInvalid" computerName="KALLTOP" duration="00:00:00.0038851" startTime="2011-03-11T00:26:58.9917711-05:00" endTime="2011-03-11T00:26:59.0077720-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cde18ff5-b901-4ea5-995a-19671a6725d2">
+    </UnitTestResult>
+    <UnitTestResult executionId="3280ca12-0c81-4ef4-8db9-bc22e0856397" testId="6edf184e-fddc-d915-83ba-b25d6eeab8b6" testName="Can_Add_New_Entities" computerName="KALLTOP" duration="00:00:18.0750919" startTime="2011-03-11T00:26:59.0267731-05:00" endTime="2011-03-11T00:27:17.1128075-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3280ca12-0c81-4ef4-8db9-bc22e0856397">
+    </UnitTestResult>
+    <UnitTestResult executionId="1375edb7-9755-4846-8a4b-db3e70b6071c" testId="89b44fb1-4a4a-3ac6-c5d2-07735d6caf58" testName="Can_Remove_Entities" computerName="KALLTOP" duration="00:00:00.1182599" startTime="2011-03-11T00:27:17.1218080-05:00" endTime="2011-03-11T00:27:17.2518155-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1375edb7-9755-4846-8a4b-db3e70b6071c">
+    </UnitTestResult>
+    <UnitTestResult executionId="bdd19b1a-3711-428b-8132-1f9075815e73" testId="5c450de0-dc73-686e-449e-8eeb4f7e89ba" testName="Can_Fetch_Entities" computerName="KALLTOP" duration="00:00:00.1539901" startTime="2011-03-11T00:27:17.2588159-05:00" endTime="2011-03-11T00:27:17.4258254-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bdd19b1a-3711-428b-8132-1f9075815e73">
+    </UnitTestResult>
+    <UnitTestResult executionId="ac643ceb-b659-4b57-b5b3-80cbfea72cc3" testId="c485999a-98a5-d88d-ff7d-ff049d92f51f" testName="Index" computerName="KALLTOP" duration="00:00:00.1203731" startTime="2011-03-11T00:27:17.4358260-05:00" endTime="2011-03-11T00:27:17.5658334-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ac643ceb-b659-4b57-b5b3-80cbfea72cc3">
+    </UnitTestResult>
+    <UnitTestResult executionId="99f2a097-a297-42d1-b053-53cf400413a3" testId="9a1b1a6f-fd04-c4ac-a7b3-ec48f825c6e3" testName="About" computerName="KALLTOP" duration="00:00:00.0007991" startTime="2011-03-11T00:27:17.5738339-05:00" endTime="2011-03-11T00:27:17.5858346-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="99f2a097-a297-42d1-b053-53cf400413a3">
+    </UnitTestResult>
+    <UnitTestResult executionId="b8857a90-f74c-4450-b087-cb0d17f03ed1" testId="3d6025db-5d2a-dcbd-730d-34e5126c162c" testName="Can_Add_New_Entities" computerName="KALLTOP" duration="00:00:00.0072953" startTime="2011-03-11T00:27:17.5918349-05:00" endTime="2011-03-11T00:27:17.6078358-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b8857a90-f74c-4450-b087-cb0d17f03ed1">
+    </UnitTestResult>
+    <UnitTestResult executionId="f6259a0d-dfd0-4fa0-975b-db87b5a6b790" testId="a7606f1a-26f9-89e5-ac83-8295978cd755" testName="Can_Remove_Entities" computerName="KALLTOP" duration="00:00:00.0011965" startTime="2011-03-11T00:27:17.6118361-05:00" endTime="2011-03-11T00:27:17.6178364-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f6259a0d-dfd0-4fa0-975b-db87b5a6b790">
+    </UnitTestResult>
+    <UnitTestResult executionId="6ece4cc4-0b14-4cf9-9944-ec3d7787dad3" testId="c244799b-8a61-8e17-25a8-0a4c528ad902" testName="Can_Fetch_Entities" computerName="KALLTOP" duration="00:00:00.0038022" startTime="2011-03-11T00:27:17.6218366-05:00" endTime="2011-03-11T00:27:17.6298371-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6ece4cc4-0b14-4cf9-9944-ec3d7787dad3">
+    </UnitTestResult>
+  </Results>
+</TestRun>

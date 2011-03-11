@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using MyJobLeads.DomainModel.Entities.EF;
+using System.Data.Entity.Database;
 
 namespace MyJobLeads
 {
@@ -35,6 +37,8 @@ namespace MyJobLeads
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            DbDatabase.SetInitializer<MyJobLeadsDbContext>(new MyJobLeadsDbInitializer());
         }
     }
 }

@@ -1,0 +1,6 @@
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.DomainModel\bin\Debug\MyJobLeads.DomainModel.dll
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.DomainModel\bin\Debug\MyJobLeads.DomainModel.pdb
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.DomainModel\bin\Debug\EntityFramework.dll
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.DomainModel\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.DomainModel\obj\Debug\MyJobLeads.DomainModel.dll
+C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads.DomainModel\obj\Debug\MyJobLeads.DomainModel.pdb
