@@ -16,16 +16,8 @@ namespace MyJobLeads.DomainModel.Data
         }
 
         // Repositories
-        private IRepository<UnitTestEntity> _unitTestEntities;
-        public IRepository<UnitTestEntity> UnitTestEntities
-        {
-            get
-            {
-                if (_unitTestEntities == null)
-                    _unitTestEntities = new InMemoryRepository<UnitTestEntity>(_list);
-                return _unitTestEntities;
-            }
-        }
+        public IRepository<UnitTestEntity> UnitTestEntities { get { return new InMemoryRepository<UnitTestEntity>(_list); } }
+        public IRepository<User> Users { get { return new InMemoryRepository<User>(_list); } }
 
         // UOW Methods
         public void Commit()

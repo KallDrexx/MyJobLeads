@@ -12,6 +12,7 @@ namespace MyJobLeads.DomainModel.Entities.EF
     {
         // Entities
         public DbSet<UnitTestEntity> UnitTestEntities { get; set; }
+        public DbSet<User> Users { get; set; }
 
         /// <summary>
         /// Contains the Entity Framework database configuratoin rules

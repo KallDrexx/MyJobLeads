@@ -17,7 +17,7 @@ namespace MyJobLeads.DomainModel.Utilities
         public static string CreatePasswordHash(string username, string password)
         {
             // Concat username and password together, and generate a password hash from that
-            return BCryptHelper.HashPassword(username + password, BCryptHelper.GenerateSalt(15));
+            return BCryptHelper.HashPassword(username + password, BCryptHelper.GenerateSalt(10));
         }
 
         /// <summary>

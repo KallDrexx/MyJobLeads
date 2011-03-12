@@ -16,19 +16,8 @@ namespace MyJobLeads.DomainModel.Data
         protected MyJobLeadsDbContext _context;
         protected TransactionScope _transaction;
 
-        // Repositories
-        private IRepository<UnitTestEntity> _unitTestEntities;
-        public IRepository<UnitTestEntity> UnitTestEntities
-        {
-            get
-            {
-                if (_unitTestEntities == null)
-                    _unitTestEntities = new EFRepository<UnitTestEntity>(_context);
-                return _unitTestEntities;
-            }
-        }
+        #region Unit Of Work Methods
 
-        // Unit of Work Methods
         public EFUnitOfWork()
         {
             _context = new MyJobLeadsDbContext();
@@ -62,5 +51,32 @@ namespace MyJobLeads.DomainModel.Data
 
             _transaction = null;
         }
+
+        #endregion
+
+        #region Repositories
+        private IRepository<UnitTestEntity> _unitTestEntities;
+        public IRepository<UnitTestEntity> UnitTestEntities
+        {
+            get
+            {
+                if (_unitTestEntities == null)
+                    _unitTestEntities = new EFRepository<UnitTestEntity>(_context);
+                return _unitTestEntities;
+            }
+        }
+
+        private IRepository<User> _users;
+        public IRepository<User> Users
+        {
+            get
+            {
+                if (_users == null)
+                    _users = new EFRepository<User>(_context);
+                return _users;
+            }
+        }
+
+        #endregion
     }
 }

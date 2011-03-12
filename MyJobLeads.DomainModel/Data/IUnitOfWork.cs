@@ -10,6 +10,7 @@ namespace MyJobLeads.DomainModel.Data
     {
         // Repositories
         IRepository<UnitTestEntity> UnitTestEntities { get; }
+        IRepository<User> Users { get; }
 
         /// <summary>
         /// Commits all changes to the database
