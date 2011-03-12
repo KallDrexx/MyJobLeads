@@ -14,7 +14,7 @@ namespace MyJobLeads.DomainModel.Queries.Users
     public class UserByCredentialsQuery : IQuery<User>
     {
         protected IUnitOfWork _unitOfWork;
-        protected string _username;
+        protected string _email;
         protected string _password;
 
         public UserByCredentialsQuery(IUnitOfWork unitOfWork)
@@ -23,13 +23,13 @@ namespace MyJobLeads.DomainModel.Queries.Users
         }
 
         /// <summary>
-        /// Specifies the username of the user to query for
+        /// Specifies the email address of the user to query for
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public UserByCredentialsQuery WithUsername(string username)
+        public UserByCredentialsQuery WithEmail(string username)
         {
-            _username = username;
+            _email = username;
             return this;
         }
 
@@ -53,7 +53,7 @@ namespace MyJobLeads.DomainModel.Queries.Users
             // First return the user with the matching username
             var user = _unitOfWork.Users
                                   .Fetch()
-                                  .Where(x => x.Username == _username)
+                                  .Where(x => x.Email == _email)
                                   .SingleOrDefault();
 
             // If no user was found, return null
@@ -61,7 +61,7 @@ namespace MyJobLeads.DomainModel.Queries.Users
                 return null;
 
             // Check if the password is correct
-            if (PasswordUtils.CheckPasswordHash(_username, _password, user.Password))
+            if (PasswordUtils.CheckPasswordHash(_email, _password, user.Password))
                 return user;
             else
                 return null;

@@ -16,35 +16,35 @@ namespace MyJobLeads.Tests.Queries.Users
         public void Can_Retrieve_User_With_Correct_Credentials()
         {
             // Setup
-            User user1 = new User { Username = "user1", Password = PasswordUtils.CreatePasswordHash("user1", "pass1") };
-            User user2 = new User { Username = "user2", Password = PasswordUtils.CreatePasswordHash("user2", "pass2") };
-            User user3 = new User { Username = "user3", Password = PasswordUtils.CreatePasswordHash("user3", "pass3") };
+            User user1 = new User { Email = "user1", Password = PasswordUtils.CreatePasswordHash("user1", "pass1") };
+            User user2 = new User { Email = "user2", Password = PasswordUtils.CreatePasswordHash("user2", "pass2") };
+            User user3 = new User { Email = "user3", Password = PasswordUtils.CreatePasswordHash("user3", "pass3") };
             _unitOfWork.Users.Add(user1);
             _unitOfWork.Users.Add(user2);
             _unitOfWork.Users.Add(user3);
             _unitOfWork.Commit();
 
             // Act
-            User result = new UserByCredentialsQuery(_unitOfWork).WithUsername("user2")
+            User result = new UserByCredentialsQuery(_unitOfWork).WithEmail("user2")
                                                                  .WithPassword("pass2")
                                                                  .Execute();
 
             // Verify
             Assert.IsNotNull(result, "Query returned a null user");
             Assert.AreEqual(user2.Id, result.Id, "Query returned the wrong user");
-            Assert.AreEqual(user2.Username, result.Username, "Query returned a user with an incorrect username");
+            Assert.AreEqual(user2.Email, result.Email, "Query returned a user with an incorrect email");
         }
 
         [TestMethod]
         public void Incorrect_Username_Returns_Null_User()
         {
             // Setup
-            User user = new User { Username = "user", Password = PasswordUtils.CreatePasswordHash("user", "pass") };
+            User user = new User { Email = "user", Password = PasswordUtils.CreatePasswordHash("user", "pass") };
             _unitOfWork.Users.Add(user);
             _unitOfWork.Commit();
 
             // Act
-            User result = new UserByCredentialsQuery(_unitOfWork).WithUsername("username")
+            User result = new UserByCredentialsQuery(_unitOfWork).WithEmail("username")
                                                                  .WithPassword("pass")
                                                                  .Execute();
 
@@ -56,12 +56,12 @@ namespace MyJobLeads.Tests.Queries.Users
         public void Incorrect_Password_Returns_Null_User()
         {
             // Setup
-            User user = new User { Username = "user", Password = PasswordUtils.CreatePasswordHash("user", "pass") };
+            User user = new User { Email = "user", Password = PasswordUtils.CreatePasswordHash("user", "pass") };
             _unitOfWork.Users.Add(user);
             _unitOfWork.Commit();
 
             // Act
-            User result = new UserByCredentialsQuery(_unitOfWork).WithUsername("user")
+            User result = new UserByCredentialsQuery(_unitOfWork).WithEmail("user")
                                                                  .WithPassword("password")
                                                                  .Execute();
 
