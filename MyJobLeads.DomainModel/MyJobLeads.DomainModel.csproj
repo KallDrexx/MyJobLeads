@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\JobSearches\CreateJobSearchForUserCommand.cs" />
     <Compile Include="Data\EFRepository.cs" />
     <Compile Include="Data\EFUnitOfWork.cs" />
     <Compile Include="Data\InMemoryRepository.cs" />
@@ -64,14 +65,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\JobSearches\JobSearchesByUserIdQuery.cs" />
     <Compile Include="Queries\Users\UserByCredentialsQuery.cs" />
+    <Compile Include="Queries\Users\UserByIdQuery.cs" />
     <Compile Include="Utilities\PasswordUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\JobSearches\CreateJobSearchForUserCommandTests.cs" />
     <Compile Include="Data\EFUnitOfWorkTests.cs" />
     <Compile Include="Data\InMemoryUnitOfWorkTests.cs" />
     <Compile Include="EFTestBase.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Controllers\AccountControllerTest.cs" />
     <Compile Include="Queries\JobSearches\JobSearchesByUserIdQueryTests.cs" />
     <Compile Include="Queries\Users\UserByCredentialsQueryTests.cs" />
+    <Compile Include="Queries\Users\UserByIdQueryTests.cs" />
     <Compile Include="Utilities\PasswordUtilsTests.cs" />
   </ItemGroup>
   <ItemGroup>
