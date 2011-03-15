@@ -11,5 +11,7 @@ namespace MyJobLeads.DomainModel.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         public string DisplayName { get; set; }
+
+        public virtual ICollection<JobSearch> JobSearches { get; set; }
     }
 }

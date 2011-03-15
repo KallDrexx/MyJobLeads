@@ -54,12 +54,16 @@
     <Compile Include="Data\InMemoryUnitOfWork.cs" />
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
+    <Compile Include="Entities\JobSearch.cs" />
     <Compile Include="Entities\EF\MyJobLeadsDbContext.cs" />
     <Compile Include="Entities\EF\MyJobLeadsDbInitializer.cs" />
     <Compile Include="Entities\UnitTestEntity.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Exceptions\MJLEntityNotFoundException.cs" />
+    <Compile Include="Exceptions\MJLException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\IQuery.cs" />
+    <Compile Include="Queries\JobSearches\JobSearchesByUserIdQuery.cs" />
     <Compile Include="Queries\Users\UserByCredentialsQuery.cs" />
     <Compile Include="Utilities\PasswordUtils.cs" />
   </ItemGroup>

@@ -16,12 +16,12 @@ namespace MyJobLeads.DomainModel.Data
         protected MyJobLeadsDbContext _context;
         protected TransactionScope _transaction;
 
-        #region Unit Of Work Methods
-
         public EFUnitOfWork()
         {
             _context = new MyJobLeadsDbContext();
         }
+
+        #region Unit Of Work Methods
 
         public void Commit()
         {
@@ -55,6 +55,18 @@ namespace MyJobLeads.DomainModel.Data
         #endregion
 
         #region Repositories
+
+        private IRepository<JobSearch> _jobSearches;
+        public IRepository<JobSearch> JobSearches
+        {
+            get
+            {
+                if (_jobSearches == null)
+                    _jobSearches = new EFRepository<JobSearch>(_context);
+                return _jobSearches;
+            }
+        }
+
         private IRepository<UnitTestEntity> _unitTestEntities;
         public IRepository<UnitTestEntity> UnitTestEntities
         {

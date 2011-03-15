@@ -60,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Controllers\AccountControllerTest.cs" />
+    <Compile Include="Queries\JobSearches\JobSearchesByUserIdQueryTests.cs" />
     <Compile Include="Queries\Users\UserByCredentialsQueryTests.cs" />
     <Compile Include="Utilities\PasswordUtilsTests.cs" />
   </ItemGroup>

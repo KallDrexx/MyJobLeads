@@ -9,6 +9,7 @@ namespace MyJobLeads.DomainModel.Data
     public interface IUnitOfWork
     {
         // Repositories
+        IRepository<JobSearch> JobSearches { get; }
         IRepository<UnitTestEntity> UnitTestEntities { get; }
         IRepository<User> Users { get; }
 
