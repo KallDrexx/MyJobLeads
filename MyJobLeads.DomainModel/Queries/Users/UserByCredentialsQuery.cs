@@ -11,7 +11,7 @@ namespace MyJobLeads.DomainModel.Queries.Users
     /// <summary>
     /// Query that retrieves a user by the specified user credentials
     /// </summary>
-    public class UserByCredentialsQuery : IQuery<User>
+    public class UserByCredentialsQuery
     {
         protected IUnitOfWork _unitOfWork;
         protected string _email;
