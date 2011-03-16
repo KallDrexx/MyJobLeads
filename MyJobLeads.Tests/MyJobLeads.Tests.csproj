@@ -62,6 +62,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Controllers\AccountControllerTest.cs" />
+    <Compile Include="Queries\Companies\CompaniesByJobSearchIdQueryTests.cs" />
     <Compile Include="Queries\JobSearches\JobSearchByIdQueryTests.cs" />
     <Compile Include="Queries\JobSearches\JobSearchesByUserIdQueryTests.cs" />
     <Compile Include="Queries\Users\UserByCredentialsQueryTests.cs" />

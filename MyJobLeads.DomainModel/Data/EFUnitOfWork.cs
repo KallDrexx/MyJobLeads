@@ -56,6 +56,17 @@ namespace MyJobLeads.DomainModel.Data
 
         #region Repositories
 
+        private IRepository<Company> _companies;
+        public IRepository<Company> Companies
+        {
+            get
+            {
+                if (_companies == null)
+                    _companies = new EFRepository<Company>(_context);
+                return _companies;
+            }
+        }
+
         private IRepository<JobSearch> _jobSearches;
         public IRepository<JobSearch> JobSearches
         {

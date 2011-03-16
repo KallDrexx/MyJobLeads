@@ -12,5 +12,6 @@ namespace MyJobLeads.DomainModel.Entities
         public string Description { get; set; }
 
         public virtual User User { get; set; }
+        public virtual ICollection<Company> Companies { get; set; }
     }
 }
