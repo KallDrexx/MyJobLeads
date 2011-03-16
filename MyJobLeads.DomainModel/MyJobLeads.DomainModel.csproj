@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\JobSearches\CreateJobSearchForUserCommand.cs" />
+    <Compile Include="Commands\JobSearches\EditJobSearchCommand.cs" />
     <Compile Include="Data\EFRepository.cs" />
     <Compile Include="Data\EFUnitOfWork.cs" />
     <Compile Include="Data\InMemoryRepository.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Exceptions\MJLEntityNotFoundException.cs" />
     <Compile Include="Exceptions\MJLException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\JobSearches\JobSearchByIdQuery.cs" />
     <Compile Include="Queries\JobSearches\JobSearchesByUserIdQuery.cs" />
     <Compile Include="Queries\Users\UserByCredentialsQuery.cs" />
     <Compile Include="Queries\Users\UserByIdQuery.cs" />
