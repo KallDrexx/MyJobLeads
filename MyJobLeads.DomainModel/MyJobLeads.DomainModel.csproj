@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Companies\CreateCompanyCommand.cs" />
     <Compile Include="Commands\JobSearches\CreateJobSearchForUserCommand.cs" />
     <Compile Include="Commands\JobSearches\EditJobSearchCommand.cs" />
     <Compile Include="Data\EFRepository.cs" />
