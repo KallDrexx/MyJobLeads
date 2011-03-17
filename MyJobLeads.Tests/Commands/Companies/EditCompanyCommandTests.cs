@@ -1,0 +1,366 @@
+﻿using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.Commands.Companies;
+using MyJobLeads.DomainModel.Exceptions;
+
+namespace MyJobLeads.Tests.Commands.Companies
+{
+    [TestClass]
+    public class EditCompanyCommandTests : EFTestBase
+    {
+        private Company _company;
+
+        private void InitializeTestEntities()
+        {
+            _company = new Company
+            {
+                Name = "Starting Name",
+                Phone = "333-444-5555",
+                City = "Starting City",
+                State = "Starting State",
+                Zip = "00000",
+                MetroArea = "Starting Metro",
+                Industry = "Starting Industry",
+                Notes = "Starting Notes"
+            };
+            _unitOfWork.Companies.Add(_company);
+            _unitOfWork.Commit();
+        }
+
+        [TestMethod]
+        public void Can_Edit_New_Company_For_Job_Search()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+                                                 .SetName("Name")
+                                                 .SetPhone("555-555-5555")
+                                                 .SetCity("City")
+                                                 .SetState("State")
+                                                 .SetZip("01234")
+                                                 .SetMetroArea("Metro")
+                                                 .SetIndustry("Industry")
+                                                 .SetNotes("Notes")
+                                                 .Execute();
+
+            // Verify
+            Company result = _unitOfWork.Companies.Fetch().SingleOrDefault();
+            Assert.IsNotNull(result, "No company was created");
+            Assert.AreEqual("Name", result.Name, "The created company's name was incorrect");
+            Assert.AreEqual("555-555-5555", result.Phone, "The created company's phone number was incorrect");
+            Assert.AreEqual("City", result.City, "The created company's city was incorrect");
+            Assert.AreEqual("State", result.State, "The created company's state was incorrect");
+            Assert.AreEqual("01234", result.Zip, "The created company's zip was incorrect");
+            Assert.AreEqual("Metro", result.MetroArea, "The created company's metro area was incorrect");
+            Assert.AreEqual("Notes", result.Notes, "The created company's notes were incorrect");
+            Assert.AreEqual("Industry", result.Industry, "The created company's industry was incorrect");
+        }
+
+        [TestMethod]
+        public void Execute_Returns_Created_Company()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            Company result = new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+                                                                 .SetName("Name")
+                                                                 .SetPhone("555-555-5555")
+                                                                 .SetCity("City")
+                                                                 .SetState("State")
+                                                                 .SetZip("01234")
+                                                                 .SetMetroArea("Metro")
+                                                                 .SetIndustry("Industry")
+                                                                 .SetNotes("Notes")
+                                                                 .Execute();
+
+            // Verify
+            Assert.IsNotNull(result, "Returned company entity was null");
+            Assert.AreEqual("Name", result.Name, "The created company's name was incorrect");
+            Assert.AreEqual("555-555-5555", result.Phone, "The created company's phone number was incorrect");
+            Assert.AreEqual("City", result.City, "The created company's city was incorrect");
+            Assert.AreEqual("State", result.State, "The created company's state was incorrect");
+            Assert.AreEqual("01234", result.Zip, "The created company's zip was incorrect");
+            Assert.AreEqual("Metro", result.MetroArea, "The created company's metro area was incorrect");
+            Assert.AreEqual("Notes", result.Notes, "The created company's notes were incorrect");
+            Assert.AreEqual("Industry", result.Industry, "The created company's industry was incorrect");
+        }
+
+        [TestMethod]
+        public void Execute_Throws_Exception_When_Company_Not_Found()
+        {
+            // Setup
+            InitializeTestEntities();
+            int id = _company.Id + 1;
+
+            // Act
+            try
+            {
+                new EditCompanyCommand(_unitOfWork).WithCompanyId(id)
+                                                     .SetName("Name")
+                                                     .SetPhone("555-555-5555")
+                                                     .SetCity("City")
+                                                     .SetState("State")
+                                                     .SetZip("01234")
+                                                     .SetMetroArea("Metro")
+                                                     .SetIndustry("Industry")
+                                                     .SetNotes("Notes")
+                                                     .Execute();
+                Assert.Fail("Command did not throw an exception");
+            }
+
+            // Verify
+            catch (MJLEntityNotFoundException ex)
+            {
+                Assert.AreEqual(typeof(Company), ex.EntityType, "MJLEntityNotFoundException's entity type was incorrect");
+                Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
+            }
+        }
+
+        [TestMethod]
+        public void Not_Setting_Name_Doesnt_Change_Name_Value()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+                                                 .SetPhone("555-555-5555")
+                                                 .SetCity("City")
+                                                 .SetState("State")
+                                                 .SetZip("01234")
+                                                 .SetMetroArea("Metro")
+                                                 .SetIndustry("Industry")
+                                                 .SetNotes("Notes")
+                                                 .Execute();
+
+            // Verify
+            Company result = _unitOfWork.Companies.Fetch().SingleOrDefault();
+            Assert.IsNotNull(result, "No company was created");
+            Assert.AreEqual("Starting Name", result.Name, "The created company's name was incorrect");
+            Assert.AreEqual("555-555-5555", result.Phone, "The created company's phone number was incorrect");
+            Assert.AreEqual("City", result.City, "The created company's city was incorrect");
+            Assert.AreEqual("State", result.State, "The created company's state was incorrect");
+            Assert.AreEqual("01234", result.Zip, "The created company's zip was incorrect");
+            Assert.AreEqual("Metro", result.MetroArea, "The created company's metro area was incorrect");
+            Assert.AreEqual("Notes", result.Notes, "The created company's notes were incorrect");
+            Assert.AreEqual("Industry", result.Industry, "The created company's industry was incorrect");
+        }
+
+        [TestMethod]
+        public void Not_Setting_Phone_Doesnt_Change_Phone_Value()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+                                                 .SetName("Name")
+                                                 .SetCity("City")
+                                                 .SetState("State")
+                                                 .SetZip("01234")
+                                                 .SetMetroArea("Metro")
+                                                 .SetIndustry("Industry")
+                                                 .SetNotes("Notes")
+                                                 .Execute();
+
+            // Verify
+            Company result = _unitOfWork.Companies.Fetch().SingleOrDefault();
+            Assert.IsNotNull(result, "No company was created");
+            Assert.AreEqual("Name", result.Name, "The created company's name was incorrect");
+            Assert.AreEqual("333-444-5555", result.Phone, "The created company's phone number was incorrect");
+            Assert.AreEqual("City", result.City, "The created company's city was incorrect");
+            Assert.AreEqual("State", result.State, "The created company's state was incorrect");
+            Assert.AreEqual("01234", result.Zip, "The created company's zip was incorrect");
+            Assert.AreEqual("Metro", result.MetroArea, "The created company's metro area was incorrect");
+            Assert.AreEqual("Notes", result.Notes, "The created company's notes were incorrect");
+            Assert.AreEqual("Industry", result.Industry, "The created company's industry was incorrect");
+        }
+
+        [TestMethod]
+        public void Not_Setting_City_Doesnt_Change_City_Value()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+                                                 .SetName("Name")
+                                                 .SetPhone("555-555-5555")
+                                                 .SetState("State")
+                                                 .SetZip("01234")
+                                                 .SetMetroArea("Metro")
+                                                 .SetIndustry("Industry")
+                                                 .SetNotes("Notes")
+                                                 .Execute();
+
+            // Verify
+            Company result = _unitOfWork.Companies.Fetch().SingleOrDefault();
+            Assert.IsNotNull(result, "No company was created");
+            Assert.AreEqual("Name", result.Name, "The created company's name was incorrect");
+            Assert.AreEqual("555-555-5555", result.Phone, "The created company's phone number was incorrect");
+            Assert.AreEqual("Starting City", result.City, "The created company's city was incorrect");
+            Assert.AreEqual("State", result.State, "The created company's state was incorrect");
+            Assert.AreEqual("01234", result.Zip, "The created company's zip was incorrect");
+            Assert.AreEqual("Metro", result.MetroArea, "The created company's metro area was incorrect");
+            Assert.AreEqual("Notes", result.Notes, "The created company's notes were incorrect");
+            Assert.AreEqual("Industry", result.Industry, "The created company's industry was incorrect");
+        }
+
+        [TestMethod]
+        public void Not_Setting_State_Doesnt_Change_State_Value()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+                                                 .SetName("Name")
+                                                 .SetPhone("555-555-5555")
+                                                 .SetCity("City")
+                                                 .SetZip("01234")
+                                                 .SetMetroArea("Metro")
+                                                 .SetIndustry("Industry")
+                                                 .SetNotes("Notes")
+                                                 .Execute();
+
+            // Verify
+            Company result = _unitOfWork.Companies.Fetch().SingleOrDefault();
+            Assert.IsNotNull(result, "No company was created");
+            Assert.AreEqual("Name", result.Name, "The created company's name was incorrect");
+            Assert.AreEqual("555-555-5555", result.Phone, "The created company's phone number was incorrect");
+            Assert.AreEqual("City", result.City, "The created company's city was incorrect");
+            Assert.AreEqual("Starting State", result.State, "The created company's state was incorrect");
+            Assert.AreEqual("01234", result.Zip, "The created company's zip was incorrect");
+            Assert.AreEqual("Metro", result.MetroArea, "The created company's metro area was incorrect");
+            Assert.AreEqual("Notes", result.Notes, "The created company's notes were incorrect");
+            Assert.AreEqual("Industry", result.Industry, "The created company's industry was incorrect");
+        }
+
+        [TestMethod]
+        public void Not_Setting_Zip_Doesnt_Change_Zip_Value()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+                                                 .SetName("Name")
+                                                 .SetPhone("555-555-5555")
+                                                 .SetCity("City")
+                                                 .SetState("State")
+                                                 .SetMetroArea("Metro")
+                                                 .SetIndustry("Industry")
+                                                 .SetNotes("Notes")
+                                                 .Execute();
+
+            // Verify
+            Company result = _unitOfWork.Companies.Fetch().SingleOrDefault();
+            Assert.IsNotNull(result, "No company was created");
+            Assert.AreEqual("Name", result.Name, "The created company's name was incorrect");
+            Assert.AreEqual("555-555-5555", result.Phone, "The created company's phone number was incorrect");
+            Assert.AreEqual("City", result.City, "The created company's city was incorrect");
+            Assert.AreEqual("State", result.State, "The created company's state was incorrect");
+            Assert.AreEqual("00000", result.Zip, "The created company's zip was incorrect");
+            Assert.AreEqual("Metro", result.MetroArea, "The created company's metro area was incorrect");
+            Assert.AreEqual("Notes", result.Notes, "The created company's notes were incorrect");
+            Assert.AreEqual("Industry", result.Industry, "The created company's industry was incorrect");
+        }
+
+        [TestMethod]
+        public void Not_Setting_MetroArea_Doesnt_Change_MetroArea_Value()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+                                                 .SetName("Name")
+                                                 .SetPhone("555-555-5555")
+                                                 .SetCity("City")
+                                                 .SetState("State")
+                                                 .SetZip("01234")
+                                                 .SetIndustry("Industry")
+                                                 .SetNotes("Notes")
+                                                 .Execute();
+
+            // Verify
+            Company result = _unitOfWork.Companies.Fetch().SingleOrDefault();
+            Assert.IsNotNull(result, "No company was created");
+            Assert.AreEqual("Name", result.Name, "The created company's name was incorrect");
+            Assert.AreEqual("555-555-5555", result.Phone, "The created company's phone number was incorrect");
+            Assert.AreEqual("City", result.City, "The created company's city was incorrect");
+            Assert.AreEqual("State", result.State, "The created company's state was incorrect");
+            Assert.AreEqual("01234", result.Zip, "The created company's zip was incorrect");
+            Assert.AreEqual("Starting Metro", result.MetroArea, "The created company's metro area was incorrect");
+            Assert.AreEqual("Notes", result.Notes, "The created company's notes were incorrect");
+            Assert.AreEqual("Industry", result.Industry, "The created company's industry was incorrect");
+        }
+
+        [TestMethod]
+        public void Not_Setting_Industry_Doesnt_Change_Industry_Value()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+                                                 .SetName("Name")
+                                                 .SetPhone("555-555-5555")
+                                                 .SetCity("City")
+                                                 .SetState("State")
+                                                 .SetZip("01234")
+                                                 .SetMetroArea("Metro")
+                                                 .SetNotes("Notes")
+                                                 .Execute();
+
+            // Verify
+            Company result = _unitOfWork.Companies.Fetch().SingleOrDefault();
+            Assert.IsNotNull(result, "No company was created");
+            Assert.AreEqual("Name", result.Name, "The created company's name was incorrect");
+            Assert.AreEqual("555-555-5555", result.Phone, "The created company's phone number was incorrect");
+            Assert.AreEqual("City", result.City, "The created company's city was incorrect");
+            Assert.AreEqual("State", result.State, "The created company's state was incorrect");
+            Assert.AreEqual("01234", result.Zip, "The created company's zip was incorrect");
+            Assert.AreEqual("Metro", result.MetroArea, "The created company's metro area was incorrect");
+            Assert.AreEqual("Notes", result.Notes, "The created company's notes were incorrect");
+            Assert.AreEqual("Starting Industry", result.Industry, "The created company's industry was incorrect");
+        }
+
+        [TestMethod]
+        public void Not_Setting_Notes_Doesnt_Change_Notes_Value()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+                                                 .SetName("Name")
+                                                 .SetPhone("555-555-5555")
+                                                 .SetCity("City")
+                                                 .SetState("State")
+                                                 .SetZip("01234")
+                                                 .SetMetroArea("Metro")
+                                                 .SetIndustry("Industry")
+                                                 .Execute();
+
+            // Verify
+            Company result = _unitOfWork.Companies.Fetch().SingleOrDefault();
+            Assert.IsNotNull(result, "No company was created");
+            Assert.AreEqual("Name", result.Name, "The created company's name was incorrect");
+            Assert.AreEqual("555-555-5555", result.Phone, "The created company's phone number was incorrect");
+            Assert.AreEqual("City", result.City, "The created company's city was incorrect");
+            Assert.AreEqual("State", result.State, "The created company's state was incorrect");
+            Assert.AreEqual("01234", result.Zip, "The created company's zip was incorrect");
+            Assert.AreEqual("Metro", result.MetroArea, "The created company's metro area was incorrect");
+            Assert.AreEqual("Starting Notes", result.Notes, "The created company's notes were incorrect");
+            Assert.AreEqual("Industry", result.Industry, "The created company's industry was incorrect");
+        }
+    }
+}

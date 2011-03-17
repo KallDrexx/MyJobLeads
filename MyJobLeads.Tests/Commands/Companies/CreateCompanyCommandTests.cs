@@ -7,7 +7,7 @@ using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Commands.Companies;
 using MyJobLeads.DomainModel.Exceptions;
 
-namespace MyJobLeads.Tests.Commands
+namespace MyJobLeads.Tests.Commands.Companies
 {
     [TestClass]
     public class CreateCompanyCommandTests : EFTestBase
