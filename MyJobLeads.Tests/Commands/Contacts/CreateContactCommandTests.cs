@@ -83,7 +83,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
         }
        
         [TestMethod]
-        public void Execute_Throws_Exception_When_JobSearch_Not_Found()
+        public void Execute_Throws_Exception_When_Company_Not_Found()
         {
             // Setup
             InitializeTestEntities();

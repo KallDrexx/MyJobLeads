@@ -51,6 +51,7 @@
     <Compile Include="Commands\Companies\CreateCompanyCommand.cs" />
     <Compile Include="Commands\Companies\EditCompanyCommand.cs" />
     <Compile Include="Commands\Contacts\CreateContactCommand.cs" />
+    <Compile Include="Commands\Contacts\EditContactCommand.cs" />
     <Compile Include="Commands\JobSearches\CreateJobSearchForUserCommand.cs" />
     <Compile Include="Commands\JobSearches\EditJobSearchCommand.cs" />
     <Compile Include="Data\EFRepository.cs" />
