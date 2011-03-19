@@ -18,5 +18,6 @@ namespace MyJobLeads.DomainModel.Entities
         public string Notes { get; set; }
 
         public virtual JobSearch JobSearch { get; set; }
+        public virtual ICollection<Contact> Contacts { get; set; }
     }
 }

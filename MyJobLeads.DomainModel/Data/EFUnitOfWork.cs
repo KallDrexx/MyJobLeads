@@ -67,6 +67,17 @@ namespace MyJobLeads.DomainModel.Data
             }
         }
 
+        private IRepository<Contact> _contacts;
+        public IRepository<Contact> Contacts
+        {
+            get
+            {
+                if (_contacts == null)
+                    _contacts = new EFRepository<Contact>(_context);
+                return _contacts;
+            }
+        }
+
         private IRepository<JobSearch> _jobSearches;
         public IRepository<JobSearch> JobSearches
         {
