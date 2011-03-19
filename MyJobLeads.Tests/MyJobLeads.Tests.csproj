@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Commands\Companies\CreateCompanyCommandTests.cs" />
     <Compile Include="Commands\Companies\EditCompanyCommandTests.cs" />
+    <Compile Include="Commands\Contacts\CreateContactCommandTests.cs" />
     <Compile Include="Commands\JobSearches\CreateJobSearchForUserCommandTests.cs" />
     <Compile Include="Commands\JobSearches\EditJobSearchCommandTests.cs" />
     <Compile Include="Data\EFUnitOfWorkTests.cs" />
