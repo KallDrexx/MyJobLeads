@@ -19,6 +19,7 @@ namespace MyJobLeads.DomainModel.Data
         public IRepository<Company> Companies { get { return new InMemoryRepository<Company>(_list); } }
         public IRepository<Contact> Contacts { get { return new InMemoryRepository<Contact>(_list); } }
         public IRepository<JobSearch> JobSearches { get { return new InMemoryRepository<JobSearch>(_list); } }
+        public IRepository<Task> Tasks { get { return new InMemoryRepository<Task>(_list); } }
         public IRepository<UnitTestEntity> UnitTestEntities { get { return new InMemoryRepository<UnitTestEntity>(_list); } }
         public IRepository<User> Users { get { return new InMemoryRepository<User>(_list); } }
 

@@ -12,6 +12,7 @@ namespace MyJobLeads.DomainModel.Data
         IRepository<Company> Companies { get; }
         IRepository<Contact> Contacts { get; }
         IRepository<JobSearch> JobSearches { get; }
+        IRepository<Task> Tasks { get; }
         IRepository<UnitTestEntity> UnitTestEntities { get; }
         IRepository<User> Users { get; }
 

@@ -65,6 +65,7 @@
     <Compile Include="Entities\JobSearch.cs" />
     <Compile Include="Entities\EF\MyJobLeadsDbContext.cs" />
     <Compile Include="Entities\EF\MyJobLeadsDbInitializer.cs" />
+    <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\UnitTestEntity.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Exceptions\MJLEntityNotFoundException.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Queries\Contacts\ContactsByCompanyIdQuery.cs" />
     <Compile Include="Queries\JobSearches\JobSearchByIdQuery.cs" />
     <Compile Include="Queries\JobSearches\JobSearchesByUserIdQuery.cs" />
+    <Compile Include="Queries\Tasks\TaskByIdQuery.cs" />
     <Compile Include="Queries\Users\UserByCredentialsQuery.cs" />
     <Compile Include="Queries\Users\UserByIdQuery.cs" />
     <Compile Include="Utilities\PasswordUtils.cs" />

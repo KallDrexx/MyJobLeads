@@ -89,6 +89,17 @@ namespace MyJobLeads.DomainModel.Data
             }
         }
 
+        private IRepository<Task> _tasks;
+        public IRepository<Task> Tasks
+        {
+            get
+            {
+                if (_tasks == null)
+                    _tasks = new EFRepository<Task>(_context);
+                return _tasks;
+            }
+        }
+
         private IRepository<UnitTestEntity> _unitTestEntities;
         public IRepository<UnitTestEntity> UnitTestEntities
         {
