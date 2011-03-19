@@ -39,9 +39,11 @@ namespace MyJobLeads.Tests.Commands.Tasks
             // Verify
             Task result = _unitOfWork.Tasks.Fetch().SingleOrDefault();
             Assert.IsNotNull(result, "No task was created in the database");
+
             Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
             Assert.AreEqual(_testDate, result.TaskDate, "Task's date value was incorrect");
             Assert.IsFalse(result.Completed, "Task's completed status value is incorrect");
+            Assert.AreEqual(_company.Id, result.Company.Id, "Tasks' company id was incorrect");
         }
 
         [TestMethod]
@@ -61,6 +63,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
             Assert.AreEqual(_testDate, result.TaskDate, "Task's date value was incorrect");
             Assert.IsFalse(result.Completed, "Task's completed status value is incorrect");
+            Assert.AreEqual(_company.Id, result.Company.Id, "Tasks' company id was incorrect");
         }
 
         [TestMethod]
