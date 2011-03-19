@@ -78,6 +78,7 @@
     <Compile Include="Queries\JobSearches\JobSearchByIdQuery.cs" />
     <Compile Include="Queries\JobSearches\JobSearchesByUserIdQuery.cs" />
     <Compile Include="Queries\Tasks\TaskByIdQuery.cs" />
+    <Compile Include="Queries\Tasks\TasksByCompanyIdQuery.cs" />
     <Compile Include="Queries\Users\UserByCredentialsQuery.cs" />
     <Compile Include="Queries\Users\UserByIdQuery.cs" />
     <Compile Include="Utilities\PasswordUtils.cs" />
