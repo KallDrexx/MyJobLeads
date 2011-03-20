@@ -31,5 +31,7 @@ namespace MyJobLeads.DomainModel.Utilities
         {
             return BCryptHelper.CheckPassword(username + password, hash);
         }
+
+        public const int MinPasswordLength = 5;
     }
 }

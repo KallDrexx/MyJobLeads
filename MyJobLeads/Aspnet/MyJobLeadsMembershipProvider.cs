@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Security;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Commands.Users;
+using MyJobLeads.DomainModel.Utilities;
 
 namespace MyJobLeads.Aspnet
 {
@@ -26,6 +28,22 @@ namespace MyJobLeads.Aspnet
         #endregion
 
         #region Implemented MembershipProvider Methods
+
+        public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer,
+                                                    bool isApproved, object providerUserKey, out MembershipCreateStatus status)
+        {
+            var user = new CreateUserCommand(_unitOfWork).SetUsername(username)
+                                                         .SetPassword(password)
+                                                         .SetEmail(email)
+                                                         .Execute();
+            status = MembershipCreateStatus.Success;
+            return new MyJobLeadsMembershipUser(user);   
+        }
+
+        public override int MinRequiredPasswordLength
+        {
+            get { return PasswordUtils.MinPasswordLength; }
+        }
 
         /// <summary>
         /// Determines if a user exists with the specified username and password
@@ -73,11 +91,6 @@ namespace MyJobLeads.Aspnet
         }
 
         public override bool ChangePasswordQuestionAndAnswer(string username, string password, string newPasswordQuestion, string newPasswordAnswer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
         {
             throw new NotImplementedException();
         }
@@ -143,11 +156,6 @@ namespace MyJobLeads.Aspnet
         }
 
         public override int MinRequiredNonAlphanumericCharacters
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public override int MinRequiredPasswordLength
         {
             get { throw new NotImplementedException(); }
         }

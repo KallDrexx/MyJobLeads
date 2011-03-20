@@ -13,8 +13,8 @@ namespace MyJobLeads.Aspnet
     public class MyJobLeadsMembershipUser : MembershipUser
     {
         public MyJobLeadsMembershipUser(User mjlUser)
-            : base("MyJobLeadsMembershipUser"
-            , mjlUser.Email
+            : base("MyJobLeadsMembershipProvider"
+            , mjlUser.Username
             , mjlUser.Id
             , mjlUser.Email
             , string.Empty // Not implemented
