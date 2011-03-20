@@ -50,7 +50,10 @@ namespace MyJobLeads.DomainModel.Queries.Users
         /// <returns></returns>
         public User Execute()
         {
-            // First return the user with the matching username
+            // Make the supplised username lower case and trimmed
+            _username = _username.Trim().ToLower();
+
+            // Return the user with the matching username
             var user = _unitOfWork.Users
                                   .Fetch()
                                   .Where(x => x.Username == _username)
