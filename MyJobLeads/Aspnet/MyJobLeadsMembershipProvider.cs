@@ -48,6 +48,11 @@ namespace MyJobLeads.Aspnet
                 status = MembershipCreateStatus.DuplicateUserName;
                 return null;
             }
+            catch (MJLDuplicateEmailException)
+            {
+                status = MembershipCreateStatus.DuplicateEmail;
+                return null;
+            }
 
             status = MembershipCreateStatus.Success;
             return new MyJobLeadsMembershipUser(user);   

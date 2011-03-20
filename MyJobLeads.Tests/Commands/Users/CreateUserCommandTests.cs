@@ -108,5 +108,30 @@ namespace MyJobLeads.Tests.Commands.Users
                 Assert.AreEqual("user", ex.Username, "MJLDuplicateUsernameException's username value was incorrect");
             }
         }
+
+        [TestMethod]
+        public void Execute_Throws_MJLDuplicateEmailException_When_Email_Already_Exists()
+        {
+            // Setup
+            User user = new User { Email = "test@test.com" };
+            _unitOfWork.Users.Add(user);
+            _unitOfWork.Commit();
+
+            // Act
+            try
+            {
+                new CreateUserCommand(_unitOfWork).SetUsername("user")
+                                                  .SetPassword("pass")
+                                                  .SetEmail("test@test.com")
+                                                  .Execute();
+                Assert.Fail("Command did not throw an exception");
+            }
+
+            // Catch
+            catch (MJLDuplicateEmailException ex)
+            {
+                Assert.AreEqual("test@test.com", ex.Email, "MJLDuplicateUsernameException's email value was incorrect");
+            }
+        }
     }
 }

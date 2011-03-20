@@ -72,6 +72,7 @@
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\UnitTestEntity.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Exceptions\MJLDuplicateEmailException.cs" />
     <Compile Include="Exceptions\MJLDuplicateUsernameException.cs" />
     <Compile Include="Exceptions\MJLEntityNotFoundException.cs" />
     <Compile Include="Exceptions\MJLException.cs" />

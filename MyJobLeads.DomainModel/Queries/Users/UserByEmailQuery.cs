@@ -39,6 +39,8 @@ namespace MyJobLeads.DomainModel.Queries.Users
         /// <exception cref="MJLUserNotFoundException">Thrown when no user was found</exception>
         public User Execute()
         {
+            _email = _email.Trim().ToLower();
+
             var user = _unitOfWork.Users.Fetch().Where(x => x.Email == _email).SingleOrDefault();
             if (user == null)
                 throw new MJLUserNotFoundException(MJLUserNotFoundException.SearchPropertyType.Email, _email);

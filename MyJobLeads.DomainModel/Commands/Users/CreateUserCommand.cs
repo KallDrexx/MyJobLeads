@@ -61,6 +61,7 @@ namespace MyJobLeads.DomainModel.Commands.Users
         /// </summary>
         /// <returns></returns>
         /// <exception cref="MJLDuplicateUsernameException">Thrown when the requested username is already taken</exception>
+        /// <exception cref="MJLDuplicateEmailException">Thrown when the requested user's email is already used on another account</exception>
         public User Execute()
         {
             // Convert the email and username to lower case and trim it
@@ -74,10 +75,17 @@ namespace MyJobLeads.DomainModel.Commands.Users
                 new UserByUsernameQuery(_unitOfWork).WithUsername(_username).Execute();
                 throw new MJLDuplicateUsernameException(_username);
             }
-            catch (MJLUserNotFoundException) 
-            { 
-                // Do nothing, this is good
+            catch (MJLUserNotFoundException) { /* No user is using this username */ }
+
+            // Check if any user is using this email already
+            try
+            {
+                new UserByEmailQuery(_unitOfWork).WithEmail(_email).Execute();
+
+                // No exception occurred, meaning a user was found, thus report this
+                throw new MJLDuplicateEmailException(_email);
             }
+            catch (MJLUserNotFoundException) { /* No user is using this email */ }
 
             // Create the user
             var user = new User

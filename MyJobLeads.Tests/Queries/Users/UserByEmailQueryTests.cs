@@ -42,7 +42,21 @@ namespace MyJobLeads.Tests.Queries.Users
         }
 
         [TestMethod]
-        public void Execute_Throws_Exception_When_No_User_Email_Exists()
+        public void Email_Query_Is_CaseInsensitive_And_Trimmed()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            User result = new UserByEmailQuery(_unitOfWork).WithEmail(" USER2@EMAIL.COM ").Execute();
+
+            // Verify
+            Assert.IsNotNull(result, "Query returned a null user");
+            Assert.AreEqual(_user2, result, "Query returned the incorrect user");
+        }
+
+        [TestMethod]
+        public void Execute_Throws_MJLUserNotFoundException_When_No_User_Email_Exists()
         {
             // Setup
             InitializeTestEntities();
