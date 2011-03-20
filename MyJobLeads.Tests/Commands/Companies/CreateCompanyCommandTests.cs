@@ -49,6 +49,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             Assert.AreEqual("01234", result.Zip, "The created company's zip was incorrect");
             Assert.AreEqual("Metro", result.MetroArea, "The created company's metro area was incorrect");
             Assert.AreEqual("Notes", result.Notes, "The created company's notes were incorrect");
+            Assert.AreEqual(_search, result.JobSearch, "The created company was associated with the incorrect job search");
         }
 
         [TestMethod]
@@ -78,6 +79,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             Assert.AreEqual("01234", result.Zip, "The created company's zip was incorrect");
             Assert.AreEqual("Metro", result.MetroArea, "The created company's metro area was incorrect");
             Assert.AreEqual("Notes", result.Notes, "The created company's notes were incorrect");
+            Assert.AreEqual(_search, result.JobSearch, "The created company was associated with the incorrect job search");
         }
 
         [TestMethod]

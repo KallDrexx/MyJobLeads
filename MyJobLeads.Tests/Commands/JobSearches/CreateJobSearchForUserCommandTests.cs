@@ -39,6 +39,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             Assert.AreEqual(_user.Id, result.User.Id, "Jobsearch had an incorrect user id value");
             Assert.AreEqual("Test Name", result.Name, "JobSearch had an incorrect name value");
             Assert.AreEqual("Test Desc", result.Description, "JobSearch had an incorrect description value");
+            Assert.AreEqual(_user.Id, result.User.Id, "JobSearch had an incorrect user id value");
         }
 
         [TestMethod]
@@ -58,6 +59,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             Assert.AreEqual(_user.Id, result.User.Id, "Jobsearch had an incorrect user id value");
             Assert.AreEqual("Test Name", result.Name, "JobSearch had an incorrect name value");
             Assert.AreEqual("Test Desc", result.Description, "JobSearch had an incorrect description value");
+            Assert.AreEqual(_user.Id, result.User.Id, "JobSearch had an incorrect user id value");
         }
 
         [TestMethod]
