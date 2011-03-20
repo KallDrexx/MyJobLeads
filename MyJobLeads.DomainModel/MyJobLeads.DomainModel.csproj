@@ -56,6 +56,7 @@
     <Compile Include="Commands\JobSearches\CreateJobSearchForUserCommand.cs" />
     <Compile Include="Commands\JobSearches\EditJobSearchCommand.cs" />
     <Compile Include="Commands\Tasks\CreateTaskForContactCommand.cs" />
+    <Compile Include="Commands\Tasks\EditTaskCommand.cs" />
     <Compile Include="Data\EFRepository.cs" />
     <Compile Include="Data\EFUnitOfWork.cs" />
     <Compile Include="Data\InMemoryRepository.cs" />

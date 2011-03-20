@@ -25,7 +25,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
         }
 
         [TestMethod]
-        public void Can_Create_Company_Task()
+        public void Can_Create_Contact_Task()
         {
             // Setup
             InitializeTestEntities();
@@ -66,7 +66,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
         }
 
         [TestMethod]
-        public void Execute_Throws_Exception_When_Company_Not_Found()
+        public void Execute_Throws_Exception_When_Contact_Not_Found()
         {
             // Setup
             InitializeTestEntities();
