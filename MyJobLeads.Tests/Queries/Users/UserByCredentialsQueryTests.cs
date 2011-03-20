@@ -25,7 +25,7 @@ namespace MyJobLeads.Tests.Queries.Users
             _unitOfWork.Commit();
 
             // Act
-            User result = new UserByCredentialsQuery(_unitOfWork).WithEmail("user2")
+            User result = new UserByCredentialsQuery(_unitOfWork).WithUsername("user2")
                                                                  .WithPassword("pass2")
                                                                  .Execute();
 
@@ -39,12 +39,12 @@ namespace MyJobLeads.Tests.Queries.Users
         public void Incorrect_Username_Returns_Null_User()
         {
             // Setup
-            User user = new User { Email = "user", Password = PasswordUtils.CreatePasswordHash("user", "pass") };
+            User user = new User { Username = "user", Password = PasswordUtils.CreatePasswordHash("user", "pass") };
             _unitOfWork.Users.Add(user);
             _unitOfWork.Commit();
 
             // Act
-            User result = new UserByCredentialsQuery(_unitOfWork).WithEmail("username")
+            User result = new UserByCredentialsQuery(_unitOfWork).WithUsername("username")
                                                                  .WithPassword("pass")
                                                                  .Execute();
 
@@ -61,7 +61,7 @@ namespace MyJobLeads.Tests.Queries.Users
             _unitOfWork.Commit();
 
             // Act
-            User result = new UserByCredentialsQuery(_unitOfWork).WithEmail("user")
+            User result = new UserByCredentialsQuery(_unitOfWork).WithUsername("user")
                                                                  .WithPassword("password")
                                                                  .Execute();
 

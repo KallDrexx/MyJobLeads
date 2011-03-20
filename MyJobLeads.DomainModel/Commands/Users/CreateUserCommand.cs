@@ -14,7 +14,7 @@ namespace MyJobLeads.DomainModel.Commands.Users
     public class CreateUserCommand
     {
         protected IUnitOfWork _unitOfWork;
-        protected string _email, _password, _displayName;
+        protected string _email, _password, _username;
 
         public CreateUserCommand(IUnitOfWork unitOfWork)
         {
@@ -44,13 +44,13 @@ namespace MyJobLeads.DomainModel.Commands.Users
         }
 
         /// <summary>
-        /// Specifies the display name for the new user
+        /// Specifies the username for the new user
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="username"></param>
         /// <returns></returns>
-        public CreateUserCommand SetDisplayName(string displayName)
+        public CreateUserCommand SetUsername(string username)
         {
-            _displayName = displayName;
+            _username = username;
             return this;
         }
 
@@ -60,15 +60,16 @@ namespace MyJobLeads.DomainModel.Commands.Users
         /// <returns></returns>
         public User Execute()
         {
-            // Convert the email to lower case and trim it
+            // Convert the email and username to lower case and trim it
+            _username = _username.Trim().ToLower();
             _email = _email.Trim().ToLower();
 
             // Create the user
             var user = new User
             {
+                Username = _username,
                 Email = _email,
-                DisplayName = _displayName,
-                Password = PasswordUtils.CreatePasswordHash(_email, _password)
+                Password = PasswordUtils.CreatePasswordHash(_username, _password)
             };
 
             _unitOfWork.Users.Add(user);

@@ -30,12 +30,12 @@ namespace MyJobLeads.Aspnet
         /// <summary>
         /// Determines if a user exists with the specified username and password
         /// </summary>
-        /// <param name="email"></param>
+        /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public override bool ValidateUser(string email, string password)
+        public override bool ValidateUser(string username, string password)
         {
-            var user = new UserByCredentialsQuery(_unitOfWork).WithEmail(email)
+            var user = new UserByCredentialsQuery(_unitOfWork).WithUsername(username)
                                                               .WithPassword(password)
                                                               .Execute();
 
