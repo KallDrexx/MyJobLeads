@@ -20,6 +20,7 @@ namespace MyJobLeads.DomainModel.Exceptions
         public enum SearchPropertyType
         {
             Credentials,
+            Username,
             Email
         }
     }

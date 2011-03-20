@@ -5,6 +5,8 @@ using System.Text;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Utilities;
+using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.DomainModel.Commands.Users
 {
@@ -58,11 +60,24 @@ namespace MyJobLeads.DomainModel.Commands.Users
         /// Executes the command
         /// </summary>
         /// <returns></returns>
+        /// <exception cref="MJLDuplicateUsernameException">Thrown when the requested username is already taken</exception>
         public User Execute()
         {
             // Convert the email and username to lower case and trim it
             _username = _username.Trim().ToLower();
             _email = _email.Trim().ToLower();
+
+            // Check if any user has this username already
+            try
+            {
+                // If no exception occurs, user was found and thus we need to throw a duplicateusername exception
+                new UserByUsernameQuery(_unitOfWork).WithUsername(_username).Execute();
+                throw new MJLDuplicateUsernameException(_username);
+            }
+            catch (MJLUserNotFoundException) 
+            { 
+                // Do nothing, this is good
+            }
 
             // Create the user
             var user = new User

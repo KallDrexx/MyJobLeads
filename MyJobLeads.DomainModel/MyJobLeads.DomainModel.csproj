@@ -72,6 +72,7 @@
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\UnitTestEntity.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Exceptions\MJLDuplicateUsernameException.cs" />
     <Compile Include="Exceptions\MJLEntityNotFoundException.cs" />
     <Compile Include="Exceptions\MJLException.cs" />
     <Compile Include="Exceptions\MJLUserNotFoundException.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Queries\Users\UserByCredentialsQuery.cs" />
     <Compile Include="Queries\Users\UserByEmailQuery.cs" />
     <Compile Include="Queries\Users\UserByIdQuery.cs" />
+    <Compile Include="Queries\Users\UserByUsernameQuery.cs" />
     <Compile Include="Utilities\PasswordUtils.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,8 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Commands.Users;
 using MyJobLeads.DomainModel.Utilities;
+using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Entities;
 
 namespace MyJobLeads.Aspnet
 {
@@ -32,10 +34,21 @@ namespace MyJobLeads.Aspnet
         public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer,
                                                     bool isApproved, object providerUserKey, out MembershipCreateStatus status)
         {
-            var user = new CreateUserCommand(_unitOfWork).SetUsername(username)
-                                                         .SetPassword(password)
-                                                         .SetEmail(email)
-                                                         .Execute();
+            User user;
+
+            try
+            {
+                user = new CreateUserCommand(_unitOfWork).SetUsername(username)
+                                                             .SetPassword(password)
+                                                             .SetEmail(email)
+                                                             .Execute();
+            }
+            catch (MJLDuplicateUsernameException)
+            {
+                status = MembershipCreateStatus.DuplicateUserName;
+                return null;
+            }
+
             status = MembershipCreateStatus.Success;
             return new MyJobLeadsMembershipUser(user);   
         }

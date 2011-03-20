@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyJobLeads.DomainModel.Commands.Users;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Utilities;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.Tests.Commands.Users
 {
@@ -81,6 +82,31 @@ namespace MyJobLeads.Tests.Commands.Users
             User user = _unitOfWork.Users.Fetch().SingleOrDefault();
             Assert.IsNotNull(user, "No user was created");
             Assert.AreEqual("username", user.Username, "User's username was incorrect");
+        }
+
+        [TestMethod]
+        public void Execute_Throws_MJLDuplicateUsernameException_When_Username_Already_Exists()
+        {
+            // Setup
+            User user = new User { Username = "user" };
+            _unitOfWork.Users.Add(user);
+            _unitOfWork.Commit();
+
+            // Act
+            try
+            {
+                new CreateUserCommand(_unitOfWork).SetUsername("user")
+                                                  .SetPassword("pass")
+                                                  .SetEmail("blah@blah.com")
+                                                  .Execute();
+                Assert.Fail("Command did not throw an exception");
+            }
+
+            // Catch
+            catch (MJLDuplicateUsernameException ex)
+            {
+                Assert.AreEqual("user", ex.Username, "MJLDuplicateUsernameException's username value was incorrect");
+            }
         }
     }
 }
