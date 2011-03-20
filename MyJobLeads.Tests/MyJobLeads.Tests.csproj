@@ -80,6 +80,7 @@
     <Compile Include="Queries\Tasks\TasksByCompanyIdQueryTests.cs" />
     <Compile Include="Queries\Tasks\TasksByContactIdQueryTests.cs" />
     <Compile Include="Queries\Users\UserByCredentialsQueryTests.cs" />
+    <Compile Include="Queries\Users\UserByEmailQueryTests.cs" />
     <Compile Include="Queries\Users\UserByIdQueryTests.cs" />
     <Compile Include="Utilities\PasswordUtilsTests.cs" />
   </ItemGroup>

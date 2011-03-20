@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Security;
 using MyJobLeads.DomainModel.Entities;
 
-namespace MyJobLeads.Membership
+namespace MyJobLeads.Aspnet
 {
     /// <summary>
     /// Class which converts a MyJobLeads user into an asp.net membership user

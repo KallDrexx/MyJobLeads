@@ -6,7 +6,7 @@ using System.Web.Security;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Queries.Users;
 
-namespace MyJobLeads.Membership
+namespace MyJobLeads.Aspnet
 {
     public class MyJobLeadsMembershipProvider : MembershipProvider
     {
