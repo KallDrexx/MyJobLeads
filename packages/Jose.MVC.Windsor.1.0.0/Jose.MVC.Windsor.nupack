@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<package> 
+  <metadata> 
+    <id>Jose.MVC.Windsor</id> 
+    <version>1.0.0</version> 
+    <authors>Jose Romaniello</authors>
+    <dependencies>
+        <dependency id="Castle.Windsor" version="2.5.2" />
+		<dependency id="WebActivator" version="1.4" />
+    </dependencies>
+    <description>
+        Asp.Net MVC2 sample artifacts for IoC integration with Castle.Windsor.
+		Created by Jose F. Romaniello (@jfroma).
+    </description> 
+    <language>en-US</language>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <projectUrl>http://jfromaniello.blogspot.com/</projectUrl>
+  </metadata> 
+</package>

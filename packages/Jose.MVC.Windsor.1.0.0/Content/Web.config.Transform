@@ -1,0 +1,12 @@
+<configuration>
+    <system.web>
+        <httpModules>
+            <add name="PerRequestLifestyle" type="Castle.MicroKernel.Lifestyle.PerWebRequestLifestyleModule, Castle.Windsor" />
+        </httpModules>
+    </system.web>
+    <system.webServer>
+        <modules>
+            <add name="PerRequestLifestyle" type="Castle.MicroKernel.Lifestyle.PerWebRequestLifestyleModule, Castle.Windsor" />
+        </modules>
+    </system.webServer>
+</configuration>
