@@ -10,7 +10,7 @@ using MyJobLeads.DomainModel.Utilities;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Entities;
 
-namespace MyJobLeads.Aspnet
+namespace MyJobLeads.Infrastructure
 {
     public class MyJobLeadsMembershipProvider : MembershipProvider
     {

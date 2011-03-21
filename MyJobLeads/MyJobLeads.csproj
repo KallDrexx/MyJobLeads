@@ -89,8 +89,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Aspnet\MyJobLeadsMembershipProvider.cs" />
-    <Compile Include="Aspnet\MyJobLeadsMembershipUser.cs" />
+    <Compile Include="Infrastructure\MyJobLeadsMembershipProvider.cs" />
+    <Compile Include="Infrastructure\MyJobLeadsMembershipUser.cs" />
     <Compile Include="Infrastructure\Installers\ControllerInstaller.cs" />
     <Compile Include="Infrastructure\Installers\UnitOfWorkInstaller.cs" />
     <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
