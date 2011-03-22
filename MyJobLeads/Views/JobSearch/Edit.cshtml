@@ -1,0 +1,36 @@
+﻿@model MyJobLeads.DomainModel.Entities.JobSearch
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Jobsearc</h2>
+
+@using (Html.BeginForm(MVC.JobSearch.Edit(Model.Id)))
+{
+    @Html.HiddenFor(x => x.Id);
+    
+    <table>
+        <tr>
+            <td align="right">Name:</td>
+            <td>@Html.TextBoxFor(x => x.Name)</td>
+        </tr>
+
+        <tr>
+            <td align="right">Description:</td>
+            <td>@Html.TextAreaFor(x => x.Description, new { rows = 2, cols = "50" })</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Save" /> &nbsp; &nbsp;
+                
+                @if (Model.Id == 0) { @Html.ActionLink("Back", MVC.JobSearch.Index()); }
+                else { @Html.ActionLink("Back", MVC.JobSearch.View(Model.Id)); }
+            </td>
+        </tr>
+    </table>
+}
+

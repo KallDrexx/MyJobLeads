@@ -6,16 +6,18 @@ using System.Web.Mvc;
 
 namespace MyJobLeads.Controllers
 {
-    public class HomeController : Controller
+    public partial class HomeController : Controller
     {
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction(MVC.JobSearch.Index());
 
+            ViewBag.Message = "Welcome to My Job Leads!";
             return View();
         }
 
-        public ActionResult About()
+        public virtual ActionResult About()
         {
             return View();
         }

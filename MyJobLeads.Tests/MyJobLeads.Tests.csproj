@@ -68,8 +68,6 @@
     <Compile Include="EFTestBase.cs" />
     <Compile Include="InMemoryTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\HomeControllerTest.cs" />
-    <Compile Include="Controllers\AccountControllerTest.cs" />
     <Compile Include="Queries\Companies\CompaniesByJobSearchIdQueryTests.cs" />
     <Compile Include="Queries\Companies\CompanyByIdQueryTests.cs" />
     <Compile Include="Queries\Contacts\ContactByIdQueryTests.cs" />

@@ -1,0 +1,44 @@
+﻿@model JobSearch
+@using MyJobLeads.DomainModel.Entities;
+
+@{
+    ViewBag.Title = "Job Search: " + Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Job Search: @Model.Name</h2>
+
+<p>
+    Description: @Model.Description
+</p>
+
+@using (Html.BeginForm(MVC.JobSearch.Search()))
+{
+    <input type="text" id="searchBox" /> <input type="submit" value="Search" /> <text>Not Implemented Yet!</text>
+}
+
+<table width="100%">
+    <tr>
+        <td valign="top">
+            <h2>Companies</h2>
+            @Model.Companies.Count Companies Exist <br />
+            @Html.ActionLink("Add Company", MVC.Company.Add(@Model.Id))
+                
+            <ul>
+                @foreach (Company company in @Model.Companies)
+                {
+                    <li>@company.Name</li>
+                }
+            </ul>
+        </td>
+
+        <td align="right" valign="top">
+            <h2>Open Tasks</h2>
+            XX Open Tasks
+
+            <ul dir="rtl">
+                
+            </ul>
+        </td>
+    </tr>
+</table>

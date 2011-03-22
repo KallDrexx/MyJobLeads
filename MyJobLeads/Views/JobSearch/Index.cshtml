@@ -1,0 +1,22 @@
+﻿@model IList<JobSearch>
+@using MyJobLeads.DomainModel.Entities;
+
+@{
+    ViewBag.Title = "My Job Searches";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Job Searches</h2>
+
+<ul>
+    @foreach (JobSearch search in Model) 
+    {
+        <li>@Html.ActionLink(search.Name, MVC.JobSearch.View(search.Id))</li>
+    }
+</ul>
+
+<p>
+    @Html.ActionLink("Start a new job search!", MVC.JobSearch.Add())
+</p>
+
+

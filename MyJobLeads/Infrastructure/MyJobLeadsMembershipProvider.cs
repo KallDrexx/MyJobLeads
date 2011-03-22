@@ -81,6 +81,19 @@ namespace MyJobLeads.Infrastructure
                 return true;
         }
 
+        public override MembershipUser GetUser(string username, bool userIsOnline)
+        {
+            try 
+            { 
+                var user = new UserByUsernameQuery(_unitOfWork).WithUsername(username).Execute(); 
+                return new MyJobLeadsMembershipUser(user);
+            }
+            catch (MJLUserNotFoundException)
+            {
+                return null;
+            }
+        }
+
         #endregion
 
         #region Member Variables
@@ -149,11 +162,6 @@ namespace MyJobLeads.Infrastructure
         }
 
         public override string GetPassword(string username, string answer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override MembershipUser GetUser(string username, bool userIsOnline)
         {
             throw new NotImplementedException();
         }
