@@ -1,0 +1,66 @@
+﻿@model MyJobLeads.DomainModel.Entities.Contact
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Contact</h2>
+@{ int companyId = (int)ViewBag.CompanyId; }
+@using (Html.BeginForm(MVC.Contact.Edit(Model.Id)))
+{
+    @Html.Hidden("companyId", companyId)
+    @Html.HiddenFor(x => x.Id)
+
+    <table>
+        <tr>
+            <td align="right">Name:</td>
+            <td>@Html.EditorFor(x => x.Name)</td>
+        </tr>
+
+        <tr>
+            <td align="right">Direct Phone:</td>
+            <td>@Html.EditorFor(x => x.DirectPhone)</td>
+        </tr>
+
+        <tr>
+            <td align="right">Extension:</td>
+            <td>@Html.EditorFor(x => x.Extension)</td>
+        </tr>
+
+        <tr>
+            <td align="right">Mobile Phone:</td>
+            <td>@Html.EditorFor(x => x.MobilePhone)</td>
+        </tr>
+
+        <tr>
+            <td align="right">Email:</td>
+            <td>@Html.EditorFor(x => x.Email)</td>
+        </tr>
+
+        <tr>
+            <td align="right">Assistant:</td>
+            <td>@Html.EditorFor(x => x.Assistant)</td>
+        </tr>
+
+        <tr>
+            <td align="right">Referred By:</td>
+            <td>@Html.EditorFor(x => x.ReferredBy)</td>
+        </tr>
+
+        <tr>
+            <td align="right">Notes:</td>
+            <td>@Html.TextAreaFor(x => x.Notes, new { rows = 3, cols = 50 })</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="save" /> &nbsp; &nbsp;
+                @if (Model.Id == 0) { Html.ActionLink("Back", MVC.Company.View(companyId)); }
+                else { Html.ActionLink("Back", MVC.Contact.View(Model.Id)); }
+            </td>
+        </tr>
+    </table>
+}
+

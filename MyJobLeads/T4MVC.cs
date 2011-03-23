@@ -25,6 +25,7 @@ using T4MVC;
 public static class MVC {
     public static MyJobLeads.Controllers.AccountController Account = new MyJobLeads.Controllers.T4MVC_AccountController();
     public static MyJobLeads.Controllers.CompanyController Company = new MyJobLeads.Controllers.T4MVC_CompanyController();
+    public static MyJobLeads.Controllers.ContactController Contact = new MyJobLeads.Controllers.T4MVC_ContactController();
     public static MyJobLeads.Controllers.HomeController Home = new MyJobLeads.Controllers.T4MVC_HomeController();
     public static MyJobLeads.Controllers.JobSearchController JobSearch = new MyJobLeads.Controllers.T4MVC_JobSearchController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
