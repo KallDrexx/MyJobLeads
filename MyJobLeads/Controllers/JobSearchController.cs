@@ -7,6 +7,7 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Queries.JobSearches;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Commands.JobSearches;
+using MyJobLeads.DomainModel.Queries.Tasks;
 
 namespace MyJobLeads.Controllers
 {
@@ -59,6 +60,7 @@ namespace MyJobLeads.Controllers
         public virtual ActionResult View(int id)
         {
             var search = new JobSearchByIdQuery(_unitOfWork).WithJobSearchId(id).Execute();
+            ViewBag.OpenTasks = new OpenTasksByJobSearchQuery(_unitOfWork).WithJobSearch(id).Execute();
             return View(search);
         }
 

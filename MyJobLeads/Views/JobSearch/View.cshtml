@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Job Search: " + Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    IList<Task> openTasks = ViewBag.OpenTasks ?? new List<Task>();
 }
 
 <h2>Job Search: @Model.Name</h2>
@@ -19,7 +20,7 @@
 
 <table width="100%">
     <tr>
-        <td valign="top">
+        <td valign="top" width="50%">
             <h2>Companies</h2>
             @Model.Companies.Count Companies Exist <br />
             @Html.ActionLink("Add Company", MVC.Company.Add(@Model.Id))
@@ -32,12 +33,20 @@
             </ul>
         </td>
 
-        <td align="right" valign="top">
+        <td align="right" valign="top" width="50%">
             <h2>Open Tasks</h2>
-            XX Open Tasks
+            @openTasks.Count Open Tasks
 
             <ul dir="rtl">
-                
+                @foreach (Task task in openTasks)
+                {
+                    <li>
+                        @Html.ActionLink(task.Name, MVC.Task.View(task.Id))
+
+                        @if (task.TaskDate.HasValue) { <text>Due @task.TaskDate.Value.ToString() </text> }
+                        else { <text>No due date </text> }
+                    </li>
+                }
             </ul>
         </td>
     </tr>
