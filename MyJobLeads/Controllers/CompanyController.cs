@@ -36,7 +36,7 @@ namespace MyJobLeads.Controllers
             // Determine if this is a new company or not
             if (company.Id == 0)
             {
-                var newCompany = new CreateCompanyCommand(_unitOfWork).WithJobSearch(jobSearchId)
+                company = new CreateCompanyCommand(_unitOfWork).WithJobSearch(jobSearchId)
                                                                       .SetName(company.Name)
                                                                       .SetCity(company.City)
                                                                       .SetIndustry(company.Industry)
@@ -49,7 +49,7 @@ namespace MyJobLeads.Controllers
             }
             else
             {
-                var editedCompany = new EditCompanyCommand(_unitOfWork).WithCompanyId(company.Id)
+                company = new EditCompanyCommand(_unitOfWork).WithCompanyId(company.Id)
                                                                       .SetName(company.Name)
                                                                       .SetCity(company.City)
                                                                       .SetIndustry(company.Industry)
@@ -61,7 +61,13 @@ namespace MyJobLeads.Controllers
                                                                       .Execute();
             }
 
-            return RedirectToAction(MVC.JobSearch.View(jobSearchId));
+            return RedirectToAction(MVC.Company.View(company.Id));
+        }
+
+        public virtual ActionResult View(int id)
+        {
+            var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(id).Execute();
+            return View(company);
         }
     }
 }

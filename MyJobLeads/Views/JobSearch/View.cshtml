@@ -27,7 +27,7 @@
             <ul>
                 @foreach (Company company in @Model.Companies)
                 {
-                    <li>@company.Name</li>
+                    <li>@Html.ActionLink(company.Name, MVC.Company.View(company.Id))</li>
                 }
             </ul>
         </td>
