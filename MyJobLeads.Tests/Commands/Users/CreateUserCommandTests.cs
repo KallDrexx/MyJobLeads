@@ -133,5 +133,15 @@ namespace MyJobLeads.Tests.Commands.Users
                 Assert.AreEqual("test@test.com", ex.Email, "MJLDuplicateUsernameException's email value was incorrect");
             }
         }
+
+        [TestMethod]
+        public void Execute_Initializes_JobSearch_List()
+        {
+            // Act
+            User user = new CreateUserCommand(_unitOfWork).SetUsername("user").SetEmail("Email@email.com").Execute();
+
+            // Verify
+            Assert.IsNotNull(user, "User's job search list was not initialized");
+        }
     }
 }

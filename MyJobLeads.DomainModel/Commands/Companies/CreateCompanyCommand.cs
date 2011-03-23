@@ -142,7 +142,10 @@ namespace MyJobLeads.DomainModel.Commands.Companies
                 Zip = _zip,
                 MetroArea = _metro,
                 Industry = _industry,
-                Notes = _notes
+                Notes = _notes,
+
+                Tasks = new List<Task>(),
+                Contacts = new List<Contact>()
             };
 
             _unitOfWork.Companies.Add(company);

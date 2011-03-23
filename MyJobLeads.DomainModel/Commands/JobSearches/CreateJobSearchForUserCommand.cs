@@ -70,7 +70,9 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
             {
                 Name = _name,
                 Description = _description,
-                User = user
+                User = user,
+
+                Companies = new List<Company>()
             };
 
             _unitOfWork.JobSearches.Add(search);

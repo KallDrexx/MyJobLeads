@@ -92,7 +92,9 @@ namespace MyJobLeads.DomainModel.Commands.Users
             {
                 Username = _username,
                 Email = _email,
-                Password = PasswordUtils.CreatePasswordHash(_username, _password)
+                Password = PasswordUtils.CreatePasswordHash(_username, _password),
+
+                JobSearches = new List<JobSearch>()
             };
 
             _unitOfWork.Users.Add(user);

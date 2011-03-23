@@ -114,5 +114,18 @@ namespace MyJobLeads.Tests.Commands.Contacts
                 Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
             }
         }
+
+        [TestMethod]
+        public void Execute_Initializes_Task_List()
+        {
+            // setup
+            InitializeTestEntities();
+
+            // Act
+            Contact result = new CreateContactCommand(_unitOfWork).WithCompanyId(_company.Id).Execute();
+
+            // Verify
+            Assert.IsNotNull(result.Tasks, "Contact's task list was not initialized");
+        }
     }
 }

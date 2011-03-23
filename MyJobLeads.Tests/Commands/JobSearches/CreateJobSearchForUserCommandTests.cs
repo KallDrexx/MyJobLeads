@@ -85,5 +85,18 @@ namespace MyJobLeads.Tests.Commands.JobSearches
                 Assert.AreEqual((_user.Id + 1).ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
             }
         }
+
+        [TestMethod]
+        public void Execute_Initializes_Company_List()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            JobSearch search = new CreateJobSearchForUserCommand(_unitOfWork).ForUserId(_user.Id).Execute();
+
+            // Verify
+            Assert.IsNotNull(search.Companies, "Company list was not initialized");
+        }
     }
 }

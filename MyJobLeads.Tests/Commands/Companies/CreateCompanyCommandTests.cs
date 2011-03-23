@@ -112,5 +112,31 @@ namespace MyJobLeads.Tests.Commands.Companies
                 Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
             }
         }
+
+        [TestMethod]
+        public void Execute_Initializes_Task_List()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            Company result = new CreateCompanyCommand(_unitOfWork).WithJobSearch(_search.Id).Execute();
+
+            // Verify
+            Assert.IsNotNull(result.Tasks, "Company's task list was null");
+        }
+
+        [TestMethod]
+        public void Execute_Initializes_Contact_List()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            Company result = new CreateCompanyCommand(_unitOfWork).WithJobSearch(_search.Id).Execute();
+
+            // Verify
+            Assert.IsNotNull(result.Contacts, "Company's contact list was null");
+        }
     }
 }

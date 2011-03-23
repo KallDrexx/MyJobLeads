@@ -142,7 +142,9 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
                 Email = _email,
                 Assistant = _assistant,
                 ReferredBy = _referredBy,
-                Notes = _notes
+                Notes = _notes,
+
+                Tasks = new List<Task>()
             };
 
             _unitOfWork.Contacts.Add(contact);
