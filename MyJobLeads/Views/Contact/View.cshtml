@@ -22,11 +22,12 @@
 </p>
 
 <h2>Tasks</h2>
-@Model.Tasks.Count Tasks exist for this contact
+@Model.Tasks.Count Tasks exist for this contact<br />
+@Html.ActionLink("Add Task", MVC.Task.AddContactTask(Model.Id))
 
 <ul>
     @foreach (Task task in Model.Tasks)
     {
-        <li>@task.Name</li>
+        <li>@Html.ActionLink(task.Name, MVC.Task.View(task.Id))</li>
     }
 </ul>

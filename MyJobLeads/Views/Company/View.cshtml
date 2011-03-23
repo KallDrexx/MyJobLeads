@@ -34,11 +34,12 @@ Notes: @Model.Notes <br />
 </ul>
 
 <h2>Tasks</h2>
-@Model.Tasks.Count Task(s) have been created for this company
+@Model.Tasks.Count Task(s) have been created for this company<br />
+@Html.ActionLink("Add Task", MVC.Task.AddCompanyTask(Model.Id))
 
 <ul>
     @foreach (Task task in Model.Tasks)
     {
-        <li>@task.Name</li>
+        <li>@Html.ActionLink(task.Name, MVC.Task.View(task.Id))</li>
     }
 </ul>

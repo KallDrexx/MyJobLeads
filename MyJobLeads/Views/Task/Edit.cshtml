@@ -1,0 +1,52 @@
+﻿@model MyJobLeads.DomainModel.Entities.Task
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int companyId = ViewBag.CompanyId ?? 0;
+    int contactId = ViewBag.ContactId ?? 0;
+}
+
+<h2>Edit Task</h2>
+
+@using (Html.BeginForm(MVC.Task.Edit()))
+{
+    @Html.HiddenFor(x => x.Id)
+    @Html.Hidden("companyId", companyId) 
+    @Html.Hidden("contactId", contactId)
+
+    <table>
+        <tr>
+            <td align="right">Name:</td>
+            <td>@Html.EditorFor(x => x.Name)</td>
+        </tr>
+
+        <tr>
+            <td align="right">Task Due Date:</td>
+            <td>@Html.EditorFor(x => x.TaskDate)</td>
+        </tr>
+
+        @* Only show the completed checkbox if we are editing an existing task *@
+        @if (Model.Id != 0)
+        {
+            <tr>
+                <td align="right">Task Completed?</td>
+                <td>@Html.CheckBoxFor(x => x.Completed)</td>
+            </tr>
+        }
+        
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Save" /> &nbsp; &nbsp; 
+
+                @if (Model.Id != 0) { @Html.ActionLink("Back To Task", MVC.Task.View(Model.Id)); }
+                else if (companyId != 0) { @Html.ActionLink("Back To Company", MVC.Company.View(companyId)) }
+                else { @Html.ActionLink("Back To Contact", MVC.Contact.View(contactId)) }
+                
+            </td>
+        </tr>
+    </table>
+        
+}
+
