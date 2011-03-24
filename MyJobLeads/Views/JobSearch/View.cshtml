@@ -41,10 +41,8 @@
                 @foreach (Task task in openTasks)
                 {
                     <li>
+                        @( task.TaskDate.HasValue ? "Due " + task.TaskDate.ToString() : string.Empty )
                         @Html.ActionLink(task.Name, MVC.Task.View(task.Id))
-
-                        @if (task.TaskDate.HasValue) { <text>Due @task.TaskDate.Value.ToString() </text> }
-                        else { <text>No due date </text> }
                     </li>
                 }
             </ul>
