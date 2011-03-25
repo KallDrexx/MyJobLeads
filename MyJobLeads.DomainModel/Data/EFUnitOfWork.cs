@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MyJobLeads.DomainModel.Entities.EF;
-using System.Data.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Data;
 using System.Transactions;
@@ -30,11 +29,6 @@ namespace MyJobLeads.DomainModel.Data
 
         public void BeginTransaction()
         {
-            // Retrieve the context and explicitely open the database connectection
-            ObjectContext ctx = ((IObjectContextAdapter)_context).ObjectContext;
-            if (ctx.Connection.State != ConnectionState.Open)
-                ctx.Connection.Open();
-
             // Open the transaction scope
             _transaction = new TransactionScope();
         }

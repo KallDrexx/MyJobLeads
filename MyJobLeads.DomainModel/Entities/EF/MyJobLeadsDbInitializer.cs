@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data.Entity.Database;
+using System.Data.Entity;
 
 namespace MyJobLeads.DomainModel.Entities.EF
 {

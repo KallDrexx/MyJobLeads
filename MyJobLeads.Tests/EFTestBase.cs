@@ -5,8 +5,8 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyJobLeads.DomainModel.Data;
 using System.Transactions;
-using System.Data.Entity.Database;
 using MyJobLeads.DomainModel.Entities.EF;
+using System.Data.Entity;
 
 namespace MyJobLeads.Tests
 {
@@ -19,16 +19,20 @@ namespace MyJobLeads.Tests
         [TestInitialize]
         public void Setup()
         {
-            DbDatabase.SetInitializer<MyJobLeadsDbContext>(new DropCreateDatabaseAlways<MyJobLeadsDbContext>());
+            Database.SetInitializer<MyJobLeadsDbContext>(new DropCreateDatabaseAlways<MyJobLeadsDbContext>());
             _unitOfWork = new EFUnitOfWork();
-            _unitOfWork.BeginTransaction();
+            _unitOfWork.UnitTestEntities.Fetch().Count();
+
+            _transaction = new TransactionScope();
         }
 
         [TestCleanup]
         public void Cleanup()
         {
             // Dispose the transaction
-            _unitOfWork.EndTransaction(false);
+            _transaction.Dispose();
         }
+
+        
     }
 }
