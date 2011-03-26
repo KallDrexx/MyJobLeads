@@ -38,7 +38,11 @@ namespace MyJobLeads
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            Database.SetInitializer<MyJobLeadsDbContext>(new MyJobLeadsDbInitializer());
+            #if DEVELOPMENT
+                Database.SetInitializer<MyJobLeadsDbContext>(new MyJobLeadsDbInitializer());
+            #else
+                Database.SetInitializer<MyJobLeadsDbContext>(null);
+            #endif
         }
     }
 }
