@@ -5,6 +5,7 @@ using System.Text;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Contacts;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.DomainModel.Commands.Tasks
 {
@@ -60,16 +61,18 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         /// Executes the command
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="MJLEntityNotFoundException">Thrown when the specified company is not found</exception>
+        /// <exception cref="MJLEntityNotFoundException">Thrown when the specified contact is not found</exception>
         public Task Execute()
         {
             // Retrieve the company
-            var company = new ContactByIdQuery(_unitOfWork).WithContactId(_contactId).Execute();
+            var contact = new ContactByIdQuery(_unitOfWork).WithContactId(_contactId).Execute();
+            if (contact == null)
+                throw new MJLEntityNotFoundException(typeof(Contact), _contactId);
 
             // Create the Task
             var task = new Task
             {
-                Contact = company,
+                Contact = contact,
                 Name = _name,
                 TaskDate = _taskDate
             };

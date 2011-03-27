@@ -36,15 +36,10 @@ namespace MyJobLeads.DomainModel.Queries.Companies
         /// Executes the query
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="MJLEntityNotFoundException">Thrown when the specified company does not exist</exception>
         public Company Execute()
         {
             // Attempt to retrieve the company
-            var company = _unitOfWork.Companies.Fetch().Where(x => x.Id == _companyId).SingleOrDefault();
-            if (company == null)
-                throw new MJLEntityNotFoundException(typeof(Company), _companyId);
-
-            return company;
+            return _unitOfWork.Companies.Fetch().Where(x => x.Id == _companyId).SingleOrDefault();
         }
     }
 }

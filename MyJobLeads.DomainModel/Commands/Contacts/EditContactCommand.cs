@@ -5,6 +5,7 @@ using System.Text;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Contacts;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.DomainModel.Commands.Contacts
 {
@@ -130,6 +131,8 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
         {
             // Retrieve the company
             var contact = new ContactByIdQuery(_unitOfWork).WithContactId(_contactId).Execute();
+            if (contact == null)
+                throw new MJLEntityNotFoundException(typeof(Contact), _contactId);
 
             // Change any of the contact's properties only if the new property value is not null
             if (_name != null) { contact.Name = _name; }

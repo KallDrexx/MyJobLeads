@@ -36,14 +36,9 @@ namespace MyJobLeads.DomainModel.Queries.Contacts
         /// Executes the query
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="MJLEntityNotFoundException">Thrown when no contact is found</exception>
         public Contact Execute()
         {
-            var contact = _unitOfWork.Contacts.Fetch().Where(x => x.Id == _contactId).SingleOrDefault();
-            if (contact == null)
-                throw new MJLEntityNotFoundException(typeof(Contact), _contactId);
-
-            return contact;
+            return _unitOfWork.Contacts.Fetch().Where(x => x.Id == _contactId).SingleOrDefault();
         }
     }
 }

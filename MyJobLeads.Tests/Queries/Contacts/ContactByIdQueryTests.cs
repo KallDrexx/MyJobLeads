@@ -43,25 +43,17 @@ namespace MyJobLeads.Tests.Queries.Contacts
         }
 
         [TestMethod]
-        public void Execute_Throws_Exception_When_Entity_Not_Found()
+        public void Execute_Returns_Null_Contact_When_Id_Not_Found()
         {
             // Setup
             InitializeTestEntities();
             int id = _contact2.Id + 100;
 
             // Act
-            try
-            {
-                new ContactByIdQuery(_unitOfWork).WithContactId(id).Execute();
-                Assert.Fail("Query did not throw an exception");
-            }
+            Contact result = new ContactByIdQuery(_unitOfWork).WithContactId(id).Execute();
 
             // Verify
-            catch (MJLEntityNotFoundException ex)
-            {
-                Assert.AreEqual(typeof(Contact), ex.EntityType, "MJLEntityNotFoundException's entity type was not valid");
-                Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was not valid");
-            }
+            Assert.IsNull(result, "Query returned a non-null contact");
         }
     }
 }

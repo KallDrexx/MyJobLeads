@@ -56,25 +56,17 @@ namespace MyJobLeads.Tests.Queries.Users
         }
 
         [TestMethod]
-        public void Execute_Throws_MJLUserNotFoundException_When_No_User_Email_Exists()
+        public void Execute_Returns_Null_User_When_No_User_Found()
         {
             // Setup
             InitializeTestEntities();
             string email = "blah@blah.com";
 
             // Act
-            try
-            {
-                User result = new UserByEmailQuery(_unitOfWork).WithEmail(email).Execute();
-                Assert.Fail("Query did not throw an exception");
-            }
+            User result = new UserByEmailQuery(_unitOfWork).WithEmail(email).Execute();
 
             // Verify
-            catch (MJLUserNotFoundException ex)
-            {
-                Assert.AreEqual(MJLUserNotFoundException.SearchPropertyType.Email, ex.SearchProperty, "MJLUserNotFoundException's search property value was incorrect");
-                Assert.AreEqual(email, ex.SearchValue, "MJLUserNotFoundException's search value was incorrect");
-            }
+            Assert.IsNull(result, "Execute returned a non-null user");
         }
     }
 }

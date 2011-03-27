@@ -5,6 +5,7 @@ using System.Text;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Companies;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.DomainModel.Commands.Companies
 {
@@ -127,6 +128,8 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         {
             // Retrieve the entity
             var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(_companyId).Execute();
+            if (company == null)
+                throw new MJLEntityNotFoundException(typeof(Company), _companyId);
 
             // Edit only the properties that have been changed (not null)
             if (_name != null) { company.Name = _name; }

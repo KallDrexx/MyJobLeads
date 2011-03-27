@@ -53,24 +53,16 @@ namespace MyJobLeads.Tests.Queries.Users
         }
 
         [TestMethod]
-        public void Execute_Throws_Exception_When_Username_Not_Found()
+        public void Execute_Returns_Null_User_When_Username_Not_Found()
         {
             // Setup
             InitializeTestEntities();
 
             // Act
-            try
-            {
-                User user = new UserByUsernameQuery(_unitOfWork).WithUsername("username").Execute();
-                Assert.Fail("Query did not throw an exception");
-            }
+            User user = new UserByUsernameQuery(_unitOfWork).WithUsername("username").Execute();
 
             // Verify
-            catch (MJLUserNotFoundException ex)
-            {
-                Assert.AreEqual(MJLUserNotFoundException.SearchPropertyType.Username, ex.SearchProperty, "MJLUserNotFoundException's search property was incorrect");
-                Assert.AreEqual("username", ex.SearchValue, "MJLUserNotFoundException's search value was incorrect");
-            }
+            Assert.IsNull(user, "Query returned a non-null user");
         }
     }
 }

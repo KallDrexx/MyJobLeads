@@ -36,7 +36,7 @@ namespace MyJobLeads.Tests.Queries.Companies
         }
 
         [TestMethod]
-        public void Execute_Throws_Exception_When_Company_Not_Found()
+        public void Execute_Returns_Null_Company_When_Id_Not_Found()
         {
             // Setup
             Company company = new Company();
@@ -46,18 +46,10 @@ namespace MyJobLeads.Tests.Queries.Companies
             int id = company.Id + 1;
 
             // Act
-            try
-            {
-                Company result = new CompanyByIdQuery(_unitOfWork).WithCompanyId(id).Execute();
-                Assert.Fail("Query did not throw an exception");
-            }
+            Company result = new CompanyByIdQuery(_unitOfWork).WithCompanyId(id).Execute();
 
             // Verify
-            catch (MJLEntityNotFoundException ex)
-            {
-                Assert.AreEqual(typeof(Company), ex.EntityType, "MJLEntityNotFoundException's entity type was incorrect");
-                Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
-            }
+            Assert.IsNull(result, "Query returned a non-null company");
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.JobSearches;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.DomainModel.Commands.JobSearches
 {
@@ -64,6 +65,8 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
         {
             // Retrieve the job search
             var search = new JobSearchByIdQuery(_unitOfWork).WithJobSearchId(_jobSearchId).Execute();
+            if (search == null)
+                throw new MJLEntityNotFoundException(typeof(JobSearch), _jobSearchId);
 
             // Only edit the properties that were requested
             if (_newName != null)

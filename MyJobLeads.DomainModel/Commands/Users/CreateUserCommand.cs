@@ -69,23 +69,12 @@ namespace MyJobLeads.DomainModel.Commands.Users
             _email = _email.Trim().ToLower();
 
             // Check if any user has this username already
-            try
-            {
-                // If no exception occurs, user was found and thus we need to throw a duplicateusername exception
-                new UserByUsernameQuery(_unitOfWork).WithUsername(_username).Execute();
+            if (new UserByUsernameQuery(_unitOfWork).WithUsername(_username).Execute() != null)
                 throw new MJLDuplicateUsernameException(_username);
-            }
-            catch (MJLUserNotFoundException) { /* No user is using this username */ }
 
             // Check if any user is using this email already
-            try
-            {
-                new UserByEmailQuery(_unitOfWork).WithEmail(_email).Execute();
-
-                // No exception occurred, meaning a user was found, thus report this
+            if (new UserByEmailQuery(_unitOfWork).WithEmail(_email).Execute() != null)
                 throw new MJLDuplicateEmailException(_email);
-            }
-            catch (MJLUserNotFoundException) { /* No user is using this email */ }
 
             // Create the user
             var user = new User

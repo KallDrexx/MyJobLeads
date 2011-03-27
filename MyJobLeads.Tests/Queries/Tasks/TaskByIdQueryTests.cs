@@ -43,25 +43,17 @@ namespace MyJobLeads.Tests.Queries.Tasks
         }
 
         [TestMethod]
-        public void Execute_Throws_Exception_When_Task_Not_Found()
+        public void Execute_Returns_Null_Task_When_Id_Not_Found()
         {
             // Setup
             InitializeTestEntities();
             int id = _task2.Id + 100;
 
             // Act
-            try
-            {
-                new TaskByIdQuery(_unitOfWork).WithTaskId(id).Execute();
-                Assert.Fail("Query did not throw an exception");
-            }
+            Task result = new TaskByIdQuery(_unitOfWork).WithTaskId(id).Execute();
 
             // Verify
-            catch (MJLEntityNotFoundException ex)
-            {
-                Assert.AreEqual(typeof(Task), ex.EntityType, "MJLEntityNotFoundException's entity type was invalid");
-                Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was invalid");
-            }
+            Assert.IsNull(result, "Query returned a non-null task");
         }
     }
 }

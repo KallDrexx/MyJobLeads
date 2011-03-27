@@ -5,6 +5,7 @@ using System.Text;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.DomainModel.Commands.JobSearches
 {
@@ -64,6 +65,8 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
         {
             // Retrieve the user
             var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();
+            if (user == null)
+                throw new MJLEntityNotFoundException(typeof(User), _userId);
 
             // Create the job search
             var search = new JobSearch

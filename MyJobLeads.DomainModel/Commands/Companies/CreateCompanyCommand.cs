@@ -5,6 +5,7 @@ using System.Text;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.JobSearches;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.DomainModel.Commands.Companies
 {
@@ -130,6 +131,8 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         {
             // Retrieve the job search
             var search = new JobSearchByIdQuery(_unitOfWork).WithJobSearchId(_searchId).Execute();
+            if (search == null)
+                throw new MJLEntityNotFoundException(typeof(JobSearch), _searchId);
 
             // Create the company entity
             var company = new Company

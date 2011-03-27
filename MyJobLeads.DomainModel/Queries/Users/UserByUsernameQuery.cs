@@ -39,11 +39,7 @@ namespace MyJobLeads.DomainModel.Queries.Users
         /// <exception cref="MJLUserNotFoundException">Thrown when no user exists with the specified username</exception>
         public User Execute()
         {
-            var user = _unitOfWork.Users.Fetch().Where(x => x.Username == _username.Trim().ToLower()).SingleOrDefault();
-            if (user == null)
-                throw new MJLUserNotFoundException(MJLUserNotFoundException.SearchPropertyType.Username, _username);
-
-            return user;
+            return _unitOfWork.Users.Fetch().Where(x => x.Username == _username.Trim().ToLower()).SingleOrDefault();
         }
     }
 }

@@ -36,15 +36,10 @@ namespace MyJobLeads.DomainModel.Queries.Tasks
         /// Executes the query
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="MJLEntityNotFoundException">Thrown when the task is not found</exception>
         public Task Execute()
         {
             // Retrieve the task
-            var task = _unitOfWork.Tasks.Fetch().Where(x => x.Id == _taskId).SingleOrDefault();
-            if (task == null)
-                throw new MJLEntityNotFoundException(typeof(Task), _taskId);
-
-            return task;
+            return _unitOfWork.Tasks.Fetch().Where(x => x.Id == _taskId).SingleOrDefault();
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Tasks;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.DomainModel.Commands.Tasks
 {
@@ -79,6 +80,8 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         {
             // Retrieve the task
             var task = new TaskByIdQuery(_unitOfWork).WithTaskId(_taskId).Execute();
+            if (task == null)
+                throw new MJLEntityNotFoundException(typeof(Task), _taskId);
 
             // Only change the properties that were specified
             if (_name != null) { task.Name = _name; }

@@ -39,25 +39,17 @@ namespace MyJobLeads.Tests.Queries.JobSearches
         }
 
         [TestMethod]
-        public void Execute_Throws_Exception_When_JobSearch_Not_Found()
+        public void Execute_Returns_Null_JobSearch_When_Id_Not_Found()
         {
             // Setup 
             InitializeTestEntities();
             int id = _jobSearch.Id + 100;
 
             // Act
-            try
-            {
-                JobSearch result = new JobSearchByIdQuery(_unitOfWork).WithJobSearchId(id).Execute();
-                Assert.Fail("Query did not throw an exception");
-            }
+            JobSearch result = new JobSearchByIdQuery(_unitOfWork).WithJobSearchId(id).Execute();
 
             // Verify
-            catch (MJLEntityNotFoundException ex)
-            {
-                Assert.AreEqual(typeof(JobSearch), ex.EntityType, "MJLEntityNotFoundException's entity type was not correct");
-                Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was not correct");
-            }
+            Assert.IsNull(result, "Query returned a non-null job search");
         }
     }
 }

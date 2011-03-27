@@ -38,24 +38,17 @@ namespace MyJobLeads.Tests.Queries.Users
         }
 
         [TestMethod]
-        public void Execute_Throws_Exception_When_User_Not_Found()
+        public void Execute_Returns_Null_User_When_UserId_Not_Found()
         {
             // Setup
             InitializeTestEntities();
+            int id = _user.Id + 100;
 
             // Act
-            try
-            {
-                new UserByIdQuery(_unitOfWork).WithUserId(-1).Execute();
-                Assert.Fail("Query did not throw an exception");
-            }
+            User result = new UserByIdQuery(_unitOfWork).WithUserId(id).Execute();
 
             // Verify
-            catch (MJLEntityNotFoundException ex)
-            {
-                Assert.AreEqual(typeof(User), ex.EntityType, "MJLEntityNotFoundException's entity type was incorrect");
-                Assert.AreEqual((-1).ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
-            }
+            Assert.IsNull(result, "Query returned a non-null user");
         }
     }
 }

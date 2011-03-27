@@ -40,11 +40,7 @@ namespace MyJobLeads.DomainModel.Queries.Users
         public User Execute()
         {
             // Attempt to retrieve the user
-            var user = _unitOfWork.Users.Fetch().Where(x => x.Id == _userId).SingleOrDefault();
-            if (user == null)
-                throw new MJLEntityNotFoundException(typeof(User), _userId);
-
-            return user;
+            return _unitOfWork.Users.Fetch().Where(x => x.Id == _userId).SingleOrDefault();
         }
     }
 }

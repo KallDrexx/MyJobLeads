@@ -36,15 +36,10 @@ namespace MyJobLeads.DomainModel.Queries.JobSearches
         /// Executes the query
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="MJLEntityNotFoundException">Thrown when the requested job search does not exist</exception>
         public JobSearch Execute()
         {
             // Attempt to retrieve the job search
-            var jobSearch = _unitOfWork.JobSearches.Fetch().Where(x => x.Id == _jobSearchId).SingleOrDefault();
-            if (jobSearch == null)
-                throw new MJLEntityNotFoundException(typeof(JobSearch), _jobSearchId);
-
-            return jobSearch;
+            return _unitOfWork.JobSearches.Fetch().Where(x => x.Id == _jobSearchId).SingleOrDefault();
         }
     }
 }
