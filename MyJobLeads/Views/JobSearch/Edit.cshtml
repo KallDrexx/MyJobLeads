@@ -3,9 +3,21 @@
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    bool isNewJobSearch = Model.Id == 0;
 }
 
-<h2>Edit Jobsearc</h2>
+@if (isNewJobSearch)
+{
+    <h2>Start a New Job Search</h2>
+    <text>
+        Your first step towards a successful job search is to define what type of job search you are conducting. <br />
+    </text>
+    <br /><br />
+}
+else
+{
+    <h2>Editing the '@Model.Name' job search</h2>
+}
 
 @using (Html.BeginForm(MVC.JobSearch.Edit(Model.Id)))
 {
@@ -13,12 +25,12 @@
     
     <table>
         <tr>
-            <td align="right">Name:</td>
+            <td align="right">Job Search Name:</td>
             <td>@Html.TextBoxFor(x => x.Name)</td>
         </tr>
 
         <tr>
-            <td align="right">Description:</td>
+            <td align="right" valign="top">Description:</td>
             <td>@Html.TextAreaFor(x => x.Description, new { rows = 2, cols = "50" })</td>
         </tr>
 
@@ -27,7 +39,7 @@
             <td>
                 <input type="submit" value="Save" /> &nbsp; &nbsp;
                 
-                @if (Model.Id == 0) { @Html.ActionLink("Back", MVC.JobSearch.Index()); }
+                @if (isNewJobSearch) { @Html.ActionLink("Back", MVC.JobSearch.Index()); }
                 else { @Html.ActionLink("Back", MVC.JobSearch.View(Model.Id)); }
             </td>
         </tr>
