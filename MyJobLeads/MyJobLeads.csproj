@@ -157,6 +157,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\BlankForDeployment.txt" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -210,9 +212,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\MyJobLeads.DomainModel\MyJobLeads.DomainModel.csproj">
       <Project>{B8CE5C58-BADC-4504-93FB-CFA05F8DAC6F}</Project>
