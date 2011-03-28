@@ -8,6 +8,8 @@
 }
 
 <h2>Job Search: @Model.Name</h2>
+@Html.ActionLink("Edit This Job Search", MVC.JobSearch.Edit(Model.Id)) &nbsp; 
+@Html.ActionLink("View All Job Searches", MVC.JobSearch.Index())
 
 <p>
     Description: @Model.Description
