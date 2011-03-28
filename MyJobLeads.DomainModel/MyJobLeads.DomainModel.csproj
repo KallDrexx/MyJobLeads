@@ -70,6 +70,7 @@
     <Compile Include="Commands\Tasks\CreateTaskForContactCommand.cs" />
     <Compile Include="Commands\Tasks\EditTaskCommand.cs" />
     <Compile Include="Commands\Users\CreateUserCommand.cs" />
+    <Compile Include="Commands\Users\EditUserCommand.cs" />
     <Compile Include="Data\EFRepository.cs" />
     <Compile Include="Data\EFUnitOfWork.cs" />
     <Compile Include="Data\InMemoryRepository.cs" />

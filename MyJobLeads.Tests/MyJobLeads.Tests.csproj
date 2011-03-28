@@ -73,6 +73,7 @@
     <Compile Include="Commands\Tasks\CreateTaskForCompanyCommandTests.cs" />
     <Compile Include="Commands\Tasks\CreateTaskForContactCommandTests.cs" />
     <Compile Include="Commands\Tasks\EditTaskCommandTests.cs" />
+    <Compile Include="Commands\Users\EditUserCommandTests.cs" />
     <Compile Include="Data\EFUnitOfWorkTests.cs" />
     <Compile Include="Data\InMemoryUnitOfWorkTests.cs" />
     <Compile Include="EFTestBase.cs" />
