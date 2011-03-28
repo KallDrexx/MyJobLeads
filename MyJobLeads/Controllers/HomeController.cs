@@ -20,10 +20,15 @@ namespace MyJobLeads.Controllers
             {
                 var user = new UserByIdQuery(_unitOfWork).WithUserId(CurrentUserId).Execute();
                 if (user == null)
-                    return View();
+                    return View(); // Only happens when Asp.net thinks a non-existant user is logged in
 
                 if (user.LastVisitedJobSearchId == null)
-                    return RedirectToAction(MVC.JobSearch.Index());
+                {
+                    if (user.JobSearches.Count == 0)
+                        return RedirectToAction(MVC.JobSearch.Add());
+                    else
+                        return RedirectToAction(MVC.JobSearch.Index());
+                }
 
                 return RedirectToAction(MVC.JobSearch.View(user.LastVisitedJobSearchId.Value));
             }
