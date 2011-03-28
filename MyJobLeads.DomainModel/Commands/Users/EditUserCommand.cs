@@ -17,7 +17,8 @@ namespace MyJobLeads.DomainModel.Commands.Users
     {
         protected IUnitOfWork _unitOfWork;
         protected string _newEmail, _newPassword;
-        protected int _userId;
+        protected int _userId, _lastJobSearchId;
+        protected bool _updateLastJobSearch;
 
         public EditUserCommand(IUnitOfWork unitOfWork)
         {
@@ -58,6 +59,18 @@ namespace MyJobLeads.DomainModel.Commands.Users
         }
 
         /// <summary>
+        /// Specifies the id value of the job search the user last visited
+        /// </summary>
+        /// <param name="lastVisitedJobSearchId"></param>
+        /// <returns></returns>
+        public EditUserCommand SetLastVisitedJobSearchId(int lastVisitedJobSearchId)
+        {
+            _lastJobSearchId = lastVisitedJobSearchId;
+            _updateLastJobSearch = true;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
@@ -72,6 +85,7 @@ namespace MyJobLeads.DomainModel.Commands.Users
             // Edit the properties
             if (_newEmail != null) { user.Email = _newEmail; }
             if (_newPassword != null) { user.Password = PasswordUtils.CreatePasswordHash(user.Username, _newPassword); }
+            if (_updateLastJobSearch) { user.LastVisitedJobSearchId = _lastJobSearchId; }
 
             // Save
             _unitOfWork.Commit();
