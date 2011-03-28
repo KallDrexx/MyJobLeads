@@ -244,6 +244,8 @@
     <Content Include="Views\Contact\View.cshtml" />
     <Content Include="Views\Task\Edit.cshtml" />
     <Content Include="Views\Task\View.cshtml" />
+    <Content Include="Views\Shared\_CompanyDisplay.cshtml" />
+    <Content Include="Views\Shared\_ContactDisplay.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

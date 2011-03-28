@@ -5,13 +5,25 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Viewing Task: @Model.Name</h2>
-@Html.ActionLink("Edit", MVC.Task.Edit(Model.Id)) &nbsp; 
+<table width="100%">
+    <tr>
+        <td valign="top" width="50%">
+            @if (Model.Company != null) { Html.RenderPartial(MVC.Shared.Views._CompanyDisplay, Model.Company); }
+            else { Html.RenderPartial(MVC.Shared.Views._ContactDisplay, Model.Contact); }
+        </td>
 
-@if (Model.Company != null) { @Html.ActionLink("Back To Company", MVC.Company.View(Model.Company.Id)) } &nbsp; 
-@if (Model.Contact != null) { @Html.ActionLink("Back To Contact", MVC.Contact.View(Model.Contact.Id)) }
+        <td valign="top">
+            <h2>Task: @Model.Name</h2>
+            @Html.ActionLink("Edit", MVC.Task.Edit(Model.Id)) &nbsp; 
+
+            @if (Model.Company != null) { @Html.ActionLink("Back To Company", MVC.Company.View(Model.Company.Id)) } &nbsp; 
+            @if (Model.Contact != null) { @Html.ActionLink("Back To Contact", MVC.Contact.View(Model.Contact.Id)) }
                                                                                                       
-<p>
-    Task Date: @if (Model.TaskDate.HasValue) { @Model.TaskDate.Value.ToString() } else { <text>&lt;No Date Set&gt;</text> } <br />
-    Task Completed: @Model.Completed 
-</p>
+            <p>
+                Task Date: @if (Model.TaskDate.HasValue) { @Model.TaskDate.Value.ToString() } else { <text>&lt;No Date Set&gt;</text> } <br />
+                Task Completed: @Model.Completed 
+            </p>
+        </td>
+    </tr>
+
+</table>

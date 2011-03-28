@@ -6,28 +6,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Viewing Contact: @Model.Name</h2>
-@Html.ActionLink("Edit Contact", MVC.Contact.Edit(Model.Id)) &nbsp; &nbsp; 
-@Html.ActionLink("Back To Company", MVC.Company.View(Model.Company.Id))
+<table width="100%">
+    <tr>
+        <td valign="top" width="50%">
+            @{ Html.RenderPartial(MVC.Shared.Views._CompanyDisplay, Model.Company); }
+        </td>
 
-<p>
-    Name: @Model.Name <br />
-    Direct Phone: @Model.DirectPhone <br />
-    Extension: @Model.Extension <br />
-    Mobile Phone: @Model.MobilePhone <br />
-    Email Address: @Model.Email <br />
-    Assistant: @Model.Assistant <br />
-    Referred By: @Model.ReferredBy <br />
-    Notes: @Model.Notes
-</p>
-
-<h2>Tasks</h2>
-@Model.Tasks.Count Tasks exist for this contact<br />
-@Html.ActionLink("Add Task", MVC.Task.AddContactTask(Model.Id))
-
-<ul>
-    @foreach (Task task in Model.Tasks)
-    {
-        <li>@Html.ActionLink(task.Name, MVC.Task.View(task.Id))</li>
-    }
-</ul>
+        <td valign="top">
+            @{ Html.RenderPartial(MVC.Shared.Views._ContactDisplay, Model); }
+        </td>
+    </tr>
+</table>
