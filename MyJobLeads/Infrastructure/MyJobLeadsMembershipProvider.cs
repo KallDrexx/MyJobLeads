@@ -85,7 +85,10 @@ namespace MyJobLeads.Infrastructure
         {
             try 
             { 
-                var user = new UserByUsernameQuery(_unitOfWork).WithUsername(username).Execute(); 
+                var user = new UserByUsernameQuery(_unitOfWork).WithUsername(username).Execute();
+                if (user == null)
+                    return null;
+
                 return new MyJobLeadsMembershipUser(user);
             }
             catch (MJLUserNotFoundException)

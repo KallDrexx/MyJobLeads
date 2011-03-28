@@ -8,6 +8,8 @@ using MyJobLeads.DomainModel.Queries.JobSearches;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Commands.JobSearches;
 using MyJobLeads.DomainModel.Queries.Tasks;
+using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Commands.Users;
 
 namespace MyJobLeads.Controllers
 {
@@ -59,8 +61,13 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult View(int id)
         {
+            // Retrieve the specified job search
             var search = new JobSearchByIdQuery(_unitOfWork).WithJobSearchId(id).Execute();
             ViewBag.OpenTasks = new OpenTasksByJobSearchQuery(_unitOfWork).WithJobSearch(id).Execute();
+
+            // Set this as the user's last visited job search
+            new EditUserCommand(_unitOfWork).WithUserId(CurrentUserId).SetLastVisitedJobSearchId(id).Execute();
+
             return View(search);
         }
 
