@@ -48,6 +48,9 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="netDumbster">
+      <HintPath>..\Libs\netDumbster.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -93,6 +96,7 @@
     <Compile Include="Queries\Users\UserByEmailQueryTests.cs" />
     <Compile Include="Queries\Users\UserByIdQueryTests.cs" />
     <Compile Include="Queries\Users\UserByUsernameQueryTests.cs" />
+    <Compile Include="Utilities\EmailUtilsTest.cs" />
     <Compile Include="Utilities\PasswordUtilsTests.cs" />
   </ItemGroup>
   <ItemGroup>

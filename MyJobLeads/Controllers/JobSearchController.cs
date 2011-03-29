@@ -43,11 +43,11 @@ namespace MyJobLeads.Controllers
             // Determine if we are editing or adding a jobsearch
             if (jobSearch.Id == 0)
             {
-                new CreateJobSearchForUserCommand(_unitOfWork).ForUserId(CurrentUserId)
-                                                              .WithName(jobSearch.Name)
-                                                              .WithDescription(jobSearch.Description)
-                                                              .Execute();
-                return RedirectToAction(MVC.JobSearch.Index());
+                jobSearch = new CreateJobSearchForUserCommand(_unitOfWork).ForUserId(CurrentUserId)
+                                                                      .WithName(jobSearch.Name)
+                                                                      .WithDescription(jobSearch.Description)
+                                                                      .Execute();
+                return RedirectToAction(MVC.JobSearch.View(jobSearch.Id));
             }
             else
             {
