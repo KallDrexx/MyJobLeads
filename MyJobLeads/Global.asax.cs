@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using MyJobLeads.DomainModel.Entities.EF;
 using System.Data.Entity;
+using System.Configuration;
 
 namespace MyJobLeads
 {
@@ -33,16 +34,17 @@ namespace MyJobLeads
 
         protected void Application_Start()
         {
+            const string UpdateDbAppSettingName = "UpdateDatabaseOnModelChange";
+
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            #if DEVELOPMENT
+            if (ConfigurationManager.AppSettings[UpdateDbAppSettingName] == "true")
                 Database.SetInitializer<MyJobLeadsDbContext>(new MyJobLeadsDbInitializer());
-            #else
+            else
                 Database.SetInitializer<MyJobLeadsDbContext>(null);
-            #endif
         }
     }
 }
