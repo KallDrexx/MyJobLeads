@@ -16,7 +16,7 @@ namespace MyJobLeads.DomainModel.Commands.Users
     public class CreateUserCommand
     {
         protected IUnitOfWork _unitOfWork;
-        protected string _email, _password, _username;
+        protected string _email, _password;
 
         public CreateUserCommand(IUnitOfWork unitOfWork)
         {
@@ -46,17 +46,6 @@ namespace MyJobLeads.DomainModel.Commands.Users
         }
 
         /// <summary>
-        /// Specifies the username for the new user
-        /// </summary>
-        /// <param name="username"></param>
-        /// <returns></returns>
-        public CreateUserCommand SetUsername(string username)
-        {
-            _username = username;
-            return this;
-        }
-
-        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
@@ -65,12 +54,7 @@ namespace MyJobLeads.DomainModel.Commands.Users
         public User Execute()
         {
             // Convert the email and username to lower case and trim it
-            _username = _username.Trim().ToLower();
             _email = _email.Trim().ToLower();
-
-            // Check if any user has this username already
-            if (new UserByUsernameQuery(_unitOfWork).WithUsername(_username).Execute() != null)
-                throw new MJLDuplicateUsernameException(_username);
 
             // Check if any user is using this email already
             if (new UserByEmailQuery(_unitOfWork).WithEmail(_email).Execute() != null)
@@ -79,9 +63,8 @@ namespace MyJobLeads.DomainModel.Commands.Users
             // Create the user
             var user = new User
             {
-                Username = _username,
                 Email = _email,
-                Password = PasswordUtils.CreatePasswordHash(_username, _password),
+                Password = PasswordUtils.CreatePasswordHash(_email, _password),
 
                 JobSearches = new List<JobSearch>()
             };

@@ -96,9 +96,9 @@
     <Compile Include="Entities\UnitTestEntity.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Exceptions\MJLDuplicateEmailException.cs" />
-    <Compile Include="Exceptions\MJLDuplicateUsernameException.cs" />
     <Compile Include="Exceptions\MJLEntityNotFoundException.cs" />
     <Compile Include="Exceptions\MJLException.cs" />
+    <Compile Include="Exceptions\MJLIncorrectPasswordException.cs" />
     <Compile Include="Exceptions\MJLUserNotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\Companies\CompaniesByJobSearchIdQuery.cs" />
@@ -114,7 +114,6 @@
     <Compile Include="Queries\Users\UserByCredentialsQuery.cs" />
     <Compile Include="Queries\Users\UserByEmailQuery.cs" />
     <Compile Include="Queries\Users\UserByIdQuery.cs" />
-    <Compile Include="Queries\Users\UserByUsernameQuery.cs" />
     <Compile Include="Utilities\EmailUtils.cs" />
     <Compile Include="Utilities\PasswordUtils.cs" />
   </ItemGroup>

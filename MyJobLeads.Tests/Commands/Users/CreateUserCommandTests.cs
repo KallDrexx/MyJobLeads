@@ -19,17 +19,15 @@ namespace MyJobLeads.Tests.Commands.Users
             // Setup
 
             // Act
-            new CreateUserCommand(_unitOfWork).SetUsername("username")
-                                              .SetEmail("test@email.com")
+            new CreateUserCommand(_unitOfWork).SetEmail("test@email.com")
                                               .SetPassword("password")
                                               .Execute();
 
             // Verify
             User user = _unitOfWork.Users.Fetch().SingleOrDefault();
             Assert.IsNotNull(user, "No user was created");
-            Assert.AreEqual("username", user.Username, "User's username was incorrect");
             Assert.AreEqual("test@email.com", user.Email, "User's email was incorrect");
-            Assert.IsTrue(PasswordUtils.CheckPasswordHash(user.Username, "password", user.Password), "User's password could not be validated");
+            Assert.IsTrue(PasswordUtils.CheckPasswordHash(user.Email, "password", user.Password), "User's password could not be validated");
         }
 
         [TestMethod]
@@ -40,14 +38,12 @@ namespace MyJobLeads.Tests.Commands.Users
             // Act
             User user = new CreateUserCommand(_unitOfWork).SetEmail("test@email.com")
                                                           .SetPassword("password")
-                                                          .SetUsername("username")
                                                           .Execute();
 
             // Verify
             Assert.IsNotNull(user, "Execute returned a null user");
-            Assert.AreEqual("username", user.Username, "User's username was incorrect");
             Assert.AreEqual("test@email.com", user.Email, "User's email was incorrect");
-            Assert.IsTrue(PasswordUtils.CheckPasswordHash(user.Username, "password", user.Password), "User's password could not be validated");
+            Assert.IsTrue(PasswordUtils.CheckPasswordHash(user.Email, "password", user.Password), "User's password could not be validated");
         }
 
         [TestMethod]
@@ -58,55 +54,12 @@ namespace MyJobLeads.Tests.Commands.Users
             // Act
             new CreateUserCommand(_unitOfWork).SetEmail(" TEST@email.com ")
                                               .SetPassword("password")
-                                              .SetUsername("username")
                                               .Execute();
 
             // Verify
             User user = _unitOfWork.Users.Fetch().SingleOrDefault();
             Assert.IsNotNull(user, "No user was created");
             Assert.AreEqual("test@email.com", user.Email, "User's email was incorrect");
-        }
-
-        [TestMethod]
-        public void Username_Is_Trimmed_And_Converted_To_Lower_Case()
-        {
-            // Setup
-
-            // Act
-            new CreateUserCommand(_unitOfWork).SetEmail("TEST@email.com")
-                                              .SetPassword("password")
-                                              .SetUsername(" UserName")
-                                              .Execute();
-
-            // Verify
-            User user = _unitOfWork.Users.Fetch().SingleOrDefault();
-            Assert.IsNotNull(user, "No user was created");
-            Assert.AreEqual("username", user.Username, "User's username was incorrect");
-        }
-
-        [TestMethod]
-        public void Execute_Throws_MJLDuplicateUsernameException_When_Username_Already_Exists()
-        {
-            // Setup
-            User user = new User { Username = "user" };
-            _unitOfWork.Users.Add(user);
-            _unitOfWork.Commit();
-
-            // Act
-            try
-            {
-                new CreateUserCommand(_unitOfWork).SetUsername("user")
-                                                  .SetPassword("pass")
-                                                  .SetEmail("blah@blah.com")
-                                                  .Execute();
-                Assert.Fail("Command did not throw an exception");
-            }
-
-            // Catch
-            catch (MJLDuplicateUsernameException ex)
-            {
-                Assert.AreEqual("user", ex.Username, "MJLDuplicateUsernameException's username value was incorrect");
-            }
         }
 
         [TestMethod]
@@ -120,8 +73,7 @@ namespace MyJobLeads.Tests.Commands.Users
             // Act
             try
             {
-                new CreateUserCommand(_unitOfWork).SetUsername("user")
-                                                  .SetPassword("pass")
+                new CreateUserCommand(_unitOfWork).SetPassword("pass")
                                                   .SetEmail("test@test.com")
                                                   .Execute();
                 Assert.Fail("Command did not throw an exception");
@@ -138,7 +90,7 @@ namespace MyJobLeads.Tests.Commands.Users
         public void Execute_Initializes_JobSearch_List()
         {
             // Act
-            User user = new CreateUserCommand(_unitOfWork).SetUsername("user").SetEmail("Email@email.com").Execute();
+            User user = new CreateUserCommand(_unitOfWork).SetEmail("Email@email.com").Execute();
 
             // Verify
             Assert.IsNotNull(user, "User's job search list was not initialized");

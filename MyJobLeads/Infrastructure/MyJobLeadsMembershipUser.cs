@@ -14,7 +14,7 @@ namespace MyJobLeads.Infrastructure
     {
         public MyJobLeadsMembershipUser(User mjlUser)
             : base("MyJobLeadsMembershipProvider"
-            , mjlUser.Username
+            , mjlUser.Email
             , mjlUser.Id
             , mjlUser.Email
             , string.Empty // Not implemented

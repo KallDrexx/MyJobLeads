@@ -38,15 +38,9 @@ namespace MyJobLeads.Infrastructure
 
             try
             {
-                user = new CreateUserCommand(_unitOfWork).SetUsername(username)
-                                                             .SetPassword(password)
+                user = new CreateUserCommand(_unitOfWork).SetPassword(password)
                                                              .SetEmail(email)
                                                              .Execute();
-            }
-            catch (MJLDuplicateUsernameException)
-            {
-                status = MembershipCreateStatus.DuplicateUserName;
-                return null;
             }
             catch (MJLDuplicateEmailException)
             {
@@ -69,9 +63,9 @@ namespace MyJobLeads.Infrastructure
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public override bool ValidateUser(string username, string password)
+        public override bool ValidateUser(string email, string password)
         {
-            var user = new UserByCredentialsQuery(_unitOfWork).WithUsername(username)
+            var user = new UserByCredentialsQuery(_unitOfWork).WithEmail(email)
                                                               .WithPassword(password)
                                                               .Execute();
 
@@ -81,11 +75,11 @@ namespace MyJobLeads.Infrastructure
                 return true;
         }
 
-        public override MembershipUser GetUser(string username, bool userIsOnline)
+        public override MembershipUser GetUser(string email, bool userIsOnline)
         {
             try 
             { 
-                var user = new UserByUsernameQuery(_unitOfWork).WithUsername(username).Execute();
+                var user = new UserByEmailQuery(_unitOfWork).WithEmail(email).Execute();
                 if (user == null)
                     return null;
 

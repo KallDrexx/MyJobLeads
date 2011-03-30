@@ -16,7 +16,7 @@ namespace MyJobLeads.DomainModel.Commands.Users
     public class EditUserCommand
     {
         protected IUnitOfWork _unitOfWork;
-        protected string _newEmail, _newPassword;
+        protected string _newEmail, _newPassword, _oldPassword;
         protected int _userId, _lastJobSearchId;
         protected bool _updateLastJobSearch;
 
@@ -71,6 +71,17 @@ namespace MyJobLeads.DomainModel.Commands.Users
         }
 
         /// <summary>
+        /// Specifies the current password for the user
+        /// </summary>
+        /// <param name="currentPassword"></param>
+        /// <returns></returns>
+        public EditUserCommand WithExistingPassword(string currentPassword)
+        {
+            _oldPassword = currentPassword;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
@@ -83,8 +94,16 @@ namespace MyJobLeads.DomainModel.Commands.Users
                 throw new MJLEntityNotFoundException(typeof(User), _userId);
 
             // Edit the properties
-            if (_newEmail != null) { user.Email = _newEmail; }
-            if (_newPassword != null) { user.Password = PasswordUtils.CreatePasswordHash(user.Username, _newPassword); }
+            if (_newEmail != null || _newPassword != null)
+            {
+                // Verify the user's current password is correct
+                if (!PasswordUtils.CheckPasswordHash(user.Email, _oldPassword, user.Password))
+                    throw new MJLIncorrectPasswordException(_userId);
+
+                if (_newEmail != null) { user.Email = _newEmail; }
+                user.Password = PasswordUtils.CreatePasswordHash(user.Email, _newPassword ?? _oldPassword);
+            }
+
             if (_updateLastJobSearch) { user.LastVisitedJobSearchId = _lastJobSearchId; }
 
             // Save

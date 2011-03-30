@@ -19,7 +19,7 @@ namespace MyJobLeads.Tests.Commands.Users
 
         private void InitializeTestEntities()
         {
-            _user = new User { Username = "username", Email = "test@email.com" };
+            _user = new User { Email = "test@email.com" };
             _unitOfWork.Users.Add(_user);
             _unitOfWork.Commit();
 
@@ -37,7 +37,7 @@ namespace MyJobLeads.Tests.Commands.Users
             User user = _unitOfWork.Users.Fetch().Single();
 
             // Verify
-            Assert.IsTrue(PasswordUtils.CheckPasswordHash(user.Username, newPass, user.Password), "New password does not validate");
+            Assert.IsTrue(PasswordUtils.CheckPasswordHash(user.Email, newPass, user.Password), "New password does not validate");
         }
 
         [TestMethod]

@@ -52,7 +52,7 @@ namespace MyJobLeads.DomainModel.Commands.Users
 
             // Generate a new password for the user
             string newPassword = PasswordUtils.GenerateRandomPassword();
-            user.Password = PasswordUtils.CreatePasswordHash(user.Username, newPassword);
+            user.Password = PasswordUtils.CreatePasswordHash(user.Email, newPassword);
 
             _unitOfWork.Commit();
 
