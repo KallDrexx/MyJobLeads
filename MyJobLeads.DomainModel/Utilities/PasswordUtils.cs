@@ -8,6 +8,8 @@ namespace MyJobLeads.DomainModel.Utilities
 {
     public class PasswordUtils
     {
+        public const int MinPasswordLength = 5;
+
         /// <summary>
         /// Generates a password hash from the credentials specified
         /// </summary>
@@ -32,6 +34,17 @@ namespace MyJobLeads.DomainModel.Utilities
             return BCryptHelper.CheckPassword(username + password, hash);
         }
 
-        public const int MinPasswordLength = 5;
+        public static string GenerateRandomPassword()
+        {
+            const int passwordLength = 10;
+            string allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789!@$?_-";
+            char[] chars = new char[passwordLength];
+            Random rd = new Random();
+
+            for (int i = 0; i < passwordLength; i++)
+                chars[i] = allowedChars[rd.Next(0, allowedChars.Length)];
+
+            return new string(chars);
+        }
     }
 }
