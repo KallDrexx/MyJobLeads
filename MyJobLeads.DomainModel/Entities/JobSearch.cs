@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyJobLeads.DomainModel.Entities
 {
@@ -12,6 +13,8 @@ namespace MyJobLeads.DomainModel.Entities
         public string Description { get; set; }
 
         public virtual User User { get; set; }
+        public virtual int? UserId { get; set; }
+
         public virtual ICollection<Company> Companies { get; set; }
     }
 }

@@ -13,6 +13,9 @@ namespace MyJobLeads.DomainModel.Entities
         public bool Completed { get; set; }
 
         public virtual Company Company { get; set; }
+        public virtual int? CompanyId { get; set; }
+
         public virtual Contact Contact { get; set; }
+        public virtual int? ContactId { get; set; }
     }
 }

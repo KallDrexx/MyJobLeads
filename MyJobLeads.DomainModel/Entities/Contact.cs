@@ -18,6 +18,8 @@ namespace MyJobLeads.DomainModel.Entities
         public string Notes { get; set; }
 
         public virtual Company Company { get; set; }
+        public virtual int? CompanyId { get; set; }
+
         public virtual ICollection<Task> Tasks { get; set; }
     }
 }
