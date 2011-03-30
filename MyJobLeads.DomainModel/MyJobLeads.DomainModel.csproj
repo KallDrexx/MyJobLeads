@@ -107,7 +107,6 @@
     <Compile Include="Queries\Users\UserByIdQuery.cs" />
     <Compile Include="Queries\Users\UserByUsernameQuery.cs" />
     <Compile Include="Utilities\EmailUtils.cs" />
-    <Compile Include="Utilities\IEmailUtils.cs" />
     <Compile Include="Utilities\PasswordUtils.cs" />
   </ItemGroup>
   <ItemGroup>

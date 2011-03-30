@@ -15,7 +15,7 @@ namespace MyJobLeads.Tests.Commands.Users
     public class ResetUserPasswordCommandTests : EFTestBase
     {
         private User _user;
-        private Mock<IEmailUtils> _mock;
+        private Mock<EmailUtils> _mock;
 
         private void InitializeTestEntities()
         {
@@ -23,7 +23,7 @@ namespace MyJobLeads.Tests.Commands.Users
             _unitOfWork.Users.Add(_user);
             _unitOfWork.Commit();
 
-            _mock = new Mock<IEmailUtils>();
+            _mock = new Mock<EmailUtils>();
         }
 
         [TestMethod]

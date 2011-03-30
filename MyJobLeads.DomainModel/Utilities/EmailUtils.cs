@@ -9,7 +9,7 @@ namespace MyJobLeads.DomainModel.Utilities
     /// <summary>
     /// Class that contains utilities for dealing with emails
     /// </summary>
-    public class EmailUtils : IEmailUtils
+    public class EmailUtils
     {
         /// <summary>
         /// Sends an email with the specified parameters
@@ -18,7 +18,7 @@ namespace MyJobLeads.DomainModel.Utilities
         /// <param name="toAddress"></param>
         /// <param name="subject"></param>
         /// <param name="messageBody"></param>
-        public void Send(string toAddress, string subject, string messageBody)
+        public virtual void Send(string toAddress, string subject, string messageBody)
         {
             // Create a SmtpClient using the parameters from app.config
             var client = new SmtpClient();

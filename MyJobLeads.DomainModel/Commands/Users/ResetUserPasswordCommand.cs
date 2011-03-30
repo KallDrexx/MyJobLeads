@@ -17,11 +17,11 @@ namespace MyJobLeads.DomainModel.Commands.Users
     {
         protected IUnitOfWork _unitOfWork;
         protected int _userId;
-        public IEmailUtils EmailProvider { get; protected set; }
+        public EmailUtils EmailProvider { get; protected set; }
 
         public ResetUserPasswordCommand(IUnitOfWork unitOfWork) : this(unitOfWork, new EmailUtils()) { }
 
-        public ResetUserPasswordCommand(IUnitOfWork unitOfWork, IEmailUtils emailUtils)
+        public ResetUserPasswordCommand(IUnitOfWork unitOfWork, EmailUtils emailUtils)
         {
             _unitOfWork = unitOfWork;
             EmailProvider = emailUtils;
