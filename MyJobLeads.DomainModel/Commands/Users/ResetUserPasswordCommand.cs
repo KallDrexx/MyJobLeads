@@ -17,10 +17,14 @@ namespace MyJobLeads.DomainModel.Commands.Users
     {
         protected IUnitOfWork _unitOfWork;
         protected int _userId;
+        public IEmailUtils EmailProvider { get; protected set; }
 
-        public ResetUserPasswordCommand(IUnitOfWork unitOfWork)
+        public ResetUserPasswordCommand(IUnitOfWork unitOfWork) : this(unitOfWork, new EmailUtils()) { }
+
+        public ResetUserPasswordCommand(IUnitOfWork unitOfWork, IEmailUtils emailUtils)
         {
             _unitOfWork = unitOfWork;
+            EmailProvider = emailUtils;
         }
 
         /// <summary>
@@ -51,6 +55,10 @@ namespace MyJobLeads.DomainModel.Commands.Users
             user.Password = PasswordUtils.CreatePasswordHash(user.Username, newPassword);
 
             _unitOfWork.Commit();
+
+            // Send out an email
+            EmailProvider.Send(user.Email, "Password Recovery", "Your new MyJobLeads password is: " + newPassword);
+
             return newPassword;
         }
     }

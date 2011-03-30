@@ -7,6 +7,7 @@ using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Commands.Users;
 using MyJobLeads.DomainModel.Utilities;
 using MyJobLeads.DomainModel.Exceptions;
+using Moq;
 
 namespace MyJobLeads.Tests.Commands.Users
 {
@@ -14,12 +15,15 @@ namespace MyJobLeads.Tests.Commands.Users
     public class ResetUserPasswordCommandTests : EFTestBase
     {
         private User _user;
+        private Mock<IEmailUtils> _mock;
 
         private void InitializeTestEntities()
         {
             _user = new User { Username = "username", Email = "test@email.com" };
             _unitOfWork.Users.Add(_user);
             _unitOfWork.Commit();
+
+            _mock = new Mock<IEmailUtils>();
         }
 
         [TestMethod]
@@ -29,7 +33,7 @@ namespace MyJobLeads.Tests.Commands.Users
             InitializeTestEntities();
 
             // Act
-            string newPass = new ResetUserPasswordCommand(_unitOfWork).WithUserId(_user.Id).Execute();
+            string newPass = new ResetUserPasswordCommand(_unitOfWork, _mock.Object).WithUserId(_user.Id).Execute();
             User user = _unitOfWork.Users.Fetch().Single();
 
             // Verify
@@ -46,7 +50,7 @@ namespace MyJobLeads.Tests.Commands.Users
             // Act
             try
             {
-                new ResetUserPasswordCommand(_unitOfWork).WithUserId(id).Execute();
+                new ResetUserPasswordCommand(_unitOfWork, _mock.Object).WithUserId(id).Execute();
                 Assert.Fail("Command did not throw an exception");
             }
 
@@ -56,6 +60,34 @@ namespace MyJobLeads.Tests.Commands.Users
                 Assert.AreEqual(typeof(User), ex.EntityType, "MJLEntityNotFoundException's entity type was incorrect");
                 Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
             }
+        }
+
+        [TestMethod]
+        public void Execute_Sends_Email_To_User()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            string newPass = new ResetUserPasswordCommand(_unitOfWork, _mock.Object).WithUserId(_user.Id).Execute();
+
+            // Verify
+            _mock.Verify(x => x.Send(It.Is<string>(y => y == _user.Email), 
+                                     It.IsAny<string>(), 
+                                     It.Is<string>(y => y.Contains(newPass))), 
+                        Times.Once());
+        }
+
+        [TestMethod]
+        public void Command_Instantiates_EmailUtils_As_EmailProvider_When_None_Passed_In()
+        {
+            // Setup
+            ResetUserPasswordCommand cmd = new ResetUserPasswordCommand(_unitOfWork);
+
+            // Verify
+            Assert.IsNotNull(cmd.EmailProvider, "Command's email provider was null");
+            Assert.AreEqual(typeof(EmailUtils), cmd.EmailProvider.GetType(), "Command's email provider was an incorrect type");
+            
         }
     }
 }

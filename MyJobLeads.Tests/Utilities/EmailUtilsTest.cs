@@ -35,7 +35,7 @@ namespace MyJobLeads.Tests.Utilities
             string toAddress = "to@address.com", fromAddress = "from@address.com", subject = "subject", message = "This is the message";
 
             // Act
-            EmailUtils.Send(toAddress, subject, message);
+            new EmailUtils().Send(toAddress, subject, message);
 
             // Verify
             Assert.AreEqual(1, _server.ReceivedEmailCount, "The smtp server had an incorrect email count");
