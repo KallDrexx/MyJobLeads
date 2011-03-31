@@ -35,7 +35,7 @@ namespace MyJobLeads.Models
     public class LogOnModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Email Address")]
         public string UserName { get; set; }
 
         [Required]
@@ -47,13 +47,8 @@ namespace MyJobLeads.Models
         public bool RememberMe { get; set; }
     }
 
-
     public class RegisterModel
     {
-        [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
-
         [Required]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email address")]
