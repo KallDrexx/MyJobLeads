@@ -16,7 +16,7 @@ using MyJobLeads.Tests.Mocks;
 namespace MyJobLeads.Tests.Controllers
 {
     [TestClass]
-    public class HomeControllerTest : EFTestBase
+    public class HomeControllerTest : InMemoryTestBase
     {
         [TestMethod]
         public void Index_Shows_When_Not_Logged_In()
@@ -38,7 +38,7 @@ namespace MyJobLeads.Tests.Controllers
         public void Index_Redirects_To_Add_Jobsearch_Action_When_User_Has_No_Job_Searches()
         {
             // Setup
-            User user = new User { JobSearches = new List<JobSearch>() };
+            User user = new User { Id = 20, JobSearches = new List<JobSearch>() };
             _unitOfWork.Users.Add(user);
             _unitOfWork.Commit();
 
@@ -60,7 +60,7 @@ namespace MyJobLeads.Tests.Controllers
         public void Index_Redirects_To_Jobsearch_Index_When_User_Has_Job_Searches_But_Null_LastVisitedJobSearchId()
         {
             // Setup
-            User user = new User { JobSearches = new List<JobSearch>() };
+            User user = new User { Id = 40, JobSearches = new List<JobSearch>() };
             user.JobSearches.Add(new JobSearch());
             _unitOfWork.Users.Add(user);
             _unitOfWork.Commit();
@@ -83,7 +83,7 @@ namespace MyJobLeads.Tests.Controllers
         public void Index_Redirects_To_Jobsearch_View_When_User_Has_Job_Searches_And_LastVisitedJobSearchId()
         {
             // Setup
-            User user = new User { JobSearches = new List<JobSearch>(), LastVisitedJobSearchId = 4 };
+            User user = new User { Id = 20, JobSearches = new List<JobSearch>(), LastVisitedJobSearchId = 4 };
             user.JobSearches.Add(new JobSearch());
             _unitOfWork.Users.Add(user);
             _unitOfWork.Commit();

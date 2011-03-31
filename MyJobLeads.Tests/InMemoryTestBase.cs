@@ -8,7 +8,7 @@ using MyJobLeads.DomainModel.Data;
 namespace MyJobLeads.Tests
 {
     [TestClass]
-    public class InMemoryTestBase
+    public class InMemoryTestBase : TestingBase
     {
         protected IUnitOfWork _unitOfWork;
 

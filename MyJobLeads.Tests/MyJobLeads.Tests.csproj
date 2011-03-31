@@ -104,6 +104,7 @@
     <Compile Include="Queries\Users\UserByCredentialsQueryTests.cs" />
     <Compile Include="Queries\Users\UserByEmailQueryTests.cs" />
     <Compile Include="Queries\Users\UserByIdQueryTests.cs" />
+    <Compile Include="TestingBase.cs" />
     <Compile Include="Utilities\EmailUtilsTest.cs" />
     <Compile Include="Utilities\PasswordUtilsTests.cs" />
   </ItemGroup>
