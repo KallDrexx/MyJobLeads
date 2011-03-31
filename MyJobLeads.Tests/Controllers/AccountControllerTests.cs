@@ -9,6 +9,7 @@ using MyJobLeads;
 using MyJobLeads.Controllers;
 using MyJobLeads.Models;
 using MyJobLeads.Models.Accounts;
+using MyJobLeads.Tests.Mocks;
 
 namespace MyJobLeads.Tests.Controllers
 {
@@ -16,7 +17,6 @@ namespace MyJobLeads.Tests.Controllers
     [TestClass]
     public class AccountControllerTest
     {
-
         [TestMethod]
         public void ChangePassword_Get_ReturnsView()
         {
@@ -369,45 +369,6 @@ namespace MyJobLeads.Tests.Controllers
             public void SignOut()
             {
                 SignOut_WasCalled = true;
-            }
-        }
-
-        private class MockHttpContext : HttpContextBase
-        {
-            private readonly IPrincipal _user = new GenericPrincipal(new GenericIdentity("someUser"), null /* roles */);
-            private readonly HttpRequestBase _request = new MockHttpRequest();
-
-            public override IPrincipal User
-            {
-                get
-                {
-                    return _user;
-                }
-                set
-                {
-                    base.User = value;
-                }
-            }
-
-            public override HttpRequestBase Request
-            {
-                get
-                {
-                    return _request;
-                }
-            }
-        }
-
-        private class MockHttpRequest : HttpRequestBase
-        {
-            private readonly Uri _url = new Uri("http://mysite.example.com/");
-
-            public override Uri Url
-            {
-                get
-                {
-                    return _url;
-                }
             }
         }
 

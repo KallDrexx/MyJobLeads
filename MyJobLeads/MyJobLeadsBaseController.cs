@@ -14,22 +14,27 @@ namespace MyJobLeads
     {
         public MyJobLeadsBaseController()
         {
-            CurrentUserId = 0;
         }
 
         protected override void Initialize(RequestContext requestContext)
         {
             if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
             base.Initialize(requestContext);
-
-            // If the user is logged in, retrieve their login id
-            var user = MembershipService.GetUser();
-            if (user != null)
-                CurrentUserId = (int)user.ProviderUserKey;
         }
 
-        public int CurrentUserId { get; set; }
         public IMembershipService MembershipService { get; set; }
+        public int CurrentUserId 
+        {
+            get
+            {
+                var user = MembershipService.GetUser();
+                if (user != null)
+                    return (int)user.ProviderUserKey;
+                else
+                    return 0;
+            }
+        }
+        
 
         protected IUnitOfWork _unitOfWork;
     }
