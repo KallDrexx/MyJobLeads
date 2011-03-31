@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Security;
 using System.Web.Mvc;
 using MyJobLeads.DomainModel.Data;
+using MyJobLeads.Models.Accounts;
+using System.Web.Routing;
 
 namespace MyJobLeads
 {
@@ -12,17 +14,22 @@ namespace MyJobLeads
     {
         public MyJobLeadsBaseController()
         {
-            // Set the CurrentUserId for the currently logged in user, if one is logged in
-            if (Membership.GetUser() == null)
-                CurrentUserId = 0;
-            else
-                CurrentUserId = (int)Membership.GetUser().ProviderUserKey;
+            CurrentUserId = 0;
         }
 
-        /// <summary>
-        /// Retrieves the currently logged in user id value
-        /// </summary>
+        protected override void Initialize(RequestContext requestContext)
+        {
+            if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
+            base.Initialize(requestContext);
+
+            // If the user is logged in, retrieve their login id
+            var user = MembershipService.GetUser();
+            if (user != null)
+                CurrentUserId = (int)user.ProviderUserKey;
+        }
+
         public int CurrentUserId { get; set; }
+        public IMembershipService MembershipService { get; set; }
 
         protected IUnitOfWork _unitOfWork;
     }

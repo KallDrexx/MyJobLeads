@@ -69,5 +69,10 @@ namespace MyJobLeads.Models.Accounts
                 return false;
             }
         }
+
+        public MembershipUser GetUser()
+        {
+            return Membership.GetUser();
+        }
     }
 }
