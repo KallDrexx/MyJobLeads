@@ -52,7 +52,55 @@ namespace MyJobLeads.Tests.Controllers
             // Verify
             Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult), "Index returned the incorrect type of action result");
             RedirectToRouteResult redirect = (RedirectToRouteResult)result;
+            Assert.AreEqual("JobSearch", redirect.RouteValues["controller"], "Index redirected to an incorrect controller");
             Assert.AreEqual("Add", redirect.RouteValues["action"], "Index redirected to an incorrect action");
+        }
+
+        [TestMethod]
+        public void Index_Redirects_To_Jobsearch_Index_When_User_Has_Job_Searches_But_Null_LastVisitedJobSearchId()
+        {
+            // Setup
+            User user = new User { JobSearches = new List<JobSearch>() };
+            user.JobSearches.Add(new JobSearch());
+            _unitOfWork.Users.Add(user);
+            _unitOfWork.Commit();
+
+            HomeController controller = new HomeController(_unitOfWork);
+            controller.MembershipService = new MockMembershipService(user);
+            SetupController(controller);
+
+            // Act
+            ActionResult result = controller.Index();
+
+            // Verify
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult), "Index returned the incorrect type of action result");
+            RedirectToRouteResult redirect = (RedirectToRouteResult)result;
+            Assert.AreEqual("JobSearch", redirect.RouteValues["controller"], "Index redirected to an incorrect controller");
+            Assert.AreEqual("Index", redirect.RouteValues["action"], "Index redirected to an incorrect action");
+        }
+
+        [TestMethod]
+        public void Index_Redirects_To_Jobsearch_View_When_User_Has_Job_Searches_And_LastVisitedJobSearchId()
+        {
+            // Setup
+            User user = new User { JobSearches = new List<JobSearch>(), LastVisitedJobSearchId = 4 };
+            user.JobSearches.Add(new JobSearch());
+            _unitOfWork.Users.Add(user);
+            _unitOfWork.Commit();
+
+            HomeController controller = new HomeController(_unitOfWork);
+            controller.MembershipService = new MockMembershipService(user);
+            SetupController(controller);
+
+            // Act
+            ActionResult result = controller.Index();
+
+            // Verify
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult), "Index returned the incorrect type of action result");
+            RedirectToRouteResult redirect = (RedirectToRouteResult)result;
+            Assert.AreEqual("JobSearch", redirect.RouteValues["controller"], "Index redirected to an incorrect controller");
+            Assert.AreEqual("View", redirect.RouteValues["action"], "Index redirected to an incorrect action");
+            Assert.AreEqual(4, redirect.RouteValues["id"], "Index redirected with an incorrect jobsearch id value");
         }
 
         [TestMethod]
