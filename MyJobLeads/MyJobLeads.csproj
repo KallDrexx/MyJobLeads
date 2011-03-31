@@ -141,7 +141,9 @@
     <Compile Include="JobSearchController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Accounts\AccountModels.cs" />
+    <Compile Include="Models\Accounts\AccountMembershipService.cs" />
+    <Compile Include="Models\Accounts\IMembershipService.cs" />
     <Compile Include="MyJobLeadsBaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedController.generated.cs">
