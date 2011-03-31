@@ -12,17 +12,13 @@ using MyJobLeads.Models.Accounts;
 
 namespace MyJobLeads.Controllers
 {
-    public partial class AccountController : Controller
+    public partial class AccountController : MyJobLeadsBaseController
     {
-
         public IFormsAuthenticationService FormsService { get; set; }
-        public IMembershipService MembershipService { get; set; }
 
         protected override void Initialize(RequestContext requestContext)
         {
             if (FormsService == null) { FormsService = new FormsAuthenticationService(); }
-            if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
-
             base.Initialize(requestContext);
         }
 
