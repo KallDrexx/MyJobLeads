@@ -14,13 +14,9 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Index()
         {
-            ViewBag.Message = "Welcome to My Job Leads!";
-
-            if (User.Identity.IsAuthenticated)
+            if (CurrentUserId != 0)
             {
                 var user = new UserByIdQuery(_unitOfWork).WithUserId(CurrentUserId).Execute();
-                if (user == null)
-                    return View(); // Only happens when Asp.net thinks a non-existant user is logged in
 
                 if (user.LastVisitedJobSearchId == null)
                 {
