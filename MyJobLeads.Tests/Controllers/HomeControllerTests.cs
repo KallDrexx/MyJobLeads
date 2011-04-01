@@ -12,6 +12,7 @@ using System.Web.Security;
 using MyJobLeads.Infrastructure;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.Tests.Mocks;
+using MvcContrib.TestHelper;
 
 namespace MyJobLeads.Tests.Controllers
 {
@@ -30,8 +31,7 @@ namespace MyJobLeads.Tests.Controllers
             ActionResult result = controller.Index();
 
             // Verify
-            Assert.IsNotNull(result, "Index returned a null action result");
-            Assert.IsInstanceOfType(result, typeof(ViewResult), "Index did not return a view result");
+            result.AssertViewRendered();
         }
 
         [TestMethod]
@@ -50,10 +50,7 @@ namespace MyJobLeads.Tests.Controllers
             ActionResult result = controller.Index();
 
             // Verify
-            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult), "Index returned the incorrect type of action result");
-            RedirectToRouteResult redirect = (RedirectToRouteResult)result;
-            Assert.AreEqual("JobSearch", redirect.RouteValues["controller"], "Index redirected to an incorrect controller");
-            Assert.AreEqual("Add", redirect.RouteValues["action"], "Index redirected to an incorrect action");
+            result.AssertActionRedirect().ToController("JobSearch").ToAction("Add");
         }
 
         [TestMethod]
@@ -73,10 +70,7 @@ namespace MyJobLeads.Tests.Controllers
             ActionResult result = controller.Index();
 
             // Verify
-            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult), "Index returned the incorrect type of action result");
-            RedirectToRouteResult redirect = (RedirectToRouteResult)result;
-            Assert.AreEqual("JobSearch", redirect.RouteValues["controller"], "Index redirected to an incorrect controller");
-            Assert.AreEqual("Index", redirect.RouteValues["action"], "Index redirected to an incorrect action");
+            result.AssertActionRedirect().ToController("JobSearch").ToAction("Index");
         }
 
         [TestMethod]
@@ -96,11 +90,7 @@ namespace MyJobLeads.Tests.Controllers
             ActionResult result = controller.Index();
 
             // Verify
-            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult), "Index returned the incorrect type of action result");
-            RedirectToRouteResult redirect = (RedirectToRouteResult)result;
-            Assert.AreEqual("JobSearch", redirect.RouteValues["controller"], "Index redirected to an incorrect controller");
-            Assert.AreEqual("View", redirect.RouteValues["action"], "Index redirected to an incorrect action");
-            Assert.AreEqual(4, redirect.RouteValues["id"], "Index redirected with an incorrect jobsearch id value");
+            result.AssertActionRedirect().ToController("JobSearch").ToAction("View").WithParameter("id", 4);
         }
 
         [TestMethod]
@@ -113,7 +103,7 @@ namespace MyJobLeads.Tests.Controllers
             ViewResult result = controller.About() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            result.AssertViewRendered();
         }
     }
 }
