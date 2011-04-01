@@ -27,7 +27,6 @@ namespace MyJobLeads.Tests.Controllers
 
             JobSearchController controller = new JobSearchController(_unitOfWork);
             controller.MembershipService = new MockMembershipService(user);
-            SetupController(controller);
 
             // Act
             ActionResult result = controller.Index();

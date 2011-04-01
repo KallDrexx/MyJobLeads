@@ -25,7 +25,6 @@ namespace MyJobLeads.Tests.Controllers
             // Setup
             HomeController controller = new HomeController(_unitOfWork);
             controller.MembershipService = new MockMembershipService(null);
-            SetupController(controller);
 
             // Act
             ActionResult result = controller.Index();
@@ -44,7 +43,6 @@ namespace MyJobLeads.Tests.Controllers
 
             HomeController controller = new HomeController(_unitOfWork);
             controller.MembershipService = new MockMembershipService(user);
-            SetupController(controller);
 
             // Act
             ActionResult result = controller.Index();
@@ -64,7 +62,6 @@ namespace MyJobLeads.Tests.Controllers
 
             HomeController controller = new HomeController(_unitOfWork);
             controller.MembershipService = new MockMembershipService(user);
-            SetupController(controller);
 
             // Act
             ActionResult result = controller.Index();
@@ -84,7 +81,6 @@ namespace MyJobLeads.Tests.Controllers
 
             HomeController controller = new HomeController(_unitOfWork);
             controller.MembershipService = new MockMembershipService(user);
-            SetupController(controller);
 
             // Act
             ActionResult result = controller.Index();

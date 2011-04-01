@@ -11,7 +11,7 @@ using System.Data.Entity;
 namespace MyJobLeads.Tests
 {
     [TestClass]
-    public class EFTestBase : TestingBase
+    public class EFTestBase
     {
         protected IUnitOfWork _unitOfWork;
         protected TransactionScope _transaction;
