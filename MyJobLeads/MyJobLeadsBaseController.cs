@@ -23,18 +23,24 @@ namespace MyJobLeads
         }
 
         public IMembershipService MembershipService { get; set; }
+
+        private int? _currentUserId;
         public int CurrentUserId 
         {
             get
             {
-                var user = MembershipService.GetUser();
-                if (user != null)
-                    return (int)user.ProviderUserKey;
-                else
-                    return 0;
+                if (_currentUserId == null)
+                {
+                    var user = MembershipService.GetUser();
+                    if (user != null)
+                        _currentUserId = (int)MembershipService.GetUser().ProviderUserKey;
+                    else
+                        _currentUserId = 0;
+                }
+
+                return _currentUserId.Value;
             }
         }
-        
 
         protected IUnitOfWork _unitOfWork;
     }
