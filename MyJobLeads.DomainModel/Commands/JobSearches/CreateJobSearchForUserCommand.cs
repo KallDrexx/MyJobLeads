@@ -6,6 +6,7 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Entities.History;
 
 namespace MyJobLeads.DomainModel.Commands.JobSearches
 {
@@ -75,8 +76,19 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
                 Description = _description,
                 User = user,
 
-                Companies = new List<Company>()
+                Companies = new List<Company>(),
+                History = new List<JobSearchHistory>()
             };
+
+            // Create the history record
+            search.History.Add(new JobSearchHistory
+            {
+                Name = _name,
+                Description = _description,
+                Author = user,
+                HistoryAction = MJLConstants.HistoryInsert,
+                DateModified = DateTime.Now
+            });
 
             _unitOfWork.JobSearches.Add(search);
             _unitOfWork.Commit();

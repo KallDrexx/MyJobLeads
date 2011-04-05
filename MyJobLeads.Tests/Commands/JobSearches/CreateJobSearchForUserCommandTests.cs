@@ -6,6 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Commands.JobSearches;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Entities.History;
+using MyJobLeads.DomainModel;
 
 namespace MyJobLeads.Tests.Commands.JobSearches
 {
@@ -97,6 +99,32 @@ namespace MyJobLeads.Tests.Commands.JobSearches
 
             // Verify
             Assert.IsNotNull(search.Companies, "Company list was not initialized");
+        }
+
+        [TestMethod]
+        public void Execute_Creates_History_Record()
+        {
+            // Setup
+            InitializeTestEntities();
+            DateTime start, end;
+
+            // Act
+            start = DateTime.Now;
+            new CreateJobSearchForUserCommand(_unitOfWork).ForUserId(_user.Id)
+                                                          .WithName("Test Name")
+                                                          .WithDescription("Test Desc")
+                                                          .Execute();
+            end = DateTime.Now;
+
+            // Verify
+            JobSearch result = _unitOfWork.JobSearches.Fetch().Single();
+            JobSearchHistory history = result.History.Single();
+
+            Assert.AreEqual("Test Name", history.Name, "History record had an incorrect name value");
+            Assert.AreEqual("Test Desc", history.Description, "History record had an incorrect description value");
+            Assert.AreEqual(_user, history.Author, "History record had an incorrect author");
+            Assert.AreEqual(MJLConstants.HistoryInsert, history.HistoryAction, "History record had an incorrect history action value");
+            Assert.IsTrue(history.DateModified >= start && history.DateModified <= end, "History record had an incorrect modified date value");
         }
     }
 }

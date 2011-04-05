@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using MyJobLeads.DomainModel.Entities.History;
 
 namespace MyJobLeads.DomainModel.Entities
 {
@@ -16,5 +17,6 @@ namespace MyJobLeads.DomainModel.Entities
         public virtual int? UserId { get; set; }
 
         public virtual ICollection<Company> Companies { get; set; }
+        public virtual ICollection<JobSearchHistory> History { get; set; }
     }
 }

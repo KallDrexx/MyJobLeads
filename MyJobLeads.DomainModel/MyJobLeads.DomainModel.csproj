@@ -89,6 +89,8 @@
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\History\EntityHistoryBase.cs" />
+    <Compile Include="Entities\History\JobSearchHistory.cs" />
     <Compile Include="Entities\JobSearch.cs" />
     <Compile Include="Entities\EF\MyJobLeadsDbContext.cs" />
     <Compile Include="Entities\EF\MyJobLeadsDbInitializer.cs" />
@@ -100,6 +102,7 @@
     <Compile Include="Exceptions\MJLException.cs" />
     <Compile Include="Exceptions\MJLIncorrectPasswordException.cs" />
     <Compile Include="Exceptions\MJLUserNotFoundException.cs" />
+    <Compile Include="MJLConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\Companies\CompaniesByJobSearchIdQuery.cs" />
     <Compile Include="Queries\Companies\CompanyByIdQuery.cs" />
