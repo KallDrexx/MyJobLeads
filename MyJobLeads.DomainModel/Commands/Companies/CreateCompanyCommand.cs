@@ -6,6 +6,8 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.JobSearches;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Entities.History;
 
 namespace MyJobLeads.DomainModel.Commands.Companies
 {
@@ -15,7 +17,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
     public class CreateCompanyCommand
     {
         protected IUnitOfWork _unitOfWork;
-        protected int _searchId;
+        protected int _searchId, _callingUserId;
         protected string _name, _phone, _city, _state, _zip, _metro, _industry, _notes;
 
         public CreateCompanyCommand(IUnitOfWork unitOfWork)
@@ -123,12 +125,28 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         }
 
         /// <summary>
+        /// Specifies the id value of the user creating the company
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public CreateCompanyCommand CalledByUserId(int userId)
+        {
+            _callingUserId = userId;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="MJLEntityNotFoundException">Thrown when the job search doesn't exist</exception>
+        /// <exception cref="MJLEntityNotFoundException"></exception>
         public Company Execute()
         {
+            // Retrieve the user creating this company
+            var user = new UserByIdQuery(_unitOfWork).WithUserId(_callingUserId).Execute();
+            if (user == null)
+                throw new MJLEntityNotFoundException(typeof(User), _callingUserId);
+
             // Retrieve the job search
             var search = new JobSearchByIdQuery(_unitOfWork).WithJobSearchId(_searchId).Execute();
             if (search == null)
@@ -148,8 +166,26 @@ namespace MyJobLeads.DomainModel.Commands.Companies
                 Notes = _notes,
 
                 Tasks = new List<Task>(),
-                Contacts = new List<Contact>()
+                Contacts = new List<Contact>(),
+                History = new List<CompanyHistory>()
             };
+
+            // Create the history record
+            company.History.Add(new CompanyHistory
+            {
+                Name = _name,
+                Phone = _phone,
+                City = _city,
+                State = _state,
+                Zip = _zip,
+                MetroArea = _metro,
+                Industry = _industry,
+                Notes = _notes,
+
+                Author = user,
+                DateModified = DateTime.Now,
+                HistoryAction = MJLConstants.HistoryInsert
+            });
 
             _unitOfWork.Companies.Add(company);
             _unitOfWork.Commit();

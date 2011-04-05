@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MyJobLeads.DomainModel.Entities.History;
 
 namespace MyJobLeads.DomainModel.Entities
 {
@@ -22,5 +23,6 @@ namespace MyJobLeads.DomainModel.Entities
 
         public virtual ICollection<Contact> Contacts { get; set; }
         public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<CompanyHistory> History { get; set; }
     }
 }
