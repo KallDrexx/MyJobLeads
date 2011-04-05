@@ -6,6 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Commands.Companies;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Entities.History;
+using MyJobLeads.DomainModel;
 
 namespace MyJobLeads.Tests.Commands.Companies
 {
@@ -13,9 +15,11 @@ namespace MyJobLeads.Tests.Commands.Companies
     public class EditCompanyCommandTests : EFTestBase
     {
         private Company _company;
+        private User _user;
 
         private void InitializeTestEntities()
         {
+            _user = new User();
             _company = new Company
             {
                 Name = "Starting Name",
@@ -25,8 +29,12 @@ namespace MyJobLeads.Tests.Commands.Companies
                 Zip = "00000",
                 MetroArea = "Starting Metro",
                 Industry = "Starting Industry",
-                Notes = "Starting Notes"
+                Notes = "Starting Notes", 
+
+                History = new List<CompanyHistory>()
             };
+
+            _unitOfWork.Users.Add(_user);
             _unitOfWork.Companies.Add(_company);
             _unitOfWork.Commit();
         }
@@ -47,6 +55,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                  .SetMetroArea("Metro")
                                                  .SetIndustry("Industry")
                                                  .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -78,6 +87,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                                  .SetMetroArea("Metro")
                                                                  .SetIndustry("Industry")
                                                                  .SetNotes("Notes")
+                                                                 .RequestedByUserId(_user.Id)
                                                                  .Execute();
 
             // Verify
@@ -111,6 +121,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                      .SetMetroArea("Metro")
                                                      .SetIndustry("Industry")
                                                      .SetNotes("Notes")
+                                                     .RequestedByUserId(_user.Id)
                                                      .Execute();
                 Assert.Fail("Command did not throw an exception");
             }
@@ -138,6 +149,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                  .SetMetroArea("Metro")
                                                  .SetIndustry("Industry")
                                                  .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -168,6 +180,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                  .SetMetroArea("Metro")
                                                  .SetIndustry("Industry")
                                                  .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -198,6 +211,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                  .SetMetroArea("Metro")
                                                  .SetIndustry("Industry")
                                                  .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -228,6 +242,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                  .SetMetroArea("Metro")
                                                  .SetIndustry("Industry")
                                                  .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -258,6 +273,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                  .SetMetroArea("Metro")
                                                  .SetIndustry("Industry")
                                                  .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -288,6 +304,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                  .SetZip("01234")
                                                  .SetIndustry("Industry")
                                                  .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -318,6 +335,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                  .SetZip("01234")
                                                  .SetMetroArea("Metro")
                                                  .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -348,6 +366,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                  .SetZip("01234")
                                                  .SetMetroArea("Metro")
                                                  .SetIndustry("Industry")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -361,6 +380,77 @@ namespace MyJobLeads.Tests.Commands.Companies
             Assert.AreEqual("Metro", result.MetroArea, "The created company's metro area was incorrect");
             Assert.AreEqual("Starting Notes", result.Notes, "The created company's notes were incorrect");
             Assert.AreEqual("Industry", result.Industry, "The created company's industry was incorrect");
+        }
+
+        [TestMethod]
+        public void Execute_Throws_MJLEntityNotFoundException_When_Calling_User_Not_Found()
+        {
+            // Setup
+            InitializeTestEntities();
+            int id = _user.Id + 1;
+
+            // Act
+            try
+            {
+                new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+                                                     .SetName("Name")
+                                                     .SetPhone("555-555-5555")
+                                                     .SetCity("City")
+                                                     .SetState("State")
+                                                     .SetZip("01234")
+                                                     .SetMetroArea("Metro")
+                                                     .SetIndustry("Industry")
+                                                     .SetNotes("Notes")
+                                                     .RequestedByUserId(id)
+                                                     .Execute();
+                Assert.Fail("Command did not throw an exception");
+            }
+
+            // Verify
+            catch (MJLEntityNotFoundException ex)
+            {
+                Assert.AreEqual(typeof(User), ex.EntityType, "MJLEntityNotFoundException's entity type was incorrect");
+                Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
+            }
+        }
+
+        [TestMethod]
+        public void Execute_Creates_History_Record()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            DateTime start = DateTime.Now;
+            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+                                                 .SetName("Name")
+                                                 .SetPhone("555-555-5555")
+                                                 .SetCity("City")
+                                                 .SetState("State")
+                                                 .SetZip("01234")
+                                                 .SetMetroArea("Metro")
+                                                 .SetIndustry("Industry")
+                                                 .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
+                                                 .Execute();
+            DateTime end = DateTime.Now;
+
+            // Verify
+            Company company = _unitOfWork.Companies.Fetch().Single();
+            CompanyHistory history = company.History.Single();
+
+            Assert.AreEqual("Name", history.Name, "The history record's name was incorrect");
+            Assert.AreEqual("555-555-5555", history.Phone, "The history record's phone number was incorrect");
+            Assert.AreEqual("City", history.City, "The history record's city was incorrect");
+            Assert.AreEqual("State", history.State, "The history record's state was incorrect");
+            Assert.AreEqual("01234", history.Zip, "The history record's zip was incorrect");
+            Assert.AreEqual("Metro", history.MetroArea, "The history record's metro area was incorrect");
+            Assert.AreEqual("Notes", history.Notes, "The history record's notes were incorrect");
+            Assert.AreEqual("Industry", history.Industry, "The history record's industry was incorrect");
+
+            Assert.AreEqual(_user, history.Author, "The history record's author was incorrect");
+            Assert.AreEqual(MJLConstants.HistoryUpdate, history.HistoryAction, "The history record's action value was incorrect");
+            Assert.IsTrue(history.DateModified >= start && history.DateModified <= end, "The history record's modification date was incorrect");
         }
     }
 }

@@ -6,13 +6,15 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Entities.History;
 
 namespace MyJobLeads.DomainModel.Commands.Companies
 {
     public class EditCompanyCommand
     {
         protected IUnitOfWork _unitOfWork;
-        protected int _companyId;
+        protected int _companyId, _userId;
         protected string _name, _phone, _city, _state, _zip, _metro, _industry, _notes;
 
         public EditCompanyCommand(IUnitOfWork unitOfWork)
@@ -120,12 +122,28 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         }
 
         /// <summary>
+        /// Specifies the id value of the user editing the company
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public EditCompanyCommand RequestedByUserId(int userId)
+        {
+            _userId = userId;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="MJLEntityNotFoundException">Thrown when the company doesn't exist</exception>
+        /// <exception cref="MJLEntityNotFoundException">Thrown when the company or requesting user doesn't exist</exception>
         public Company Execute()
         {
+            // Retrieve the calling user
+            var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();
+            if (user == null)
+                throw new MJLEntityNotFoundException(typeof(User), _userId);
+
             // Retrieve the entity
             var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(_companyId).Execute();
             if (company == null)
@@ -140,6 +158,23 @@ namespace MyJobLeads.DomainModel.Commands.Companies
             if (_metro != null) { company.MetroArea = _metro; }
             if (_industry != null) { company.Industry = _industry; }
             if (_notes != null) { company.Notes = _notes; }
+
+            // Create the history record
+            company.History.Add(new CompanyHistory
+            {
+                Name = company.Name,
+                Phone = company.Phone,
+                City = company.City,
+                State = company.State,
+                Zip = company.Zip,
+                MetroArea = company.MetroArea,
+                Industry = company.Industry,
+                Notes = company.Notes,
+
+                Author = user,
+                HistoryAction = MJLConstants.HistoryUpdate,
+                DateModified = DateTime.Now
+            });
 
             // Commit changes
             _unitOfWork.Commit();
