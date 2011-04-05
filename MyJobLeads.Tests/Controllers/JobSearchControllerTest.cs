@@ -43,7 +43,7 @@ namespace MyJobLeads.Tests.Controllers
             ActionResult result = _controller.Index();
 
             // Verify
-            result.AssertViewRendered(); //.ForView("Index");
+            result.AssertViewRendered().ForView("");
             IList<JobSearch> model = ((ViewResult)result).Model as List<JobSearch>;
 
             Assert.IsNotNull(model, "Action returned a null view model");
@@ -59,7 +59,7 @@ namespace MyJobLeads.Tests.Controllers
             ActionResult result = _controller.Add();
 
             // Verify
-            result.AssertViewRendered(); //.ForView("Edit");
+            result.AssertViewRendered().ForView(MVC.JobSearch.Views.Edit);
         }
     }
 }
