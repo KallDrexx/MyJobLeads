@@ -90,6 +90,7 @@
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\History\CompanyHistory.cs" />
+    <Compile Include="Entities\History\ContactHistory.cs" />
     <Compile Include="Entities\History\EntityHistoryBase.cs" />
     <Compile Include="Entities\History\JobSearchHistory.cs" />
     <Compile Include="Entities\JobSearch.cs" />

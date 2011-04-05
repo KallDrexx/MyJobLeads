@@ -6,6 +6,8 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Entities.History;
 
 namespace MyJobLeads.DomainModel.Commands.Contacts
 {
@@ -15,7 +17,7 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
     public class CreateContactCommand
     {
         protected IUnitOfWork _unitOfWork;
-        protected int _companyId;
+        protected int _companyId, _userId;
         protected string _name, _directPhone, _mobilePhone, _ext, _email, _assistant, _referredBy, _notes;
 
         public CreateContactCommand(IUnitOfWork unitOfWork)
@@ -123,12 +125,28 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
         }
 
         /// <summary>
+        /// Specifies the id value of the user creating the contact
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public CreateContactCommand RequestedByUserId(int userId)
+        {
+            _userId = userId;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="MJLEntityNotFoundException">Thrown when the company is not found</exception>
+        /// <exception cref="MJLEntityNotFoundException">Thrown when the company or calling user is not found</exception>
         public Contact Execute()
         {
+            // Retrieve the user creating the contact
+            var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();
+            if (user == null)
+                throw new MJLEntityNotFoundException(typeof(User), _userId);
+
             // Retrieve the company
             var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(_companyId).Execute();
             if (company == null)
@@ -147,8 +165,26 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
                 ReferredBy = _referredBy,
                 Notes = _notes,
 
-                Tasks = new List<Task>()
+                Tasks = new List<Task>(),
+                History = new List<ContactHistory>()
             };
+
+            // Create the history record
+            contact.History.Add(new ContactHistory
+            {
+                Name = _name,
+                DirectPhone = _directPhone,
+                MobilePhone = _mobilePhone,
+                Extension = _ext,
+                Email = _email,
+                Assistant = _assistant,
+                ReferredBy = _referredBy,
+                Notes = _notes,
+
+                DateModified = DateTime.Now,
+                Author = user,
+                HistoryAction = MJLConstants.HistoryInsert
+            });
 
             _unitOfWork.Contacts.Add(contact);
             _unitOfWork.Commit();

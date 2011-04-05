@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MyJobLeads.DomainModel.Entities.History;
 
-namespace MyJobLeads.DomainModel.Entities
+namespace MyJobLeads.DomainModel.Entities.History
 {
-    public class Contact
+    public class ContactHistory : EntityHistoryBase
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string DirectPhone { get; set; }
         public string MobilePhone { get; set; }
@@ -18,11 +16,7 @@ namespace MyJobLeads.DomainModel.Entities
         public string ReferredBy { get; set; }
         public string Notes { get; set; }
 
-        public virtual Company Company { get; set; }
-        public virtual int? CompanyId { get; set; }
-
-        public virtual ICollection<Task> Tasks { get; set; }
-        public virtual ICollection<Contact> Contacts { get; set; }
-        public virtual ICollection<ContactHistory> History { get; set; }
+        public virtual int ContactId { get; set; }
+        public virtual Contact Contact { get; set; }
     }
 }
