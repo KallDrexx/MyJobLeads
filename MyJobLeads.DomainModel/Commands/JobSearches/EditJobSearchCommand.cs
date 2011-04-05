@@ -6,6 +6,8 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.JobSearches;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Entities.History;
 
 namespace MyJobLeads.DomainModel.Commands.JobSearches
 {
@@ -15,7 +17,7 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
     public class EditJobSearchCommand
     {
         protected IUnitOfWork _unitOfWork;
-        protected int _jobSearchId;
+        protected int _jobSearchId, _userId;
         protected string _newName, _newDesc;
 
         public EditJobSearchCommand(IUnitOfWork unitOfWork)
@@ -57,6 +59,17 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
         }
 
         /// <summary>
+        /// Specifies the id value of the user editing the job search
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public EditJobSearchCommand CalledByUserId(int userId)
+        {
+            _userId = userId;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
@@ -68,12 +81,27 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
             if (search == null)
                 throw new MJLEntityNotFoundException(typeof(JobSearch), _jobSearchId);
 
+            // Retrieve the calling user
+            var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();
+            if (user == null)
+                throw new MJLEntityNotFoundException(typeof(User), _userId);
+
             // Only edit the properties that were requested
             if (_newName != null)
                 search.Name = _newName;
 
             if (_newDesc != null)
                 search.Description = _newDesc;
+
+            // Create the history record
+            search.History.Add(new JobSearchHistory
+            {
+                HistoryAction = MJLConstants.HistoryUpdate,
+                DateModified = DateTime.Now,
+                Author = user,
+                Name = search.Name,
+                Description = search.Description
+            });
 
             // Commit
             _unitOfWork.Commit();

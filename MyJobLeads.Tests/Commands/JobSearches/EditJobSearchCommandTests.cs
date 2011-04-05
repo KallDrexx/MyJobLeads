@@ -6,6 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Commands.JobSearches;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Entities.History;
+using MyJobLeads.DomainModel;
 
 namespace MyJobLeads.Tests.Commands.JobSearches
 {
@@ -13,10 +15,14 @@ namespace MyJobLeads.Tests.Commands.JobSearches
     public class EditJobSearchCommandTests : EFTestBase
     {
         private JobSearch _jobSearch;
+        private User _user;
 
         private void InitializeTestEntities()
         {
-            _jobSearch = new JobSearch { Name = "Test Name", Description = "Test Description" };
+            _jobSearch = new JobSearch { Name = "Test Name", Description = "Test Description", History = new List<JobSearchHistory>() };
+            _user = new User();
+
+            _unitOfWork.Users.Add(_user);
             _unitOfWork.JobSearches.Add(_jobSearch);
             _unitOfWork.Commit();
         }
@@ -31,6 +37,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             new EditJobSearchCommand(_unitOfWork).WithJobSearchId(_jobSearch.Id)
                                                  .SetName("New Name")
                                                  .SetDescription("New Description")
+                                                 .CalledByUserId(_user.Id)
                                                  .Execute();
 
             // Verify 
@@ -49,6 +56,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             JobSearch result = new EditJobSearchCommand(_unitOfWork).WithJobSearchId(_jobSearch.Id)
                                                                     .SetName("New Name")
                                                                     .SetDescription("New Description")
+                                                                    .CalledByUserId(_user.Id)
                                                                     .Execute();
 
             // Verify 
@@ -69,6 +77,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
                 new EditJobSearchCommand(_unitOfWork).WithJobSearchId(_jobSearch.Id + 1)
                                                      .SetName("Name")
                                                      .SetDescription("Description")
+                                                     .CalledByUserId(_user.Id)
                                                      .Execute();
                 Assert.Fail("Command did not throw an exception");
             }
@@ -90,6 +99,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             // Act
             new EditJobSearchCommand(_unitOfWork).WithJobSearchId(_jobSearch.Id)
                                                  .SetName("New Name")
+                                                 .CalledByUserId(_user.Id)
                                                  .Execute();
 
             // Verify 
@@ -107,12 +117,65 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             // Act
             new EditJobSearchCommand(_unitOfWork).WithJobSearchId(_jobSearch.Id)
                                                  .SetDescription("New Description")
+                                                 .CalledByUserId(_user.Id)
                                                  .Execute();
 
             // Verify 
             JobSearch result = _unitOfWork.JobSearches.Fetch().Single();
             Assert.AreEqual("Test Name", result.Name, "The JobSearch had an incorrect name");
             Assert.AreEqual("New Description", result.Description, "The JobSearch had an incorrect description");
+        }
+
+        [TestMethod]
+        public void Execute_Creates_History_Record()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            DateTime start = DateTime.Now;
+            new EditJobSearchCommand(_unitOfWork).WithJobSearchId(_jobSearch.Id)
+                                                 .SetName("New Name")
+                                                 .SetDescription("New Description")
+                                                 .CalledByUserId(_user.Id)
+                                                 .Execute();
+            DateTime end = DateTime.Now;
+
+            // Verify 
+            JobSearch result = _unitOfWork.JobSearches.Fetch().Single();
+            JobSearchHistory history = result.History.Single();
+
+            Assert.AreEqual("New Name", history.Name, "The history record had an incorrect name");
+            Assert.AreEqual("New Description", history.Description, "The history record had an incorrect description");
+            Assert.AreEqual(_user, history.Author, "The history record had an incorrect author");
+            Assert.AreEqual(MJLConstants.HistoryUpdate, history.HistoryAction, "The history record had an incorrect history action value");
+            Assert.IsTrue(history.DateModified >= start && history.DateModified <= end, "The history record had an incorrect modification date");
+        }
+
+        [TestMethod]
+        public void Execute_Throws_MJLEntityNotFoundException_When_Calling_User_Not_Found()
+        {
+            // Setup
+            InitializeTestEntities();
+            int id = _user.Id + 101;
+
+            // Act
+            try
+            {
+                new EditJobSearchCommand(_unitOfWork).WithJobSearchId(_jobSearch.Id)
+                                                     .SetName("Name")
+                                                     .SetDescription("Description")
+                                                     .CalledByUserId(id)
+                                                     .Execute();
+                Assert.Fail("Command did not throw an exception");
+            }
+
+            // Verify
+            catch (MJLEntityNotFoundException ex)
+            {
+                Assert.AreEqual(typeof(User), ex.EntityType, "MJLEntityNotFoundException's entity type was incorrect");
+                Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
+            }
         }
     }
 }
