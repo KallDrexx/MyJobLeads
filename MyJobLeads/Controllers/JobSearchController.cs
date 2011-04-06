@@ -59,7 +59,7 @@ namespace MyJobLeads.Controllers
             }
         }
 
-        public virtual ActionResult View(int id)
+        public virtual ActionResult Details(int id)
         {
             // Retrieve the specified job search
             var search = new JobSearchByIdQuery(_unitOfWork).WithJobSearchId(id).Execute();

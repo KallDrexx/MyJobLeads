@@ -57,8 +57,8 @@
             <td></td>
             <td>
                 <input type="submit" value="save" /> &nbsp; &nbsp;
-                @if (Model.Id == 0) { Html.ActionLink("Back", MVC.Company.View(companyId)); }
-                else { Html.ActionLink("Back", MVC.Contact.View(Model.Id)); }
+                @if (Model.Id == 0) { Html.ActionLink("Back", MVC.Company.Details(companyId)); }
+                else { Html.ActionLink("Back", MVC.Contact.Details(Model.Id)); }
             </td>
         </tr>
     </table>

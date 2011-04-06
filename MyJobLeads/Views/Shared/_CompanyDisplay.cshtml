@@ -24,7 +24,7 @@ Notes: @Model.Notes <br />
 <ul>
     @foreach (Contact contact in Model.Contacts)
     {
-        <li>@Html.ActionLink(contact.Name, MVC.Contact.View(contact.Id))</li>   
+        <li>@Html.ActionLink(contact.Name, MVC.Contact.Details(contact.Id))</li>   
     }
 </ul>
 

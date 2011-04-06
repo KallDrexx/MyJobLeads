@@ -61,10 +61,10 @@ namespace MyJobLeads.Controllers
                                                                       .Execute();
             }
 
-            return RedirectToAction(MVC.Company.View(company.Id));
+            return RedirectToAction(MVC.Company.Details(company.Id));
         }
 
-        public virtual ActionResult View(int id)
+        public virtual ActionResult Details(int id)
         {
             var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(id).Execute();
             return View(company);

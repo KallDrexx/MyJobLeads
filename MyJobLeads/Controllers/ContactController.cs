@@ -61,14 +61,13 @@ namespace MyJobLeads.Controllers
                                                              .Execute();
             }
 
-            return RedirectToAction(MVC.Contact.View(contact.Id));
+            return RedirectToAction(MVC.Contact.Details(contact.Id));
         }
 
-        public virtual ActionResult View(int id)
+        public virtual ActionResult Details(int id)
         {
             var contact = new ContactByIdQuery(_unitOfWork).WithContactId(id).Execute();
             return View(contact);
         }
-
     }
 }

@@ -26,7 +26,7 @@ namespace MyJobLeads.Controllers
                         return RedirectToAction(MVC.JobSearch.Index());
                 }
 
-                return RedirectToAction(MVC.JobSearch.View(user.LastVisitedJobSearchId.Value));
+                return RedirectToAction(MVC.JobSearch.Details(user.LastVisitedJobSearchId.Value));
             }
 
             

@@ -67,10 +67,10 @@ namespace MyJobLeads.Controllers
                                                        .Execute();
             }
 
-            return RedirectToAction(MVC.Task.View(task.Id));
+            return RedirectToAction(MVC.Task.Details(task.Id));
         }
 
-        public virtual ActionResult View(int id)
+        public virtual ActionResult Details(int id)
         {
             var task = new TaskByIdQuery(_unitOfWork).WithTaskId(id).Execute();
             return View(task);

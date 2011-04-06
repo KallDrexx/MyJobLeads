@@ -11,7 +11,7 @@
 <ul>
     @foreach (JobSearch search in Model) 
     {
-        <li>@Html.ActionLink(search.Name, MVC.JobSearch.View(search.Id))</li>
+        <li>@Html.ActionLink(search.Name, MVC.JobSearch.Details(search.Id))</li>
     }
 </ul>
 

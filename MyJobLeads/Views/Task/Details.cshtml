@@ -16,8 +16,8 @@
             <h2>Task: @Model.Name</h2>
             @Html.ActionLink("Edit", MVC.Task.Edit(Model.Id)) &nbsp; 
 
-            @if (Model.Company != null) { @Html.ActionLink("Back To Company", MVC.Company.View(Model.Company.Id)) } &nbsp; 
-            @if (Model.Contact != null) { @Html.ActionLink("Back To Contact", MVC.Contact.View(Model.Contact.Id)) }
+            @if (Model.Company != null) { @Html.ActionLink("Back To Company", MVC.Company.Details(Model.Company.Id)) } &nbsp; 
+            @if (Model.Contact != null) { @Html.ActionLink("Back To Contact", MVC.Contact.Details(Model.Contact.Id)) }
                                                                                                       
             <p>
                 Task Date: @if (Model.TaskDate.HasValue) { @Model.TaskDate.Value.ToString() } else { <text>&lt;No Date Set&gt;</text> } <br />

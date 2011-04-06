@@ -40,7 +40,7 @@ else
                 <input type="submit" value="Save" /> &nbsp; &nbsp;
                 
                 @if (isNewJobSearch) { @Html.ActionLink("Back", MVC.JobSearch.Index()); }
-                else { @Html.ActionLink("Back", MVC.JobSearch.View(Model.Id)); }
+                else { @Html.ActionLink("Back", MVC.JobSearch.Details(Model.Id)); }
             </td>
         </tr>
     </table>

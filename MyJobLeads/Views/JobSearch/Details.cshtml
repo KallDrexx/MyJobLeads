@@ -30,7 +30,7 @@
             <ul>
                 @foreach (Company company in @Model.Companies)
                 {
-                    <li>@Html.ActionLink(company.Name, MVC.Company.View(company.Id))</li>
+                    <li>@Html.ActionLink(company.Name, MVC.Company.Details(company.Id))</li>
                 }
             </ul>
         </td>
@@ -44,7 +44,7 @@
                 {
                     <li>
                         @( task.TaskDate.HasValue ? "Due " + task.TaskDate.ToString() : string.Empty )
-                        @Html.ActionLink(task.Name, MVC.Task.View(task.Id))
+                        @Html.ActionLink(task.Name, MVC.Task.Details(task.Id))
                     </li>
                 }
             </ul>

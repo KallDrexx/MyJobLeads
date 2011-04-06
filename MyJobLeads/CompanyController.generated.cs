@@ -43,8 +43,8 @@ namespace MyJobLeads.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult View() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.View);
+        public System.Web.Mvc.ActionResult Details() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Details);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -61,7 +61,7 @@ namespace MyJobLeads.Controllers {
         public class ActionNamesClass {
             public readonly string Add = "Add";
             public readonly string Edit = "Edit";
-            public readonly string View = "View";
+            public readonly string Details = "Details";
         }
 
 
@@ -70,8 +70,8 @@ namespace MyJobLeads.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string Details = "~/Views/Company/Details.cshtml";
             public readonly string Edit = "~/Views/Company/Edit.cshtml";
-            public readonly string View = "~/Views/Company/View.cshtml";
         }
     }
 
@@ -98,8 +98,8 @@ namespace MyJobLeads.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult View(int id) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.View);
+        public override System.Web.Mvc.ActionResult Details(int id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }

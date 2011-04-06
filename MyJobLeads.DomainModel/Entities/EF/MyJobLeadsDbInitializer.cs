@@ -6,6 +6,7 @@ using System.Data.Entity;
 using Microsoft.SqlServer.Management.Smo;
 using Microsoft.SqlServer.Management.Common;
 using System.Data.SqlClient;
+using MyJobLeads.DomainModel.Utilities;
 
 namespace MyJobLeads.DomainModel.Entities.EF
 {
@@ -17,6 +18,13 @@ namespace MyJobLeads.DomainModel.Entities.EF
         /// <param name="context"></param>
         protected override void Seed(MyJobLeadsDbContext context)
         {
+            context.Users.Add(new User 
+            { 
+                Email = "test@test.com", 
+                Password = PasswordUtils.CreatePasswordHash("test@test.com", "test")
+            });
+
+            context.SaveChanges();
             GenerateElmahSchema(context);
         }
 

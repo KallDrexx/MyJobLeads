@@ -23,7 +23,7 @@
 <ul>
     @foreach (Task task in Model.Tasks)
     {
-        <li>@Html.ActionLink(task.Name, MVC.Task.View(task.Id))</li>
+        <li>@Html.ActionLink(task.Name, MVC.Task.Details(task.Id))</li>
     }
 </ul>
 
