@@ -6,6 +6,8 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Entities.History;
 
 namespace MyJobLeads.DomainModel.Commands.Tasks
 {
@@ -17,7 +19,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         protected IUnitOfWork _unitOfWork;
         protected string _name;
         protected DateTime? _taskDate;
-        protected int _companyId;
+        protected int _companyId, _userId;
 
         public CreateTaskForCompanyCommand(IUnitOfWork unitOfWork)
         {
@@ -58,12 +60,28 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         }
 
         /// <summary>
+        /// Specifies the id value of the user creating the task
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public CreateTaskForCompanyCommand RequestedByUserId(int userId)
+        {
+            _userId = userId;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="MJLEntityNotFoundException">Thrown when the specified company is not found</exception>
+        /// <exception cref="MJLEntityNotFoundException">Thrown when the specified company or calling user is not found</exception>
         public Task Execute()
         {
+            // Retrieve the user creating the task
+            var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();
+            if (user == null)
+                throw new MJLEntityNotFoundException(typeof(User), _userId);
+
             // Retrieve the company
             var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(_companyId).Execute();
             if (company == null)
@@ -74,8 +92,20 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
             {
                 Company = company,
                 Name = _name,
-                TaskDate = _taskDate
+                TaskDate = _taskDate,
+
+                History = new List<TaskHistory>()
             };
+
+            // Create history record
+            task.History.Add(new TaskHistory
+            {
+                Name = _name,
+                TaskDate = _taskDate,
+                HistoryAction = MJLConstants.HistoryInsert,
+                DateModified = DateTime.Now,
+                Author = user
+            });
 
             _unitOfWork.Tasks.Add(task);
             _unitOfWork.Commit();

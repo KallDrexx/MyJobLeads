@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MyJobLeads.DomainModel.Entities.History;
 
 namespace MyJobLeads.DomainModel.Entities
 {
@@ -17,5 +18,7 @@ namespace MyJobLeads.DomainModel.Entities
 
         public virtual Contact Contact { get; set; }
         public virtual int? ContactId { get; set; }
+
+        public virtual ICollection<TaskHistory> History { get; set; }
     }
 }

@@ -93,6 +93,7 @@
     <Compile Include="Entities\History\ContactHistory.cs" />
     <Compile Include="Entities\History\EntityHistoryBase.cs" />
     <Compile Include="Entities\History\JobSearchHistory.cs" />
+    <Compile Include="Entities\History\TaskHistory.cs" />
     <Compile Include="Entities\JobSearch.cs" />
     <Compile Include="Entities\EF\MyJobLeadsDbContext.cs" />
     <Compile Include="Entities\EF\MyJobLeadsDbInitializer.cs" />
