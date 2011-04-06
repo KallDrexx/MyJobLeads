@@ -220,7 +220,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.AreEqual("Name", history.Name, "The history record's name was incorrect");
             Assert.AreEqual(_changedDate, history.TaskDate, "The history record's date value was incorrect");
             Assert.IsTrue(history.Completed, "The history record's completed status value is incorrect");
-            Assert.AreEqual(_user, history.Author, "The history record's author was incorrect");
+            Assert.AreEqual(_user, history.AuthoringUser, "The history record's author was incorrect");
             Assert.AreEqual(MJLConstants.HistoryUpdate, history.HistoryAction, "The history record's action value was incorrect");
             Assert.IsTrue(history.DateModified >= start && history.DateModified <= end, "The history record's modification date was incorrect");
         }

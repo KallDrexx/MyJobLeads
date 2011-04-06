@@ -147,7 +147,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
 
             Assert.AreEqual("New Name", history.Name, "The history record had an incorrect name");
             Assert.AreEqual("New Description", history.Description, "The history record had an incorrect description");
-            Assert.AreEqual(_user, history.Author, "The history record had an incorrect author");
+            Assert.AreEqual(_user, history.AuthoringUser, "The history record had an incorrect author");
             Assert.AreEqual(MJLConstants.HistoryUpdate, history.HistoryAction, "The history record had an incorrect history action value");
             Assert.IsTrue(history.DateModified >= start && history.DateModified <= end, "The history record had an incorrect modification date");
         }

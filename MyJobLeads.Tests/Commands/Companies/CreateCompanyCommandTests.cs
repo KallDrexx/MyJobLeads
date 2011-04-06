@@ -213,7 +213,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             Assert.AreEqual("01234", result.Zip, "The created history record's zip was incorrect");
             Assert.AreEqual("Metro", result.MetroArea, "The created history record's metro area was incorrect");
             Assert.AreEqual("Notes", result.Notes, "The created history record's notes were incorrect");
-            Assert.AreEqual(_user, result.Author, "The history record's author was incorrect");
+            Assert.AreEqual(_user, result.AuthoringUser, "The history record's author was incorrect");
             Assert.AreEqual(MJLConstants.HistoryInsert, result.HistoryAction, "The history record's history action was incorrect");
             Assert.IsTrue(result.DateModified >= start && result.DateModified <= end, "The history record's modification date was incorrect");
         }

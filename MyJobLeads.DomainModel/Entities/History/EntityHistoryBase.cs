@@ -11,7 +11,7 @@ namespace MyJobLeads.DomainModel.Entities.History
         public DateTime DateModified { get; set; }
         public string HistoryAction { get; set; }
 
-        public virtual int AuthorId { get; set; }
-        public virtual User Author { get; set; }
+        public virtual int AuthoringUserId { get; set; }
+        public virtual User AuthoringUser { get; set; }
     }
 }

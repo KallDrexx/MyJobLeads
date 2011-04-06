@@ -85,7 +85,7 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
             {
                 Name = _name,
                 Description = _description,
-                Author = user,
+                AuthoringUser = user,
                 HistoryAction = MJLConstants.HistoryInsert,
                 DateModified = DateTime.Now
             });

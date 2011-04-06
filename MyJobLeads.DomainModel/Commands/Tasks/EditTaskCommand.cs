@@ -112,7 +112,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 Name = task.Name,
                 TaskDate = task.TaskDate,
                 Completed = task.Completed,
-                Author = user,
+                AuthoringUser = user,
                 DateModified = DateTime.Now,
                 HistoryAction = MJLConstants.HistoryUpdate
             });

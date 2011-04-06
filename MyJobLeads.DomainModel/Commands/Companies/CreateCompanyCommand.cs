@@ -182,7 +182,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
                 Industry = _industry,
                 Notes = _notes,
 
-                Author = user,
+                AuthoringUser = user,
                 DateModified = DateTime.Now,
                 HistoryAction = MJLConstants.HistoryInsert
             });

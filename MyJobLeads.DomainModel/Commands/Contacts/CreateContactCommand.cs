@@ -182,7 +182,7 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
                 Notes = _notes,
 
                 DateModified = DateTime.Now,
-                Author = user,
+                AuthoringUser = user,
                 HistoryAction = MJLConstants.HistoryInsert
             });
 

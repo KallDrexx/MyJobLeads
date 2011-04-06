@@ -448,7 +448,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             Assert.AreEqual("Notes", history.Notes, "The history record's notes were incorrect");
             Assert.AreEqual("Industry", history.Industry, "The history record's industry was incorrect");
 
-            Assert.AreEqual(_user, history.Author, "The history record's author was incorrect");
+            Assert.AreEqual(_user, history.AuthoringUser, "The history record's author was incorrect");
             Assert.AreEqual(MJLConstants.HistoryUpdate, history.HistoryAction, "The history record's action value was incorrect");
             Assert.IsTrue(history.DateModified >= start && history.DateModified <= end, "The history record's modification date was incorrect");
         }

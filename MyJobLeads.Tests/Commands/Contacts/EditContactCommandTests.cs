@@ -448,7 +448,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             Assert.AreEqual("Referred By", history.ReferredBy, "The history record's referred by was incorrect");
             Assert.AreEqual("Notes", history.Notes, "The history record's notes was incorrect");
 
-            Assert.AreEqual(_user, history.Author, "The history record's author was incorrect");
+            Assert.AreEqual(_user, history.AuthoringUser, "The history record's author was incorrect");
             Assert.AreEqual(MJLConstants.HistoryUpdate, history.HistoryAction, "The history record's action value was incorrect");
             Assert.IsTrue(history.DateModified >= start && history.DateModified <= end, "The history record's modification date was incorrect");
         }

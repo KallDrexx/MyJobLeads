@@ -174,7 +174,7 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
                 ReferredBy = contact.ReferredBy,
                 Notes = contact.Notes,
 
-                Author = user,
+                AuthoringUser = user,
                 HistoryAction = MJLConstants.HistoryUpdate,
                 DateModified = DateTime.Now
             });

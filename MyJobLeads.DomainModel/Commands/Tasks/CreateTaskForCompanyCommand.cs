@@ -104,7 +104,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 TaskDate = _taskDate,
                 HistoryAction = MJLConstants.HistoryInsert,
                 DateModified = DateTime.Now,
-                Author = user
+                AuthoringUser = user
             });
 
             _unitOfWork.Tasks.Add(task);

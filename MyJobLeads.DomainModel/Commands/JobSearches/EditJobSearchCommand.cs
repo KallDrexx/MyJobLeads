@@ -98,7 +98,7 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
             {
                 HistoryAction = MJLConstants.HistoryUpdate,
                 DateModified = DateTime.Now,
-                Author = user,
+                AuthoringUser = user,
                 Name = search.Name,
                 Description = search.Description
             });
