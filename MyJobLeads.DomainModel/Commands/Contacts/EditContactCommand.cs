@@ -6,6 +6,8 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Contacts;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Entities.History;
 
 namespace MyJobLeads.DomainModel.Commands.Contacts
 {
@@ -15,7 +17,7 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
     public class EditContactCommand
     {
         protected IUnitOfWork _unitOfWork;
-        protected int _contactId;
+        protected int _contactId, _userid;
         protected string _name, _directPhone, _mobilePhone, _ext, _email, _assistant, _referredBy, _notes;
 
         public EditContactCommand(IUnitOfWork unitOfWork)
@@ -123,12 +125,28 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
         }
 
         /// <summary>
+        /// Specifies the id value of the user editing the contact
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public EditContactCommand RequestedByUserId(int userId)
+        {
+            _userid = userId;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
         /// <exception cref="MJLEntityNotFoundException">Thrown when the contact is not found</exception>
         public Contact Execute()
         {
+            // Retrieve the user editing the contact
+            var user = new UserByIdQuery(_unitOfWork).WithUserId(_userid).Execute();
+            if (user == null)
+                throw new MJLEntityNotFoundException(typeof(User), _userid);
+
             // Retrieve the company
             var contact = new ContactByIdQuery(_unitOfWork).WithContactId(_contactId).Execute();
             if (contact == null)
@@ -143,6 +161,23 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
             if (_assistant != null) { contact.Assistant = _assistant; }
             if (_referredBy != null) { contact.ReferredBy = _referredBy; }
             if (_notes != null) { contact.Notes = _notes; }
+
+            // Create a history record
+            contact.History.Add(new ContactHistory
+            {
+                Name = contact.Name,
+                DirectPhone = contact.DirectPhone,
+                MobilePhone = contact.MobilePhone,
+                Extension = contact.Extension,
+                Email = contact.Email,
+                Assistant = contact.Assistant,
+                ReferredBy = contact.ReferredBy,
+                Notes = contact.Notes,
+
+                Author = user,
+                HistoryAction = MJLConstants.HistoryUpdate,
+                DateModified = DateTime.Now
+            });
 
             // Submit changes
             _unitOfWork.Commit();

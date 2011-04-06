@@ -6,6 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyJobLeads.DomainModel.Commands.Contacts;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.Entities.History;
+using MyJobLeads.DomainModel;
 
 namespace MyJobLeads.Tests.Commands.Contacts
 {
@@ -13,9 +15,11 @@ namespace MyJobLeads.Tests.Commands.Contacts
     public class EditContactCommandTests : EFTestBase
     {
         private Contact _contact;
+        private User _user;
 
         private void InitializeTestEntities()
         {
+            _user = new User();
             _contact = new Contact
             {
                 Name = "Starting Name",
@@ -25,8 +29,12 @@ namespace MyJobLeads.Tests.Commands.Contacts
                 Email = "starting@email.com",
                 Assistant = "Starting Assistant",
                 ReferredBy = "Starting Referred",
-                Notes = "Starting Notes"
+                Notes = "Starting Notes",
+
+                History = new List<ContactHistory>()
             };
+
+            _unitOfWork.Users.Add(_user);
             _unitOfWork.Contacts.Add(_contact);
             _unitOfWork.Commit();
         }
@@ -47,6 +55,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
                                                  .SetAssistant("Assistant")
                                                  .SetReferredBy("Referred By")
                                                  .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -78,6 +87,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
                                                                  .SetAssistant("Assistant")
                                                                  .SetReferredBy("Referred By")
                                                                  .SetNotes("Notes")
+                                                                 .RequestedByUserId(_user.Id)
                                                                  .Execute();
 
             // Verify
@@ -111,6 +121,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
                                                     .SetAssistant("Assistant")
                                                     .SetReferredBy("Referred By")
                                                     .SetNotes("Notes")
+                                                    .RequestedByUserId(_user.Id)
                                                     .Execute();
                 Assert.Fail("Command did not throw an exception");
             }
@@ -138,6 +149,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
                                                  .SetAssistant("Assistant")
                                                  .SetReferredBy("Referred By")
                                                  .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -168,6 +180,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
                                                  .SetAssistant("Assistant")
                                                  .SetReferredBy("Referred By")
                                                  .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -198,6 +211,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
                                                  .SetAssistant("Assistant")
                                                  .SetReferredBy("Referred By")
                                                  .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -228,6 +242,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
                                                  .SetAssistant("Assistant")
                                                  .SetReferredBy("Referred By")
                                                  .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -258,6 +273,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
                                                  .SetEmail("blah@blah.com")
                                                  .SetReferredBy("Referred By")
                                                  .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -288,6 +304,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
                                                  .SetEmail("blah@blah.com")
                                                  .SetAssistant("Assistant")
                                                  .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -318,6 +335,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
                                                  .SetAssistant("Assistant")
                                                  .SetReferredBy("Referred By")
                                                  .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -348,6 +366,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
                                                  .SetEmail("blah@blah.com")
                                                  .SetAssistant("Assistant")
                                                  .SetReferredBy("Referred By")
+                                                 .RequestedByUserId(_user.Id)
                                                  .Execute();
 
             // Verify
@@ -361,6 +380,77 @@ namespace MyJobLeads.Tests.Commands.Contacts
             Assert.AreEqual("Assistant", result.Assistant, "The contact's assistant was incorrect");
             Assert.AreEqual("Referred By", result.ReferredBy, "The contact's referred by was incorrect");
             Assert.AreEqual("Starting Notes", result.Notes, "The contact's notes was incorrect");
+        }
+
+        [TestMethod]
+        public void Execute_Throws_MJLEntityNotFoundException_When_Calling_User_Not_Found()
+        {
+            // Setup
+            InitializeTestEntities();
+            int id = _user.Id + 1;
+
+            // Act
+            try
+            {
+                new EditContactCommand(_unitOfWork).WithContactId(_contact.Id)
+                                                    .SetName("Name")
+                                                    .SetDirectPhone("111-111-1111")
+                                                    .SetMobilePhone("222-222-2222")
+                                                    .SetExtension("33")
+                                                    .SetEmail("blah@blah.com")
+                                                    .SetAssistant("Assistant")
+                                                    .SetReferredBy("Referred By")
+                                                    .SetNotes("Notes")
+                                                    .RequestedByUserId(id)
+                                                    .Execute();
+                Assert.Fail("Command did not throw an exception");
+            }
+
+            // Verify
+            catch (MJLEntityNotFoundException ex)
+            {
+                Assert.AreEqual(typeof(User), ex.EntityType, "MJLEntityNotFoundException's entity type was incorrect");
+                Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
+            }
+        }
+
+        [TestMethod]
+        public void Execute_Creates_History_Record()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            DateTime start = DateTime.Now;
+            new EditContactCommand(_unitOfWork).WithContactId(_contact.Id)
+                                                 .SetName("Name")
+                                                 .SetDirectPhone("111-111-1111")
+                                                 .SetMobilePhone("222-222-2222")
+                                                 .SetExtension("33")
+                                                 .SetEmail("blah@blah.com")
+                                                 .SetAssistant("Assistant")
+                                                 .SetReferredBy("Referred By")
+                                                 .SetNotes("Notes")
+                                                 .RequestedByUserId(_user.Id)
+                                                 .Execute();
+            DateTime end = DateTime.Now;
+
+            // Verify
+            Contact contact = _unitOfWork.Contacts.Fetch().Single();
+            ContactHistory history = contact.History.Single();
+
+            Assert.AreEqual("Name", history.Name, "The history record's name was incorrect");
+            Assert.AreEqual("111-111-1111", history.DirectPhone, "The history record's direct phone was incorrect");
+            Assert.AreEqual("222-222-2222", history.MobilePhone, "The history record's mobile phone was incorrect");
+            Assert.AreEqual("33", history.Extension, "The history record's extension was incorrect");
+            Assert.AreEqual("blah@blah.com", history.Email, "The history record's email was incorrect");
+            Assert.AreEqual("Assistant", history.Assistant, "The history record's assistant was incorrect");
+            Assert.AreEqual("Referred By", history.ReferredBy, "The history record's referred by was incorrect");
+            Assert.AreEqual("Notes", history.Notes, "The history record's notes was incorrect");
+
+            Assert.AreEqual(_user, history.Author, "The history record's author was incorrect");
+            Assert.AreEqual(MJLConstants.HistoryUpdate, history.HistoryAction, "The history record's action value was incorrect");
+            Assert.IsTrue(history.DateModified >= start && history.DateModified <= end, "The history record's modification date was incorrect");
         }
     }
 }
