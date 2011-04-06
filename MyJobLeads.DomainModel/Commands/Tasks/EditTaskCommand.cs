@@ -6,6 +6,8 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Tasks;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Entities.History;
 
 namespace MyJobLeads.DomainModel.Commands.Tasks
 {
@@ -15,7 +17,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
     public class EditTaskCommand
     {
         protected IUnitOfWork _unitOfWork;
-        protected int _taskId;
+        protected int _taskId, _userId;
         protected DateTime? _newTaskDate;
         protected string _name;
         protected bool _completed, _completedChanged, _dateChanged;
@@ -72,12 +74,28 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         }
 
         /// <summary>
+        /// Specifies the id value of the user editing the task
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public EditTaskCommand RequestedByUserId(int userId)
+        {
+            _userId = userId;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="MJLEntityNotFoundException">Thrown when the specified task isn't found</exception>
+        /// <exception cref="MJLEntityNotFoundException">Thrown when the specified task or calling user isn't found</exception>
         public Task Execute()
         {
+            // Retrieve the user editing the task
+            var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();
+            if (user == null)
+                throw new MJLEntityNotFoundException(typeof(User), _userId);
+
             // Retrieve the task
             var task = new TaskByIdQuery(_unitOfWork).WithTaskId(_taskId).Execute();
             if (task == null)
@@ -87,6 +105,17 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
             if (_name != null) { task.Name = _name; }
             if (_dateChanged) { task.TaskDate = _newTaskDate; }
             if (_completedChanged) { task.Completed = _completed; }
+
+            // Create the history record
+            task.History.Add(new TaskHistory
+            {
+                Name = task.Name,
+                TaskDate = task.TaskDate,
+                Completed = task.Completed,
+                Author = user,
+                DateModified = DateTime.Now,
+                HistoryAction = MJLConstants.HistoryUpdate
+            });
 
             // Save
             _unitOfWork.Commit();
