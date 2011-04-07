@@ -66,6 +66,7 @@
     <Reference Include="Simple.Data.Ado">
       <HintPath>..\packages\Simple.Data.Core.0.5.2\lib\net40\Simple.Data.Ado.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -132,6 +133,11 @@
     </Compile>
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Installers\CommandQueryInstaller.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommandQueryInstaller.tt</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\MyJobLeadsMembershipProvider.cs" />
     <Compile Include="Infrastructure\MyJobLeadsMembershipUser.cs" />
@@ -232,13 +238,18 @@
     <Content Include="Views\JobSearch\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="T4MVC.tt">
+    <Content Include="Infrastructure\Installers\CommandQueryInstaller.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CommandQueryInstaller.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
-    </None>
+    </Content>
     <None Include="T4MVC.tt.settings.t4" />
     <Content Include="Views\JobSearch\Details.cshtml" />
     <Content Include="Views\Company\Edit.cshtml" />

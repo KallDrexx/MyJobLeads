@@ -1,0 +1,49 @@
+﻿<#@ template language="C#" Hostspecific="True" #>
+<#@ output extension="generated.cs" #>
+<#@ assembly name="$(ProjectDir)bin\MyJobLeads.DomainModel.dll" #>
+<#@ Assembly Name="System.Core" #>
+<#@ import namespace="System.Reflection" #>
+<#@ Import Namespace="System.Linq" #>
+<#@ Import Namespace="MyJobLeads.DomainModel" #>
+<# Assembly a = Assembly.GetAssembly(typeof(MyJobLeads.DomainModel.Data.IUnitOfWork)); #>
+/* Auto-generated code, do not modify */
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.SubSystems.Configuration;
+using Castle.Windsor;
+<# 
+	// Load up all the namespaces for the commands and queries 
+#>
+<# var namespaces = a.GetTypes().Select(x => x.Namespace).Distinct(); #>
+<# foreach (var nsp in namespaces) { #>
+<#		if (nsp.Contains("MyJobLeads.DomainModel.Commands") || nsp.Contains("MyJobLeads.DomainModel.Queries")) { #>
+using <#=  nsp #>;
+<#		} #>
+<# } #>
+
+namespace MyJobLeads.Infrastructure.Installers
+{
+    public class CommandAndQueryInstaller : IWindsorInstaller
+    {
+        public void Install(IWindsorContainer container, IConfigurationStore store)
+        {
+			// Command registration
+<#			foreach (var type in a.GetTypes()) { #>
+<#				if (type.Namespace.Contains("MyJobLeads.DomainModel.Commands")) { #>
+			container.Register(Component.For<<#= type.Name #>>().ImplementedBy<<#= type.Name #>>());			
+<#				} #>
+<#			} #>
+
+			// Query registration
+<#			foreach (var type in a.GetTypes()) { #>
+<#				if (type.Namespace.Contains("MyJobLeads.DomainModel.Queries")) { #>
+			container.Register(Component.For<<#= type.Name #>>().ImplementedBy<<#= type.Name #>>());			
+<#				} #>
+<#			} #>
+		}
+	}
+}
