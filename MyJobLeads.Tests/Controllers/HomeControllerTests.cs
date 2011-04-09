@@ -13,17 +13,33 @@ using MyJobLeads.Infrastructure;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.Tests.Mocks;
 using MvcContrib.TestHelper;
+using MyJobLeads.DomainModel.Queries.Users;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
 
 namespace MyJobLeads.Tests.Controllers
 {
     [TestClass]
-    public class HomeControllerTest : InMemoryTestBase
+    public class HomeControllerTest
     {
+        [TestMethod]
+        public void Windsor_Can_Resolve_HomeController_Dependencies()
+        {
+            // Setup
+            WindsorContainer container = new WindsorContainer();
+            container.Install(FromAssembly.Containing<HomeController>());
+
+            // Act
+            container.Kernel.Resolve(typeof(HomeController));
+        }
+
         [TestMethod]
         public void Index_Shows_When_Not_Logged_In()
         {
             // Setup
-            HomeController controller = new HomeController(_unitOfWork);
+            var userByIdMock = new Mock<UserByIdQuery>(null);
+            userByIdMock.Setup(x => x.Execute()).Returns((User)null);
+            HomeController controller = new HomeController(userByIdMock.Object);
             controller.MembershipService = new MockMembershipService(null);
 
             // Act
@@ -38,10 +54,9 @@ namespace MyJobLeads.Tests.Controllers
         {
             // Setup
             User user = new User { Id = 20, JobSearches = new List<JobSearch>() };
-            _unitOfWork.Users.Add(user);
-            _unitOfWork.Commit();
-
-            HomeController controller = new HomeController(_unitOfWork);
+            var userByIdMock = new Mock<UserByIdQuery>(null);
+            userByIdMock.Setup(x => x.Execute()).Returns(user);
+            HomeController controller = new HomeController(userByIdMock.Object);
             controller.MembershipService = new MockMembershipService(user);
 
             // Act
@@ -57,10 +72,10 @@ namespace MyJobLeads.Tests.Controllers
             // Setup
             User user = new User { Id = 40, JobSearches = new List<JobSearch>() };
             user.JobSearches.Add(new JobSearch());
-            _unitOfWork.Users.Add(user);
-            _unitOfWork.Commit();
+            var userByIdMock = new Mock<UserByIdQuery>(null);
+            userByIdMock.Setup(x => x.Execute()).Returns(user);
 
-            HomeController controller = new HomeController(_unitOfWork);
+            HomeController controller = new HomeController(userByIdMock.Object);
             controller.MembershipService = new MockMembershipService(user);
 
             // Act
@@ -75,25 +90,24 @@ namespace MyJobLeads.Tests.Controllers
         {
             // Setup
             User user = new User { Id = 20, JobSearches = new List<JobSearch>(), LastVisitedJobSearchId = 4 };
-            user.JobSearches.Add(new JobSearch());
-            _unitOfWork.Users.Add(user);
-            _unitOfWork.Commit();
+            var userByIdMock = new Mock<UserByIdQuery>(null);
+            userByIdMock.Setup(x => x.Execute()).Returns(user);
 
-            HomeController controller = new HomeController(_unitOfWork);
+            HomeController controller = new HomeController(userByIdMock.Object);
             controller.MembershipService = new MockMembershipService(user);
 
             // Act
             ActionResult result = controller.Index();
 
             // Verify
-            result.AssertActionRedirect().ToController("JobSearch").ToAction("View").WithParameter("id", 4);
+            result.AssertActionRedirect().ToController("JobSearch").ToAction("Details").WithParameter("id", 4);
         }
 
         [TestMethod]
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController(_unitOfWork);
+            HomeController controller = new HomeController(null);
 
             // Act
             ViewResult result = controller.About() as ViewResult;

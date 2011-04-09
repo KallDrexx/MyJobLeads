@@ -10,13 +10,18 @@ namespace MyJobLeads.Controllers
 {
     public partial class HomeController : MyJobLeadsBaseController
     {
-        public HomeController(IUnitOfWork unitOfWork) { _unitOfWork = unitOfWork; }
+        public HomeController(UserByIdQuery userByIdQuery)
+        {
+            _userByIdQuery = userByIdQuery;
+        }
+
+        private UserByIdQuery _userByIdQuery;
 
         public virtual ActionResult Index()
         {
             if (CurrentUserId != 0)
             {
-                var user = new UserByIdQuery(_unitOfWork).WithUserId(CurrentUserId).Execute();
+                var user = _userByIdQuery.WithUserId(CurrentUserId).Execute();
 
                 if (user.LastVisitedJobSearchId == null)
                 {
