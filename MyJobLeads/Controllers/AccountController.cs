@@ -9,10 +9,12 @@ using System.Web.Routing;
 using System.Web.Security;
 using MyJobLeads.Models;
 using MyJobLeads.Models.Accounts;
+using MyJobLeads.DomainModel.Commands.Users;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.Controllers
 {
-    public partial class AccountController : MyJobLeadsBaseController
+    public partial class AccountController : Controller
     {
         public IFormsAuthenticationService FormsService { get; set; }
         public IMembershipService MembershipService { get; set; }
@@ -146,5 +148,20 @@ namespace MyJobLeads.Controllers
             return View();
         }
 
+        public virtual ActionResult ResetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public virtual ActionResult ResetPasswordResult(string userEmail)
+        {
+            var user = Membership.GetUser(userEmail);
+            if (user == null)
+                return View(false); // user wasn't found
+
+            user.ResetPassword();
+            return View(true);
+        }
     }
 }

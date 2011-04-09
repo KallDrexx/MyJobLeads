@@ -91,6 +91,11 @@ namespace MyJobLeads.Infrastructure
             }
         }
 
+        public override string ResetPassword(string email, string answer)
+        {
+            return new ResetUserPasswordCommand(_unitOfWork).WithUserEmail(email).Execute();
+        }
+
         #endregion
 
         #region Member Variables
@@ -206,11 +211,6 @@ namespace MyJobLeads.Infrastructure
         public override bool RequiresUniqueEmail
         {
             get { throw new NotImplementedException(); }
-        }
-
-        public override string ResetPassword(string username, string answer)
-        {
-            throw new NotImplementedException();
         }
 
         public override bool UnlockUser(string userName)

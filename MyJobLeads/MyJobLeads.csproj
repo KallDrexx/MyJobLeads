@@ -260,6 +260,8 @@
     <Content Include="Views\Task\Details.cshtml" />
     <Content Include="Views\Shared\_CompanyDisplay.cshtml" />
     <Content Include="Views\Shared\_ContactDisplay.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordResult.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

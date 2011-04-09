@@ -34,6 +34,11 @@ namespace MyJobLeads.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ResetPasswordResult() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ResetPasswordResult);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public AccountController Actions { get { return MVC.Account; } }
@@ -52,6 +57,8 @@ namespace MyJobLeads.Controllers {
             public readonly string Register = "Register";
             public readonly string ChangePassword = "ChangePassword";
             public readonly string ChangePasswordSuccess = "ChangePasswordSuccess";
+            public readonly string ResetPassword = "ResetPassword";
+            public readonly string ResetPasswordResult = "ResetPasswordResult";
         }
 
 
@@ -64,6 +71,8 @@ namespace MyJobLeads.Controllers {
             public readonly string ChangePasswordSuccess = "~/Views/Account/ChangePasswordSuccess.cshtml";
             public readonly string LogOn = "~/Views/Account/LogOn.cshtml";
             public readonly string Register = "~/Views/Account/Register.cshtml";
+            public readonly string ResetPassword = "~/Views/Account/ResetPassword.cshtml";
+            public readonly string ResetPasswordResult = "~/Views/Account/ResetPasswordResult.cshtml";
         }
     }
 
@@ -112,6 +121,17 @@ namespace MyJobLeads.Controllers {
 
         public override System.Web.Mvc.ActionResult ChangePasswordSuccess() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangePasswordSuccess);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ResetPassword() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ResetPassword);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ResetPasswordResult(string userEmail) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ResetPasswordResult);
+            callInfo.RouteValueDictionary.Add("userEmail", userEmail);
             return callInfo;
         }
 
