@@ -18,14 +18,11 @@ namespace MyJobLeads
 
         protected override void Initialize(RequestContext requestContext)
         {
-            if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
             base.Initialize(requestContext);
 
-            if (MembershipService.GetUser() != null)
-                CurrentUserId = (int)MembershipService.GetUser().ProviderUserKey;
+            if (Membership.GetUser() != null)
+                CurrentUserId = (int)Membership.GetUser().ProviderUserKey;
         }
-
-        public IMembershipService MembershipService { get; set; }
 
         public int CurrentUserId { get; set; }
 

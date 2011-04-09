@@ -40,7 +40,6 @@ namespace MyJobLeads.Tests.Controllers
             var userByIdMock = new Mock<UserByIdQuery>(null);
             userByIdMock.Setup(x => x.Execute()).Returns((User)null);
             HomeController controller = new HomeController(userByIdMock.Object);
-            controller.MembershipService = new MockMembershipService(null);
 
             // Act
             ActionResult result = controller.Index();
