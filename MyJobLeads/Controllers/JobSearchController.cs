@@ -75,8 +75,9 @@ namespace MyJobLeads.Controllers
                 _editJobSearchCommand.WithJobSearchId(jobSearch.Id)
                                     .SetName(jobSearch.Name)
                                     .SetDescription(jobSearch.Description)
+                                    .CalledByUserId(CurrentUserId)
                                     .Execute();
-                return RedirectToAction(MVC.JobSearch.View(jobSearch.Id));
+                return RedirectToAction(MVC.JobSearch.Details(jobSearch.Id));
             }
         }
 

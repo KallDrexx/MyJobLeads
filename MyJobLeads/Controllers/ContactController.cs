@@ -45,6 +45,7 @@ namespace MyJobLeads.Controllers
                                                                .SetName(contact.Name)
                                                                .SetNotes(contact.Notes)
                                                                .SetReferredBy(contact.ReferredBy)
+                                                               .RequestedByUserId(CurrentUserId)
                                                                .Execute();
             }
             else
@@ -58,6 +59,7 @@ namespace MyJobLeads.Controllers
                                                              .SetName(contact.Name)
                                                              .SetNotes(contact.Notes)
                                                              .SetReferredBy(contact.ReferredBy)
+                                                             .RequestedByUserId(CurrentUserId)
                                                              .Execute();
             }
 

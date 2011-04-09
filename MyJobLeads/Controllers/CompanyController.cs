@@ -45,6 +45,7 @@ namespace MyJobLeads.Controllers
                                                                       .SetPhone(company.Phone)
                                                                       .SetState(company.State)
                                                                       .SetZip(company.Zip)
+                                                                      .CalledByUserId(CurrentUserId)
                                                                       .Execute();
             }
             else
@@ -58,6 +59,7 @@ namespace MyJobLeads.Controllers
                                                                       .SetPhone(company.Phone)
                                                                       .SetState(company.State)
                                                                       .SetZip(company.Zip)
+                                                                      .RequestedByUserId(CurrentUserId)
                                                                       .Execute();
             }
 

@@ -47,6 +47,7 @@ namespace MyJobLeads.Controllers
                     task = new CreateTaskForCompanyCommand(_unitOfWork).WithCompanyId(companyId)
                                                                        .SetName(task.Name)
                                                                        .SetTaskDate(task.TaskDate)
+                                                                       .RequestedByUserId(CurrentUserId)
                                                                        .Execute();
                 }
                 else
@@ -54,6 +55,7 @@ namespace MyJobLeads.Controllers
                     task = new CreateTaskForContactCommand(_unitOfWork).WithContactId(contactId)
                                                                        .SetName(task.Name)
                                                                        .SetTaskDate(task.TaskDate)
+                                                                       .RequestedByUserId(CurrentUserId)
                                                                        .Execute();
                 }
             }
@@ -64,6 +66,7 @@ namespace MyJobLeads.Controllers
                                                        .SetName(task.Name)
                                                        .SetTaskDate(task.TaskDate)
                                                        .SetCompleted(task.Completed)
+                                                       .RequestedByUserId(CurrentUserId)
                                                        .Execute();
             }
 

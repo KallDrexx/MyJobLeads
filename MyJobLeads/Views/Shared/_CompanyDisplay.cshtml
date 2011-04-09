@@ -2,7 +2,7 @@
 @using MyJobLeads.DomainModel.Entities; 
 
 <h2>Company: @Model.Name</h2>
-@Html.ActionLink("Edit", MVC.Company.Edit(Model.Id)) &nbsp; &nbsp; @Html.ActionLink("Back To Job Search", MVC.JobSearch.View(Model.JobSearch.Id))
+@Html.ActionLink("Edit", MVC.Company.Edit(Model.Id)) &nbsp; &nbsp; @Html.ActionLink("Back To Job Search", MVC.JobSearch.Details(Model.JobSearch.Id))
 
 <br /><br />
 
@@ -35,7 +35,7 @@ Notes: @Model.Notes <br />
 <ul>
     @foreach (Task task in Model.Tasks)
     {
-        <li>@Html.ActionLink(task.Name, MVC.Task.View(task.Id))</li>
+        <li>@Html.ActionLink(task.Name, MVC.Task.Details(task.Id))</li>
     }
 </ul>
 

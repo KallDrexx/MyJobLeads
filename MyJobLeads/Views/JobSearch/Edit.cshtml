@@ -19,7 +19,7 @@ else
     <h2>Editing the '@Model.Name' job search</h2>
 }
 
-@using (Html.BeginForm(MVC.JobSearch.Edit(Model.Id)))
+@using (Html.BeginForm(MVC.JobSearch.Edit()))
 {
     @Html.HiddenFor(x => x.Id);
     

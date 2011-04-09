@@ -40,7 +40,7 @@
             <td>
                 <input type="submit" value="Save" /> &nbsp; &nbsp; 
 
-                @if (Model.Id != 0) { @Html.ActionLink("Back To Task", MVC.Task.View(Model.Id)); }
+                @if (Model.Id != 0) { @Html.ActionLink("Back To Task", MVC.Task.Details(Model.Id)); }
                 else if (companyId != 0) { @Html.ActionLink("Back To Company", MVC.Company.Details(companyId)) }
                 else { @Html.ActionLink("Back To Contact", MVC.Contact.Details(contactId)) }
                 
