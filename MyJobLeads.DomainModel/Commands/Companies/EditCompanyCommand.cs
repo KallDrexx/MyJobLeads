@@ -137,7 +137,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         /// </summary>
         /// <returns></returns>
         /// <exception cref="MJLEntityNotFoundException">Thrown when the company or requesting user doesn't exist</exception>
-        public Company Execute()
+        public virtual Company Execute()
         {
             // Retrieve the calling user
             var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();

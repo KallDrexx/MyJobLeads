@@ -35,7 +35,7 @@ namespace MyJobLeads.DomainModel.Queries.Companies
         /// Executes the query
         /// </summary>
         /// <returns></returns>
-        public IList<Company> Execute()
+        public virtual IList<Company> Execute()
         {
             return _unitOfWork.Companies.Fetch().Where(x => x.JobSearch.Id == _searchId).ToList();
         }

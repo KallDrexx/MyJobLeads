@@ -36,7 +36,7 @@ namespace MyJobLeads.DomainModel.Queries.JobSearches
         /// Executes the query
         /// </summary>
         /// <returns></returns>
-        public JobSearch Execute()
+        public virtual JobSearch Execute()
         {
             // Attempt to retrieve the job search
             return _unitOfWork.JobSearches.Fetch().Where(x => x.Id == _jobSearchId).SingleOrDefault();

@@ -140,7 +140,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         /// </summary>
         /// <returns></returns>
         /// <exception cref="MJLEntityNotFoundException"></exception>
-        public Company Execute()
+        public virtual Company Execute()
         {
             // Retrieve the user creating this company
             var user = new UserByIdQuery(_unitOfWork).WithUserId(_callingUserId).Execute();

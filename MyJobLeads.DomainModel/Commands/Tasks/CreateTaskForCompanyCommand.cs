@@ -75,7 +75,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         /// </summary>
         /// <returns></returns>
         /// <exception cref="MJLEntityNotFoundException">Thrown when the specified company or calling user is not found</exception>
-        public Task Execute()
+        public virtual Task Execute()
         {
             // Retrieve the user creating the task
             var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();

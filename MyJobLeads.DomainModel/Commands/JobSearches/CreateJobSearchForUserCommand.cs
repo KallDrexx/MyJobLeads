@@ -62,7 +62,7 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
         /// </summary>
         /// <returns></returns>
         /// <exception cref="MJLEntityNotFoundException">Thrown when the specified user is not found</exception>
-        public JobSearch Execute()
+        public virtual JobSearch Execute()
         {
             // Retrieve the user
             var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();

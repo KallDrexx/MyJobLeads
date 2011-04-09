@@ -74,7 +74,7 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
         /// </summary>
         /// <returns></returns>
         /// <exception cref="MJLEntityNotFoundException">Thrown when the specified job search is not found</exception>
-        public JobSearch Execute()
+        public virtual JobSearch Execute()
         {
             // Retrieve the job search
             var search = new JobSearchByIdQuery(_unitOfWork).WithJobSearchId(_jobSearchId).Execute();

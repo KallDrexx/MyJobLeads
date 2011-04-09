@@ -43,7 +43,7 @@ namespace MyJobLeads.DomainModel.Commands.Users
         /// </summary>
         /// <returns>Returns the generated password for the user</returns>
         /// <exception cref="MJLEntityNotFoundException">Thrown when the specified user is not found</exception>
-        public string Execute()
+        public virtual string Execute()
         {
             // Retrieve the user
             var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();

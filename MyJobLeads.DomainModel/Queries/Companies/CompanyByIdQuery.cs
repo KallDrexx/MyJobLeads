@@ -36,7 +36,7 @@ namespace MyJobLeads.DomainModel.Queries.Companies
         /// Executes the query
         /// </summary>
         /// <returns></returns>
-        public Company Execute()
+        public virtual Company Execute()
         {
             // Attempt to retrieve the company
             return _unitOfWork.Companies.Fetch().Where(x => x.Id == _companyId).SingleOrDefault();

@@ -35,7 +35,7 @@ namespace MyJobLeads.DomainModel.Queries.Tasks
         /// Executes the command
         /// </summary>
         /// <returns></returns>
-        public IList<Task> Execute()
+        public virtual IList<Task> Execute()
         {
             return _unitOfWork.Tasks.Fetch().Where(x => x.Contact.Id == _contactId).ToList();
         }

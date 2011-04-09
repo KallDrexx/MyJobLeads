@@ -37,7 +37,7 @@ namespace MyJobLeads.DomainModel.Queries.Users
         /// </summary>
         /// <returns></returns>
         /// <exception cref="MJLEntityNotFoundException">Thrown when no user exists with the specified id value</exception>
-        public User Execute()
+        public virtual User Execute()
         {
             // Attempt to retrieve the user
             return _unitOfWork.Users.Fetch().Where(x => x.Id == _userId).SingleOrDefault();

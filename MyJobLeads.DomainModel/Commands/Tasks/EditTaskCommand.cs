@@ -89,7 +89,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         /// </summary>
         /// <returns></returns>
         /// <exception cref="MJLEntityNotFoundException">Thrown when the specified task or calling user isn't found</exception>
-        public Task Execute()
+        public virtual Task Execute()
         {
             // Retrieve the user editing the task
             var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();

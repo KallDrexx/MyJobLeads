@@ -35,7 +35,7 @@ namespace MyJobLeads.DomainModel.Queries.Tasks
         /// Executes the query
         /// </summary>
         /// <returns></returns>
-        public IList<Task> Execute()
+        public virtual IList<Task> Execute()
         {
             // Retrieve all tasks that are not completed that are associated with the specified job search
             return _unitOfWork.Tasks

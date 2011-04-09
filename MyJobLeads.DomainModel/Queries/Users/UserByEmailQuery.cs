@@ -37,7 +37,7 @@ namespace MyJobLeads.DomainModel.Queries.Users
         /// </summary>
         /// <returns></returns>
         /// <exception cref="MJLUserNotFoundException">Thrown when no user was found</exception>
-        public User Execute()
+        public virtual User Execute()
         {
             _email = _email.Trim().ToLower();
 

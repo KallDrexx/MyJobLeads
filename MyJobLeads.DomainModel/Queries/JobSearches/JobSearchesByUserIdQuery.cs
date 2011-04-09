@@ -35,7 +35,7 @@ namespace MyJobLeads.DomainModel.Queries.JobSearches
         /// Executes the query
         /// </summary>
         /// <returns></returns>
-        public IList<JobSearch> Execute()
+        public virtual IList<JobSearch> Execute()
         {
             // Retrieve all job searches for the user
             return _unitOfWork.JobSearches.Fetch().Where(x => x.User.Id == _userId).ToList();

@@ -51,7 +51,7 @@ namespace MyJobLeads.DomainModel.Commands.Users
         /// <returns></returns>
         /// <exception cref="MJLDuplicateUsernameException">Thrown when the requested username is already taken</exception>
         /// <exception cref="MJLDuplicateEmailException">Thrown when the requested user's email is already used on another account</exception>
-        public User Execute()
+        public virtual User Execute()
         {
             // Convert the email and username to lower case and trim it
             _email = _email.Trim().ToLower();

@@ -140,7 +140,7 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
         /// </summary>
         /// <returns></returns>
         /// <exception cref="MJLEntityNotFoundException">Thrown when the contact is not found</exception>
-        public Contact Execute()
+        public virtual Contact Execute()
         {
             // Retrieve the user editing the contact
             var user = new UserByIdQuery(_unitOfWork).WithUserId(_userid).Execute();

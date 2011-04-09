@@ -36,7 +36,7 @@ namespace MyJobLeads.DomainModel.Queries.Tasks
         /// Executes the query
         /// </summary>
         /// <returns></returns>
-        public Task Execute()
+        public virtual Task Execute()
         {
             // Retrieve the task
             return _unitOfWork.Tasks.Fetch().Where(x => x.Id == _taskId).SingleOrDefault();

@@ -140,7 +140,7 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
         /// </summary>
         /// <returns></returns>
         /// <exception cref="MJLEntityNotFoundException">Thrown when the company or calling user is not found</exception>
-        public Contact Execute()
+        public virtual Contact Execute()
         {
             // Retrieve the user creating the contact
             var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();

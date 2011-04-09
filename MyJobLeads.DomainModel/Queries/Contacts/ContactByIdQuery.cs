@@ -36,7 +36,7 @@ namespace MyJobLeads.DomainModel.Queries.Contacts
         /// Executes the query
         /// </summary>
         /// <returns></returns>
-        public Contact Execute()
+        public virtual Contact Execute()
         {
             return _unitOfWork.Contacts.Fetch().Where(x => x.Id == _contactId).SingleOrDefault();
         }

@@ -86,7 +86,7 @@ namespace MyJobLeads.DomainModel.Commands.Users
         /// </summary>
         /// <returns></returns>
         /// <exception cref="MJLEntityNotFoundException">Thrown when the specified user isn't found</exception>
-        public User Execute()
+        public virtual User Execute()
         {
             // Retrieve the user
             var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();

@@ -48,7 +48,7 @@ namespace MyJobLeads.DomainModel.Queries.Users
         /// Executes the query
         /// </summary>
         /// <returns></returns>
-        public User Execute()
+        public virtual User Execute()
         {
             // Make the supplised username lower case and trimmed
             _email = _email.Trim().ToLower();
