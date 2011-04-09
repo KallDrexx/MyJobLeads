@@ -33,7 +33,7 @@ namespace MyJobLeads.Tests.Commands.Users
             InitializeTestEntities();
 
             // Act
-            string newPass = new ResetUserPasswordCommand(_unitOfWork, _mock.Object).WithUserId(_user.Id).Execute();
+            string newPass = new ResetUserPasswordCommand(_unitOfWork, _mock.Object).WithUserEmail(_user.Email).Execute();
             User user = _unitOfWork.Users.Fetch().Single();
 
             // Verify
@@ -41,24 +41,24 @@ namespace MyJobLeads.Tests.Commands.Users
         }
 
         [TestMethod]
-        public void Execute_Throws_MJLEntityNotFoundException_When_User_Id_Not_Found()
+        public void Execute_Throws_MJLUserNotFoundException_When_User_Id_Not_Found()
         {
             // Setup
             InitializeTestEntities();
-            int id = _user.Id + 101;
+            string email = "blah@blah.com";
 
             // Act
             try
             {
-                new ResetUserPasswordCommand(_unitOfWork, _mock.Object).WithUserId(id).Execute();
+                new ResetUserPasswordCommand(_unitOfWork, _mock.Object).WithUserEmail(email).Execute();
                 Assert.Fail("Command did not throw an exception");
             }
 
             // Verify
-            catch (MJLEntityNotFoundException ex)
+            catch (MJLUserNotFoundException ex)
             {
-                Assert.AreEqual(typeof(User), ex.EntityType, "MJLEntityNotFoundException's entity type was incorrect");
-                Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
+                Assert.AreEqual(MJLUserNotFoundException.SearchPropertyType.Email, ex.SearchProperty, "MJLUserNotFoundException's search property was incorrect");
+                Assert.AreEqual(email, ex.SearchValue, "MJLUserNotFoundException's search value was incorrect");
             }
         }
 
@@ -69,7 +69,7 @@ namespace MyJobLeads.Tests.Commands.Users
             InitializeTestEntities();
 
             // Act
-            string newPass = new ResetUserPasswordCommand(_unitOfWork, _mock.Object).WithUserId(_user.Id).Execute();
+            string newPass = new ResetUserPasswordCommand(_unitOfWork, _mock.Object).WithUserEmail(_user.Email).Execute();
 
             // Verify
             _mock.Verify(x => x.Send(It.Is<string>(y => y == _user.Email), 

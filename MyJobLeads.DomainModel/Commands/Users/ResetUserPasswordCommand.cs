@@ -16,7 +16,8 @@ namespace MyJobLeads.DomainModel.Commands.Users
     public class ResetUserPasswordCommand
     {
         protected IUnitOfWork _unitOfWork;
-        protected int _userId;
+        protected string _email;
+        
         public EmailUtils EmailProvider { get; protected set; }
 
         public ResetUserPasswordCommand(IUnitOfWork unitOfWork) : this(unitOfWork, new EmailUtils()) { }
@@ -28,13 +29,13 @@ namespace MyJobLeads.DomainModel.Commands.Users
         }
 
         /// <summary>
-        /// Specifies the id value of the user whose password to reset
+        /// Specifies the email address of the user's whose password to reset
         /// </summary>
-        /// <param name="userId"></param>
+        /// <param name="email"></param>
         /// <returns></returns>
-        public ResetUserPasswordCommand WithUserId(int userId)
+        public ResetUserPasswordCommand WithUserEmail(string email)
         {
-            _userId = userId;
+            _email = email;
             return this;
         }
 
@@ -46,9 +47,9 @@ namespace MyJobLeads.DomainModel.Commands.Users
         public virtual string Execute()
         {
             // Retrieve the user
-            var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();
+            var user = new UserByEmailQuery(_unitOfWork).WithEmail(_email).Execute();
             if (user == null)
-                throw new MJLEntityNotFoundException(typeof(User), _userId);
+                throw new MJLUserNotFoundException(MJLUserNotFoundException.SearchPropertyType.Email, _email);
 
             // Generate a new password for the user
             string newPassword = PasswordUtils.GenerateRandomPassword();
