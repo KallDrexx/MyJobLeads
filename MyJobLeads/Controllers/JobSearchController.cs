@@ -15,14 +15,35 @@ namespace MyJobLeads.Controllers
 {
     public partial class JobSearchController : MyJobLeadsBaseController
     {
-        public JobSearchController(IUnitOfWork unitOfWork)
+        #region Constructor and Command/Query Members
+
+        protected JobSearchesByUserIdQuery _jobSearchesByUserIdQuery;
+        protected JobSearchByIdQuery _jobSearchByIdQuery;
+        protected CreateJobSearchForUserCommand _createJobSearchCommand;
+        protected EditJobSearchCommand _editJobSearchCommand;
+        protected OpenTasksByJobSearchQuery _openTasksByJobSearchQuery;
+        protected EditUserCommand _editUserCommand;
+
+        public JobSearchController(JobSearchesByUserIdQuery jobSearchesByIdQuery,
+                                    JobSearchByIdQuery jobSearchByIdQuery,
+                                    CreateJobSearchForUserCommand createJobSearchCommand,
+                                    EditJobSearchCommand editJobSearchCommand,
+                                    OpenTasksByJobSearchQuery openTasksByJobSearchQuery,
+                                    EditUserCommand editUserCommand)
         {
-            _unitOfWork = unitOfWork;
+            _jobSearchByIdQuery = jobSearchByIdQuery;
+            _jobSearchesByUserIdQuery = jobSearchesByIdQuery;
+            _createJobSearchCommand = createJobSearchCommand;
+            _editJobSearchCommand = editJobSearchCommand;
+            _openTasksByJobSearchQuery = openTasksByJobSearchQuery;
+            _editUserCommand = editUserCommand;
         }
+
+        #endregion
 
         public virtual ActionResult Index()
         {
-            var searches = new JobSearchesByUserIdQuery(_unitOfWork).WithUserId(CurrentUserId).Execute();
+            var searches = _jobSearchesByUserIdQuery.WithUserId(CurrentUserId).Execute();
             return View(searches);
         }
 
@@ -33,7 +54,7 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Edit(int id)
         {
-            var jobSearch = new JobSearchByIdQuery(_unitOfWork).WithJobSearchId(id).Execute();
+            var jobSearch = _jobSearchByIdQuery.WithJobSearchId(id).Execute();
             return View(jobSearch);
         }
 
@@ -43,18 +64,18 @@ namespace MyJobLeads.Controllers
             // Determine if we are editing or adding a jobsearch
             if (jobSearch.Id == 0)
             {
-                jobSearch = new CreateJobSearchForUserCommand(_unitOfWork).ForUserId(CurrentUserId)
-                                                                      .WithName(jobSearch.Name)
-                                                                      .WithDescription(jobSearch.Description)
-                                                                      .Execute();
+                jobSearch = _createJobSearchCommand.ForUserId(CurrentUserId)
+                                                    .WithName(jobSearch.Name)
+                                                    .WithDescription(jobSearch.Description)
+                                                    .Execute();
                 return RedirectToAction(MVC.JobSearch.View(jobSearch.Id));
             }
             else
             {
-                new EditJobSearchCommand(_unitOfWork).WithJobSearchId(jobSearch.Id)
-                                                     .SetName(jobSearch.Name)
-                                                     .SetDescription(jobSearch.Description)
-                                                     .Execute();
+                _editJobSearchCommand.WithJobSearchId(jobSearch.Id)
+                                    .SetName(jobSearch.Name)
+                                    .SetDescription(jobSearch.Description)
+                                    .Execute();
                 return RedirectToAction(MVC.JobSearch.View(jobSearch.Id));
             }
         }
@@ -62,11 +83,11 @@ namespace MyJobLeads.Controllers
         public virtual ActionResult Details(int id)
         {
             // Retrieve the specified job search
-            var search = new JobSearchByIdQuery(_unitOfWork).WithJobSearchId(id).Execute();
-            ViewBag.OpenTasks = new OpenTasksByJobSearchQuery(_unitOfWork).WithJobSearch(id).Execute();
+            var search = _jobSearchByIdQuery.WithJobSearchId(id).Execute();
+            ViewBag.OpenTasks = _openTasksByJobSearchQuery.WithJobSearch(id).Execute();
 
             // Set this as the user's last visited job search
-            new EditUserCommand(_unitOfWork).WithUserId(CurrentUserId).SetLastVisitedJobSearchId(id).Execute();
+            _editUserCommand.WithUserId(CurrentUserId).SetLastVisitedJobSearchId(id).Execute();
 
             return View(search);
         }

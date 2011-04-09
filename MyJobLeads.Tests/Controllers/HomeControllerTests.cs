@@ -57,7 +57,7 @@ namespace MyJobLeads.Tests.Controllers
             var userByIdMock = new Mock<UserByIdQuery>(null);
             userByIdMock.Setup(x => x.Execute()).Returns(user);
             HomeController controller = new HomeController(userByIdMock.Object);
-            controller.MembershipService = new MockMembershipService(user);
+            controller.CurrentUserId = 20;
 
             // Act
             ActionResult result = controller.Index();
@@ -76,7 +76,7 @@ namespace MyJobLeads.Tests.Controllers
             userByIdMock.Setup(x => x.Execute()).Returns(user);
 
             HomeController controller = new HomeController(userByIdMock.Object);
-            controller.MembershipService = new MockMembershipService(user);
+            controller.CurrentUserId = 40;
 
             // Act
             ActionResult result = controller.Index();
@@ -94,7 +94,7 @@ namespace MyJobLeads.Tests.Controllers
             userByIdMock.Setup(x => x.Execute()).Returns(user);
 
             HomeController controller = new HomeController(userByIdMock.Object);
-            controller.MembershipService = new MockMembershipService(user);
+            controller.CurrentUserId = 20;
 
             // Act
             ActionResult result = controller.Index();

@@ -20,27 +20,14 @@ namespace MyJobLeads
         {
             if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
             base.Initialize(requestContext);
+
+            if (MembershipService.GetUser() != null)
+                CurrentUserId = (int)MembershipService.GetUser().ProviderUserKey;
         }
 
         public IMembershipService MembershipService { get; set; }
 
-        private int? _currentUserId;
-        public int CurrentUserId 
-        {
-            get
-            {
-                if (_currentUserId == null)
-                {
-                    var user = MembershipService.GetUser();
-                    if (user != null)
-                        _currentUserId = (int)MembershipService.GetUser().ProviderUserKey;
-                    else
-                        _currentUserId = 0;
-                }
-
-                return _currentUserId.Value;
-            }
-        }
+        public int CurrentUserId { get; set; }
 
         protected IUnitOfWork _unitOfWork;
     }

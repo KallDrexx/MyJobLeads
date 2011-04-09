@@ -8,39 +8,41 @@ using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.Tests.Mocks;
 using System.Web.Mvc;
 using MvcContrib.TestHelper;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
+using MyJobLeads.DomainModel.Queries.JobSearches;
+using Moq;
 
 namespace MyJobLeads.Tests.Controllers
 {
     [TestClass]
     public class JobSearchControllerTest : InMemoryTestBase
     {
-        private JobSearchController _controller;
-        private TestControllerBuilder _builder;
-
-        [TestInitialize]
-        public void InitController()
+        [TestMethod]
+        public void Windsor_Can_Resolve_HomeController_Dependencies()
         {
-            _controller = new JobSearchController(_unitOfWork);
-            _builder = new TestControllerBuilder();
-            _builder.InitializeController(_controller);
+            // Setup
+            WindsorContainer container = new WindsorContainer();
+            container.Install(FromAssembly.Containing<JobSearchController>());
+
+            // Act
+            container.Kernel.Resolve(typeof(JobSearchController));
         }
 
         [TestMethod]
         public void Index_Shows_All_Job_Searches_For_User()
         {
             // Setup
-            User user = new User { Id = 20, JobSearches = new List<JobSearch>() };
-            JobSearch search1 = new JobSearch { Id = 3, User = user }, search2 = new JobSearch { Id = 4, User = user };
+            JobSearch search1 = new JobSearch { Id = 3 }, search2 = new JobSearch { Id = 4 };
+            var mock = new Mock<JobSearchesByUserIdQuery>(null);
+            mock.Setup(x => x.Execute()).Returns(new List<JobSearch> { search1, search2 });
 
-            _unitOfWork.Users.Add(user);
-            _unitOfWork.JobSearches.Add(search1);
-            _unitOfWork.JobSearches.Add(search2);
-            _unitOfWork.Commit();
-
-            _controller.MembershipService = new MockMembershipService(user);
+            var controller = new JobSearchController(mock.Object, null, null, null, null, null);
+            var builder = new TestControllerBuilder();
+            builder.InitializeController(controller);
 
             // Act
-            ActionResult result = _controller.Index();
+            ActionResult result = controller.Index();
 
             // Verify
             result.AssertViewRendered().ForView("");
@@ -55,8 +57,11 @@ namespace MyJobLeads.Tests.Controllers
         [TestMethod]
         public void Add_Returns_Edit_View()
         {
+            // Setup
+            var controller = new JobSearchController(null, null, null, null, null, null);
+
             // Act
-            ActionResult result = _controller.Add();
+            ActionResult result = controller.Add();
 
             // Verify
             result.AssertViewRendered().ForView(MVC.JobSearch.Views.Edit);
