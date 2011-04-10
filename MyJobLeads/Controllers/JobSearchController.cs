@@ -68,7 +68,7 @@ namespace MyJobLeads.Controllers
                                                     .WithName(jobSearch.Name)
                                                     .WithDescription(jobSearch.Description)
                                                     .Execute();
-                return RedirectToAction(MVC.JobSearch.View(jobSearch.Id));
+                return RedirectToAction(MVC.JobSearch.Details(jobSearch.Id));
             }
             else
             {

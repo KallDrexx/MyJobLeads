@@ -1,31 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <publishData>
-  <publishProfile publishUrl="ftp://184.168.249.1" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="GoDaddy" publishMethod="FTP" replaceMatchingFiles="False" userName="kalldrexx" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAdYNGSHKsxEyCcGGkXEdj5wAAAAACAAAAAAAQZgAAAAEAACAAAAD5MFm86C9t4m33eneFnlh3hBnk1eho7pwMvxNEXctNWAAAAAAOgAAAAAIAACAAAACmSfhYdkRtdZE/2fAJHoK5VltJAPrj/KdupCLsnEmxNyAAAACuxQl9RZpYtCLZlvdD7r0uUN/A9JzoALBZS0BiIYXe7EAAAAC51q5cwak2YlyLgAIupV2naxOWrt16M6UBTXpGzK3JphXxD1D5f7vBpp8brdHaLobEyW1lOQUMNXKUjXWcU079" SelectedForPublish="True">
+  <publishProfile publishUrl="ftp://184.168.249.1" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="GoDaddy" publishMethod="FTP" replaceMatchingFiles="True" userName="kalldrexx" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAdYNGSHKsxEyCcGGkXEdj5wAAAAACAAAAAAAQZgAAAAEAACAAAAD5MFm86C9t4m33eneFnlh3hBnk1eho7pwMvxNEXctNWAAAAAAOgAAAAAIAACAAAACmSfhYdkRtdZE/2fAJHoK5VltJAPrj/KdupCLsnEmxNyAAAACuxQl9RZpYtCLZlvdD7r0uUN/A9JzoALBZS0BiIYXe7EAAAAC51q5cwak2YlyLgAIupV2naxOWrt16M6UBTXpGzK3JphXxD1D5f7vBpp8brdHaLobEyW1lOQUMNXKUjXWcU079" SelectedForPublish="True">
     <file relUrl="Scripts/jquery.validate.unobtrusive.js" publishTime="03/10/2011 17:28:49" />
-    <file relUrl="Views/Account/Register.cshtml" publishTime="03/10/2011 17:28:49" />
+    <file relUrl="Views/Account/Register.cshtml" publishTime="03/30/2011 22:34:48" />
     <file relUrl="Content/themes/base/images/ui-bg_flat_75_ffffff_40x100.png" publishTime="03/10/2011 17:28:48" />
     <file relUrl="Views/Company/Edit.cshtml" publishTime="03/21/2011 22:43:49" />
     <file relUrl="Scripts/MicrosoftAjax.js" publishTime="03/10/2011 17:28:49" />
     <file relUrl="Scripts/jquery-1.4.4.js" publishTime="03/10/2011 17:28:48" />
-    <file relUrl="bin/Simple.Data.Ado.dll" publishTime="03/11/2011 00:41:14" />
-    <file relUrl="Views/Account/LogOn.cshtml" publishTime="03/10/2011 17:28:49" />
-    <file relUrl="Views/Task/Edit.cshtml" publishTime="03/23/2011 17:29:02" />
+    <file relUrl="Views/Account/LogOn.cshtml" publishTime="04/09/2011 18:56:15" />
+    <file relUrl="Views/Task/Edit.cshtml" publishTime="04/08/2011 22:17:30" />
     <file relUrl="Scripts/jquery.validate.min.js" publishTime="03/10/2011 17:28:49" />
-    <file relUrl="Views/JobSearch/Index.cshtml" publishTime="03/21/2011 20:14:19" />
+    <file relUrl="Views/JobSearch/Index.cshtml" publishTime="04/05/2011 23:38:38" />
+    <file relUrl="T4MVC.tt" publishTime="04/10/2011 09:52:22" />
     <file relUrl="Scripts/MicrosoftMvcValidation.debug.js" publishTime="03/10/2011 17:28:49" />
     <file relUrl="Scripts/jquery-1.4.4-vsdoc.js" publishTime="03/10/2011 17:28:48" />
     <file relUrl="bin/System.Web.Mvc.dll" publishTime="01/05/2011 17:42:16" />
-    <file relUrl="Web.config" publishTime="03/28/2011 10:10:43" />
+    <file relUrl="Web.config" publishTime="04/10/2011 09:43:10" />
     <file relUrl="bin/System.Web.WebPages.Deployment.xml" publishTime="12/20/2010 10:52:36" />
-    <file relUrl="Views/Contact/Edit.cshtml" publishTime="03/28/2011 00:05:38" />
+    <file relUrl="bin/MyJobLeads.dll" publishTime="04/10/2011 09:52:27" />
+    <file relUrl="Views/Contact/Edit.cshtml" publishTime="04/05/2011 23:39:30" />
     <file relUrl="bin/Castle.Core.dll" publishTime="03/20/2011 18:55:05" />
-    <file relUrl="Views/JobSearch/Edit.cshtml" publishTime="03/27/2011 23:37:28" />
+    <file relUrl="Views/JobSearch/Edit.cshtml" publishTime="04/08/2011 22:22:45" />
     <file relUrl="Global.asax" publishTime="03/10/2011 17:28:49" />
-    <file relUrl="Scripts/jquery-ui.min.js" publishTime="03/10/2011 17:28:48" />
-    <file relUrl="Views/JobSearch/View.cshtml" publishTime="03/27/2011 23:45:09" />
     <file relUrl="Content/themes/base/images/ui-icons_2e83ff_256x240.png" publishTime="03/10/2011 17:28:48" />
     <file relUrl="Scripts/jquery-1.4.4.min.js" publishTime="03/10/2011 17:28:48" />
-    <file relUrl="bin/MyJobLeads.pdb" publishTime="03/28/2011 08:23:49" />
+    <file relUrl="bin/MyJobLeads.pdb" publishTime="04/10/2011 09:52:27" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png" publishTime="03/10/2011 17:28:48" />
     <file relUrl="Scripts/jquery-ui.js" publishTime="03/10/2011 17:28:48" />
     <file relUrl="bin/System.Web.Razor.xml" publishTime="12/20/2010 10:52:36" />
@@ -34,49 +33,53 @@
     <file relUrl="bin/System.Web.Mvc.xml" publishTime="01/04/2011 15:29:22" />
     <file relUrl="bin/System.Web.Helpers.xml" publishTime="12/19/2010 23:59:38" />
     <file relUrl="Views/Shared/_LogOnPartial.cshtml" publishTime="03/10/2011 17:28:49" />
+    <file relUrl="Views/Task/Details.cshtml" publishTime="04/05/2011 23:38:24" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_55_fbf9ee_1x400.png" publishTime="03/10/2011 17:28:48" />
+    <file relUrl="Views/Account/ResetPassword.cshtml" publishTime="04/09/2011 18:42:31" />
     <file relUrl="Content/themes/base/images/ui-icons_cd0a0a_256x240.png" publishTime="03/10/2011 17:28:48" />
-    <file relUrl="bin/MyJobLeads.DomainModel.dll" publishTime="03/28/2011 08:23:47" />
+    <file relUrl="Views/Web.config" publishTime="03/10/2011 17:28:49" />
+    <file relUrl="bin/MyJobLeads.DomainModel.dll" publishTime="04/09/2011 18:32:09" />
     <file relUrl="bin/EntityFramework.xml" publishTime="03/25/2011 18:04:19" />
+    <file relUrl="Scripts/jquery.validate.unobtrusive.min.js" publishTime="03/10/2011 17:28:49" />
     <file relUrl="bin/System.Web.Helpers.dll" publishTime="01/05/2011 15:45:38" />
     <file relUrl="bin/Microsoft.Web.Infrastructure.dll" publishTime="01/05/2011 15:45:38" />
-    <file relUrl="Views/Shared/_CompanyDisplay.cshtml" publishTime="03/27/2011 23:52:44" />
-    <file relUrl="bin/MyJobLeads.DomainModel.pdb" publishTime="03/28/2011 08:23:46" />
-    <file relUrl="Views/Home/Index.cshtml" publishTime="03/23/2011 17:45:07" />
+    <file relUrl="Views/Shared/_CompanyDisplay.cshtml" publishTime="04/08/2011 22:16:33" />
     <file relUrl="bin/Castle.Windsor.dll" publishTime="03/20/2011 18:55:06" />
+    <file relUrl="Views/Company/Details.cshtml" publishTime="03/27/2011 23:57:42" />
     <file relUrl="Content/themes/base/images/ui-icons_222222_256x240.png" publishTime="03/10/2011 17:28:48" />
     <file relUrl="bin/Microsoft.Web.Infrastructure.xml" publishTime="12/20/2010 10:52:36" />
     <file relUrl="packages.config" publishTime="03/26/2011 21:09:38" />
     <file relUrl="bin/Castle.Windsor.xml" publishTime="03/20/2011 18:55:06" />
     <file relUrl="bin/System.Web.WebPages.Razor.dll" publishTime="01/05/2011 15:45:38" />
-    <file relUrl="Content/themes/base/images/ui-icons_888888_256x240.png" publishTime="03/10/2011 17:28:48" />
-    <file relUrl="Content/themes/base/images/ui-bg_glass_75_dadada_1x400.png" publishTime="03/10/2011 17:28:48" />
     <file relUrl="bin/System.Web.Routing.dll" publishTime="03/18/2010 20:31:26" />
     <file relUrl="Views/Home/About.cshtml" publishTime="03/10/2011 17:28:49" />
     <file relUrl="Views/Account/ChangePasswordSuccess.cshtml" publishTime="03/10/2011 17:28:49" />
     <file relUrl="Views/Shared/Error.cshtml" publishTime="03/10/2011 17:28:49" />
+    <file relUrl="Views/Account/ResetPasswordResult.cshtml" publishTime="04/09/2011 18:40:41" />
     <file relUrl="Content/themes/base/images/ui-icons_454545_256x240.png" publishTime="03/10/2011 17:28:48" />
+    <file relUrl="bin/EntityFramework.dll" publishTime="03/25/2011 18:04:19" />
     <file relUrl="bin/System.Web.WebPages.Razor.xml" publishTime="12/20/2010 10:52:36" />
     <file relUrl="bin/Elmah.dll" publishTime="03/26/2011 21:09:35" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_65_ffffff_1x400.png" publishTime="03/10/2011 17:28:48" />
-    <file relUrl="Views/Task/View.cshtml" publishTime="03/28/2011 00:09:52" />
-    <file relUrl="Views/Company/View.cshtml" publishTime="03/27/2011 23:57:42" />
     <file relUrl="Scripts/jquery.validate-vsdoc.js" publishTime="03/10/2011 17:28:48" />
     <file relUrl="bin/WebActivator.dll" publishTime="03/20/2011 21:55:15" />
     <file relUrl="bin/System.Web.Razor.dll" publishTime="01/05/2011 15:45:38" />
     <file relUrl="Views/Shared/_Layout.cshtml" publishTime="03/21/2011 20:18:22" />
+    <file relUrl="Content/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png" publishTime="03/10/2011 17:28:48" />
     <file relUrl="favicon.ico" publishTime="02/14/2010 22:35:47" />
-    <file relUrl="Views/Web.config" publishTime="03/10/2011 17:28:49" />
-    <file relUrl="Views/Shared/_ContactDisplay.cshtml" publishTime="03/28/2011 00:01:52" />
+    <file relUrl="Scripts/jquery-ui.min.js" publishTime="03/10/2011 17:28:48" />
+    <file relUrl="Views/JobSearch/Details.cshtml" publishTime="04/05/2011 23:48:12" />
+    <file relUrl="Views/Shared/_ContactDisplay.cshtml" publishTime="04/08/2011 22:16:23" />
     <file relUrl="Content/Site.css" publishTime="03/10/2011 17:28:48" />
+    <file relUrl="Infrastructure/Installers/CommandQueryInstaller.tt" publishTime="04/07/2011 17:37:02" />
     <file relUrl="Scripts/MicrosoftMvcValidation.js" publishTime="03/10/2011 17:28:49" />
-    <file relUrl="Views/Contact/View.cshtml" publishTime="03/28/2011 00:03:40" />
     <file relUrl="bin/System.Web.Abstractions.dll" publishTime="03/18/2010 20:31:26" />
-    <file relUrl="bin/EntityFramework.dll" publishTime="03/25/2011 18:04:19" />
-    <file relUrl="bin/MyJobLeads.dll" publishTime="03/28/2011 08:23:49" />
+    <file relUrl="Content/themes/base/images/ui-icons_888888_256x240.png" publishTime="03/10/2011 17:28:48" />
+    <file relUrl="bin/Simple.Data.Ado.dll" publishTime="03/11/2011 00:41:14" />
+    <file relUrl="bin/Simple.Data.dll" publishTime="03/11/2011 00:41:14" />
     <file relUrl="Content/themes/base/jquery-ui.css" publishTime="03/10/2011 17:28:48" />
     <file relUrl="Views/_ViewStart.cshtml" publishTime="03/10/2011 17:28:49" />
-    <file relUrl="bin/Simple.Data.dll" publishTime="03/11/2011 00:41:14" />
+    <file relUrl="bin/MyJobLeads.DomainModel.pdb" publishTime="04/09/2011 18:32:09" />
     <file relUrl="Scripts/jquery.unobtrusive-ajax.js" publishTime="03/10/2011 17:28:48" />
     <file relUrl="Scripts/MicrosoftAjax.debug.js" publishTime="03/10/2011 17:28:49" />
     <file relUrl="bin/Castle.Core.xml" publishTime="03/20/2011 18:55:05" />
@@ -84,12 +87,12 @@
     <file relUrl="Scripts/MicrosoftMvcAjax.debug.js" publishTime="03/10/2011 17:28:49" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_95_fef1ec_1x400.png" publishTime="03/10/2011 17:28:48" />
     <file relUrl="Scripts/MicrosoftMvcAjax.js" publishTime="03/10/2011 17:28:49" />
-    <file relUrl="App_Data/BlankForDeployment.txt" publishTime="03/27/2011 19:56:31" />
     <file relUrl="Scripts/jquery.validate.js" publishTime="03/10/2011 17:28:49" />
     <file relUrl="Views/Account/ChangePassword.cshtml" publishTime="03/10/2011 17:28:49" />
     <file relUrl="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png" publishTime="03/10/2011 17:28:48" />
-    <file relUrl="Scripts/jquery.validate.unobtrusive.min.js" publishTime="03/10/2011 17:28:49" />
-    <file relUrl="Content/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png" publishTime="03/10/2011 17:28:48" />
+    <file relUrl="Views/Home/Index.cshtml" publishTime="03/23/2011 17:45:07" />
+    <file relUrl="Views/Contact/Details.cshtml" publishTime="03/28/2011 00:03:40" />
+    <file relUrl="Content/themes/base/images/ui-bg_glass_75_dadada_1x400.png" publishTime="03/10/2011 17:28:48" />
     <file relUrl="bin/System.Web.WebPages.Deployment.dll" publishTime="01/05/2011 15:45:38" />
     <file relUrl="bin/DevOne.Security.Cryptography.BCrypt.dll" publishTime="03/12/2011 11:09:17" />
   </publishProfile>
