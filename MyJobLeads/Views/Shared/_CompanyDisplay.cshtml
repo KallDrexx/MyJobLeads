@@ -35,7 +35,14 @@ Notes: @Model.Notes <br />
 <ul>
     @foreach (Task task in Model.Tasks)
     {
-        <li>@Html.ActionLink(task.Name, MVC.Task.Details(task.Id))</li>
+        <li>
+            @Html.ActionLink(task.Name, MVC.Task.Details(task.Id)) - 
+
+            @if (task.Completed) { <text>Completed </text> }
+            else { <b>Not Completed</b> }
+
+            @if (task.TaskDate != null && !task.Completed) { <text> - Due: @task.TaskDate.Value.ToString()</text> }
+        </li>
     }
 </ul>
 
