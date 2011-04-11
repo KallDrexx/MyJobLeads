@@ -22,7 +22,7 @@ Notes: @Model.Notes <br />
 @Html.ActionLink("Add Contact", MVC.Contact.Add(Model.Id))
 
 <ul>
-    @foreach (Contact contact in Model.Contacts)
+    @foreach (Contact contact in Model.Contacts.OrderBy(x => x.Name).ToArray())
     {
         <li>@Html.ActionLink(contact.Name, MVC.Contact.Details(contact.Id))</li>   
     }
