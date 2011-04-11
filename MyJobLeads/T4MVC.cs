@@ -287,6 +287,41 @@ namespace Links {
         private const string URLPATH = "~/Scripts";
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class _2011_1_315 {
+            private const string URLPATH = "~/Scripts/2011.1.315";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string jquery_1_5_1_min_js = Url("jquery-1.5.1.min.js");
+            public static readonly string jquery_validate_min_js = Url("jquery.validate.min.js");
+            public static readonly string telerik_autocomplete_min_js = Url("telerik.autocomplete.min.js");
+            public static readonly string telerik_calendar_min_js = Url("telerik.calendar.min.js");
+            public static readonly string telerik_combobox_min_js = Url("telerik.combobox.min.js");
+            public static readonly string telerik_common_min_js = Url("telerik.common.min.js");
+            public static readonly string telerik_datepicker_min_js = Url("telerik.datepicker.min.js");
+            public static readonly string telerik_datetimepicker_min_js = Url("telerik.datetimepicker.min.js");
+            public static readonly string telerik_draganddrop_min_js = Url("telerik.draganddrop.min.js");
+            public static readonly string telerik_editor_min_js = Url("telerik.editor.min.js");
+            public static readonly string telerik_grid_editing_min_js = Url("telerik.grid.editing.min.js");
+            public static readonly string telerik_grid_filtering_min_js = Url("telerik.grid.filtering.min.js");
+            public static readonly string telerik_grid_grouping_min_js = Url("telerik.grid.grouping.min.js");
+            public static readonly string telerik_grid_min_js = Url("telerik.grid.min.js");
+            public static readonly string telerik_grid_reordering_min_js = Url("telerik.grid.reordering.min.js");
+            public static readonly string telerik_grid_resizing_min_js = Url("telerik.grid.resizing.min.js");
+            public static readonly string telerik_imagebrowser_min_js = Url("telerik.imagebrowser.min.js");
+            public static readonly string telerik_list_min_js = Url("telerik.list.min.js");
+            public static readonly string telerik_menu_min_js = Url("telerik.menu.min.js");
+            public static readonly string telerik_panelbar_min_js = Url("telerik.panelbar.min.js");
+            public static readonly string telerik_slider_min_js = Url("telerik.slider.min.js");
+            public static readonly string telerik_splitter_min_js = Url("telerik.splitter.min.js");
+            public static readonly string telerik_tabstrip_min_js = Url("telerik.tabstrip.min.js");
+            public static readonly string telerik_textbox_min_js = Url("telerik.textbox.min.js");
+            public static readonly string telerik_timepicker_min_js = Url("telerik.timepicker.min.js");
+            public static readonly string telerik_treeview_min_js = Url("telerik.treeview.min.js");
+            public static readonly string telerik_upload_min_js = Url("telerik.upload.min.js");
+            public static readonly string telerik_window_min_js = Url("telerik.window.min.js");
+        }
+    
         public static readonly string jquery_1_4_4_vsdoc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.4.4-vsdoc.min.js") ? Url("jquery-1.4.4-vsdoc.min.js") : Url("jquery-1.4.4-vsdoc.js");
                       
         public static readonly string jquery_1_4_4_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.4.4.min.js") ? Url("jquery-1.4.4.min.js") : Url("jquery-1.4.4.js");
@@ -325,6 +360,429 @@ namespace Links {
         private const string URLPATH = "~/Content";
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class _2011_1_315 {
+            private const string URLPATH = "~/Content/2011.1.315";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Black {
+                private const string URLPATH = "~/Content/2011.1.315/Black";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string editor_png = Url("editor.png");
+                public static readonly string imagebrowser_png = Url("imagebrowser.png");
+                public static readonly string loading_gif = Url("loading.gif");
+                public static readonly string slider_h_both_gif = Url("slider-h-both.gif");
+                public static readonly string slider_h_bottom_gif = Url("slider-h-bottom.gif");
+                public static readonly string slider_h_top_gif = Url("slider-h-top.gif");
+                public static readonly string slider_hs_both_gif = Url("slider-hs-both.gif");
+                public static readonly string slider_hs_bottom_gif = Url("slider-hs-bottom.gif");
+                public static readonly string slider_hs_top_gif = Url("slider-hs-top.gif");
+                public static readonly string slider_v_both_gif = Url("slider-v-both.gif");
+                public static readonly string slider_v_left_gif = Url("slider-v-left.gif");
+                public static readonly string slider_v_right_gif = Url("slider-v-right.gif");
+                public static readonly string slider_vs_both_gif = Url("slider-vs-both.gif");
+                public static readonly string slider_vs_left_gif = Url("slider-vs-left.gif");
+                public static readonly string slider_vs_right_gif = Url("slider-vs-right.gif");
+                public static readonly string sprite_vertical_png = Url("sprite-vertical.png");
+                public static readonly string sprite_png = Url("sprite.png");
+                public static readonly string treeview_line_png = Url("treeview-line.png");
+                public static readonly string treeview_nodes_rtl_png = Url("treeview-nodes-rtl.png");
+                public static readonly string treeview_nodes_png = Url("treeview-nodes.png");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Default {
+                private const string URLPATH = "~/Content/2011.1.315/Default";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string editor_png = Url("editor.png");
+                public static readonly string imagebrowser_png = Url("imagebrowser.png");
+                public static readonly string loading_gif = Url("loading.gif");
+                public static readonly string slider_h_both_gif = Url("slider-h-both.gif");
+                public static readonly string slider_h_bottom_gif = Url("slider-h-bottom.gif");
+                public static readonly string slider_h_top_gif = Url("slider-h-top.gif");
+                public static readonly string slider_hs_both_gif = Url("slider-hs-both.gif");
+                public static readonly string slider_hs_bottom_gif = Url("slider-hs-bottom.gif");
+                public static readonly string slider_hs_top_gif = Url("slider-hs-top.gif");
+                public static readonly string slider_v_both_gif = Url("slider-v-both.gif");
+                public static readonly string slider_v_left_gif = Url("slider-v-left.gif");
+                public static readonly string slider_v_right_gif = Url("slider-v-right.gif");
+                public static readonly string slider_vs_both_gif = Url("slider-vs-both.gif");
+                public static readonly string slider_vs_left_gif = Url("slider-vs-left.gif");
+                public static readonly string slider_vs_right_gif = Url("slider-vs-right.gif");
+                public static readonly string sprite_vertical_png = Url("sprite-vertical.png");
+                public static readonly string sprite_png = Url("sprite.png");
+                public static readonly string treeview_line_png = Url("treeview-line.png");
+                public static readonly string treeview_nodes_rtl_png = Url("treeview-nodes-rtl.png");
+                public static readonly string treeview_nodes_png = Url("treeview-nodes.png");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Forest {
+                private const string URLPATH = "~/Content/2011.1.315/Forest";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string editor_png = Url("editor.png");
+                public static readonly string imagebrowser_png = Url("imagebrowser.png");
+                public static readonly string loading_gif = Url("loading.gif");
+                public static readonly string slider_h_both_gif = Url("slider-h-both.gif");
+                public static readonly string slider_h_bottom_gif = Url("slider-h-bottom.gif");
+                public static readonly string slider_h_top_gif = Url("slider-h-top.gif");
+                public static readonly string slider_hs_both_gif = Url("slider-hs-both.gif");
+                public static readonly string slider_hs_bottom_gif = Url("slider-hs-bottom.gif");
+                public static readonly string slider_hs_top_gif = Url("slider-hs-top.gif");
+                public static readonly string slider_v_both_gif = Url("slider-v-both.gif");
+                public static readonly string slider_v_left_gif = Url("slider-v-left.gif");
+                public static readonly string slider_v_right_gif = Url("slider-v-right.gif");
+                public static readonly string slider_vs_both_gif = Url("slider-vs-both.gif");
+                public static readonly string slider_vs_left_gif = Url("slider-vs-left.gif");
+                public static readonly string slider_vs_right_gif = Url("slider-vs-right.gif");
+                public static readonly string sprite_vertical_png = Url("sprite-vertical.png");
+                public static readonly string sprite_png = Url("sprite.png");
+                public static readonly string treeview_line_png = Url("treeview-line.png");
+                public static readonly string treeview_nodes_rtl_png = Url("treeview-nodes-rtl.png");
+                public static readonly string treeview_nodes_png = Url("treeview-nodes.png");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Hay {
+                private const string URLPATH = "~/Content/2011.1.315/Hay";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string editor_png = Url("editor.png");
+                public static readonly string imagebrowser_png = Url("imagebrowser.png");
+                public static readonly string loading_gif = Url("loading.gif");
+                public static readonly string slider_h_both_gif = Url("slider-h-both.gif");
+                public static readonly string slider_h_bottom_gif = Url("slider-h-bottom.gif");
+                public static readonly string slider_h_top_gif = Url("slider-h-top.gif");
+                public static readonly string slider_hs_both_gif = Url("slider-hs-both.gif");
+                public static readonly string slider_hs_bottom_gif = Url("slider-hs-bottom.gif");
+                public static readonly string slider_hs_top_gif = Url("slider-hs-top.gif");
+                public static readonly string slider_v_both_gif = Url("slider-v-both.gif");
+                public static readonly string slider_v_left_gif = Url("slider-v-left.gif");
+                public static readonly string slider_v_right_gif = Url("slider-v-right.gif");
+                public static readonly string slider_vs_both_gif = Url("slider-vs-both.gif");
+                public static readonly string slider_vs_left_gif = Url("slider-vs-left.gif");
+                public static readonly string slider_vs_right_gif = Url("slider-vs-right.gif");
+                public static readonly string sprite_vertical_png = Url("sprite-vertical.png");
+                public static readonly string sprite_png = Url("sprite.png");
+                public static readonly string treeview_line_png = Url("treeview-line.png");
+                public static readonly string treeview_nodes_rtl_png = Url("treeview-nodes-rtl.png");
+                public static readonly string treeview_nodes_png = Url("treeview-nodes.png");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Office2007 {
+                private const string URLPATH = "~/Content/2011.1.315/Office2007";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string editor_png = Url("editor.png");
+                public static readonly string imagebrowser_png = Url("imagebrowser.png");
+                public static readonly string loading_gif = Url("loading.gif");
+                public static readonly string slider_h_both_gif = Url("slider-h-both.gif");
+                public static readonly string slider_h_bottom_gif = Url("slider-h-bottom.gif");
+                public static readonly string slider_h_top_gif = Url("slider-h-top.gif");
+                public static readonly string slider_hs_both_gif = Url("slider-hs-both.gif");
+                public static readonly string slider_hs_bottom_gif = Url("slider-hs-bottom.gif");
+                public static readonly string slider_hs_top_gif = Url("slider-hs-top.gif");
+                public static readonly string slider_v_both_gif = Url("slider-v-both.gif");
+                public static readonly string slider_v_left_gif = Url("slider-v-left.gif");
+                public static readonly string slider_v_right_gif = Url("slider-v-right.gif");
+                public static readonly string slider_vs_both_gif = Url("slider-vs-both.gif");
+                public static readonly string slider_vs_left_gif = Url("slider-vs-left.gif");
+                public static readonly string slider_vs_right_gif = Url("slider-vs-right.gif");
+                public static readonly string sprite_vertical_png = Url("sprite-vertical.png");
+                public static readonly string sprite_png = Url("sprite.png");
+                public static readonly string treeview_line_png = Url("treeview-line.png");
+                public static readonly string treeview_nodes_rtl_png = Url("treeview-nodes-rtl.png");
+                public static readonly string treeview_nodes_png = Url("treeview-nodes.png");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Office2010Black {
+                private const string URLPATH = "~/Content/2011.1.315/Office2010Black";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string editor_png = Url("editor.png");
+                public static readonly string imagebrowser_png = Url("imagebrowser.png");
+                public static readonly string loading_gif = Url("loading.gif");
+                public static readonly string slider_h_both_gif = Url("slider-h-both.gif");
+                public static readonly string slider_h_bottom_gif = Url("slider-h-bottom.gif");
+                public static readonly string slider_h_top_gif = Url("slider-h-top.gif");
+                public static readonly string slider_hs_both_gif = Url("slider-hs-both.gif");
+                public static readonly string slider_hs_bottom_gif = Url("slider-hs-bottom.gif");
+                public static readonly string slider_hs_top_gif = Url("slider-hs-top.gif");
+                public static readonly string slider_v_both_gif = Url("slider-v-both.gif");
+                public static readonly string slider_v_left_gif = Url("slider-v-left.gif");
+                public static readonly string slider_v_right_gif = Url("slider-v-right.gif");
+                public static readonly string slider_vs_both_gif = Url("slider-vs-both.gif");
+                public static readonly string slider_vs_left_gif = Url("slider-vs-left.gif");
+                public static readonly string slider_vs_right_gif = Url("slider-vs-right.gif");
+                public static readonly string sprite_vertical_png = Url("sprite-vertical.png");
+                public static readonly string sprite_png = Url("sprite.png");
+                public static readonly string treeview_line_png = Url("treeview-line.png");
+                public static readonly string treeview_nodes_rtl_png = Url("treeview-nodes-rtl.png");
+                public static readonly string treeview_nodes_png = Url("treeview-nodes.png");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Outlook {
+                private const string URLPATH = "~/Content/2011.1.315/Outlook";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string editor_png = Url("editor.png");
+                public static readonly string imagebrowser_png = Url("imagebrowser.png");
+                public static readonly string loading_gif = Url("loading.gif");
+                public static readonly string slider_h_both_gif = Url("slider-h-both.gif");
+                public static readonly string slider_h_bottom_gif = Url("slider-h-bottom.gif");
+                public static readonly string slider_h_top_gif = Url("slider-h-top.gif");
+                public static readonly string slider_hs_both_gif = Url("slider-hs-both.gif");
+                public static readonly string slider_hs_bottom_gif = Url("slider-hs-bottom.gif");
+                public static readonly string slider_hs_top_gif = Url("slider-hs-top.gif");
+                public static readonly string slider_v_both_gif = Url("slider-v-both.gif");
+                public static readonly string slider_v_left_gif = Url("slider-v-left.gif");
+                public static readonly string slider_v_right_gif = Url("slider-v-right.gif");
+                public static readonly string slider_vs_both_gif = Url("slider-vs-both.gif");
+                public static readonly string slider_vs_left_gif = Url("slider-vs-left.gif");
+                public static readonly string slider_vs_right_gif = Url("slider-vs-right.gif");
+                public static readonly string sprite_vertical_png = Url("sprite-vertical.png");
+                public static readonly string sprite_png = Url("sprite.png");
+                public static readonly string treeview_line_png = Url("treeview-line.png");
+                public static readonly string treeview_nodes_rtl_png = Url("treeview-nodes-rtl.png");
+                public static readonly string treeview_nodes_png = Url("treeview-nodes.png");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Simple {
+                private const string URLPATH = "~/Content/2011.1.315/Simple";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string editor_png = Url("editor.png");
+                public static readonly string imagebrowser_png = Url("imagebrowser.png");
+                public static readonly string loading_gif = Url("loading.gif");
+                public static readonly string slider_h_both_gif = Url("slider-h-both.gif");
+                public static readonly string slider_h_bottom_gif = Url("slider-h-bottom.gif");
+                public static readonly string slider_h_top_gif = Url("slider-h-top.gif");
+                public static readonly string slider_hs_both_gif = Url("slider-hs-both.gif");
+                public static readonly string slider_hs_bottom_gif = Url("slider-hs-bottom.gif");
+                public static readonly string slider_hs_top_gif = Url("slider-hs-top.gif");
+                public static readonly string slider_v_both_gif = Url("slider-v-both.gif");
+                public static readonly string slider_v_left_gif = Url("slider-v-left.gif");
+                public static readonly string slider_v_right_gif = Url("slider-v-right.gif");
+                public static readonly string slider_vs_both_gif = Url("slider-vs-both.gif");
+                public static readonly string slider_vs_left_gif = Url("slider-vs-left.gif");
+                public static readonly string slider_vs_right_gif = Url("slider-vs-right.gif");
+                public static readonly string sprite_vertical_png = Url("sprite-vertical.png");
+                public static readonly string sprite_png = Url("sprite.png");
+                public static readonly string treeview_line_png = Url("treeview-line.png");
+                public static readonly string treeview_nodes_rtl_png = Url("treeview-nodes-rtl.png");
+                public static readonly string treeview_nodes_png = Url("treeview-nodes.png");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Sitefinity {
+                private const string URLPATH = "~/Content/2011.1.315/Sitefinity";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string editor_png = Url("editor.png");
+                public static readonly string imagebrowser_png = Url("imagebrowser.png");
+                public static readonly string loading_gif = Url("loading.gif");
+                public static readonly string slider_h_both_gif = Url("slider-h-both.gif");
+                public static readonly string slider_h_bottom_gif = Url("slider-h-bottom.gif");
+                public static readonly string slider_h_top_gif = Url("slider-h-top.gif");
+                public static readonly string slider_hs_both_gif = Url("slider-hs-both.gif");
+                public static readonly string slider_hs_bottom_gif = Url("slider-hs-bottom.gif");
+                public static readonly string slider_hs_top_gif = Url("slider-hs-top.gif");
+                public static readonly string slider_v_both_gif = Url("slider-v-both.gif");
+                public static readonly string slider_v_left_gif = Url("slider-v-left.gif");
+                public static readonly string slider_v_right_gif = Url("slider-v-right.gif");
+                public static readonly string slider_vs_both_gif = Url("slider-vs-both.gif");
+                public static readonly string slider_vs_left_gif = Url("slider-vs-left.gif");
+                public static readonly string slider_vs_right_gif = Url("slider-vs-right.gif");
+                public static readonly string sprite_vertical_png = Url("sprite-vertical.png");
+                public static readonly string sprite_png = Url("sprite.png");
+                public static readonly string treeview_line_png = Url("treeview-line.png");
+                public static readonly string treeview_nodes_rtl_png = Url("treeview-nodes-rtl.png");
+                public static readonly string treeview_nodes_png = Url("treeview-nodes.png");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Sunset {
+                private const string URLPATH = "~/Content/2011.1.315/Sunset";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string editor_png = Url("editor.png");
+                public static readonly string imagebrowser_png = Url("imagebrowser.png");
+                public static readonly string loading_gif = Url("loading.gif");
+                public static readonly string slider_h_both_gif = Url("slider-h-both.gif");
+                public static readonly string slider_h_bottom_gif = Url("slider-h-bottom.gif");
+                public static readonly string slider_h_top_gif = Url("slider-h-top.gif");
+                public static readonly string slider_hs_both_gif = Url("slider-hs-both.gif");
+                public static readonly string slider_hs_bottom_gif = Url("slider-hs-bottom.gif");
+                public static readonly string slider_hs_top_gif = Url("slider-hs-top.gif");
+                public static readonly string slider_v_both_gif = Url("slider-v-both.gif");
+                public static readonly string slider_v_left_gif = Url("slider-v-left.gif");
+                public static readonly string slider_v_right_gif = Url("slider-v-right.gif");
+                public static readonly string slider_vs_both_gif = Url("slider-vs-both.gif");
+                public static readonly string slider_vs_left_gif = Url("slider-vs-left.gif");
+                public static readonly string slider_vs_right_gif = Url("slider-vs-right.gif");
+                public static readonly string sprite_vertical_png = Url("sprite-vertical.png");
+                public static readonly string sprite_png = Url("sprite.png");
+                public static readonly string treeview_line_png = Url("treeview-line.png");
+                public static readonly string treeview_nodes_rtl_png = Url("treeview-nodes-rtl.png");
+                public static readonly string treeview_nodes_png = Url("treeview-nodes.png");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Telerik {
+                private const string URLPATH = "~/Content/2011.1.315/Telerik";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string editor_png = Url("editor.png");
+                public static readonly string imagebrowser_png = Url("imagebrowser.png");
+                public static readonly string loading_gif = Url("loading.gif");
+                public static readonly string slider_h_both_gif = Url("slider-h-both.gif");
+                public static readonly string slider_h_bottom_gif = Url("slider-h-bottom.gif");
+                public static readonly string slider_h_top_gif = Url("slider-h-top.gif");
+                public static readonly string slider_hs_both_gif = Url("slider-hs-both.gif");
+                public static readonly string slider_hs_bottom_gif = Url("slider-hs-bottom.gif");
+                public static readonly string slider_hs_top_gif = Url("slider-hs-top.gif");
+                public static readonly string slider_v_both_gif = Url("slider-v-both.gif");
+                public static readonly string slider_v_left_gif = Url("slider-v-left.gif");
+                public static readonly string slider_v_right_gif = Url("slider-v-right.gif");
+                public static readonly string slider_vs_both_gif = Url("slider-vs-both.gif");
+                public static readonly string slider_vs_left_gif = Url("slider-vs-left.gif");
+                public static readonly string slider_vs_right_gif = Url("slider-vs-right.gif");
+                public static readonly string sprite_vertical_png = Url("sprite-vertical.png");
+                public static readonly string sprite_png = Url("sprite.png");
+                public static readonly string treeview_line_png = Url("treeview-line.png");
+                public static readonly string treeview_nodes_rtl_png = Url("treeview-nodes-rtl.png");
+                public static readonly string treeview_nodes_png = Url("treeview-nodes.png");
+            }
+        
+            public static readonly string telerik_black_min_css = Url("telerik.black.min.css");
+            public static readonly string telerik_common_min_css = Url("telerik.common.min.css");
+            public static readonly string telerik_default_min_css = Url("telerik.default.min.css");
+            public static readonly string telerik_forest_min_css = Url("telerik.forest.min.css");
+            public static readonly string telerik_hay_min_css = Url("telerik.hay.min.css");
+            public static readonly string telerik_office2007_min_css = Url("telerik.office2007.min.css");
+            public static readonly string telerik_office2010black_min_css = Url("telerik.office2010black.min.css");
+            public static readonly string telerik_outlook_min_css = Url("telerik.outlook.min.css");
+            public static readonly string telerik_rtl_min_css = Url("telerik.rtl.min.css");
+            public static readonly string telerik_simple_min_css = Url("telerik.simple.min.css");
+            public static readonly string telerik_sitefinity_min_css = Url("telerik.sitefinity.min.css");
+            public static readonly string telerik_sunset_min_css = Url("telerik.sunset.min.css");
+            public static readonly string telerik_telerik_min_css = Url("telerik.telerik.min.css");
+            public static readonly string telerik_vista_min_css = Url("telerik.vista.min.css");
+            public static readonly string telerik_web20_min_css = Url("telerik.web20.min.css");
+            public static readonly string telerik_webblue_min_css = Url("telerik.webblue.min.css");
+            public static readonly string telerik_windows7_min_css = Url("telerik.windows7.min.css");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Vista {
+                private const string URLPATH = "~/Content/2011.1.315/Vista";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string editor_png = Url("editor.png");
+                public static readonly string imagebrowser_png = Url("imagebrowser.png");
+                public static readonly string loading_gif = Url("loading.gif");
+                public static readonly string slider_h_both_gif = Url("slider-h-both.gif");
+                public static readonly string slider_h_bottom_gif = Url("slider-h-bottom.gif");
+                public static readonly string slider_h_top_gif = Url("slider-h-top.gif");
+                public static readonly string slider_hs_both_gif = Url("slider-hs-both.gif");
+                public static readonly string slider_hs_bottom_gif = Url("slider-hs-bottom.gif");
+                public static readonly string slider_hs_top_gif = Url("slider-hs-top.gif");
+                public static readonly string slider_v_both_gif = Url("slider-v-both.gif");
+                public static readonly string slider_v_left_gif = Url("slider-v-left.gif");
+                public static readonly string slider_v_right_gif = Url("slider-v-right.gif");
+                public static readonly string slider_vs_both_gif = Url("slider-vs-both.gif");
+                public static readonly string slider_vs_left_gif = Url("slider-vs-left.gif");
+                public static readonly string slider_vs_right_gif = Url("slider-vs-right.gif");
+                public static readonly string sprite_vertical_png = Url("sprite-vertical.png");
+                public static readonly string sprite_png = Url("sprite.png");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Web20 {
+                private const string URLPATH = "~/Content/2011.1.315/Web20";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string editor_png = Url("editor.png");
+                public static readonly string imagebrowser_png = Url("imagebrowser.png");
+                public static readonly string loading_gif = Url("loading.gif");
+                public static readonly string slider_h_both_gif = Url("slider-h-both.gif");
+                public static readonly string slider_h_bottom_gif = Url("slider-h-bottom.gif");
+                public static readonly string slider_h_top_gif = Url("slider-h-top.gif");
+                public static readonly string slider_hs_both_gif = Url("slider-hs-both.gif");
+                public static readonly string slider_hs_bottom_gif = Url("slider-hs-bottom.gif");
+                public static readonly string slider_hs_top_gif = Url("slider-hs-top.gif");
+                public static readonly string slider_v_both_gif = Url("slider-v-both.gif");
+                public static readonly string slider_v_left_gif = Url("slider-v-left.gif");
+                public static readonly string slider_v_right_gif = Url("slider-v-right.gif");
+                public static readonly string slider_vs_both_gif = Url("slider-vs-both.gif");
+                public static readonly string slider_vs_left_gif = Url("slider-vs-left.gif");
+                public static readonly string slider_vs_right_gif = Url("slider-vs-right.gif");
+                public static readonly string sprite_vertical_png = Url("sprite-vertical.png");
+                public static readonly string sprite_png = Url("sprite.png");
+                public static readonly string treeview_line_png = Url("treeview-line.png");
+                public static readonly string treeview_nodes_rtl_png = Url("treeview-nodes-rtl.png");
+                public static readonly string treeview_nodes_png = Url("treeview-nodes.png");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class WebBlue {
+                private const string URLPATH = "~/Content/2011.1.315/WebBlue";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string editor_png = Url("editor.png");
+                public static readonly string imagebrowser_png = Url("imagebrowser.png");
+                public static readonly string loading_gif = Url("loading.gif");
+                public static readonly string slider_h_both_gif = Url("slider-h-both.gif");
+                public static readonly string slider_h_bottom_gif = Url("slider-h-bottom.gif");
+                public static readonly string slider_h_top_gif = Url("slider-h-top.gif");
+                public static readonly string slider_hs_both_gif = Url("slider-hs-both.gif");
+                public static readonly string slider_hs_bottom_gif = Url("slider-hs-bottom.gif");
+                public static readonly string slider_hs_top_gif = Url("slider-hs-top.gif");
+                public static readonly string slider_v_both_gif = Url("slider-v-both.gif");
+                public static readonly string slider_v_left_gif = Url("slider-v-left.gif");
+                public static readonly string slider_v_right_gif = Url("slider-v-right.gif");
+                public static readonly string slider_vs_both_gif = Url("slider-vs-both.gif");
+                public static readonly string slider_vs_left_gif = Url("slider-vs-left.gif");
+                public static readonly string slider_vs_right_gif = Url("slider-vs-right.gif");
+                public static readonly string sprite_vertical_png = Url("sprite-vertical.png");
+                public static readonly string sprite_png = Url("sprite.png");
+                public static readonly string treeview_line_png = Url("treeview-line.png");
+                public static readonly string treeview_nodes_rtl_png = Url("treeview-nodes-rtl.png");
+                public static readonly string treeview_nodes_png = Url("treeview-nodes.png");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Windows7 {
+                private const string URLPATH = "~/Content/2011.1.315/Windows7";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string editor_png = Url("editor.png");
+                public static readonly string imagebrowser_png = Url("imagebrowser.png");
+                public static readonly string loading_gif = Url("loading.gif");
+                public static readonly string slider_h_both_gif = Url("slider-h-both.gif");
+                public static readonly string slider_h_bottom_gif = Url("slider-h-bottom.gif");
+                public static readonly string slider_h_top_gif = Url("slider-h-top.gif");
+                public static readonly string slider_hs_both_gif = Url("slider-hs-both.gif");
+                public static readonly string slider_hs_bottom_gif = Url("slider-hs-bottom.gif");
+                public static readonly string slider_hs_top_gif = Url("slider-hs-top.gif");
+                public static readonly string slider_v_both_gif = Url("slider-v-both.gif");
+                public static readonly string slider_v_left_gif = Url("slider-v-left.gif");
+                public static readonly string slider_v_right_gif = Url("slider-v-right.gif");
+                public static readonly string slider_vs_both_gif = Url("slider-vs-both.gif");
+                public static readonly string slider_vs_left_gif = Url("slider-vs-left.gif");
+                public static readonly string slider_vs_right_gif = Url("slider-vs-right.gif");
+                public static readonly string sprite_vertical_png = Url("sprite-vertical.png");
+                public static readonly string sprite_png = Url("sprite.png");
+            }
+        
+        }
+    
         public static readonly string Site_css = Url("Site.css");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class themes {

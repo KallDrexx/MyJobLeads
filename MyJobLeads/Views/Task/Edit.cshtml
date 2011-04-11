@@ -23,7 +23,9 @@
 
         <tr>
             <td align="right">Task Due Date:</td>
-            <td>@Html.EditorFor(x => x.TaskDate)</td>
+            <td>
+                @Html.Telerik().DateTimePickerFor(x => x.TaskDate)
+            </td>
         </tr>
 
         @* Only show the completed checkbox if we are editing an existing task *@
