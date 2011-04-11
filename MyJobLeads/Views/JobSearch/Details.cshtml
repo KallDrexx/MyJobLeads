@@ -28,7 +28,7 @@
             @Html.ActionLink("Add Company", MVC.Company.Add(@Model.Id))
                 
             <ul>
-                @foreach (Company company in @Model.Companies)
+                @foreach (Company company in @Model.Companies.OrderBy(x => x.Name).ToList())
                 {
                     <li>@Html.ActionLink(company.Name, MVC.Company.Details(company.Id))</li>
                 }

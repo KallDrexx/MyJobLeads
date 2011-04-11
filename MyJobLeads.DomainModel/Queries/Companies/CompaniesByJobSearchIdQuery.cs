@@ -14,6 +14,7 @@ namespace MyJobLeads.DomainModel.Queries.Companies
     {
         protected IUnitOfWork _unitOfWork;
         protected int _searchId;
+        protected bool _sortByName;
 
         public CompaniesByJobSearchIdQuery(IUnitOfWork unitOfWork)
         {
@@ -32,12 +33,27 @@ namespace MyJobLeads.DomainModel.Queries.Companies
         }
 
         /// <summary>
+        /// Specifies to sort results by company name
+        /// </summary>
+        /// <returns></returns>
+        public CompaniesByJobSearchIdQuery SortByName()
+        {
+            _sortByName = true;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the query
         /// </summary>
         /// <returns></returns>
         public virtual IList<Company> Execute()
         {
-            return _unitOfWork.Companies.Fetch().Where(x => x.JobSearch.Id == _searchId).ToList();
+            var query = _unitOfWork.Companies.Fetch().Where(x => x.JobSearchID == _searchId);
+
+            if (_sortByName)
+                query = query.OrderBy(x => x.Name);
+
+            return query.ToList();
         }
     }
 }
