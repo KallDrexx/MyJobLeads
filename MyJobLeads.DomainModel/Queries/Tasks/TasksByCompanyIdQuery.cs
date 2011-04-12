@@ -37,7 +37,9 @@ namespace MyJobLeads.DomainModel.Queries.Tasks
         /// <returns></returns>
         public virtual IList<Task> Execute()
         {
-            return _unitOfWork.Tasks.Fetch().Where(x => x.Company.Id == _companyId).ToList();
+            return _unitOfWork.Tasks.Fetch()
+                                    .Where(x => x.CompanyId == _companyId || x.Contact.CompanyId == _companyId )
+                                    .ToList();
         }
     }
 }
