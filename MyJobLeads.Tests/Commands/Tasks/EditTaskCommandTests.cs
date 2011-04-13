@@ -17,12 +17,14 @@ namespace MyJobLeads.Tests.Commands.Tasks
         private Task _task;
         private DateTime? _startDate, _changedDate;
         private User _user;
+        private Contact _contact;
 
         private void InitializeTestEntities()
         {
             _changedDate = new DateTime(2011, 1, 2, 3, 4, 5);
             _startDate = new DateTime(2011, 2, 3, 4, 5, 6);
             _user = new User();
+            _contact = new Contact();
 
             _task = new Task
             {
@@ -34,6 +36,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
 
             _unitOfWork.Users.Add(_user);
             _unitOfWork.Tasks.Add(_task);
+            _unitOfWork.Contacts.Add(_contact);
             _unitOfWork.Commit();
         }
 
@@ -209,6 +212,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
                                             .SetName("Name")
                                             .SetTaskDate(_changedDate)
                                             .SetCompleted(true)
+                                            .SetContactId(_contact.Id)
                                             .RequestedByUserId(_user.Id)
                                             .Execute();
             DateTime end = DateTime.Now;
@@ -221,8 +225,88 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.AreEqual(_changedDate, history.TaskDate, "The history record's date value was incorrect");
             Assert.IsTrue(history.Completed, "The history record's completed status value is incorrect");
             Assert.AreEqual(_user, history.AuthoringUser, "The history record's author was incorrect");
+            Assert.AreEqual(_contact, history.Contact, "The history record had an incorrect contact");
             Assert.AreEqual(MJLConstants.HistoryUpdate, history.HistoryAction, "The history record's action value was incorrect");
             Assert.IsTrue(history.DateModified >= start && history.DateModified <= end, "The history record's modification date was incorrect");
+        }
+
+        [TestMethod]
+        public void Execute_Throws_MJLEntityNotFoundException_When_Contact_Specified_But_Not_Found()
+        {
+            // Setup
+            InitializeTestEntities();
+            int id = _contact.Id + 1;
+
+            // Act
+            try
+            {
+                new EditTaskCommand(_unitOfWork).WithTaskId(_task.Id)
+                                                .RequestedByUserId(_user.Id)
+                                                .SetContactId(id)
+                                                .Execute();
+                Assert.Fail("Command did not throw an exception");
+            }
+
+            // Verify
+            catch (MJLEntityNotFoundException ex)
+            {
+                Assert.AreEqual(typeof(Contact), ex.EntityType, "MJLEntityNotFoundException's entity type was incorrect");
+                Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
+            }
+        }
+
+        [TestMethod]
+        public void Task_Contact_Is_Changed_When_Contact_Specified()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new EditTaskCommand(_unitOfWork).WithTaskId(_task.Id)
+                                            .RequestedByUserId(_user.Id)
+                                            .SetContactId(_contact.Id)
+                                            .Execute();
+
+            // Verify
+            Task task = _unitOfWork.Tasks.Fetch().Single();
+            Assert.AreEqual(_contact, task.Contact, "Task had an incorrect contact");
+        }
+
+        [TestMethod]
+        public void Not_Specifying_Contact_Doesnt_Change_Task_Contact()
+        {
+            // Setup
+            InitializeTestEntities();
+            _task.Contact = _contact;
+            _unitOfWork.Commit();
+
+            // Act
+            new EditTaskCommand(_unitOfWork).WithTaskId(_task.Id)
+                                            .RequestedByUserId(_user.Id)
+                                            .Execute();
+
+            // Verify
+            Task task = _unitOfWork.Tasks.Fetch().Single();
+            Assert.AreEqual(_contact, task.Contact, "Task had an incorrect contact");
+        }
+
+        [TestMethod]
+        public void Specifying_Contact_Id_Of_Zero_Sets_Task_Contact_To_Null()
+        {
+            // Setup
+            InitializeTestEntities();
+            _task.Contact = _contact;
+            _unitOfWork.Commit();
+
+            // Act
+            new EditTaskCommand(_unitOfWork).WithTaskId(_task.Id)
+                                            .SetContactId(0)
+                                            .RequestedByUserId(_user.Id)
+                                            .Execute();
+
+            // Verify
+            Task task = _unitOfWork.Tasks.Fetch().Single();
+            Assert.IsNull(task.Contact, "Task's contact was not null");
         }
     }
 }

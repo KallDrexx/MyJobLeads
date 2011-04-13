@@ -8,6 +8,7 @@ using MyJobLeads.DomainModel.Queries.Tasks;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Entities.History;
+using MyJobLeads.DomainModel.Queries.Contacts;
 
 namespace MyJobLeads.DomainModel.Commands.Tasks
 {
@@ -17,10 +18,10 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
     public class EditTaskCommand
     {
         protected IUnitOfWork _unitOfWork;
-        protected int _taskId, _userId;
+        protected int _taskId, _userId, _contactId;
         protected DateTime? _newTaskDate;
         protected string _name;
-        protected bool _completed, _completedChanged, _dateChanged;
+        protected bool _completed, _completedChanged, _dateChanged, _contactChanged;
 
         public EditTaskCommand(IUnitOfWork unitOfWork)
         {
@@ -85,10 +86,22 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         }
 
         /// <summary>
+        /// Specifies the id value of the contact to associate with the task
+        /// </summary>
+        /// <param name="contactId"></param>
+        /// <returns></returns>
+        public EditTaskCommand SetContactId(int contactId)
+        {
+            _contactId = contactId;
+            _contactChanged = true;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="MJLEntityNotFoundException">Thrown when the specified task or calling user isn't found</exception>
+        /// <exception cref="MJLEntityNotFoundException">Thrown when the specified task, calling user, or contact isn't found</exception>
         public virtual Task Execute()
         {
             // Retrieve the user editing the task
@@ -101,10 +114,23 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
             if (task == null)
                 throw new MJLEntityNotFoundException(typeof(Task), _taskId);
 
+            // If specified, retrieve the specified contact
+            Contact contact = null;
+            if (_contactChanged)
+            {
+                if (_contactId != 0)
+                {
+                    contact = new ContactByIdQuery(_unitOfWork).WithContactId(_contactId).Execute();
+                    if (contact == null)
+                        throw new MJLEntityNotFoundException(typeof(Contact), _contactId);
+                }
+            }
+
             // Only change the properties that were specified
             if (_name != null) { task.Name = _name; }
             if (_dateChanged) { task.TaskDate = _newTaskDate; }
             if (_completedChanged) { task.Completed = _completed; }
+            if (_contactChanged) { task.Contact = contact; }
 
             // Create the history record
             task.History.Add(new TaskHistory
@@ -112,6 +138,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 Name = task.Name,
                 TaskDate = task.TaskDate,
                 Completed = task.Completed,
+                Contact = task.Contact,
                 AuthoringUser = user,
                 DateModified = DateTime.Now,
                 HistoryAction = MJLConstants.HistoryUpdate
