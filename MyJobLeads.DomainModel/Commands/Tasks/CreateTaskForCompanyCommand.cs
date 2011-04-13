@@ -8,6 +8,7 @@ using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Entities.History;
+using MyJobLeads.DomainModel.Queries.Contacts;
 
 namespace MyJobLeads.DomainModel.Commands.Tasks
 {
@@ -19,7 +20,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         protected IUnitOfWork _unitOfWork;
         protected string _name;
         protected DateTime? _taskDate;
-        protected int _companyId, _userId;
+        protected int _companyId, _userId, _contactId;
 
         public CreateTaskForCompanyCommand(IUnitOfWork unitOfWork)
         {
@@ -71,10 +72,21 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         }
 
         /// <summary>
+        /// Specifies the id value of the contact to associate the task with
+        /// </summary>
+        /// <param name="contactId"></param>
+        /// <returns></returns>
+        public CreateTaskForCompanyCommand WithContactId(int contactId)
+        {
+            _contactId = contactId;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="MJLEntityNotFoundException">Thrown when the specified company or calling user is not found</exception>
+        /// <exception cref="MJLEntityNotFoundException">Thrown when the specified company, calling user, or contact is not found</exception>
         public virtual Task Execute()
         {
             // Retrieve the user creating the task
@@ -87,12 +99,22 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
             if (company == null)
                 throw new MJLEntityNotFoundException(typeof(Company), _companyId);
 
+            // Retrieve the contact if one is specified
+            Contact contact = null;
+            if (_contactId != 0)
+            {
+                contact = new ContactByIdQuery(_unitOfWork).WithContactId(_contactId).Execute();
+                if (contact == null)
+                    throw new MJLEntityNotFoundException(typeof(Contact), _contactId);
+            }
+
             // Create the Task
             var task = new Task
             {
                 Company = company,
                 Name = _name,
                 TaskDate = _taskDate,
+                Contact = contact,
 
                 History = new List<TaskHistory>()
             };
