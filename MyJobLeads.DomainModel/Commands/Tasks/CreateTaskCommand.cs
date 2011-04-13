@@ -15,14 +15,14 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
     /// <summary>
     /// Command class to create a new task for a company
     /// </summary>
-    public class CreateTaskForCompanyCommand
+    public class CreateTaskCommand
     {
         protected IUnitOfWork _unitOfWork;
         protected string _name;
         protected DateTime? _taskDate;
         protected int _companyId, _userId, _contactId;
 
-        public CreateTaskForCompanyCommand(IUnitOfWork unitOfWork)
+        public CreateTaskCommand(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -32,7 +32,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         /// </summary>
         /// <param name="companyId"></param>
         /// <returns></returns>
-        public CreateTaskForCompanyCommand WithCompanyId(int companyId)
+        public CreateTaskCommand WithCompanyId(int companyId)
         {
             _companyId = companyId;
             return this;
@@ -43,7 +43,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public CreateTaskForCompanyCommand SetName(string name)
+        public CreateTaskCommand SetName(string name)
         {
             _name = name;
             return this;
@@ -54,7 +54,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         /// </summary>
         /// <param name="taskDate"></param>
         /// <returns></returns>
-        public CreateTaskForCompanyCommand SetTaskDate(DateTime? taskDate)
+        public CreateTaskCommand SetTaskDate(DateTime? taskDate)
         {
             _taskDate = taskDate;
             return this;
@@ -65,7 +65,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public CreateTaskForCompanyCommand RequestedByUserId(int userId)
+        public CreateTaskCommand RequestedByUserId(int userId)
         {
             _userId = userId;
             return this;
@@ -76,7 +76,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         /// </summary>
         /// <param name="contactId"></param>
         /// <returns></returns>
-        public CreateTaskForCompanyCommand WithContactId(int contactId)
+        public CreateTaskCommand WithContactId(int contactId)
         {
             _contactId = contactId;
             return this;

@@ -119,7 +119,7 @@
     <Compile Include="Commands\Users\CreateUserCommandTests.cs" />
     <Compile Include="Commands\JobSearches\CreateJobSearchForUserCommandTests.cs" />
     <Compile Include="Commands\JobSearches\EditJobSearchCommandTests.cs" />
-    <Compile Include="Commands\Tasks\CreateTaskForCompanyCommandTests.cs" />
+    <Compile Include="Commands\Tasks\CreateTaskCommandTests.cs" />
     <Compile Include="Commands\Tasks\CreateTaskForContactCommandTests.cs" />
     <Compile Include="Commands\Tasks\EditTaskCommandTests.cs" />
     <Compile Include="Commands\Users\EditUserCommandTests.cs" />

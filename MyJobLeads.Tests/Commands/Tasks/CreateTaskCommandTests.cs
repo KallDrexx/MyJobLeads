@@ -12,7 +12,7 @@ using MyJobLeads.DomainModel;
 namespace MyJobLeads.Tests.Commands.Tasks
 {
     [TestClass]
-    public class CreateTaskForCompanyCommandTests : EFTestBase
+    public class CreateTaskCommandTests : EFTestBase
     {
         private Company _company;
         private Contact _contact;
@@ -40,7 +40,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            new CreateTaskForCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            new CreateTaskCommand(_unitOfWork).WithCompanyId(_company.Id)
                                                         .SetName("Name")
                                                         .SetTaskDate(_testDate)
                                                         .RequestedByUserId(_user.Id)
@@ -64,7 +64,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            Task result = new CreateTaskForCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            Task result = new CreateTaskCommand(_unitOfWork).WithCompanyId(_company.Id)
                                                                         .SetName("Name")
                                                                         .SetTaskDate(_testDate)
                                                                         .RequestedByUserId(_user.Id)
@@ -88,7 +88,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             // Act
             try
             {
-                new CreateTaskForCompanyCommand(_unitOfWork).WithCompanyId(id)
+                new CreateTaskCommand(_unitOfWork).WithCompanyId(id)
                                                             .SetName("Name")
                                                             .SetTaskDate(_testDate)
                                                             .RequestedByUserId(_user.Id)
@@ -114,7 +114,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             // Act
             try
             {
-                new CreateTaskForCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+                new CreateTaskCommand(_unitOfWork).WithCompanyId(_company.Id)
                                                             .SetName("Name")
                                                             .SetTaskDate(_testDate)
                                                             .RequestedByUserId(id)
@@ -138,7 +138,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
 
             // Act
             DateTime start = DateTime.Now;
-            new CreateTaskForCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            new CreateTaskCommand(_unitOfWork).WithCompanyId(_company.Id)
                                                         .SetName("Name")
                                                         .SetTaskDate(_testDate)
                                                         .RequestedByUserId(_user.Id)
@@ -164,7 +164,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            new CreateTaskForCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            new CreateTaskCommand(_unitOfWork).WithCompanyId(_company.Id)
                                                         .WithContactId(_contact.Id)
                                                         .RequestedByUserId(_user.Id)
                                                         .Execute();
@@ -184,7 +184,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             // Act
             try
             {
-                new CreateTaskForCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+                new CreateTaskCommand(_unitOfWork).WithCompanyId(_company.Id)
                                                             .SetName("Name")
                                                             .SetTaskDate(_testDate)
                                                             .WithContactId(id)
@@ -208,7 +208,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            new CreateTaskForCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            new CreateTaskCommand(_unitOfWork).WithCompanyId(_company.Id)
                                                         .RequestedByUserId(_user.Id)
                                                         .Execute();
 

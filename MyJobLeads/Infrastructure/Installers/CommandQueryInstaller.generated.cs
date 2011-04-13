@@ -26,7 +26,7 @@ namespace MyJobLeads.Infrastructure.Installers
         {
 			// Command registration
 			container.Register(Component.For<CreateUserCommand>().ImplementedBy<CreateUserCommand>());			
-			container.Register(Component.For<CreateTaskForCompanyCommand>().ImplementedBy<CreateTaskForCompanyCommand>());			
+			container.Register(Component.For<CreateTaskCommand>().ImplementedBy<CreateTaskCommand>());			
 			container.Register(Component.For<EditContactCommand>().ImplementedBy<EditContactCommand>());			
 			container.Register(Component.For<CreateTaskForContactCommand>().ImplementedBy<CreateTaskForContactCommand>());			
 			container.Register(Component.For<CreateCompanyCommand>().ImplementedBy<CreateCompanyCommand>());			

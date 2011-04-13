@@ -44,7 +44,7 @@ namespace MyJobLeads.Controllers
                 // Determine if this task is for a company or contact
                 if (companyId != 0)
                 {
-                    task = new CreateTaskForCompanyCommand(_unitOfWork).WithCompanyId(companyId)
+                    task = new CreateTaskCommand(_unitOfWork).WithCompanyId(companyId)
                                                                        .SetName(task.Name)
                                                                        .SetTaskDate(task.TaskDate)
                                                                        .RequestedByUserId(CurrentUserId)
