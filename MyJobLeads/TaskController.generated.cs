@@ -33,13 +33,8 @@ namespace MyJobLeads.Controllers {
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult AddCompanyTask() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.AddCompanyTask);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult AddContactTask() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.AddContactTask);
+        public System.Web.Mvc.ActionResult Add() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Add);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -64,8 +59,7 @@ namespace MyJobLeads.Controllers {
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string AddCompanyTask = "AddCompanyTask";
-            public readonly string AddContactTask = "AddContactTask";
+            public readonly string Add = "Add";
             public readonly string Edit = "Edit";
             public readonly string Details = "Details";
         }
@@ -85,14 +79,9 @@ namespace MyJobLeads.Controllers {
     public class T4MVC_TaskController: MyJobLeads.Controllers.TaskController {
         public T4MVC_TaskController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult AddCompanyTask(int companyId) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddCompanyTask);
+        public override System.Web.Mvc.ActionResult Add(int companyId, int contactId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Add);
             callInfo.RouteValueDictionary.Add("companyId", companyId);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult AddContactTask(int contactId) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddContactTask);
             callInfo.RouteValueDictionary.Add("contactId", contactId);
             return callInfo;
         }
@@ -103,11 +92,9 @@ namespace MyJobLeads.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(MyJobLeads.DomainModel.Entities.Task task, int companyId, int contactId) {
+        public override System.Web.Mvc.ActionResult Edit(MyJobLeads.Models.Tasks.EditTaskViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
-            callInfo.RouteValueDictionary.Add("task", task);
-            callInfo.RouteValueDictionary.Add("companyId", companyId);
-            callInfo.RouteValueDictionary.Add("contactId", contactId);
+            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 

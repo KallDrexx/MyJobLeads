@@ -30,7 +30,7 @@ Notes: @Model.Notes <br />
 
 <h2>Tasks</h2>
 @Model.Tasks.Count Task(s) have been created for this company<br />
-@Html.ActionLink("Add Task", MVC.Task.AddCompanyTask(Model.Id))
+@Html.ActionLink("Add Task", MVC.Task.Add(Model.Id))
 
 <ul>
     @foreach (Task task in Model.Tasks)

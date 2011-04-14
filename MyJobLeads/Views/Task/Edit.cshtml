@@ -1,24 +1,30 @@
-﻿@model MyJobLeads.DomainModel.Entities.Task
+﻿@model EditTaskViewModel
+@using MyJobLeads.Models.Tasks;
 
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    int companyId = ViewBag.CompanyId ?? 0;
-    int contactId = ViewBag.ContactId ?? 0;
 }
 
-<h2>Edit Task</h2>
+@if (Model.Id == 0) { <h2>Create New Task</h2> }
+else { <h2>Editing Task: @Model.Name</h2> }
 
 @using (Html.BeginForm(MVC.Task.Edit()))
 {
     @Html.HiddenFor(x => x.Id)
-    @Html.Hidden("companyId", companyId) 
-    @Html.Hidden("contactId", contactId)
+    @Html.HiddenFor(x => x.AssociatedCompanyId)
 
     <table>
         <tr>
             <td align="right">Name:</td>
             <td>@Html.EditorFor(x => x.Name)</td>
+        </tr>
+
+        <tr>
+            <td align="right">Contact:</td>
+            <td>
+                @Html.DropDownListFor(x => x.AssociatedContactId, Model.CompanyContactList)
+            </td>
         </tr>
 
         <tr>
@@ -43,9 +49,7 @@
                 <input type="submit" value="Save" /> &nbsp; &nbsp; 
 
                 @if (Model.Id != 0) { @Html.ActionLink("Back To Task", MVC.Task.Details(Model.Id)); }
-                else if (companyId != 0) { @Html.ActionLink("Back To Company", MVC.Company.Details(companyId)) }
-                else { @Html.ActionLink("Back To Contact", MVC.Contact.Details(contactId)) }
-                
+                else if (Model.AssociatedCompanyId != 0) { @Html.ActionLink("Back To Company", MVC.Company.Details(Model.AssociatedCompanyId)) }                
             </td>
         </tr>
     </table>

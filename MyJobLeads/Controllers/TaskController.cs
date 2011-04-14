@@ -7,6 +7,10 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Tasks;
 using MyJobLeads.DomainModel.Commands.Tasks;
+using MyJobLeads.Models.Tasks;
+using MyJobLeads.DomainModel.Queries.Companies;
+using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Queries.Contacts;
 
 namespace MyJobLeads.Controllers
 {
@@ -17,55 +21,75 @@ namespace MyJobLeads.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public virtual ActionResult AddCompanyTask(int companyId)
+        public virtual ActionResult Add(int companyId, int contactId = 0)
         {
-            ViewBag.CompanyId = companyId;
-            return View(MVC.Task.Views.Edit, new Task());
-        }
+            // Retrieve the specified company value
+            var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(companyId).Execute();
+            if (company == null)
+                throw new MJLEntityNotFoundException(typeof(Company), companyId);
 
-        public virtual ActionResult AddContactTask(int contactId)
-        {
-            ViewBag.ContactId = contactId;
-            return View(MVC.Task.Views.Edit, new Task());
+            // Form the view model
+            var model = new EditTaskViewModel(company);
+
+            // Create contact list
+            model.CompanyContactList = new ContactsByCompanyIdQuery(_unitOfWork).WithCompanyId(companyId)
+                                                                                .Execute()
+                                                                                .Select(x => new SelectListItem
+                                                                                {
+                                                                                    Text = x.Name,
+                                                                                    Value = x.Id.ToString(),
+                                                                                    Selected = x.Id == contactId
+                                                                                })
+                                                                                .ToList();
+            model.CompanyContactList.Insert(0, new SelectListItem { Text = "<None>", Value = "0", Selected = contactId == 0 });
+            return View(MVC.Task.Views.Edit, model);
         }
 
         public virtual ActionResult Edit(int id)
         {
             var task = new TaskByIdQuery(_unitOfWork).WithTaskId(id).Execute();
-            return View(task);
-        }
+            if (task == null)
+                throw new MJLEntityNotFoundException(typeof(Task), id);
 
+            // Form the view model
+            var model = new EditTaskViewModel(task);
+
+            // Create contact list
+            model.CompanyContactList = new ContactsByCompanyIdQuery(_unitOfWork).WithCompanyId(Convert.ToInt32(task.CompanyId))
+                                                                                .Execute()
+                                                                                .Select(x => new SelectListItem
+                                                                                {
+                                                                                    Text = x.Name,
+                                                                                    Value = x.Id.ToString(),
+                                                                                    Selected = x.Id == Convert.ToInt32(task.ContactId)
+                                                                                })
+                                                                                .ToList();
+            model.CompanyContactList.Insert(0, new SelectListItem { Text = "<None>", Value = "0", Selected = Convert.ToInt32(task.ContactId) == 0 });
+            return View(MVC.Task.Views.Edit, model);
+        }
+        
         [HttpPost]
-        public virtual ActionResult Edit(Task task, int companyId, int contactId)
+        public virtual ActionResult Edit(EditTaskViewModel model)
         {
+            Task task;
+
             // Determine if this is a new task or not
-            if (task.Id == 0)
+            if (model.Id == 0)
             {
-                // Determine if this task is for a company or contact
-                if (companyId != 0)
-                {
-                    task = new CreateTaskCommand(_unitOfWork).WithCompanyId(companyId)
-                                                                       .SetName(task.Name)
-                                                                       .SetTaskDate(task.TaskDate)
-                                                                       .RequestedByUserId(CurrentUserId)
-                                                                       .Execute();
-                }
-                else
-                {
-                    task = new CreateTaskForContactCommand(_unitOfWork).WithContactId(contactId)
-                                                                       .SetName(task.Name)
-                                                                       .SetTaskDate(task.TaskDate)
-                                                                       .RequestedByUserId(CurrentUserId)
-                                                                       .Execute();
-                }
+                task = new CreateTaskCommand(_unitOfWork).WithCompanyId(model.AssociatedCompanyId)
+                                                         .SetName(model.Name)
+                                                         .SetTaskDate(model.TaskDate)
+                                                         .WithContactId(model.AssociatedContactId)
+                                                         .RequestedByUserId(CurrentUserId)
+                                                         .Execute();
             }
             else
             {
                 // Existing task
-                task = new EditTaskCommand(_unitOfWork).WithTaskId(task.Id)
-                                                       .SetName(task.Name)
-                                                       .SetTaskDate(task.TaskDate)
-                                                       .SetCompleted(task.Completed)
+                task = new EditTaskCommand(_unitOfWork).WithTaskId(model.Id)
+                                                       .SetName(model.Name)
+                                                       .SetTaskDate(model.TaskDate)
+                                                       .SetContactId(model.AssociatedContactId)
                                                        .RequestedByUserId(CurrentUserId)
                                                        .Execute();
             }

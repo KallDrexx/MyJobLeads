@@ -18,7 +18,7 @@
 
 <h2>Tasks</h2>
 @Model.Tasks.Count Tasks exist for this contact<br />
-@Html.ActionLink("Add Task", MVC.Task.AddContactTask(Model.Id))
+@Html.ActionLink("Add Task", MVC.Task.Add((int)Model.CompanyId, Model.Id))
 
 <ul>
     @foreach (Task task in Model.Tasks)

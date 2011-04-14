@@ -254,6 +254,7 @@
     <Compile Include="Models\Accounts\AccountModels.cs" />
     <Compile Include="Models\Accounts\AccountMembershipService.cs" />
     <Compile Include="Models\Accounts\IMembershipService.cs" />
+    <Compile Include="Models\Tasks\EditTaskViewModel.cs" />
     <Compile Include="MyJobLeadsBaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedController.generated.cs">
@@ -699,12 +700,12 @@
     <Content Include="Views\Company\Details.cshtml" />
     <Content Include="Views\Contact\Edit.cshtml" />
     <Content Include="Views\Contact\Details.cshtml" />
-    <Content Include="Views\Task\Edit.cshtml" />
     <Content Include="Views\Task\Details.cshtml" />
     <Content Include="Views\Shared\_CompanyDisplay.cshtml" />
     <Content Include="Views\Shared\_ContactDisplay.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordResult.cshtml" />
+    <Content Include="Views\Task\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\EditorLocalization.bg-BG.resx">
