@@ -76,7 +76,6 @@
     <Compile Include="Commands\Tasks\CreateTaskCommand.cs" />
     <Compile Include="Commands\JobSearches\CreateJobSearchForUserCommand.cs" />
     <Compile Include="Commands\JobSearches\EditJobSearchCommand.cs" />
-    <Compile Include="Commands\Tasks\CreateTaskForContactCommand.cs" />
     <Compile Include="Commands\Tasks\EditTaskCommand.cs" />
     <Compile Include="Commands\Users\CreateUserCommand.cs" />
     <Compile Include="Commands\Users\EditUserCommand.cs" />

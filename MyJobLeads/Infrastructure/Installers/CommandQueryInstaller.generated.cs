@@ -11,9 +11,9 @@ using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Queries.JobSearches;
 using MyJobLeads.DomainModel.Queries.Contacts;
 using MyJobLeads.DomainModel.Commands.Users;
-using MyJobLeads.DomainModel.Commands.Tasks;
 using MyJobLeads.DomainModel.Queries.Tasks;
 using MyJobLeads.DomainModel.Queries.Companies;
+using MyJobLeads.DomainModel.Commands.Tasks;
 using MyJobLeads.DomainModel.Commands.Contacts;
 using MyJobLeads.DomainModel.Commands.Companies;
 using MyJobLeads.DomainModel.Commands.JobSearches;
@@ -28,7 +28,6 @@ namespace MyJobLeads.Infrastructure.Installers
 			container.Register(Component.For<CreateUserCommand>().ImplementedBy<CreateUserCommand>());			
 			container.Register(Component.For<CreateTaskCommand>().ImplementedBy<CreateTaskCommand>());			
 			container.Register(Component.For<EditContactCommand>().ImplementedBy<EditContactCommand>());			
-			container.Register(Component.For<CreateTaskForContactCommand>().ImplementedBy<CreateTaskForContactCommand>());			
 			container.Register(Component.For<CreateCompanyCommand>().ImplementedBy<CreateCompanyCommand>());			
 			container.Register(Component.For<EditJobSearchCommand>().ImplementedBy<EditJobSearchCommand>());			
 			container.Register(Component.For<CreateJobSearchForUserCommand>().ImplementedBy<CreateJobSearchForUserCommand>());			
