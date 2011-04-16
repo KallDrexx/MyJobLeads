@@ -13,7 +13,9 @@ namespace MyJobLeads.Infrastructure.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IUnitOfWork>().ImplementedBy<EFUnitOfWork>());
+            container.Register(Component.For<IUnitOfWork>()
+                                        .ImplementedBy<EFUnitOfWork>()
+                                        .LifeStyle.PerWebRequest);
         }
     }
 }

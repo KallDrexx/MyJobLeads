@@ -25,32 +25,32 @@ namespace MyJobLeads.Infrastructure.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
 			// Command registration
-			container.Register(Component.For<CreateUserCommand>().ImplementedBy<CreateUserCommand>());			
-			container.Register(Component.For<CreateTaskCommand>().ImplementedBy<CreateTaskCommand>());			
-			container.Register(Component.For<EditContactCommand>().ImplementedBy<EditContactCommand>());			
-			container.Register(Component.For<CreateCompanyCommand>().ImplementedBy<CreateCompanyCommand>());			
-			container.Register(Component.For<EditJobSearchCommand>().ImplementedBy<EditJobSearchCommand>());			
-			container.Register(Component.For<CreateJobSearchForUserCommand>().ImplementedBy<CreateJobSearchForUserCommand>());			
-			container.Register(Component.For<EditUserCommand>().ImplementedBy<EditUserCommand>());			
-			container.Register(Component.For<EditTaskCommand>().ImplementedBy<EditTaskCommand>());			
-			container.Register(Component.For<EditCompanyCommand>().ImplementedBy<EditCompanyCommand>());			
-			container.Register(Component.For<ResetUserPasswordCommand>().ImplementedBy<ResetUserPasswordCommand>());			
-			container.Register(Component.For<CreateContactCommand>().ImplementedBy<CreateContactCommand>());			
+			container.Register(Component.For<CreateUserCommand>().ImplementedBy<CreateUserCommand>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<CreateTaskCommand>().ImplementedBy<CreateTaskCommand>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<EditContactCommand>().ImplementedBy<EditContactCommand>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<CreateCompanyCommand>().ImplementedBy<CreateCompanyCommand>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<EditJobSearchCommand>().ImplementedBy<EditJobSearchCommand>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<CreateJobSearchForUserCommand>().ImplementedBy<CreateJobSearchForUserCommand>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<EditUserCommand>().ImplementedBy<EditUserCommand>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<EditTaskCommand>().ImplementedBy<EditTaskCommand>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<EditCompanyCommand>().ImplementedBy<EditCompanyCommand>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<ResetUserPasswordCommand>().ImplementedBy<ResetUserPasswordCommand>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<CreateContactCommand>().ImplementedBy<CreateContactCommand>().LifeStyle.PerWebRequest);			
 
 			// Query registration
-			container.Register(Component.For<UserByEmailQuery>().ImplementedBy<UserByEmailQuery>());			
-			container.Register(Component.For<JobSearchesByUserIdQuery>().ImplementedBy<JobSearchesByUserIdQuery>());			
-			container.Register(Component.For<ContactsByCompanyIdQuery>().ImplementedBy<ContactsByCompanyIdQuery>());			
-			container.Register(Component.For<TaskByIdQuery>().ImplementedBy<TaskByIdQuery>());			
-			container.Register(Component.For<CompanyByIdQuery>().ImplementedBy<CompanyByIdQuery>());			
-			container.Register(Component.For<UserByCredentialsQuery>().ImplementedBy<UserByCredentialsQuery>());			
-			container.Register(Component.For<JobSearchByIdQuery>().ImplementedBy<JobSearchByIdQuery>());			
-			container.Register(Component.For<ContactByIdQuery>().ImplementedBy<ContactByIdQuery>());			
-			container.Register(Component.For<UserByIdQuery>().ImplementedBy<UserByIdQuery>());			
-			container.Register(Component.For<TasksByCompanyIdQuery>().ImplementedBy<TasksByCompanyIdQuery>());			
-			container.Register(Component.For<CompaniesByJobSearchIdQuery>().ImplementedBy<CompaniesByJobSearchIdQuery>());			
-			container.Register(Component.For<TasksByContactIdQuery>().ImplementedBy<TasksByContactIdQuery>());			
-			container.Register(Component.For<OpenTasksByJobSearchQuery>().ImplementedBy<OpenTasksByJobSearchQuery>());			
+			container.Register(Component.For<UserByEmailQuery>().ImplementedBy<UserByEmailQuery>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<JobSearchesByUserIdQuery>().ImplementedBy<JobSearchesByUserIdQuery>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<ContactsByCompanyIdQuery>().ImplementedBy<ContactsByCompanyIdQuery>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<TaskByIdQuery>().ImplementedBy<TaskByIdQuery>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<CompanyByIdQuery>().ImplementedBy<CompanyByIdQuery>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<UserByCredentialsQuery>().ImplementedBy<UserByCredentialsQuery>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<JobSearchByIdQuery>().ImplementedBy<JobSearchByIdQuery>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<ContactByIdQuery>().ImplementedBy<ContactByIdQuery>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<UserByIdQuery>().ImplementedBy<UserByIdQuery>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<TasksByCompanyIdQuery>().ImplementedBy<TasksByCompanyIdQuery>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<CompaniesByJobSearchIdQuery>().ImplementedBy<CompaniesByJobSearchIdQuery>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<TasksByContactIdQuery>().ImplementedBy<TasksByContactIdQuery>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<OpenTasksByJobSearchQuery>().ImplementedBy<OpenTasksByJobSearchQuery>().LifeStyle.PerWebRequest);			
 		}
 	}
 }

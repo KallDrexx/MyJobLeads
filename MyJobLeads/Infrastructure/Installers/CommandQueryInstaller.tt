@@ -34,14 +34,14 @@ namespace MyJobLeads.Infrastructure.Installers
 			// Command registration
 <#			foreach (var type in a.GetTypes()) { #>
 <#				if (type.Namespace.Contains("MyJobLeads.DomainModel.Commands")) { #>
-			container.Register(Component.For<<#= type.Name #>>().ImplementedBy<<#= type.Name #>>());			
+			container.Register(Component.For<<#= type.Name #>>().ImplementedBy<<#= type.Name #>>().LifeStyle.PerWebRequest);			
 <#				} #>
 <#			} #>
 
 			// Query registration
 <#			foreach (var type in a.GetTypes()) { #>
 <#				if (type.Namespace.Contains("MyJobLeads.DomainModel.Queries")) { #>
-			container.Register(Component.For<<#= type.Name #>>().ImplementedBy<<#= type.Name #>>());			
+			container.Register(Component.For<<#= type.Name #>>().ImplementedBy<<#= type.Name #>>().LifeStyle.PerWebRequest);			
 <#				} #>
 <#			} #>
 		}
