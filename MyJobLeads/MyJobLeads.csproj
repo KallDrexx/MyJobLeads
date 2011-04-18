@@ -709,6 +709,7 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordResult.cshtml" />
     <Content Include="Views\Task\Edit.cshtml" />
+    <Content Include="Views\JobSearch\_JobSearchOpenTaskDisplayControl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\EditorLocalization.bg-BG.resx">

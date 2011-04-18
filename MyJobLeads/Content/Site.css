@@ -52,6 +52,7 @@ h1
     padding-bottom: 0;
     margin-bottom: 0;
 }
+
 h2
 {
     padding: 0 0 10px 0;
@@ -342,4 +343,12 @@ div#title
 .tri-state
 {
     width: 6em;
+}
+
+/* Custom Classes 
+---------------------------------------------- */
+.SiteTitle a
+{
+    color: #FFF;
+    text-decoration: none;
 }

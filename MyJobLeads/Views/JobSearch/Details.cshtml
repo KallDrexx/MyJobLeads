@@ -2,30 +2,32 @@
 @using MyJobLeads.DomainModel.Entities;
 
 @{
-    ViewBag.Title = "Job Search: " + Model.Name;
+    ViewBag.Title = Model.Name + " - Job Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
     IList<Task> openTasks = ViewBag.OpenTasks ?? new List<Task>();
 }
 
-<h2>Job Search: @Model.Name</h2>
-@Html.ActionLink("Edit This Job Search", MVC.JobSearch.Edit(Model.Id)) &nbsp; 
-@Html.ActionLink("View All Job Searches", MVC.JobSearch.Index())
-
+<h1>@Model.Name</h1>
 <p>
-    Description: @Model.Description
+    This screen displays all companies in your database, and all pending tasks for your '@Model.Name' job search. <br />
+    @Html.ActionLink("Edit This Job Search", MVC.JobSearch.Edit(Model.Id)) &nbsp; 
+    @Html.ActionLink("View All Job Searches", MVC.JobSearch.Index())
 </p>
 
-@using (Html.BeginForm(MVC.JobSearch.Search()))
+<p>
+    @if (!string.IsNullOrWhiteSpace(Model.Description)) { <text><b>Description:</b> @Model.Description</text> }
+</p>
+
+@*@using (Html.BeginForm(MVC.JobSearch.Search()))
 {
     <input type="text" id="searchBox" /> <input type="submit" value="Search" /> <text>Not Implemented Yet!</text>
-}
+}*@
 
 <table width="100%">
     <tr>
         <td valign="top" width="50%">
             <h2>Companies</h2>
-            @Model.Companies.Count Companies Exist <br />
-            @Html.ActionLink("Add Company", MVC.Company.Add(@Model.Id))
+            @Html.ActionLink("Add A New Company", MVC.Company.Add(@Model.Id))
                 
             <ul>
                 @foreach (Company company in @Model.Companies.OrderBy(x => x.Name).ToList())
@@ -35,19 +37,57 @@
             </ul>
         </td>
 
-        <td align="right" valign="top" width="50%">
-            <h2>Open Tasks</h2>
-            @openTasks.Count Open Tasks
+        <td align="left" valign="top" width="50%">
+            @{
+                var undatedTasks = openTasks.Where(x => x.TaskDate == null || !x.TaskDate.HasValue).ToArray();
+                var overDueTasks = openTasks.Where(x => x.TaskDate != null && x.TaskDate.Value.Date < DateTime.Today).ToArray();
+                var todaysTasks = openTasks.Where(x => x.TaskDate != null && x.TaskDate.Value.Date == DateTime.Today).ToArray();
+                var futureTasks = openTasks.Where(x => x.TaskDate != null && x.TaskDate.Value.Date > DateTime.Today).ToArray();
+            }
 
-            <ul dir="rtl">
-                @foreach (Task task in openTasks)
-                {
-                    <li>
-                        @( task.TaskDate.HasValue ? "Due " + task.TaskDate.ToString() : string.Empty )
-                        @Html.ActionLink(task.Name, MVC.Task.Details(task.Id))
-                    </li>
-                }
-            </ul>
+            @if (undatedTasks.Length > 0)
+            {
+                <h2>Undated Tasks</h2>
+                <ul>
+                    @foreach (Task task in undatedTasks)
+                    {
+                        <li>@{ Html.RenderPartial(MVC.JobSearch.Views._JobSearchOpenTaskDisplayControl, task); }</li>
+                    }
+                </ul>
+            }
+            
+            @if (overDueTasks.Length > 0)
+            {
+                <h2>Overdue Tasks</h2>
+                <ul>
+                    @foreach (Task task in overDueTasks)
+                    {
+                        <li>@{ Html.RenderPartial(MVC.JobSearch.Views._JobSearchOpenTaskDisplayControl, task); }</li>
+                    }
+                </ul>
+            }
+            
+            @if (todaysTasks.Length > 0)
+            {
+                <h2>Today's Tasks</h2>
+                <ul>
+                    @foreach (Task task in todaysTasks)
+                    {
+                        <li>@{ Html.RenderPartial(MVC.JobSearch.Views._JobSearchOpenTaskDisplayControl, task); }</li>
+                    }
+                </ul>
+            }
+            
+            @if (futureTasks.Length > 0)
+            {
+                <h2>Future Tasks</h2>
+                <ul>
+                    @foreach (Task task in futureTasks)
+                    {
+                        <li>@{ Html.RenderPartial(MVC.JobSearch.Views._JobSearchOpenTaskDisplayControl, task); }</li>
+                    }
+                </ul>
+            }
         </td>
     </tr>
 </table>

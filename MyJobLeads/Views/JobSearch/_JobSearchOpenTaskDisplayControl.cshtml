@@ -1,0 +1,7 @@
+﻿@model MyJobLeads.DomainModel.Entities.Task
+
+@Html.ActionLink(Model.Name, MVC.Task.Details(Model.Id))
+
+for @Html.ActionLink(Model.Company.Name, MVC.Company.Details(Model.Company.Id))
+
+@( Model.TaskDate.HasValue ? "Due " + Model.TaskDate.ToString() : string.Empty)
