@@ -1,25 +1,26 @@
 ﻿@model Company
 @using MyJobLeads.DomainModel.Entities; 
 
-<h2>Company: @Model.Name</h2>
-@Html.ActionLink("Edit", MVC.Company.Edit(Model.Id)) &nbsp; &nbsp; @Html.ActionLink("Back To Job Search", MVC.JobSearch.Details(Model.JobSearch.Id))
+@{
+    string contactString = Model.Contacts.Count == 1 ? "contact" : "contacts";
+    string taskString = Model.Tasks.Count == 1 ? "task" : "tasks";
+}
 
+<h2>@Model.Name</h2>
+@Html.ActionLink("Edit", MVC.Company.Edit(Model.Id)) &nbsp; &nbsp; 
+@Html.ActionLink("Back To Job Search", MVC.JobSearch.Details(Model.JobSearch.Id))
 <br /><br />
 
-Name: @Model.Name <br />
 Phone: @Model.Phone <br />
 City: @Model.City <br />
 State: @Model.State <br />
 Zip: @Model.Zip <br />
-Metro Area: @Model.MetroArea <br />
-Industry: @Model.Industry <br />
 Notes: @Model.Notes <br />
 
 <br />
 
 <h2>Contacts</h2>
-@Model.Contacts.Count Contact(s) have been entered for this company<br />
-@Html.ActionLink("Add Contact", MVC.Contact.Add(Model.Id))
+This company has @Model.Contacts.Count @contactString entered (@Html.ActionLink("Add Contact", MVC.Contact.Add(Model.Id)))
 
 <ul>
     @foreach (Contact contact in Model.Contacts.OrderBy(x => x.Name).ToArray())
@@ -29,8 +30,7 @@ Notes: @Model.Notes <br />
 </ul>
 
 <h2>Tasks</h2>
-@Model.Tasks.Count Task(s) have been created for this company<br />
-@Html.ActionLink("Add Task", MVC.Task.Add(Model.Id))
+This company has @Model.Tasks.Count @taskString entered (@Html.ActionLink("Add Task", MVC.Task.Add(Model.Id)))
 
 <ul>
     @foreach (Task task in Model.Tasks)
