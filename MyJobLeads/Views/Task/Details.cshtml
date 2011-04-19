@@ -13,9 +13,12 @@
         </td>
 
         <td valign="top">
-            <h2>Task: @Model.Name</h2>
-            @Html.ActionLink("Edit", MVC.Task.Edit(Model.Id)) &nbsp; 
-                                                                                                      
+            <br />
+
+            <h1>@Model.Name</h1>                                                                                          
+
+            <div class="ScreenHint">This screen displays all information entered for this task.</div>
+
             <p>
                 @if (Model.Contact != null) 
                 { 
@@ -24,6 +27,8 @@
                 Task Date: @if (Model.TaskDate.HasValue) { @Model.TaskDate.Value.ToString() } else { <text>&lt;No Date Set&gt;</text> } <br />
                 Task Completed: @Model.Completed 
             </p>
+
+            @Html.ActionLink("Edit Task Details", MVC.Task.Edit(Model.Id)) &nbsp; 
         </td>
     </tr>
 

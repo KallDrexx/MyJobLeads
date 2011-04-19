@@ -1,14 +1,18 @@
 ﻿@model Contact
 @using MyJobLeads.DomainModel.Entities;
 
-<h2>Contact: @Model.Name</h2>
-@Html.ActionLink("Edit Contact", MVC.Contact.Edit(Model.Id)) &nbsp; &nbsp; 
-@Html.ActionLink("Back To Company", MVC.Company.Details(Model.Company.Id))
+@{
+    string taskString = Model.Tasks.Count == 1 ? "task" : "tasks";
+}
+<br />
+
+<h1>@Model.Name</h1>
+
+<div class="ScreenHint">This screen displays all information and tasks for this contact</div>
 
 <p>
-    Name: @Model.Name <br />
-    Direct Phone: @Model.DirectPhone <br />
-    Extension: @Model.Extension <br />
+    Company: @Html.ActionLink(Model.Company.Name, MVC.Company.Details(Model.Company.Id)) <br />
+    Direct Phone: @Model.DirectPhone @if (!string.IsNullOrWhiteSpace(Model.Extension)) { <text>Ext: @Model.Extension</text> } <br />
     Mobile Phone: @Model.MobilePhone <br />
     Email Address: @Model.Email <br />
     Assistant: @Model.Assistant <br />
@@ -16,9 +20,11 @@
     Notes: @Model.Notes
 </p>
 
+@Html.ActionLink("Edit Contact Details", MVC.Contact.Edit(Model.Id))
+
 <h2>Tasks</h2>
-@Model.Tasks.Count Tasks exist for this contact<br />
-@Html.ActionLink("Add Task", MVC.Task.Add((int)Model.CompanyId, Model.Id))
+This contact has @Model.Tasks.Count @taskString entered 
+(@Html.ActionLink("Add", MVC.Task.Add((int)Model.CompanyId, Model.Id)))
 
 <ul>
     @foreach (Task task in Model.Tasks)

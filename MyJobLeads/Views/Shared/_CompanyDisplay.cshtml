@@ -6,21 +6,24 @@
     string taskString = Model.Tasks.Count == 1 ? "task" : "tasks";
 }
 
-<h2>@Model.Name</h2>
-@Html.ActionLink("Edit", MVC.Company.Edit(Model.Id)) &nbsp; &nbsp; 
+ 
 @Html.ActionLink("Back To Job Search", MVC.JobSearch.Details(Model.JobSearch.Id))
-<br /><br />
+
+<h1>@Model.Name</h1>
+<div class="ScreenHint">This screen displays all information, contacts, and tasks for this company</div>
+<br />
 
 Phone: @Model.Phone <br />
 City: @Model.City <br />
 State: @Model.State <br />
 Zip: @Model.Zip <br />
 Notes: @Model.Notes <br />
-
 <br />
 
+@Html.ActionLink("Edit Company Details", MVC.Company.Edit(Model.Id))
+
 <h2>Contacts</h2>
-This company has @Model.Contacts.Count @contactString entered (@Html.ActionLink("Add Contact", MVC.Contact.Add(Model.Id)))
+This company has @Model.Contacts.Count @contactString entered (@Html.ActionLink("Add", MVC.Contact.Add(Model.Id)))
 
 <ul>
     @foreach (Contact contact in Model.Contacts.OrderBy(x => x.Name).ToArray())
@@ -30,7 +33,7 @@ This company has @Model.Contacts.Count @contactString entered (@Html.ActionLink(
 </ul>
 
 <h2>Tasks</h2>
-This company has @Model.Tasks.Count @taskString entered (@Html.ActionLink("Add Task", MVC.Task.Add(Model.Id)))
+This company has @Model.Tasks.Count @taskString entered (@Html.ActionLink("Add", MVC.Task.Add(Model.Id)))
 
 <ul>
     @foreach (Task task in Model.Tasks)

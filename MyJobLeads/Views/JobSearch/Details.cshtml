@@ -8,8 +8,10 @@
 }
 
 <h1>@Model.Name</h1>
+
+<div class="ScreenHint">This screen displays all companies in your database, and all pending tasks for your '@Model.Name' job search.</div>
+
 <p>
-    This screen displays all companies in your database, and all pending tasks for your '@Model.Name' job search. <br />
     @Html.ActionLink("Edit This Job Search", MVC.JobSearch.Edit(Model.Id)) &nbsp; 
     @Html.ActionLink("View All Job Searches", MVC.JobSearch.Index())
 </p>
