@@ -2,12 +2,23 @@
 @using MyJobLeads.Models.Tasks;
 
 @{
-    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (Model.Id == 0) { <h2>Create New Task</h2> }
-else { <h2>Editing Task: @Model.Name</h2> }
+@if (Model.Id == 0)
+{
+    ViewBag.Title = "Add A Task";
+    <h1>Add A New Task</h1>
+    <div class="ScreenHint">This screen allows you to create a new task.</div>
+}
+else
+{
+    ViewBag.Title = "Editing " + @Model.Name;
+    <h1>Editing @Model.Name</h1>
+    <div class="ScreenHint">This screen allows you to edit the @Model.Name task.</div>
+}
+
+<br />
 
 @using (Html.BeginForm(MVC.Task.Edit()))
 {

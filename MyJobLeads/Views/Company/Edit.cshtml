@@ -1,11 +1,22 @@
 ﻿@model MyJobLeads.DomainModel.Entities.Company
 
 @{
-    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit Company</h2>
+@if (Model.Id == 0)
+{
+    ViewBag.Title = "Add A Company";
+    <h1>Add A Company</h1>
+    <div class="ScreenHint">This screen allows you to add a company to your job search.</div>
+}
+else
+{
+    ViewBag.Title = "Editing " + @Model.Name;
+    <h1>Editing @Model.Name</h1>
+    <div class="ScreenHint">This screen allows you to edit the @Model.Name company.</div>
+}
+<br />
 
 @using (Html.BeginForm(MVC.Company.Edit(Model.Id)))
 {

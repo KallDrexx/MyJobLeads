@@ -1,13 +1,14 @@
 ﻿@model MyJobLeads.DomainModel.Entities.JobSearch
 
 @{
-    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
     bool isNewJobSearch = Model.Id == 0;
 }
 
 @if (isNewJobSearch)
 {
+    ViewBag.Title = "Start a New Job Search";
+    
     <h2>Start a New Job Search</h2>
     <p>
         Your first step is to setup a job search. Interview Tools allows you to organize multiple job searches. Some uses of this are:
@@ -19,7 +20,10 @@
 }
 else
 {
-    <h2>Editing the '@Model.Name' job search</h2>
+    ViewBag.Title = "Editing " + @Model.Name;
+    
+    <h1>Editing the '@Model.Name' Job Search</h1>
+    <div class="ScreenHint">This screen allows you to edit the details of the @Model.Name job search.</div><br />
 }
 
 @using (Html.BeginForm(MVC.JobSearch.Edit()))

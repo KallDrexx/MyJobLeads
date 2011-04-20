@@ -7,6 +7,9 @@ using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Contacts;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Commands.Contacts;
+using MyJobLeads.Models.Contacts;
+using MyJobLeads.DomainModel.Queries.Companies;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.Controllers
 {
@@ -19,20 +22,26 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Add(int companyId)
         {
-            ViewBag.CompanyId = companyId;
-            return View(MVC.Contact.Views.Edit, new Contact());
+            var model = new EditContactViewModel { Contact = new Contact() };
+            model.Company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(companyId).Execute();
+            if (model.Company == null)
+                throw new MJLEntityNotFoundException(typeof(Company), companyId);
+
+            return View(MVC.Contact.Views.Edit, model);
         }
 
         public virtual ActionResult Edit(int id)
         {
             var contact = new ContactByIdQuery(_unitOfWork).WithContactId(id).Execute();
             ViewBag.CompanyId = contact.Company.Id;
-            return View(contact);
+            return View(new EditContactViewModel { Contact = contact, Company = contact.Company });
         }
 
         [HttpPost]
-        public virtual ActionResult Edit(Contact contact, int companyId)
+        public virtual ActionResult Edit(EditContactViewModel contactModel, int companyId)
         {
+            var contact = contactModel.Contact;
+
             // Determine if this is a new contact or not
             if (contact.Id == 0)
             {

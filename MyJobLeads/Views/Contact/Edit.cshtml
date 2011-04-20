@@ -1,64 +1,77 @@
-﻿@model MyJobLeads.DomainModel.Entities.Contact
+﻿@model MyJobLeads.Models.Contacts.EditContactViewModel
 
 @{
-    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit Contact</h2>
-@{ int companyId = (int)ViewBag.CompanyId; }
-@using (Html.BeginForm(MVC.Contact.Edit(Model.Id)))
+@if (Model.Contact.Id == 0)
+{
+    ViewBag.Title = "Add A Contact";
+    <h1>Add A Contact</h1>
+    <div class="ScreenHint">This screen allows you to add a contact for @Model.Company.Name.</div>
+}
+else
+{
+    ViewBag.Title = "Editing " + @Model.Contact.Name;
+    <h1>Editing @Model.Contact.Name</h1>
+    <div class="ScreenHint">This screen allows you to edit the details for @Model.Contact.Name</div>
+}
+
+<br />
+
+@{ int companyId = Model.Company.Id; }
+@using (Html.BeginForm(MVC.Contact.Edit(Model.Contact.Id)))
 {
     @Html.Hidden("companyId", companyId)
-    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.Contact.Id)
 
     <table>
         <tr>
             <td align="right">Name:</td>
-            <td>@Html.EditorFor(x => x.Name)</td>
+            <td>@Html.EditorFor(x => x.Contact.Name)</td>
         </tr>
 
         <tr>
             <td align="right">Direct Phone:</td>
-            <td>@Html.EditorFor(x => x.DirectPhone)</td>
+            <td>@Html.EditorFor(x => x.Contact.DirectPhone)</td>
         </tr>
 
         <tr>
             <td align="right">Extension:</td>
-            <td>@Html.EditorFor(x => x.Extension)</td>
+            <td>@Html.EditorFor(x => x.Contact.Extension)</td>
         </tr>
 
         <tr>
             <td align="right">Mobile Phone:</td>
-            <td>@Html.EditorFor(x => x.MobilePhone)</td>
+            <td>@Html.EditorFor(x => x.Contact.MobilePhone)</td>
         </tr>
 
         <tr>
             <td align="right">Email:</td>
-            <td>@Html.EditorFor(x => x.Email)</td>
+            <td>@Html.EditorFor(x => x.Contact.Email)</td>
         </tr>
 
         <tr>
             <td align="right">Assistant:</td>
-            <td>@Html.EditorFor(x => x.Assistant)</td>
+            <td>@Html.EditorFor(x => x.Contact.Assistant)</td>
         </tr>
 
         <tr>
             <td align="right">Referred By:</td>
-            <td>@Html.EditorFor(x => x.ReferredBy)</td>
+            <td>@Html.EditorFor(x => x.Contact.ReferredBy)</td>
         </tr>
 
         <tr>
             <td align="right">Notes:</td>
-            <td>@Html.TextAreaFor(x => x.Notes, new { rows = 3, cols = 50 })</td>
+            <td>@Html.TextAreaFor(x => x.Contact.Notes, new { rows = 3, cols = 50 })</td>
         </tr>
 
         <tr>
             <td></td>
             <td>
-                <input type="submit" value="save" /> &nbsp; &nbsp;
-                @if (Model.Id == 0) { Html.ActionLink("Back", MVC.Company.Details(companyId)); }
-                else { Html.ActionLink("Back", MVC.Contact.Details(Model.Id)); }
+                <input type="submit" value="Save" /> &nbsp; &nbsp;
+                @if (Model.Contact.Id == 0) { Html.ActionLink("Back", MVC.Company.Details(companyId)); }
+                else { Html.ActionLink("Back", MVC.Contact.Details(Model.Contact.Id)); }
             </td>
         </tr>
     </table>

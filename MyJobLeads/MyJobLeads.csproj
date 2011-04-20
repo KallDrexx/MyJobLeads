@@ -256,6 +256,7 @@
     <Compile Include="Models\Accounts\AccountModels.cs" />
     <Compile Include="Models\Accounts\AccountMembershipService.cs" />
     <Compile Include="Models\Accounts\IMembershipService.cs" />
+    <Compile Include="Models\Contacts\EditContactViewModel.cs" />
     <Compile Include="Models\Tasks\EditTaskViewModel.cs" />
     <Compile Include="MyJobLeadsBaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
