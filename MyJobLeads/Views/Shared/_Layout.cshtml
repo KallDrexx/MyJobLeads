@@ -39,7 +39,59 @@
             @RenderBody()
 
             <div id="footer">
-                @Html.Telerik().ScriptRegistrar();
+                <center><a href="javascript:void()" id="feedback-link">Tell us what you think!</a></center>
+
+                @{ Html.Telerik().Window()
+                                 .Name("FeedbackWindow")
+                                 .Title("Submit Feedback")
+                                 .Draggable(true)
+                                 .Modal(true)
+                                 .Buttons(b => b.Close())
+                                 .Content(@<text>
+                                    @using (Html.BeginForm(MVC.Home.SubmitFeedback(), FormMethod.Post, new { id = "feedback-form" }))
+                                    {
+                                        <p>We appreciate your feedback on the InterviewTools system.</p>
+                                        
+                                        @Html.Hidden("fromUrl", @HttpContext.Current.Request.Url.AbsoluteUri)
+
+                                        <label for="name">Name:</label> <br />
+                                        @Html.TextBox("name") <br />
+                                        
+                                        <label for="email">Email:</label> <br />
+                                        @Html.TextBox("email") <br /><br />
+
+                                        <label for="feedback">Comments:</label>
+                                        @(Html.Telerik().Editor()
+                                                        .Name("feedback")
+                                                        .Tools(tools => tools
+                                                                .Clear()
+                                                                .Bold().Italic().Separator()
+                                                                .InsertOrderedList().InsertUnorderedList().Separator()
+                                                                .Indent().Outdent()
+                                        ))
+                                        <br />
+                                        
+                                        <div class="form-actions">
+                                            <button type="submit" class="t-button t-state-default">Submit feedback!</button>
+                                        </div>
+                                    }
+                                    </text>)
+                                .Width(400)
+                                .Draggable(true)
+                                .Modal(true)
+                                .Visible(false)
+                                .Render();
+                    }
+
+                @(Html.Telerik().ScriptRegistrar()
+                                .OnDocumentReady(@<text>
+                                    // Open the hidden window when the feedback-link is clicked
+                                    $('#feedback-link').click(function(e) {
+                                        e.preventDefault();
+                                        $('#FeedbackWindow').data('tWindow').center().open();
+                                    });
+                                </text>)
+                )
 
             </div>
         </div>

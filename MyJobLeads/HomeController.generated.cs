@@ -31,6 +31,11 @@ namespace MyJobLeads.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult SubmitFeedback() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.SubmitFeedback);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public HomeController Actions { get { return MVC.Home; } }
@@ -46,6 +51,7 @@ namespace MyJobLeads.Controllers {
         public class ActionNamesClass {
             public readonly string Index = "Index";
             public readonly string About = "About";
+            public readonly string SubmitFeedback = "SubmitFeedback";
         }
 
 
@@ -56,6 +62,7 @@ namespace MyJobLeads.Controllers {
         public class ViewNames {
             public readonly string About = "~/Views/Home/About.cshtml";
             public readonly string Index = "~/Views/Home/Index.cshtml";
+            public readonly string SubmitFeedback = "~/Views/Home/SubmitFeedback.cshtml";
         }
     }
 
@@ -70,6 +77,15 @@ namespace MyJobLeads.Controllers {
 
         public override System.Web.Mvc.ActionResult About() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.About);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SubmitFeedback(string name, string email, string feedback, string fromUrl) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SubmitFeedback);
+            callInfo.RouteValueDictionary.Add("name", name);
+            callInfo.RouteValueDictionary.Add("email", email);
+            callInfo.RouteValueDictionary.Add("feedback", feedback);
+            callInfo.RouteValueDictionary.Add("fromUrl", fromUrl);
             return callInfo;
         }
 

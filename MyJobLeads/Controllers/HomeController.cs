@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Data;
+using MyJobLeads.DomainModel.Utilities;
 
 namespace MyJobLeads.Controllers
 {
@@ -40,6 +41,33 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult About()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public virtual ActionResult SubmitFeedback(string name, string email, string feedback, string fromUrl)
+        {
+            feedback = HttpUtility.HtmlDecode(feedback);
+
+            string emailBody = string.Format(
+@"The following feedback was submitted:
+
+Name: {0}
+Email: {1}
+URL: {2}
+Date: {3}
+
+Feedback: 
+{4}",
+                name,
+                email,
+                fromUrl,
+                DateTime.Now.ToString(),
+                feedback);
+
+            EmailUtils emailUtil = new EmailUtils();
+            emailUtil.Send("feedback@interviewtools.net", "Feedback Submitted", emailBody);
+
             return View();
         }
     }
