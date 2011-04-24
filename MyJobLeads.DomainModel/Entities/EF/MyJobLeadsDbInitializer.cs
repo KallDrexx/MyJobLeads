@@ -18,14 +18,18 @@ namespace MyJobLeads.DomainModel.Entities.EF
         /// <param name="context"></param>
         protected override void Seed(MyJobLeadsDbContext context)
         {
-            context.Users.Add(new User 
-            { 
-                Email = "test@test.com", 
-                Password = PasswordUtils.CreatePasswordHash("test@test.com", "test")
+            // Additional schema generation
+            GenerateElmahSchema(context);
+
+            // Seed data
+            context.Users.Add(new User
+            {
+                Email = "test@test.com",
+                Password = PasswordUtils.CreatePasswordHash("test@test.com", "test"),
+                LastVisitedJobSearchId = null
             });
 
             context.SaveChanges();
-            GenerateElmahSchema(context);
         }
 
         #region Elmah Generation
