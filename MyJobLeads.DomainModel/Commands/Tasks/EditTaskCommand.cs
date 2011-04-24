@@ -92,7 +92,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         /// <returns></returns>
         public EditTaskCommand SetContactId(int contactId)
         {
-            _contactId = contactId;
+            _contactId = contactId < 1? 0 : contactId;
             _contactChanged = true;
             return this;
         }

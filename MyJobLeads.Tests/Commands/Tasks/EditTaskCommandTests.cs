@@ -291,7 +291,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
         }
 
         [TestMethod]
-        public void Specifying_Contact_Id_Of_Zero_Sets_Task_Contact_To_Null()
+        public void Specifying_Contact_Id_Of_Less_Than_One_Sets_Task_Contact_To_Null()
         {
             // Setup
             InitializeTestEntities();
