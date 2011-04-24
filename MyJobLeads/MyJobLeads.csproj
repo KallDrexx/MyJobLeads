@@ -245,6 +245,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CommandQueryInstaller.tt</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\ModelBinders\EmptyStringModelBaseBinder.cs" />
     <Compile Include="Infrastructure\MyJobLeadsMembershipProvider.cs" />
     <Compile Include="Infrastructure\MyJobLeadsMembershipUser.cs" />
     <Compile Include="Infrastructure\Installers\ControllerInstaller.cs" />

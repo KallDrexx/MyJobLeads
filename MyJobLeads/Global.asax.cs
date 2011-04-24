@@ -7,6 +7,7 @@ using System.Web.Routing;
 using MyJobLeads.DomainModel.Entities.EF;
 using System.Data.Entity;
 using System.Configuration;
+using MyJobLeads.Infrastructure.ModelBinders;
 
 namespace MyJobLeads
 {
@@ -35,6 +36,8 @@ namespace MyJobLeads
         protected void Application_Start()
         {
             const string UpdateDbAppSettingName = "UpdateDatabaseOnModelChange";
+
+            ModelBinders.Binders.DefaultBinder = new EmptyStringModelBaseBinder();
 
             AreaRegistration.RegisterAllAreas();
 
