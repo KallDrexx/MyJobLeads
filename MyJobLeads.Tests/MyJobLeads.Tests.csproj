@@ -126,9 +126,7 @@
     <Compile Include="Controllers\AccountControllerTests.cs" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
     <Compile Include="Data\EFUnitOfWorkTests.cs" />
-    <Compile Include="Data\InMemoryUnitOfWorkTests.cs" />
     <Compile Include="EFTestBase.cs" />
-    <Compile Include="InMemoryTestBase.cs" />
     <Compile Include="Controllers\JobSearchControllerTest.cs" />
     <Compile Include="Mocks\MockHttpContext.cs" />
     <Compile Include="Mocks\MockHttpRequest.cs" />

@@ -82,8 +82,6 @@
     <Compile Include="Commands\Users\ResetUserPasswordCommand.cs" />
     <Compile Include="Data\EFRepository.cs" />
     <Compile Include="Data\EFUnitOfWork.cs" />
-    <Compile Include="Data\InMemoryRepository.cs" />
-    <Compile Include="Data\InMemoryUnitOfWork.cs" />
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Entities\Company.cs" />
