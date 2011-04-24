@@ -130,7 +130,11 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
             if (_name != null) { task.Name = _name; }
             if (_dateChanged) { task.TaskDate = _newTaskDate; }
             if (_completedChanged) { task.Completed = _completed; }
-            if (_contactChanged) { task.Contact = contact; }
+            if (_contactChanged) 
+            {
+                // ContactId must be set instead of Contact due to the contact not being eager loaded.
+                task.ContactId = contact == null ? (int?)null : contact.Id;
+            }
 
             // Create the history record
             task.History.Add(new TaskHistory
@@ -138,7 +142,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 Name = task.Name,
                 TaskDate = task.TaskDate,
                 Completed = task.Completed,
-                Contact = task.Contact,
+                ContactId = task.ContactId,
                 AuthoringUser = user,
                 DateModified = DateTime.Now,
                 HistoryAction = MJLConstants.HistoryUpdate
