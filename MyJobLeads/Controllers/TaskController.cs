@@ -21,6 +21,8 @@ namespace MyJobLeads.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        #region Actions 
+
         public virtual ActionResult Add(int companyId, int contactId = 0)
         {
             // Retrieve the specified company value
@@ -32,16 +34,8 @@ namespace MyJobLeads.Controllers
             var model = new EditTaskViewModel(company);
 
             // Create contact list
-            model.CompanyContactList = new ContactsByCompanyIdQuery(_unitOfWork).WithCompanyId(companyId)
-                                                                                .Execute()
-                                                                                .Select(x => new SelectListItem
-                                                                                {
-                                                                                    Text = x.Name,
-                                                                                    Value = x.Id.ToString(),
-                                                                                    Selected = x.Id == contactId
-                                                                                })
-                                                                                .ToList();
-            model.CompanyContactList.Insert(0, new SelectListItem { Text = "<None>", Value = "0", Selected = contactId == 0 });
+            CreateCompanyContactList(contactId, company, model);
+
             return View(MVC.Task.Views.Edit, model);
         }
 
@@ -55,16 +49,8 @@ namespace MyJobLeads.Controllers
             var model = new EditTaskViewModel(task);
 
             // Create contact list
-            model.CompanyContactList = new ContactsByCompanyIdQuery(_unitOfWork).WithCompanyId(Convert.ToInt32(task.CompanyId))
-                                                                                .Execute()
-                                                                                .Select(x => new SelectListItem
-                                                                                {
-                                                                                    Text = x.Name,
-                                                                                    Value = x.Id.ToString(),
-                                                                                    Selected = x.Id == Convert.ToInt32(task.ContactId)
-                                                                                })
-                                                                                .ToList();
-            model.CompanyContactList.Insert(0, new SelectListItem { Text = "<None>", Value = "0", Selected = Convert.ToInt32(task.ContactId) == 0 });
+            CreateCompanyContactList(Convert.ToInt32(task.ContactId), task.Company, model);
+
             return View(MVC.Task.Views.Edit, model);
         }
         
@@ -72,6 +58,7 @@ namespace MyJobLeads.Controllers
         public virtual ActionResult Edit(EditTaskViewModel model)
         {
             Task task;
+            int selectedContactId = model.AssociatedContactId == -1 ? 0 : model.AssociatedContactId;
 
             // Determine if this is a new task or not
             if (model.Id == 0)
@@ -79,7 +66,7 @@ namespace MyJobLeads.Controllers
                 task = new CreateTaskCommand(_unitOfWork).WithCompanyId(model.AssociatedCompanyId)
                                                          .SetName(model.Name)
                                                          .SetTaskDate(model.TaskDate)
-                                                         .WithContactId(model.AssociatedContactId)
+                                                         .WithContactId(selectedContactId)
                                                          .RequestedByUserId(CurrentUserId)
                                                          .Execute();
             }
@@ -89,7 +76,7 @@ namespace MyJobLeads.Controllers
                 task = new EditTaskCommand(_unitOfWork).WithTaskId(model.Id)
                                                        .SetName(model.Name)
                                                        .SetTaskDate(model.TaskDate)
-                                                       .SetContactId(model.AssociatedContactId)
+                                                       .SetContactId(selectedContactId)
                                                        .RequestedByUserId(CurrentUserId)
                                                        .Execute();
             }
@@ -102,5 +89,26 @@ namespace MyJobLeads.Controllers
             var task = new TaskByIdQuery(_unitOfWork).WithTaskId(id).Execute();
             return View(task);
         }
+
+        #endregion
+
+        #region Utility Methods
+
+        protected void CreateCompanyContactList(int selectedContactId, Company company, EditTaskViewModel model)
+        {
+            model.CompanyContactList = new ContactsByCompanyIdQuery(_unitOfWork).WithCompanyId(company.Id)
+                                                                                .Execute()
+                                                                                .Select(x => new SelectListItem
+                                                                                {
+                                                                                    Text = x.Name,
+                                                                                    Value = x.Id.ToString(),
+                                                                                    Selected = x.Id == selectedContactId
+                                                                                })
+                                                                                .ToList();
+            model.CompanyContactList.Insert(0, new SelectListItem { Text = "---------------------------", Value = "-1", Selected = false });
+            model.CompanyContactList.Insert(0, new SelectListItem { Text = "Company: " + company.Name, Value = "0", Selected = selectedContactId == 0 });
+        }
+
+        #endregion
     }
 }
