@@ -7,6 +7,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data;
 using System.Transactions;
 using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.Entities.History;
 
 namespace MyJobLeads.DomainModel.Data
 {
@@ -61,6 +62,17 @@ namespace MyJobLeads.DomainModel.Data
             }
         }
 
+        private IRepository<CompanyHistory> _companyHistory;
+        public IRepository<CompanyHistory> CompanyHistory
+        {
+            get
+            {
+                if (_companyHistory == null)
+                    _companyHistory = new EFRepository<CompanyHistory>(_context);
+                return _companyHistory;
+            }
+        }
+
         private IRepository<Contact> _contacts;
         public IRepository<Contact> Contacts
         {
@@ -69,6 +81,17 @@ namespace MyJobLeads.DomainModel.Data
                 if (_contacts == null)
                     _contacts = new EFRepository<Contact>(_context);
                 return _contacts;
+            }
+        }
+
+        private IRepository<ContactHistory> _contactHistory;
+        public IRepository<ContactHistory> ContactHistory
+        {
+            get
+            {
+                if (_contactHistory == null)
+                    _contactHistory = new EFRepository<ContactHistory>(_context);
+                return _contactHistory;
             }
         }
 
@@ -83,6 +106,17 @@ namespace MyJobLeads.DomainModel.Data
             }
         }
 
+        private IRepository<JobSearchHistory> _jobsearchHistory;
+        public IRepository<JobSearchHistory> JobSearchHistory
+        {
+            get
+            {
+                if (_jobsearchHistory == null)
+                    _jobsearchHistory = new EFRepository<JobSearchHistory>(_context);
+                return _jobsearchHistory;
+            }
+        }
+
         private IRepository<Task> _tasks;
         public IRepository<Task> Tasks
         {
@@ -91,6 +125,17 @@ namespace MyJobLeads.DomainModel.Data
                 if (_tasks == null)
                     _tasks = new EFRepository<Task>(_context);
                 return _tasks;
+            }
+        }
+
+        private IRepository<TaskHistory> _taskHistory;
+        public IRepository<TaskHistory> TaskHistory
+        {
+            get
+            {
+                if (_taskHistory == null)
+                    _taskHistory = new EFRepository<TaskHistory>(_context);
+                return _taskHistory;
             }
         }
 

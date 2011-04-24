@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.Entities.History;
 
 namespace MyJobLeads.DomainModel.Data
 {
@@ -10,9 +11,13 @@ namespace MyJobLeads.DomainModel.Data
     {
         // Repositories
         IRepository<Company> Companies { get; }
+        IRepository<CompanyHistory> CompanyHistory { get; }
         IRepository<Contact> Contacts { get; }
+        IRepository<ContactHistory> ContactHistory { get; }
         IRepository<JobSearch> JobSearches { get; }
+        IRepository<JobSearchHistory> JobSearchHistory { get; }
         IRepository<Task> Tasks { get; }
+        IRepository<TaskHistory> TaskHistory { get; }
         IRepository<UnitTestEntity> UnitTestEntities { get; }
         IRepository<User> Users { get; }
 
