@@ -27,6 +27,7 @@ namespace MyJobLeads.Tests.Controllers
         {
             // Setup
             WindsorContainer container = new WindsorContainer();
+            container.Kernel.ComponentModelBuilder.AddContributor(new SingletonLifestyleEqualizer());
             container.Install(FromAssembly.Containing<HomeController>());
 
             // Act
