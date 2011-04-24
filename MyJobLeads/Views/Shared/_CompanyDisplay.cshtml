@@ -4,6 +4,18 @@
 @{
     string contactString = Model.Contacts.Count == 1 ? "contact" : "contacts";
     string taskString = Model.Tasks.Count == 1 ? "task" : "tasks";
+    
+    // Form company location string
+    bool citySpecified = !string.IsNullOrWhiteSpace(Model.City);
+    bool stateSpecified = !string.IsNullOrWhiteSpace(Model.State);
+    bool zipSpecified = !string.IsNullOrWhiteSpace(Model.Zip);
+    
+    string location = string.Empty;
+    if (citySpecified && stateSpecified) { location = string.Concat(Model.City, ", ", Model.State, " "); }
+    else if (citySpecified) { location  = Model.City + " "; }
+    else if (stateSpecified) { location = Model.State + " "; }
+    
+    if (zipSpecified) { location += Model.Zip; }
 }
 
  
@@ -14,9 +26,7 @@
 <br />
 
 Phone: @Model.Phone <br />
-City: @Model.City <br />
-State: @Model.State <br />
-Zip: @Model.Zip <br />
+Location: @location <br />
 Notes: @Model.Notes <br />
 <br />
 
