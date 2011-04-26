@@ -1,5 +1,6 @@
 ﻿@if(Request.IsAuthenticated) {
     <text>Welcome <b>@Context.User.Identity.Name</b>!
+    [ @Html.ActionLink("Change Password", MVC.Account.ChangePassword()) ]
     [ @Html.ActionLink("Log Off", "LogOff", "Account") ]</text>
 }
 else {

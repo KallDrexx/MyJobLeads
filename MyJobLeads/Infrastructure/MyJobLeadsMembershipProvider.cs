@@ -31,6 +31,26 @@ namespace MyJobLeads.Infrastructure
 
         #region Implemented MembershipProvider Methods
 
+        public override bool ChangePassword(string email, string oldPassword, string newPassword)
+        {
+            // Retrieve the user with the specified email
+            var user = new UserByEmailQuery(_unitOfWork).WithEmail(email).Execute();
+            if (user == null)
+                return false;
+
+            // Update the password
+            try
+            {
+                new EditUserCommand(_unitOfWork).WithUserId(user.Id)
+                                                .WithExistingPassword(oldPassword)
+                                                .SetPassword(newPassword)
+                                                .Execute();
+            }
+            catch (MJLIncorrectPasswordException) { return false; }
+
+            return true;
+        }
+
         public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer,
                                                     bool isApproved, object providerUserKey, out MembershipCreateStatus status)
         {
@@ -116,11 +136,6 @@ namespace MyJobLeads.Infrastructure
             {
                 throw new NotImplementedException();
             }
-        }
-
-        public override bool ChangePassword(string username, string oldPassword, string newPassword)
-        {
-            throw new NotImplementedException();
         }
 
         public override bool ChangePasswordQuestionAndAnswer(string username, string password, string newPasswordQuestion, string newPasswordAnswer)
