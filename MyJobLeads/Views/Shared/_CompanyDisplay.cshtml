@@ -25,9 +25,9 @@
 <div class="ScreenHint">This screen displays all information, contacts, and tasks for this company</div>
 <br />
 
-Phone: @Model.Phone <br />
-Location: @location <br />
-Notes: @Model.Notes <br />
+@if (!string.IsNullOrWhiteSpace(Model.Phone)) { <text>Phone: @Model.Phone <br /></text> }
+@if (!string.IsNullOrWhiteSpace(location)) { <text>Location: @location <br /></text> }
+@if (!string.IsNullOrWhiteSpace(Model.Notes)) { <text>Notes: @Model.Notes <br /></text> }
 <br />
 
 @Html.ActionLink("Edit Company Details", MVC.Company.Edit(Model.Id))

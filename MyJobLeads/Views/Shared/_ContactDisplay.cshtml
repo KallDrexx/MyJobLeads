@@ -12,12 +12,16 @@
 
 <p>
     Company: @Html.ActionLink(Model.Company.Name, MVC.Company.Details(Model.Company.Id)) <br />
-    Direct Phone: @Model.DirectPhone @if (!string.IsNullOrWhiteSpace(Model.Extension)) { <text>Ext: @Model.Extension</text> } <br />
-    Mobile Phone: @Model.MobilePhone <br />
-    Email Address: @Model.Email <br />
-    Assistant: @Model.Assistant <br />
-    Referred By: @Model.ReferredBy <br />
-    Notes: @Model.Notes
+    @if (!string.IsNullOrWhiteSpace(Model.DirectPhone)) 
+    {
+        <text>Direct Phone: @Model.DirectPhone 
+        @if (!string.IsNullOrWhiteSpace(Model.Extension)) { <text>Ext: @Model.Extension</text> } <br /></text>
+    }
+    @if (!string.IsNullOrWhiteSpace(Model.MobilePhone)) { <text>Mobile Phone: @Model.MobilePhone <br /></text> }
+    @if (!string.IsNullOrWhiteSpace(Model.Email)) { <text>Email Address: @Model.Email <br /></text> }
+    @if (!string.IsNullOrWhiteSpace(Model.Assistant)) { <text>Assistant: @Model.Assistant <br /></text> }
+    @if (!string.IsNullOrWhiteSpace(Model.ReferredBy)) { <text>Referred By: @Model.ReferredBy <br /></text> }
+    @if (!string.IsNullOrWhiteSpace(Model.Notes)) { <text>Notes: @Model.Notes</text> }
 </p>
 
 @Html.ActionLink("Edit Contact Details", MVC.Contact.Edit(Model.Id))
