@@ -1,344 +1,85 @@
-﻿/*----------------------------------------------------------
-Base styles for the layout
-----------------------------------------------------------*/
-body
-{
-    background-color: #5c87b2;
-    font-size: 75%;
-    font-family: Verdana, Tahoma, Arial, "Helvetica Neue", Helvetica, Sans-Serif;
-    margin: 0;
-    padding: 0;
-    color: #696969;
-}
+﻿/* Body */
+* {margin:0; padding:0;}
+body {background:#474d59 url(images/bodybg.gif) top left repeat-x; color:#eee; font:76% Verdana,Arial,Tahoma,"Trebuchet MS",sans-serif; line-height:1.4em; text-align:center; padding:0;}
 
-a:link
-{
-    color: #034af3;
-    text-decoration: underline;
-}
-a:visited
-{
-    color: #505abc;
-}
-a:hover
-{
-    color: #1d60ff;
-    text-decoration: none;
-}
-a:active
-{
-    color: #12eb87;
-}
+#wrap {width:960px; background-color:#fff; color:#555; padding:10px; margin:10px auto 0 auto; text-align:left; border:1px solid #555;}
+#top {width:960px; text-align:right; margin:10px auto 5px auto; color:#ddd; font-size:0.9em;}
+#top p {margin:2px; padding:0;}
+#top a {color:#eee; border-bottom: 1px dotted #aaa;}
+#top a:hover {color:#fff; text-decoration:none; border-bottom:1px dotted #fff;}
 
-p, ul
-{
-    margin-bottom: 20px;
-    line-height: 1.6em;
-}
+/* Header and title */
+#header {text-align:left; padding:0; margin:0 0 10px 0;}
+#sitetitle {width:340px; float:left;}
+#sitetitle h1 {font-weight: 700; font-size:2.2em; letter-spacing:-2px; line-height:0.9em; margin:20px 0 10px 10px; padding:0;}
+#sitetitle h1 a {font-weight:700; letter-spacing:-1px;}
+#sitetitle p {margin:5px 0 20px 20px; padding:0; letter-spacing:-1px; font-size:1.4em; color:#777;}
 
-/* HEADINGS   
-----------------------------------------------------------*/
-h1, h2, h3, h4, h5, h6
-{
-    font-size: 1.5em;
-    color: #000;
-}
+/* Main menu */
+#mainmenu {float:right; margin:0;}
+dl.nav {width:140px; float:left; margin: 0 0px 5px 10px;}
+dl.nav dt {border-bottom:1px solid #aaa; padding:0; font-weight:700; margin:0; color:#777;}
+dl.nav dt a {font-weight:700; color:#777;}
+dl.nav dt a:hover {color:#222;}
+dl.nav dd {padding:0; margin:0; border-bottom:1px solid #ccc;}
+dl.nav dd a {font-weight:400; padding:1px 0 1px 5px; color:#4d699d; display:block; width:135px;}
+dl.nav dd a:hover {color:#222; background:#f4f4f4;}
 
-h1
-{
-    font-size: 2em;
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
+/* Headline */
+#headline {width:958px; text-align:center; margin:5px 0 15px 0; border:1px solid #ccc; background-color:#f0f0f0; color:#777; font-size:0.9em;}
+#headline p {margin:2px; padding:0;}
 
-h2
-{
-    padding: 0 0 10px 0;
-}
-h3
-{
-    font-size: 1.2em;
-}
-h4
-{
-    font-size: 1.1em;
-}
-h5, h6
-{
-    font-size: 1em;
-}
+/* Headers */
+h2, h3, h4 {margin:0 0 14px; padding-bottom:5px; color:#666; font-weight:700;}
 
-/* this rule styles <h2> tags that are the 
-first child of the left and right table columns */
-.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
-{
-    margin-top: 0;
-}
+/* Content */
+#content {float:left; text-align:left; width:700px; margin:10px 0 0 0;;}
+#content h2 {font-size:1.7em; letter-spacing:-1px; clear:left; border-bottom:2px solid #ccc;}
+#content h3 {font-size:1.4em; letter-spacing:-1px;}
+#content h2 a, #content h3 a {font-weight:700;}
+#content p {margin:0 0 15px;}
+#content a {border-bottom:1px dotted #888;}
+#content a:hover {color: #222; border-bottom:1px dotted #000;}
+#content ul, #content ol {margin:0 0 15px 10px; padding:0 0 0 10px;}
+#content ul li, #content ol li {margin:0 0 10px 10px;}
+#content ul ul, #content ol ol {margin:5px 0 5px 10px;}
 
-/* PRIMARY LAYOUT ELEMENTS   
-----------------------------------------------------------*/
+/* Sidebar */
+#sidebar {text-align:left; margin:5px 0 0 718px; width:220px; padding:10px; background:#f0f0f0; border:1px solid #ccc;}
+#sidebar h2, #sidebar h3 {font-size:1.4em; padding:0 0 2px 0; margin:0 0 5px 0; border-bottom:2px solid #ccc;}
+#sidebar p, #sidebar ul, #sidebar ol {margin:0 0 15px 0; padding:0;}
+#sidebar a {font-weight:400;}
+#sidebar ul li {list-style:none; margin:0 0 3px 0;}
+#sidebar ul li a {font-size:1.1em;}
+#sidebar ul ul {margin:3px 0 3px 10px; font-size:1em;}
+#sidebar ul ul li {margin:2px 0;}
+#sidebar ul ul li a {font-weight:400;}
 
-/* you can specify a greater or lesser percentage for the 
-page width. Or, you can specify an exact pixel width. */
-.page
-{
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
+#sidebar ul.sidemenu li {list-style: none; width:218px; padding:0; margin:0 0 2px 0;}
+#sidebar ul.sidemenu li a {display: block; overflow: visible; padding:2px 0 2px 5px; background-color:#f4f4f4; font-weight:400; border:1px solid #ddd; font-size:1.1em; }
+#sidebar ul.sidemenu li a:hover, #sidebar ul li.current a {border:1px solid #555; color:#444; background-color:#fff;}
+#sidebar ul.sidemenu li.current li a {background-color:#f8f8f8; color:#467aa7; border:1px solid #ddd; border-bottom:1px solid #ccc;}
+#sidebar ul.sidemenu ul {margin:0; padding:2px 0 0 15px;}
+#sidebar ul.sidemenu ul li {width:203px; letter-spacing:0;}
+#sidebar ul.sidemenu ul li a {font-size:0.9em; padding:1px 0 1px 5px;}
 
-#header
-{
-    position: relative;
-    margin-bottom: 0px;
-    color: #000;
-    padding: 0;
-}
+/* Footer */
+#footer {clear:both; font-size:0.9em; width:960px; line-height:1.5em; color:#ccc;  margin: 5px auto 10px auto; padding:0;}
+#footer p {margin:0; padding:0;}
+#footer a {color:#ddd; border-bottom: 1px dotted #aaa;}
+#footer a:hover {color:#eee; text-decoration:none; border-bottom:1px dotted #fff;}
 
-#header h1
-{
-    font-weight: bold;
-    padding: 5px 0;
-    margin: 0;
-    color: #fff;
-    border: none;
-    line-height: 2em;
-    font-size: 32px !important;
-}
+/* Links */
+a {color:#4d699d; font-weight:400; text-decoration:none;}
+a:hover {color:#444; text-decoration:none;}
+a img {border:0;}
 
-#main
-{
-    padding: 30px 30px 15px 30px;
-    background-color: #fff;
-    margin-bottom: 30px;
-    _height: 1px; /* only IE6 applies CSS properties starting with an underscore */
-}
-
-#footer
-{
-    color: #999;
-    padding: 10px 0;
-    text-align: center;
-    line-height: normal;
-    margin: 0;
-    font-size: .9em;
-}
-
-/* TAB MENU   
-----------------------------------------------------------*/
-ul#menu
-{
-    border-bottom: 1px #5C87B2 solid;
-    padding: 0 0 2px;
-    position: relative;
-    margin: 0;
-    text-align: right;
-}
-
-ul#menu li
-{
-    display: inline;
-    list-style: none;
-}
-
-ul#menu li#greeting
-{
-    padding: 10px 20px;
-    font-weight: bold;
-    text-decoration: none;
-    line-height: 2.8em;
-    color: #fff;
-}
-
-ul#menu li a
-{
-    padding: 10px 20px;
-    font-weight: bold;
-    text-decoration: none;
-    line-height: 2.8em;
-    background-color: #e8eef4;
-    color: #034af3;
-}
-
-ul#menu li a:hover
-{
-    background-color: #fff;
-    text-decoration: none;
-}
-
-ul#menu li a:active
-{
-    background-color: #a6e2a6;
-    text-decoration: none;
-}
-
-ul#menu li.selected a
-{
-    background-color: #fff;
-    color: #000;
-}
-
-/* FORM LAYOUT ELEMENTS   
-----------------------------------------------------------*/
-
-fieldset 
-{
-    border:1px solid #ddd;
-    padding:0 1.4em 1.4em 1.4em;
-    margin:0 0 1.5em 0;
-}
-
-legend 
-{
-    font-size:1.2em;
-    font-weight: bold;
-}
-
-textarea 
-{
-    min-height: 75px;
-}
-
-input[type="text"] 
-{
-    width: 200px;
-    border: 1px solid #CCC;
-}
-
-input[type="password"] 
-{
-    width: 200px;
-    border: 1px solid #CCC;
-}
-
-/* TABLE
-----------------------------------------------------------*/
-
-table 
-{
-  border: solid 1px #e8eef4;
-  border-collapse: collapse;
-}
-
-table td 
-{
-  padding: 5px;   
-  border: solid 1px #e8eef4;
-}
-
-table th
-{
-  padding: 6px 5px;
-  text-align: left;
-  background-color: #e8eef4; 
-  border: solid 1px #e8eef4;   
-}
-
-/* MISC  
-----------------------------------------------------------*/
-.clear
-{
-    clear: both;
-}
-
-.error
-{
-    color:Red;
-}
-
-#menucontainer
-{
-    margin-top:40px;
-}
-
-div#title
-{
-    display:block;
-    float:left;
-    text-align:left;
-}
-
-#logindisplay
-{
-    font-size:1.1em;
-    display:block;
-    text-align:right;
-    margin:10px;
-    color:White;
-}
-
-#logindisplay a:link
-{
-    color: white;
-    text-decoration: underline;
-}
-
-#logindisplay a:visited
-{
-    color: white;
-    text-decoration: underline;
-}
-
-#logindisplay a:hover
-{
-    color: white;
-    text-decoration: none;
-}
-
-/* Styles for validation helpers
------------------------------------------------------------*/
-.field-validation-error
-{
-    color: #ff0000;
-}
-
-.field-validation-valid
-{
-    display: none;
-}
-
-.input-validation-error
-{
-    border: 1px solid #ff0000;
-    background-color: #ffeeee;
-}
-
-.validation-summary-errors
-{
-    font-weight: bold;
-    color: #ff0000;
-}
-
-.validation-summary-valid
-{
-    display: none;
-}
-
-/* Styles for editor and display helpers
-----------------------------------------------------------*/
-.display-label,
-.editor-label
-{
-    margin: 1em 0 0 0;
-}
-
-.display-field,
-.editor-field
-{
-    margin:0.5em 0 0 0;
-}
-
-.text-box
-{
-    width: 30em;
-}
-
-.text-box.multi-line
-{
-    height: 6.5em;
-}
-
-.tri-state
-{
-    width: 6em;
-}
+/* Various classes */
+.left {float:left; width:49%; text-align:left;}
+.right {float:right; width:49%; text-align:right;}
+.textleft {text-align:left;}
+.textright {text-align:right;}
+.textcenter {text-align:center;}
+.introtext, .introtext a {font-weight:700;}
+.clear {visibility:hidden; clear:both; height:1px;}
+.hide {display:none;}

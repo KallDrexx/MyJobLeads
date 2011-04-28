@@ -1,6 +1,10 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Your description goes here" />
+	<meta name="keywords" content="your,keywords,goes,here" />
+	<meta name="author" content="Your Name" />
     <title>@ViewBag.Title</title>
     @(Html.Telerik().StyleSheetRegistrar()
                     .DefaultGroup(group => group
@@ -11,91 +15,127 @@
                         .Combined(true)
                         .Compress(true))
     )
-
 </head>
 
 <body>
-    <div class="page">
 
-        <div id="header">
-            <div id="title">
-                <h1 class="SiteTitle">@Html.ActionLink("InterviewTools", MVC.Home.Index())</h1>
-            </div>
-
-            <div id="logindisplay">
-                @Html.Partial("_LogOnPartial")
-            </div>
-
-            <div id="menucontainer">
-
-                <ul id="menu">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                </ul>
-
-            </div>
-        </div>
-
-        <div id="main">
-            @RenderBody()
-
-            <div id="footer">
-                <center><a href="javascript:void()" id="feedback-link">Tell us what you think!</a></center>
-
-                @{ Html.Telerik().Window()
-                                 .Name("FeedbackWindow")
-                                 .Title("Submit Feedback")
-                                 .Draggable(true)
-                                 .Modal(true)
-                                 .Buttons(b => b.Close())
-                                 .Content(@<text>
-                                    @using (Html.BeginForm(MVC.Home.SubmitFeedback(), FormMethod.Post, new { id = "feedback-form" }))
-                                    {
-                                        <p>We appreciate your feedback on the InterviewTools system.</p>
-                                        
-                                        @Html.Hidden("fromUrl", @HttpContext.Current.Request.Url.AbsoluteUri)
-
-                                        <label for="name">Name:</label> <br />
-                                        @Html.TextBox("name") <br />
-                                        
-                                        <label for="email">Email:</label> <br />
-                                        @Html.TextBox("email") <br /><br />
-
-                                        <label for="feedback">Comments:</label>
-                                        @(Html.Telerik().Editor()
-                                                        .Name("feedback")
-                                                        .Tools(tools => tools
-                                                                .Clear()
-                                                                .Bold().Italic().Separator()
-                                                                .InsertOrderedList().InsertUnorderedList().Separator()
-                                                                .Indent().Outdent()
-                                        ))
-                                        <br />
-                                        
-                                        <div class="form-actions">
-                                            <button type="submit" class="t-button t-state-default">Submit feedback!</button>
-                                        </div>
-                                    }
-                                    </text>)
-                                .Width(400)
-                                .Draggable(true)
-                                .Modal(true)
-                                .Visible(false)
-                                .Render();
-                    }
-
-                @(Html.Telerik().ScriptRegistrar()
-                                .OnDocumentReady(@<text>
-                                    // Open the hidden window when the feedback-link is clicked
-                                    $('#feedback-link').click(function(e) {
-                                        e.preventDefault();
-                                        $('#FeedbackWindow').data('tWindow').center().open();
-                                    });
-                                </text>)
-                )
-
-            </div>
-        </div>
+    <div id="top">
+	    <p>@Html.Partial("_LogOnPartial")</p>
     </div>
+
+    <div id="wrap">
+	    <div id="header">
+		    <div id="sitetitle">
+			    <h1>@Html.ActionLink("InterviewTools", MVC.Home.Index())</h1>
+			    <p><strong>Empower Your Jobsearch</strong></p>
+		    </div>
+
+		    <div id="mainmenu">
+			    <dl class="nav">
+				    <dt>@Html.ActionLink("Home", MVC.Home.Index())</dt>
+				    <dd>@Html.ActionLink("About", MVC.Home.About())</dd>
+				    <dd><a href="#">University Access</a></dd>
+			    </dl>
+		    </div>
+		    <hr class="clear" />
+	    </div>
+	
+	    <div id="headline">
+	        <p>Welcome to InterviewTools</p>
+	    </div>
+
+	    <div id="content">
+		    @RenderBody()
+		    <hr class="clear" />
+	    </div>
+
+	    <div id="sidebar">
+		    <h2>Summary</h2>
+		    <p>This space will be used to display summary information for companies or contacts related to the main content</p>
+
+		    <h2>Sample button menu</h2>
+		    <ul class="sidemenu">
+			    <li><a href="#">First page</a></li>
+			    <li><a href="#">Second page</a></li>
+			    <li><a href="#">Third page with subpages</a>
+				    <ul>
+					    <li><a href="#">First subpage</a></li>
+					    <li><a href="#">Second subpage</a></li>
+				    </ul>
+			    </li>
+			    <li><a href="#">Fourth page</a></li>
+		    </ul>
+
+		    <h2>Sample links</h2>
+		    <ul>
+			    <li><a href="http://andreasviklund.com/templates/">Free website templates</a></li>
+			    <li><a href="http://andreasviklund.com/wordpress-themes/">WordPress themes</a></li>
+			    <li><a href="http://andreasviklund.com/contact/">Your link here?</a></li>
+		    </ul>
+	    </div>
+	    <hr class="clear" />
+    </div>
+	
+    <div id="footer">
+	    <div class="left">
+		    <p>&copy; 2011 <a href="#">Our Company Name</a></p>
+	    </div>
+
+	    <div class="right">
+		    <p><a href="javascript:void()" id="feedback-link">Tell us what you think!</a></p>
+	    </div>
+    </div>
+
+    @{ Html.Telerik().Window()
+            .Name("FeedbackWindow")
+            .Title("Submit Feedback")
+            .Draggable(true)
+            .Modal(true)
+            .Buttons(b => b.Close())
+            .Content(@<text>
+            @using (Html.BeginForm(MVC.Home.SubmitFeedback(), FormMethod.Post, new { id = "feedback-form" }))
+            {
+                <p>We appreciate your feedback on the InterviewTools system.</p>
+                                        
+                @Html.Hidden("fromUrl", @HttpContext.Current.Request.Url.AbsoluteUri)
+
+                <label for="name">Name:</label> <br />
+                @Html.TextBox("name") <br />
+                                        
+                <label for="email">Email:</label> <br />
+                @Html.TextBox("email") <br /><br />
+
+                <label for="feedback">Comments:</label>
+                @(Html.Telerik().Editor()
+                                .Name("feedback")
+                                .Tools(tools => tools
+                                        .Clear()
+                                        .Bold().Italic().Separator()
+                                        .InsertOrderedList().InsertUnorderedList().Separator()
+                                        .Indent().Outdent()
+                ))
+                <br />
+                                        
+                <div class="form-actions">
+                    <button type="submit" class="t-button t-state-default">Submit feedback!</button>
+                </div>
+            }
+            </text>)
+        .Width(400)
+        .Draggable(true)
+        .Modal(true)
+        .Visible(false)
+        .Render();
+    }
+
+    @(Html.Telerik().ScriptRegistrar()
+        .OnDocumentReady(@<text>
+            // Open the hidden window when the feedback-link is clicked
+            $('#feedback-link').click(function(e) {
+                e.preventDefault();
+                $('#FeedbackWindow').data('tWindow').center().open();
+            });
+        </text>)
+    )
 </body>
 </html>
