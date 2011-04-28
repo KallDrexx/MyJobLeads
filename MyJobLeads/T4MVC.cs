@@ -783,7 +783,8 @@ namespace Links {
         
         }
     
-        public static readonly string Site_css = Url("Site.css");
+        public static readonly string Custom_css = Url("Custom.css");
+        public static readonly string Layout_css = Url("Layout.css");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class themes {
             private const string URLPATH = "~/Content/themes";

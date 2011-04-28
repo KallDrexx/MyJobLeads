@@ -2,9 +2,10 @@
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
     @(Html.Telerik().StyleSheetRegistrar()
                     .DefaultGroup(group => group
+                        .Add("~/Content/Layout.css")
+                        .Add("~/Content/Custom.css")
                         .Add("telerik.common.css")
                         .Add("Telerik.vista.css")
                         .Combined(true)
