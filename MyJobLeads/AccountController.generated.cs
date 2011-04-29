@@ -85,7 +85,7 @@ namespace MyJobLeads.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult LogOn(MyJobLeads.Models.LogOnModel model, string returnUrl) {
+        public override System.Web.Mvc.ActionResult LogOn(MyJobLeads.ViewModels.LogOnModel model, string returnUrl) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.LogOn);
             callInfo.RouteValueDictionary.Add("model", model);
             callInfo.RouteValueDictionary.Add("returnUrl", returnUrl);
@@ -102,7 +102,7 @@ namespace MyJobLeads.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Register(MyJobLeads.Models.RegisterModel model) {
+        public override System.Web.Mvc.ActionResult Register(MyJobLeads.ViewModels.RegisterModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Register);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
@@ -113,7 +113,7 @@ namespace MyJobLeads.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult ChangePassword(MyJobLeads.Models.ChangePasswordModel model) {
+        public override System.Web.Mvc.ActionResult ChangePassword(MyJobLeads.ViewModels.ChangePasswordModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangePassword);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;

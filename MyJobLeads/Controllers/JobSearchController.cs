@@ -10,6 +10,7 @@ using MyJobLeads.DomainModel.Commands.JobSearches;
 using MyJobLeads.DomainModel.Queries.Tasks;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Commands.Users;
+using MyJobLeads.ViewModels.JobSearches;
 
 namespace MyJobLeads.Controllers
 {
@@ -85,12 +86,12 @@ namespace MyJobLeads.Controllers
         {
             // Retrieve the specified job search
             var search = _jobSearchByIdQuery.WithJobSearchId(id).Execute();
-            ViewBag.OpenTasks = _openTasksByJobSearchQuery.WithJobSearch(id).Execute();
+            var openTasks = _openTasksByJobSearchQuery.WithJobSearch(id).Execute();
 
             // Set this as the user's last visited job search
             _editUserCommand.WithUserId(CurrentUserId).SetLastVisitedJobSearchId(id).Execute();
 
-            return View(search);
+            return View(new JobSearchDetailsViewModel { JobSearch = search, OpenTasks = openTasks });
         }
 
         public virtual ActionResult Search(string searchTerm)

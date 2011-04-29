@@ -1,23 +1,21 @@
-﻿@model JobSearch
+﻿@model MyJobLeads.ViewModels.JobSearches.JobSearchDetailsViewModel
 @using MyJobLeads.DomainModel.Entities;
 
 @{
-    ViewBag.Title = Model.Name + " - Job Search";
+    ViewBag.Title = Model.JobSearch.Name + " - Job Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    IList<Task> openTasks = ViewBag.OpenTasks ?? new List<Task>();
+    ViewBag.Sidebar = Html.Partial(MVC.Task.Views._OpenTaskSummary, Model.OpenTasks);
 }
 
-<h1>@Model.Name</h1>
-
-<div class="ScreenHint">This screen displays all companies and pending tasks for your @Model.Name job search.</div>
-
+<h1>@Model.JobSearch.Name's Details</h1>
+<br />
 <p>
-    @Html.ActionLink("Edit This Job Search", MVC.JobSearch.Edit(Model.Id)) &nbsp; 
+    @Html.ActionLink("Edit This Job Search", MVC.JobSearch.Edit(Model.JobSearch.Id)) &nbsp; 
     @Html.ActionLink("View All Job Searches", MVC.JobSearch.Index())
 </p>
 
 <p>
-    @if (!string.IsNullOrWhiteSpace(Model.Description)) { <text><b>Description:</b> @Model.Description</text> }
+    @if (!string.IsNullOrWhiteSpace(Model.JobSearch.Description)) { <text><b>Description:</b> @Model.JobSearch.Description</text> }
 </p>
 
 @*@using (Html.BeginForm(MVC.JobSearch.Search()))
@@ -25,71 +23,12 @@
     <input type="text" id="searchBox" /> <input type="submit" value="Search" /> <text>Not Implemented Yet!</text>
 }*@
 
-<table width="100%">
-    <tr>
-        <td valign="top" width="50%">
-            <h2>Companies</h2>
-            @Html.ActionLink("Add A New Company", MVC.Company.Add(@Model.Id))
+ <h2>Companies</h2>
+@Html.ActionLink("Add A New Company", MVC.Company.Add(@Model.JobSearch.Id))
                 
-            <ul>
-                @foreach (Company company in @Model.Companies.OrderBy(x => x.Name).ToList())
-                {
-                    <li>@Html.ActionLink(company.Name, MVC.Company.Details(company.Id))</li>
-                }
-            </ul>
-        </td>
-
-        <td align="left" valign="top" width="50%">
-            @{
-                var undatedTasks = openTasks.Where(x => x.TaskDate == null || !x.TaskDate.HasValue).ToArray();
-                var overDueTasks = openTasks.Where(x => x.TaskDate != null && x.TaskDate.Value.Date < DateTime.Today).ToArray();
-                var todaysTasks = openTasks.Where(x => x.TaskDate != null && x.TaskDate.Value.Date == DateTime.Today).ToArray();
-                var futureTasks = openTasks.Where(x => x.TaskDate != null && x.TaskDate.Value.Date > DateTime.Today).ToArray();
-            }
-
-            @if (undatedTasks.Length > 0)
-            {
-                <h2>Undated Tasks</h2>
-                <ul>
-                    @foreach (Task task in undatedTasks)
-                    {
-                        <li>@{ Html.RenderPartial(MVC.JobSearch.Views._JobSearchOpenTaskDisplayControl, task); }</li>
-                    }
-                </ul>
-            }
-            
-            @if (overDueTasks.Length > 0)
-            {
-                <h2>Overdue Tasks</h2>
-                <ul>
-                    @foreach (Task task in overDueTasks)
-                    {
-                        <li>@{ Html.RenderPartial(MVC.JobSearch.Views._JobSearchOpenTaskDisplayControl, task); }</li>
-                    }
-                </ul>
-            }
-            
-            @if (todaysTasks.Length > 0)
-            {
-                <h2>Today's Tasks</h2>
-                <ul>
-                    @foreach (Task task in todaysTasks)
-                    {
-                        <li>@{ Html.RenderPartial(MVC.JobSearch.Views._JobSearchOpenTaskDisplayControl, task); }</li>
-                    }
-                </ul>
-            }
-            
-            @if (futureTasks.Length > 0)
-            {
-                <h2>Future Tasks</h2>
-                <ul>
-                    @foreach (Task task in futureTasks)
-                    {
-                        <li>@{ Html.RenderPartial(MVC.JobSearch.Views._JobSearchOpenTaskDisplayControl, task); }</li>
-                    }
-                </ul>
-            }
-        </td>
-    </tr>
-</table>
+<ul>
+    @foreach (Company company in @Model.JobSearch.Companies.OrderBy(x => x.Name).ToList())
+    {
+        <li>@Html.ActionLink(company.Name, MVC.Company.Details(company.Id))</li>
+    }
+</ul>

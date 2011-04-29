@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.Mvc;
 using MyJobLeads.DomainModel.Data;
-using MyJobLeads.Models.Accounts;
+using MyJobLeads.ViewModels.Accounts;
 using System.Web.Routing;
 
 namespace MyJobLeads

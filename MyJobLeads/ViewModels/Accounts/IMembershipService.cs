@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 
-namespace MyJobLeads.Models.Accounts
+namespace MyJobLeads.ViewModels.Accounts
 {
     public interface IMembershipService
     {

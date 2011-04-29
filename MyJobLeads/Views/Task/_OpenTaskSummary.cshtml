@@ -1,0 +1,65 @@
+﻿@model IList<Task>
+@using MyJobLeads.DomainModel.Entities
+
+@{
+    var openTasks = Model ?? new List<Task>();
+    var undatedTasks = openTasks.Where(x => x.TaskDate == null || !x.TaskDate.HasValue).ToArray();
+    var overDueTasks = openTasks.Where(x => x.TaskDate != null && x.TaskDate.Value.Date < DateTime.Today).ToArray();
+    var todaysTasks = openTasks.Where(x => x.TaskDate != null && x.TaskDate.Value.Date == DateTime.Today).ToArray();
+    var futureTasks = openTasks.Where(x => x.TaskDate != null && x.TaskDate.Value.Date > DateTime.Today).ToArray();
+}
+
+<h2>Open Tasks</h2>
+
+@if (openTasks.Count == 0)
+{
+    @:All tasks entered have been completed
+}
+else
+{
+    <text>Below are tasks which have not been completed yet:<br /><br /></text>
+
+    if (undatedTasks.Length > 0)
+    {
+        <h2>Undated Tasks</h2>
+        <ul>
+            @foreach (Task task in undatedTasks)
+            {
+                <li>@{ Html.RenderPartial(MVC.JobSearch.Views._JobSearchOpenTaskDisplayControl, task); }</li>
+            }
+        </ul>
+    }
+            
+    if (overDueTasks.Length > 0)
+    {
+        <h2>Overdue Tasks</h2>
+        <ul>
+            @foreach (Task task in overDueTasks)
+            {
+                <li>@{ Html.RenderPartial(MVC.JobSearch.Views._JobSearchOpenTaskDisplayControl, task); }</li>
+            }
+        </ul>
+    }
+            
+    if (todaysTasks.Length > 0)
+    {
+        <h2>Today's Tasks</h2>
+        <ul>
+            @foreach (Task task in todaysTasks)
+            {
+                <li>@{ Html.RenderPartial(MVC.JobSearch.Views._JobSearchOpenTaskDisplayControl, task); }</li>
+            }
+        </ul>
+    }
+            
+    if (futureTasks.Length > 0)
+    {
+        <h2>Future Tasks</h2>
+        <ul>
+            @foreach (Task task in futureTasks)
+            {
+                <li>@{ Html.RenderPartial(MVC.JobSearch.Views._JobSearchOpenTaskDisplayControl, task); }</li>
+            }
+        </ul>
+    }
+}

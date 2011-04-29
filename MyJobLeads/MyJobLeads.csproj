@@ -254,11 +254,12 @@
     <Compile Include="JobSearchController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Accounts\AccountModels.cs" />
-    <Compile Include="Models\Accounts\AccountMembershipService.cs" />
-    <Compile Include="Models\Accounts\IMembershipService.cs" />
-    <Compile Include="Models\Contacts\EditContactViewModel.cs" />
-    <Compile Include="Models\Tasks\EditTaskViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\AccountModels.cs" />
+    <Compile Include="ViewModels\Accounts\AccountMembershipService.cs" />
+    <Compile Include="ViewModels\Accounts\IMembershipService.cs" />
+    <Compile Include="ViewModels\Contacts\EditContactViewModel.cs" />
+    <Compile Include="ViewModels\JobSearches\JobSearchDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Tasks\EditTaskViewModel.cs" />
     <Compile Include="MyJobLeadsBaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedController.generated.cs">
@@ -714,6 +715,7 @@
     <Content Include="Views\Task\Edit.cshtml" />
     <Content Include="Views\JobSearch\_JobSearchOpenTaskDisplayControl.cshtml" />
     <Content Include="Views\Home\SubmitFeedback.cshtml" />
+    <Content Include="Views\Task\_OpenTaskSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\EditorLocalization.bg-BG.resx">

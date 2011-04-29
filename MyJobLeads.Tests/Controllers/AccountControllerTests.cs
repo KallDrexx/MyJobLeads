@@ -7,8 +7,8 @@ using System.Web.Security;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyJobLeads;
 using MyJobLeads.Controllers;
-using MyJobLeads.Models;
-using MyJobLeads.Models.Accounts;
+using MyJobLeads.ViewModels;
+using MyJobLeads.ViewModels.Accounts;
 using MyJobLeads.Tests.Mocks;
 
 namespace MyJobLeads.Tests.Controllers

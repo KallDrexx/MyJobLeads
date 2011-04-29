@@ -7,7 +7,7 @@ using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Contacts;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Commands.Contacts;
-using MyJobLeads.Models.Contacts;
+using MyJobLeads.ViewModels.Contacts;
 using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Exceptions;
 

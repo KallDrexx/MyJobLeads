@@ -49,32 +49,45 @@
 		    <hr class="clear" />
 	    </div>
 
-	    <div id="sidebar">
-		    <h2>Summary</h2>
-		    <p>This space will be used to display summary information for companies or contacts related to the main content</p>
+        @{ string sidebarHtml = ViewBag.Sidebar == null ? string.Empty : ViewBag.Sidebar.ToString(); }
+        @if (!string.IsNullOrWhiteSpace(sidebarHtml))
+        {
+	        <div id="sidebar">
+                @ViewBag.Sidebar
+            
+		        @*<h2>Open Tasks</h2>
+		        <p>This space will be used to display summary information for companies or contacts related to the main content</p>
 
-		    <h2>Sample button menu</h2>
-		    <ul class="sidemenu">
-			    <li><a href="#">First page</a></li>
-			    <li><a href="#">Second page</a></li>
-			    <li><a href="#">Third page with subpages</a>
-				    <ul>
-					    <li><a href="#">First subpage</a></li>
-					    <li><a href="#">Second subpage</a></li>
-				    </ul>
-			    </li>
-			    <li><a href="#">Fourth page</a></li>
-		    </ul>
+                <h2>Related Tasks</h2>
+                <ul class="sidemenu">
+                    <li><a href="#">Call Chevy Chase for available positions for Bank Of America <br /> 8/23/2011 12:00 AM</a></li>
+                    <li><a href="#">Call back for update for Chevron <br /> 8/23/2011 12:00 AM</a></li>
+                </ul>
 
-		    <h2>Sample links</h2>
-		    <ul>
-			    <li><a href="http://andreasviklund.com/templates/">Free website templates</a></li>
-			    <li><a href="http://andreasviklund.com/wordpress-themes/">WordPress themes</a></li>
-			    <li><a href="http://andreasviklund.com/contact/">Your link here?</a></li>
-		    </ul>
-	    </div>
-	    <hr class="clear" />
-    </div>
+		        <h2>Sample button menu</h2>
+		        <ul class="sidemenu">
+			        <li><a href="#">First page</a></li>
+			        <li><a href="#">Second page</a></li>
+			        <li><a href="#">Third page with subpages</a>
+				        <ul>
+					        <li><a href="#">First subpage</a></li>
+					        <li><a href="#">Second subpage</a></li>
+				        </ul>
+			        </li>
+			        <li><a href="#">Fourth page</a></li>
+		        </ul>
+
+		        <h2>Sample links</h2>
+		        <ul>
+			        <li><a href="http://andreasviklund.com/templates/">Free website templates</a></li>
+			        <li><a href="http://andreasviklund.com/wordpress-themes/">WordPress themes</a></li>
+			        <li><a href="http://andreasviklund.com/contact/">Your link here?</a></li>
+		        </ul>
+	        </div>*@
+            
+	        <hr class="clear" />
+        </div>
+    }
 	
     <div id="footer">
 	    <div class="left">

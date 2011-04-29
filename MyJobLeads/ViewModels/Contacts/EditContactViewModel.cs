@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using MyJobLeads.DomainModel.Entities;
 
-namespace MyJobLeads.Models.Contacts
+namespace MyJobLeads.ViewModels.Contacts
 {
     public class EditContactViewModel
     {

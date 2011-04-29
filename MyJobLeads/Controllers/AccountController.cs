@@ -7,8 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
-using MyJobLeads.Models;
-using MyJobLeads.Models.Accounts;
+using MyJobLeads.ViewModels;
+using MyJobLeads.ViewModels.Accounts;
 using MyJobLeads.DomainModel.Commands.Users;
 using MyJobLeads.DomainModel.Exceptions;
 

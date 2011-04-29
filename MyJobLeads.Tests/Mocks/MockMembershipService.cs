@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MyJobLeads.Models.Accounts;
+using MyJobLeads.ViewModels.Accounts;
 using MyJobLeads.DomainModel.Entities;
 using System.Web.Security;
 using Moq;

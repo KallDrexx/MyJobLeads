@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyJobLeads;
 using MyJobLeads.Controllers;
-using MyJobLeads.Models.Accounts;
+using MyJobLeads.ViewModels.Accounts;
 using Moq;
 using System.Web.Security;
 using MyJobLeads.Infrastructure;

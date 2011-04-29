@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using MyJobLeads.DomainModel.Entities;
 
-namespace MyJobLeads.Models.Tasks
+namespace MyJobLeads.ViewModels.Tasks
 {
     public class EditTaskViewModel
     {
