@@ -8,8 +8,7 @@
     <title>@ViewBag.Title</title>
     @(Html.Telerik().StyleSheetRegistrar()
                     .DefaultGroup(group => group
-                        .Add("~/Content/Layout.css")
-                        .Add("~/Content/Custom.css")
+                        .Add("~/Content/Site.css")
                         .Add("telerik.common.css")
                         .Add("Telerik.vista.css")
                         .Combined(true)
@@ -20,83 +19,57 @@
 <body>
 
     <div id="top">
-	    <p>@Html.Partial("_LogOnPartial")</p>
+        <div class="inner">
+
+	        <div id="topleft">
+                <h1>@Html.ActionLink("InterviewTools", MVC.Home.Index())</h1>
+			    <p><strong>Empower Your Jobsearch</strong></p>
+            </div>
+
+            <div id="topright">
+                <p>@Html.Partial("_LogOnPartial")</p>
+            </div>
+
+		    <div id="mainmenu">
+			    <ul>
+				    <li>@Html.ActionLink("Home", MVC.Home.Index())</li>
+				    <li>@Html.ActionLink("About", MVC.Home.About())</li>
+				    <li><a href="#">University Access</a></li>
+			    </ul>
+		    </div>
+	    </div>
     </div>
 
     <div id="wrap">
-	    <div id="header">
-		    <div id="sitetitle">
-			    <h1>@Html.ActionLink("InterviewTools", MVC.Home.Index())</h1>
-			    <p><strong>Empower Your Jobsearch</strong></p>
-		    </div>
+        <div class="inner">
 
-		    <div id="mainmenu">
-			    <dl class="nav">
-				    <dt>@Html.ActionLink("Home", MVC.Home.Index())</dt>
-				    <dd>@Html.ActionLink("About", MVC.Home.About())</dd>
-				    <dd><a href="#">University Access</a></dd>
-			    </dl>
-		    </div>
-		    <hr class="clear" />
-	    </div>
-	
-	    <div id="headline">
-	        <p>Welcome to InterviewTools</p>
-	    </div>
+	        <div id="content">
+		        @RenderBody()
+		        <br class="clear" />
+	        </div>
 
-	    <div id="content">
-		    @RenderBody()
-		    <hr class="clear" />
-	    </div>
+            @{ string sidebarHtml = ViewBag.Sidebar == null ? string.Empty : ViewBag.Sidebar.ToString(); }
+            @if (!string.IsNullOrWhiteSpace(sidebarHtml))
+            {
+	            <div id="sidebar">
+                    @ViewBag.Sidebar
 
-        @{ string sidebarHtml = ViewBag.Sidebar == null ? string.Empty : ViewBag.Sidebar.ToString(); }
-        @if (!string.IsNullOrWhiteSpace(sidebarHtml))
-        {
-	        <div id="sidebar">
-                @ViewBag.Sidebar
-            
-		        @*<h2>Open Tasks</h2>
-		        <p>This space will be used to display summary information for companies or contacts related to the main content</p>
-
-                <h2>Related Tasks</h2>
-                <ul class="sidemenu">
-                    <li><a href="#">Call Chevy Chase for available positions for Bank Of America <br /> 8/23/2011 12:00 AM</a></li>
-                    <li><a href="#">Call back for update for Chevron <br /> 8/23/2011 12:00 AM</a></li>
-                </ul>
-
-		        <h2>Sample button menu</h2>
-		        <ul class="sidemenu">
-			        <li><a href="#">First page</a></li>
-			        <li><a href="#">Second page</a></li>
-			        <li><a href="#">Third page with subpages</a>
-				        <ul>
-					        <li><a href="#">First subpage</a></li>
-					        <li><a href="#">Second subpage</a></li>
-				        </ul>
-			        </li>
-			        <li><a href="#">Fourth page</a></li>
-		        </ul>
-
-		        <h2>Sample links</h2>
-		        <ul>
-			        <li><a href="http://andreasviklund.com/templates/">Free website templates</a></li>
-			        <li><a href="http://andreasviklund.com/wordpress-themes/">WordPress themes</a></li>
-			        <li><a href="http://andreasviklund.com/contact/">Your link here?</a></li>
-		        </ul>
-	        </div>*@
-            
-	        <hr class="clear" />
+	                <br class="clear" />
+                </div>
+            }
         </div>
-    }
+        <br class="clear" />
+    </div>
 	
     <div id="footer">
-	    <div class="left">
-		    <p>&copy; 2011 <a href="#">Our Company Name</a></p>
-	    </div>
+        <div class="inner">
+        
+            <p>
+                <span class="credits">&copy; 2011 Company Name</span><br />
+                <a href="javascript:void()" id="feedback-link">Tell us what you think!</a>
+            </p>
 
-	    <div class="right">
-		    <p><a href="javascript:void()" id="feedback-link">Tell us what you think!</a></p>
-	    </div>
+        </div>
     </div>
 
     @{ Html.Telerik().Window()
