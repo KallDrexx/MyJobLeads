@@ -707,14 +707,14 @@
     <Content Include="Views\Contact\Edit.cshtml" />
     <Content Include="Views\Contact\Details.cshtml" />
     <Content Include="Views\Task\Details.cshtml" />
-    <Content Include="Views\Shared\_CompanyDisplay.cshtml" />
-    <Content Include="Views\Shared\_ContactDisplay.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordResult.cshtml" />
     <Content Include="Views\Task\Edit.cshtml" />
     <Content Include="Views\JobSearch\_JobSearchOpenTaskDisplayControl.cshtml" />
     <Content Include="Views\Home\SubmitFeedback.cshtml" />
     <Content Include="Views\Task\_OpenTaskSummary.cshtml" />
+    <Content Include="Views\Company\_CompanySidebarDisplay.cshtml" />
+    <Content Include="Views\Contact\_ContactSidebarDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\EditorLocalization.bg-BG.resx">

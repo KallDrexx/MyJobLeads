@@ -4,16 +4,40 @@
 @{
     ViewBag.Title = "Contact: " + Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Sidebar = Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company);
+
+    string taskString = Model.Tasks.Count == 1 ? "task" : "tasks";
 }
 
-<table width="100%">
-    <tr>
-        <td valign="top" width="50%">
-            @{ Html.RenderPartial(MVC.Shared.Views._CompanyDisplay, Model.Company); }
-        </td>
+<h2>@Model.Name's Details</h2>
 
-        <td valign="top">
-            @{ Html.RenderPartial(MVC.Shared.Views._ContactDisplay, Model); }
-        </td>
-    </tr>
-</table>
+<p>
+    @Model.Name is a contact for @Html.ActionLink(Model.Company.Name, MVC.Company.Details(Model.Company.Id)) <br /><br />
+    Direct Phone: @Model.DirectPhone @if (!string.IsNullOrWhiteSpace(Model.Extension)) { <text>Ext: @Model.Extension</text> } <br />
+    Mobile Phone: @Model.MobilePhone <br />
+    Email Address: <a href="mailto:@Model.Email">@Model.Email</a> <br />
+    Assistant: @Model.Assistant <br />
+    Referred By: @Model.ReferredBy <br />
+    Notes: @Model.Notes
+</p>
+
+@Html.ActionLink("Edit Contact Details", MVC.Contact.Edit(Model.Id))
+
+<br /><br />
+<h2>Tasks</h2>
+This contact has @Model.Tasks.Count @taskString entered 
+(@Html.ActionLink("Add", MVC.Task.Add((int)Model.CompanyId, Model.Id)))
+
+<ul>
+    @foreach (Task task in Model.Tasks)
+    {
+        <li>
+            @Html.ActionLink(task.Name, MVC.Task.Details(task.Id)) - 
+
+            @if (task.Completed) { <text>Completed </text> }
+            else { <b>Not Completed</b> }
+
+            @if (task.TaskDate != null && !task.Completed) { <text> - Due: @task.TaskDate.Value.ToString()</text> }
+        </li>
+    }
+</ul>

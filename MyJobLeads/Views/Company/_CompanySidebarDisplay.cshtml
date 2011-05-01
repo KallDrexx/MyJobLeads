@@ -1,0 +1,24 @@
+﻿@model MyJobLeads.DomainModel.Entities.Company
+
+@{
+    // Form company location string
+    bool citySpecified = !string.IsNullOrWhiteSpace(Model.City);
+    bool stateSpecified = !string.IsNullOrWhiteSpace(Model.State);
+    bool zipSpecified = !string.IsNullOrWhiteSpace(Model.Zip);
+
+    string location = string.Empty;
+    if (citySpecified && stateSpecified) { location = string.Concat(Model.City, ", ", Model.State, " "); }
+    else if (citySpecified) { location = Model.City + " "; }
+    else if (stateSpecified) { location = Model.State + " "; }
+
+    if (zipSpecified) { location += Model.Zip; }
+}
+
+<h2>@Html.ActionLink(Model.Name, MVC.Company.Details(Model.Id))'s Summary</h2><br />
+
+<p>
+    Phone: @Model.Phone <br />
+    Location: @location <br />
+    Notes: @Model.Notes <br />
+</p>
+

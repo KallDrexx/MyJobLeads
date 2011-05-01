@@ -3,33 +3,31 @@
 @{
     ViewBag.Title = "Task: " + Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Setup the sidebar
+    if (Model.ContactId != 0) 
+    {
+        ViewBag.Sidebar = new HtmlString(Html.Partial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact).ToString() +
+                                            Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company).ToString());
+    }
+    else { ViewBag.Sidebar = Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company); }
 }
 
-<table width="100%">
-    <tr>
-        <td valign="top" width="50%">
-            @if (Model.Company != null) { Html.RenderPartial(MVC.Shared.Views._CompanyDisplay, Model.Company); }
-            else { Html.RenderPartial(MVC.Shared.Views._ContactDisplay, Model.Contact); }
-        </td>
+<h2>@Model.Name's Task Details</h2> <br />                                                                                      
 
-        <td valign="top">
-            <br />
+<p>
+    @if (Model.ContactId != 0) 
+    { 
+        @:This task is associated with @Html.ActionLink(Model.Contact.Name, MVC.Contact.Details((int)Model.ContactId))
+    }
+    else
+    {
+        @:This task is associated with @Html.ActionLink(Model.Company.Name, MVC.Company.Details((int)Model.CompanyId))
+    }
 
-            <h1>@Model.Name</h1>                                                                                          
+    <br /><br />
+    Task Date: @if (Model.TaskDate.HasValue) { @Model.TaskDate.Value.ToString() } else { <text>&lt;No Date Set&gt;</text> } <br />
+    Task Completed: @Model.Completed 
+</p>
 
-            <div class="ScreenHint">This screen displays all information entered for this task.</div>
-
-            <p>
-                @if (Model.Contact != null) 
-                { 
-                    <text>Associated Contact: @Html.ActionLink(Model.Contact.Name, MVC.Contact.Details((int)Model.ContactId)) <br /> </text>
-                }
-                Task Date: @if (Model.TaskDate.HasValue) { @Model.TaskDate.Value.ToString() } else { <text>&lt;No Date Set&gt;</text> } <br />
-                Task Completed: @Model.Completed 
-            </p>
-
-            @Html.ActionLink("Edit Task Details", MVC.Task.Edit(Model.Id)) &nbsp; 
-        </td>
-    </tr>
-
-</table>
+@Html.ActionLink("Edit Task Details", MVC.Task.Edit(Model.Id)) &nbsp; 

@@ -1,0 +1,13 @@
+﻿@model MyJobLeads.DomainModel.Entities.Contact
+
+<h2>@Html.ActionLink(Model.Name, MVC.Contact.Details(@Model.Id))'s Summary</h2><br />
+
+<p>
+    Direct Phone: @Model.DirectPhone @if (!string.IsNullOrWhiteSpace(Model.Extension)) { <text>Ext: @Model.Extension</text> } <br />
+    Mobile Phone: @Model.MobilePhone <br />
+    Email: <a href="mailto:@Model.Email">@Model.Email</a> <br />
+    Assistant: @Model.Assistant <br />
+    Referred By: @Model.ReferredBy <br />
+    Notes: @Model.Notes <br />
+</p>
+
