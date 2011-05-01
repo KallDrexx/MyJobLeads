@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     // Setup the sidebar
-    if (Model.ContactId != 0) 
+    if (Model.ContactId != null) 
     {
         ViewBag.Sidebar = new HtmlString(Html.Partial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact).ToString() +
                                             Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company).ToString());
@@ -16,7 +16,7 @@
 <h2>@Model.Name's Task Details</h2> <br />                                                                                      
 
 <p>
-    @if (Model.ContactId != 0) 
+    @if (Model.ContactId != null) 
     { 
         @:This task is associated with @Html.ActionLink(Model.Contact.Name, MVC.Contact.Details((int)Model.ContactId))
     }

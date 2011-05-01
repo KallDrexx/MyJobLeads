@@ -34,20 +34,20 @@ body {background-color:#eaeaea; color:#333; font:76% Verdana,sans-serif; line-he
 h2, h3, h4 {margin:0 0 15px; color:#666; font-weight:normal;}
 
 /* Sidebar */
-#sidebar {text-align:left; float:right; margin:0; width:300px; padding:0;}
-#sidebar .left {float:left; width:150px;}
-#sidebar .right {float:right; width:150px;}
+#sidebar {text-align:left; float:right; margin:0; width:360px; padding:0;}
+#sidebar .left {float:left; width:180px;}
+#sidebar .right {float:right; width:180px;}
 #sidebar h2, #sidebar h3 {font-size:1.3em; padding:0; margin:0 0 5px 0; border-bottom:3px solid #ddd;}
 #sidebar p, #sidebar ul ,#sidebar .textwidget,#sidebar form,#sidebar table {margin:0 0 20px 0; line-height:1.3em; font-size:1em; padding:0;}
 #sidebar table {width:160px;}
 #sidebar caption {font-size:1.3em; padding:0; margin:0 0 4px 0; text-align:left;}
-#sidebar ul li {list-style: none; width:158px; padding:0; margin:0 0 2px 0;}
+#sidebar ul li {list-style: none; width:180px; padding:0; margin:0 0 2px 0;}
 #sidebar ul li a {display: block; overflow: visible; padding:2px 0 2px 5px; background-color:#f8f8f8; color:#467aa7; font-weight:400; border:1px solid #eee; border-bottom:1px solid #ddd;}
 #sidebar ul li a:hover, #sidebar ul li.current_page_item a {border:1px solid #ccc; color:#555; background-color:#eaeaea; border-bottom:1px solid #aaa;}
 #sidebar ul li.current_page_item li a {background-color:#f8f8f8; color:#467aa7; border:1px solid #eee; border-bottom:1px solid #ddd;}
-#sidebar ul ul {margin:0; padding:2px 0 0 10px;}
-#sidebar ul ul li {width:148px;}
-#sidebar ul ul li a {font-size:0.9em; padding:1px 0 1px 5px;}
+#sidebar ul ul {margin:0; padding:2px 0 0 10px; font-size: 0.9em}
+#sidebar ul ul li {width:170px;}
+#sidebar ul ul li a {font-size:0.9em; padding:1px 0 1px 5px; display:inline}
 #sidebar ul ul ul li {width:138px;}
 #sidebar ul ul ul li a {font-size:0.8em; padding:0 0 0 5px;}
 #sidebar p.sidebarlinks {line-height:1.6em;}

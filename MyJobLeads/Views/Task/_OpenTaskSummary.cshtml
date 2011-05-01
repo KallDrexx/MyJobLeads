@@ -25,7 +25,7 @@ else
         <ul>
             @foreach (Task task in undatedTasks)
             {
-                <li>@{ Html.RenderPartial(MVC.JobSearch.Views._JobSearchOpenTaskDisplayControl, task); }</li>
+                <li>@{ Html.RenderPartial(MVC.Task.Views._OpenTaskListItem, task); }</li>
             }
         </ul>
     }
@@ -36,7 +36,7 @@ else
         <ul>
             @foreach (Task task in overDueTasks)
             {
-                <li>@{ Html.RenderPartial(MVC.JobSearch.Views._JobSearchOpenTaskDisplayControl, task); }</li>
+                <li>@{ Html.RenderPartial(MVC.Task.Views._OpenTaskListItem, task); }</li>
             }
         </ul>
     }
@@ -47,7 +47,7 @@ else
         <ul>
             @foreach (Task task in todaysTasks)
             {
-                <li>@{ Html.RenderPartial(MVC.JobSearch.Views._JobSearchOpenTaskDisplayControl, task); }</li>
+                <li>@{ Html.RenderPartial(MVC.Task.Views._OpenTaskListItem, task); }</li>
             }
         </ul>
     }
@@ -58,7 +58,7 @@ else
         <ul>
             @foreach (Task task in futureTasks)
             {
-                <li>@{ Html.RenderPartial(MVC.JobSearch.Views._JobSearchOpenTaskDisplayControl, task); }</li>
+                <li>@{ Html.RenderPartial(MVC.Task.Views._OpenTaskListItem, task); }</li>
             }
         </ul>
     }
