@@ -1,7 +1,11 @@
 ﻿@model MyJobLeads.DomainModel.Entities.Task
+           
+@{
+    string linkString = string.Concat(Model.Name, " for ", Model.Company.Name);
+    if (Model.TaskDate != null && Model.TaskDate.HasValue)
+    {
+        linkString = string.Concat(linkString, "<br>Due: ", Model.TaskDate.ToString());
+    }
+}
 
-@Html.ActionLink(Model.Name, MVC.Task.Details(Model.Id))
-
-for @Html.ActionLink(Model.Company.Name, MVC.Company.Details(Model.Company.Id))
-
-@( Model.TaskDate.HasValue ? "Due " + Model.TaskDate.ToString() : string.Empty)
+@Html.ActionLink(linkString, MVC.Task.Details(Model.Id))
