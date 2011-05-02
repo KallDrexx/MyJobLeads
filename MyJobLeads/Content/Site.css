@@ -53,7 +53,7 @@ h2, h3, h4 {margin:0 0 15px; color:#666; font-weight:normal;}
 #sidebar p.sidebarlinks {line-height:1.6em;}
 
 /* Content */
-#content {float:left; clear:left; width: 500px; text-align: left; margin:0 0 10px 0;}
+#content {float:left; clear:left; width: 600px; text-align: left; margin:0 0 10px 0;}
 #content h2 {font-size:1.7em; clear:left;}
 #content h3 {font-size:1.3em; clear:left;}
 #content h2.archiveheader {margin:0 0 20px 0; padding:4px 0; border-bottom:3px solid #ddd;}

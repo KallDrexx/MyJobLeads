@@ -22,34 +22,38 @@ else
 {
     ViewBag.Title = "Editing " + @Model.Name;
     
-    <h1>Editing the '@Model.Name' Job Search</h1>
+    <h2>Editing the '@Model.Name' Job Search</h2>
     <div class="ScreenHint">This screen allows you to edit the details of the @Model.Name job search.</div><br />
 }
 
 @using (Html.BeginForm(MVC.JobSearch.Edit()))
 {
-    @Html.HiddenFor(x => x.Id);
+    <fieldset>
+        @Html.HiddenFor(x => x.Id)
     
-    <table>
-        <tr>
-            <td align="right">Job Search Name:</td>
-            <td>@Html.TextBoxFor(x => x.Name)</td>
-        </tr>
+        <div class="required">
+            @Html.LabelFor(x => x.Name)
+            @Html.TextBoxFor(x => x.Name)
+        </div>
 
-        <tr>
-            <td align="right" valign="top">Description:</td>
-            <td>@Html.TextAreaFor(x => x.Description, new { rows = 2, cols = "50" })</td>
-        </tr>
+        <div class="required">
+            <!--@Html.LabelFor(x => x.Description)-->
+            <label>Description
+            </label>
+            @Html.TextAreaFor(x => x.Description, new { rows = 4, cols = "60" })
+        </div>
+        
+        <div class="submit">
+            <input type="submit" value="Submit" class="inputSubmit" /> &nbsp; &nbsp;
+            @if (isNewJobSearch)
+            {
+                @Html.ActionLink("Cancel", MVC.JobSearch.Index());
+            }
+            else
+            {
+                @Html.ActionLink("Cancel", MVC.JobSearch.Details(Model.Id));
+            }
 
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Save" /> &nbsp; &nbsp;
-                
-                @if (isNewJobSearch) { @Html.ActionLink("Back", MVC.JobSearch.Index()); }
-                else { @Html.ActionLink("Back", MVC.JobSearch.Details(Model.Id)); }
-            </td>
-        </tr>
-    </table>
+        </div>
+    </fieldset>
 }
-
