@@ -26,7 +26,7 @@ else
     <div class="ScreenHint">This screen allows you to edit the details of the @Model.Name job search.</div><br />
 }
 
-@using (Html.BeginForm(MVC.JobSearch.Edit()))
+@using (Html.BeginForm(MVC.JobSearch.Edit(), FormMethod.Post, new { @class = "editform" }))
 {
     <fieldset>
         @Html.HiddenFor(x => x.Id)
