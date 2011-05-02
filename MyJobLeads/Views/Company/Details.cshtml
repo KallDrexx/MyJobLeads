@@ -4,9 +4,12 @@
 @{
     ViewBag.Title = "Company: " + Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-    string contactString = Model.Contacts.Count == 1 ? "contact" : "contacts";
-    string taskString = Model.Tasks.Count == 1 ? "task" : "tasks";
+    
+    // Form sidebar data
+    ViewBag.Sidebar = new HtmlString(
+                        string.Concat(
+                            Html.Partial(MVC.Contact.Views._CompanyContactDisplay, Model),
+                            Html.Partial(MVC.Task.Views._CompanyTaskDisplay, Model)));
 
     // Form company location string
     bool citySpecified = !string.IsNullOrWhiteSpace(Model.City);
@@ -29,32 +32,3 @@ Notes: @Model.Notes<br />
 
 <br />
 @Html.ActionLink("Edit Company Details", MVC.Company.Edit(Model.Id))
-
-<br /><br />
-<h2>Contacts</h2>
-This company has @Model.Contacts.Count @contactString entered (@Html.ActionLink("Add", MVC.Contact.Add(Model.Id)))
-
-<ul>
-    @foreach (Contact contact in Model.Contacts.OrderBy(x => x.Name).ToArray())
-    {
-        <li>@Html.ActionLink(contact.Name, MVC.Contact.Details(contact.Id))</li>   
-    }
-</ul>
-
-<br />
-<h2>Tasks</h2>
-This company has @Model.Tasks.Count @taskString entered (@Html.ActionLink("Add", MVC.Task.Add(Model.Id)))
-
-<ul>
-    @foreach (Task task in Model.Tasks)
-    {
-        <li>
-            @Html.ActionLink(task.Name, MVC.Task.Details(task.Id)) - 
-
-            @if (task.Completed) { <text>Completed </text> }
-            else { <b>Not Completed</b> }
-
-            @if (task.TaskDate != null && !task.Completed) { <text> - Due: @task.TaskDate.Value.ToString()</text> }
-        </li>
-    }
-</ul>

@@ -3,6 +3,14 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Setup the sidebar
+    if (Model.Contact != null)
+    {
+        ViewBag.Sidebar = new HtmlString(Html.Partial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact).ToString() +
+                                            Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company).ToString());
+    }
+    else { ViewBag.Sidebar = Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company); }
 }
 
 @if (Model.Id == 0)
@@ -28,7 +36,7 @@ else
     <table>
         <tr>
             <td align="right">Name:</td>
-            <td>@Html.EditorFor(x => x.Name)</td>
+            <td>@Html.TextBoxFor(x => x.Name, new { size = 30 })</td>
         </tr>
 
         <tr>
