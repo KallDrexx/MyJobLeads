@@ -720,6 +720,8 @@
     <Content Include="Views\Company\_CompanySidebarDisplay.cshtml" />
     <Content Include="Views\Contact\_ContactSidebarDisplay.cshtml" />
     <Content Include="Views\Task\_OpenTaskListItem.cshtml" />
+    <Content Include="Views\Task\_CompanyTaskDisplay.cshtml" />
+    <Content Include="Views\Contact\_CompanyContactDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\EditorLocalization.bg-BG.resx">

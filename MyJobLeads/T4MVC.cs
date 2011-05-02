@@ -783,6 +783,18 @@ namespace Links {
         
         }
     
+        public static readonly string Forms_css = Url("Forms.css");
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class images {
+            private const string URLPATH = "~/Content/images";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string footbg_gif = Url("footbg.gif");
+            public static readonly string rss_png = Url("rss.png");
+            public static readonly string topbg_gif = Url("topbg.gif");
+            public static readonly string wrapbg_gif = Url("wrapbg.gif");
+        }
+    
         public static readonly string Site_css = Url("Site.css");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class themes {

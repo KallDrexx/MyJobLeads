@@ -1,0 +1,30 @@
+﻿@model Company
+@using MyJobLeads.DomainModel.Entities;
+
+@{
+    string taskString = Model.Tasks.Count == 1 ? "task" : "tasks";
+}
+
+<h2>Tasks</h2>
+This company has @Model.Tasks.Count @taskString entered (@Html.ActionLink("Add", MVC.Task.Add(Model.Id)))
+
+<br /><br />
+<ul>
+    @foreach (Task task in Model.Tasks)
+    {
+        <li>
+            @Html.ActionLink(task.Name, MVC.Task.Details(task.Id))
+            
+            <ul>
+                <li>
+                    @if (task.Completed) { <text>Completed </text> }
+                    else { <b>Not Completed</b> }
+                </li>
+
+                @if (task.TaskDate != null && !task.Completed) { <li>Due: @task.TaskDate.Value.ToString()</li> }
+                <li>&nbsp;</li>
+            </ul> 
+
+        </li>
+    }
+</ul>
