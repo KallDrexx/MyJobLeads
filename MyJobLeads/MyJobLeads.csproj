@@ -588,7 +588,6 @@
     <Content Include="Content\2011.1.315\Windows7\sprite.png" />
     <Content Include="Content\images\footbg.gif" />
     <Content Include="Content\images\rss.png" />
-    <Content Include="Content\images\sample-logo.jpg" />
     <Content Include="Content\images\topbg.gif" />
     <Content Include="Content\images\wrapbg.gif" />
     <Content Include="favicon.ico" />
