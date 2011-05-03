@@ -7,13 +7,13 @@
 @if (Model.Id == 0)
 {
     ViewBag.Title = "Add A Company";
-    <h1>Add A Company</h1>
+    <h2>Add A Company</h2>
     <div class="ScreenHint">This screen allows you to add a company to your job search.</div>
 }
 else
 {
     ViewBag.Title = "Editing " + @Model.Name;
-    <h1>Editing @Model.Name</h1>
+    <h2>Editing @Model.Name</h2>
     <div class="ScreenHint">This screen allows you to edit the @Model.Name company.</div>
 }
 <br />

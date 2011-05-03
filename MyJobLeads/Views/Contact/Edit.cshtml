@@ -15,11 +15,13 @@
 {
     ViewBag.Title = "Add A Contact";
     <h2>Add A Contact</h2>
+    <div class="ScreenHint">This screen allows you to add a contact for @Model.Company.Name.</div>
 }
 else
 {
     ViewBag.Title = "Editing " + @Model.Contact.Name;
     <h2>Editing @Model.Contact.Name</h2>
+    <div class="ScreenHint">This screen allows you to edit the details for @Model.Contact.Name</div>
 }
 
 <br />
