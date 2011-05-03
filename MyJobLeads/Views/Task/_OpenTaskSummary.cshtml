@@ -26,6 +26,7 @@ else
             @foreach (Task task in undatedTasks)
             {
                 <li>@{ Html.RenderPartial(MVC.Task.Views._OpenTaskListItem, task); }</li>
+                <li>&nbsp;</li>
             }
         </ul>
     }
@@ -37,10 +38,11 @@ else
             @foreach (Task task in overDueTasks)
             {
                 <li>@{ Html.RenderPartial(MVC.Task.Views._OpenTaskListItem, task); }</li>
+                <li>&nbsp;</li>
             }
         </ul>
     }
-            
+
     if (todaysTasks.Length > 0)
     {
         <h2>Today's Tasks</h2>
@@ -48,10 +50,11 @@ else
             @foreach (Task task in todaysTasks)
             {
                 <li>@{ Html.RenderPartial(MVC.Task.Views._OpenTaskListItem, task); }</li>
+                <li>&nbsp;</li>
             }
         </ul>
     }
-            
+
     if (futureTasks.Length > 0)
     {
         <h2>Future Tasks</h2>
@@ -59,6 +62,7 @@ else
             @foreach (Task task in futureTasks)
             {
                 <li>@{ Html.RenderPartial(MVC.Task.Views._OpenTaskListItem, task); }</li>
+                <li>&nbsp;</li>
             }
         </ul>
     }
