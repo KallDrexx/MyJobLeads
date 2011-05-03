@@ -1,20 +1,25 @@
-﻿@model MyJobLeads.ViewModels.Contacts.EditContactViewModel
+﻿@model EditContactViewModel
+@using MyJobLeads.ViewModels.Contacts;
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    // Make sure the contact is at least initialized to an empty contact
+    if (Model.Contact == null) { Model.Contact = new MyJobLeads.DomainModel.Entities.Contact(); }
+    
+    // Setup the sidebar
+    ViewBag.Sidebar = Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company);
 }
 
 @if (Model.Contact.Id == 0)
 {
     ViewBag.Title = "Add A Contact";
-    <h1>Add A Contact</h1>
-    <div class="ScreenHint">This screen allows you to add a contact for @Model.Company.Name.</div>
+    <h2>Add A Contact</h2>
 }
 else
 {
     ViewBag.Title = "Editing " + @Model.Contact.Name;
-    <h1>Editing @Model.Contact.Name</h1>
-    <div class="ScreenHint">This screen allows you to edit the details for @Model.Contact.Name</div>
+    <h2>Editing @Model.Contact.Name</h2>
 }
 
 <br />
