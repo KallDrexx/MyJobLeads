@@ -80,5 +80,14 @@ namespace MyJobLeads.Controllers
             var contact = new ContactByIdQuery(_unitOfWork).WithContactId(id).Execute();
             return View(contact);
         }
+
+        public virtual ActionResult GetSummary(int id)
+        {
+            var contact = new ContactByIdQuery(_unitOfWork).WithContactId(id).Execute();
+            if (contact == null)
+                return new EmptyResult();
+
+            return PartialView(MVC.Contact.Views._ContactSidebarDisplay, contact);
+        }
     }
 }

@@ -46,6 +46,11 @@ namespace MyJobLeads.Controllers {
         public System.Web.Mvc.ActionResult Details() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Details);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult GetSummary() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.GetSummary);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ContactController Actions { get { return MVC.Contact; } }
@@ -62,6 +67,7 @@ namespace MyJobLeads.Controllers {
             public readonly string Add = "Add";
             public readonly string Edit = "Edit";
             public readonly string Details = "Details";
+            public readonly string GetSummary = "GetSummary";
         }
 
 
@@ -102,6 +108,12 @@ namespace MyJobLeads.Controllers {
 
         public override System.Web.Mvc.ActionResult Details(int id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult GetSummary(int id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.GetSummary);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }

@@ -115,14 +115,16 @@
         .Render();
     }
 
-    @(Html.Telerik().ScriptRegistrar()
-        .OnDocumentReady(@<text>
-            // Open the hidden window when the feedback-link is clicked
-            $('#feedback-link').click(function(e) {
-                e.preventDefault();
-                $('#FeedbackWindow').data('tWindow').center().open();
-            });
-        </text>)
+    @(
+        Html.Telerik().ScriptRegistrar()
+            //.Scripts(s => s.GetGroup("scripts", g => g.Combined(true).Compress(true)))
+            .OnDocumentReady(@<text>
+                // Open the hidden window when the feedback-link is clicked
+                $('#feedback-link').click(function(e) {
+                    e.preventDefault();
+                    $('#FeedbackWindow').data('tWindow').center().open();
+                });
+            </text>)
     )
 </body>
 </html>

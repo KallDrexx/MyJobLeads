@@ -5,12 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     // Setup the sidebar
+    string sidebar = "<div id=\"contactsummary\">";
+    
     if (Model.Contact != null)
     {
-        ViewBag.Sidebar = new HtmlString(Html.Partial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact).ToString() +
-                                            Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company).ToString());
+        sidebar = Html.Partial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact).ToString();
     }
-    else { ViewBag.Sidebar = Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company); }
+
+    sidebar = string.Concat(sidebar, "</div>", Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company));
+    ViewBag.Sidebar = new HtmlString(sidebar);
 }
 
 @if (Model.Id == 0)
@@ -28,6 +31,21 @@ else
 
 <br />
 
+@(Html.Telerik().ScriptRegistrar().OnDocumentReady(
+    @<text>
+        // Upon contact selection change, update the contact sidebar summary
+        $('#contactlist').change(function() {
+            $.ajax({
+                url: '/Contact/GetSummary/' + $(this).val(),
+                success: function(html) {
+                    $('#contactsummary').html(html);
+                }
+            });
+        });
+    </text>)
+    //.Scripts(s => s.AddSharedGroup("scripts"))
+)
+
 @using (Html.BeginForm(MVC.Task.Edit()))
 {
     @Html.HiddenFor(x => x.Id)
@@ -42,7 +60,7 @@ else
         <tr>
             <td align="right">Contact:</td>
             <td>
-                @Html.DropDownListFor(x => x.AssociatedContactId, Model.CompanyContactList)
+                @Html.DropDownListFor(x => x.AssociatedContactId, Model.CompanyContactList, new { id = "contactlist" })
             </td>
         </tr>
 
