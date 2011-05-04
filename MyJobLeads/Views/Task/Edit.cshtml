@@ -31,7 +31,7 @@ else
 
 <br />
 
-@(Html.Telerik().ScriptRegistrar().OnDocumentReady(
+@{Html.Telerik().ScriptRegistrar().OnDocumentReady(
     @<text>
         // Upon contact selection change, update the contact sidebar summary
         $('#contactlist').change(function() {
@@ -42,9 +42,8 @@ else
                 }
             });
         });
-    </text>)
-    //.Scripts(s => s.AddSharedGroup("scripts"))
-)
+    </text>);
+}
 
 @using (Html.BeginForm(MVC.Task.Edit()))
 {
