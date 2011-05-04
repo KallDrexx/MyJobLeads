@@ -9,9 +9,9 @@ namespace MyJobLeads.DomainModel.Providers.Search
 {
     public interface ISearchProvider
     {
-        void Add(Company company);
-        void Add(Contact contact);
-        void Add(Task task);
+        void Index(Company company);
+        void Index(Contact contact);
+        void Index(Task task);
 
         void Remove(Company company);
         void Remove(Contact contact);
