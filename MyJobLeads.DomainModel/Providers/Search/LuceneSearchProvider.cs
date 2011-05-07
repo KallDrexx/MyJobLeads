@@ -64,7 +64,35 @@ namespace MyJobLeads.DomainModel.Providers.Search
 
         public void Index(Contact contact)
         {
-            throw new NotImplementedException();
+            if (contact == null)
+                throw new ArgumentNullException("Cannot index a null company");
+
+            // Create a document for the contact
+            var document = new Document();
+            document.Add(new Field(Constants.CONTACT_ID, contact.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            document.Add(new Field(Constants.CONTACT_ASSISTANT, contact.Assistant ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
+            document.Add(new Field(Constants.CONTACT_DIRECTPHONE, contact.DirectPhone ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
+            document.Add(new Field(Constants.CONTACT_EMAIL, contact.Email ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
+            document.Add(new Field(Constants.CONTACT_EXTENSION, contact.Extension ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
+            document.Add(new Field(Constants.CONTACT_MOBILEPHONE, contact.MobilePhone ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
+            document.Add(new Field(Constants.CONTACT_NAME, contact.Name ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
+            document.Add(new Field(Constants.CONTACT_NOTES, contact.Notes ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
+            document.Add(new Field(Constants.CONTACT_REFERREDBY, contact.ReferredBy ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
+
+            // Remove any previous documents for the contact and add the new one
+            Remove(contact);
+
+            var writer = OpenIndex();
+            try
+            {
+                writer.AddDocument(document);
+                writer.Optimize();
+            }
+            finally
+            {
+                // Make sure the writer attempts to close even if an exception occurs, to prevent stale locks
+                writer.Close();
+            }
         }
 
         public void Index(Task task)
@@ -86,7 +114,14 @@ namespace MyJobLeads.DomainModel.Providers.Search
 
         public void Remove(Contact contact)
         {
-            throw new NotImplementedException();
+            if (contact == null)
+                throw new ArgumentNullException("Can't remove the index for a null contact");
+
+            // Delete all documents that have a matching contact id
+            var writer = OpenIndex();
+            writer.DeleteDocuments(new Term(Constants.CONTACT_ID, contact.Id.ToString()));
+            writer.Optimize();
+            writer.Close();
         }
 
         public void Remove(Task task)
