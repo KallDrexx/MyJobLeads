@@ -49,6 +49,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.4.1.10311.0\lib\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Lucene.Net">
+      <HintPath>..\packages\Lucene.2.9.2.2\lib\Lucene.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\Libs\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
     </Reference>
@@ -105,6 +108,7 @@
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\Search\ISearchProvider.cs" />
+    <Compile Include="Providers\Search\LuceneSearchProvider.cs" />
     <Compile Include="ViewModels\SearchProviderResult.cs" />
     <Compile Include="Queries\Companies\CompaniesByJobSearchIdQuery.cs" />
     <Compile Include="Queries\Companies\CompanyByIdQuery.cs" />
