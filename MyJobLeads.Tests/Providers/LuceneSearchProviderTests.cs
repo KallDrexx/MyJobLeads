@@ -12,6 +12,7 @@ using Lucene.Net.Store;
 using Lucene.Net.QueryParsers;
 using Lucene.Net.Search;
 using Lucene.Net.Documents;
+using MyJobLeads.DomainModel.ViewModels;
 
 namespace MyJobLeads.Tests.Providers
 {
@@ -425,6 +426,200 @@ namespace MyJobLeads.Tests.Providers
         {
             // Act
             _provider.Remove((Task)null);
+        }
+
+        #endregion
+
+        #region Search Tests
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Search_Throws_ArgumentException_When_Searchstring_Is_Null()
+        {
+            // Act
+            _provider.Search(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Search_Throws_ArgumentException_When_Searchstring_Is_Whitespace()
+        {
+            // Act
+            _provider.Search("  ");
+        }
+
+        [TestMethod]
+        public void Search_Returns_No_Results_With_No_Match()
+        {
+            // Setup
+            Company company = new Company { Id = 2 };
+            Contact contact = new Contact { Id = 3 };
+            Task task = new Task { Id = 4 };
+
+            _provider.Index(company);
+            _provider.Index(contact);
+            _provider.Index(task);
+
+            // Act
+            SearchProviderResult result = _provider.Search("Test");
+
+            // Verify
+            Assert.IsNotNull(result, "Search provider result was null");
+            Assert.AreEqual(0, result.FoundCompanyIds.Count, "Search provider result's found company list item count was incorrect");
+            Assert.AreEqual(0, result.FoundContactIds.Count, "Search provider result's found contact list item count was incorrect");
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Search provider result's found task list item count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Company_By_Name()
+        {
+            // Setup 
+            Company company = new Company { Id = 2, Name = "My Name" };
+            _provider.Index(company);
+
+            // Act
+            SearchProviderResult result = _provider.Search("Name");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(company.Id, result.FoundCompanyIds[0], "Found company id was incorrect");
+
+            Assert.AreEqual(0, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Company_By_Phone()
+        {
+            // Setup 
+            Company company = new Company { Id = 2, Phone = "111-222-3334" };
+            _provider.Index(company);
+
+            // Act
+            SearchProviderResult result = _provider.Search("111-222-3334");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(company.Id, result.FoundCompanyIds[0], "Found company id was incorrect");
+
+            Assert.AreEqual(0, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Company_By_City()
+        {
+            // Setup 
+            Company company = new Company { Id = 2, City = "Orlando" };
+            _provider.Index(company);
+
+            // Act
+            SearchProviderResult result = _provider.Search("Orlando");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(company.Id, result.FoundCompanyIds[0], "Found company id was incorrect");
+
+            Assert.AreEqual(0, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Company_By_State()
+        {
+            // Setup 
+            Company company = new Company { Id = 2, State = "Florida" };
+            _provider.Index(company);
+
+            // Act
+            SearchProviderResult result = _provider.Search("Florida");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(company.Id, result.FoundCompanyIds[0], "Found company id was incorrect");
+
+            Assert.AreEqual(0, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Company_By_Zip()
+        {
+            // Setup 
+            Company company = new Company { Id = 2, Zip = "32804" };
+            _provider.Index(company);
+
+            // Act
+            SearchProviderResult result = _provider.Search("32804");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(company.Id, result.FoundCompanyIds[0], "Found company id was incorrect");
+
+            Assert.AreEqual(0, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Company_By_MetroArea()
+        {
+            // Setup 
+            Company company = new Company { Id = 2, MetroArea = "Orlando" };
+            _provider.Index(company);
+
+            // Act
+            SearchProviderResult result = _provider.Search("Orlando");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(company.Id, result.FoundCompanyIds[0], "Found company id was incorrect");
+
+            Assert.AreEqual(0, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Company_By_Industry()
+        {
+            // Setup 
+            Company company = new Company { Id = 2, Industry = "Engineering" };
+            _provider.Index(company);
+
+            // Act
+            SearchProviderResult result = _provider.Search("Engineering");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(company.Id, result.FoundCompanyIds[0], "Found company id was incorrect");
+
+            Assert.AreEqual(0, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Company_By_Notes()
+        {
+            // Setup 
+            Company company = new Company { Id = 2, Notes = "This is my note" };
+            _provider.Index(company);
+
+            // Act
+            SearchProviderResult result = _provider.Search("note");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(company.Id, result.FoundCompanyIds[0], "Found company id was incorrect");
+
+            Assert.AreEqual(0, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
         }
 
         #endregion

@@ -11,6 +11,7 @@ using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Analysis;
 using Lucene.Net.Documents;
 using Lucene.Net.Search;
+using Lucene.Net.QueryParsers;
 
 namespace MyJobLeads.DomainModel.Providers.Search
 {
@@ -163,7 +164,49 @@ namespace MyJobLeads.DomainModel.Providers.Search
 
         public SearchProviderResult Search(string searchString)
         {
-            throw new NotImplementedException();
+            const int MAX_RESULTS = 10000;
+
+            if (string.IsNullOrWhiteSpace(searchString))
+                throw new ArgumentException("Provided search string is empty");
+
+            // Update the search string to make each word allow fuzzyness
+            searchString = searchString.Replace("~", string.Empty).Replace(" ", "~ ") + "~";
+
+            // Perform the search
+            string[] searchfields = new string[] 
+            {
+                Constants.COMPANY_CITY, Constants.COMPANY_INDUSTRY, Constants.COMPANY_METRO, Constants.COMPANY_NAME, Constants.COMPANY_NOTES,
+                Constants.COMPANY_PHONE, Constants.COMPANY_STATE, Constants.COMPANY_ZIP
+            };
+            var parser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, searchfields, new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29));
+            parser.SetDefaultOperator(QueryParser.Operator.AND);
+
+            var query = parser.Parse(searchString);
+            var directory = FSDirectory.Open(new DirectoryInfo(LuceneIndexBaseDirectory));
+            var searcher = new IndexSearcher(directory, true);
+            var hits = searcher.Search(query, MAX_RESULTS);
+
+            // Go through found documents and add them to the result
+            var result = new SearchProviderResult();
+
+            foreach(var scoreDoc in hits.scoreDocs)
+            {
+                string id;
+
+                // Retrieve the document, and determine if it's a company, contact, or task and add it to the correct list
+                var doc = searcher.Doc(scoreDoc.doc);
+
+                if ((id = doc.Get(Constants.COMPANY_ID)) != null)
+                    result.FoundCompanyIds.Add(Convert.ToInt32(id));
+
+                else if ((id = doc.Get(Constants.CONTACT_ID)) != null)
+                    result.FoundContactIds.Add(Convert.ToInt32(id));
+
+                else if ((id = doc.Get(Constants.TASK_ID)) != null)
+                    result.FoundTaskIds.Add(Convert.ToInt32(id));
+            }
+
+            return result;
         }
 
         #endregion
