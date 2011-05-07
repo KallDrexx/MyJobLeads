@@ -311,6 +311,122 @@ namespace MyJobLeads.Tests.Providers
             _provider.Remove((Contact)null);
         }
 
+        [TestMethod]
+        public void Can_Index_Tasks()
+        {
+            // Setup
+            DateTime testdate = DateTime.Now;
+
+            Task task = new Task
+            {
+                Id = 3,
+                Name = "Name",
+                TaskDate = testdate
+            };
+
+            // Act
+            _provider.Index(task);
+
+            // Verify
+            IndexSearcher searcher;
+            TopDocs hits = SearchIndex(LuceneSearchProvider.Constants.TASK_ID, "3", out searcher);
+            Assert.AreEqual(1, hits.scoreDocs.Length, "Incorrect number of documents returned");
+
+            Document doc = searcher.Doc(hits.scoreDocs[0].doc);
+            Assert.AreEqual("3", doc.Get(LuceneSearchProvider.Constants.TASK_ID), "Document had an incorrect contact id value");
+            Assert.AreEqual("Name", doc.Get(LuceneSearchProvider.Constants.TASK_NAME), "Document had an incorrect name value");
+        }
+
+        [TestMethod]
+        public void Tasks_Null_Properties_Index_As_Empty_String()
+        {
+            // Setup
+            Task task = new Task { Id = 3 };
+
+            // Act
+            _provider.Index(task);
+
+            // Verify
+            IndexSearcher searcher;
+            TopDocs hits = SearchIndex(LuceneSearchProvider.Constants.TASK_ID, "3", out searcher);
+            Assert.AreEqual(1, hits.scoreDocs.Length, "Incorrect number of documents returned");
+
+            Document doc = searcher.Doc(hits.scoreDocs[0].doc);
+            Assert.AreEqual("3", doc.Get(LuceneSearchProvider.Constants.TASK_ID), "Document had an incorrect contact id value");
+            Assert.AreEqual(string.Empty, doc.Get(LuceneSearchProvider.Constants.TASK_NAME), "Document had an incorrect name value");
+        }
+
+        [TestMethod]
+        public void Can_Index_Multiple_Tasks()
+        {
+            // Setup
+            Task task1 = new Task { Id = 3, Name = "Name" };
+            Task task2 = new Task { Id = 4, Name = "Name" };
+
+            // Act
+            _provider.Index(task1);
+            _provider.Index(task2);
+
+            // Verify
+            IndexSearcher searcher;
+            TopDocs hits = SearchIndex(LuceneSearchProvider.Constants.TASK_NAME, "Name", out searcher);
+
+            Assert.AreEqual(2, hits.scoreDocs.Length, "Incorrect number of documents returned");
+        }
+
+        [TestMethod]
+        public void Can_Remove_Task_From_Index()
+        {
+            // Setup
+            Task task = new Task { Id = 3 };
+            _provider.Index(task);
+
+            // Act
+            _provider.Remove(task);
+
+            // Verify
+            IndexSearcher searcher;
+            TopDocs hits = SearchIndex(LuceneSearchProvider.Constants.TASK_ID, "3", out searcher);
+
+            Assert.AreEqual(0, hits.scoreDocs.Length, "Incorrect number of documents returned");
+        }
+
+        [TestMethod]
+        public void ReIndexing_Task_Updates_Existing_Contact_Document()
+        {
+            // Setup
+            Task task = new Task { Id = 3, Name = "Name1" };
+            _provider.Index(task);
+            task.Name = "Name2";
+
+            // Act
+            _provider.Index(task);
+
+            // Verify
+            IndexSearcher searcher;
+            TopDocs hits = SearchIndex(LuceneSearchProvider.Constants.TASK_ID, "3", out searcher);
+            Assert.AreEqual(1, hits.scoreDocs.Length, "Incorrect number of documents returned");
+
+            Document doc = searcher.Doc(hits.scoreDocs[0].doc);
+            Assert.AreEqual("Name2", doc.Get(LuceneSearchProvider.Constants.TASK_NAME), "Document had an incorrect name");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Indexing_Null_Task_Throws_ArgumentNullException()
+        {
+            // Act
+            _provider.Index((Task)null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Removing_Null_Task_Throws_ArgumentNullException()
+        {
+            // Act
+            _provider.Remove((Task)null);
+        }
+
         #endregion
     }
 }

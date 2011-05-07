@@ -97,7 +97,28 @@ namespace MyJobLeads.DomainModel.Providers.Search
 
         public void Index(Task task)
         {
-            throw new NotImplementedException();
+            if (task == null)
+                throw new ArgumentNullException("Can't index a null task");
+
+            // Create a document for the task
+            var document = new Document();
+            document.Add(new Field(Constants.TASK_ID, task.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            document.Add(new Field(Constants.TASK_NAME, task.Name ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
+
+            // Remove any previous documents for the task and add the new one
+            Remove(task);
+
+            var writer = OpenIndex();
+            try
+            {
+                writer.AddDocument(document);
+                writer.Optimize();
+            }
+            finally
+            {
+                // Make sure the writer attempts to close even if an exception occurs, to prevent stale locks
+                writer.Close();
+            }
         }
 
         public void Remove(Company company)
@@ -126,7 +147,14 @@ namespace MyJobLeads.DomainModel.Providers.Search
 
         public void Remove(Task task)
         {
-            throw new NotImplementedException();
+            if (task == null)
+                throw new ArgumentNullException("Can't remove the index for a null task");
+
+            // Delete all documents with a matching task id
+            var writer = OpenIndex();
+            writer.DeleteDocuments(new Term(Constants.TASK_ID, task.Id.ToString()));
+            writer.Optimize();
+            writer.Close();
         }
 
         #endregion
