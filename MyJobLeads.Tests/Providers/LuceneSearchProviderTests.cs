@@ -35,7 +35,8 @@ namespace MyJobLeads.Tests.Providers
 
             // Load the index and delete all documents so it's fresh for the test
             _indexDirectory = Lucene.Net.Store.FSDirectory.Open(new DirectoryInfo(_provider.LuceneIndexBaseDirectory));
-            var writer = new IndexWriter(_indexDirectory, new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29), true, IndexWriter.MaxFieldLength.UNLIMITED);
+            bool createNewIndex = !IndexReader.IndexExists(_indexDirectory);
+            var writer = new IndexWriter(_indexDirectory, new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29), createNewIndex, IndexWriter.MaxFieldLength.UNLIMITED);
             writer.DeleteAll();
             writer.Close();
         }
