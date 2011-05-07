@@ -18,10 +18,11 @@ namespace MyJobLeads.Tests.Providers
         [TestMethod]
         public void Can_Get_Lucene_Working()
         {
-            string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MyJobLeadsLuceneTests";
+            string directoryPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MyJobLeadsLuceneTests";
+            var indexDirectory = Lucene.Net.Store.FSDirectory.Open(new DirectoryInfo(directoryPath));
 
             // Build the index
-            var writer = new IndexWriter(directory, new StandardAnalyzer(), true);
+            var writer = new IndexWriter(indexDirectory, new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29), true, IndexWriter.MaxFieldLength.UNLIMITED);
 
             try
             {
@@ -30,9 +31,10 @@ namespace MyJobLeads.Tests.Providers
                 var doc2 = new Document();
 
                 doc1.Add(new Field("id", "doc1", Field.Store.YES, Field.Index.ANALYZED));
-                doc1.Add(new Field("content", "testing1", Field.Store.YES, Field.Index.ANALYZED));
+                doc1.Add(new Field("content", "This is my first document", Field.Store.YES, Field.Index.ANALYZED));
                 doc2.Add(new Field("id", "doc2", Field.Store.YES, Field.Index.ANALYZED));
-                doc2.Add(new Field("content", "testing2", Field.Store.YES, Field.Index.ANALYZED));
+                doc2.Add(new Field("content", "The big red", Field.Store.YES, Field.Index.ANALYZED));
+                doc2.Add(new Field("content2", "fox jumped", Field.Store.YES, Field.Index.ANALYZED));
 
                 writer.AddDocument(doc1);
                 writer.AddDocument(doc2);
@@ -41,9 +43,16 @@ namespace MyJobLeads.Tests.Providers
                 writer.Close();
 
                 // Search for doc2
-                var parser = new QueryParser("id", new StandardAnalyzer());
-                var query = parser.Parse("doc2");
-                var searcher = new IndexSearcher(directory);
+                string queryString = "bag rad";
+                queryString = queryString.Replace("~", string.Empty).Replace(" ", "~ ") + "~";
+
+                var parser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, 
+                                                        new string[] {"content", "content2"}, 
+                                                        new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29));
+                parser.SetDefaultOperator(QueryParser.Operator.AND);
+
+                var query = parser.Parse(queryString);
+                var searcher = new IndexSearcher(indexDirectory, true);
                 var hits = searcher.Search(query);
 
                 Assert.AreEqual(1, hits.Length());
@@ -51,7 +60,7 @@ namespace MyJobLeads.Tests.Providers
                 var document = hits.Doc(0);
 
                 Assert.AreEqual("doc2", document.Get("id"));
-                Assert.AreEqual("testing2", document.Get("content"));
+                Assert.AreEqual("The big red", document.Get("content"));
             }
             finally
             {
