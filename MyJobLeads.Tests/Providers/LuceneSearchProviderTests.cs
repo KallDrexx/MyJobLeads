@@ -470,6 +470,8 @@ namespace MyJobLeads.Tests.Providers
             Assert.AreEqual(0, result.FoundTaskIds.Count, "Search provider result's found task list item count was incorrect");
         }
 
+        #region Entity Field Search Tests
+
         [TestMethod]
         public void Search_Finds_Company_By_Name()
         {
@@ -791,6 +793,8 @@ namespace MyJobLeads.Tests.Providers
             Assert.AreEqual(1, result.FoundTaskIds.Count, "Found task count was incorrect");
             Assert.AreEqual(task.Id, result.FoundTaskIds[0], "Found task id value was incorrect");
         }
+
+        #endregion
 
         #endregion
     }

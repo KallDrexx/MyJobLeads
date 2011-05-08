@@ -170,7 +170,7 @@ namespace MyJobLeads.DomainModel.Providers.Search
                 throw new ArgumentException("Provided search string is empty");
 
             // Update the search string to make each word allow fuzzyness
-            searchString = searchString.Replace("~", string.Empty).Replace(" ", "~ ") + "~";
+            searchString = searchString.Replace("~", string.Empty) + "~";
 
             // Perform the search
             string[] searchfields = new string[] 
