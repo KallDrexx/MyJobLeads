@@ -176,7 +176,9 @@ namespace MyJobLeads.DomainModel.Providers.Search
             string[] searchfields = new string[] 
             {
                 Constants.COMPANY_CITY, Constants.COMPANY_INDUSTRY, Constants.COMPANY_METRO, Constants.COMPANY_NAME, Constants.COMPANY_NOTES,
-                Constants.COMPANY_PHONE, Constants.COMPANY_STATE, Constants.COMPANY_ZIP
+                Constants.COMPANY_PHONE, Constants.COMPANY_STATE, Constants.COMPANY_ZIP, Constants.CONTACT_ASSISTANT, Constants.CONTACT_DIRECTPHONE,
+                Constants.CONTACT_EMAIL, Constants.CONTACT_EXTENSION, Constants.CONTACT_MOBILEPHONE, Constants.CONTACT_NAME, Constants.CONTACT_NOTES,
+                Constants.CONTACT_REFERREDBY, Constants.TASK_NAME
             };
             var parser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, searchfields, new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29));
             parser.SetDefaultOperator(QueryParser.Operator.AND);

@@ -622,6 +622,176 @@ namespace MyJobLeads.Tests.Providers
             Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
         }
 
+        [TestMethod]
+        public void Search_Finds_Contact_By_Name()
+        {
+            // Setup 
+            Contact contact = new Contact { Id = 2, Name = "My Name" };
+            _provider.Index(contact);
+
+            // Act
+            SearchProviderResult result = _provider.Search("Name");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(1, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(contact.Id, result.FoundContactIds[0], "Found contact id value was incorrect");
+
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Contact_By_Assistant()
+        {
+            // Setup 
+            Contact contact = new Contact { Id = 2, Assistant = "Assistant" };
+            _provider.Index(contact);
+
+            // Act
+            SearchProviderResult result = _provider.Search("Assistant");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(1, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(contact.Id, result.FoundContactIds[0], "Found contact id value was incorrect");
+
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Contact_By_DirectPhone()
+        {
+            // Setup 
+            Contact contact = new Contact { Id = 2, DirectPhone = "555-333-2323" };
+            _provider.Index(contact);
+
+            // Act
+            SearchProviderResult result = _provider.Search("555-333-2323");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(1, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(contact.Id, result.FoundContactIds[0], "Found contact id value was incorrect");
+
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Contact_By_Email()
+        {
+            // Setup 
+            Contact contact = new Contact { Id = 2, Email = "blah@blah.com" };
+            _provider.Index(contact);
+
+            // Act
+            SearchProviderResult result = _provider.Search("blah@blah.com");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(1, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(contact.Id, result.FoundContactIds[0], "Found contact id value was incorrect");
+
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Contact_By_Extension()
+        {
+            // Setup 
+            Contact contact = new Contact { Id = 2, Extension = "23" };
+            _provider.Index(contact);
+
+            // Act
+            SearchProviderResult result = _provider.Search("23");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(1, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(contact.Id, result.FoundContactIds[0], "Found contact id value was incorrect");
+
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Contact_By_MobilePhone()
+        {
+            // Setup 
+            Contact contact = new Contact { Id = 2, MobilePhone = "test" };
+            _provider.Index(contact);
+
+            // Act
+            SearchProviderResult result = _provider.Search("test");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(1, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(contact.Id, result.FoundContactIds[0], "Found contact id value was incorrect");
+
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Contact_By_Notes()
+        {
+            // Setup 
+            Contact contact = new Contact { Id = 2, Notes = "Notes" };
+            _provider.Index(contact);
+
+            // Act
+            SearchProviderResult result = _provider.Search("Notes");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(1, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(contact.Id, result.FoundContactIds[0], "Found contact id value was incorrect");
+
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Contact_By_ReferredBy()
+        {
+            // Setup 
+            Contact contact = new Contact { Id = 2, ReferredBy = "ReferredBy" };
+            _provider.Index(contact);
+
+            // Act
+            SearchProviderResult result = _provider.Search("ReferredBy");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(1, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(contact.Id, result.FoundContactIds[0], "Found contact id value was incorrect");
+
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Task_By_Name()
+        {
+            // Setup 
+            Task task = new Task { Id = 2, Name = "Name" };
+            _provider.Index(task);
+
+            // Act
+            SearchProviderResult result = _provider.Search("Name");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(0, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(1, result.FoundTaskIds.Count, "Found task count was incorrect");
+            Assert.AreEqual(task.Id, result.FoundTaskIds[0], "Found task id value was incorrect");
+        }
+
         #endregion
     }
 }
