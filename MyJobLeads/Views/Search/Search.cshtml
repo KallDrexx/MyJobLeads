@@ -36,7 +36,7 @@
     <ul>
         @foreach (var contact in Model.Results.Contacts)
         {
-            <li>@Html.ActionLink(contact.Name, MVC.Company.Details(contact.Id))</li>
+            <li>@Html.ActionLink(contact.Name, MVC.Contact.Details(contact.Id))</li>
         }
     </ul>
 }
@@ -47,7 +47,7 @@
     <ul>
         @foreach (var task in Model.Results.Tasks)
         {
-            <li>@Html.ActionLink(task.Name, MVC.Company.Details(task.Id))</li>
+            <li>@Html.ActionLink(task.Name, MVC.Task.Details(task.Id))</li>
         }
     </ul>
 }
