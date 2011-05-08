@@ -6,24 +6,34 @@ using System.Web.Mvc;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Commands.Search;
+using MyJobLeads.DomainModel.Queries.Search;
+using MyJobLeads.ViewModels;
 
 namespace MyJobLeads.Controllers
 {
     public partial class SearchController : MyJobLeadsBaseController
     {
-        protected ISearchProvider _searchProvider;
+        protected RefreshSearchIndexCommand _refreshSearchIndexCommand;
+        protected EntitySearchQuery _entitySearchQuery;
 
-        public SearchController(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
+        public SearchController(RefreshSearchIndexCommand refreshSearchIndexCommand, EntitySearchQuery entitySearchQuery)
         {
-            _unitOfWork = unitOfWork;
-            _searchProvider = searchProvider;
+            _refreshSearchIndexCommand = refreshSearchIndexCommand;
+            _entitySearchQuery = entitySearchQuery;
         }
 
         public virtual ActionResult RefreshSearchIndex()
         {
             // Perform the re-index command
-            new RefreshSearchIndexCommand(_unitOfWork, _searchProvider).Execute();
+            _refreshSearchIndexCommand.Execute();
             return View();
+        }
+
+        public virtual ActionResult Search(string query)
+        {
+            // Perform the search
+            var result = _entitySearchQuery.WithSearchQuery(query).Execute();
+            return View(new PerformedSearchViewModel { SearchQuery = query, Results = result });
         }
     }
 }

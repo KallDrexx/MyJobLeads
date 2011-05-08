@@ -263,6 +263,7 @@
     <Compile Include="ViewModels\Accounts\IMembershipService.cs" />
     <Compile Include="ViewModels\Contacts\EditContactViewModel.cs" />
     <Compile Include="ViewModels\JobSearches\JobSearchDetailsViewModel.cs" />
+    <Compile Include="ViewModels\PerformedSearchViewModel.cs" />
     <Compile Include="ViewModels\Tasks\EditTaskViewModel.cs" />
     <Compile Include="MyJobLeadsBaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -679,6 +680,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModels\Search\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyJobLeads.DomainModel\MyJobLeads.DomainModel.csproj">
@@ -727,6 +729,7 @@
     <Content Include="Views\Task\_CompanyTaskDisplay.cshtml" />
     <Content Include="Views\Contact\_CompanyContactDisplay.cshtml" />
     <Content Include="Views\Search\RefreshSearchIndex.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\EditorLocalization.bg-BG.resx">

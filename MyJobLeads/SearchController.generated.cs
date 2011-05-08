@@ -31,6 +31,11 @@ namespace MyJobLeads.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Search() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Search);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public SearchController Actions { get { return MVC.Search; } }
@@ -45,6 +50,7 @@ namespace MyJobLeads.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string RefreshSearchIndex = "RefreshSearchIndex";
+            public readonly string Search = "Search";
         }
 
 
@@ -54,6 +60,7 @@ namespace MyJobLeads.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string RefreshSearchIndex = "~/Views/Search/RefreshSearchIndex.cshtml";
+            public readonly string Search = "~/Views/Search/Search.cshtml";
         }
     }
 
@@ -63,6 +70,12 @@ namespace MyJobLeads.Controllers {
 
         public override System.Web.Mvc.ActionResult RefreshSearchIndex() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.RefreshSearchIndex);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Search(string query) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Search);
+            callInfo.RouteValueDictionary.Add("query", query);
             return callInfo;
         }
 

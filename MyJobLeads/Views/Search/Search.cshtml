@@ -1,0 +1,53 @@
+﻿@model MyJobLeads.ViewModels.PerformedSearchViewModel
+
+@{
+    ViewBag.Title = "Search Results";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    @using (Html.BeginForm(MVC.Search.Search()))
+    {
+        @:Search: @Html.TextBox("query") <input type="submit" value="Search" />
+    }
+</p>
+
+<p>Search results matching "@Model.SearchQuery"</p>
+
+@if (Model.Results.Companies.Count == 0 && Model.Results.Contacts.Count == 0 && Model.Results.Tasks.Count == 0)
+{
+    <p>No companies, contacts or tasks were found for your search phrase</p>
+}
+
+@if (Model.Results.Companies.Count > 0)
+{
+    <h2>Companies</h2>
+    <ul>
+        @foreach (var company in Model.Results.Companies)
+        {
+            <li>@Html.ActionLink(company.Name, MVC.Company.Details(company.Id))</li>
+        }
+    </ul>
+}
+
+@if (Model.Results.Contacts.Count > 0)
+{
+    <h2>Contacts</h2>
+    <ul>
+        @foreach (var contact in Model.Results.Contacts)
+        {
+            <li>@Html.ActionLink(contact.Name, MVC.Company.Details(contact.Id))</li>
+        }
+    </ul>
+}
+
+@if (Model.Results.Tasks.Count > 0)
+{
+    <h2>Tasks</h2>
+    <ul>
+        @foreach (var task in Model.Results.Tasks)
+        {
+            <li>@Html.ActionLink(task.Name, MVC.Company.Details(task.Id))</li>
+        }
+    </ul>
+}
