@@ -119,6 +119,7 @@
     <Compile Include="Commands\Companies\EditCompanyCommandTests.cs" />
     <Compile Include="Commands\Contacts\CreateContactCommandTests.cs" />
     <Compile Include="Commands\Contacts\EditContactCommandTests.cs" />
+    <Compile Include="Commands\Search\RefreshSearchIndexCommandTests.cs" />
     <Compile Include="Commands\Users\CreateUserCommandTests.cs" />
     <Compile Include="Commands\JobSearches\CreateJobSearchForUserCommandTests.cs" />
     <Compile Include="Commands\JobSearches\EditJobSearchCommandTests.cs" />
