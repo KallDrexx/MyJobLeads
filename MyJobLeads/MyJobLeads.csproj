@@ -233,6 +233,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobSearchController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -249,9 +250,12 @@
     <Compile Include="Infrastructure\MyJobLeadsMembershipProvider.cs" />
     <Compile Include="Infrastructure\MyJobLeadsMembershipUser.cs" />
     <Compile Include="Infrastructure\Installers\ControllerInstaller.cs" />
-    <Compile Include="Infrastructure\Installers\UnitOfWorkInstaller.cs" />
+    <Compile Include="Infrastructure\Installers\MyJobLeadsInstaller.cs" />
     <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
     <Compile Include="JobSearchController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SearchController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Accounts\AccountModels.cs" />
@@ -722,6 +726,7 @@
     <Content Include="Views\Task\_OpenTaskListItem.cshtml" />
     <Content Include="Views\Task\_CompanyTaskDisplay.cshtml" />
     <Content Include="Views\Contact\_CompanyContactDisplay.cshtml" />
+    <Content Include="Views\Search\RefreshSearchIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\EditorLocalization.bg-BG.resx">
