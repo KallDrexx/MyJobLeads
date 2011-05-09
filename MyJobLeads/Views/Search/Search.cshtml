@@ -21,11 +21,32 @@
 
 @if (Model.Results.Companies.Count > 0)
 {
-    <h2>Companies</h2>
+    <h2>Companies That Match</h2>
     <ul>
-        @foreach (var company in Model.Results.Companies)
+        @foreach (var company in Model.Results.Companies.OrderBy(x => x.Name).ToArray())
         {
-            <li>@Html.ActionLink(company.Name, MVC.Company.Details(company.Id))</li>
+            <li>
+                @Html.ActionLink(company.Name, MVC.Company.Details(company.Id))
+                <ul>
+                    @{
+                        // Form company location string
+                        bool citySpecified = !string.IsNullOrWhiteSpace(company.City);
+                        bool stateSpecified = !string.IsNullOrWhiteSpace(company.State);
+                        bool zipSpecified = !string.IsNullOrWhiteSpace(company.Zip);
+
+                        string location = string.Empty;
+                        if (citySpecified && stateSpecified) { location = string.Concat(company.City, ", ", company.State, " "); }
+                        else if (citySpecified) { location = company.City + " "; }
+                        else if (stateSpecified) { location = company.State + " "; }
+
+                        if (zipSpecified) { location += company.Zip; }
+                    }
+                    
+                    @if (!string.IsNullOrWhiteSpace(company.Phone)) { <li>Phone: @company.Phone:</li> }
+                    @if (!string.IsNullOrWhiteSpace(location)) { <li>Location: @location</li> }
+                    @if (!string.IsNullOrWhiteSpace(company.Notes)) { <li>@company.Notes</li> }
+                </ul>
+            </li>
         }
     </ul>
 }
@@ -34,9 +55,24 @@
 {
     <h2>Contacts</h2>
     <ul>
-        @foreach (var contact in Model.Results.Contacts)
+        @foreach (var contact in Model.Results.Contacts.OrderBy(x => x.Name).ToArray())
         {
-            <li>@Html.ActionLink(contact.Name, MVC.Contact.Details(contact.Id))</li>
+            <li>
+                @Html.ActionLink(contact.Name, MVC.Contact.Details(contact.Id))
+                <ul>
+                    <li>Contact for @Html.ActionLink(contact.Company.Name, MVC.Company.Details(contact.Company.Id))</li>
+
+                    @if (!string.IsNullOrWhiteSpace(contact.DirectPhone)) 
+                    { 
+                        <li>Direct Phone: @contact.DirectPhone @if (!string.IsNullOrWhiteSpace(contact.Extension)) { <text>Ext: @contact.Extension</text> }</li>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(contact.MobilePhone)) { <li>Mobile Phone: @contact.MobilePhone</li> }
+                    @if (!string.IsNullOrWhiteSpace(contact.Email)) { <li>Email: <a href="mailto:@contact.Email">@contact.Email</a></li> }
+                    @if (!string.IsNullOrWhiteSpace(contact.Assistant)) { <li>Assistant: @contact.Assistant</li> }
+                    @if (!string.IsNullOrWhiteSpace(contact.ReferredBy)) { <li>Referred By: @contact.ReferredBy</li> }
+                    @if (!string.IsNullOrWhiteSpace(contact.Notes)) { <li>Notes: @contact.Notes</li> }
+                </ul>
+            </li>
         }
     </ul>
 }
@@ -45,9 +81,18 @@
 {
     <h2>Tasks</h2>
     <ul>
-        @foreach (var task in Model.Results.Tasks)
+        @foreach (var task in Model.Results.Tasks.OrderBy(x => x.TaskDate).ThenBy(x => x.Name).ToArray())
         {
-            <li>@Html.ActionLink(task.Name, MVC.Task.Details(task.Id))</li>
+            <li>
+                @Html.ActionLink(task.Name, MVC.Task.Details(task.Id))
+                <ul>
+                    @if (task.ContactId != null) { <li>Task for @Html.ActionLink(task.Contact.Name, MVC.Contact.Details(task.Contact.Id))</li> }
+                    else { <li>Task for @Html.ActionLink(task.Company.Name, MVC.Company.Details(task.Company.Id))</li> }
+
+                    @if (task.Completed) { <li>Task Completed</li> } else { <li>Not Completed</li> }
+                    @if (task.TaskDate != null && task.TaskDate.HasValue) { <li>Due: @task.TaskDate.Value.ToString()</li> }
+                </ul>
+            </li>
         }
     </ul>
 }
