@@ -7,6 +7,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Providers.Search;
+using MyJobLeads.DomainModel.Providers.DataDirectory;
 
 namespace MyJobLeads.Infrastructure.Installers
 {
@@ -16,6 +17,7 @@ namespace MyJobLeads.Infrastructure.Installers
         {
             container.Register(Component.For<IUnitOfWork>().ImplementedBy<EFUnitOfWork>().LifeStyle.PerWebRequest);
             container.Register(Component.For<ISearchProvider>().ImplementedBy<LuceneSearchProvider>().LifeStyle.PerWebRequest);
+            container.Register(Component.For<IDataDirectoryProvider>().ImplementedBy<AppDataDirectoryProvider>().LifeStyle.Singleton);
         }
     }
 }

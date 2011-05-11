@@ -241,6 +241,7 @@
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\AppDataDirectoryProvider.cs" />
     <Compile Include="Infrastructure\Installers\CommandQueryInstaller.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -679,7 +680,6 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="ViewModels\Search\" />
   </ItemGroup>
   <ItemGroup>

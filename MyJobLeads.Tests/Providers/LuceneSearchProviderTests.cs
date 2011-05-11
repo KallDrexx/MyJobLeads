@@ -13,6 +13,8 @@ using Lucene.Net.QueryParsers;
 using Lucene.Net.Search;
 using Lucene.Net.Documents;
 using MyJobLeads.DomainModel.ViewModels;
+using Moq;
+using MyJobLeads.DomainModel.Providers.DataDirectory;
 
 namespace MyJobLeads.Tests.Providers
 {
@@ -32,7 +34,10 @@ namespace MyJobLeads.Tests.Providers
         [TestInitialize]
         public void Setup()
         {
-            _provider = new LuceneSearchProvider();
+            var dirProvider = new Mock<IDataDirectoryProvider>();
+            dirProvider.Setup(x => x.DataDirectoryPath).Returns(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MyJobLeadsTestIndex");
+
+            _provider = new LuceneSearchProvider(dirProvider.Object);
 
             // Load the index and delete all documents so it's fresh for the test
             _indexDirectory = Lucene.Net.Store.FSDirectory.Open(new DirectoryInfo(_provider.LuceneIndexBaseDirectory));

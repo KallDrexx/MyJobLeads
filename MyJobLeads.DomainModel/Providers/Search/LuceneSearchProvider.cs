@@ -12,14 +12,15 @@ using Lucene.Net.Analysis;
 using Lucene.Net.Documents;
 using Lucene.Net.Search;
 using Lucene.Net.QueryParsers;
+using MyJobLeads.DomainModel.Providers.DataDirectory;
 
 namespace MyJobLeads.DomainModel.Providers.Search
 {
     public class LuceneSearchProvider : ISearchProvider
     {
-        public LuceneSearchProvider()
+        public LuceneSearchProvider(IDataDirectoryProvider dataDirProvider)
         {
-            LuceneIndexBaseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MyJobLeadsIndex";
+            LuceneIndexBaseDirectory = dataDirProvider.DataDirectoryPath + "\\MyJobLeadsIndex";
         }
 
         #region Properties

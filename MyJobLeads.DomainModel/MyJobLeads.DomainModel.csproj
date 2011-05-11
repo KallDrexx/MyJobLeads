@@ -108,6 +108,7 @@
     <Compile Include="Exceptions\MJLUserNotFoundException.cs" />
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\DataDirectory\IDataDirectoryProvider.cs" />
     <Compile Include="Providers\Search\ISearchProvider.cs" />
     <Compile Include="Providers\Search\LuceneSearchProvider.cs" />
     <Compile Include="Queries\Search\EntitySearchQuery.cs" />
