@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyJobLeads.DomainModel.Entities.History
 {
@@ -14,6 +15,8 @@ namespace MyJobLeads.DomainModel.Entities.History
         public string Zip { get; set; }
         public string MetroArea { get; set; }
         public string Industry { get; set; }
+
+        [StringLength(Int32.MaxValue)]
         public string Notes { get; set; }
 
         public virtual int CompanyId { get; set; }

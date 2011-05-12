@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MyJobLeads.DomainModel.Entities.History;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyJobLeads.DomainModel.Entities
 {
@@ -16,6 +17,8 @@ namespace MyJobLeads.DomainModel.Entities
         public string Zip { get; set; }
         public string MetroArea { get; set; }
         public string Industry { get; set; }
+
+        [StringLength(Int32.MaxValue)]
         public string Notes { get; set; }
 
         public virtual JobSearch JobSearch { get; set; }

@@ -452,5 +452,23 @@ namespace MyJobLeads.Tests.Commands.Companies
             Assert.AreEqual(MJLConstants.HistoryUpdate, history.HistoryAction, "The history record's action value was incorrect");
             Assert.IsTrue(history.DateModified >= start && history.DateModified <= end, "The history record's modification date was incorrect");
         }
+
+        [TestMethod]
+        public void Can_Make_Notes_More_Than_128_Characters()
+        {
+            // Setup
+            InitializeTestEntities();
+            string newNotes = "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
+
+            // Act
+            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+                                               .RequestedByUserId(_user.Id)
+                                               .SetNotes(newNotes)
+                                               .Execute();
+
+            // Verify
+            Company result = _unitOfWork.Companies.Fetch().SingleOrDefault();
+            Assert.AreEqual(newNotes, result.Notes, "Company's notes were not set correctly");
+        }
     }
 }

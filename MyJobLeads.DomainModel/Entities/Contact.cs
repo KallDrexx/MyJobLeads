@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MyJobLeads.DomainModel.Entities.History;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyJobLeads.DomainModel.Entities
 {
@@ -16,6 +17,8 @@ namespace MyJobLeads.DomainModel.Entities
         public string Email { get; set; }
         public string Assistant { get; set; }
         public string ReferredBy { get; set; }
+
+        [StringLength(Int32.MaxValue)]
         public string Notes { get; set; }
 
         public virtual Company Company { get; set; }

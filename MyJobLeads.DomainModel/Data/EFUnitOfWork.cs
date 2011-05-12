@@ -8,6 +8,7 @@ using System.Data;
 using System.Transactions;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Entities.History;
+using System.Data.Entity.Validation;
 
 namespace MyJobLeads.DomainModel.Data
 {

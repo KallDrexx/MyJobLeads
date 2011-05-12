@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyJobLeads.DomainModel.Entities.History
 {
@@ -14,6 +15,8 @@ namespace MyJobLeads.DomainModel.Entities.History
         public string Email { get; set; }
         public string Assistant { get; set; }
         public string ReferredBy { get; set; }
+
+        [StringLength(Int32.MaxValue)]
         public string Notes { get; set; }
 
         public virtual int ContactId { get; set; }
