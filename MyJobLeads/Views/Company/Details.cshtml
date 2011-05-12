@@ -28,7 +28,7 @@
 
 Phone: @Model.Phone<br />
 Location: @location<br />
-Notes: @Model.Notes<br />
+Notes: @Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))<br />
 
 <br />
 @Html.ActionLink("Edit Company Details", MVC.Company.Edit(Model.Id))

@@ -18,7 +18,7 @@
     Email Address: <a href="mailto:@Model.Email">@Model.Email</a> <br />
     Assistant: @Model.Assistant <br />
     Referred By: @Model.ReferredBy <br />
-    Notes: @Model.Notes
+    Notes: @Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))
 </p>
 
 @Html.ActionLink("Edit Contact Details", MVC.Contact.Edit(Model.Id))
