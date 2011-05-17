@@ -115,6 +115,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 Name = _name,
                 TaskDate = _taskDate,
                 Contact = contact,
+                CreatedByUser = user,
 
                 History = new List<TaskHistory>()
             };

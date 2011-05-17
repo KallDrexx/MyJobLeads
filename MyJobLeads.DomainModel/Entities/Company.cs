@@ -24,6 +24,9 @@ namespace MyJobLeads.DomainModel.Entities
         public virtual JobSearch JobSearch { get; set; }
         public virtual int? JobSearchID { get; set; }
 
+        public virtual User CreatedByUser { get; set; }
+        public virtual int? CreatedByUserId { get; set; }
+
         public virtual ICollection<Contact> Contacts { get; set; }
         public virtual ICollection<Task> Tasks { get; set; }
         public virtual ICollection<CompanyHistory> History { get; set; }

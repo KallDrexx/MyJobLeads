@@ -58,6 +58,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             Assert.AreEqual("Referred By", result.ReferredBy, "The contact's referred by was incorrect");
             Assert.AreEqual("Notes", result.Notes, "The contact's notes was incorrect");
             Assert.AreEqual(_company, result.Company, "The contact is associated with the incorrect company");
+            Assert.AreEqual(_user, result.CreatedByUser, "The created contact was associated with the incorrect created user");
         }
 
         [TestMethod]
@@ -90,6 +91,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             Assert.AreEqual("Referred By", result.ReferredBy, "The contact's referred by was incorrect");
             Assert.AreEqual("Notes", result.Notes, "The contact's notes was incorrect");
             Assert.AreEqual(_company, result.Company, "The contact is associated with the incorrect company");
+            Assert.AreEqual(_user, result.CreatedByUser, "The created contact was associated with the incorrect created user");
         }
        
         [TestMethod]

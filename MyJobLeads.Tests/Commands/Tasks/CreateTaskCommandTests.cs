@@ -55,6 +55,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.IsFalse(result.Completed, "Task's completed status value is incorrect");
             Assert.AreEqual(_company.Id, result.Company.Id, "Tasks' company id was incorrect");
             Assert.IsNull(result.Contact, "Tasks' contact was incorrectly set");
+            Assert.AreEqual(_user, result.CreatedByUser, "The created task was associated with the incorrect created user");
         }
 
         [TestMethod]
@@ -76,6 +77,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.AreEqual(_testDate, result.TaskDate, "Task's date value was incorrect");
             Assert.IsFalse(result.Completed, "Task's completed status value is incorrect");
             Assert.AreEqual(_company.Id, result.Company.Id, "Tasks' company id was incorrect");
+            Assert.AreEqual(_user, result.CreatedByUser, "The created task was associated with the incorrect created user");
         }
 
         [TestMethod]
