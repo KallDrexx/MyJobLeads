@@ -17,18 +17,17 @@ namespace MyJobLeads.Tests.Queries.Contacts
             // Setup
             User user = new User();
             JobSearch jobSearch = new JobSearch { User = user };
-            Contact contact = new Contact { JobSearch = jobSearch };
+            Company company = new Company { JobSearch = jobSearch };
+            Contact contact = new Contact { Company = company };
 
             _unitOfWork.Contacts.Add(contact);
-            _unitOfWork.Users.Add(user);
-            _unitOfWork.JobSearches.Add(jobSearch);
             _unitOfWork.Commit();
 
             // Act
             bool result = new IsUserAuthorizedForContactQuery(_unitOfWork).WithUserId(user.Id).WithContactId(contact.Id).Execute();
 
             // Verify
-            Assert.IsTrue(result, "User was incorrectly not authorized for the specified contact");
+            Assert.IsTrue(result, "User was incorrectly not authorized for the contact");
         }
 
         [TestMethod]
@@ -37,19 +36,18 @@ namespace MyJobLeads.Tests.Queries.Contacts
             // Setup
             User user = new User(), user2 = new User();
             JobSearch jobSearch = new JobSearch { User = user };
-            Contact contact = new Contact { JobSearch = jobSearch };
+            Company company = new Company { JobSearch = jobSearch };
+            Contact contact = new Contact { Company = company };
 
             _unitOfWork.Contacts.Add(contact);
-            _unitOfWork.Users.Add(user);
             _unitOfWork.Users.Add(user2);
-            _unitOfWork.JobSearches.Add(jobSearch);
             _unitOfWork.Commit();
 
             // Act
             bool result = new IsUserAuthorizedForContactQuery(_unitOfWork).WithUserId(user2.Id).WithContactId(contact.Id).Execute();
 
             // Verify
-            Assert.IsFalse(result, "User was incorrectly not authorized for the specified contact");
+            Assert.IsFalse(result, "User was incorrectly authorized for the contact");
         }
     }
 }

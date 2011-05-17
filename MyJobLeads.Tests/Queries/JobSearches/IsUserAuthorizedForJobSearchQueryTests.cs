@@ -34,10 +34,7 @@ namespace MyJobLeads.Tests.Queries.JobSearches
             // Setup
             User user = new User(), user2 = new User();
             JobSearch jobSearch = new JobSearch { User = user };
-            Contact contact = new Contact { JobSearch = jobSearch };
 
-            _unitOfWork.Contacts.Add(contact);
-            _unitOfWork.Users.Add(user);
             _unitOfWork.Users.Add(user2);
             _unitOfWork.JobSearches.Add(jobSearch);
             _unitOfWork.Commit();

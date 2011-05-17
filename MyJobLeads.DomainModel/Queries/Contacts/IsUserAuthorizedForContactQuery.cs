@@ -49,7 +49,7 @@ namespace MyJobLeads.DomainModel.Queries.Contacts
         public bool Execute()
         {
             // Determine if the specified user created the jobsearch the contact is associated with
-            return _unitOfWork.Contacts.Fetch().Any(x => x.Id == _contactId && x.JobSearch.User.Id == _userId);
+            return _unitOfWork.Contacts.Fetch().Any(x => x.Id == _contactId && x.Company.JobSearch.User.Id == _userId);
         }
     }
 }
