@@ -164,7 +164,6 @@ namespace MyJobLeads.DomainModel.Commands.Companies
                 MetroArea = _metro,
                 Industry = _industry,
                 Notes = _notes,
-                CreatedByUser = user,
 
                 Tasks = new List<Task>(),
                 Contacts = new List<Contact>(),

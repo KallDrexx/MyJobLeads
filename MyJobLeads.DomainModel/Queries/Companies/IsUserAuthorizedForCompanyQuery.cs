@@ -48,7 +48,7 @@ namespace MyJobLeads.DomainModel.Queries.Companies
         /// <returns>Returns true if the user is authorized for access to the specified company, false if they are not</returns>
         public bool Execute()
         {
-            return _unitOfWork.Companies.Fetch().Count(x => x.Id == _companyId && x.CreatedByUserId == _userId) > 0;
+            return false; //_unitOfWork.Companies.Fetch().Count(x => x.Id == _companyId && x.CreatedByUserId == _userId) > 0;
         }
     }
 }

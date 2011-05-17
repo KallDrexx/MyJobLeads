@@ -164,7 +164,6 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
                 Assistant = _assistant,
                 ReferredBy = _referredBy,
                 Notes = _notes,
-                CreatedByUser = user,
 
                 Tasks = new List<Task>(),
                 History = new List<ContactHistory>()
