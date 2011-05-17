@@ -16,10 +16,12 @@ namespace MyJobLeads.Tests.Queries.Companies
         {
             // Setup
             User user = new User();
-            Company company = new Company { CreatedByUser = user };
+            JobSearch jobSearch = new JobSearch { User = user };
+            Company company = new Company { JobSearch = jobSearch };
 
             _unitOfWork.Companies.Add(company);
             _unitOfWork.Users.Add(user);
+            _unitOfWork.JobSearches.Add(jobSearch);
             _unitOfWork.Commit();
 
             // Act
@@ -34,11 +36,13 @@ namespace MyJobLeads.Tests.Queries.Companies
         {
             // Setup
             User user = new User(), user2 = new User();
-            Company company = new Company { CreatedByUser = user };
+            JobSearch jobSearch = new JobSearch { User = user };
+            Company company = new Company { JobSearch = jobSearch };
 
             _unitOfWork.Companies.Add(company);
             _unitOfWork.Users.Add(user);
             _unitOfWork.Users.Add(user2);
+            _unitOfWork.JobSearches.Add(jobSearch);
             _unitOfWork.Commit();
 
             // Act
