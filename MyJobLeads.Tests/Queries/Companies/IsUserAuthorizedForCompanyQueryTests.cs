@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Companies;
 
-namespace MyJobLeads.Tests.Commands.Companies
+namespace MyJobLeads.Tests.Queries.Companies
 {
     [TestClass]
     public class IsUserAuthorizedForCompanyQueryTests : EFTestBase
