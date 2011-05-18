@@ -18,12 +18,12 @@
     @if (!string.IsNullOrWhiteSpace(Model.JobSearch.Description)) { <text><b>Description:</b> @Model.JobSearch.Description</text> }
 </p>
 
-<p>
+@*<p>
     @using (Html.BeginForm(MVC.Search.Search()))
     {
         @:Search: @Html.TextBox("query") <input type="submit" value="Search" />
     }
-</p>
+</p>*@
 
  <h2>Companies</h2>
 @Html.ActionLink("Add A New Company", MVC.Company.Add(@Model.JobSearch.Id))
