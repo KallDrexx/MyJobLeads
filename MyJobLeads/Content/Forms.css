@@ -115,7 +115,7 @@
 .editform div label {
   display: block;
   float: left;
-  width: 100px;
+  width: 120px;
   padding: 3px 5px;
   margin: 0 0 5px 0;
   text-align: right;
@@ -183,7 +183,7 @@
 }
 
 .editform div select, form div textarea {
-  width: 280px;
+  width: 240px;
   padding: 1px 3px;
   margin: 0 0 0 0;
 }

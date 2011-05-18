@@ -32,15 +32,14 @@ else
         @Html.HiddenFor(x => x.Id)
     
         <div class="required">
-            @Html.LabelFor(x => x.Name)
+            <label>Job Search Title</label>
             @Html.TextBoxFor(x => x.Name)
         </div>
 
         <div class="required">
-            <!--@Html.LabelFor(x => x.Description)-->
             <label>Description
             </label>
-            @Html.TextAreaFor(x => x.Description, new { rows = 4, cols = "60" })
+            @Html.TextAreaFor(x => x.Description, new { rows = 4 })
         </div>
         
         <div class="submit">
