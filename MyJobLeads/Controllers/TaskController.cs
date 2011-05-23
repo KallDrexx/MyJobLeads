@@ -11,9 +11,11 @@ using MyJobLeads.ViewModels.Tasks;
 using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Queries.Contacts;
+using MyJobLeads.Infrastructure.Attributes;
 
 namespace MyJobLeads.Controllers
 {
+    [MJLAuthorize]
     public partial class TaskController : MyJobLeadsBaseController
     {
         public TaskController(IUnitOfWork unitOfWork)

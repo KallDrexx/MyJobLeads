@@ -11,9 +11,11 @@ using MyJobLeads.DomainModel.Queries.Tasks;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Commands.Users;
 using MyJobLeads.ViewModels.JobSearches;
+using MyJobLeads.Infrastructure.Attributes;
 
 namespace MyJobLeads.Controllers
 {
+    [MJLAuthorize]
     public partial class JobSearchController : MyJobLeadsBaseController
     {
         #region Constructor and Command/Query Members

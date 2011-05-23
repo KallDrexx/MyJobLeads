@@ -10,9 +10,11 @@ using MyJobLeads.DomainModel.Commands.Contacts;
 using MyJobLeads.ViewModels.Contacts;
 using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.Infrastructure.Attributes;
 
 namespace MyJobLeads.Controllers
 {
+    [MJLAuthorize]
     public partial class ContactController : MyJobLeadsBaseController
     {
         public ContactController(IUnitOfWork unitOfWork)

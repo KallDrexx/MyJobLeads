@@ -242,6 +242,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\AppDataDirectoryProvider.cs" />
+    <Compile Include="Infrastructure\Attributes\MJLAuthorizeAttribute.cs" />
     <Compile Include="Infrastructure\Installers\CommandQueryInstaller.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

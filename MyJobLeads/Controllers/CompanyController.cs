@@ -7,9 +7,11 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Commands.Companies;
+using MyJobLeads.Infrastructure.Attributes;
 
 namespace MyJobLeads.Controllers
 {
+    [MJLAuthorize]
     public partial class CompanyController : MyJobLeadsBaseController
     {
         public CompanyController(IUnitOfWork unitOfWork)
