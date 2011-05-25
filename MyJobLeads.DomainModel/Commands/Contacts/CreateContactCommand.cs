@@ -8,6 +8,7 @@ using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Entities.History;
+using MyJobLeads.DomainModel.Providers.Search;
 
 namespace MyJobLeads.DomainModel.Commands.Contacts
 {
@@ -17,12 +18,14 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
     public class CreateContactCommand
     {
         protected IUnitOfWork _unitOfWork;
+        protected ISearchProvider _searchProvider;
         protected int _companyId, _userId;
         protected string _name, _directPhone, _mobilePhone, _ext, _email, _assistant, _referredBy, _notes;
 
-        public CreateContactCommand(IUnitOfWork unitOfWork)
+        public CreateContactCommand(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
         {
             _unitOfWork = unitOfWork;
+            _searchProvider = searchProvider;
         }
 
         /// <summary>
@@ -188,6 +191,9 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
 
             _unitOfWork.Contacts.Add(contact);
             _unitOfWork.Commit();
+
+            // Index the new contact so it can be searched
+            _searchProvider.Index(contact);
 
             return contact;
         }

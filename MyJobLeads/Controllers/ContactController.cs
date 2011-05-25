@@ -11,15 +11,19 @@ using MyJobLeads.ViewModels.Contacts;
 using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.Infrastructure.Attributes;
+using MyJobLeads.DomainModel.Providers.Search;
 
 namespace MyJobLeads.Controllers
 {
     [MJLAuthorize]
     public partial class ContactController : MyJobLeadsBaseController
     {
-        public ContactController(IUnitOfWork unitOfWork)
+        protected ISearchProvider _searchProvider;
+
+        public ContactController(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
         {
             _unitOfWork = unitOfWork;
+            _searchProvider = searchProvider;
         }
 
         public virtual ActionResult Add(int companyId)
@@ -47,7 +51,7 @@ namespace MyJobLeads.Controllers
             // Determine if this is a new contact or not
             if (contact.Id == 0)
             {
-                contact = new CreateContactCommand(_unitOfWork).WithCompanyId(companyId)
+                contact = new CreateContactCommand(_unitOfWork, _searchProvider).WithCompanyId(companyId)
                                                                .SetAssistant(contact.Assistant)
                                                                .SetDirectPhone(contact.DirectPhone)
                                                                .SetEmail(contact.Email)
@@ -61,7 +65,7 @@ namespace MyJobLeads.Controllers
             }
             else
             {
-                contact = new EditContactCommand(_unitOfWork).WithContactId(contact.Id)
+                contact = new EditContactCommand(_unitOfWork, _searchProvider).WithContactId(contact.Id)
                                                              .SetAssistant(contact.Assistant)
                                                              .SetDirectPhone(contact.DirectPhone)
                                                              .SetEmail(contact.Email)

@@ -8,6 +8,8 @@ using MyJobLeads.DomainModel.Commands.Companies;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel;
+using Moq;
+using MyJobLeads.DomainModel.Providers.Search;
 
 namespace MyJobLeads.Tests.Commands.Companies
 {
@@ -16,9 +18,11 @@ namespace MyJobLeads.Tests.Commands.Companies
     {
         private JobSearch _search;
         private User _user;
+        private Mock<ISearchProvider> _searchProvider;
 
         private void InitializeTestEntities()
         {
+            _searchProvider = new Mock<ISearchProvider>();
             _search = new JobSearch();
             _user = new User();
 
@@ -34,7 +38,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new CreateCompanyCommand(_unitOfWork).WithJobSearch(_search.Id)
+            new CreateCompanyCommand(_unitOfWork, _searchProvider.Object).WithJobSearch(_search.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -66,7 +70,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            Company result = new CreateCompanyCommand(_unitOfWork).WithJobSearch(_search.Id)
+            Company result = new CreateCompanyCommand(_unitOfWork, _searchProvider.Object).WithJobSearch(_search.Id)
                                                                  .SetName("Name")
                                                                  .SetPhone("555-555-5555")
                                                                  .SetCity("City")
@@ -100,7 +104,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             // Act
             try
             {
-                new CreateCompanyCommand(_unitOfWork).WithJobSearch(id)
+                new CreateCompanyCommand(_unitOfWork, _searchProvider.Object).WithJobSearch(id)
                                                      .SetName("Name")
                                                      .SetPhone("555-555-5555")
                                                      .SetCity("City")
@@ -129,7 +133,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            Company result = new CreateCompanyCommand(_unitOfWork).WithJobSearch(_search.Id).CalledByUserId(_user.Id).Execute();
+            Company result = new CreateCompanyCommand(_unitOfWork, _searchProvider.Object).WithJobSearch(_search.Id).CalledByUserId(_user.Id).Execute();
 
             // Verify
             Assert.IsNotNull(result.Tasks, "Company's task list was null");
@@ -142,7 +146,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            Company result = new CreateCompanyCommand(_unitOfWork).WithJobSearch(_search.Id).CalledByUserId(_user.Id).Execute();
+            Company result = new CreateCompanyCommand(_unitOfWork, _searchProvider.Object).WithJobSearch(_search.Id).CalledByUserId(_user.Id).Execute();
 
             // Verify
             Assert.IsNotNull(result.Contacts, "Company's contact list was null");
@@ -158,7 +162,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             // Act
             try
             {
-                new CreateCompanyCommand(_unitOfWork).WithJobSearch(_search.Id)
+                new CreateCompanyCommand(_unitOfWork, _searchProvider.Object).WithJobSearch(_search.Id)
                                                      .SetName("Name")
                                                      .SetPhone("555-555-5555")
                                                      .SetCity("City")
@@ -188,7 +192,7 @@ namespace MyJobLeads.Tests.Commands.Companies
 
             // Act
             DateTime start = DateTime.Now;
-            new CreateCompanyCommand(_unitOfWork).WithJobSearch(_search.Id)
+            new CreateCompanyCommand(_unitOfWork, _searchProvider.Object).WithJobSearch(_search.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -216,6 +220,21 @@ namespace MyJobLeads.Tests.Commands.Companies
             Assert.AreEqual(_user, result.AuthoringUser, "The history record's author was incorrect");
             Assert.AreEqual(MJLConstants.HistoryInsert, result.HistoryAction, "The history record's history action was incorrect");
             Assert.IsTrue(result.DateModified >= start && result.DateModified <= end, "The history record's modification date was incorrect");
+        }
+
+        [TestMethod]
+        public void Execute_Indexes_New_Company()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            Company company = new CreateCompanyCommand(_unitOfWork, _searchProvider.Object).WithJobSearch(_search.Id)
+                                                                                           .CalledByUserId(_user.Id)
+                                                                                           .Execute();
+
+            // Verify
+            _searchProvider.Verify(x => x.Index(company), Times.Once());
         }
     }
 }

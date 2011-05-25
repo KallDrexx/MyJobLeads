@@ -9,6 +9,7 @@ using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Queries.Contacts;
+using MyJobLeads.DomainModel.Providers.Search;
 
 namespace MyJobLeads.DomainModel.Commands.Tasks
 {
@@ -18,14 +19,16 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
     public class EditTaskCommand
     {
         protected IUnitOfWork _unitOfWork;
+        protected ISearchProvider _searchProvider;
         protected int _taskId, _userId, _contactId;
         protected DateTime? _newTaskDate;
         protected string _name;
         protected bool _completed, _completedChanged, _dateChanged, _contactChanged;
 
-        public EditTaskCommand(IUnitOfWork unitOfWork)
+        public EditTaskCommand(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
         {
             _unitOfWork = unitOfWork;
+            _searchProvider = searchProvider;
         }
 
         /// <summary>
@@ -150,6 +153,10 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
 
             // Save
             _unitOfWork.Commit();
+
+            // Update the index for the task
+            _searchProvider.Index(task);
+
             return task;
         }
     }

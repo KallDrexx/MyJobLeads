@@ -8,6 +8,8 @@ using MyJobLeads.DomainModel.Commands.Companies;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel;
+using MyJobLeads.DomainModel.Providers.Search;
+using Moq;
 
 namespace MyJobLeads.Tests.Commands.Companies
 {
@@ -16,9 +18,11 @@ namespace MyJobLeads.Tests.Commands.Companies
     {
         private Company _company;
         private User _user;
+        private Mock<ISearchProvider> _searchProvider;
 
         private void InitializeTestEntities()
         {
+            _searchProvider = new Mock<ISearchProvider>();
             _user = new User();
             _company = new Company
             {
@@ -46,7 +50,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -78,7 +82,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            Company result = new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            Company result = new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
                                                                  .SetName("Name")
                                                                  .SetPhone("555-555-5555")
                                                                  .SetCity("City")
@@ -112,7 +116,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             // Act
             try
             {
-                new EditCompanyCommand(_unitOfWork).WithCompanyId(id)
+                new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(id)
                                                      .SetName("Name")
                                                      .SetPhone("555-555-5555")
                                                      .SetCity("City")
@@ -141,7 +145,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
                                                  .SetState("State")
@@ -172,7 +176,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetCity("City")
                                                  .SetState("State")
@@ -203,7 +207,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetState("State")
@@ -234,7 +238,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -265,7 +269,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -296,7 +300,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -327,7 +331,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -358,7 +362,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -392,7 +396,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             // Act
             try
             {
-                new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+                new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
                                                      .SetName("Name")
                                                      .SetPhone("555-555-5555")
                                                      .SetCity("City")
@@ -422,7 +426,7 @@ namespace MyJobLeads.Tests.Commands.Companies
 
             // Act
             DateTime start = DateTime.Now;
-            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -461,7 +465,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             string newNotes = "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
 
             // Act
-            new EditCompanyCommand(_unitOfWork).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
                                                .RequestedByUserId(_user.Id)
                                                .SetNotes(newNotes)
                                                .Execute();
@@ -469,6 +473,19 @@ namespace MyJobLeads.Tests.Commands.Companies
             // Verify
             Company result = _unitOfWork.Companies.Fetch().SingleOrDefault();
             Assert.AreEqual(newNotes, result.Notes, "Company's notes were not set correctly");
+        }
+
+        [TestMethod]
+        public void Execute_Indexes_Edited_Company()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id).RequestedByUserId(_user.Id).Execute();
+
+            // Verify
+            _searchProvider.Verify(x => x.Index(_company), Times.Once());
         }
     }
 }

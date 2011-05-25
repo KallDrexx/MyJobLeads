@@ -8,6 +8,7 @@ using MyJobLeads.DomainModel.Queries.Contacts;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Entities.History;
+using MyJobLeads.DomainModel.Providers.Search;
 
 namespace MyJobLeads.DomainModel.Commands.Contacts
 {
@@ -17,12 +18,14 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
     public class EditContactCommand
     {
         protected IUnitOfWork _unitOfWork;
+        protected ISearchProvider _searchProvider;
         protected int _contactId, _userid;
         protected string _name, _directPhone, _mobilePhone, _ext, _email, _assistant, _referredBy, _notes;
 
-        public EditContactCommand(IUnitOfWork unitOfWork)
+        public EditContactCommand(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
         {
             _unitOfWork = unitOfWork;
+            _searchProvider = searchProvider;
         }
 
         /// <summary>
@@ -181,6 +184,10 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
 
             // Submit changes
             _unitOfWork.Commit();
+
+            // Update the contact's search index
+            _searchProvider.Index(contact);
+
             return contact;
         }
     }

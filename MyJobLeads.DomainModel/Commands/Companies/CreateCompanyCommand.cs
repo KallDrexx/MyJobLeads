@@ -8,6 +8,7 @@ using MyJobLeads.DomainModel.Queries.JobSearches;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Entities.History;
+using MyJobLeads.DomainModel.Providers.Search;
 
 namespace MyJobLeads.DomainModel.Commands.Companies
 {
@@ -19,10 +20,12 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         protected IUnitOfWork _unitOfWork;
         protected int _searchId, _callingUserId;
         protected string _name, _phone, _city, _state, _zip, _metro, _industry, _notes;
+        protected ISearchProvider _searchProvider;
 
-        public CreateCompanyCommand(IUnitOfWork unitOfWork)
+        public CreateCompanyCommand(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
         {
             _unitOfWork = unitOfWork;
+            _searchProvider = searchProvider;
         }
 
         /// <summary>
@@ -189,6 +192,9 @@ namespace MyJobLeads.DomainModel.Commands.Companies
 
             _unitOfWork.Companies.Add(company);
             _unitOfWork.Commit();
+
+            // Index this new company for searching
+            _searchProvider.Index(company);
 
             return company;
         }

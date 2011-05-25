@@ -12,15 +12,19 @@ using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Queries.Contacts;
 using MyJobLeads.Infrastructure.Attributes;
+using MyJobLeads.DomainModel.Providers.Search;
 
 namespace MyJobLeads.Controllers
 {
     [MJLAuthorize]
     public partial class TaskController : MyJobLeadsBaseController
     {
-        public TaskController(IUnitOfWork unitOfWork)
+        protected ISearchProvider _searchProvider;
+
+        public TaskController(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
         {
             _unitOfWork = unitOfWork;
+            _searchProvider = searchProvider;
         }
 
         #region Actions 
@@ -65,7 +69,7 @@ namespace MyJobLeads.Controllers
             // Determine if this is a new task or not
             if (model.Id == 0)
             {
-                task = new CreateTaskCommand(_unitOfWork).WithCompanyId(model.AssociatedCompanyId)
+                task = new CreateTaskCommand(_unitOfWork, _searchProvider).WithCompanyId(model.AssociatedCompanyId)
                                                          .SetName(model.Name)
                                                          .SetTaskDate(model.TaskDate)
                                                          .WithContactId(selectedContactId)
@@ -75,7 +79,7 @@ namespace MyJobLeads.Controllers
             else
             {
                 // Existing task
-                task = new EditTaskCommand(_unitOfWork).WithTaskId(model.Id)
+                task = new EditTaskCommand(_unitOfWork, _searchProvider).WithTaskId(model.Id)
                                                        .SetName(model.Name)
                                                        .SetTaskDate(model.TaskDate)
                                                        .SetContactId(selectedContactId)
