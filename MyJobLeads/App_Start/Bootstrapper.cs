@@ -8,11 +8,9 @@ using Castle.Windsor.Installer;
 using MyJobLeads.App_Start;
 using MyJobLeads.Infrastructure;
 
-[assembly: WebActivator.PostApplicationStartMethod (
-    typeof(Bootstrapper), "Wire")]
+[assembly: WebActivator.PreApplicationStartMethod(typeof(Bootstrapper), "Wire")]
 
-[assembly: WebActivator.ApplicationShutdownMethod (
-    typeof(Bootstrapper), "DeWire")]
+[assembly: WebActivator.ApplicationShutdownMethod(typeof(Bootstrapper), "DeWire")]
 
 namespace MyJobLeads.App_Start
 {
