@@ -47,7 +47,7 @@ namespace MyJobLeads.Tests.Providers
             writer.Close();
         }
 
-        #region Indexing Tests
+        #region Company Index Tests
 
         [TestMethod]
         public void Can_Index_Company()
@@ -63,7 +63,9 @@ namespace MyJobLeads.Tests.Providers
                 Notes = "Notes",
                 Phone = "Phone",
                 State = "State",
-                Zip = "Zip"
+                Zip = "Zip",
+
+                JobSearch = new JobSearch { Id = 5 }
             };
 
             // Act
@@ -84,6 +86,7 @@ namespace MyJobLeads.Tests.Providers
             Assert.AreEqual("Phone", doc.Get(LuceneSearchProvider.Constants.COMPANY_PHONE), "Document had an incorrect phone value");
             Assert.AreEqual("State", doc.Get(LuceneSearchProvider.Constants.COMPANY_STATE), "Document had an incorrect state value");
             Assert.AreEqual("Zip", doc.Get(LuceneSearchProvider.Constants.COMPANY_ZIP), "Document had an incorrect zip value");
+            Assert.AreEqual("5", doc.Get(LuceneSearchProvider.Constants.JOBSEARCH_ID), "Document had an incorrect job search id value ");
         }
 
         [TestMethod]
@@ -183,6 +186,10 @@ namespace MyJobLeads.Tests.Providers
             _provider.Remove((Company)null);
         }
 
+        #endregion
+
+        #region Contact Index Tests
+
         [TestMethod]
         public void Can_Index_Contact()
         {
@@ -197,7 +204,9 @@ namespace MyJobLeads.Tests.Providers
                 MobilePhone = "MobilePhone",
                 Name = "Name",
                 Notes = "Notes",
-                ReferredBy = "ReferredBy"
+                ReferredBy = "ReferredBy",
+
+                Company = new Company { JobSearch = new JobSearch { Id = 6 } }
             };
 
             // Act
@@ -218,6 +227,7 @@ namespace MyJobLeads.Tests.Providers
             Assert.AreEqual("Name", doc.Get(LuceneSearchProvider.Constants.CONTACT_NAME), "Document had an incorrect name value");
             Assert.AreEqual("Notes", doc.Get(LuceneSearchProvider.Constants.CONTACT_NOTES), "Document had an incorrect notes value");
             Assert.AreEqual("ReferredBy", doc.Get(LuceneSearchProvider.Constants.CONTACT_REFERREDBY), "Document had an incorrect referred by value");
+            Assert.AreEqual("6", doc.Get(LuceneSearchProvider.Constants.JOBSEARCH_ID), "Document had an incorrect job search id value ");
         }
 
         [TestMethod]
@@ -317,6 +327,10 @@ namespace MyJobLeads.Tests.Providers
             _provider.Remove((Contact)null);
         }
 
+        #endregion
+
+        #region Task Index Tests
+
         [TestMethod]
         public void Can_Index_Tasks()
         {
@@ -327,7 +341,9 @@ namespace MyJobLeads.Tests.Providers
             {
                 Id = 3,
                 Name = "Name",
-                TaskDate = testdate
+                TaskDate = testdate,
+
+                Company = new Company { JobSearch = new JobSearch { Id = 7 } }
             };
 
             // Act
@@ -341,6 +357,7 @@ namespace MyJobLeads.Tests.Providers
             Document doc = searcher.Doc(hits.scoreDocs[0].doc);
             Assert.AreEqual("3", doc.Get(LuceneSearchProvider.Constants.TASK_ID), "Document had an incorrect contact id value");
             Assert.AreEqual("Name", doc.Get(LuceneSearchProvider.Constants.TASK_NAME), "Document had an incorrect name value");
+            Assert.AreEqual("7", doc.Get(LuceneSearchProvider.Constants.JOBSEARCH_ID), "Document had an incorrect job search id value");
         }
 
         [TestMethod]

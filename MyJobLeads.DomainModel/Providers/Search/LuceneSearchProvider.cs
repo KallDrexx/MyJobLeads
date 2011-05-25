@@ -47,6 +47,7 @@ namespace MyJobLeads.DomainModel.Providers.Search
             document.Add(new Field(Constants.COMPANY_PHONE, company.Phone ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
             document.Add(new Field(Constants.COMPANY_STATE, company.State ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
             document.Add(new Field(Constants.COMPANY_ZIP, company.Zip ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
+            document.Add(new Field(Constants.JOBSEARCH_ID, company.JobSearch.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
 
             // Remove any previous documents for the company and add the new one
             Remove(company);
@@ -80,6 +81,7 @@ namespace MyJobLeads.DomainModel.Providers.Search
             document.Add(new Field(Constants.CONTACT_NAME, contact.Name ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
             document.Add(new Field(Constants.CONTACT_NOTES, contact.Notes ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
             document.Add(new Field(Constants.CONTACT_REFERREDBY, contact.ReferredBy ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
+            document.Add(new Field(Constants.JOBSEARCH_ID, contact.Company.JobSearch.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
 
             // Remove any previous documents for the contact and add the new one
             Remove(contact);
@@ -106,6 +108,7 @@ namespace MyJobLeads.DomainModel.Providers.Search
             var document = new Document();
             document.Add(new Field(Constants.TASK_ID, task.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             document.Add(new Field(Constants.TASK_NAME, task.Name ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
+            document.Add(new Field(Constants.JOBSEARCH_ID, task.Company.JobSearch.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
 
             // Remove any previous documents for the task and add the new one
             Remove(task);
@@ -247,6 +250,8 @@ namespace MyJobLeads.DomainModel.Providers.Search
         public static class Constants
         {
             // Document field name constants for all searchable fields
+            public const string JOBSEARCH_ID = "jobsearch_id";
+
             public const string COMPANY_ID = "company_id";
             public const string COMPANY_NAME = "company_name";
             public const string COMPANY_PHONE = "company_phone";
