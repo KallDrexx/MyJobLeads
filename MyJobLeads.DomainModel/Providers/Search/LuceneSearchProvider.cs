@@ -169,28 +169,36 @@ namespace MyJobLeads.DomainModel.Providers.Search
         public SearchProviderResult Search(string searchString)
         {
             const int MAX_RESULTS = 10000;
+            const float MIN_SIMILARITY = 0.5f;
+            const int PREFIX_LENGTH = 3;
 
             if (string.IsNullOrWhiteSpace(searchString))
                 throw new ArgumentException("Provided search string is empty");
 
-            // Update the search string to make each word allow fuzzyness
-            searchString = searchString.Replace("~", string.Empty) + "~";
+            // Split the search into seperate queries per word, and combine them into one major query
+            var finalQuery = new BooleanQuery();
+
+            string[] terms = searchString.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string term in terms)
+            {
+                // Setup the fields to search
+                string[] searchfields = new string[] 
+                {
+                    Constants.COMPANY_CITY, Constants.COMPANY_INDUSTRY, Constants.COMPANY_METRO, Constants.COMPANY_NAME, Constants.COMPANY_NOTES,
+                    Constants.COMPANY_PHONE, Constants.COMPANY_STATE, Constants.COMPANY_ZIP, Constants.CONTACT_ASSISTANT, Constants.CONTACT_DIRECTPHONE,
+                    Constants.CONTACT_EMAIL, Constants.CONTACT_EXTENSION, Constants.CONTACT_MOBILEPHONE, Constants.CONTACT_NAME, Constants.CONTACT_NOTES,
+                    Constants.CONTACT_REFERREDBY, Constants.TASK_NAME
+                };
+
+                var parser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, searchfields, new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29));
+                finalQuery.Add(parser.Parse(term), BooleanClause.Occur.MUST);
+            }
+            
 
             // Perform the search
-            string[] searchfields = new string[] 
-            {
-                Constants.COMPANY_CITY, Constants.COMPANY_INDUSTRY, Constants.COMPANY_METRO, Constants.COMPANY_NAME, Constants.COMPANY_NOTES,
-                Constants.COMPANY_PHONE, Constants.COMPANY_STATE, Constants.COMPANY_ZIP, Constants.CONTACT_ASSISTANT, Constants.CONTACT_DIRECTPHONE,
-                Constants.CONTACT_EMAIL, Constants.CONTACT_EXTENSION, Constants.CONTACT_MOBILEPHONE, Constants.CONTACT_NAME, Constants.CONTACT_NOTES,
-                Constants.CONTACT_REFERREDBY, Constants.TASK_NAME
-            };
-            var parser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, searchfields, new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29));
-            parser.SetDefaultOperator(QueryParser.Operator.AND);
-
-            var query = parser.Parse(searchString);
             var directory = FSDirectory.Open(new DirectoryInfo(LuceneIndexBaseDirectory));
             var searcher = new IndexSearcher(directory, true);
-            var hits = searcher.Search(query, MAX_RESULTS);
+            var hits = searcher.Search(finalQuery, MAX_RESULTS);
 
             // Go through found documents and add them to the result
             var result = new SearchProviderResult();

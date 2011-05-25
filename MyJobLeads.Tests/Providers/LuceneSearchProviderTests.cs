@@ -93,7 +93,7 @@ namespace MyJobLeads.Tests.Providers
         public void Indexed_Companys_Null_Properties_Become_Empty_Strings()
         {
             // Setup
-            Company company = new Company { Id = 3 };
+            Company company = new Company { Id = 3, JobSearch = new JobSearch { Id = 5 } };
 
             // Act
             _provider.Index(company);
@@ -119,8 +119,8 @@ namespace MyJobLeads.Tests.Providers
         public void Can_Index_Multiple_Companies()
         {
             // Setup
-            var company1 = new Company { Id = 3, Name = "Name" };
-            var company2 = new Company { Id = 4, Name = "Name" };
+            var company1 = new Company { Id = 3, Name = "Name", JobSearch = new JobSearch { Id = 5 } };
+            var company2 = new Company { Id = 4, Name = "Name", JobSearch = new JobSearch { Id = 5 } };
 
             // Act
             _provider.Index(company1);
@@ -137,7 +137,7 @@ namespace MyJobLeads.Tests.Providers
         public void ReIndexing_Company_Updates_Existing_Company_Document()
         {
             // Setup
-            Company company = new Company { Id = 3, Name = "Name1" };
+            Company company = new Company { Id = 3, Name = "Name1", JobSearch = new JobSearch { Id = 5 } };
             _provider.Index(company);
             company.Name = "Name2";
 
@@ -157,7 +157,7 @@ namespace MyJobLeads.Tests.Providers
         public void Can_Remove_Company_From_Index()
         {
             // Setup
-            Company company = new Company { Id = 3 };
+            Company company = new Company { Id = 3, JobSearch = new JobSearch { Id = 5 } };
             _provider.Index(company);
 
             // Act
@@ -234,7 +234,7 @@ namespace MyJobLeads.Tests.Providers
         public void Indexed_Contacts_Null_Properties_Index_As_Empty_String()
         {
             // Setup
-            Contact contact = new Contact { Id = 3 };
+            Contact contact = new Contact { Id = 3, Company = new Company { JobSearch = new JobSearch { Id = 5 } } };
 
             // Act
             _provider.Index(contact);
@@ -260,8 +260,8 @@ namespace MyJobLeads.Tests.Providers
         public void Can_Index_Multiple_Contacts()
         {
             // Setup
-            Contact contact1 = new Contact { Id = 3, Name = "Name" };
-            Contact contact2 = new Contact { Id = 4, Name = "Name" };
+            Contact contact1 = new Contact { Id = 3, Name = "Name", Company = new Company { JobSearch = new JobSearch { Id = 5 } } };
+            Contact contact2 = new Contact { Id = 4, Name = "Name", Company = new Company { JobSearch = new JobSearch { Id = 5 } } };
 
             // Act
             _provider.Index(contact1);
@@ -278,7 +278,7 @@ namespace MyJobLeads.Tests.Providers
         public void Can_Remove_Contact_From_Index()
         {
             // Setup
-            Contact contact = new Contact { Id = 3 };
+            Contact contact = new Contact { Id = 3, Company = new Company { JobSearch = new JobSearch { Id = 5 } } };
             _provider.Index(contact);
 
             // Act
@@ -295,7 +295,7 @@ namespace MyJobLeads.Tests.Providers
         public void ReIndexing_Contact_Updates_Existing_Contact_Document()
         {
             // Setup
-            Contact contact = new Contact { Id = 3, Name = "Name1" };
+            Contact contact = new Contact { Id = 3, Name = "Name1", Company = new Company { JobSearch = new JobSearch { Id = 5 } } };
             _provider.Index(contact);
             contact.Name = "Name2";
 
@@ -364,7 +364,7 @@ namespace MyJobLeads.Tests.Providers
         public void Tasks_Null_Properties_Index_As_Empty_String()
         {
             // Setup
-            Task task = new Task { Id = 3 };
+            Task task = new Task { Id = 3, Company = new Company { JobSearch = new JobSearch { Id = 5 } } };
 
             // Act
             _provider.Index(task);
@@ -383,8 +383,8 @@ namespace MyJobLeads.Tests.Providers
         public void Can_Index_Multiple_Tasks()
         {
             // Setup
-            Task task1 = new Task { Id = 3, Name = "Name" };
-            Task task2 = new Task { Id = 4, Name = "Name" };
+            Task task1 = new Task { Id = 3, Name = "Name", Company = new Company { JobSearch = new JobSearch { Id = 5 } } };
+            Task task2 = new Task { Id = 4, Name = "Name", Company = new Company { JobSearch = new JobSearch { Id = 5 } } };
 
             // Act
             _provider.Index(task1);
@@ -401,7 +401,7 @@ namespace MyJobLeads.Tests.Providers
         public void Can_Remove_Task_From_Index()
         {
             // Setup
-            Task task = new Task { Id = 3 };
+            Task task = new Task { Id = 3, Company = new Company { JobSearch = new JobSearch { Id = 5 } } };
             _provider.Index(task);
 
             // Act
@@ -418,7 +418,7 @@ namespace MyJobLeads.Tests.Providers
         public void ReIndexing_Task_Updates_Existing_Contact_Document()
         {
             // Setup
-            Task task = new Task { Id = 3, Name = "Name1" };
+            Task task = new Task { Id = 3, Name = "Name1", Company = new Company { JobSearch = new JobSearch { Id = 5 } } };
             _provider.Index(task);
             task.Name = "Name2";
 
@@ -474,9 +474,9 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Returns_No_Results_With_No_Match()
         {
             // Setup
-            Company company = new Company { Id = 2 };
-            Contact contact = new Contact { Id = 3 };
-            Task task = new Task { Id = 4 };
+            Company company = new Company { Id = 2, JobSearch = new JobSearch { Id = 5 } };
+            Contact contact = new Contact { Id = 3, Company = new Company { JobSearch = new JobSearch { Id = 6 } } };
+            Task task = new Task { Id = 4, Company = new Company { JobSearch = new JobSearch { Id = 6 } } };
 
             _provider.Index(company);
             _provider.Index(contact);
@@ -498,7 +498,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Company_By_Name()
         {
             // Setup 
-            Company company = new Company { Id = 2, Name = "My Name" };
+            Company company = new Company { Id = 2, Name = "My Name", JobSearch = new JobSearch { Id = 4 } };
             _provider.Index(company);
 
             // Act
@@ -517,7 +517,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Company_By_Phone()
         {
             // Setup 
-            Company company = new Company { Id = 2, Phone = "111-222-3334" };
+            Company company = new Company { Id = 2, Phone = "111-222-3334", JobSearch = new JobSearch { Id = 4 } };
             _provider.Index(company);
 
             // Act
@@ -536,7 +536,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Company_By_City()
         {
             // Setup 
-            Company company = new Company { Id = 2, City = "Orlando" };
+            Company company = new Company { Id = 2, City = "Orlando", JobSearch = new JobSearch { Id = 4 } };
             _provider.Index(company);
 
             // Act
@@ -555,7 +555,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Company_By_State()
         {
             // Setup 
-            Company company = new Company { Id = 2, State = "Florida" };
+            Company company = new Company { Id = 2, State = "Florida", JobSearch = new JobSearch { Id = 4 } };
             _provider.Index(company);
 
             // Act
@@ -574,7 +574,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Company_By_Zip()
         {
             // Setup 
-            Company company = new Company { Id = 2, Zip = "32804" };
+            Company company = new Company { Id = 2, Zip = "32804", JobSearch = new JobSearch { Id = 4 } };
             _provider.Index(company);
 
             // Act
@@ -593,7 +593,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Company_By_MetroArea()
         {
             // Setup 
-            Company company = new Company { Id = 2, MetroArea = "Orlando" };
+            Company company = new Company { Id = 2, MetroArea = "Orlando", JobSearch = new JobSearch { Id = 4 } };
             _provider.Index(company);
 
             // Act
@@ -612,7 +612,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Company_By_Industry()
         {
             // Setup 
-            Company company = new Company { Id = 2, Industry = "Engineering" };
+            Company company = new Company { Id = 2, Industry = "Engineering", JobSearch = new JobSearch { Id = 4 } };
             _provider.Index(company);
 
             // Act
@@ -631,7 +631,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Company_By_Notes()
         {
             // Setup 
-            Company company = new Company { Id = 2, Notes = "This is my note" };
+            Company company = new Company { Id = 2, Notes = "This is my note", JobSearch = new JobSearch { Id = 4 } };
             _provider.Index(company);
 
             // Act
@@ -650,7 +650,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Contact_By_Name()
         {
             // Setup 
-            Contact contact = new Contact { Id = 2, Name = "My Name" };
+            Contact contact = new Contact { Id = 2, Name = "My Name", Company = new Company { JobSearch = new JobSearch { Id = 4 } } };
             _provider.Index(contact);
 
             // Act
@@ -669,7 +669,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Contact_By_Assistant()
         {
             // Setup 
-            Contact contact = new Contact { Id = 2, Assistant = "Assistant" };
+            Contact contact = new Contact { Id = 2, Assistant = "Assistant", Company = new Company { JobSearch = new JobSearch { Id = 4 } } };
             _provider.Index(contact);
 
             // Act
@@ -688,7 +688,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Contact_By_DirectPhone()
         {
             // Setup 
-            Contact contact = new Contact { Id = 2, DirectPhone = "555-333-2323" };
+            Contact contact = new Contact { Id = 2, DirectPhone = "555-333-2323", Company = new Company { JobSearch = new JobSearch { Id = 4 } } };
             _provider.Index(contact);
 
             // Act
@@ -707,7 +707,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Contact_By_Email()
         {
             // Setup 
-            Contact contact = new Contact { Id = 2, Email = "blah@blah.com" };
+            Contact contact = new Contact { Id = 2, Email = "blah@blah.com", Company = new Company { JobSearch = new JobSearch { Id = 4 } } };
             _provider.Index(contact);
 
             // Act
@@ -726,7 +726,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Contact_By_Extension()
         {
             // Setup 
-            Contact contact = new Contact { Id = 2, Extension = "23" };
+            Contact contact = new Contact { Id = 2, Extension = "23", Company = new Company { JobSearch = new JobSearch { Id = 4 } } };
             _provider.Index(contact);
 
             // Act
@@ -745,7 +745,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Contact_By_MobilePhone()
         {
             // Setup 
-            Contact contact = new Contact { Id = 2, MobilePhone = "test" };
+            Contact contact = new Contact { Id = 2, MobilePhone = "test", Company = new Company { JobSearch = new JobSearch { Id = 4 } } };
             _provider.Index(contact);
 
             // Act
@@ -764,7 +764,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Contact_By_Notes()
         {
             // Setup 
-            Contact contact = new Contact { Id = 2, Notes = "Notes" };
+            Contact contact = new Contact { Id = 2, Notes = "Notes", Company = new Company { JobSearch = new JobSearch { Id = 4 } } };
             _provider.Index(contact);
 
             // Act
@@ -783,7 +783,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Contact_By_ReferredBy()
         {
             // Setup 
-            Contact contact = new Contact { Id = 2, ReferredBy = "ReferredBy" };
+            Contact contact = new Contact { Id = 2, ReferredBy = "ReferredBy", Company = new Company { JobSearch = new JobSearch { Id = 4 } } };
             _provider.Index(contact);
 
             // Act
@@ -802,7 +802,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Finds_Task_By_Name()
         {
             // Setup 
-            Task task = new Task { Id = 2, Name = "Name" };
+            Task task = new Task { Id = 2, Name = "Name", Company = new Company { JobSearch = new JobSearch { Id = 4 } } };
             _provider.Index(task);
 
             // Act
@@ -814,6 +814,84 @@ namespace MyJobLeads.Tests.Providers
             Assert.AreEqual(0, result.FoundContactIds.Count, "Found contact count was incorrect");
             Assert.AreEqual(1, result.FoundTaskIds.Count, "Found task count was incorrect");
             Assert.AreEqual(task.Id, result.FoundTaskIds[0], "Found task id value was incorrect");
+        }
+
+        #endregion
+
+        #region Search Attempt Tests
+
+        [TestMethod]
+        public void Search_Finds_Entity_With_Multiple_Search_Words()
+        {
+            // Setup 
+            Company company = new Company { Id = 2, Name = "My Name is Andrew", JobSearch = new JobSearch { Id = 4 } };
+            _provider.Index(company);
+
+            // Act
+            SearchProviderResult result = _provider.Search("Andrew Name");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(company.Id, result.FoundCompanyIds[0], "Found company id was incorrect");
+
+            Assert.AreEqual(0, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Entity_With_Multiple_Search_Words_In_Separate_Fields()
+        {
+            // Setup 
+            Company company = new Company { Id = 2, Name = "My Name", Notes = "is Andrew", JobSearch = new JobSearch { Id = 4 } };
+            _provider.Index(company);
+
+            // Act
+            SearchProviderResult result = _provider.Search("Andrew Name");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(company.Id, result.FoundCompanyIds[0], "Found company id was incorrect");
+
+            Assert.AreEqual(0, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Doesnt_Find_Entity_When_All_Words_Not_Matched()
+        {
+            // Setup 
+            Company company = new Company { Id = 2, Name = "My Name", JobSearch = new JobSearch { Id = 4 } };
+            _provider.Index(company);
+
+            // Act
+            SearchProviderResult result = _provider.Search("Andrew Name");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(0, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Allows_For_Fuzzy_Searching()
+        {
+            // Setup 
+            Company company = new Company { Id = 2, Name = "My Name is Andrew", JobSearch = new JobSearch { Id = 4 } };
+            _provider.Index(company);
+
+            // Act
+            SearchProviderResult result = _provider.Search("Andrw Nme");
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(company.Id, result.FoundCompanyIds[0], "Found company id was incorrect");
+
+            Assert.AreEqual(0, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
         }
 
         #endregion
