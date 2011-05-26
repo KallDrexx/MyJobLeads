@@ -17,6 +17,7 @@ namespace MyJobLeads.DomainModel.Queries.Search
         protected IUnitOfWork _unitOfWork;
         protected ISearchProvider _searchProvider;
         protected string _searchQuery;
+        protected int _jobSearchId;
 
         public EntitySearchQuery(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
         {
@@ -36,13 +37,24 @@ namespace MyJobLeads.DomainModel.Queries.Search
         }
 
         /// <summary>
+        /// Specifies the id value of the job search to search for entities in
+        /// </summary>
+        /// <param name="jobSearchId"></param>
+        /// <returns></returns>
+        public EntitySearchQuery WithJobSearchId(int jobSearchId)
+        {
+            _jobSearchId = jobSearchId;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the query
         /// </summary>
         /// <returns></returns>
         public SearchResultEntities Execute()
         {
             // Perform the search
-            var results = _searchProvider.Search(_searchQuery);
+            var results = _searchProvider.SearchByJobSearchId(_searchQuery, _jobSearchId);
 
             // Go through all the returned id values and retrieve the entities for them
             var companies = _unitOfWork.Companies.Fetch().Where(x => results.FoundCompanyIds.Contains(x.Id)).ToList();

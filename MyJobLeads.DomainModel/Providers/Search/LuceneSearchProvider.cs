@@ -166,7 +166,7 @@ namespace MyJobLeads.DomainModel.Providers.Search
 
         #region Search Methods
 
-        public SearchProviderResult Search(string searchString)
+        public SearchProviderResult SearchByJobSearchId(string searchString, int jobSearchId)
         {
             const int MAX_RESULTS = 10000;
             const float MIN_SIMILARITY = 0.5f;
@@ -194,6 +194,8 @@ namespace MyJobLeads.DomainModel.Providers.Search
                 finalQuery.Add(parser.Parse(term), BooleanClause.Occur.MUST);
             }
             
+            // Add an additional query that the document must have a matching job search id value
+            finalQuery.Add(new TermQuery(new Term(Constants.JOBSEARCH_ID, jobSearchId.ToString())), BooleanClause.Occur.MUST);
 
             // Perform the search
             var directory = FSDirectory.Open(new DirectoryInfo(LuceneIndexBaseDirectory));

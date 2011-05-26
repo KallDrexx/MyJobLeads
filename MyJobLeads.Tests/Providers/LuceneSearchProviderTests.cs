@@ -459,7 +459,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Throws_ArgumentException_When_Searchstring_Is_Null()
         {
             // Act
-            _provider.Search(null);
+            _provider.SearchByJobSearchId(null, 0);
         }
 
         [TestMethod]
@@ -467,7 +467,7 @@ namespace MyJobLeads.Tests.Providers
         public void Search_Throws_ArgumentException_When_Searchstring_Is_Whitespace()
         {
             // Act
-            _provider.Search("  ");
+            _provider.SearchByJobSearchId("  ", 0);
         }
 
         [TestMethod]
@@ -475,15 +475,33 @@ namespace MyJobLeads.Tests.Providers
         {
             // Setup
             Company company = new Company { Id = 2, JobSearch = new JobSearch { Id = 5 } };
-            Contact contact = new Contact { Id = 3, Company = new Company { JobSearch = new JobSearch { Id = 6 } } };
-            Task task = new Task { Id = 4, Company = new Company { JobSearch = new JobSearch { Id = 6 } } };
+            Contact contact = new Contact { Id = 3, Company = new Company { JobSearch = new JobSearch { Id = 5 } } };
+            Task task = new Task { Id = 4, Company = new Company { JobSearch = new JobSearch { Id = 5 } } };
 
             _provider.Index(company);
             _provider.Index(contact);
             _provider.Index(task);
 
             // Act
-            SearchProviderResult result = _provider.Search("Test");
+            SearchProviderResult result = _provider.SearchByJobSearchId("Test", 5);
+
+            // Verify
+            Assert.IsNotNull(result, "Search provider result was null");
+            Assert.AreEqual(0, result.FoundCompanyIds.Count, "Search provider result's found company list item count was incorrect");
+            Assert.AreEqual(0, result.FoundContactIds.Count, "Search provider result's found contact list item count was incorrect");
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Search provider result's found task list item count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Returns_No_Results_When_JobSearchId_Doesnt_Match()
+        {
+            // Setup
+            Company company = new Company { Id = 2, Name = "Test", JobSearch = new JobSearch { Id = 5 } };
+
+            _provider.Index(company);
+
+            // Act
+            SearchProviderResult result = _provider.SearchByJobSearchId("Test", 6);
 
             // Verify
             Assert.IsNotNull(result, "Search provider result was null");
@@ -502,7 +520,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(company);
 
             // Act
-            SearchProviderResult result = _provider.Search("Name");
+            SearchProviderResult result = _provider.SearchByJobSearchId("Name", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -521,7 +539,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(company);
 
             // Act
-            SearchProviderResult result = _provider.Search("111-222-3334");
+            SearchProviderResult result = _provider.SearchByJobSearchId("111-222-3334", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -540,7 +558,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(company);
 
             // Act
-            SearchProviderResult result = _provider.Search("Orlando");
+            SearchProviderResult result = _provider.SearchByJobSearchId("Orlando", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -559,7 +577,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(company);
 
             // Act
-            SearchProviderResult result = _provider.Search("Florida");
+            SearchProviderResult result = _provider.SearchByJobSearchId("Florida", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -578,7 +596,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(company);
 
             // Act
-            SearchProviderResult result = _provider.Search("32804");
+            SearchProviderResult result = _provider.SearchByJobSearchId("32804", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -597,7 +615,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(company);
 
             // Act
-            SearchProviderResult result = _provider.Search("Orlando");
+            SearchProviderResult result = _provider.SearchByJobSearchId("Orlando", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -616,7 +634,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(company);
 
             // Act
-            SearchProviderResult result = _provider.Search("Engineering");
+            SearchProviderResult result = _provider.SearchByJobSearchId("Engineering", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -635,7 +653,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(company);
 
             // Act
-            SearchProviderResult result = _provider.Search("note");
+            SearchProviderResult result = _provider.SearchByJobSearchId("note", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -654,7 +672,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(contact);
 
             // Act
-            SearchProviderResult result = _provider.Search("Name");
+            SearchProviderResult result = _provider.SearchByJobSearchId("Name", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -673,7 +691,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(contact);
 
             // Act
-            SearchProviderResult result = _provider.Search("Assistant");
+            SearchProviderResult result = _provider.SearchByJobSearchId("Assistant", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -692,7 +710,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(contact);
 
             // Act
-            SearchProviderResult result = _provider.Search("555-333-2323");
+            SearchProviderResult result = _provider.SearchByJobSearchId("555-333-2323", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -711,7 +729,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(contact);
 
             // Act
-            SearchProviderResult result = _provider.Search("blah@blah.com");
+            SearchProviderResult result = _provider.SearchByJobSearchId("blah@blah.com", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -730,7 +748,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(contact);
 
             // Act
-            SearchProviderResult result = _provider.Search("23");
+            SearchProviderResult result = _provider.SearchByJobSearchId("23", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -749,7 +767,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(contact);
 
             // Act
-            SearchProviderResult result = _provider.Search("test");
+            SearchProviderResult result = _provider.SearchByJobSearchId("test", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -768,7 +786,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(contact);
 
             // Act
-            SearchProviderResult result = _provider.Search("Notes");
+            SearchProviderResult result = _provider.SearchByJobSearchId("Notes", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -787,7 +805,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(contact);
 
             // Act
-            SearchProviderResult result = _provider.Search("ReferredBy");
+            SearchProviderResult result = _provider.SearchByJobSearchId("ReferredBy", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -806,7 +824,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(task);
 
             // Act
-            SearchProviderResult result = _provider.Search("Name");
+            SearchProviderResult result = _provider.SearchByJobSearchId("Name", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -818,7 +836,7 @@ namespace MyJobLeads.Tests.Providers
 
         #endregion
 
-        #region Search Attempt Tests
+        #region Search Scenario Tests
 
         [TestMethod]
         public void Search_Finds_Entity_With_Multiple_Search_Words()
@@ -828,7 +846,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(company);
 
             // Act
-            SearchProviderResult result = _provider.Search("Andrew Name");
+            SearchProviderResult result = _provider.SearchByJobSearchId("Andrew Name", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -847,7 +865,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(company);
 
             // Act
-            SearchProviderResult result = _provider.Search("Andrew Name");
+            SearchProviderResult result = _provider.SearchByJobSearchId("Andrew Name", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -866,7 +884,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(company);
 
             // Act
-            SearchProviderResult result = _provider.Search("Andrew Name");
+            SearchProviderResult result = _provider.SearchByJobSearchId("Andrew Name", 4);
 
             // Verify
             Assert.IsNotNull(result);
@@ -875,7 +893,8 @@ namespace MyJobLeads.Tests.Providers
             Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
         }
 
-        [TestMethod]
+        // Fuzzy search not enabled yet
+        //[TestMethod]
         public void Search_Allows_For_Fuzzy_Searching()
         {
             // Setup 
@@ -883,7 +902,7 @@ namespace MyJobLeads.Tests.Providers
             _provider.Index(company);
 
             // Act
-            SearchProviderResult result = _provider.Search("Andrw Nme");
+            SearchProviderResult result = _provider.SearchByJobSearchId("Andrw Nme", 4);
 
             // Verify
             Assert.IsNotNull(result);

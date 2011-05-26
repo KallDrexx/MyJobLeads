@@ -17,6 +17,6 @@ namespace MyJobLeads.DomainModel.Providers.Search
         void Remove(Contact contact);
         void Remove(Task task);
 
-        SearchProviderResult Search(string searchString);
+        SearchProviderResult SearchByJobSearchId(string searchString, int jobSearchId);
     }
 }

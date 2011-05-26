@@ -18,9 +18,10 @@ namespace MyJobLeads.Tests.Queries.Search
         public void Can_Find_Result_Entities_From_Database()
         {
             // Setup
-            Company company1 = new Company(), company2 = new Company();
-            Contact contact = new Contact();
-            Task task = new Task();
+            JobSearch search = new JobSearch();
+            Company company1 = new Company { JobSearch = search }, company2 = new Company { JobSearch = search };
+            Contact contact = new Contact { Company = company1 };
+            Task task = new Task { Company = company1 };
 
             _unitOfWork.Companies.Add(company1);
             _unitOfWork.Companies.Add(company2);
@@ -36,10 +37,10 @@ namespace MyJobLeads.Tests.Queries.Search
             searchResult.FoundTaskIds.Add(task.Id);
 
             var mock = new Mock<ISearchProvider>();
-            mock.Setup(x => x.Search("Query")).Returns(searchResult);
+            mock.Setup(x => x.SearchByJobSearchId("Query", search.Id)).Returns(searchResult);
 
             // Act
-            SearchResultEntities result = new EntitySearchQuery(_unitOfWork, mock.Object).WithSearchQuery("Query").Execute();
+            SearchResultEntities result = new EntitySearchQuery(_unitOfWork, mock.Object).WithSearchQuery("Query").WithJobSearchId(search.Id).Execute();
 
             // Verify
             Assert.IsNotNull(result, "Search provider returned a null result");
@@ -56,9 +57,10 @@ namespace MyJobLeads.Tests.Queries.Search
         public void Does_Not_Return_Entities_Not_In_Search_Results()
         {
             // Setup
-            Company company = new Company(), company2 = new Company();
-            Contact contact = new Contact(), contact2 = new Contact();
-            Task task = new Task(), task2 = new Task();
+            JobSearch search = new JobSearch();
+            Company company = new Company { JobSearch = search }, company2 = new Company { JobSearch = search };
+            Contact contact = new Contact { Company = company }, contact2 = new Contact { Company = company };
+            Task task = new Task { Company = company }, task2 = new Task { Company = company };
 
             _unitOfWork.Companies.Add(company);
             _unitOfWork.Companies.Add(company2);
@@ -75,10 +77,10 @@ namespace MyJobLeads.Tests.Queries.Search
             searchResult.FoundTaskIds.Add(task.Id);
 
             var mock = new Mock<ISearchProvider>();
-            mock.Setup(x => x.Search("Query")).Returns(searchResult);
+            mock.Setup(x => x.SearchByJobSearchId("Query", search.Id)).Returns(searchResult);
 
             // Act
-            SearchResultEntities result = new EntitySearchQuery(_unitOfWork, mock.Object).WithSearchQuery("Query").Execute();
+            SearchResultEntities result = new EntitySearchQuery(_unitOfWork, mock.Object).WithSearchQuery("Query").WithJobSearchId(search.Id).Execute();
 
             // Verify
             Assert.IsNotNull(result, "Search results returned a null result");
