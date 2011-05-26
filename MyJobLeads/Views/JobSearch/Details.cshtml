@@ -21,7 +21,7 @@
 <p>
     @using (Html.BeginForm(MVC.JobSearch.Search(), FormMethod.Get))
     {
-        @Html.Hidden("id", Model.JobSearchId)
+        @Html.Hidden("id", Model.JobSearch.Id)
         @:Search: @Html.TextBox("query") <input type="submit" value="Search" />
     }
 </p>
