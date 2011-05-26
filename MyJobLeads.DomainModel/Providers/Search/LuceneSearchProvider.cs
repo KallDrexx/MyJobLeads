@@ -190,8 +190,8 @@ namespace MyJobLeads.DomainModel.Providers.Search
                     Constants.CONTACT_REFERREDBY, Constants.TASK_NAME
                 };
 
-                var parser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, searchfields, new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29));
-                finalQuery.Add(parser.Parse(term), BooleanClause.Occur.MUST);
+                var parser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, searchfields, CreateAnalyzer());
+                finalQuery.Add(parser.Parse(term.Replace("~", "") + "~"), BooleanClause.Occur.MUST);
             }
             
             // Add an additional query that the document must have a matching job search id value

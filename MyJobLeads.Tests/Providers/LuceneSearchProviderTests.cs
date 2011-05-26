@@ -893,8 +893,7 @@ namespace MyJobLeads.Tests.Providers
             Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
         }
 
-        // Fuzzy search not enabled yet
-        //[TestMethod]
+        [TestMethod]
         public void Search_Allows_For_Fuzzy_Searching()
         {
             // Setup 
