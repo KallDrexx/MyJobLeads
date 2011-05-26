@@ -730,7 +730,7 @@
     <Content Include="Views\Task\_CompanyTaskDisplay.cshtml" />
     <Content Include="Views\Contact\_CompanyContactDisplay.cshtml" />
     <Content Include="Views\Search\RefreshSearchIndex.cshtml" />
-    <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\JobSearch\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\EditorLocalization.bg-BG.resx">

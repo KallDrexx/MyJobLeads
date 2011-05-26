@@ -10,5 +10,6 @@ namespace MyJobLeads.ViewModels
     {
         public string SearchQuery { get; set; }
         public SearchResultEntities Results { get; set; }
+        public int JobSearchId { get; set; }
     }
 }

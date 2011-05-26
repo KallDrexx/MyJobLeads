@@ -6,8 +6,9 @@
 }
 
 <p>
-    @using (Html.BeginForm(MVC.Search.Search()))
+    @using (Html.BeginForm(MVC.JobSearch.Search()))
     {
+        @Html.Hidden("id", Model.JobSearchId)
         @:Search: @Html.TextBox("query") <input type="submit" value="Search" />
     }
 </p>

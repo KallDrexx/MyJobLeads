@@ -28,12 +28,5 @@ namespace MyJobLeads.Controllers
             _refreshSearchIndexCommand.Execute();
             return View();
         }
-
-        public virtual ActionResult Search(string query)
-        {
-            // Perform the search
-            var result = _entitySearchQuery.WithSearchQuery(query).Execute();
-            return View(new PerformedSearchViewModel { SearchQuery = query, Results = result });
-        }
     }
 }

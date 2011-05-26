@@ -12,6 +12,8 @@ using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Commands.Users;
 using MyJobLeads.ViewModels.JobSearches;
 using MyJobLeads.Infrastructure.Attributes;
+using MyJobLeads.DomainModel.Queries.Search;
+using MyJobLeads.ViewModels;
 
 namespace MyJobLeads.Controllers
 {
@@ -26,13 +28,15 @@ namespace MyJobLeads.Controllers
         protected EditJobSearchCommand _editJobSearchCommand;
         protected OpenTasksByJobSearchQuery _openTasksByJobSearchQuery;
         protected EditUserCommand _editUserCommand;
+        protected EntitySearchQuery _entitySearchQuery;
 
         public JobSearchController(JobSearchesByUserIdQuery jobSearchesByIdQuery,
                                     JobSearchByIdQuery jobSearchByIdQuery,
                                     CreateJobSearchForUserCommand createJobSearchCommand,
                                     EditJobSearchCommand editJobSearchCommand,
                                     OpenTasksByJobSearchQuery openTasksByJobSearchQuery,
-                                    EditUserCommand editUserCommand)
+                                    EditUserCommand editUserCommand,
+                                    EntitySearchQuery entitySearchQuery)
         {
             _jobSearchByIdQuery = jobSearchByIdQuery;
             _jobSearchesByUserIdQuery = jobSearchesByIdQuery;
@@ -40,6 +44,7 @@ namespace MyJobLeads.Controllers
             _editJobSearchCommand = editJobSearchCommand;
             _openTasksByJobSearchQuery = openTasksByJobSearchQuery;
             _editUserCommand = editUserCommand;
+            _entitySearchQuery = entitySearchQuery;
         }
 
         #endregion
@@ -96,9 +101,10 @@ namespace MyJobLeads.Controllers
             return View(new JobSearchDetailsViewModel { JobSearch = search, OpenTasks = openTasks });
         }
 
-        public virtual ActionResult Search(string searchTerm)
+        public virtual ActionResult Search(int id, string query)
         {
-            return View();
+            var results = _entitySearchQuery.WithJobSearchId(id).WithSearchQuery(query).Execute();
+            return View(new PerformedSearchViewModel { SearchQuery = query, Results = results, JobSearchId = id });
         }
     }
 }

@@ -75,6 +75,7 @@ namespace MyJobLeads.Controllers {
             public readonly string Details = "~/Views/JobSearch/Details.cshtml";
             public readonly string Edit = "~/Views/JobSearch/Edit.cshtml";
             public readonly string Index = "~/Views/JobSearch/Index.cshtml";
+            public readonly string Search = "~/Views/JobSearch/Search.cshtml";
         }
     }
 
@@ -110,9 +111,10 @@ namespace MyJobLeads.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Search(string searchTerm) {
+        public override System.Web.Mvc.ActionResult Search(int id, string query) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Search);
-            callInfo.RouteValueDictionary.Add("searchTerm", searchTerm);
+            callInfo.RouteValueDictionary.Add("id", id);
+            callInfo.RouteValueDictionary.Add("query", query);
             return callInfo;
         }
 
