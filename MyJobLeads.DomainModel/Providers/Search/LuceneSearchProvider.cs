@@ -175,24 +175,22 @@ namespace MyJobLeads.DomainModel.Providers.Search
             if (string.IsNullOrWhiteSpace(searchString))
                 throw new ArgumentException("Provided search string is empty");
 
+            // Setup the fields to search through
+            string[] searchfields = new string[] 
+            {
+                Constants.COMPANY_CITY, Constants.COMPANY_INDUSTRY, Constants.COMPANY_METRO, Constants.COMPANY_NAME, Constants.COMPANY_NOTES,
+                Constants.COMPANY_PHONE, Constants.COMPANY_STATE, Constants.COMPANY_ZIP, Constants.CONTACT_ASSISTANT, Constants.CONTACT_DIRECTPHONE,
+                Constants.CONTACT_EMAIL, Constants.CONTACT_EXTENSION, Constants.CONTACT_MOBILEPHONE, Constants.CONTACT_NAME, Constants.CONTACT_NOTES,
+                Constants.CONTACT_REFERREDBY, Constants.TASK_NAME
+            };
+
             // Split the search into seperate queries per word, and combine them into one major query
             var finalQuery = new BooleanQuery();
+            var parser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, searchfields, CreateAnalyzer());
 
             string[] terms = searchString.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
             foreach (string term in terms)
-            {
-                // Setup the fields to search
-                string[] searchfields = new string[] 
-                {
-                    Constants.COMPANY_CITY, Constants.COMPANY_INDUSTRY, Constants.COMPANY_METRO, Constants.COMPANY_NAME, Constants.COMPANY_NOTES,
-                    Constants.COMPANY_PHONE, Constants.COMPANY_STATE, Constants.COMPANY_ZIP, Constants.CONTACT_ASSISTANT, Constants.CONTACT_DIRECTPHONE,
-                    Constants.CONTACT_EMAIL, Constants.CONTACT_EXTENSION, Constants.CONTACT_MOBILEPHONE, Constants.CONTACT_NAME, Constants.CONTACT_NOTES,
-                    Constants.CONTACT_REFERREDBY, Constants.TASK_NAME
-                };
-
-                var parser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, searchfields, CreateAnalyzer());
                 finalQuery.Add(parser.Parse(term.Replace("~", "") + "~"), BooleanClause.Occur.MUST);
-            }
             
             // Add an additional query that the document must have a matching job search id value
             finalQuery.Add(new TermQuery(new Term(Constants.JOBSEARCH_ID, jobSearchId.ToString())), BooleanClause.Occur.MUST);
