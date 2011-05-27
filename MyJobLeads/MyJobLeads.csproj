@@ -253,7 +253,7 @@
     <Compile Include="Infrastructure\MyJobLeadsMembershipUser.cs" />
     <Compile Include="Infrastructure\Installers\ControllerInstaller.cs" />
     <Compile Include="Infrastructure\Installers\MyJobLeadsInstaller.cs" />
-    <Compile Include="Infrastructure\Providers\WindsorServiceProvider.cs" />
+    <Compile Include="Infrastructure\Providers\WindsorServiceFactory.cs" />
     <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
     <Compile Include="JobSearchController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>

@@ -13,6 +13,7 @@ using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Queries.Contacts;
 using MyJobLeads.Infrastructure.Attributes;
 using MyJobLeads.DomainModel.Providers.Search;
+using MyJobLeads.DomainModel.Providers;
 
 namespace MyJobLeads.Controllers
 {
@@ -20,19 +21,21 @@ namespace MyJobLeads.Controllers
     public partial class TaskController : MyJobLeadsBaseController
     {
         protected ISearchProvider _searchProvider;
+        protected IServiceFactory _serviceFactory;
 
-        public TaskController(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
+        public TaskController(IServiceFactory factory)
         {
-            _unitOfWork = unitOfWork;
-            _searchProvider = searchProvider;
+            _serviceFactory = factory;
         }
 
         #region Actions 
 
         public virtual ActionResult Add(int companyId, int contactId = 0)
         {
+            var companyByIdQuery = _serviceFactory.GetService<CompanyByIdQuery>();
+
             // Retrieve the specified company value
-            var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(companyId).Execute();
+            var company = companyByIdQuery.WithCompanyId(companyId).Execute();
             if (company == null)
                 throw new MJLEntityNotFoundException(typeof(Company), companyId);
 
@@ -47,7 +50,9 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Edit(int id)
         {
-            var task = new TaskByIdQuery(_unitOfWork).WithTaskId(id).Execute();
+            var taskByIdQuery = _serviceFactory.GetService<TaskByIdQuery>();
+
+            var task = taskByIdQuery.WithTaskId(id).Execute();
             if (task == null)
                 throw new MJLEntityNotFoundException(typeof(Task), id);
 
@@ -69,7 +74,7 @@ namespace MyJobLeads.Controllers
             // Determine if this is a new task or not
             if (model.Id == 0)
             {
-                task = new CreateTaskCommand(_unitOfWork, _searchProvider).WithCompanyId(model.AssociatedCompanyId)
+                task = _serviceFactory.GetService<CreateTaskCommand>().WithCompanyId(model.AssociatedCompanyId)
                                                          .SetName(model.Name)
                                                          .SetTaskDate(model.TaskDate)
                                                          .WithContactId(selectedContactId)
@@ -79,7 +84,7 @@ namespace MyJobLeads.Controllers
             else
             {
                 // Existing task
-                task = new EditTaskCommand(_unitOfWork, _searchProvider).WithTaskId(model.Id)
+                task = _serviceFactory.GetService<EditTaskCommand>().WithTaskId(model.Id)
                                                        .SetName(model.Name)
                                                        .SetTaskDate(model.TaskDate)
                                                        .SetContactId(selectedContactId)
@@ -92,7 +97,7 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Details(int id)
         {
-            var task = new TaskByIdQuery(_unitOfWork).WithTaskId(id).Execute();
+            var task = _serviceFactory.GetService<TaskByIdQuery>().WithTaskId(id).Execute();
             return View(task);
         }
 
@@ -102,15 +107,15 @@ namespace MyJobLeads.Controllers
 
         protected void CreateCompanyContactList(int selectedContactId, Company company, EditTaskViewModel model)
         {
-            model.CompanyContactList = new ContactsByCompanyIdQuery(_unitOfWork).WithCompanyId(company.Id)
-                                                                                .Execute()
-                                                                                .Select(x => new SelectListItem
-                                                                                {
-                                                                                    Text = x.Name,
-                                                                                    Value = x.Id.ToString(),
-                                                                                    Selected = x.Id == selectedContactId
-                                                                                })
-                                                                                .ToList();
+            model.CompanyContactList = _serviceFactory.GetService<ContactsByCompanyIdQuery>().WithCompanyId(company.Id)
+                                                                                            .Execute()
+                                                                                            .Select(x => new SelectListItem
+                                                                                            {
+                                                                                                Text = x.Name,
+                                                                                                Value = x.Id.ToString(),
+                                                                                                Selected = x.Id == selectedContactId
+                                                                                            })
+                                                                                            .ToList();
             model.CompanyContactList.Insert(0, new SelectListItem { Text = "---------------------------", Value = "-1", Selected = false });
             model.CompanyContactList.Insert(0, new SelectListItem { Text = "Company: " + company.Name, Value = "0", Selected = selectedContactId == 0 });
         }

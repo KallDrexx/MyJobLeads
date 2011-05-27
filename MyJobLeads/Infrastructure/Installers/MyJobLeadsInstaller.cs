@@ -10,6 +10,8 @@ using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Providers.DataDirectory;
 using MyJobLeads.DomainModel.Entities.EF;
 using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.Providers;
+using MyJobLeads.Infrastructure.Providers;
 
 namespace MyJobLeads.Infrastructure.Installers
 {
@@ -17,6 +19,7 @@ namespace MyJobLeads.Infrastructure.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            container.Register(Component.For<IServiceFactory>().ImplementedBy<WindsorServiceFactory>().LifeStyle.PerWebRequest);
             container.Register(Component.For<ISearchProvider>().ImplementedBy<LuceneSearchProvider>().LifeStyle.PerWebRequest);
             container.Register(Component.For<IDataDirectoryProvider>().ImplementedBy<AppDataDirectoryProvider>().LifeStyle.Singleton);
 
@@ -27,6 +30,9 @@ namespace MyJobLeads.Infrastructure.Installers
             {
                 context.Set<UnitTestEntity>().Any();
             }
+
+            // Pass the windsor container to be used for IWindsorContainer dependency injection
+            container.Register(Component.For<IWindsorContainer>().Instance(container));
         }
     }
 }
