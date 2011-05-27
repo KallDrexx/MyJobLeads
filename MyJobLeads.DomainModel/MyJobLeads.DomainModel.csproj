@@ -105,12 +105,14 @@
     <Compile Include="Exceptions\MJLEntityNotFoundException.cs" />
     <Compile Include="Exceptions\MJLException.cs" />
     <Compile Include="Exceptions\MJLIncorrectPasswordException.cs" />
+    <Compile Include="Exceptions\MJLServiceNotFoundException.cs" />
     <Compile Include="Exceptions\MJLUserNotFoundException.cs" />
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\DataDirectory\IDataDirectoryProvider.cs" />
     <Compile Include="Providers\Search\ISearchProvider.cs" />
     <Compile Include="Providers\Search\LuceneSearchProvider.cs" />
+    <Compile Include="Providers\IServiceFactory.cs" />
     <Compile Include="Queries\Companies\IsUserAuthorizedForCompanyQuery.cs" />
     <Compile Include="Queries\Contacts\IsUserAuthorizedForContactQuery.cs" />
     <Compile Include="Queries\JobSearches\IsUserAuthorizedForJobSearchQuery.cs" />

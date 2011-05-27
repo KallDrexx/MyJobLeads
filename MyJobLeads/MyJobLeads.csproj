@@ -241,7 +241,7 @@
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\AppDataDirectoryProvider.cs" />
+    <Compile Include="Infrastructure\Providers\AppDataDirectoryProvider.cs" />
     <Compile Include="Infrastructure\Attributes\MJLAuthorizeAttribute.cs" />
     <Compile Include="Infrastructure\Installers\CommandQueryInstaller.generated.cs">
       <AutoGen>True</AutoGen>
@@ -253,6 +253,7 @@
     <Compile Include="Infrastructure\MyJobLeadsMembershipUser.cs" />
     <Compile Include="Infrastructure\Installers\ControllerInstaller.cs" />
     <Compile Include="Infrastructure\Installers\MyJobLeadsInstaller.cs" />
+    <Compile Include="Infrastructure\Providers\WindsorServiceProvider.cs" />
     <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
     <Compile Include="JobSearchController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
