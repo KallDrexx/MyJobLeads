@@ -56,7 +56,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
 
             Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
             Assert.AreEqual(_testDate, result.TaskDate, "Task's date value was incorrect");
-            Assert.IsFalse(result.Completed, "Task's completed status value is incorrect");
+            Assert.IsNull(result.CompletionDate, "Task's completed status value is not null");
             Assert.AreEqual(_company.Id, result.Company.Id, "Tasks' company id was incorrect");
             Assert.IsNull(result.Contact, "Tasks' contact was incorrectly set");
         }
@@ -78,7 +78,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.IsNotNull(result, "No task was created in the database");
             Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
             Assert.AreEqual(_testDate, result.TaskDate, "Task's date value was incorrect");
-            Assert.IsFalse(result.Completed, "Task's completed status value is incorrect");
+            Assert.IsNull(result.CompletionDate, "Task's completion date is not null");
             Assert.AreEqual(_company.Id, result.Company.Id, "Tasks' company id was incorrect");
         }
 
@@ -155,7 +155,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
 
             Assert.AreEqual("Name", history.Name, "History Record's name was incorrect");
             Assert.AreEqual(_testDate, history.TaskDate, "History Record's date value was incorrect");
-            Assert.AreEqual(task.Completed, history.Completed, "History Record's completed status value was incorrect");
+            Assert.AreEqual(task.CompletionDate, history.CompletionDate, "History Record's completed date was incorrect");
             Assert.AreEqual(_user, history.AuthoringUser, "History Record's author was incorrect");
             Assert.AreEqual(MJLConstants.HistoryInsert, history.HistoryAction, "History Record's action value was incorrect");
             Assert.IsTrue(history.DateModified >= start && history.DateModified <= end, "History Record's modification date was incorrect");

@@ -41,7 +41,7 @@ namespace MyJobLeads.DomainModel.Queries.Tasks
             return _unitOfWork.Tasks
                               .Fetch()
                               .Where(x => (x.Company.JobSearch.Id == _jobSearchId || x.Contact.Company.JobSearch.Id == _jobSearchId)
-                                            && !x.Completed)
+                                            && x.CompletionDate == null)
                               .OrderBy(x => x.TaskDate)
                               .ToList();
         }

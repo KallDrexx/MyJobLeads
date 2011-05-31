@@ -22,7 +22,7 @@ namespace MyJobLeads.ViewModels.Tasks
             Id = task.Id;
             Name = task.Name;
             TaskDate = task.TaskDate;
-            Completed = task.Completed;
+            Completed = task.CompletionDate != null;
             AssociatedContactId = Convert.ToInt32(task.ContactId);
             Company = task.Company;
             Contact = task.Contact;

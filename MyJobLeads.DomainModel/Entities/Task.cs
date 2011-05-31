@@ -11,7 +11,7 @@ namespace MyJobLeads.DomainModel.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime? TaskDate { get; set; }
-        public bool Completed { get; set; }
+        public DateTime? CompletionDate { get; set; }
 
         public virtual Company Company { get; set; }
         public virtual int? CompanyId { get; set; }

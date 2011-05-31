@@ -132,7 +132,19 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
             // Only change the properties that were specified
             if (_name != null) { task.Name = _name; }
             if (_dateChanged) { task.TaskDate = _newTaskDate; }
-            if (_completedChanged) { task.Completed = _completed; }
+
+            if (_completedChanged) 
+            {
+                if (_completed)
+                {
+                    // Only change the completion date if the completion date isn't already set
+                    if (task.CompletionDate == null)
+                        task.CompletionDate = DateTime.Now;
+                }
+                else
+                    task.CompletionDate = null;
+            }
+
             if (_contactChanged) 
             {
                 // ContactId must be set instead of Contact due to the contact not being eager loaded.
@@ -144,7 +156,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
             {
                 Name = task.Name,
                 TaskDate = task.TaskDate,
-                Completed = task.Completed,
+                CompletionDate = task.CompletionDate,
                 ContactId = task.ContactId,
                 AuthoringUser = user,
                 DateModified = DateTime.Now,

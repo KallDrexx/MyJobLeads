@@ -33,7 +33,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             _task = new Task
             {
                 Name = "Starting Name",
-                Completed = false,
+                CompletionDate = null,
                 TaskDate = _startDate,
                 History = new List<TaskHistory>()
             };
@@ -45,7 +45,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
         }
 
         [TestMethod]
-        public void Can_Create_Company_Task()
+        public void Can_Edit_Task()
         {
             // Setup
             InitializeTestEntities();
@@ -63,7 +63,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.IsNotNull(result, "No task was created in the database");
             Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
             Assert.AreEqual(_changedDate, result.TaskDate, "Task's date value was incorrect");
-            Assert.IsTrue(result.Completed, "Task's completed status value is incorrect");
         }
 
         [TestMethod]
@@ -84,7 +83,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.IsNotNull(result, "No task was created in the database");
             Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
             Assert.AreEqual(_changedDate, result.TaskDate, "Task's date value was incorrect");
-            Assert.IsTrue(result.Completed, "Task's completed status value is incorrect");
+            Assert.IsNotNull(result.CompletionDate, "Task's completion date was null");
         }
 
         [TestMethod]
@@ -132,7 +131,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.IsNotNull(result, "No task was created in the database");
             Assert.AreEqual("Starting Name", result.Name, "Task's name was incorrect");
             Assert.AreEqual(_changedDate, result.TaskDate, "Task's date value was incorrect");
-            Assert.IsTrue(result.Completed, "Task's completed status value is incorrect");
+            Assert.IsNotNull(result.CompletionDate, "Task's completion date was null");
         }
 
         [TestMethod]
@@ -153,7 +152,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.IsNotNull(result, "No task was created in the database");
             Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
             Assert.AreEqual(_startDate, result.TaskDate, "Task's date value was incorrect");
-            Assert.IsTrue(result.Completed, "Task's completed status value is incorrect");
+            Assert.IsNotNull(result.CompletionDate, "Task's completion date was null");
         }
 
         [TestMethod]
@@ -174,7 +173,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.IsNotNull(result, "No task was created in the database");
             Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
             Assert.AreEqual(_changedDate, result.TaskDate, "Task's date value was incorrect");
-            Assert.IsFalse(result.Completed, "Task's completed status value is incorrect");
+            Assert.IsNull(result.CompletionDate, "Task's completion date was not null");
         }
 
         [TestMethod]
@@ -227,7 +226,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
 
             Assert.AreEqual("Name", history.Name, "The history record's name was incorrect");
             Assert.AreEqual(_changedDate, history.TaskDate, "The history record's date value was incorrect");
-            Assert.IsTrue(history.Completed, "The history record's completed status value is incorrect");
+            Assert.AreEqual(_task.CompletionDate, history.CompletionDate, "The history record's completion date value was incorrect");
             Assert.AreEqual(_user, history.AuthoringUser, "The history record's author was incorrect");
             Assert.AreEqual(_contact, history.Contact, "The history record had an incorrect contact");
             Assert.AreEqual(MJLConstants.HistoryUpdate, history.HistoryAction, "The history record's action value was incorrect");
@@ -324,6 +323,65 @@ namespace MyJobLeads.Tests.Commands.Tasks
 
             // Verify
             _searchProvider.Verify(x => x.Index(_task), Times.Once());
+        }
+
+        [TestMethod]
+        public void Setting_Task_As_Completed_Sets_Completion_Date_To_Current_DateTime()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            DateTime start = DateTime.Now;
+            new EditTaskCommand(_unitOfWork, _searchProvider.Object).WithTaskId(_task.Id)
+                                            .SetCompleted(true)
+                                            .RequestedByUserId(_user.Id)
+                                            .Execute();
+            DateTime end = DateTime.Now;
+
+            // Verify
+            Task result = _unitOfWork.Tasks.Fetch().SingleOrDefault();
+            Assert.IsNotNull(result.CompletionDate, "Task's completion date was null");
+            Assert.IsTrue(result.CompletionDate >= start && result.CompletionDate <= end, "Task's completion date was incorrect");
+        }
+
+        [TestMethod]
+        public void Setting_Task_As_Not_Completed_Sets_Completion_Date_To_Null()
+        {
+            // Setup
+            InitializeTestEntities();
+            _task.CompletionDate = DateTime.Now;
+            _unitOfWork.Commit();
+
+            // Act
+            new EditTaskCommand(_unitOfWork, _searchProvider.Object).WithTaskId(_task.Id)
+                                            .SetCompleted(false)
+                                            .RequestedByUserId(_user.Id)
+                                            .Execute();
+
+            // Verify
+            Task result = _unitOfWork.Tasks.Fetch().SingleOrDefault();
+            Assert.IsNull(result.CompletionDate, "Task's completion date was not set to null");
+        }
+
+        [TestMethod]
+        public void Task_CompletionDate_Not_Updated_When_Already_Set()
+        {
+            // Setup
+            InitializeTestEntities();
+            _task.CompletionDate = new DateTime(2011, 1, 1);
+            _unitOfWork.Commit();
+
+            // Act
+            new EditTaskCommand(_unitOfWork, _searchProvider.Object).WithTaskId(_task.Id)
+                                            .SetCompleted(true)
+                                            .RequestedByUserId(_user.Id)
+                                            .Execute();
+
+            // Verify
+            Task result = _unitOfWork.Tasks.Fetch().SingleOrDefault();
+            Assert.IsNotNull(result.CompletionDate, "Task's completion date was null");
+            Assert.AreEqual(result.CompletionDate, new DateTime(2011, 1, 1), "Task's completion date was incorrect");
         }
     }
 }

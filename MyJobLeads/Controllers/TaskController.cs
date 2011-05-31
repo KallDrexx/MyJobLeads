@@ -88,6 +88,7 @@ namespace MyJobLeads.Controllers
                                                        .SetName(model.Name)
                                                        .SetTaskDate(model.TaskDate)
                                                        .SetContactId(selectedContactId)
+                                                       .SetCompleted(model.Completed)
                                                        .RequestedByUserId(CurrentUserId)
                                                        .Execute();
             }

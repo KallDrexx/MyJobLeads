@@ -34,10 +34,10 @@ This contact has @Model.Tasks.Count @taskString entered
         <li>
             @Html.ActionLink(task.Name, MVC.Task.Details(task.Id)) - 
 
-            @if (task.Completed) { <text>Completed </text> }
+            @if (task.CompletionDate != null) { <text>Completed on @task.CompletionDate.Value.ToString()</text> }
             else { <b>Not Completed</b> }
 
-            @if (task.TaskDate != null && !task.Completed) { <text> - Due: @task.TaskDate.Value.ToString()</text> }
+            @if (task.TaskDate != null && task.CompletionDate == null) { <text> - Due: @task.TaskDate.Value.ToString()</text> }
         </li>
     }
 </ul>

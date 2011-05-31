@@ -17,11 +17,11 @@ This company has @Model.Tasks.Count @taskString entered (@Html.ActionLink("Add",
             
             <ul>
                 <li>
-                    @if (task.Completed) { <text>Completed </text> }
+                    @if (task.CompletionDate == null) { <text>Completed</text> }
                     else { <b>Not Completed</b> }
                 </li>
 
-                @if (task.TaskDate != null && !task.Completed) { <li>Due: @task.TaskDate.Value.ToString()</li> }
+                @if (task.TaskDate != null && task.CompletionDate == null) { <li>Due: @task.TaskDate.Value.ToString()</li> }
                 <li>&nbsp;</li>
             </ul> 
 

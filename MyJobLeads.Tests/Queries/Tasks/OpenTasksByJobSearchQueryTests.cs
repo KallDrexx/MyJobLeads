@@ -25,12 +25,12 @@ namespace MyJobLeads.Tests.Queries.Tasks
             _contact1 = new Contact { Tasks = new List<Task>(), Company = _company1 };
             _contact2 = new Contact { Tasks = new List<Task>(), Company = _company2 };
 
-            _contactTask1 = new Task { Contact = _contact1, Completed = false, TaskDate = new DateTime(2011, 1, 2, 5, 4, 5) };
-            _contactTask2 = new Task { Contact = _contact2, Completed = false, TaskDate = new DateTime(2011, 1, 2, 6, 4, 5) };
-            _companyTask1 = new Task { Company = _company1, Completed = false, TaskDate = new DateTime(2011, 1, 2, 1, 4, 5) };
-            _companyTask2 = new Task { Company = _company2, Completed = false, TaskDate = new DateTime(2011, 1, 2, 2, 4, 5) };
-            _closedTask1 = new Task { Company = _company1, Completed = true, TaskDate = new DateTime(2011, 1, 2, 3, 4, 5) };
-            _closedTask2 = new Task { Company = _company2, Completed = true, TaskDate = new DateTime(2011, 1, 2, 4, 4, 5) };
+            _contactTask1 = new Task { Contact = _contact1, CompletionDate = null, TaskDate = new DateTime(2011, 1, 2, 5, 4, 5) };
+            _contactTask2 = new Task { Contact = _contact2, CompletionDate = null, TaskDate = new DateTime(2011, 1, 2, 6, 4, 5) };
+            _companyTask1 = new Task { Company = _company1, CompletionDate = null, TaskDate = new DateTime(2011, 1, 2, 1, 4, 5) };
+            _companyTask2 = new Task { Company = _company2, CompletionDate = null, TaskDate = new DateTime(2011, 1, 2, 2, 4, 5) };
+            _closedTask1 = new Task { Company = _company1, CompletionDate = DateTime.Now, TaskDate = new DateTime(2011, 1, 2, 3, 4, 5) };
+            _closedTask2 = new Task { Company = _company2, CompletionDate = DateTime.Now, TaskDate = new DateTime(2011, 1, 2, 4, 4, 5) };
 
             _unitOfWork.JobSearches.Add(_jobsearch1);
             _unitOfWork.JobSearches.Add(_jobsearch2);
