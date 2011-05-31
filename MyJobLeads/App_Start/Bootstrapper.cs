@@ -7,6 +7,9 @@ using Castle.Windsor;
 using Castle.Windsor.Installer;
 using MyJobLeads.App_Start;
 using MyJobLeads.Infrastructure;
+using System.Configuration;
+using MyJobLeads.DomainModel.Entities.EF;
+using System.Data.Entity;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(Bootstrapper), "Wire")]
 
@@ -17,16 +20,15 @@ namespace MyJobLeads.App_Start
     public static class Bootstrapper
     {
         private static readonly IWindsorContainer container = new WindsorContainer();
+        private const string UpdateDbAppSettingName = "UpdateDatabaseOnModelChange";
 
         public static void Wire()
         {
-            //To be able to inject IEnumerable<T> ICollection<T> IList<T> T[] use this:
-            //container.Kernel.Resolver.AddSubResolver(new CollectionResolver(container.Kernel, true));
-            //Documentation http://docs.castleproject.org/Windsor.Resolvers.ashx
-            
-            //To support typed factories add this:
-            //container.AddFacility<TypedFactoryFacility>();
-            //Documentation http://docs.castleproject.org/Windsor.Typed-Factory-Facility.ashx
+            // Set the Entity Framework database initializer
+            if (ConfigurationManager.AppSettings[UpdateDbAppSettingName] == "true")
+                Database.SetInitializer<MyJobLeadsDbContext>(new MyJobLeadsDbInitializer());
+            else
+                Database.SetInitializer<MyJobLeadsDbContext>(null);
             
             container.Install(FromAssembly.This());
 			var controllerFactory = new WindsorControllerFactory(container.Kernel);

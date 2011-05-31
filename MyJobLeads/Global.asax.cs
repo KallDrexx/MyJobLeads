@@ -36,19 +36,12 @@ namespace MyJobLeads
 
         protected void Application_Start()
         {
-            const string UpdateDbAppSettingName = "UpdateDatabaseOnModelChange";
-
             ModelBinders.Binders.DefaultBinder = new EmptyStringModelBaseBinder();
 
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
-
-            if (ConfigurationManager.AppSettings[UpdateDbAppSettingName] == "true")
-                Database.SetInitializer<MyJobLeadsDbContext>(new MyJobLeadsDbInitializer());
-            else
-                Database.SetInitializer<MyJobLeadsDbContext>(null);
         }
     }
 }
