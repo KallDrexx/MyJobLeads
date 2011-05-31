@@ -50,6 +50,9 @@
     <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.2.0.0.0\lib\NET35\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Lucene.Net">
       <HintPath>..\packages\Lucene.2.9.2.2\lib\Lucene.Net.dll</HintPath>
     </Reference>
@@ -119,6 +122,7 @@
     <Compile Include="Commands\Companies\EditCompanyCommandTests.cs" />
     <Compile Include="Controllers\TaskControllerTests.cs" />
     <Compile Include="Providers\WindsorServiceFactoryTests.cs" />
+    <Compile Include="Providers\WindsorValidatorFactoryTests.cs" />
     <Compile Include="Queries\Companies\IsUserAuthorizedForCompanyQueryTests.cs" />
     <Compile Include="Commands\Contacts\CreateContactCommandTests.cs" />
     <Compile Include="Commands\Contacts\EditContactCommandTests.cs" />
