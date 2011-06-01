@@ -25,18 +25,20 @@
         @:This task is associated with @Html.ActionLink(Model.Company.Name, MVC.Company.Details((int)Model.CompanyId))
     }
 
-    <br /><br />
-    Task Due Date: @if (Model.TaskDate.HasValue) { @Model.TaskDate.Value.ToString() } else { <text>&lt;No Date Set&gt;</text> } <br />
+    <p>
+        Category: @Model.Category <br />
+        Sub-Category: @Model.SubCategory <br />
+        Task Due Date: @if (Model.TaskDate.HasValue) { @Model.TaskDate.Value.ToString() } else { <text>&lt;No Date Set&gt;</text> } <br />
 
-    @if (Model.CompletionDate == null) 
-    { 
-        <b>Not Completed</b>
-    }
-    else 
-    { 
-        @:Completed on: @Model.CompletionDate.Value.ToString() 
-    }
-                                                              
+        @if (Model.CompletionDate == null) 
+        { 
+            <b>Not Completed</b>
+        }
+        else 
+        { 
+            @:Completed on: @Model.CompletionDate.Value.ToString() 
+        }
+    </p>                                                       
 </p>
 
 @Html.ActionLink("Edit Task Details", MVC.Task.Edit(Model.Id)) &nbsp; 

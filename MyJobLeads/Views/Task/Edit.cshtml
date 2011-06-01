@@ -57,6 +57,15 @@ else
         </tr>
 
         <tr>
+            <td align="right">Category:</td>
+        </tr>
+
+        <tr>
+            <td align="right">Sub-Category:</td>
+            <td>@Html.TextBoxFor(x => x.SubCategory, new { size = 30 })</td>
+        </tr>
+
+        <tr>
             <td align="right">Contact:</td>
             <td>
                 @Html.DropDownListFor(x => x.AssociatedContactId, Model.CompanyContactList, new { id = "contactlist" })

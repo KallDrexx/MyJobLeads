@@ -26,6 +26,9 @@ namespace MyJobLeads.ViewModels.Tasks
             AssociatedContactId = Convert.ToInt32(task.ContactId);
             Company = task.Company;
             Contact = task.Contact;
+            Category = task.Category;
+            SubCategory = task.SubCategory;
+
             AssociatedContactId = task.ContactId ?? 0;
         }
 
@@ -35,6 +38,8 @@ namespace MyJobLeads.ViewModels.Tasks
         public bool Completed { get; set; }
         public Company Company { get; set; }
         public Contact Contact { get; set; }
+        public string Category { get; set; }
+        public string SubCategory { get; set; }
 
         public int AssociatedContactId { get; set; }
         public int AssociatedCompanyId { get; set; }

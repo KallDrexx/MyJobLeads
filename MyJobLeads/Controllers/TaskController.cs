@@ -77,6 +77,8 @@ namespace MyJobLeads.Controllers
                 task = _serviceFactory.GetService<CreateTaskCommand>().WithCompanyId(model.AssociatedCompanyId)
                                                          .SetName(model.Name)
                                                          .SetTaskDate(model.TaskDate)
+                                                         .SetCategory(model.Category)
+                                                         .SetSubCategory(model.SubCategory)
                                                          .WithContactId(selectedContactId)
                                                          .RequestedByUserId(CurrentUserId)
                                                          .Execute();
@@ -89,6 +91,8 @@ namespace MyJobLeads.Controllers
                                                        .SetTaskDate(model.TaskDate)
                                                        .SetContactId(selectedContactId)
                                                        .SetCompleted(model.Completed)
+                                                       .SetCategory(model.Category)
+                                                       .SetSubCategory(model.SubCategory)
                                                        .RequestedByUserId(CurrentUserId)
                                                        .Execute();
             }
