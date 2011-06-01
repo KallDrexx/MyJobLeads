@@ -45,5 +45,6 @@ namespace MyJobLeads.ViewModels.Tasks
         public int AssociatedCompanyId { get; set; }
 
         public IList<SelectListItem> CompanyContactList { get; set; }
+        public IList<string> AvailableCategoryList { get; set; }
     }
 }

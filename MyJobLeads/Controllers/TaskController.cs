@@ -50,14 +50,18 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Edit(int id)
         {
+            // Retrieve the task
             var taskByIdQuery = _serviceFactory.GetService<TaskByIdQuery>();
-
             var task = taskByIdQuery.WithTaskId(id).Execute();
             if (task == null)
                 throw new MJLEntityNotFoundException(typeof(Task), id);
 
+            // Get the list of available task categories
+            var categories = _serviceFactory.GetService<CategoriesAvailableForTasksQuery>().Execute();
+
             // Form the view model
             var model = new EditTaskViewModel(task);
+            model.AvailableCategoryList = categories;
 
             // Create contact list
             CreateCompanyContactList(Convert.ToInt32(task.ContactId), task.Company, model);

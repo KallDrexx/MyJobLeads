@@ -58,6 +58,9 @@ else
 
         <tr>
             <td align="right">Category:</td>
+            <td>
+                @Html.DropDownListFor(x => x.Category, new SelectList(Model.AvailableCategoryList, Model.Category))
+            </td>
         </tr>
 
         <tr>

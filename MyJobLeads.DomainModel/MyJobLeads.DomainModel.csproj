@@ -121,6 +121,7 @@
     <Compile Include="Queries\Contacts\IsUserAuthorizedForContactQuery.cs" />
     <Compile Include="Queries\JobSearches\IsUserAuthorizedForJobSearchQuery.cs" />
     <Compile Include="Queries\Search\EntitySearchQuery.cs" />
+    <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQuery.cs" />
     <Compile Include="Queries\Tasks\IsUserAuthorizedForTaskQuery.cs" />
     <Compile Include="ViewModels\SearchProviderResult.cs" />
     <Compile Include="Queries\Companies\CompaniesByJobSearchIdQuery.cs" />
@@ -142,6 +143,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\LookupTables\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
