@@ -22,7 +22,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         protected ISearchProvider _searchProvider;
         protected int _taskId, _userId, _contactId;
         protected DateTime? _newTaskDate;
-        protected string _name;
+        protected string _name, _category;
         protected bool _completed, _completedChanged, _dateChanged, _contactChanged;
 
         public EditTaskCommand(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
@@ -101,6 +101,17 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         }
 
         /// <summary>
+        /// Specifies the category for the task
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        public EditTaskCommand SetCategory(string category)
+        {
+            _category = category;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
@@ -131,6 +142,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
 
             // Only change the properties that were specified
             if (_name != null) { task.Name = _name; }
+            if (_category != null) { task.Category = _category; }
             if (_dateChanged) { task.TaskDate = _newTaskDate; }
 
             if (_completedChanged) 
@@ -158,6 +170,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 TaskDate = task.TaskDate,
                 CompletionDate = task.CompletionDate,
                 ContactId = task.ContactId,
+                Category = task.Category,
                 AuthoringUser = user,
                 DateModified = DateTime.Now,
                 HistoryAction = MJLConstants.HistoryUpdate

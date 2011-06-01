@@ -342,6 +342,7 @@ namespace MyJobLeads.Tests.Providers
                 Id = 3,
                 Name = "Name",
                 TaskDate = testdate,
+                Category = "Category",
 
                 Company = new Company { JobSearch = new JobSearch { Id = 7 } }
             };
@@ -358,6 +359,7 @@ namespace MyJobLeads.Tests.Providers
             Assert.AreEqual("3", doc.Get(LuceneSearchProvider.Constants.TASK_ID), "Document had an incorrect contact id value");
             Assert.AreEqual("Name", doc.Get(LuceneSearchProvider.Constants.TASK_NAME), "Document had an incorrect name value");
             Assert.AreEqual("7", doc.Get(LuceneSearchProvider.Constants.JOBSEARCH_ID), "Document had an incorrect job search id value");
+            Assert.AreEqual("Category", doc.Get(LuceneSearchProvider.Constants.TASK_CATEGORY), "Document had an incorrect category value");
         }
 
         [TestMethod]

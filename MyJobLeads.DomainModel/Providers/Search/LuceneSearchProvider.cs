@@ -108,6 +108,7 @@ namespace MyJobLeads.DomainModel.Providers.Search
             var document = new Document();
             document.Add(new Field(Constants.TASK_ID, task.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             document.Add(new Field(Constants.TASK_NAME, task.Name ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
+            document.Add(new Field(Constants.TASK_CATEGORY, task.Category ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
             document.Add(new Field(Constants.JOBSEARCH_ID, task.Company.JobSearch.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
 
             // Remove any previous documents for the task and add the new one
@@ -282,6 +283,7 @@ namespace MyJobLeads.DomainModel.Providers.Search
 
             public const string TASK_ID = "task_id";
             public const string TASK_NAME = "task_name";
+            public const string TASK_CATEGORY = "task_category";
         }
 
         #endregion

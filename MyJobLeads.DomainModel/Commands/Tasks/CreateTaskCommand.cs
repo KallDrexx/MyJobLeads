@@ -23,6 +23,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         protected string _name;
         protected DateTime? _taskDate;
         protected int _companyId, _userId, _contactId;
+        protected string _category;
 
         public CreateTaskCommand(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
         {
@@ -86,6 +87,17 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         }
 
         /// <summary>
+        /// Specifies the task's category
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        public CreateTaskCommand SetCategory(string category)
+        {
+            _category = category;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
@@ -118,6 +130,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 Name = _name,
                 TaskDate = _taskDate,
                 Contact = contact,
+                Category = _category,
 
                 History = new List<TaskHistory>()
             };
@@ -127,6 +140,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
             {
                 Name = _name,
                 TaskDate = _taskDate,
+                Category = _category,
                 HistoryAction = MJLConstants.HistoryInsert,
                 DateModified = DateTime.Now,
                 AuthoringUser = user

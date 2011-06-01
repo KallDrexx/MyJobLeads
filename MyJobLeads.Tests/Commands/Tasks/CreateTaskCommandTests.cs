@@ -47,6 +47,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             new CreateTaskCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
                                                         .SetName("Name")
                                                         .SetTaskDate(_testDate)
+                                                        .SetCategory("Category")
                                                         .RequestedByUserId(_user.Id)
                                                         .Execute();
 
@@ -59,6 +60,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.IsNull(result.CompletionDate, "Task's completed status value is not null");
             Assert.AreEqual(_company.Id, result.Company.Id, "Tasks' company id was incorrect");
             Assert.IsNull(result.Contact, "Tasks' contact was incorrectly set");
+            Assert.AreEqual("Category", result.Category, "Task's category was incorrect");
         }
 
         [TestMethod]
@@ -71,6 +73,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Task result = new CreateTaskCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
                                                                         .SetName("Name")
                                                                         .SetTaskDate(_testDate)
+                                                                        .SetCategory("Category")
                                                                         .RequestedByUserId(_user.Id)
                                                                         .Execute();
 
@@ -80,6 +83,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.AreEqual(_testDate, result.TaskDate, "Task's date value was incorrect");
             Assert.IsNull(result.CompletionDate, "Task's completion date is not null");
             Assert.AreEqual(_company.Id, result.Company.Id, "Tasks' company id was incorrect");
+            Assert.AreEqual("Category", result.Category, "Task's category was incorrect");
         }
 
         [TestMethod]
@@ -145,6 +149,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             new CreateTaskCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
                                                         .SetName("Name")
                                                         .SetTaskDate(_testDate)
+                                                        .SetCategory("Category")
                                                         .RequestedByUserId(_user.Id)
                                                         .Execute();
             DateTime end = DateTime.Now;
@@ -158,6 +163,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.AreEqual(task.CompletionDate, history.CompletionDate, "History Record's completed date was incorrect");
             Assert.AreEqual(_user, history.AuthoringUser, "History Record's author was incorrect");
             Assert.AreEqual(MJLConstants.HistoryInsert, history.HistoryAction, "History Record's action value was incorrect");
+            Assert.AreEqual("Category", history.Category, "History Record's category value was incorrect");
             Assert.IsTrue(history.DateModified >= start && history.DateModified <= end, "History Record's modification date was incorrect");
         }
 

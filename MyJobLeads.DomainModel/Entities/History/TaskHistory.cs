@@ -10,6 +10,8 @@ namespace MyJobLeads.DomainModel.Entities.History
         public string Name { get; set; }
         public DateTime? TaskDate { get; set; }
         public DateTime? CompletionDate { get; set; }
+        public string Category { get; set; }
+        public string SubCategory { get; set; }
 
         public virtual int TaskId { get; set; }
         public virtual Task Task { get; set; }
