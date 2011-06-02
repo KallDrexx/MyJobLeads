@@ -83,7 +83,7 @@ namespace MyJobLeads.Tests.Queries.JobSearches
             JobSearchUserMetrics results = new JobSearchUserMetricsQuery(_unitOfWork).WithJobSearchId(_jobSearch.Id).Execute();
 
             // Verify
-            Assert.AreEqual(2, results.NumCompanies, "Number of companies found was incorrect");
+            Assert.AreEqual(2, results.NumCompanies, "Number of companies returned was incorrect");
         }
     }
 }
