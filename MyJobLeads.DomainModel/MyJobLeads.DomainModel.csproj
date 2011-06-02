@@ -120,6 +120,7 @@
     <Compile Include="Queries\Companies\IsUserAuthorizedForCompanyQuery.cs" />
     <Compile Include="Queries\Contacts\IsUserAuthorizedForContactQuery.cs" />
     <Compile Include="Queries\JobSearches\IsUserAuthorizedForJobSearchQuery.cs" />
+    <Compile Include="Queries\JobSearches\JobSearchUserMetricsQuery.cs" />
     <Compile Include="Queries\Search\EntitySearchQuery.cs" />
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQuery.cs" />
     <Compile Include="Queries\Tasks\IsUserAuthorizedForTaskQuery.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Utilities\EmailUtils.cs" />
     <Compile Include="Utilities\PasswordUtils.cs" />
     <Compile Include="ViewModels\SearchResultEntities.cs" />
+    <Compile Include="ViewModels\JobSearchUserMetrics.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
