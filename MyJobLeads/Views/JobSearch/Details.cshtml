@@ -1,5 +1,6 @@
 ﻿@model MyJobLeads.ViewModels.JobSearches.JobSearchDetailsViewModel
 @using MyJobLeads.DomainModel.Entities;
+@using MyJobLeads.Infrastructure.HtmlHelpers;
 
 @{
     ViewBag.Title = Model.JobSearch.Name + " - Job Search";
@@ -7,8 +8,9 @@
     ViewBag.Sidebar = Html.Partial(MVC.Task.Views._OpenTaskSummary, Model.OpenTasks);
 }
 
-<h1>@Model.JobSearch.Name's Details</h1>
+<h1>@Model.JobSearch.Name</h1>
 <br />
+
 <p>
     @Html.ActionLink("Edit This Job Search", MVC.JobSearch.Edit(Model.JobSearch.Id)) &nbsp; 
     @Html.ActionLink("View All Job Searches", MVC.JobSearch.Index())
@@ -26,12 +28,31 @@
     }
 </p>
 
- <h2>Companies</h2>
-@Html.ActionLink("Add A New Company", MVC.Company.Add(@Model.JobSearch.Id))
-                
+<h2>Job Search Progress</h2>
+<hr />
+
 <ul>
-    @foreach (Company company in @Model.JobSearch.Companies.OrderBy(x => x.Name).ToList())
+    <li>You have entered <b>@Model.Metrics.NumCompanies</b> companies</li>
+    <li>You have entered <b>@Model.Metrics.NumTasks</b> tasks</li>
+
+    @if (Model.Metrics.NumTasks > 0)
     {
-        <li>@Html.ActionLink(company.Name, MVC.Company.Details(company.Id))</li>
+        <li><b>@Html.DisplayPercentageString(Model.Metrics.NumTasksCompleted, Model.Metrics.NumTasks)</b> of your tasks have been completed</li>
+        <li>You have an average of <b>@Html.DisplayPercentageDecimal(Model.Metrics.NumTasks, Model.Metrics.NumCompanies)</b> tasks per company</li>
     }
+   
 </ul>
+
+ <h2>Companies</h2>
+ <hr />
+
+ <p>
+    @Html.ActionLink("Add A New Company", MVC.Company.Add(@Model.JobSearch.Id))
+                
+    <ul>
+        @foreach (Company company in @Model.JobSearch.Companies.OrderBy(x => x.Name).ToList())
+        {
+            <li>@Html.ActionLink(company.Name, MVC.Company.Details(company.Id))</li>
+        }
+    </ul>
+</p>

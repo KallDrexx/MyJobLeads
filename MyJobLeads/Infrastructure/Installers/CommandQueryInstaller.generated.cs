@@ -44,6 +44,7 @@ namespace MyJobLeads.Infrastructure.Installers
 			container.Register(Component.For<UserByEmailQuery>().ImplementedBy<UserByEmailQuery>().LifeStyle.PerWebRequest);			
 			container.Register(Component.For<JobSearchesByUserIdQuery>().ImplementedBy<JobSearchesByUserIdQuery>().LifeStyle.PerWebRequest);			
 			container.Register(Component.For<ContactsByCompanyIdQuery>().ImplementedBy<ContactsByCompanyIdQuery>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<JobSearchUserMetricsQuery>().ImplementedBy<JobSearchUserMetricsQuery>().LifeStyle.PerWebRequest);			
 			container.Register(Component.For<IsUserAuthorizedForCompanyQuery>().ImplementedBy<IsUserAuthorizedForCompanyQuery>().LifeStyle.PerWebRequest);			
 			container.Register(Component.For<TaskByIdQuery>().ImplementedBy<TaskByIdQuery>().LifeStyle.PerWebRequest);			
 			container.Register(Component.For<CompanyByIdQuery>().ImplementedBy<CompanyByIdQuery>().LifeStyle.PerWebRequest);			
@@ -57,9 +58,9 @@ namespace MyJobLeads.Infrastructure.Installers
 			container.Register(Component.For<CompaniesByJobSearchIdQuery>().ImplementedBy<CompaniesByJobSearchIdQuery>().LifeStyle.PerWebRequest);			
 			container.Register(Component.For<IsUserAuthorizedForTaskQuery>().ImplementedBy<IsUserAuthorizedForTaskQuery>().LifeStyle.PerWebRequest);			
 			container.Register(Component.For<IsUserAuthorizedForContactQuery>().ImplementedBy<IsUserAuthorizedForContactQuery>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<CategoriesAvailableForTasksQuery>().ImplementedBy<CategoriesAvailableForTasksQuery>().LifeStyle.PerWebRequest);			
 			container.Register(Component.For<TasksByContactIdQuery>().ImplementedBy<TasksByContactIdQuery>().LifeStyle.PerWebRequest);			
 			container.Register(Component.For<OpenTasksByJobSearchQuery>().ImplementedBy<OpenTasksByJobSearchQuery>().LifeStyle.PerWebRequest);			
-			container.Register(Component.For<CategoriesAvailableForTasksQuery>().ImplementedBy<CategoriesAvailableForTasksQuery>().LifeStyle.PerWebRequest);					
 		}
 	}
 }
