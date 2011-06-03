@@ -19,7 +19,7 @@ namespace MyJobLeads.Infrastructure.HtmlHelpers
             if (denominator == 0)
                 return 0;
 
-            return (decimal)numerator / (decimal)denominator;
+            return Math.Round((decimal)numerator / (decimal)denominator, 2);
         }
     }
 }
