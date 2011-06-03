@@ -9,7 +9,7 @@
     
     if (Model.Contact != null)
     {
-        sidebar = Html.Partial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact).ToString();
+        sidebar += Html.Partial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact).ToString();
     }
 
     sidebar = string.Concat(sidebar, "</div>", Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company));
