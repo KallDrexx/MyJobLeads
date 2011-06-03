@@ -43,6 +43,7 @@ namespace MyJobLeads.DomainModel.Queries.JobSearches
             data.NumTasks = _unitOfWork.Tasks.Fetch().Where(x => x.Company.JobSearchID == _jobsearchId).Count();
             data.NumTasksCompleted = _unitOfWork.Tasks.Fetch().Where(x => x.Company.JobSearchID == _jobsearchId && x.CompletionDate != null).Count();
             data.NumCompanies = _unitOfWork.Companies.Fetch().Where(x => x.JobSearchID == _jobsearchId).Count();
+            data.NumContacts = _unitOfWork.Contacts.Fetch().Where(x => x.Company.JobSearchID == _jobsearchId).Count();
 
             return data;
         }

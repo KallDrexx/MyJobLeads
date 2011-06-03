@@ -10,5 +10,6 @@ namespace MyJobLeads.DomainModel.ViewModels
         public int NumTasks { get; set; }
         public int NumTasksCompleted { get; set; }
         public int NumCompanies { get; set; }
+        public int NumContacts { get; set; }
     }
 }

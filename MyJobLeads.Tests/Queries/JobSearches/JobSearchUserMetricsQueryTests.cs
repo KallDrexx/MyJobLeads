@@ -85,5 +85,22 @@ namespace MyJobLeads.Tests.Queries.JobSearches
             // Verify
             Assert.AreEqual(2, results.NumCompanies, "Number of companies returned was incorrect");
         }
+
+        [TestMethod]
+        public void Can_Retrieve_Number_Of_Contacts_In_JobSearch()
+        {
+            // Setup
+            InitializeEntities();
+            _unitOfWork.Contacts.Add(new Contact { Company = new Company { JobSearch = _jobSearch } });
+            _unitOfWork.Contacts.Add(new Contact { Company = new Company { JobSearch = new JobSearch() } });
+            _unitOfWork.Contacts.Add(new Contact { Company = new Company { JobSearch = _jobSearch } });
+            _unitOfWork.Commit();
+
+            // Act
+            JobSearchUserMetrics results = new JobSearchUserMetricsQuery(_unitOfWork).WithJobSearchId(_jobSearch.Id).Execute();
+
+            // Verify
+            Assert.AreEqual(2, results.NumCompanies, "Number of contacts returned was incorrect");
+        }
     }
 }
