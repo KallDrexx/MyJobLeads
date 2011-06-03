@@ -41,6 +41,7 @@ namespace MyJobLeads.Controllers
 
             // Form the view model
             var model = new EditTaskViewModel(company);
+            model.AvailableCategoryList = _serviceFactory.GetService<CategoriesAvailableForTasksQuery>().Execute();
 
             // Create contact list
             CreateCompanyContactList(contactId, company, model);

@@ -9,12 +9,16 @@ namespace MyJobLeads.ViewModels.Tasks
 {
     public class EditTaskViewModel
     {
-        public EditTaskViewModel() { }
+        public EditTaskViewModel() 
+        {
+            AvailableCategoryList = new List<string>();
+        }
 
         public EditTaskViewModel(Company company) 
         {
             Company = company;
             AssociatedCompanyId = company.Id;
+            AvailableCategoryList = new List<string>();
         }
 
         public EditTaskViewModel(Task task)
@@ -30,6 +34,7 @@ namespace MyJobLeads.ViewModels.Tasks
             SubCategory = task.SubCategory;
 
             AssociatedContactId = task.ContactId ?? 0;
+            AvailableCategoryList = new List<string>();
         }
 
         public int Id { get; set; }
