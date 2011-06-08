@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using MyJobLeads.DomainModel.Entities.History;
+using MyJobLeads.DomainModel.Entities.Configuration;
 
 namespace MyJobLeads.DomainModel.Entities.EF
 {
@@ -22,8 +23,11 @@ namespace MyJobLeads.DomainModel.Entities.EF
         public DbSet<UnitTestEntity> UnitTestEntities { get; set; }
         public DbSet<User> Users { get; set; }
 
+        // Configuration Tables
+        public DbSet<MilestoneConfig> MilestoneConfigs { get; set; }
+
         /// <summary>
-        /// Contains the Entity Framework database configuratoin rules
+        /// Contains the Entity Framework database configuration rules
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

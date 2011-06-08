@@ -17,7 +17,15 @@ namespace MyJobLeads.DomainModel.Queries.Tasks
         public IList<string> Execute()
         {
             // Current category list is hardcoded
-            return new List<string> { "Apply At Firm", "Follow Up", "In-Person Interview", "Initial Contact", "Phone Interview", "Other" };
+            return new List<string> 
+            { 
+                MJLConstants.ApplyToFirmTaskCategory,
+                MJLConstants.FollowUpTaskCategory,
+                MJLConstants.InPersonInterviewTaskCategory,
+                MJLConstants.InitialContactTaskCategory,
+                MJLConstants.PhoneInterviewTaskCategory,
+                MJLConstants.OtherTaskCategory
+            };
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Transactions;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Entities.History;
 using System.Data.Entity.Validation;
+using MyJobLeads.DomainModel.Entities.Configuration;
 
 namespace MyJobLeads.DomainModel.Data
 {
@@ -159,6 +160,17 @@ namespace MyJobLeads.DomainModel.Data
                 if (_users == null)
                     _users = new EFRepository<User>(_context);
                 return _users;
+            }
+        }
+
+        private IRepository<MilestoneConfig> _milestoneConfigs;
+        public IRepository<MilestoneConfig> MilestoneConfigs
+        {
+            get
+            {
+                if (_milestoneConfigs == null)
+                    _milestoneConfigs = new EFRepository<MilestoneConfig>(_context);
+                return _milestoneConfigs;
             }
         }
 

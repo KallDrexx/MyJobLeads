@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Entities.History;
+using MyJobLeads.DomainModel.Entities.Configuration;
 
 namespace MyJobLeads.DomainModel.Data
 {
@@ -20,6 +21,9 @@ namespace MyJobLeads.DomainModel.Data
         IRepository<TaskHistory> TaskHistory { get; }
         IRepository<UnitTestEntity> UnitTestEntities { get; }
         IRepository<User> Users { get; }
+
+        // Configuration Repositories
+        IRepository<MilestoneConfig> MilestoneConfigs { get; }
 
         /// <summary>
         /// Commits all changes to the database

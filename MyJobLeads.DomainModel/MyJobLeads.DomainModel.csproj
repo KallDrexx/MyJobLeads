@@ -79,6 +79,7 @@
     <Compile Include="Commands\Companies\EditCompanyCommand.cs" />
     <Compile Include="Commands\Contacts\CreateContactCommand.cs" />
     <Compile Include="Commands\Contacts\EditContactCommand.cs" />
+    <Compile Include="Commands\JobSearches\UpdateJobSearchMetricsCommand.cs" />
     <Compile Include="Commands\Search\RefreshSearchIndexCommand.cs" />
     <Compile Include="Commands\Tasks\CreateTaskCommand.cs" />
     <Compile Include="Commands\JobSearches\CreateJobSearchForUserCommand.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Entities\Company.cs" />
+    <Compile Include="Entities\Configuration\MilestoneConfig.cs" />
     <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\History\CompanyHistory.cs" />
     <Compile Include="Entities\History\ContactHistory.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Entities\JobSearch.cs" />
     <Compile Include="Entities\EF\MyJobLeadsDbContext.cs" />
     <Compile Include="Entities\EF\MyJobLeadsDbInitializer.cs" />
+    <Compile Include="Entities\Metrics\JobSearchMetrics.cs" />
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\UnitTestEntity.cs" />
     <Compile Include="Entities\User.cs" />
@@ -146,9 +149,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\LookupTables\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

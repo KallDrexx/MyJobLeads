@@ -11,5 +11,13 @@ namespace MyJobLeads.DomainModel
         public const string HistoryInsert = "ins";
         public const string HistoryUpdate = "upd";
         public const string HistoryDelete = "del";
+
+        // Task Categories
+        public const string ApplyToFirmTaskCategory = "Apply At Firm";
+        public const string FollowUpTaskCategory = "Follow Up";
+        public const string InPersonInterviewTaskCategory = "In-Person Interview";
+        public const string InitialContactTaskCategory = "Initial Contact";
+        public const string PhoneInterviewTaskCategory = "Phone Interview";
+        public const string OtherTaskCategory = "Other";
     }
 }
