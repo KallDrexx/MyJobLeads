@@ -9,6 +9,7 @@ using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Commands.Companies;
 using MyJobLeads.Infrastructure.Attributes;
 using MyJobLeads.DomainModel.Providers.Search;
+using MyJobLeads.DomainModel.Providers;
 
 namespace MyJobLeads.Controllers
 {
@@ -16,11 +17,13 @@ namespace MyJobLeads.Controllers
     public partial class CompanyController : MyJobLeadsBaseController
     {
         protected ISearchProvider _searchProvider;
+        protected IServiceFactory _serviceFactory;
 
-        public CompanyController(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
+        public CompanyController(IUnitOfWork unitOfWork, ISearchProvider searchProvider, IServiceFactory serviceFactory)
         {
             _unitOfWork = unitOfWork;
             _searchProvider = searchProvider;
+            _serviceFactory = serviceFactory;
         }
 
         public virtual ActionResult Add(int jobSearchId)
@@ -42,7 +45,7 @@ namespace MyJobLeads.Controllers
             // Determine if this is a new company or not
             if (company.Id == 0)
             {
-                company = new CreateCompanyCommand(_unitOfWork, _searchProvider).WithJobSearch(jobSearchId)
+                company = new CreateCompanyCommand(_serviceFactory).WithJobSearch(jobSearchId)
                                                                       .SetName(company.Name)
                                                                       .SetCity(company.City)
                                                                       .SetIndustry(company.Industry)

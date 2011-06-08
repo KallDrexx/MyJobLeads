@@ -10,6 +10,8 @@ using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel;
 using Moq;
 using MyJobLeads.DomainModel.Providers.Search;
+using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Queries.JobSearches;
 
 namespace MyJobLeads.Tests.Commands.Companies
 {
@@ -22,13 +24,24 @@ namespace MyJobLeads.Tests.Commands.Companies
 
         private void InitializeTestEntities()
         {
-            _searchProvider = new Mock<ISearchProvider>();
             _search = new JobSearch();
             _user = new User();
 
             _unitOfWork.Users.Add(_user);
             _unitOfWork.JobSearches.Add(_search);
             _unitOfWork.Commit();
+
+            // Initialize Mocks
+            _searchProvider = new Mock<ISearchProvider>();
+            _serviceFactoryMock.Setup(x => x.GetService<ISearchProvider>()).Returns(_searchProvider.Object);
+
+            var userByIdQuery = new Mock<UserByIdQuery>(_unitOfWork);
+            userByIdQuery.Setup(x => x.Execute()).Returns(_user);
+            _serviceFactoryMock.Setup(x => x.GetService<UserByIdQuery>()).Returns(userByIdQuery.Object);
+
+            var jobsearchByIdQuery = new Mock<JobSearchByIdQuery>(_unitOfWork);
+            jobsearchByIdQuery.Setup(x => x.Execute()).Returns(_search);
+            _serviceFactoryMock.Setup(x => x.GetService<JobSearchByIdQuery>()).Returns(jobsearchByIdQuery.Object);
         }
 
         [TestMethod]
@@ -38,7 +51,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new CreateCompanyCommand(_unitOfWork, _searchProvider.Object).WithJobSearch(_search.Id)
+            new CreateCompanyCommand(_serviceFactoryMock.Object).WithJobSearch(_search.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -70,7 +83,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            Company result = new CreateCompanyCommand(_unitOfWork, _searchProvider.Object).WithJobSearch(_search.Id)
+            Company result = new CreateCompanyCommand(_serviceFactoryMock.Object).WithJobSearch(_search.Id)
                                                                  .SetName("Name")
                                                                  .SetPhone("555-555-5555")
                                                                  .SetCity("City")
@@ -79,7 +92,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                                  .SetMetroArea("Metro")
                                                                  .SetIndustry("Industry")
                                                                  .SetNotes("Notes")
-                                                 .CalledByUserId(_user.Id)
+                                                                 .CalledByUserId(_user.Id)
                                                                  .Execute();
 
             // Verify
@@ -101,10 +114,14 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
             int id = _search.Id + 1;
 
+            var query = new Mock<JobSearchByIdQuery>(_unitOfWork);
+            query.Setup(x => x.Execute()).Returns((JobSearch)null);
+            _serviceFactoryMock.Setup(x => x.GetService<JobSearchByIdQuery>()).Returns(query.Object);
+
             // Act
             try
             {
-                new CreateCompanyCommand(_unitOfWork, _searchProvider.Object).WithJobSearch(id)
+                new CreateCompanyCommand(_serviceFactoryMock.Object).WithJobSearch(id)
                                                      .SetName("Name")
                                                      .SetPhone("555-555-5555")
                                                      .SetCity("City")
@@ -133,7 +150,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            Company result = new CreateCompanyCommand(_unitOfWork, _searchProvider.Object).WithJobSearch(_search.Id).CalledByUserId(_user.Id).Execute();
+            Company result = new CreateCompanyCommand(_serviceFactoryMock.Object).WithJobSearch(_search.Id).CalledByUserId(_user.Id).Execute();
 
             // Verify
             Assert.IsNotNull(result.Tasks, "Company's task list was null");
@@ -146,7 +163,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            Company result = new CreateCompanyCommand(_unitOfWork, _searchProvider.Object).WithJobSearch(_search.Id).CalledByUserId(_user.Id).Execute();
+            Company result = new CreateCompanyCommand(_serviceFactoryMock.Object).WithJobSearch(_search.Id).CalledByUserId(_user.Id).Execute();
 
             // Verify
             Assert.IsNotNull(result.Contacts, "Company's contact list was null");
@@ -159,10 +176,14 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
             int id = _user.Id + 101;
 
+            var query = new Mock<UserByIdQuery>(_unitOfWork);
+            query.Setup(x => x.Execute()).Returns((User)null);
+            _serviceFactoryMock.Setup(x => x.GetService<UserByIdQuery>()).Returns(query.Object);
+
             // Act
             try
             {
-                new CreateCompanyCommand(_unitOfWork, _searchProvider.Object).WithJobSearch(_search.Id)
+                new CreateCompanyCommand(_serviceFactoryMock.Object).WithJobSearch(_search.Id)
                                                      .SetName("Name")
                                                      .SetPhone("555-555-5555")
                                                      .SetCity("City")
@@ -192,7 +213,7 @@ namespace MyJobLeads.Tests.Commands.Companies
 
             // Act
             DateTime start = DateTime.Now;
-            new CreateCompanyCommand(_unitOfWork, _searchProvider.Object).WithJobSearch(_search.Id)
+            new CreateCompanyCommand(_serviceFactoryMock.Object).WithJobSearch(_search.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -229,7 +250,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            Company company = new CreateCompanyCommand(_unitOfWork, _searchProvider.Object).WithJobSearch(_search.Id)
+            Company company = new CreateCompanyCommand(_serviceFactoryMock.Object).WithJobSearch(_search.Id)
                                                                                            .CalledByUserId(_user.Id)
                                                                                            .Execute();
 

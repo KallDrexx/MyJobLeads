@@ -9,6 +9,7 @@ using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Providers.Search;
+using MyJobLeads.DomainModel.Providers;
 
 namespace MyJobLeads.DomainModel.Commands.Companies
 {
@@ -17,15 +18,13 @@ namespace MyJobLeads.DomainModel.Commands.Companies
     /// </summary>
     public class CreateCompanyCommand
     {
-        protected IUnitOfWork _unitOfWork;
+        protected IServiceFactory _serviceFactory;
         protected int _searchId, _callingUserId;
         protected string _name, _phone, _city, _state, _zip, _metro, _industry, _notes;
-        protected ISearchProvider _searchProvider;
 
-        public CreateCompanyCommand(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
+        public CreateCompanyCommand(IServiceFactory serviceFactory)
         {
-            _unitOfWork = unitOfWork;
-            _searchProvider = searchProvider;
+            _serviceFactory = serviceFactory;
         }
 
         /// <summary>
@@ -146,12 +145,13 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         public virtual Company Execute()
         {
             // Retrieve the user creating this company
-            var user = new UserByIdQuery(_unitOfWork).WithUserId(_callingUserId).Execute();
+            
+            var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(_callingUserId).Execute();
             if (user == null)
                 throw new MJLEntityNotFoundException(typeof(User), _callingUserId);
 
             // Retrieve the job search
-            var search = new JobSearchByIdQuery(_unitOfWork).WithJobSearchId(_searchId).Execute();
+            var search = _serviceFactory.GetService<JobSearchByIdQuery>().WithJobSearchId(_searchId).Execute();
             if (search == null)
                 throw new MJLEntityNotFoundException(typeof(JobSearch), _searchId);
 
@@ -190,11 +190,12 @@ namespace MyJobLeads.DomainModel.Commands.Companies
                 HistoryAction = MJLConstants.HistoryInsert
             });
 
-            _unitOfWork.Companies.Add(company);
-            _unitOfWork.Commit();
+            var unitOfWork = _serviceFactory.GetService<IUnitOfWork>();
+            unitOfWork.Companies.Add(company);
+            unitOfWork.Commit();
 
             // Index this new company for searching
-            _searchProvider.Index(company);
+            _serviceFactory.GetService<ISearchProvider>().Index(company);
 
             return company;
         }
