@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.Providers;
 
 namespace MyJobLeads.DomainModel.Queries.Companies
 {
@@ -12,13 +13,13 @@ namespace MyJobLeads.DomainModel.Queries.Companies
     /// </summary>
     public class CompaniesByJobSearchIdQuery
     {
-        protected IUnitOfWork _unitOfWork;
+        protected IServiceFactory _serviceFactory;
         protected int _searchId;
         protected bool _sortByName;
 
-        public CompaniesByJobSearchIdQuery(IUnitOfWork unitOfWork)
+        public CompaniesByJobSearchIdQuery(IServiceFactory serviceFactory)
         {
-            _unitOfWork = unitOfWork;
+            _serviceFactory = serviceFactory;
         }
 
         /// <summary>
@@ -48,7 +49,9 @@ namespace MyJobLeads.DomainModel.Queries.Companies
         /// <returns></returns>
         public virtual IList<Company> Execute()
         {
-            var query = _unitOfWork.Companies.Fetch().Where(x => x.JobSearchID == _searchId);
+            var unitOfWork = _serviceFactory.GetService<IUnitOfWork>();
+
+            var query = unitOfWork.Companies.Fetch().Where(x => x.JobSearchID == _searchId);
 
             if (_sortByName)
                 query = query.OrderBy(x => x.Name);
