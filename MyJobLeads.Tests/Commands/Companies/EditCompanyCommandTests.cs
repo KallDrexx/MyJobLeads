@@ -158,7 +158,6 @@ namespace MyJobLeads.Tests.Commands.Companies
             {
                 Assert.AreEqual(typeof(Company), ex.EntityType, "MJLEntityNotFoundException's entity type was incorrect");
                 Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
-                query.Verify(x => x.WithCompanyId(id));
             }
         }
 
@@ -443,7 +442,6 @@ namespace MyJobLeads.Tests.Commands.Companies
             {
                 Assert.AreEqual(typeof(User), ex.EntityType, "MJLEntityNotFoundException's entity type was incorrect");
                 Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
-                query.Verify(x => x.WithUserId(id));
             }
         }
 
