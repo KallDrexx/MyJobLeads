@@ -12,6 +12,7 @@ using Moq;
 using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Queries.JobSearches;
+using MyJobLeads.DomainModel.Commands.JobSearches;
 
 namespace MyJobLeads.Tests.Commands.Companies
 {
@@ -42,6 +43,8 @@ namespace MyJobLeads.Tests.Commands.Companies
             var jobsearchByIdQuery = new Mock<JobSearchByIdQuery>(_unitOfWork);
             jobsearchByIdQuery.Setup(x => x.Execute()).Returns(_search);
             _serviceFactoryMock.Setup(x => x.GetService<JobSearchByIdQuery>()).Returns(jobsearchByIdQuery.Object);
+
+            _serviceFactoryMock.Setup(x => x.GetService<UpdateJobSearchMetricsCommand>()).Returns(new Mock<UpdateJobSearchMetricsCommand>(_unitOfWork).Object);
         }
 
         [TestMethod]
@@ -256,6 +259,23 @@ namespace MyJobLeads.Tests.Commands.Companies
 
             // Verify
             _searchProvider.Verify(x => x.Index(company), Times.Once());
+        }
+
+        [TestMethod]
+        public void Command_Updates_JobSearch_Metrics()
+        {
+            // Setup
+            InitializeTestEntities();
+            Mock<UpdateJobSearchMetricsCommand> updateCommand = new Mock<UpdateJobSearchMetricsCommand>(_unitOfWork);
+            _serviceFactoryMock.Setup(x => x.GetService<UpdateJobSearchMetricsCommand>()).Returns(updateCommand.Object);
+
+            // Act
+            Company company = new CreateCompanyCommand(_serviceFactoryMock.Object).WithJobSearch(_search.Id)
+                                                                                           .CalledByUserId(_user.Id)
+                                                                                           .Execute();
+
+            // Verify
+            updateCommand.Verify(x => x.Execute(), Times.Once());
         }
     }
 }

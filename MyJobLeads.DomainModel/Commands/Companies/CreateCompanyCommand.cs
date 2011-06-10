@@ -10,6 +10,7 @@ using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Providers;
+using MyJobLeads.DomainModel.Commands.JobSearches;
 
 namespace MyJobLeads.DomainModel.Commands.Companies
 {
@@ -196,6 +197,10 @@ namespace MyJobLeads.DomainModel.Commands.Companies
 
             // Index this new company for searching
             _serviceFactory.GetService<ISearchProvider>().Index(company);
+
+            // Update the job search metrics
+            var updateCommand = _serviceFactory.GetService<UpdateJobSearchMetricsCommand>();
+            updateCommand.WithJobSearchId(search.Id).Execute();
 
             return company;
         }
