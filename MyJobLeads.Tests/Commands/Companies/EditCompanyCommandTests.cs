@@ -10,6 +10,10 @@ using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel;
 using MyJobLeads.DomainModel.Providers.Search;
 using Moq;
+using MyJobLeads.DomainModel.Providers;
+using MyJobLeads.DomainModel.Data;
+using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Queries.Companies;
 
 namespace MyJobLeads.Tests.Commands.Companies
 {
@@ -19,10 +23,10 @@ namespace MyJobLeads.Tests.Commands.Companies
         private Company _company;
         private User _user;
         private Mock<ISearchProvider> _searchProvider;
+        private Mock<IServiceFactory> _serviceFactory;
 
         private void InitializeTestEntities()
         {
-            _searchProvider = new Mock<ISearchProvider>();
             _user = new User();
             _company = new Company
             {
@@ -41,6 +45,21 @@ namespace MyJobLeads.Tests.Commands.Companies
             _unitOfWork.Users.Add(_user);
             _unitOfWork.Companies.Add(_company);
             _unitOfWork.Commit();
+
+            // Setup mocks
+            _serviceFactory = new Mock<IServiceFactory>();
+            _serviceFactory.Setup(x => x.GetService<IUnitOfWork>()).Returns(_unitOfWork);
+
+            _searchProvider = new Mock<ISearchProvider>();
+            _serviceFactory.Setup(x => x.GetService<ISearchProvider>()).Returns(_searchProvider.Object);
+
+            Mock<UserByIdQuery> userQuery = new Mock<UserByIdQuery>(_unitOfWork);
+            userQuery.Setup(x => x.Execute()).Returns(_user);
+            _serviceFactory.Setup(x => x.GetService<UserByIdQuery>()).Returns(userQuery.Object);
+
+            Mock<CompanyByIdQuery> companyQuery = new Mock<CompanyByIdQuery>(_unitOfWork);
+            companyQuery.Setup(x => x.Execute()).Returns(_company);
+            _serviceFactory.Setup(x => x.GetService<CompanyByIdQuery>()).Returns(companyQuery.Object);
         }
 
         [TestMethod]
@@ -50,7 +69,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -82,7 +101,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            Company result = new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            Company result = new EditCompanyCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                                  .SetName("Name")
                                                                  .SetPhone("555-555-5555")
                                                                  .SetCity("City")
@@ -113,10 +132,14 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
             int id = _company.Id + 1;
 
+            Mock<CompanyByIdQuery> query = new Mock<CompanyByIdQuery>(_unitOfWork);
+            query.Setup(x => x.Execute()).Returns((Company)null);
+            _serviceFactory.Setup(x => x.GetService<CompanyByIdQuery>()).Returns(query.Object);
+
             // Act
             try
             {
-                new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(id)
+                new EditCompanyCommand(_serviceFactory.Object).WithCompanyId(id)
                                                      .SetName("Name")
                                                      .SetPhone("555-555-5555")
                                                      .SetCity("City")
@@ -135,6 +158,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             {
                 Assert.AreEqual(typeof(Company), ex.EntityType, "MJLEntityNotFoundException's entity type was incorrect");
                 Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
+                query.Verify(x => x.WithCompanyId(id));
             }
         }
 
@@ -145,7 +169,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
                                                  .SetState("State")
@@ -176,7 +200,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetCity("City")
                                                  .SetState("State")
@@ -207,7 +231,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetState("State")
@@ -238,7 +262,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -269,7 +293,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -300,7 +324,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -331,7 +355,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -362,7 +386,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -393,10 +417,14 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
             int id = _user.Id + 1;
 
+            Mock<UserByIdQuery> query = new Mock<UserByIdQuery>(_unitOfWork);
+            query.Setup(x => x.Execute()).Returns((User)null);
+            _serviceFactory.Setup(x => x.GetService<UserByIdQuery>()).Returns(query.Object);
+
             // Act
             try
             {
-                new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+                new EditCompanyCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                      .SetName("Name")
                                                      .SetPhone("555-555-5555")
                                                      .SetCity("City")
@@ -415,6 +443,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             {
                 Assert.AreEqual(typeof(User), ex.EntityType, "MJLEntityNotFoundException's entity type was incorrect");
                 Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
+                query.Verify(x => x.WithUserId(id));
             }
         }
 
@@ -426,7 +455,7 @@ namespace MyJobLeads.Tests.Commands.Companies
 
             // Act
             DateTime start = DateTime.Now;
-            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetPhone("555-555-5555")
                                                  .SetCity("City")
@@ -465,7 +494,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             string newNotes = "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
 
             // Act
-            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new EditCompanyCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                .RequestedByUserId(_user.Id)
                                                .SetNotes(newNotes)
                                                .Execute();
@@ -482,7 +511,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
 
             // Act
-            new EditCompanyCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id).RequestedByUserId(_user.Id).Execute();
+            new EditCompanyCommand(_serviceFactory.Object).WithCompanyId(_company.Id).RequestedByUserId(_user.Id).Execute();
 
             // Verify
             _searchProvider.Verify(x => x.Index(_company), Times.Once());

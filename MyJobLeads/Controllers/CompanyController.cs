@@ -59,7 +59,7 @@ namespace MyJobLeads.Controllers
             }
             else
             {
-                company = new EditCompanyCommand(_unitOfWork, _searchProvider).WithCompanyId(company.Id)
+                company = new EditCompanyCommand(_serviceFactory).WithCompanyId(company.Id)
                                                                       .SetName(company.Name)
                                                                       .SetCity(company.City)
                                                                       .SetIndustry(company.Industry)

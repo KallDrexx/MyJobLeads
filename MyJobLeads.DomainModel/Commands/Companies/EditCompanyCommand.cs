@@ -9,20 +9,19 @@ using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Providers.Search;
+using MyJobLeads.DomainModel.Providers;
 
 namespace MyJobLeads.DomainModel.Commands.Companies
 {
     public class EditCompanyCommand
     {
-        protected IUnitOfWork _unitOfWork;
+        protected IServiceFactory _factory;
         protected int _companyId, _userId;
         protected string _name, _phone, _city, _state, _zip, _metro, _industry, _notes;
-        protected ISearchProvider _searchProvider;
 
-        public EditCompanyCommand(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
+        public EditCompanyCommand(IServiceFactory factory)
         {
-            _unitOfWork = unitOfWork;
-            _searchProvider = searchProvider;
+            _factory = factory;
         }
 
         /// <summary>
@@ -142,13 +141,15 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         /// <exception cref="MJLEntityNotFoundException">Thrown when the company or requesting user doesn't exist</exception>
         public virtual Company Execute()
         {
+            var unitOfWork = _factory.GetService<IUnitOfWork>();
+
             // Retrieve the calling user
-            var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();
+            var user = _factory.GetService<UserByIdQuery>().WithUserId(_userId).Execute();
             if (user == null)
                 throw new MJLEntityNotFoundException(typeof(User), _userId);
 
             // Retrieve the entity
-            var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(_companyId).Execute();
+            var company = _factory.GetService<CompanyByIdQuery>().WithCompanyId(_companyId).Execute();
             if (company == null)
                 throw new MJLEntityNotFoundException(typeof(Company), _companyId);
 
@@ -180,10 +181,10 @@ namespace MyJobLeads.DomainModel.Commands.Companies
             });
 
             // Commit changes
-            _unitOfWork.Commit();
+            unitOfWork.Commit();
 
             // Index the edited company
-            _searchProvider.Index(company);
+            _factory.GetService<ISearchProvider>().Index(company);
 
             return company;
         }
