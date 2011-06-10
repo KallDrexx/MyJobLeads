@@ -10,6 +10,10 @@ using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel;
 using Moq;
 using MyJobLeads.DomainModel.Providers.Search;
+using MyJobLeads.DomainModel.Providers;
+using MyJobLeads.DomainModel.Data;
+using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Queries.Companies;
 
 namespace MyJobLeads.Tests.Commands.Contacts
 {
@@ -19,6 +23,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
         private Company _company;
         private User _user;
         private Mock<ISearchProvider> _searchProvider;
+        private Mock<IServiceFactory> _serviceFactory;
 
         private void InitializeTestEntities()
         {
@@ -29,6 +34,21 @@ namespace MyJobLeads.Tests.Commands.Contacts
             _unitOfWork.Users.Add(_user);
             _unitOfWork.Companies.Add(_company);
             _unitOfWork.Commit();
+
+            // Mocks
+            _serviceFactory = new Mock<IServiceFactory>();
+            _serviceFactory.Setup(x => x.GetService<IUnitOfWork>()).Returns(_unitOfWork);
+
+            _searchProvider = new Mock<ISearchProvider>();
+            _serviceFactory.Setup(x => x.GetService<ISearchProvider>()).Returns(_searchProvider.Object);
+
+            Mock<UserByIdQuery> userQuery = new Mock<UserByIdQuery>(_unitOfWork);
+            userQuery.Setup(x => x.Execute()).Returns(_user);
+            _serviceFactory.Setup(x => x.GetService<UserByIdQuery>()).Returns(userQuery.Object);
+
+            Mock<CompanyByIdQuery> companyQuery = new Mock<CompanyByIdQuery>(_unitOfWork);
+            companyQuery.Setup(x => x.Execute()).Returns(_company);
+            _serviceFactory.Setup(x => x.GetService<CompanyByIdQuery>()).Returns(companyQuery.Object);
         }
 
         [TestMethod]
@@ -38,7 +58,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
 
             // Act
-            new CreateContactCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new CreateContactCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetDirectPhone("111-111-1111")
                                                  .SetMobilePhone("222-222-2222")
@@ -71,7 +91,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
 
             // Act
-            Contact result = new CreateContactCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            Contact result = new CreateContactCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                                  .SetName("Name")
                                                                  .SetDirectPhone("111-111-1111")
                                                                  .SetMobilePhone("222-222-2222")
@@ -103,10 +123,14 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
             int id = _company.Id + 1;
 
+            Mock<CompanyByIdQuery> query = new Mock<CompanyByIdQuery>(_unitOfWork);
+            query.Setup(x => x.Execute()).Returns((Company)null);
+            _serviceFactory.Setup(x => x.GetService<CompanyByIdQuery>()).Returns(query.Object);
+
             // Act
             try
             {
-                new CreateContactCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(id)
+                new CreateContactCommand(_serviceFactory.Object).WithCompanyId(id)
                                                     .SetName("Name")
                                                     .SetDirectPhone("111-111-1111")
                                                     .SetMobilePhone("222-222-2222")
@@ -135,7 +159,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
 
             // Act
-            Contact result = new CreateContactCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id).RequestedByUserId(_user.Id).Execute();
+            Contact result = new CreateContactCommand(_serviceFactory.Object).WithCompanyId(_company.Id).RequestedByUserId(_user.Id).Execute();
 
             // Verify
             Assert.IsNotNull(result.Tasks, "Contact's task list was not initialized");
@@ -148,10 +172,14 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
             int id = _user.Id + 1;
 
+            Mock<UserByIdQuery> query = new Mock<UserByIdQuery>(_unitOfWork);
+            query.Setup(x => x.Execute()).Returns((User)null);
+            _serviceFactory.Setup(x => x.GetService<UserByIdQuery>()).Returns(query.Object);
+
             // Act
             try
             {
-                new CreateContactCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+                new CreateContactCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                     .SetName("Name")
                                                     .SetDirectPhone("111-111-1111")
                                                     .SetMobilePhone("222-222-2222")
@@ -181,7 +209,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
 
             // Act
             DateTime start = DateTime.Now;
-            new CreateContactCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new CreateContactCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                  .SetName("Name")
                                                  .SetDirectPhone("111-111-1111")
                                                  .SetMobilePhone("222-222-2222")
@@ -218,7 +246,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
 
             // Act
-            Contact contact = new CreateContactCommand(_unitOfWork, _searchProvider.Object)
+            Contact contact = new CreateContactCommand(_serviceFactory.Object)
                                     .WithCompanyId(_company.Id)
                                     .RequestedByUserId(_user.Id)
                                     .Execute();

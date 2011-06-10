@@ -12,6 +12,7 @@ using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.Infrastructure.Attributes;
 using MyJobLeads.DomainModel.Providers.Search;
+using MyJobLeads.DomainModel.Providers;
 
 namespace MyJobLeads.Controllers
 {
@@ -19,11 +20,11 @@ namespace MyJobLeads.Controllers
     public partial class ContactController : MyJobLeadsBaseController
     {
         protected ISearchProvider _searchProvider;
+        protected IServiceFactory _serviceFactory;
 
-        public ContactController(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
+        public ContactController(IServiceFactory factory)
         {
-            _unitOfWork = unitOfWork;
-            _searchProvider = searchProvider;
+            _serviceFactory = factory;
         }
 
         public virtual ActionResult Add(int companyId)
@@ -51,7 +52,7 @@ namespace MyJobLeads.Controllers
             // Determine if this is a new contact or not
             if (contact.Id == 0)
             {
-                contact = new CreateContactCommand(_unitOfWork, _searchProvider).WithCompanyId(companyId)
+                contact = new CreateContactCommand(_serviceFactory).WithCompanyId(companyId)
                                                                .SetAssistant(contact.Assistant)
                                                                .SetDirectPhone(contact.DirectPhone)
                                                                .SetEmail(contact.Email)
