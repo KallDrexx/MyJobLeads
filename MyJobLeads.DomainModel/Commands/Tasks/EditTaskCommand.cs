@@ -10,6 +10,7 @@ using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Queries.Contacts;
 using MyJobLeads.DomainModel.Providers.Search;
+using MyJobLeads.DomainModel.Providers;
 
 namespace MyJobLeads.DomainModel.Commands.Tasks
 {
@@ -18,17 +19,15 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
     /// </summary>
     public class EditTaskCommand
     {
-        protected IUnitOfWork _unitOfWork;
-        protected ISearchProvider _searchProvider;
+        protected IServiceFactory _serviceFactory;
         protected int _taskId, _userId, _contactId;
         protected DateTime? _newTaskDate;
         protected string _name, _category, _subCategory;
         protected bool _completed, _completedChanged, _dateChanged, _contactChanged;
 
-        public EditTaskCommand(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
+        public EditTaskCommand(IServiceFactory factory)
         {
-            _unitOfWork = unitOfWork;
-            _searchProvider = searchProvider;
+            _serviceFactory = factory;
         }
 
         /// <summary>
@@ -129,13 +128,15 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         /// <exception cref="MJLEntityNotFoundException">Thrown when the specified task, calling user, or contact isn't found</exception>
         public virtual Task Execute()
         {
+            var unitOfWork = _serviceFactory.GetService<IUnitOfWork>();
+
             // Retrieve the user editing the task
-            var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();
+            var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(_userId).Execute();
             if (user == null)
                 throw new MJLEntityNotFoundException(typeof(User), _userId);
 
             // Retrieve the task
-            var task = new TaskByIdQuery(_unitOfWork).WithTaskId(_taskId).Execute();
+            var task = _serviceFactory.GetService<TaskByIdQuery>().WithTaskId(_taskId).Execute();
             if (task == null)
                 throw new MJLEntityNotFoundException(typeof(Task), _taskId);
 
@@ -145,7 +146,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
             {
                 if (_contactId != 0)
                 {
-                    contact = new ContactByIdQuery(_unitOfWork).WithContactId(_contactId).Execute();
+                    contact = _serviceFactory.GetService<ContactByIdQuery>().WithContactId(_contactId).Execute();
                     if (contact == null)
                         throw new MJLEntityNotFoundException(typeof(Contact), _contactId);
                 }
@@ -190,10 +191,10 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
             });
 
             // Save
-            _unitOfWork.Commit();
+            unitOfWork.Commit();
 
             // Update the index for the task
-            _searchProvider.Index(task);
+            _serviceFactory.GetService<ISearchProvider>().Index(task);
 
             return task;
         }
