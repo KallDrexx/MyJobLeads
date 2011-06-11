@@ -8,13 +8,25 @@ using MyJobLeads.DomainModel.Queries.JobSearches;
 
 namespace MyJobLeads.DomainModel.Commands.JobSearches
 {
+    public struct UpdateJobSearchMetricsCmdParams
+    {
+        /// <summary>
+        /// Specifies the id value of the job search to update
+        /// </summary>
+        public int JobSearchId { get; set; }
+
+        /// <summary>
+        /// Specifies the id value of the user updating the job search metrics
+        /// </summary>
+        public int RequestingUserId { get; set; }
+    }
+
     /// <summary>
     /// Command that updates the metrics for a job search
     /// </summary>
     public class UpdateJobSearchMetricsCommand
     {
         protected IUnitOfWork _unitOfWork;
-        protected int _jobSearchId;
 
         public UpdateJobSearchMetricsCommand(IUnitOfWork unitOfWork)
         {
@@ -22,45 +34,34 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
         }
 
         /// <summary>
-        /// Specifies the id value of the job search to update metrics for
-        /// </summary>
-        /// <param name="jobSearchId"></param>
-        /// <returns></returns>
-        public UpdateJobSearchMetricsCommand WithJobSearchId(int jobSearchId)
-        {
-            _jobSearchId = jobSearchId;
-            return this;
-        }
-
-        /// <summary>
         /// Executes the command
         /// </summary>
-        virtual public void Execute()
+        virtual public void Execute(UpdateJobSearchMetricsCmdParams cmdParams)
         {
             // Retrieve the job search 
-            var jobSearch = new JobSearchByIdQuery(_unitOfWork).WithJobSearchId(_jobSearchId).Execute();
+            var jobSearch = new JobSearchByIdQuery(_unitOfWork).WithJobSearchId(cmdParams.JobSearchId).Execute();
 
             // Rebuild Metrics
-            jobSearch.Metrics.NumCompaniesCreated = _unitOfWork.Companies.Fetch().Count(x => x.JobSearchID == _jobSearchId);
-            jobSearch.Metrics.NumContactsCreated = _unitOfWork.Contacts.Fetch().Count(x => x.Company.JobSearchID == _jobSearchId);
+            jobSearch.Metrics.NumCompaniesCreated = _unitOfWork.Companies.Fetch().Count(x => x.JobSearchID == cmdParams.JobSearchId);
+            jobSearch.Metrics.NumContactsCreated = _unitOfWork.Contacts.Fetch().Count(x => x.Company.JobSearchID == cmdParams.JobSearchId);
             jobSearch.Metrics.NumApplyTasksCreated = _unitOfWork.Tasks.Fetch()
-                                                                      .Where(x => x.Company.JobSearchID == _jobSearchId)
+                                                                      .Where(x => x.Company.JobSearchID == cmdParams.JobSearchId)
                                                                       .Where(x => x.Category == MJLConstants.ApplyToFirmTaskCategory)
                                                                       .Count();
 
             jobSearch.Metrics.NumApplyTasksCompleted = _unitOfWork.Tasks.Fetch()
-                                                                        .Where(x => x.Company.JobSearchID == _jobSearchId)
+                                                                        .Where(x => x.Company.JobSearchID == cmdParams.JobSearchId)
                                                                         .Where(x => x.Category == MJLConstants.ApplyToFirmTaskCategory)
                                                                         .Where(x => x.CompletionDate != null)
                                                                         .Count();
 
             jobSearch.Metrics.NumPhoneInterviewTasksCreated = _unitOfWork.Tasks.Fetch()
-                                                                               .Where(x => x.Company.JobSearchID == _jobSearchId)
+                                                                               .Where(x => x.Company.JobSearchID == cmdParams.JobSearchId)
                                                                                .Where(x => x.Category == MJLConstants.PhoneInterviewTaskCategory)
                                                                                .Count();
 
             jobSearch.Metrics.NumInPersonInterviewTasksCreated = _unitOfWork.Tasks.Fetch()
-                                                                                  .Where(x => x.Company.JobSearchID == _jobSearchId)
+                                                                                  .Where(x => x.Company.JobSearchID == cmdParams.JobSearchId)
                                                                                   .Where(x => x.Category == MJLConstants.InPersonInterviewTaskCategory)
                                                                                   .Count();
 

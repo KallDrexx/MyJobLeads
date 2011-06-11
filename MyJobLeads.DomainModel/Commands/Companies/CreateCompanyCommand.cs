@@ -200,7 +200,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
 
             // Update the job search metrics
             var updateCommand = _serviceFactory.GetService<UpdateJobSearchMetricsCommand>();
-            updateCommand.WithJobSearchId(search.Id).Execute();
+            updateCommand.Execute(new UpdateJobSearchMetricsCmdParams { JobSearchId = search.Id });
 
             return company;
         }

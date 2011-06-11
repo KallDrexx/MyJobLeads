@@ -275,7 +275,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                                                            .Execute();
 
             // Verify
-            updateCommand.Verify(x => x.Execute(), Times.Once());
+            updateCommand.Verify(x => x.Execute(It.Is<UpdateJobSearchMetricsCmdParams>(y => y.JobSearchId == _search.Id)), Times.Once());
         }
     }
 }

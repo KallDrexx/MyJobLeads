@@ -29,7 +29,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             _unitOfWork.Commit();
 
             // Act
-            new UpdateJobSearchMetricsCommand(_unitOfWork).WithJobSearchId(_search.Id).Execute();
+            new UpdateJobSearchMetricsCommand(_unitOfWork).Execute(new UpdateJobSearchMetricsCmdParams { JobSearchId = _search.Id });
 
             // Verify
             Assert.AreEqual(2, _search.Metrics.NumCompaniesCreated, "Number of companies created was incorrect");
@@ -46,7 +46,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             _unitOfWork.Commit();
 
             // Act
-            new UpdateJobSearchMetricsCommand(_unitOfWork).WithJobSearchId(_search.Id).Execute();
+            new UpdateJobSearchMetricsCommand(_unitOfWork).Execute(new UpdateJobSearchMetricsCmdParams { JobSearchId = _search.Id });
 
             // Verify
             Assert.AreEqual(2, _search.Metrics.NumContactsCreated, "Number of companies created was incorrect");
@@ -64,7 +64,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             _unitOfWork.Commit();
 
             // Act
-            new UpdateJobSearchMetricsCommand(_unitOfWork).WithJobSearchId(_search.Id).Execute();
+            new UpdateJobSearchMetricsCommand(_unitOfWork).Execute(new UpdateJobSearchMetricsCmdParams { JobSearchId = _search.Id });
 
             // Verify
             Assert.AreEqual(2, _search.Metrics.NumApplyTasksCreated, "Number of application tasks created was incorrect");
@@ -83,7 +83,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             _unitOfWork.Commit();
 
             // Act
-            new UpdateJobSearchMetricsCommand(_unitOfWork).WithJobSearchId(_search.Id).Execute();
+            new UpdateJobSearchMetricsCommand(_unitOfWork).Execute(new UpdateJobSearchMetricsCmdParams { JobSearchId = _search.Id });
 
             // Verify
             Assert.AreEqual(2, _search.Metrics.NumApplyTasksCompleted, "Number of application tasks completed was incorrect");
@@ -101,7 +101,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             _unitOfWork.Commit();
 
             // Act
-            new UpdateJobSearchMetricsCommand(_unitOfWork).WithJobSearchId(_search.Id).Execute();
+            new UpdateJobSearchMetricsCommand(_unitOfWork).Execute(new UpdateJobSearchMetricsCmdParams { JobSearchId = _search.Id });
 
             // Verify
             Assert.AreEqual(2, _search.Metrics.NumPhoneInterviewTasksCreated, "Number of phone interview tasks created was incorrect");
@@ -119,7 +119,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             _unitOfWork.Commit();
 
             // Act
-            new UpdateJobSearchMetricsCommand(_unitOfWork).WithJobSearchId(_search.Id).Execute();
+            new UpdateJobSearchMetricsCommand(_unitOfWork).Execute(new UpdateJobSearchMetricsCmdParams { JobSearchId = _search.Id });
 
             // Verify
             Assert.AreEqual(2, _search.Metrics.NumInPersonInterviewTasksCreated, "Number of in person interview tasks created was incorrect");
