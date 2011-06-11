@@ -9,6 +9,7 @@ using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Providers.Search;
+using MyJobLeads.DomainModel.Providers;
 
 namespace MyJobLeads.DomainModel.Commands.Contacts
 {
@@ -17,15 +18,13 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
     /// </summary>
     public class EditContactCommand
     {
-        protected IUnitOfWork _unitOfWork;
-        protected ISearchProvider _searchProvider;
+        protected IServiceFactory _serviceFactory;
         protected int _contactId, _userid;
         protected string _name, _directPhone, _mobilePhone, _ext, _email, _assistant, _referredBy, _notes;
 
-        public EditContactCommand(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
+        public EditContactCommand(IServiceFactory factory)
         {
-            _unitOfWork = unitOfWork;
-            _searchProvider = searchProvider;
+            _serviceFactory = factory;
         }
 
         /// <summary>
@@ -145,13 +144,15 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
         /// <exception cref="MJLEntityNotFoundException">Thrown when the contact is not found</exception>
         public virtual Contact Execute()
         {
+            var unitofWork = _serviceFactory.GetService<IUnitOfWork>();
+
             // Retrieve the user editing the contact
-            var user = new UserByIdQuery(_unitOfWork).WithUserId(_userid).Execute();
+            var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(_userid).Execute();
             if (user == null)
                 throw new MJLEntityNotFoundException(typeof(User), _userid);
 
-            // Retrieve the company
-            var contact = new ContactByIdQuery(_unitOfWork).WithContactId(_contactId).Execute();
+            // Retrieve the contact
+            var contact = _serviceFactory.GetService<ContactByIdQuery>().WithContactId(_contactId).Execute();
             if (contact == null)
                 throw new MJLEntityNotFoundException(typeof(Contact), _contactId);
 
@@ -183,10 +184,10 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
             });
 
             // Submit changes
-            _unitOfWork.Commit();
+            unitofWork.Commit();
 
             // Update the contact's search index
-            _searchProvider.Index(contact);
+            _serviceFactory.GetService<ISearchProvider>().Index(contact);
 
             return contact;
         }

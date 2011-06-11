@@ -10,6 +10,10 @@ using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel;
 using Moq;
 using MyJobLeads.DomainModel.Providers.Search;
+using MyJobLeads.DomainModel.Providers;
+using MyJobLeads.DomainModel.Data;
+using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Queries.Contacts;
 
 namespace MyJobLeads.Tests.Commands.Contacts
 {
@@ -19,10 +23,12 @@ namespace MyJobLeads.Tests.Commands.Contacts
         private Contact _contact;
         private User _user;
         private Mock<ISearchProvider> _searchProvider;
+        private Mock<IServiceFactory> _serviceFactory;
+        private Mock<UserByIdQuery> _userQuery;
+        private Mock<ContactByIdQuery> _contactQuery;
 
         private void InitializeTestEntities()
         {
-            _searchProvider = new Mock<ISearchProvider>();
             _user = new User();
             _contact = new Contact
             {
@@ -41,6 +47,21 @@ namespace MyJobLeads.Tests.Commands.Contacts
             _unitOfWork.Users.Add(_user);
             _unitOfWork.Contacts.Add(_contact);
             _unitOfWork.Commit();
+
+            // Mocks
+            _serviceFactory = new Mock<IServiceFactory>();
+            _serviceFactory.Setup(x => x.GetService<IUnitOfWork>()).Returns(_unitOfWork);
+
+            _searchProvider = new Mock<ISearchProvider>();
+            _serviceFactory.Setup(x => x.GetService<ISearchProvider>()).Returns(_searchProvider.Object);
+
+            _userQuery = new Mock<UserByIdQuery>(_unitOfWork);
+            _userQuery.Setup(x => x.Execute()).Returns(_user);
+            _serviceFactory.Setup(x => x.GetService<UserByIdQuery>()).Returns(_userQuery.Object);
+
+            _contactQuery = new Mock<ContactByIdQuery>(_unitOfWork);
+            _contactQuery.Setup(x => x.Execute()).Returns(_contact);
+            _serviceFactory.Setup(x => x.GetService<ContactByIdQuery>()).Returns(_contactQuery.Object);
         }
 
         [TestMethod]
@@ -50,7 +71,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
 
             // Act
-            new EditContactCommand(_unitOfWork, _searchProvider.Object).WithContactId(_contact.Id)
+            new EditContactCommand(_serviceFactory.Object).WithContactId(_contact.Id)
                                                  .SetName("Name")
                                                  .SetDirectPhone("111-111-1111")
                                                  .SetMobilePhone("222-222-2222")
@@ -82,7 +103,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
 
             // Act
-            Contact result = new EditContactCommand(_unitOfWork, _searchProvider.Object).WithContactId(_contact.Id)
+            Contact result = new EditContactCommand(_serviceFactory.Object).WithContactId(_contact.Id)
                                                                  .SetName("Name")
                                                                  .SetDirectPhone("111-111-1111")
                                                                  .SetMobilePhone("222-222-2222")
@@ -111,12 +132,13 @@ namespace MyJobLeads.Tests.Commands.Contacts
         {
             // Setup
             InitializeTestEntities();
+            _contactQuery.Setup(x => x.Execute()).Returns((Contact)null);
             int id = _contact.Id + 1;
 
             // Act
             try
             {
-                new EditContactCommand(_unitOfWork, _searchProvider.Object).WithContactId(id)
+                new EditContactCommand(_serviceFactory.Object).WithContactId(id)
                                                     .SetName("Name")
                                                     .SetDirectPhone("111-111-1111")
                                                     .SetMobilePhone("222-222-2222")
@@ -145,7 +167,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
 
             // Act
-            new EditContactCommand(_unitOfWork, _searchProvider.Object).WithContactId(_contact.Id)
+            new EditContactCommand(_serviceFactory.Object).WithContactId(_contact.Id)
                                                  .SetDirectPhone("111-111-1111")
                                                  .SetMobilePhone("222-222-2222")
                                                  .SetExtension("33")
@@ -176,7 +198,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
 
             // Act
-            new EditContactCommand(_unitOfWork, _searchProvider.Object).WithContactId(_contact.Id)
+            new EditContactCommand(_serviceFactory.Object).WithContactId(_contact.Id)
                                                  .SetName("Name")
                                                  .SetMobilePhone("222-222-2222")
                                                  .SetExtension("33")
@@ -207,7 +229,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
 
             // Act
-            new EditContactCommand(_unitOfWork, _searchProvider.Object).WithContactId(_contact.Id)
+            new EditContactCommand(_serviceFactory.Object).WithContactId(_contact.Id)
                                                  .SetName("Name")
                                                  .SetDirectPhone("111-111-1111")
                                                  .SetExtension("33")
@@ -238,7 +260,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
 
             // Act
-            new EditContactCommand(_unitOfWork, _searchProvider.Object).WithContactId(_contact.Id)
+            new EditContactCommand(_serviceFactory.Object).WithContactId(_contact.Id)
                                                  .SetName("Name")
                                                  .SetDirectPhone("111-111-1111")
                                                  .SetMobilePhone("222-222-2222")
@@ -269,7 +291,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
 
             // Act
-            new EditContactCommand(_unitOfWork, _searchProvider.Object).WithContactId(_contact.Id)
+            new EditContactCommand(_serviceFactory.Object).WithContactId(_contact.Id)
                                                  .SetName("Name")
                                                  .SetDirectPhone("111-111-1111")
                                                  .SetMobilePhone("222-222-2222")
@@ -300,7 +322,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
 
             // Act
-            new EditContactCommand(_unitOfWork, _searchProvider.Object).WithContactId(_contact.Id)
+            new EditContactCommand(_serviceFactory.Object).WithContactId(_contact.Id)
                                                  .SetName("Name")
                                                  .SetDirectPhone("111-111-1111")
                                                  .SetMobilePhone("222-222-2222")
@@ -331,7 +353,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
 
             // Act
-            new EditContactCommand(_unitOfWork, _searchProvider.Object).WithContactId(_contact.Id)
+            new EditContactCommand(_serviceFactory.Object).WithContactId(_contact.Id)
                                                  .SetName("Name")
                                                  .SetDirectPhone("111-111-1111")
                                                  .SetMobilePhone("222-222-2222")
@@ -362,7 +384,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
 
             // Act
-            new EditContactCommand(_unitOfWork, _searchProvider.Object).WithContactId(_contact.Id)
+            new EditContactCommand(_serviceFactory.Object).WithContactId(_contact.Id)
                                                  .SetName("Name")
                                                  .SetDirectPhone("111-111-1111")
                                                  .SetMobilePhone("222-222-2222")
@@ -391,12 +413,13 @@ namespace MyJobLeads.Tests.Commands.Contacts
         {
             // Setup
             InitializeTestEntities();
+            _userQuery.Setup(x => x.Execute()).Returns((User)null);
             int id = _user.Id + 1;
 
             // Act
             try
             {
-                new EditContactCommand(_unitOfWork, _searchProvider.Object).WithContactId(_contact.Id)
+                new EditContactCommand(_serviceFactory.Object).WithContactId(_contact.Id)
                                                     .SetName("Name")
                                                     .SetDirectPhone("111-111-1111")
                                                     .SetMobilePhone("222-222-2222")
@@ -426,7 +449,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
 
             // Act
             DateTime start = DateTime.Now;
-            new EditContactCommand(_unitOfWork, _searchProvider.Object).WithContactId(_contact.Id)
+            new EditContactCommand(_serviceFactory.Object).WithContactId(_contact.Id)
                                                  .SetName("Name")
                                                  .SetDirectPhone("111-111-1111")
                                                  .SetMobilePhone("222-222-2222")
@@ -464,7 +487,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
 
             // Act
-            new EditContactCommand(_unitOfWork, _searchProvider.Object).WithContactId(_contact.Id).RequestedByUserId(_user.Id).Execute();
+            new EditContactCommand(_serviceFactory.Object).WithContactId(_contact.Id).RequestedByUserId(_user.Id).Execute();
 
             // Verify
             _searchProvider.Verify(x => x.Index(_contact), Times.Once());

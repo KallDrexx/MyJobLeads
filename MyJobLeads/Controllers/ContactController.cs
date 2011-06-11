@@ -66,7 +66,7 @@ namespace MyJobLeads.Controllers
             }
             else
             {
-                contact = new EditContactCommand(_unitOfWork, _searchProvider).WithContactId(contact.Id)
+                contact = new EditContactCommand(_serviceFactory).WithContactId(contact.Id)
                                                              .SetAssistant(contact.Assistant)
                                                              .SetDirectPhone(contact.DirectPhone)
                                                              .SetEmail(contact.Email)
