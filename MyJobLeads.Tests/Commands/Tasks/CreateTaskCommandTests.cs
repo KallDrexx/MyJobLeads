@@ -10,6 +10,11 @@ using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel;
 using Moq;
 using MyJobLeads.DomainModel.Providers.Search;
+using MyJobLeads.DomainModel.Providers;
+using MyJobLeads.DomainModel.Data;
+using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Queries.Companies;
+using MyJobLeads.DomainModel.Queries.Contacts;
 
 namespace MyJobLeads.Tests.Commands.Tasks
 {
@@ -21,10 +26,13 @@ namespace MyJobLeads.Tests.Commands.Tasks
         private DateTime? _testDate;
         private User _user;
         private Mock<ISearchProvider> _searchProvider;
+        private Mock<IServiceFactory> _serviceFactory;
+        private Mock<UserByIdQuery> _userQuery;
+        private Mock<CompanyByIdQuery> _companyQuery;
+        private Mock<ContactByIdQuery> _contactQuery;
 
         private void InitializeTestEntities()
         {
-            _searchProvider = new Mock<ISearchProvider>();
             _company = new Company { Tasks = new List<Task>() };
             _user = new User();
             _contact = new Contact { Company = _company };
@@ -35,6 +43,25 @@ namespace MyJobLeads.Tests.Commands.Tasks
             _unitOfWork.Commit();
 
             _testDate = new DateTime(2011, 1, 2, 3, 4, 5);
+
+            // Mocks
+            _serviceFactory = new Mock<IServiceFactory>();
+            _serviceFactory.Setup(x => x.GetService<IUnitOfWork>()).Returns(_unitOfWork);
+
+            _searchProvider = new Mock<ISearchProvider>();
+            _serviceFactory.Setup(x => x.GetService<ISearchProvider>()).Returns(_searchProvider.Object);
+
+            _userQuery = new Mock<UserByIdQuery>(_unitOfWork);
+            _userQuery.Setup(x => x.Execute()).Returns(_user);
+            _serviceFactory.Setup(x => x.GetService<UserByIdQuery>()).Returns(_userQuery.Object);
+
+            _companyQuery = new Mock<CompanyByIdQuery>(_unitOfWork);
+            _companyQuery.Setup(x => x.Execute()).Returns(_company);
+            _serviceFactory.Setup(x => x.GetService<CompanyByIdQuery>()).Returns(_companyQuery.Object);
+
+            _contactQuery = new Mock<ContactByIdQuery>(_unitOfWork);
+            _contactQuery.Setup(x => x.Execute()).Returns(_contact);
+            _serviceFactory.Setup(x => x.GetService<ContactByIdQuery>()).Returns(_contactQuery.Object);
         }
 
         [TestMethod]
@@ -44,7 +71,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            new CreateTaskCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                         .SetName("Name")
                                                         .SetTaskDate(_testDate)
                                                         .SetCategory("Category")
@@ -72,7 +99,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            Task result = new CreateTaskCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            Task result = new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                                         .SetName("Name")
                                                                         .SetTaskDate(_testDate)
                                                                         .SetCategory("Category")
@@ -96,11 +123,12 @@ namespace MyJobLeads.Tests.Commands.Tasks
             // Setup
             InitializeTestEntities();
             int id = _company.Id + 1;
+            _companyQuery.Setup(x => x.Execute()).Returns((Company)null);
 
             // Act
             try
             {
-                new CreateTaskCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(id)
+                new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(id)
                                                             .SetName("Name")
                                                             .SetTaskDate(_testDate)
                                                             .RequestedByUserId(_user.Id)
@@ -122,11 +150,12 @@ namespace MyJobLeads.Tests.Commands.Tasks
             // Setup
             InitializeTestEntities();
             int id = _user.Id + 1;
+            _userQuery.Setup(x => x.Execute()).Returns((User)null);
 
             // Act
             try
             {
-                new CreateTaskCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+                new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                             .SetName("Name")
                                                             .SetTaskDate(_testDate)
                                                             .RequestedByUserId(id)
@@ -150,7 +179,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
 
             // Act
             DateTime start = DateTime.Now;
-            new CreateTaskCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                         .SetName("Name")
                                                         .SetTaskDate(_testDate)
                                                         .SetCategory("Category")
@@ -180,7 +209,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            new CreateTaskCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                         .WithContactId(_contact.Id)
                                                         .RequestedByUserId(_user.Id)
                                                         .Execute();
@@ -196,11 +225,12 @@ namespace MyJobLeads.Tests.Commands.Tasks
             // Setup
             InitializeTestEntities();
             int id = _contact.Id + 1;
+            _contactQuery.Setup(x => x.Execute()).Returns((Contact)null);
 
             // Act
             try
             {
-                new CreateTaskCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+                new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                             .SetName("Name")
                                                             .SetTaskDate(_testDate)
                                                             .WithContactId(id)
@@ -224,7 +254,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            new CreateTaskCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id)
+            new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
                                                         .RequestedByUserId(_user.Id)
                                                         .Execute();
 
@@ -240,7 +270,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            Task task = new CreateTaskCommand(_unitOfWork, _searchProvider.Object).WithCompanyId(_company.Id).RequestedByUserId(_user.Id).Execute();
+            Task task = new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id).RequestedByUserId(_user.Id).Execute();
 
             // Verify
             _searchProvider.Verify(x => x.Index(task), Times.Once());

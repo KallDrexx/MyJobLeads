@@ -10,6 +10,7 @@ using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Queries.Contacts;
 using MyJobLeads.DomainModel.Providers.Search;
+using MyJobLeads.DomainModel.Providers;
 
 namespace MyJobLeads.DomainModel.Commands.Tasks
 {
@@ -18,17 +19,15 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
     /// </summary>
     public class CreateTaskCommand
     {
-        protected IUnitOfWork _unitOfWork;
-        protected ISearchProvider _searchProvider;
+        protected IServiceFactory _serviceFactory;
         protected string _name;
         protected DateTime? _taskDate;
         protected int _companyId, _userId, _contactId;
         protected string _category, _subCategory;
 
-        public CreateTaskCommand(IUnitOfWork unitOfWork, ISearchProvider searchProvider)
+        public CreateTaskCommand(IServiceFactory factory)
         {
-            _unitOfWork = unitOfWork;
-            _searchProvider = searchProvider;
+            _serviceFactory = factory;
         }
 
         /// <summary>
@@ -115,13 +114,15 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         /// <exception cref="MJLEntityNotFoundException">Thrown when the specified company, calling user, or contact is not found</exception>
         public virtual Task Execute()
         {
+            var unitOfWork = _serviceFactory.GetService<IUnitOfWork>();
+
             // Retrieve the user creating the task
-            var user = new UserByIdQuery(_unitOfWork).WithUserId(_userId).Execute();
+            var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(_userId).Execute();
             if (user == null)
                 throw new MJLEntityNotFoundException(typeof(User), _userId);
 
             // Retrieve the company
-            var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(_companyId).Execute();
+            var company = _serviceFactory.GetService<CompanyByIdQuery>().WithCompanyId(_companyId).Execute();
             if (company == null)
                 throw new MJLEntityNotFoundException(typeof(Company), _companyId);
 
@@ -129,7 +130,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
             Contact contact = null;
             if (_contactId != 0)
             {
-                contact = new ContactByIdQuery(_unitOfWork).WithContactId(_contactId).Execute();
+                contact = _serviceFactory.GetService<ContactByIdQuery>().WithContactId(_contactId).Execute();
                 if (contact == null)
                     throw new MJLEntityNotFoundException(typeof(Contact), _contactId);
             }
@@ -159,11 +160,11 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 AuthoringUser = user
             });
 
-            _unitOfWork.Tasks.Add(task);
-            _unitOfWork.Commit();
+            unitOfWork.Tasks.Add(task);
+            unitOfWork.Commit();
 
             // Index the task with the search provider
-            _searchProvider.Index(task);
+            _serviceFactory.GetService<ISearchProvider>().Index(task);
 
             return task;
         }
