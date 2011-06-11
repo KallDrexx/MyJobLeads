@@ -5,6 +5,7 @@ using System.Text;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.JobSearches;
+using MyJobLeads.DomainModel.Providers;
 
 namespace MyJobLeads.DomainModel.Commands.JobSearches
 {
@@ -26,11 +27,11 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
     /// </summary>
     public class UpdateJobSearchMetricsCommand
     {
-        protected IUnitOfWork _unitOfWork;
+        protected IServiceFactory _serviceFactory;
 
-        public UpdateJobSearchMetricsCommand(IUnitOfWork unitOfWork)
+        public UpdateJobSearchMetricsCommand(IServiceFactory factory)
         {
-            _unitOfWork = unitOfWork;
+            _serviceFactory = factory;
         }
 
         /// <summary>
@@ -38,35 +39,37 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
         /// </summary>
         virtual public void Execute(UpdateJobSearchMetricsCmdParams cmdParams)
         {
+            var unitOfWork = _serviceFactory.GetService<IUnitOfWork>();
+
             // Retrieve the job search 
-            var jobSearch = new JobSearchByIdQuery(_unitOfWork).WithJobSearchId(cmdParams.JobSearchId).Execute();
+            var jobSearch = new JobSearchByIdQuery(unitOfWork).WithJobSearchId(cmdParams.JobSearchId).Execute();
 
             // Rebuild Metrics
-            jobSearch.Metrics.NumCompaniesCreated = _unitOfWork.Companies.Fetch().Count(x => x.JobSearchID == cmdParams.JobSearchId);
-            jobSearch.Metrics.NumContactsCreated = _unitOfWork.Contacts.Fetch().Count(x => x.Company.JobSearchID == cmdParams.JobSearchId);
-            jobSearch.Metrics.NumApplyTasksCreated = _unitOfWork.Tasks.Fetch()
+            jobSearch.Metrics.NumCompaniesCreated = unitOfWork.Companies.Fetch().Count(x => x.JobSearchID == cmdParams.JobSearchId);
+            jobSearch.Metrics.NumContactsCreated = unitOfWork.Contacts.Fetch().Count(x => x.Company.JobSearchID == cmdParams.JobSearchId);
+            jobSearch.Metrics.NumApplyTasksCreated = unitOfWork.Tasks.Fetch()
                                                                       .Where(x => x.Company.JobSearchID == cmdParams.JobSearchId)
                                                                       .Where(x => x.Category == MJLConstants.ApplyToFirmTaskCategory)
                                                                       .Count();
 
-            jobSearch.Metrics.NumApplyTasksCompleted = _unitOfWork.Tasks.Fetch()
+            jobSearch.Metrics.NumApplyTasksCompleted = unitOfWork.Tasks.Fetch()
                                                                         .Where(x => x.Company.JobSearchID == cmdParams.JobSearchId)
                                                                         .Where(x => x.Category == MJLConstants.ApplyToFirmTaskCategory)
                                                                         .Where(x => x.CompletionDate != null)
                                                                         .Count();
 
-            jobSearch.Metrics.NumPhoneInterviewTasksCreated = _unitOfWork.Tasks.Fetch()
+            jobSearch.Metrics.NumPhoneInterviewTasksCreated = unitOfWork.Tasks.Fetch()
                                                                                .Where(x => x.Company.JobSearchID == cmdParams.JobSearchId)
                                                                                .Where(x => x.Category == MJLConstants.PhoneInterviewTaskCategory)
                                                                                .Count();
 
-            jobSearch.Metrics.NumInPersonInterviewTasksCreated = _unitOfWork.Tasks.Fetch()
+            jobSearch.Metrics.NumInPersonInterviewTasksCreated = unitOfWork.Tasks.Fetch()
                                                                                   .Where(x => x.Company.JobSearchID == cmdParams.JobSearchId)
                                                                                   .Where(x => x.Category == MJLConstants.InPersonInterviewTaskCategory)
                                                                                   .Count();
 
             // Update the entity
-            _unitOfWork.Commit();
+            unitOfWork.Commit();
         }
     }
 }
