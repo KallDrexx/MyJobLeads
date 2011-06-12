@@ -15,6 +15,7 @@ using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Queries.Tasks;
 using MyJobLeads.DomainModel.Queries.Contacts;
+using MyJobLeads.DomainModel.Commands.JobSearches;
 
 namespace MyJobLeads.Tests.Commands.Tasks
 {
@@ -29,6 +30,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
         private Mock<UserByIdQuery> _userQuery;
         private Mock<TaskByIdQuery> _taskQuery;
         private Mock<ContactByIdQuery> _contactQuery;
+        private Mock<UpdateJobSearchMetricsCommand> _updateMetricsCmd;
 
         private void InitializeTestEntities()
         {
@@ -70,6 +72,9 @@ namespace MyJobLeads.Tests.Commands.Tasks
             _taskQuery = new Mock<TaskByIdQuery>(_unitOfWork);
             _taskQuery.Setup(x => x.Execute()).Returns(_task);
             _serviceFactory.Setup(x => x.GetService<TaskByIdQuery>()).Returns(_taskQuery.Object);
+
+            _updateMetricsCmd = new Mock<UpdateJobSearchMetricsCommand>(_serviceFactory.Object);
+            _serviceFactory.Setup(x => x.GetService<UpdateJobSearchMetricsCommand>()).Returns(_updateMetricsCmd.Object);
         }
 
         [TestMethod]
@@ -482,6 +487,23 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Task result = _unitOfWork.Tasks.Fetch().SingleOrDefault();
             Assert.IsNotNull(result.CompletionDate, "Task's completion date was null");
             Assert.AreEqual(result.CompletionDate, new DateTime(2011, 1, 1), "Task's completion date was incorrect");
+        }
+
+        [TestMethod]
+        public void Command_Updates_JobSearch_Metrics_After_Edit()
+        {
+            // Setup
+            InitializeTestEntities();
+            JobSearch jobSearch = new JobSearch();
+            Company company = new Company { JobSearch = jobSearch };
+            _task.Company = company;
+            _unitOfWork.Commit();            
+
+            // Act
+            new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id).Execute();
+
+            // Verify
+            _updateMetricsCmd.Verify(x => x.Execute(It.Is<UpdateJobSearchMetricsCmdParams>(y => y.JobSearchId == jobSearch.Id)));
         }
     }
 }
