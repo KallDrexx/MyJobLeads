@@ -10,6 +10,7 @@ using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Providers;
+using MyJobLeads.DomainModel.Commands.JobSearches;
 
 namespace MyJobLeads.DomainModel.Commands.Contacts
 {
@@ -195,6 +196,10 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
 
             // Index the new contact so it can be searched
             _serviceFactory.GetService<ISearchProvider>().Index(contact);
+
+            // Update the job search metrics for the contact
+            var metricsCmd = _serviceFactory.GetService<UpdateJobSearchMetricsCommand>();
+            metricsCmd.Execute(new UpdateJobSearchMetricsCmdParams { JobSearchId = (int)company.JobSearchID });
 
             return contact;
         }

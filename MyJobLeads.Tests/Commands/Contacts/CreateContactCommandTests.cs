@@ -21,14 +21,17 @@ namespace MyJobLeads.Tests.Commands.Contacts
     [TestClass]
     public class CreateContactCommandTests : EFTestBase
     {
+        private JobSearch _jobSearch;
         private Company _company;
         private User _user;
         private Mock<ISearchProvider> _searchProvider;
+        private Mock<UpdateJobSearchMetricsCommand> _updateMetricsCmd;
 
         private void InitializeTestEntities()
         {
             _searchProvider = new Mock<ISearchProvider>();
-            _company = new Company();
+            _jobSearch = new JobSearch();
+            _company = new Company { JobSearch = _jobSearch };
             _user = new User();
 
             _unitOfWork.Users.Add(_user);
@@ -49,6 +52,9 @@ namespace MyJobLeads.Tests.Commands.Contacts
             Mock<CompanyByIdQuery> companyQuery = new Mock<CompanyByIdQuery>(_unitOfWork);
             companyQuery.Setup(x => x.Execute()).Returns(_company);
             _serviceFactory.Setup(x => x.GetService<CompanyByIdQuery>()).Returns(companyQuery.Object);
+
+            _updateMetricsCmd = new Mock<UpdateJobSearchMetricsCommand>(_serviceFactory.Object);
+            _serviceFactory.Setup(x => x.GetService<UpdateJobSearchMetricsCommand>()).Returns(_updateMetricsCmd.Object);
         }
 
         [TestMethod]
@@ -253,6 +259,19 @@ namespace MyJobLeads.Tests.Commands.Contacts
 
             // Verify
             _searchProvider.Verify(x => x.Index(contact), Times.Once());
+        }
+
+        [TestMethod]
+        public void Execute_Updates_JobSearch_Metrics()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new CreateContactCommand(_serviceFactory.Object).Execute();
+
+            // Verify
+            _updateMetricsCmd.Verify(x => x.Execute(It.Is<UpdateJobSearchMetricsCmdParams>(y => y.JobSearchId == _jobSearch.Id)));
         }
     }
 }
