@@ -49,7 +49,55 @@ namespace MyJobLeads.DomainModel.ViewModels
                 NumInPersonInterviewTasksCreatedProgress = 1;
             else
                 NumInPersonInterviewTasksCreatedProgress = (decimal)jsMetrics.NumInPersonInterviewTasksCreated / (decimal)msMetrics.NumInPersonInterviewTasksCreated; 
+
+            // Deterine the final total progress for the milestone, only counting milestones whose metrics are greater than zero
+            decimal totalprogress = 0;
+            int countMetricsUsed = 0;
+
+            if (msMetrics.NumApplyTasksCompleted > 0)
+            {
+                totalprogress += NumApplyTasksCompletedProgress;
+                countMetricsUsed++;
+            }
+
+            if (msMetrics.NumApplyTasksCreated > 0)
+            {
+                totalprogress += NumApplyTasksCreatedProgress;
+                countMetricsUsed++;
+            }
+
+            if (msMetrics.NumCompaniesCreated > 0)
+            {
+                totalprogress += NumCompaniesCreatedProgress;
+                countMetricsUsed++;
+            }
+
+            if (msMetrics.NumContactsCreated > 0)
+            {
+                totalprogress += NumContactsCreatedProgress;
+                countMetricsUsed++;
+            }
+
+            if (msMetrics.NumInPersonInterviewTasksCreated > 0)
+            {
+                totalprogress += NumInPersonInterviewTasksCreatedProgress;
+                countMetricsUsed++;
+            }
+
+            if (msMetrics.NumPhoneInterviewTasksCreated > 0)
+            {
+                totalprogress += NumPhoneInterviewTasksCreatedProgress;
+                countMetricsUsed++;
+            }
+
+            // Calculate the average of all the used progresses
+            if (countMetricsUsed == 0)
+                TotalProgress = 1;
+            else
+                TotalProgress = totalprogress / countMetricsUsed;
         }
+
+        public decimal TotalProgress { get; protected set; }
 
         public decimal NumCompaniesCreatedProgress { get; protected set; }
         public decimal NumContactsCreatedProgress { get; protected set; }

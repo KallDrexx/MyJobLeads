@@ -336,5 +336,50 @@ namespace MyJobLeads.Tests.ViewModels
             // Verify
             Assert.AreEqual(1, result.NumInPersonInterviewTasksCreatedProgress, "NumInPersonInterviewTasksCreatedProgress's value was incorrect");
         }
+
+        [TestMethod]
+        public void Milestone_Progress_Is_1_When_Milestone_Has_No_Metrics()
+        {
+            // Setup
+            JobSearch search = new JobSearch
+            {
+                CurrentMilestone = new MilestoneConfig { JobSearchMetrics = new JobSearchMetrics() },
+                Metrics = new JobSearchMetrics()
+            };
+
+            // Act
+            JobSearchMilestoneProgress result = new JobSearchMilestoneProgress(search);
+
+            // Verify
+            Assert.AreEqual(1, result.TotalProgress, "Milestone's total progress value was incorrect");
+        }
+
+        [TestMethod]
+        public void Milestone_Total_Progress_Is_Calculated_Correctly()
+        {
+            // Setup
+            JobSearch search = new JobSearch
+            {
+                CurrentMilestone = new MilestoneConfig
+                {
+                    JobSearchMetrics = new JobSearchMetrics
+                    {
+                        NumCompaniesCreated = 4,
+                        NumContactsCreated = 4
+                    }
+                },
+                Metrics = new JobSearchMetrics
+                {
+                    NumCompaniesCreated = 3,
+                    NumContactsCreated = 2
+                }
+            };
+
+            // Act
+            JobSearchMilestoneProgress result = new JobSearchMilestoneProgress(search);
+
+            // Verify
+            Assert.AreEqual((decimal)0.625, result.TotalProgress, "Milestone's total progress value was incorrect");
+        }
     }
 }
