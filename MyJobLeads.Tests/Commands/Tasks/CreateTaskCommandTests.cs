@@ -24,6 +24,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
     {
         private Company _company;
         private Contact _contact;
+        private JobSearch _jobSearch;
         private DateTime? _testDate;
         private User _user;
         private Mock<ISearchProvider> _searchProvider;
@@ -34,7 +35,8 @@ namespace MyJobLeads.Tests.Commands.Tasks
 
         private void InitializeTestEntities()
         {
-            _company = new Company { Tasks = new List<Task>() };
+            _jobSearch = new JobSearch();
+            _company = new Company { Tasks = new List<Task>(), JobSearch = _jobSearch };
             _user = new User();
             _contact = new Contact { Company = _company };
 
@@ -285,15 +287,12 @@ namespace MyJobLeads.Tests.Commands.Tasks
         {
             // Setup
             InitializeTestEntities();
-            var jobSearch = new JobSearch();
-            _company.JobSearch = jobSearch;
-            _unitOfWork.Commit();
 
             // Act
             new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id).Execute();
 
             // Verify
-            _updateMetricsCmd.Verify(x => x.Execute(It.Is<UpdateJobSearchMetricsCmdParams>(y => y.JobSearchId == jobSearch.Id)));
+            _updateMetricsCmd.Verify(x => x.Execute(It.Is<UpdateJobSearchMetricsCmdParams>(y => y.JobSearchId == _jobSearch.Id)));
         }
     }
 }

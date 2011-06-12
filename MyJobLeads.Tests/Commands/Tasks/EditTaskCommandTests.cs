@@ -23,6 +23,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
     public class EditTaskCommandTests : EFTestBase
     {
         private Task _task;
+        private JobSearch _jobSearch;
         private DateTime? _startDate, _changedDate;
         private User _user;
         private Contact _contact;
@@ -36,8 +37,11 @@ namespace MyJobLeads.Tests.Commands.Tasks
         {
             _changedDate = new DateTime(2011, 1, 2, 3, 4, 5);
             _startDate = new DateTime(2011, 2, 3, 4, 5, 6);
+
+            _jobSearch = new JobSearch();
+            Company company = new Company { JobSearch = _jobSearch };
             _user = new User();
-            _contact = new Contact();
+            _contact = new Contact { Company = company };
 
             _task = new Task
             {
@@ -46,6 +50,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
                 TaskDate = _startDate,
                 Category = "Starting Category",
                 SubCategory = "Starting SubCategory",
+                Company = company,
                 History = new List<TaskHistory>()
             };
 
@@ -493,17 +498,13 @@ namespace MyJobLeads.Tests.Commands.Tasks
         public void Command_Updates_JobSearch_Metrics_After_Edit()
         {
             // Setup
-            InitializeTestEntities();
-            JobSearch jobSearch = new JobSearch();
-            Company company = new Company { JobSearch = jobSearch };
-            _task.Company = company;
-            _unitOfWork.Commit();            
+            InitializeTestEntities();    
 
             // Act
             new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id).Execute();
 
             // Verify
-            _updateMetricsCmd.Verify(x => x.Execute(It.Is<UpdateJobSearchMetricsCmdParams>(y => y.JobSearchId == jobSearch.Id)));
+            _updateMetricsCmd.Verify(x => x.Execute(It.Is<UpdateJobSearchMetricsCmdParams>(y => y.JobSearchId == _jobSearch.Id)));
         }
     }
 }
