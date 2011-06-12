@@ -14,6 +14,7 @@ using MyJobLeads.ViewModels.JobSearches;
 using MyJobLeads.Infrastructure.Attributes;
 using MyJobLeads.DomainModel.Queries.Search;
 using MyJobLeads.ViewModels;
+using MyJobLeads.DomainModel.Providers;
 
 namespace MyJobLeads.Controllers
 {
@@ -29,6 +30,7 @@ namespace MyJobLeads.Controllers
         protected OpenTasksByJobSearchQuery _openTasksByJobSearchQuery;
         protected EditUserCommand _editUserCommand;
         protected EntitySearchQuery _entitySearchQuery;
+        protected IServiceFactory _serviceFactory;
 
         public JobSearchController(JobSearchesByUserIdQuery jobSearchesByIdQuery,
                                     JobSearchByIdQuery jobSearchByIdQuery,
@@ -36,7 +38,8 @@ namespace MyJobLeads.Controllers
                                     EditJobSearchCommand editJobSearchCommand,
                                     OpenTasksByJobSearchQuery openTasksByJobSearchQuery,
                                     EditUserCommand editUserCommand,
-                                    EntitySearchQuery entitySearchQuery)
+                                    EntitySearchQuery entitySearchQuery,
+                                    IServiceFactory serviceFactory)
         {
             _jobSearchByIdQuery = jobSearchByIdQuery;
             _jobSearchesByUserIdQuery = jobSearchesByIdQuery;
@@ -45,6 +48,7 @@ namespace MyJobLeads.Controllers
             _openTasksByJobSearchQuery = openTasksByJobSearchQuery;
             _editUserCommand = editUserCommand;
             _entitySearchQuery = entitySearchQuery;
+            _serviceFactory = serviceFactory;
         }
 
         #endregion
@@ -105,6 +109,13 @@ namespace MyJobLeads.Controllers
         {
             var results = _entitySearchQuery.WithJobSearchId(id).WithSearchQuery(query).Execute();
             return View(new PerformedSearchViewModel { SearchQuery = query, Results = results, JobSearchId = id });
+        }
+
+        public virtual ActionResult StartNextMilestone(int id)
+        {
+            _serviceFactory.GetService<StartNextJobSearchMilestoneCommand>()
+                .Execute(new StartNextJobSearchMilestoneCommandParams { JobSearchId = id });
+            return RedirectToAction(MVC.JobSearch.Details(id));
         }
     }
 }

@@ -46,6 +46,11 @@ namespace MyJobLeads.Controllers {
         public System.Web.Mvc.ActionResult Search() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Search);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult StartNextMilestone() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.StartNextMilestone);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public JobSearchController Actions { get { return MVC.JobSearch; } }
@@ -64,6 +69,7 @@ namespace MyJobLeads.Controllers {
             public readonly string Edit = "Edit";
             public readonly string Details = "Details";
             public readonly string Search = "Search";
+            public readonly string StartNextMilestone = "StartNextMilestone";
         }
 
 
@@ -116,6 +122,12 @@ namespace MyJobLeads.Controllers {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Search);
             callInfo.RouteValueDictionary.Add("id", id);
             callInfo.RouteValueDictionary.Add("query", query);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult StartNextMilestone(int id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.StartNextMilestone);
+            callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 

@@ -67,7 +67,7 @@ else
                     @Html.Raw(Html.Encode(milestone.CompletionDisplay).Replace(Environment.NewLine, "<br />"))
 
                     <br /><br />
-                    <a href="#">Start Next Milestone</a>
+                    @Html.ActionLink("Start Next Milestone", MVC.JobSearch.StartNextMilestone(Model.Id))
                 </p>
             }
         </p>

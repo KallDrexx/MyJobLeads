@@ -41,7 +41,9 @@ namespace MyJobLeads.Infrastructure.Installers
 			container.Register(Component.For<UpdateJobSearchMetricsCmdParams>().ImplementedBy<UpdateJobSearchMetricsCmdParams>().LifeStyle.PerWebRequest);			
 			container.Register(Component.For<UpdateJobSearchMetricsCommand>().ImplementedBy<UpdateJobSearchMetricsCommand>().LifeStyle.PerWebRequest);			
 			container.Register(Component.For<ResetUserPasswordCommand>().ImplementedBy<ResetUserPasswordCommand>().LifeStyle.PerWebRequest);			
-			container.Register(Component.For<CreateContactCommand>().ImplementedBy<CreateContactCommand>().LifeStyle.PerWebRequest);					
+			container.Register(Component.For<CreateContactCommand>().ImplementedBy<CreateContactCommand>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<StartNextJobSearchMilestoneCommandParams>().ImplementedBy<StartNextJobSearchMilestoneCommandParams>().LifeStyle.PerWebRequest);			
+			container.Register(Component.For<StartNextJobSearchMilestoneCommand>().ImplementedBy<StartNextJobSearchMilestoneCommand>().LifeStyle.PerWebRequest);					
 
 			// Query registration
 			container.Register(Component.For<UserByEmailQuery>().ImplementedBy<UserByEmailQuery>().LifeStyle.PerWebRequest);			
@@ -63,7 +65,7 @@ namespace MyJobLeads.Infrastructure.Installers
 			container.Register(Component.For<CategoriesAvailableForTasksQuery>().ImplementedBy<CategoriesAvailableForTasksQuery>().LifeStyle.PerWebRequest);			
 			container.Register(Component.For<TasksByContactIdQuery>().ImplementedBy<TasksByContactIdQuery>().LifeStyle.PerWebRequest);			
 			container.Register(Component.For<OpenTasksByJobSearchQuery>().ImplementedBy<OpenTasksByJobSearchQuery>().LifeStyle.PerWebRequest);			
-			container.Register(Component.For<StartingMilestoneQuery>().ImplementedBy<StartingMilestoneQuery>().LifeStyle.PerWebRequest);					
+			container.Register(Component.For<StartingMilestoneQuery>().ImplementedBy<StartingMilestoneQuery>().LifeStyle.PerWebRequest);						
 		}
 	}
 }

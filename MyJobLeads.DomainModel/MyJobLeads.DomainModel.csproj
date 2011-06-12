@@ -79,6 +79,7 @@
     <Compile Include="Commands\Companies\EditCompanyCommand.cs" />
     <Compile Include="Commands\Contacts\CreateContactCommand.cs" />
     <Compile Include="Commands\Contacts\EditContactCommand.cs" />
+    <Compile Include="Commands\JobSearches\StartNextJobSearchMilestoneCommand.cs" />
     <Compile Include="Commands\JobSearches\UpdateJobSearchMetricsCommand.cs" />
     <Compile Include="Commands\Search\RefreshSearchIndexCommand.cs" />
     <Compile Include="Commands\Tasks\CreateTaskCommand.cs" />
