@@ -26,7 +26,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
         private DateTime? _testDate;
         private User _user;
         private Mock<ISearchProvider> _searchProvider;
-        private Mock<IServiceFactory> _serviceFactory;
         private Mock<UserByIdQuery> _userQuery;
         private Mock<CompanyByIdQuery> _companyQuery;
         private Mock<ContactByIdQuery> _contactQuery;

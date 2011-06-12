@@ -38,7 +38,7 @@ namespace MyJobLeads.Tests.Queries.Companies
             InitializeEntities();
 
             // Act
-            IList<Company> results = new CompaniesByJobSearchIdQuery(_serviceFactoryMock.Object).WithJobSearchId(_search1.Id).Execute();
+            IList<Company> results = new CompaniesByJobSearchIdQuery(_serviceFactory.Object).WithJobSearchId(_search1.Id).Execute();
 
             // Verify
             Assert.IsNotNull(results, "Query returned a null list");
@@ -54,7 +54,7 @@ namespace MyJobLeads.Tests.Queries.Companies
             InitializeEntities();
 
             // Act
-            IList<Company> results = new CompaniesByJobSearchIdQuery(_serviceFactoryMock.Object).WithJobSearchId(_search1.Id).SortByName().Execute();
+            IList<Company> results = new CompaniesByJobSearchIdQuery(_serviceFactory.Object).WithJobSearchId(_search1.Id).SortByName().Execute();
 
             // Verify
             Assert.IsNotNull(results, "Query returned a null list");

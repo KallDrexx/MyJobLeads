@@ -26,7 +26,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
         private User _user;
         private Contact _contact;
         private Mock<ISearchProvider> _searchProvider;
-        private Mock<IServiceFactory> _serviceFactory;
         private Mock<UserByIdQuery> _userQuery;
         private Mock<TaskByIdQuery> _taskQuery;
         private Mock<ContactByIdQuery> _contactQuery;

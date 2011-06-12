@@ -14,6 +14,7 @@ using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Queries.Companies;
+using MyJobLeads.DomainModel.Commands.JobSearches;
 
 namespace MyJobLeads.Tests.Commands.Contacts
 {
@@ -23,7 +24,6 @@ namespace MyJobLeads.Tests.Commands.Contacts
         private Company _company;
         private User _user;
         private Mock<ISearchProvider> _searchProvider;
-        private Mock<IServiceFactory> _serviceFactory;
 
         private void InitializeTestEntities()
         {

@@ -16,7 +16,7 @@ namespace MyJobLeads.Tests
     public class EFTestBase
     {
         protected IUnitOfWork _unitOfWork;
-        protected Mock<IServiceFactory> _serviceFactoryMock;
+        protected Mock<IServiceFactory> _serviceFactory;
         protected TransactionScope _transaction;
 
         [TestInitialize]
@@ -30,8 +30,8 @@ namespace MyJobLeads.Tests
             _transaction = new TransactionScope();
 
             // Create service factory mock
-            _serviceFactoryMock = new Mock<IServiceFactory>();
-            _serviceFactoryMock.Setup(x => x.GetService<IUnitOfWork>()).Returns(_unitOfWork);
+            _serviceFactory = new Mock<IServiceFactory>();
+            _serviceFactory.Setup(x => x.GetService<IUnitOfWork>()).Returns(_unitOfWork);
         }
 
         [TestCleanup]
