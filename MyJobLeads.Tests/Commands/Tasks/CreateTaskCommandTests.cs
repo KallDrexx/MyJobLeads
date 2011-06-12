@@ -15,6 +15,7 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Queries.Contacts;
+using MyJobLeads.DomainModel.Commands.JobSearches;
 
 namespace MyJobLeads.Tests.Commands.Tasks
 {
@@ -29,6 +30,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
         private Mock<UserByIdQuery> _userQuery;
         private Mock<CompanyByIdQuery> _companyQuery;
         private Mock<ContactByIdQuery> _contactQuery;
+        private Mock<UpdateJobSearchMetricsCommand> _updateMetricsCmd;
 
         private void InitializeTestEntities()
         {
@@ -61,6 +63,9 @@ namespace MyJobLeads.Tests.Commands.Tasks
             _contactQuery = new Mock<ContactByIdQuery>(_unitOfWork);
             _contactQuery.Setup(x => x.Execute()).Returns(_contact);
             _serviceFactory.Setup(x => x.GetService<ContactByIdQuery>()).Returns(_contactQuery.Object);
+
+            _updateMetricsCmd = new Mock<UpdateJobSearchMetricsCommand>(_serviceFactory.Object);
+            _serviceFactory.Setup(x => x.GetService<UpdateJobSearchMetricsCommand>()).Returns(_updateMetricsCmd.Object);
         }
 
         [TestMethod]
@@ -273,6 +278,22 @@ namespace MyJobLeads.Tests.Commands.Tasks
 
             // Verify
             _searchProvider.Verify(x => x.Index(task), Times.Once());
+        }
+
+        [TestMethod]
+        public void Command_Updates_JobSearch_Metrics()
+        {
+            // Setup
+            InitializeTestEntities();
+            var jobSearch = new JobSearch();
+            _company.JobSearch = jobSearch;
+            _unitOfWork.Commit();
+
+            // Act
+            new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id).Execute();
+
+            // Verify
+            _updateMetricsCmd.Verify(x => x.Execute(It.Is<UpdateJobSearchMetricsCmdParams>(y => y.JobSearchId == jobSearch.Id)));
         }
     }
 }

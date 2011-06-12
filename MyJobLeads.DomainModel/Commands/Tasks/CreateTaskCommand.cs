@@ -11,6 +11,7 @@ using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Queries.Contacts;
 using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Providers;
+using MyJobLeads.DomainModel.Commands.JobSearches;
 
 namespace MyJobLeads.DomainModel.Commands.Tasks
 {
@@ -165,6 +166,10 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
 
             // Index the task with the search provider
             _serviceFactory.GetService<ISearchProvider>().Index(task);
+
+            // Update the metrics for the job search
+            _serviceFactory.GetService<UpdateJobSearchMetricsCommand>()
+                .Execute(new UpdateJobSearchMetricsCmdParams { JobSearchId = (int)company.JobSearchID });
 
             return task;
         }
