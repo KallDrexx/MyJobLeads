@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Entities.Metrics;
+using MyJobLeads.DomainModel.Entities.Configuration;
 
 namespace MyJobLeads.DomainModel.Entities
 {
@@ -22,5 +23,8 @@ namespace MyJobLeads.DomainModel.Entities
 
         public virtual ICollection<Company> Companies { get; set; }
         public virtual ICollection<JobSearchHistory> History { get; set; }
+
+        public virtual MilestoneConfig CurrentMilestone { get; set; }
+        public virtual int? CurrentMilestoneId { get; set; }
     }
 }

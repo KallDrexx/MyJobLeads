@@ -166,6 +166,7 @@
     <Compile Include="SingletonLifestyleEqualizer.cs" />
     <Compile Include="Utilities\EmailUtilsTest.cs" />
     <Compile Include="Utilities\PasswordUtilsTests.cs" />
+    <Compile Include="ViewModels\JobSearchMilestoneProgressTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
