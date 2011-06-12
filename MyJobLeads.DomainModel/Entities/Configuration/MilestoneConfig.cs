@@ -17,6 +17,7 @@ namespace MyJobLeads.DomainModel.Entities.Configuration
         public int Id { get; set; }
         public string Title { get; set; }
         public MilestoneConfig NextMilestone { get; set; }
+        public bool IsStartingMilestone { get; set; }
 
         [StringLength(Int32.MaxValue)]
         public string Instructions { get; set; }

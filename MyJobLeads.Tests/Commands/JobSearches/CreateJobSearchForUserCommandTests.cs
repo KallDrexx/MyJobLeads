@@ -8,6 +8,9 @@ using MyJobLeads.DomainModel.Commands.JobSearches;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel;
+using MyJobLeads.DomainModel.Queries.MilestoneConfigs;
+using Moq;
+using MyJobLeads.DomainModel.Entities.Configuration;
 
 namespace MyJobLeads.Tests.Commands.JobSearches
 {
@@ -15,12 +18,17 @@ namespace MyJobLeads.Tests.Commands.JobSearches
     public class CreateJobSearchForUserCommandTests : EFTestBase
     {
         private User _user;
+        private Mock<StartingMilestoneQuery> _startingMilestoneQuery;
 
         public void InitializeTestEntities()
         {
             _user = new User { JobSearches = new List<JobSearch>() };
             _unitOfWork.Users.Add(_user);
             _unitOfWork.Commit();
+
+            // Mocks
+            _startingMilestoneQuery = new Mock<StartingMilestoneQuery>(_serviceFactory.Object);
+            _serviceFactory.Setup(x => x.GetService<StartingMilestoneQuery>()).Returns(_startingMilestoneQuery.Object);
         }
 
         [TestMethod]
@@ -30,7 +38,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             InitializeTestEntities();
 
             // Act
-            new CreateJobSearchForUserCommand(_unitOfWork).ForUserId(_user.Id)
+            new CreateJobSearchForUserCommand(_serviceFactory.Object).ForUserId(_user.Id)
                                                           .WithName("Test Name")
                                                           .WithDescription("Test Desc")
                                                           .Execute();
@@ -51,7 +59,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             InitializeTestEntities();
 
             // Act
-            JobSearch result = new CreateJobSearchForUserCommand(_unitOfWork).ForUserId(_user.Id)
+            JobSearch result = new CreateJobSearchForUserCommand(_serviceFactory.Object).ForUserId(_user.Id)
                                                                              .WithName("Test Name")
                                                                              .WithDescription("Test Desc")
                                                                              .Execute();
@@ -73,7 +81,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             // Act
             try
             {
-                new CreateJobSearchForUserCommand(_unitOfWork).ForUserId(_user.Id + 1)
+                new CreateJobSearchForUserCommand(_serviceFactory.Object).ForUserId(_user.Id + 1)
                                                               .WithName("Test Name")
                                                               .WithDescription("Test Desc")
                                                               .Execute();
@@ -95,7 +103,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             InitializeTestEntities();
 
             // Act
-            JobSearch search = new CreateJobSearchForUserCommand(_unitOfWork).ForUserId(_user.Id).Execute();
+            JobSearch search = new CreateJobSearchForUserCommand(_serviceFactory.Object).ForUserId(_user.Id).Execute();
 
             // Verify
             Assert.IsNotNull(search.Companies, "Company list was not initialized");
@@ -110,7 +118,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
 
             // Act
             start = DateTime.Now;
-            new CreateJobSearchForUserCommand(_unitOfWork).ForUserId(_user.Id)
+            new CreateJobSearchForUserCommand(_serviceFactory.Object).ForUserId(_user.Id)
                                                           .WithName("Test Name")
                                                           .WithDescription("Test Desc")
                                                           .Execute();
@@ -125,6 +133,25 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             Assert.AreEqual(_user, history.AuthoringUser, "History record had an incorrect author");
             Assert.AreEqual(MJLConstants.HistoryInsert, history.HistoryAction, "History record had an incorrect history action value");
             Assert.IsTrue(history.DateModified >= start && history.DateModified <= end, "History record had an incorrect modified date value");
+        }
+
+        [TestMethod]
+        public void New_JobSearch_Has_Milestone_Set_To_Starting_MilestoneConfig()
+        {
+            // Setup
+            InitializeTestEntities();
+            MilestoneConfig config = new MilestoneConfig();
+            _unitOfWork.MilestoneConfigs.Add(config);
+            _unitOfWork.Commit();
+
+            _startingMilestoneQuery.Setup(x => x.Execute()).Returns(config);
+
+            // Act
+            new CreateJobSearchForUserCommand(_serviceFactory.Object).ForUserId(_user.Id).Execute();
+
+            // Verify
+            JobSearch result = _unitOfWork.JobSearches.Fetch().Single();
+            Assert.AreEqual(config, result.CurrentMilestone, "Job Search's current milestone was incorrect");
         }
     }
 }

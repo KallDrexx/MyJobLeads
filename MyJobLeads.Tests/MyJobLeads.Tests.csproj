@@ -153,6 +153,7 @@
     <Compile Include="Queries\JobSearches\IsUserAuthorizedForJobSearchQueryTests.cs" />
     <Compile Include="Queries\JobSearches\JobSearchByIdQueryTests.cs" />
     <Compile Include="Queries\JobSearches\JobSearchesByUserIdQueryTests.cs" />
+    <Compile Include="Queries\MilestoneConfigs\StartingMilestoneQueryTests.cs" />
     <Compile Include="Queries\Search\EntitySearchQueryTests.cs" />
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQueryTests.cs" />
     <Compile Include="Queries\Tasks\IsUserAuthorizedForTaskQueryTests.cs" />
