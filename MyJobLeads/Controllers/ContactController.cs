@@ -25,6 +25,7 @@ namespace MyJobLeads.Controllers
         public ContactController(IServiceFactory factory)
         {
             _serviceFactory = factory;
+            _unitOfWork = _serviceFactory.GetService<IUnitOfWork>();
         }
 
         public virtual ActionResult Add(int companyId)
