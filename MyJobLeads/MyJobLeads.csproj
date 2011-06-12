@@ -738,6 +738,7 @@
     <Content Include="Views\Contact\_CompanyContactDisplay.cshtml" />
     <Content Include="Views\Search\RefreshSearchIndex.cshtml" />
     <Content Include="Views\JobSearch\Search.cshtml" />
+    <Content Include="Views\JobSearch\_JsMilestoneDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\EditorLocalization.bg-BG.resx">
