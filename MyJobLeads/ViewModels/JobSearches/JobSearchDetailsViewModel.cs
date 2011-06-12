@@ -11,6 +11,5 @@ namespace MyJobLeads.ViewModels.JobSearches
     {
         public JobSearch JobSearch { get; set; }
         public IList<Task> OpenTasks { get; set; }
-        public JobSearchUserMetrics Metrics { get; set; }
     }
 }

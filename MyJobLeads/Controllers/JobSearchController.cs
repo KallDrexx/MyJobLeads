@@ -29,7 +29,6 @@ namespace MyJobLeads.Controllers
         protected OpenTasksByJobSearchQuery _openTasksByJobSearchQuery;
         protected EditUserCommand _editUserCommand;
         protected EntitySearchQuery _entitySearchQuery;
-        protected JobSearchUserMetricsQuery _jobsearchUserMetricsQuery;
 
         public JobSearchController(JobSearchesByUserIdQuery jobSearchesByIdQuery,
                                     JobSearchByIdQuery jobSearchByIdQuery,
@@ -37,8 +36,7 @@ namespace MyJobLeads.Controllers
                                     EditJobSearchCommand editJobSearchCommand,
                                     OpenTasksByJobSearchQuery openTasksByJobSearchQuery,
                                     EditUserCommand editUserCommand,
-                                    EntitySearchQuery entitySearchQuery,
-                                    JobSearchUserMetricsQuery jobsearchUserMetricsQuery)
+                                    EntitySearchQuery entitySearchQuery)
         {
             _jobSearchByIdQuery = jobSearchByIdQuery;
             _jobSearchesByUserIdQuery = jobSearchesByIdQuery;
@@ -47,7 +45,6 @@ namespace MyJobLeads.Controllers
             _openTasksByJobSearchQuery = openTasksByJobSearchQuery;
             _editUserCommand = editUserCommand;
             _entitySearchQuery = entitySearchQuery;
-            _jobsearchUserMetricsQuery = jobsearchUserMetricsQuery;
         }
 
         #endregion
@@ -97,12 +94,11 @@ namespace MyJobLeads.Controllers
             // Retrieve the specified job search information
             var search = _jobSearchByIdQuery.WithJobSearchId(id).Execute();
             var openTasks = _openTasksByJobSearchQuery.WithJobSearch(id).Execute();
-            var metrics = _jobsearchUserMetricsQuery.WithJobSearchId(id).Execute();
 
             // Set this as the user's last visited job search
             _editUserCommand.WithUserId(CurrentUserId).SetLastVisitedJobSearchId(id).Execute();
 
-            return View(new JobSearchDetailsViewModel { JobSearch = search, OpenTasks = openTasks, Metrics = metrics });
+            return View(new JobSearchDetailsViewModel { JobSearch = search, OpenTasks = openTasks });
         }
 
         public virtual ActionResult Search(int id, string query)

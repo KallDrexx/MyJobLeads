@@ -31,19 +31,6 @@
 <h2>Job Search Progress</h2>
 <hr />
 
-<ul>
-    <li>You have entered <b>@Model.Metrics.NumCompanies</b> companies</li>
-    <li>You have entered <b>@Model.Metrics.NumContacts</b> contacts</li>
-    <li>You have entered <b>@Model.Metrics.NumTasks</b> tasks</li>
-
-    @if (Model.Metrics.NumTasks > 0)
-    {
-        <li><b>@Html.DisplayPercentageString(Model.Metrics.NumTasksCompleted, Model.Metrics.NumTasks)</b> of your tasks have been completed</li>
-        <li>You have an average of <b>@Html.DisplayPercentageDecimal(Model.Metrics.NumTasks, Model.Metrics.NumCompanies)</b> tasks per company</li>
-    }
-    
-    <li>You have an average of <b>@Html.DisplayPercentageDecimal(Model.Metrics.NumContacts, Model.Metrics.NumCompanies)</b> contacts per company</li>
-</ul>
 
  <h2>Companies</h2>
  <hr />
