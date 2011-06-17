@@ -52,11 +52,6 @@ else
 
     <table>
         <tr>
-            <td align="right">Subject:</td>
-            <td>@Html.TextBoxFor(x => x.Name, new { size = 30 })</td>
-        </tr>
-
-        <tr>
             <td align="right">Category:</td>
             <td>
                 @Html.DropDownListFor(x => x.Category, new SelectList(Model.AvailableCategoryList, Model.Category))
@@ -64,8 +59,8 @@ else
         </tr>
 
         <tr>
-            <td align="right">Sub-Category:</td>
-            <td>@Html.TextBoxFor(x => x.SubCategory, new { size = 30 })</td>
+            <td align="right">Subject:</td>
+            <td>@Html.TextBoxFor(x => x.Name, new { size = 30 })</td>
         </tr>
 
         <tr>

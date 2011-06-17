@@ -49,7 +49,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
                 CompletionDate = null,
                 TaskDate = _startDate,
                 Category = "Starting Category",
-                SubCategory = "Starting SubCategory",
                 Company = company,
                 History = new List<TaskHistory>()
             };
@@ -94,7 +93,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
                                             .SetTaskDate(_changedDate)
                                             .SetCompleted(true)
                                             .SetCategory("Category")
-                                            .SetSubCategory("SubCategory")
                                             .RequestedByUserId(_user.Id)
                                             .Execute();
 
@@ -104,7 +102,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
             Assert.AreEqual(_changedDate, result.TaskDate, "Task's date value was incorrect");
             Assert.AreEqual("Category", result.Category, "Task's category was incorrect");
-            Assert.AreEqual("SubCategory", result.SubCategory, "Task's sub-category value was incorrect");
         }
 
         [TestMethod]
@@ -119,7 +116,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
                                                             .SetTaskDate(_changedDate)
                                                             .SetCompleted(true)
                                                             .SetCategory("Category")
-                                                            .SetSubCategory("SubCategory")
                                                             .RequestedByUserId(_user.Id)
                                                             .Execute();
 
@@ -129,7 +125,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.AreEqual(_changedDate, result.TaskDate, "Task's date value was incorrect");
             Assert.IsNotNull(result.CompletionDate, "Task's completion date was null");
             Assert.AreEqual("Category", result.Category, "Task's category was incorrect");
-            Assert.AreEqual("SubCategory", result.SubCategory, "Task's sub-category value was incorrect");
         }
 
         [TestMethod]
@@ -171,7 +166,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
                                             .SetTaskDate(_changedDate)
                                             .SetCompleted(true)
                                             .SetCategory("Category")
-                                            .SetSubCategory("SubCategory")
                                             .RequestedByUserId(_user.Id)
                                             .Execute();
 
@@ -182,7 +176,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.AreEqual(_changedDate, result.TaskDate, "Task's date value was incorrect");
             Assert.IsNotNull(result.CompletionDate, "Task's completion date was null");
             Assert.AreEqual("Category", result.Category, "Task's category was incorrect");
-            Assert.AreEqual("SubCategory", result.SubCategory, "Task's sub-category value was incorrect");
         }
 
         [TestMethod]
@@ -196,7 +189,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
                                             .SetName("Name")
                                             .SetCompleted(true)
                                             .SetCategory("Category")
-                                            .SetSubCategory("SubCategory")
                                             .RequestedByUserId(_user.Id)
                                             .Execute();
 
@@ -207,7 +199,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.AreEqual(_startDate, result.TaskDate, "Task's date value was incorrect");
             Assert.IsNotNull(result.CompletionDate, "Task's completion date was null");
             Assert.AreEqual("Category", result.Category, "Task's category was incorrect");
-            Assert.AreEqual("SubCategory", result.SubCategory, "Task's sub-category value was incorrect");
         }
 
         [TestMethod]
@@ -221,7 +212,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
                                             .SetName("Name")
                                             .SetTaskDate(_changedDate)
                                             .SetCategory("Category")
-                                            .SetSubCategory("SubCategory")
                                             .RequestedByUserId(_user.Id)
                                             .Execute();
 
@@ -232,7 +222,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.AreEqual(_changedDate, result.TaskDate, "Task's date value was incorrect");
             Assert.IsNull(result.CompletionDate, "Task's completion date was not null");
             Assert.AreEqual("Category", result.Category, "Task's category was incorrect");
-            Assert.AreEqual("SubCategory", result.SubCategory, "Task's sub-category value was incorrect");
         }
 
         [TestMethod]
@@ -246,7 +235,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
                                             .SetName("Name")
                                             .SetTaskDate(_changedDate)
                                             .SetCompleted(true)
-                                            .SetSubCategory("SubCategory")
                                             .RequestedByUserId(_user.Id)
                                             .Execute();
 
@@ -256,7 +244,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
             Assert.AreEqual(_changedDate, result.TaskDate, "Task's date value was incorrect");
             Assert.AreEqual("Starting Category", result.Category, "Task's category was incorrect");
-            Assert.AreEqual("SubCategory", result.SubCategory, "Task's sub-category value was incorrect");
         }
 
         [TestMethod]
@@ -280,7 +267,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
             Assert.AreEqual(_changedDate, result.TaskDate, "Task's date value was incorrect");
             Assert.AreEqual("Category", result.Category, "Task's category was incorrect");
-            Assert.AreEqual("Starting SubCategory", result.SubCategory, "Task's sub-category value was incorrect");
         }
 
         [TestMethod]
@@ -322,7 +308,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
                                             .SetCompleted(true)
                                             .SetContactId(_contact.Id)
                                             .SetCategory("Category")
-                                            .SetSubCategory("SubCategory")
                                             .RequestedByUserId(_user.Id)
                                             .Execute();
             DateTime end = DateTime.Now;
@@ -337,7 +322,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
             Assert.AreEqual(_user, history.AuthoringUser, "The history record's author was incorrect");
             Assert.AreEqual(_contact, history.Contact, "The history record had an incorrect contact");
             Assert.AreEqual("Category", history.Category, "The history record's category value was incorrect");
-            Assert.AreEqual("SubCategory", history.SubCategory, "Task's sub-category value was incorrect");
             Assert.AreEqual(MJLConstants.HistoryUpdate, history.HistoryAction, "The history record's action value was incorrect");
             Assert.IsTrue(history.DateModified >= start && history.DateModified <= end, "The history record's modification date was incorrect");
         }

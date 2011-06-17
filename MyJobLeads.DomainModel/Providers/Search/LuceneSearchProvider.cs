@@ -109,7 +109,6 @@ namespace MyJobLeads.DomainModel.Providers.Search
             document.Add(new Field(Constants.TASK_ID, task.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             document.Add(new Field(Constants.TASK_NAME, task.Name ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
             document.Add(new Field(Constants.TASK_CATEGORY, task.Category ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
-            document.Add(new Field(Constants.TASK_SUBCATEGORY, task.SubCategory ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
             document.Add(new Field(Constants.JOBSEARCH_ID, task.Company.JobSearch.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
 
             // Remove any previous documents for the task and add the new one

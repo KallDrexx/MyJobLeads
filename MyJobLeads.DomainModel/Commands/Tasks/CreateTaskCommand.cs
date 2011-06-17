@@ -24,7 +24,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         protected string _name;
         protected DateTime? _taskDate;
         protected int _companyId, _userId, _contactId;
-        protected string _category, _subCategory;
+        protected string _category;
 
         public CreateTaskCommand(IServiceFactory factory)
         {
@@ -98,17 +98,6 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         }
 
         /// <summary>
-        /// Specifies the sub-category for the task
-        /// </summary>
-        /// <param name="subcategory"></param>
-        /// <returns></returns>
-        public CreateTaskCommand SetSubCategory(string subcategory)
-        {
-            _subCategory = subcategory;
-            return this;
-        }
-
-        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
@@ -144,7 +133,6 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 TaskDate = _taskDate,
                 Contact = contact,
                 Category = _category,
-                SubCategory = _subCategory,
 
                 History = new List<TaskHistory>()
             };
@@ -155,7 +143,6 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 Name = _name,
                 TaskDate = _taskDate,
                 Category = _category,
-                SubCategory = _subCategory,
                 HistoryAction = MJLConstants.HistoryInsert,
                 DateModified = DateTime.Now,
                 AuthoringUser = user

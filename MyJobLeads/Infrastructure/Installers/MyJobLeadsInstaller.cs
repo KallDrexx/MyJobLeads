@@ -32,10 +32,10 @@ namespace MyJobLeads.Infrastructure.Installers
             // After registering the EFUnitOfWork, we have to create a new MyJobLeadsDbContext, or else the
             //   errors will occur if the site is starting up and a 2nd request is made
             container.Register(Component.For<IUnitOfWork>().ImplementedBy<EFUnitOfWork>().LifeStyle.PerWebRequest);
-            using (var context = new MyJobLeadsDbContext())
-            {
-                context.Set<UnitTestEntity>().Any();
-            }
+            //using (var context = new MyJobLeadsDbContext())
+            //{
+            //    context.Set<UnitTestEntity>().Any();
+            //}
         }
     }
 }

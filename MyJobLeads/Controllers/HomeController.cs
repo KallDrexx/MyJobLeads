@@ -6,17 +6,21 @@ using System.Web.Mvc;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Utilities;
+using MyJobLeads.DomainModel.Providers;
 
 namespace MyJobLeads.Controllers
 {
     public partial class HomeController : MyJobLeadsBaseController
     {
-        public HomeController(UserByIdQuery userByIdQuery)
+        public HomeController(UserByIdQuery userByIdQuery, IServiceFactory factory)
         {
             _userByIdQuery = userByIdQuery;
+            _serviceFactory = factory;
+            _unitOfWork = factory.GetService<IUnitOfWork>();
         }
 
         private UserByIdQuery _userByIdQuery;
+        private IServiceFactory _serviceFactory;
 
         public virtual ActionResult Index()
         {
@@ -69,6 +73,37 @@ Feedback:
             emailUtil.Send("feedback@interviewtools.net", "Feedback Submitted", emailBody);
 
             return View();
+        }
+
+        public virtual ActionResult FixBlankTitles()
+        {
+            const string BLANK = "No Name";
+            int fixedCompanies = 0, fixedContacts = 0, fixedTasks = 0;
+
+            var companies = _unitOfWork.Companies.Fetch().Where(x => x.Name.Trim() == string.Empty).ToList();
+            foreach (var comp in companies)
+            {
+                fixedCompanies++;
+                comp.Name = BLANK;
+            }
+
+            var contacts = _unitOfWork.Contacts.Fetch().Where(x => x.Name.Trim() == string.Empty).ToList();
+            foreach (var cont in contacts)
+            {
+                fixedContacts++;
+                cont.Name = BLANK;
+            }
+
+            var tasks = _unitOfWork.Tasks.Fetch().Where(x => x.Name.Trim() == string.Empty).ToList();
+            foreach (var task in tasks)
+            {
+                fixedTasks++;
+                task.Name = BLANK;
+            }
+
+            _unitOfWork.Commit();
+
+            return View(fixedCompanies + fixedContacts + fixedTasks);
         }
     }
 }

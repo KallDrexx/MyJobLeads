@@ -52,6 +52,7 @@ namespace MyJobLeads.Controllers {
             public readonly string Index = "Index";
             public readonly string About = "About";
             public readonly string SubmitFeedback = "SubmitFeedback";
+            public readonly string FixBlankTitles = "FixBlankTitles";
         }
 
 
@@ -61,6 +62,7 @@ namespace MyJobLeads.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string About = "~/Views/Home/About.cshtml";
+            public readonly string FixBlankTitles = "~/Views/Home/FixBlankTitles.cshtml";
             public readonly string Index = "~/Views/Home/Index.cshtml";
             public readonly string SubmitFeedback = "~/Views/Home/SubmitFeedback.cshtml";
         }
@@ -86,6 +88,11 @@ namespace MyJobLeads.Controllers {
             callInfo.RouteValueDictionary.Add("email", email);
             callInfo.RouteValueDictionary.Add("feedback", feedback);
             callInfo.RouteValueDictionary.Add("fromUrl", fromUrl);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult FixBlankTitles() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.FixBlankTitles);
             return callInfo;
         }
 

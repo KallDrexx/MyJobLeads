@@ -343,7 +343,6 @@ namespace MyJobLeads.Tests.Providers
                 Name = "Name",
                 TaskDate = testdate,
                 Category = "Category",
-                SubCategory = "SubCategory",
 
                 Company = new Company { JobSearch = new JobSearch { Id = 7 } }
             };
@@ -361,7 +360,6 @@ namespace MyJobLeads.Tests.Providers
             Assert.AreEqual("Name", doc.Get(LuceneSearchProvider.Constants.TASK_NAME), "Document had an incorrect name value");
             Assert.AreEqual("7", doc.Get(LuceneSearchProvider.Constants.JOBSEARCH_ID), "Document had an incorrect job search id value");
             Assert.AreEqual("Category", doc.Get(LuceneSearchProvider.Constants.TASK_CATEGORY), "Document had an incorrect category value");
-            Assert.AreEqual("SubCategory", doc.Get(LuceneSearchProvider.Constants.TASK_SUBCATEGORY), "Document had an incorrect sub-category value");
         }
 
         [TestMethod]

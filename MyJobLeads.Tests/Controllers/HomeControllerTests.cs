@@ -20,8 +20,9 @@ using Castle.Windsor.Installer;
 namespace MyJobLeads.Tests.Controllers
 {
     [TestClass]
-    public class HomeControllerTest
+    public class HomeControllerTest : EFTestBase
     {
+
         [TestMethod]
         public void Windsor_Can_Resolve_HomeController_Dependencies()
         {
@@ -40,7 +41,7 @@ namespace MyJobLeads.Tests.Controllers
             // Setup
             var userByIdMock = new Mock<UserByIdQuery>(null);
             userByIdMock.Setup(x => x.Execute()).Returns((User)null);
-            HomeController controller = new HomeController(userByIdMock.Object);
+            HomeController controller = new HomeController(userByIdMock.Object, _serviceFactory.Object);
 
             // Act
             ActionResult result = controller.Index();
@@ -56,7 +57,7 @@ namespace MyJobLeads.Tests.Controllers
             User user = new User { Id = 20, JobSearches = new List<JobSearch>() };
             var userByIdMock = new Mock<UserByIdQuery>(null);
             userByIdMock.Setup(x => x.Execute()).Returns(user);
-            HomeController controller = new HomeController(userByIdMock.Object);
+            HomeController controller = new HomeController(userByIdMock.Object, _serviceFactory.Object);
             controller.CurrentUserId = 20;
 
             // Act
@@ -75,7 +76,7 @@ namespace MyJobLeads.Tests.Controllers
             var userByIdMock = new Mock<UserByIdQuery>(null);
             userByIdMock.Setup(x => x.Execute()).Returns(user);
 
-            HomeController controller = new HomeController(userByIdMock.Object);
+            HomeController controller = new HomeController(userByIdMock.Object, _serviceFactory.Object);
             controller.CurrentUserId = 40;
 
             // Act
@@ -93,7 +94,7 @@ namespace MyJobLeads.Tests.Controllers
             var userByIdMock = new Mock<UserByIdQuery>(null);
             userByIdMock.Setup(x => x.Execute()).Returns(user);
 
-            HomeController controller = new HomeController(userByIdMock.Object);
+            HomeController controller = new HomeController(userByIdMock.Object, _serviceFactory.Object);
             controller.CurrentUserId = 20;
 
             // Act
@@ -107,7 +108,7 @@ namespace MyJobLeads.Tests.Controllers
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController(null);
+            HomeController controller = new HomeController(null, _serviceFactory.Object);
 
             // Act
             ViewResult result = controller.About() as ViewResult;

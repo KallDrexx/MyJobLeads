@@ -83,7 +83,6 @@ namespace MyJobLeads.Controllers
                                                          .SetName(model.Name)
                                                          .SetTaskDate(model.TaskDate)
                                                          .SetCategory(model.Category)
-                                                         .SetSubCategory(model.SubCategory)
                                                          .WithContactId(selectedContactId)
                                                          .RequestedByUserId(CurrentUserId)
                                                          .Execute();
@@ -97,7 +96,6 @@ namespace MyJobLeads.Controllers
                                                        .SetContactId(selectedContactId)
                                                        .SetCompleted(model.Completed)
                                                        .SetCategory(model.Category)
-                                                       .SetSubCategory(model.SubCategory)
                                                        .RequestedByUserId(CurrentUserId)
                                                        .Execute();
             }

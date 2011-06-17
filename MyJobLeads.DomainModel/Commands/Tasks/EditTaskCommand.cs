@@ -23,7 +23,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         protected IServiceFactory _serviceFactory;
         protected int _taskId, _userId, _contactId;
         protected DateTime? _newTaskDate;
-        protected string _name, _category, _subCategory;
+        protected string _name, _category;
         protected bool _completed, _completedChanged, _dateChanged, _contactChanged;
 
         public EditTaskCommand(IServiceFactory factory)
@@ -112,17 +112,6 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         }
 
         /// <summary>
-        /// Specifies the sub-category for the task
-        /// </summary>
-        /// <param name="subcategory"></param>
-        /// <returns></returns>
-        public EditTaskCommand SetSubCategory(string subcategory)
-        {
-            _subCategory = subcategory;
-            return this;
-        }
-
-        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
@@ -156,7 +145,6 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
             // Only change the properties that were specified
             if (_name != null) { task.Name = _name; }
             if (_category != null) { task.Category = _category; }
-            if (_subCategory != null) { task.SubCategory = _subCategory; }
             if (_dateChanged) { task.TaskDate = _newTaskDate; }
 
             if (_completedChanged) 
@@ -185,7 +173,6 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 CompletionDate = task.CompletionDate,
                 ContactId = task.ContactId,
                 Category = task.Category,
-                SubCategory = task.SubCategory,
                 AuthoringUser = user,
                 DateModified = DateTime.Now,
                 HistoryAction = MJLConstants.HistoryUpdate

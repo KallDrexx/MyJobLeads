@@ -27,7 +27,6 @@
 
     <p>
         Category: @Model.Category <br />
-        Sub-Category: @Model.SubCategory <br />
         Task Due Date: @if (Model.TaskDate.HasValue) { @Model.TaskDate.Value.ToString() } else { <text>&lt;No Date Set&gt;</text> } <br />
 
         @if (Model.CompletionDate == null) 
