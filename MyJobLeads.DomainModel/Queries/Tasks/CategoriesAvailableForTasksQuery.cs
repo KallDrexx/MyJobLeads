@@ -19,6 +19,7 @@ namespace MyJobLeads.DomainModel.Queries.Tasks
             // Current category list is hardcoded
             return new List<string> 
             { 
+                string.Empty,
                 MJLConstants.ApplyToFirmTaskCategory,
                 MJLConstants.FollowUpTaskCategory,
                 MJLConstants.InPersonInterviewTaskCategory,
