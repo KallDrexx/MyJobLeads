@@ -14,7 +14,10 @@
     if (zipSpecified) { location += Model.Zip; }
 }
 
-<h2>@Html.ActionLink(Model.Name, MVC.Company.Details(Model.Id))'s Summary</h2><br />
+<h2>@Html.ActionLink(Model.Name, MVC.Company.Details(Model.Id))'s Summary</h2>
+@Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Id))
+
+<br /><br />
 
 <p>
     Phone: @Model.Phone <br />

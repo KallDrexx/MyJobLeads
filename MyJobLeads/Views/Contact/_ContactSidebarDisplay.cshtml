@@ -1,6 +1,8 @@
 ﻿@model MyJobLeads.DomainModel.Entities.Contact
 
-<h2>@Html.ActionLink(Model.Name, MVC.Contact.Details(@Model.Id))'s Summary</h2><br />
+<h2>@Html.ActionLink(Model.Name, MVC.Contact.Details(@Model.Id))'s Summary</h2>
+@Html.ActionLink("Edit Details", MVC.Contact.Edit(Model.Id))
+<br /><br />
 
 <p>
     Direct Phone: @Model.DirectPhone @if (!string.IsNullOrWhiteSpace(Model.Extension)) { <text>Ext: @Model.Extension</text> } <br />
