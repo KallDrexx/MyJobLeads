@@ -92,14 +92,16 @@ namespace MyJobLeads.Controllers
             else
             {
                 // Existing task
-                task = _serviceFactory.GetService<EditTaskCommand>().WithTaskId(model.Id)
-                                                       .SetName(model.Name)
-                                                       .SetTaskDate(model.TaskDate)
-                                                       .SetContactId(selectedContactId)
-                                                       .SetCompleted(model.Completed)
-                                                       .SetCategory(model.Category)
-                                                       .RequestedByUserId(CurrentUserId)
-                                                       .Execute();
+                task = _serviceFactory.GetService<EditTaskCommand>().Execute(new EditTaskCommandParams
+                {
+                    TaskId = model.Id,
+                    TaskDate = model.TaskDate,
+                    Name = model.Name,
+                    ContactId = selectedContactId,
+                    Completed = model.Completed,
+                    Category = model.Category,
+                    RequestingUserId = CurrentUserId
+                });
             }
 
             return RedirectToAction(MVC.Task.Details(task.Id));

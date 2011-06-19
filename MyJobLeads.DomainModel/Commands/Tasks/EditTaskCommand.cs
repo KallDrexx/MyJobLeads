@@ -15,16 +15,47 @@ using MyJobLeads.DomainModel.Commands.JobSearches;
 
 namespace MyJobLeads.DomainModel.Commands.Tasks
 {
+    public struct EditTaskCommandParams
+    {
+        public int TaskId { get; set; }
+        public string Category { get; set; }
+        public string Name { get; set; }
+        public bool? Completed { get; set; }
+        public int RequestingUserId { get; set; }
+
+        private DateTime? _taskDate;
+        public DateTime? TaskDate
+        {
+            get { return _taskDate; }
+            set
+            {
+                _taskDate = value;
+                TaskDateSet = true;
+            }
+        }
+
+        public bool TaskDateSet { get; private set; }
+
+        private int _contactId;
+        public int ContactId
+        {
+            get { return _contactId; }
+            set
+            {
+                _contactId = value;
+                ContactSet = true;
+            }
+        }
+
+        public bool ContactSet { get; private set; }
+    }
+
     /// <summary>
     /// Command class that edits the specified task
     /// </summary>
     public class EditTaskCommand
     {
         protected IServiceFactory _serviceFactory;
-        protected int _taskId, _userId, _contactId;
-        protected DateTime? _newTaskDate;
-        protected string _name, _category;
-        protected bool _completed, _completedChanged, _dateChanged, _contactChanged;
 
         public EditTaskCommand(IServiceFactory factory)
         {
@@ -32,124 +63,44 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         }
 
         /// <summary>
-        /// Specifies the id value of the task to edit
-        /// </summary>
-        /// <param name="taskId"></param>
-        /// <returns></returns>
-        public EditTaskCommand WithTaskId(int taskId)
-        {
-            _taskId = taskId;
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the new name for the task
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public EditTaskCommand SetName(string name)
-        {
-            _name = name;
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the date for the task
-        /// </summary>
-        /// <param name="taskDate"></param>
-        /// <returns></returns>
-        public EditTaskCommand SetTaskDate(DateTime? taskDate)
-        {
-            _dateChanged = true;
-            _newTaskDate = taskDate;
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the completed status of the task
-        /// </summary>
-        /// <param name="completedStatus"></param>
-        /// <returns></returns>
-        public EditTaskCommand SetCompleted(bool completedStatus)
-        {
-            _completedChanged = true;
-            _completed = completedStatus;
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the id value of the user editing the task
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public EditTaskCommand RequestedByUserId(int userId)
-        {
-            _userId = userId;
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the id value of the contact to associate with the task
-        /// </summary>
-        /// <param name="contactId"></param>
-        /// <returns></returns>
-        public EditTaskCommand SetContactId(int contactId)
-        {
-            _contactId = contactId < 1? 0 : contactId;
-            _contactChanged = true;
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the category for the task
-        /// </summary>
-        /// <param name="category"></param>
-        /// <returns></returns>
-        public EditTaskCommand SetCategory(string category)
-        {
-            _category = category;
-            return this;
-        }
-
-        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
         /// <exception cref="MJLEntityNotFoundException">Thrown when the specified task, calling user, or contact isn't found</exception>
-        public virtual Task Execute()
+        public virtual Task Execute(EditTaskCommandParams cmdParams)
         {
             var unitOfWork = _serviceFactory.GetService<IUnitOfWork>();
 
             // Retrieve the user editing the task
-            var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(_userId).Execute();
+            var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(cmdParams.RequestingUserId).Execute();
             if (user == null)
-                throw new MJLEntityNotFoundException(typeof(User), _userId);
+                throw new MJLEntityNotFoundException(typeof(User), cmdParams.RequestingUserId);
 
             // Retrieve the task
-            var task = _serviceFactory.GetService<TaskByIdQuery>().WithTaskId(_taskId).Execute();
+            var task = _serviceFactory.GetService<TaskByIdQuery>().WithTaskId(cmdParams.TaskId).Execute();
             if (task == null)
-                throw new MJLEntityNotFoundException(typeof(Task), _taskId);
+                throw new MJLEntityNotFoundException(typeof(Task), cmdParams.TaskId);
 
             // If specified, retrieve the specified contact
             Contact contact = null;
-            if (_contactChanged)
+            if (cmdParams.ContactSet)
             {
-                if (_contactId != 0)
+                if (cmdParams.ContactId != 0)
                 {
-                    contact = _serviceFactory.GetService<ContactByIdQuery>().WithContactId(_contactId).Execute();
+                    contact = _serviceFactory.GetService<ContactByIdQuery>().WithContactId(cmdParams.ContactId).Execute();
                     if (contact == null)
-                        throw new MJLEntityNotFoundException(typeof(Contact), _contactId);
+                        throw new MJLEntityNotFoundException(typeof(Contact), cmdParams.ContactId);
                 }
             }
 
             // Only change the properties that were specified
-            if (_name != null) { task.Name = _name; }
-            if (_category != null) { task.Category = _category; }
-            if (_dateChanged) { task.TaskDate = _newTaskDate; }
+            if (cmdParams.Name != null) { task.Name = cmdParams.Name; }
+            if (cmdParams.Category != null) { task.Category = cmdParams.Category; }
+            if (cmdParams.TaskDateSet) { task.TaskDate = cmdParams.TaskDate; }
 
-            if (_completedChanged) 
+            if (cmdParams.Completed != null) 
             {
-                if (_completed)
+                if (cmdParams.Completed.Value)
                 {
                     // Only change the completion date if the completion date isn't already set
                     if (task.CompletionDate == null)
@@ -159,7 +110,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                     task.CompletionDate = null;
             }
 
-            if (_contactChanged) 
+            if (cmdParams.ContactSet) 
             {
                 // ContactId must be set instead of Contact due to the contact not being eager loaded.
                 task.ContactId = contact == null ? (int?)null : contact.Id;

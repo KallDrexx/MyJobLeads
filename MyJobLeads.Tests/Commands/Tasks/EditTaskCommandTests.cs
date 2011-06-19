@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -88,20 +87,11 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id)
-                                            .SetName("Name")
-                                            .SetTaskDate(_changedDate)
-                                            .SetCompleted(true)
-                                            .SetCategory("Category")
-                                            .RequestedByUserId(_user.Id)
-                                            .Execute();
+            new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams());
 
             // Verify
             Task result = _unitOfWork.Tasks.Fetch().SingleOrDefault();
             Assert.IsNotNull(result, "No task was created in the database");
-            Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
-            Assert.AreEqual(_changedDate, result.TaskDate, "Task's date value was incorrect");
-            Assert.AreEqual("Category", result.Category, "Task's category was incorrect");
         }
 
         [TestMethod]
@@ -111,20 +101,11 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            Task result = new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id)
-                                                            .SetName("Name")
-                                                            .SetTaskDate(_changedDate)
-                                                            .SetCompleted(true)
-                                                            .SetCategory("Category")
-                                                            .RequestedByUserId(_user.Id)
-                                                            .Execute();
+            Task result = new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams());
 
             // Verify
             Assert.IsNotNull(result, "No task was created in the database");
-            Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
-            Assert.AreEqual(_changedDate, result.TaskDate, "Task's date value was incorrect");
-            Assert.IsNotNull(result.CompletionDate, "Task's completion date was null");
-            Assert.AreEqual("Category", result.Category, "Task's category was incorrect");
+            Assert.AreEqual(_unitOfWork.Tasks.Fetch().Single(), result, "The returned task did not match the one in the database");
         }
 
         [TestMethod]
@@ -138,12 +119,10 @@ namespace MyJobLeads.Tests.Commands.Tasks
             // Act
             try
             {
-                new EditTaskCommand(_serviceFactory.Object).WithTaskId(id)
-                                                            .SetName("Name")
-                                                            .SetTaskDate(_changedDate)
-                                                            .SetCompleted(true)
-                                                            .RequestedByUserId(_user.Id)
-                                                            .Execute();
+                new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams
+                {
+                    TaskId = id
+                });
                 Assert.Fail("Command did not throw an exception");
             }
 
@@ -153,120 +132,6 @@ namespace MyJobLeads.Tests.Commands.Tasks
                 Assert.AreEqual(typeof(Task), ex.EntityType, "MJLEntityNotFoundException's entity type was incorrect");
                 Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
             }
-        }
-
-        [TestMethod]
-        public void Not_Specifying_Name_Doesnt_Change_Name_Value()
-        {
-            // Setup
-            InitializeTestEntities();
-
-            // Act
-            new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id)
-                                            .SetTaskDate(_changedDate)
-                                            .SetCompleted(true)
-                                            .SetCategory("Category")
-                                            .RequestedByUserId(_user.Id)
-                                            .Execute();
-
-            // Verify
-            Task result = _unitOfWork.Tasks.Fetch().SingleOrDefault();
-            Assert.IsNotNull(result, "No task was created in the database");
-            Assert.AreEqual("Starting Name", result.Name, "Task's name was incorrect");
-            Assert.AreEqual(_changedDate, result.TaskDate, "Task's date value was incorrect");
-            Assert.IsNotNull(result.CompletionDate, "Task's completion date was null");
-            Assert.AreEqual("Category", result.Category, "Task's category was incorrect");
-        }
-
-        [TestMethod]
-        public void Not_Specifying_TaskDate_Doesnt_Change_TaskDate_Value()
-        {
-            // Setup
-            InitializeTestEntities();
-
-            // Act
-            new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id)
-                                            .SetName("Name")
-                                            .SetCompleted(true)
-                                            .SetCategory("Category")
-                                            .RequestedByUserId(_user.Id)
-                                            .Execute();
-
-            // Verify
-            Task result = _unitOfWork.Tasks.Fetch().SingleOrDefault();
-            Assert.IsNotNull(result, "No task was created in the database");
-            Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
-            Assert.AreEqual(_startDate, result.TaskDate, "Task's date value was incorrect");
-            Assert.IsNotNull(result.CompletionDate, "Task's completion date was null");
-            Assert.AreEqual("Category", result.Category, "Task's category was incorrect");
-        }
-
-        [TestMethod]
-        public void Not_Specifying_Completed_Doesnt_Change_Completed_Value()
-        {
-            // Setup
-            InitializeTestEntities();
-
-            // Act
-            new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id)
-                                            .SetName("Name")
-                                            .SetTaskDate(_changedDate)
-                                            .SetCategory("Category")
-                                            .RequestedByUserId(_user.Id)
-                                            .Execute();
-
-            // Verify
-            Task result = _unitOfWork.Tasks.Fetch().SingleOrDefault();
-            Assert.IsNotNull(result, "No task was created in the database");
-            Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
-            Assert.AreEqual(_changedDate, result.TaskDate, "Task's date value was incorrect");
-            Assert.IsNull(result.CompletionDate, "Task's completion date was not null");
-            Assert.AreEqual("Category", result.Category, "Task's category was incorrect");
-        }
-
-        [TestMethod]
-        public void Not_Specifying_Category_Doesnt_Change_Category()
-        {
-            // Setup
-            InitializeTestEntities();
-
-            // Act
-            new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id)
-                                            .SetName("Name")
-                                            .SetTaskDate(_changedDate)
-                                            .SetCompleted(true)
-                                            .RequestedByUserId(_user.Id)
-                                            .Execute();
-
-            // Verify
-            Task result = _unitOfWork.Tasks.Fetch().SingleOrDefault();
-            Assert.IsNotNull(result, "No task was created in the database");
-            Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
-            Assert.AreEqual(_changedDate, result.TaskDate, "Task's date value was incorrect");
-            Assert.AreEqual("Starting Category", result.Category, "Task's category was incorrect");
-        }
-
-        [TestMethod]
-        public void Not_Specifying_SubCategory_Doesnt_Change_SubCategory()
-        {
-            // Setup
-            InitializeTestEntities();
-
-            // Act
-            new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id)
-                                            .SetName("Name")
-                                            .SetTaskDate(_changedDate)
-                                            .SetCompleted(true)
-                                            .SetCategory("Category")
-                                            .RequestedByUserId(_user.Id)
-                                            .Execute();
-
-            // Verify
-            Task result = _unitOfWork.Tasks.Fetch().SingleOrDefault();
-            Assert.IsNotNull(result, "No task was created in the database");
-            Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
-            Assert.AreEqual(_changedDate, result.TaskDate, "Task's date value was incorrect");
-            Assert.AreEqual("Category", result.Category, "Task's category was incorrect");
         }
 
         [TestMethod]
@@ -280,9 +145,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             // Act
             try
             {
-                new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id)
-                                                .RequestedByUserId(id)
-                                                .Execute();
+                new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams { RequestingUserId = id });
                 Assert.Fail("Command did not throw an exception");
             }
 
@@ -302,14 +165,16 @@ namespace MyJobLeads.Tests.Commands.Tasks
 
             // Act
             DateTime start = DateTime.Now;
-            new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id)
-                                            .SetName("Name")
-                                            .SetTaskDate(_changedDate)
-                                            .SetCompleted(true)
-                                            .SetContactId(_contact.Id)
-                                            .SetCategory("Category")
-                                            .RequestedByUserId(_user.Id)
-                                            .Execute();
+            new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams
+            {
+                TaskId = _task.Id,
+                Name = "Name",
+                TaskDate = _changedDate,
+                Completed = true,
+                ContactId = _contact.Id,
+                Category = "Category",
+                RequestingUserId = _user.Id
+            });
             DateTime end = DateTime.Now;
 
             // Verify
@@ -337,10 +202,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             // Act
             try
             {
-                new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id)
-                                                .RequestedByUserId(_user.Id)
-                                                .SetContactId(id)
-                                                .Execute();
+                new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams { ContactId = id });
                 Assert.Fail("Command did not throw an exception");
             }
 
@@ -359,10 +221,12 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id)
-                                            .RequestedByUserId(_user.Id)
-                                            .SetContactId(_contact.Id)
-                                            .Execute();
+            new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams
+            {
+                TaskId = _task.Id,
+                ContactId = _contact.Id,
+                RequestingUserId = _user.Id,
+            });
 
             // Verify
             Task task = _unitOfWork.Tasks.Fetch().Single();
@@ -378,9 +242,11 @@ namespace MyJobLeads.Tests.Commands.Tasks
             _unitOfWork.Commit();
 
             // Act
-            new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id)
-                                            .RequestedByUserId(_user.Id)
-                                            .Execute();
+            new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams
+            {
+                TaskId = _task.Id,
+                RequestingUserId = _user.Id
+            });
 
             // Verify
             Task task = _unitOfWork.Tasks.Fetch().Single();
@@ -396,10 +262,12 @@ namespace MyJobLeads.Tests.Commands.Tasks
             _unitOfWork.Commit();
 
             // Act
-            new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id)
-                                            .SetContactId(0)
-                                            .RequestedByUserId(_user.Id)
-                                            .Execute();
+            new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams
+            {
+                TaskId = _task.Id,
+                ContactId = 0,
+                RequestingUserId = _user.Id
+            });
 
             // Verify
             Task task = _unitOfWork.Tasks.Fetch().Single();
@@ -413,7 +281,11 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id).RequestedByUserId(_user.Id).Execute();
+            new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams
+            {
+                TaskId = _task.Id,
+                RequestingUserId = _user.Id
+            });
 
             // Verify
             _searchProvider.Verify(x => x.Index(_task), Times.Once());
@@ -427,10 +299,12 @@ namespace MyJobLeads.Tests.Commands.Tasks
 
             // Act
             DateTime start = DateTime.Now;
-            new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id)
-                                            .SetCompleted(true)
-                                            .RequestedByUserId(_user.Id)
-                                            .Execute();
+            new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams
+            {
+                TaskId = _task.Id,
+                Completed = true,
+                RequestingUserId = _user.Id
+            });
             DateTime end = DateTime.Now;
 
             // Verify
@@ -448,10 +322,12 @@ namespace MyJobLeads.Tests.Commands.Tasks
             _unitOfWork.Commit();
 
             // Act
-            new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id)
-                                            .SetCompleted(false)
-                                            .RequestedByUserId(_user.Id)
-                                            .Execute();
+            new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams
+            {
+                TaskId = _task.Id,
+                Completed = false,
+                RequestingUserId = _user.Id
+            });
 
             // Verify
             Task result = _unitOfWork.Tasks.Fetch().SingleOrDefault();
@@ -467,10 +343,12 @@ namespace MyJobLeads.Tests.Commands.Tasks
             _unitOfWork.Commit();
 
             // Act
-            new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id)
-                                            .SetCompleted(true)
-                                            .RequestedByUserId(_user.Id)
-                                            .Execute();
+            new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams
+            {
+                TaskId = _task.Id,
+                Completed = true,
+                RequestingUserId = _user.Id
+            });
 
             // Verify
             Task result = _unitOfWork.Tasks.Fetch().SingleOrDefault();
@@ -485,7 +363,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();    
 
             // Act
-            new EditTaskCommand(_serviceFactory.Object).WithTaskId(_task.Id).Execute();
+            new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams { TaskId = _task.Id });
 
             // Verify
             _updateMetricsCmd.Verify(x => x.Execute(It.Is<UpdateJobSearchMetricsCmdParams>(y => y.JobSearchId == _jobSearch.Id)));
