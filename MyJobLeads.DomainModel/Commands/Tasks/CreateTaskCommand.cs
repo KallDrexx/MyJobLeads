@@ -15,16 +15,22 @@ using MyJobLeads.DomainModel.Commands.JobSearches;
 
 namespace MyJobLeads.DomainModel.Commands.Tasks
 {
+    public struct CreateTaskCommandParams
+    {
+        public int CompanyId { get; set; }
+        public string Name { get; set; }
+        public DateTime? TaskDate { get; set; }
+        public int RequestedUserId { get; set; }
+        public int ContactId { get; set; }
+        public string Category { get; set; }
+    }
+
     /// <summary>
     /// Command class to create a new task for a company
     /// </summary>
     public class CreateTaskCommand
     {
         protected IServiceFactory _serviceFactory;
-        protected string _name;
-        protected DateTime? _taskDate;
-        protected int _companyId, _userId, _contactId;
-        protected string _category;
 
         public CreateTaskCommand(IServiceFactory factory)
         {
@@ -32,107 +38,41 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         }
 
         /// <summary>
-        /// Specifies the id value of the company to create the task for
-        /// </summary>
-        /// <param name="companyId"></param>
-        /// <returns></returns>
-        public CreateTaskCommand WithCompanyId(int companyId)
-        {
-            _companyId = companyId;
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the name of the task
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public CreateTaskCommand SetName(string name)
-        {
-            _name = name;
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the datetime for the task
-        /// </summary>
-        /// <param name="taskDate"></param>
-        /// <returns></returns>
-        public CreateTaskCommand SetTaskDate(DateTime? taskDate)
-        {
-            _taskDate = taskDate;
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the id value of the user creating the task
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public CreateTaskCommand RequestedByUserId(int userId)
-        {
-            _userId = userId;
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the id value of the contact to associate the task with
-        /// </summary>
-        /// <param name="contactId"></param>
-        /// <returns></returns>
-        public CreateTaskCommand WithContactId(int contactId)
-        {
-            _contactId = contactId;
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the task's category
-        /// </summary>
-        /// <param name="category"></param>
-        /// <returns></returns>
-        public CreateTaskCommand SetCategory(string category)
-        {
-            _category = category;
-            return this;
-        }
-
-        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
         /// <exception cref="MJLEntityNotFoundException">Thrown when the specified company, calling user, or contact is not found</exception>
-        public virtual Task Execute()
+        public virtual Task Execute(CreateTaskCommandParams cmdParams)
         {
             var unitOfWork = _serviceFactory.GetService<IUnitOfWork>();
 
             // Retrieve the user creating the task
-            var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(_userId).Execute();
+            var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(cmdParams.RequestedUserId).Execute();
             if (user == null)
-                throw new MJLEntityNotFoundException(typeof(User), _userId);
+                throw new MJLEntityNotFoundException(typeof(User), cmdParams.RequestedUserId);
 
             // Retrieve the company
-            var company = _serviceFactory.GetService<CompanyByIdQuery>().WithCompanyId(_companyId).Execute();
+            var company = _serviceFactory.GetService<CompanyByIdQuery>().WithCompanyId(cmdParams.CompanyId).Execute();
             if (company == null)
-                throw new MJLEntityNotFoundException(typeof(Company), _companyId);
+                throw new MJLEntityNotFoundException(typeof(Company), cmdParams.CompanyId);
 
             // Retrieve the contact if one is specified
             Contact contact = null;
-            if (_contactId != 0)
+            if (cmdParams.ContactId != 0)
             {
-                contact = _serviceFactory.GetService<ContactByIdQuery>().WithContactId(_contactId).Execute();
+                contact = _serviceFactory.GetService<ContactByIdQuery>().WithContactId(cmdParams.ContactId).Execute();
                 if (contact == null)
-                    throw new MJLEntityNotFoundException(typeof(Contact), _contactId);
+                    throw new MJLEntityNotFoundException(typeof(Contact), cmdParams.ContactId);
             }
 
             // Create the Task
             var task = new Task
             {
                 Company = company,
-                Name = _name,
-                TaskDate = _taskDate,
+                Name = cmdParams.Name,
+                TaskDate = cmdParams.TaskDate,
                 Contact = contact,
-                Category = _category,
+                Category = cmdParams.Category,
 
                 History = new List<TaskHistory>()
             };
@@ -140,9 +80,9 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
             // Create history record
             task.History.Add(new TaskHistory
             {
-                Name = _name,
-                TaskDate = _taskDate,
-                Category = _category,
+                Name = cmdParams.Name,
+                TaskDate = cmdParams.TaskDate,
+                Category = cmdParams.Category,
                 HistoryAction = MJLConstants.HistoryInsert,
                 DateModified = DateTime.Now,
                 AuthoringUser = user

@@ -77,23 +77,15 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
-                                                        .SetName("Name")
-                                                        .SetTaskDate(_testDate)
-                                                        .SetCategory("Category")
-                                                        .RequestedByUserId(_user.Id)
-                                                        .Execute();
+            new CreateTaskCommand(_serviceFactory.Object).Execute(new CreateTaskCommandParams
+            {
+                CompanyId = _company.Id,
+                RequestedUserId = _user.Id
+            });
 
             // Verify
             Task result = _unitOfWork.Tasks.Fetch().SingleOrDefault();
             Assert.IsNotNull(result, "No task was created in the database");
-
-            Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
-            Assert.AreEqual(_testDate, result.TaskDate, "Task's date value was incorrect");
-            Assert.IsNull(result.CompletionDate, "Task's completed status value is not null");
-            Assert.AreEqual(_company.Id, result.Company.Id, "Tasks' company id was incorrect");
-            Assert.IsNull(result.Contact, "Tasks' contact was incorrectly set");
-            Assert.AreEqual("Category", result.Category, "Task's category value was incorrect");
         }
 
         [TestMethod]
@@ -103,20 +95,73 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            Task result = new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
-                                                                        .SetName("Name")
-                                                                        .SetTaskDate(_testDate)
-                                                                        .SetCategory("Category")
-                                                                        .RequestedByUserId(_user.Id)
-                                                                        .Execute();
+            Task result = new CreateTaskCommand(_serviceFactory.Object).Execute(new CreateTaskCommandParams
+            {
+                CompanyId = _company.Id,
+                RequestedUserId = _user.Id
+            });
 
             // Verify
-            Assert.IsNotNull(result, "No task was created in the database");
-            Assert.AreEqual("Name", result.Name, "Task's name was incorrect");
-            Assert.AreEqual(_testDate, result.TaskDate, "Task's date value was incorrect");
-            Assert.IsNull(result.CompletionDate, "Task's completion date is not null");
-            Assert.AreEqual(_company.Id, result.Company.Id, "Tasks' company id was incorrect");
+            Assert.IsNotNull(result, "No task was returned");
+            Task task = _unitOfWork.Tasks.Fetch().Single();
+            Assert.AreEqual(result, task, "Returned task and task in database were not the same");
+        }
+
+        [TestMethod]
+        public void Can_Set_Task_Name()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new CreateTaskCommand(_serviceFactory.Object).Execute(new CreateTaskCommandParams
+            {
+                CompanyId = _company.Id,
+                RequestedUserId = _user.Id,
+                Name = "Test Task"
+            });
+
+            // Verify
+            Task result = _unitOfWork.Tasks.Fetch().Single();
+            Assert.AreEqual("Test Task", result.Name, "Task's name was incorrect");
+        }
+
+        [TestMethod]
+        public void Can_Set_Task_Category()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new CreateTaskCommand(_serviceFactory.Object).Execute(new CreateTaskCommandParams
+            {
+                CompanyId = _company.Id,
+                RequestedUserId = _user.Id,
+                Category = "Category"
+            });
+
+            // Verify
+            Task result = _unitOfWork.Tasks.Fetch().Single();
             Assert.AreEqual("Category", result.Category, "Task's category was incorrect");
+        }
+
+        [TestMethod]
+        public void Can_Set_Task_Date()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new CreateTaskCommand(_serviceFactory.Object).Execute(new CreateTaskCommandParams
+            {
+                CompanyId = _company.Id,
+                RequestedUserId = _user.Id,
+                TaskDate = _testDate
+            });
+
+            // Verify
+            Task result = _unitOfWork.Tasks.Fetch().Single();
+            Assert.AreEqual(_testDate, result.TaskDate, "Task's date was incorrect");
         }
 
         [TestMethod]
@@ -130,11 +175,11 @@ namespace MyJobLeads.Tests.Commands.Tasks
             // Act
             try
             {
-                new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(id)
-                                                            .SetName("Name")
-                                                            .SetTaskDate(_testDate)
-                                                            .RequestedByUserId(_user.Id)
-                                                            .Execute();
+                new CreateTaskCommand(_serviceFactory.Object).Execute(new CreateTaskCommandParams
+                {
+                    CompanyId = id,
+                    RequestedUserId = _user.Id
+                });
                 Assert.Fail("Command did not throw an exception");
             }
 
@@ -157,11 +202,11 @@ namespace MyJobLeads.Tests.Commands.Tasks
             // Act
             try
             {
-                new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
-                                                            .SetName("Name")
-                                                            .SetTaskDate(_testDate)
-                                                            .RequestedByUserId(id)
-                                                            .Execute();
+                new CreateTaskCommand(_serviceFactory.Object).Execute(new CreateTaskCommandParams
+                {
+                    CompanyId = _company.Id,
+                    RequestedUserId = id
+                });
                 Assert.Fail("Command did not throw an exception");
             }
 
@@ -180,26 +225,15 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            DateTime start = DateTime.Now;
-            new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
-                                                        .SetName("Name")
-                                                        .SetTaskDate(_testDate)
-                                                        .SetCategory("Category")
-                                                        .RequestedByUserId(_user.Id)
-                                                        .Execute();
-            DateTime end = DateTime.Now;
+            new CreateTaskCommand(_serviceFactory.Object).Execute(new CreateTaskCommandParams
+            {
+                CompanyId = _company.Id,
+                RequestedUserId = _user.Id
+            });
 
             // Verify
             Task task = _unitOfWork.Tasks.Fetch().Single();
-            TaskHistory history = task.History.Single();
-
-            Assert.AreEqual("Name", history.Name, "History Record's name was incorrect");
-            Assert.AreEqual(_testDate, history.TaskDate, "History Record's date value was incorrect");
-            Assert.AreEqual(task.CompletionDate, history.CompletionDate, "History Record's completed date was incorrect");
-            Assert.AreEqual(_user, history.AuthoringUser, "History Record's author was incorrect");
-            Assert.AreEqual(MJLConstants.HistoryInsert, history.HistoryAction, "History Record's action value was incorrect");
-            Assert.AreEqual("Category", history.Category, "History Record's category value was incorrect");
-            Assert.IsTrue(history.DateModified >= start && history.DateModified <= end, "History Record's modification date was incorrect");
+            Assert.AreEqual(1, task.History.Count, "Task had an incorrect number of history records");
         }
 
         [TestMethod]
@@ -209,10 +243,12 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
-                                                        .WithContactId(_contact.Id)
-                                                        .RequestedByUserId(_user.Id)
-                                                        .Execute();
+            new CreateTaskCommand(_serviceFactory.Object).Execute(new CreateTaskCommandParams
+            {
+                CompanyId = _company.Id,
+                RequestedUserId = _user.Id,
+                ContactId = _contact.Id
+            });
 
             // Verify
             Task result = _unitOfWork.Tasks.Fetch().Single();
@@ -230,12 +266,12 @@ namespace MyJobLeads.Tests.Commands.Tasks
             // Act
             try
             {
-                new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
-                                                            .SetName("Name")
-                                                            .SetTaskDate(_testDate)
-                                                            .WithContactId(id)
-                                                            .RequestedByUserId(_user.Id)
-                                                            .Execute();
+                new CreateTaskCommand(_serviceFactory.Object).Execute(new CreateTaskCommandParams
+                {
+                    CompanyId = _company.Id,
+                    RequestedUserId = _user.Id,
+                    ContactId = id
+                });
                 Assert.Fail("Command did not throw an exception");
             }
 
@@ -254,9 +290,11 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
-                                                        .RequestedByUserId(_user.Id)
-                                                        .Execute();
+            new CreateTaskCommand(_serviceFactory.Object).Execute(new CreateTaskCommandParams
+            {
+                CompanyId = _company.Id,
+                RequestedUserId = _user.Id
+            });
 
             // Verify
             Task result = _unitOfWork.Tasks.Fetch().Single();
@@ -270,7 +308,11 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            Task task = new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id).RequestedByUserId(_user.Id).Execute();
+            Task task = new CreateTaskCommand(_serviceFactory.Object).Execute(new CreateTaskCommandParams
+            {
+                CompanyId = _company.Id,
+                RequestedUserId = _user.Id
+            });
 
             // Verify
             _searchProvider.Verify(x => x.Index(task), Times.Once());
@@ -283,7 +325,11 @@ namespace MyJobLeads.Tests.Commands.Tasks
             InitializeTestEntities();
 
             // Act
-            new CreateTaskCommand(_serviceFactory.Object).WithCompanyId(_company.Id).Execute();
+            new CreateTaskCommand(_serviceFactory.Object).Execute(new CreateTaskCommandParams
+            {
+                CompanyId = _company.Id,
+                RequestedUserId = _user.Id
+            });
 
             // Verify
             _updateMetricsCmd.Verify(x => x.Execute(It.Is<UpdateJobSearchMetricsCmdParams>(y => y.JobSearchId == _jobSearch.Id)));

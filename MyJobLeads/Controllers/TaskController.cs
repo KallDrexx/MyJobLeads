@@ -79,13 +79,15 @@ namespace MyJobLeads.Controllers
             // Determine if this is a new task or not
             if (model.Id == 0)
             {
-                task = _serviceFactory.GetService<CreateTaskCommand>().WithCompanyId(model.AssociatedCompanyId)
-                                                         .SetName(model.Name)
-                                                         .SetTaskDate(model.TaskDate)
-                                                         .SetCategory(model.Category)
-                                                         .WithContactId(selectedContactId)
-                                                         .RequestedByUserId(CurrentUserId)
-                                                         .Execute();
+                task = _serviceFactory.GetService<CreateTaskCommand>().Execute(new CreateTaskCommandParams
+                {
+                    CompanyId = model.AssociatedCompanyId,
+                    Name = model.Name,
+                    Category = model.Category,
+                    TaskDate = model.TaskDate,
+                    ContactId = selectedContactId,
+                    RequestedUserId = CurrentUserId
+                });
             }
             else
             {
