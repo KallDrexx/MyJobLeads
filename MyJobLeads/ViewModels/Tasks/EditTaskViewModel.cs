@@ -31,6 +31,7 @@ namespace MyJobLeads.ViewModels.Tasks
             Company = task.Company;
             Contact = task.Contact;
             Category = task.Category;
+            Notes = task.Notes;
 
             AssociatedContactId = task.ContactId ?? 0;
             AvailableCategoryList = new List<string>();
@@ -44,6 +45,7 @@ namespace MyJobLeads.ViewModels.Tasks
         public Contact Contact { get; set; }
         public string Category { get; set; }
         public string SubCategory { get; set; }
+        public string Notes { get; set; }
 
         public int AssociatedContactId { get; set; }
         public int AssociatedCompanyId { get; set; }

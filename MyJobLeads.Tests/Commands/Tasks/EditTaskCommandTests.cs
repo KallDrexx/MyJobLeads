@@ -49,6 +49,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
                 TaskDate = _startDate,
                 Category = "Starting Category",
                 Company = company,
+                Notes = "Starting Notes",
                 History = new List<TaskHistory>()
             };
 
@@ -367,6 +368,20 @@ namespace MyJobLeads.Tests.Commands.Tasks
 
             // Verify
             _updateMetricsCmd.Verify(x => x.Execute(It.Is<UpdateJobSearchMetricsCmdParams>(y => y.JobSearchId == _jobSearch.Id)));
+        }
+
+        [TestMethod]
+        public void Can_Change_Task_Notes()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams { Notes = "New Note" });
+
+            // Verify
+            Task result = _unitOfWork.Tasks.Fetch().Single();
+            Assert.AreEqual("New Note", result.Notes, "The task's notes were incorrect");
         }
     }
 }

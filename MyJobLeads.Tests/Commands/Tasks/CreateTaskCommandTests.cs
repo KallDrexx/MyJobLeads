@@ -334,5 +334,20 @@ namespace MyJobLeads.Tests.Commands.Tasks
             // Verify
             _updateMetricsCmd.Verify(x => x.Execute(It.Is<UpdateJobSearchMetricsCmdParams>(y => y.JobSearchId == _jobSearch.Id)));
         }
+
+        [TestMethod]
+        public void Can_Set_Task_Notes()
+        {
+            // Setup
+            InitializeTestEntities();
+            string note = "This is a test note";
+
+            // Act
+            new CreateTaskCommand(_serviceFactory.Object).Execute(new CreateTaskCommandParams { Notes = note });
+
+            // Verify
+            Task result = _unitOfWork.Tasks.Fetch().Single();
+            Assert.AreEqual(note, result.Notes, "The task's note was incorrect");
+        }
     }
 }

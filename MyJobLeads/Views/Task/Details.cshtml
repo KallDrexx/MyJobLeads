@@ -37,6 +37,14 @@
         { 
             @:Completed on: @Model.CompletionDate.Value.ToString() 
         }
+        <br />
+
+        <table>
+            <tr>
+                <td valign="top">Notes:  &nbsp;</td>
+                <td>@Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))</td>
+            </tr>
+        </table>
     </p>                                                       
 </p>
 

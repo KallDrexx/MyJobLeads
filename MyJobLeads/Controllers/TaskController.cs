@@ -86,7 +86,8 @@ namespace MyJobLeads.Controllers
                     Category = model.Category,
                     TaskDate = model.TaskDate,
                     ContactId = selectedContactId,
-                    RequestedUserId = CurrentUserId
+                    RequestedUserId = CurrentUserId,
+                    Notes = model.Notes
                 });
             }
             else
@@ -100,7 +101,8 @@ namespace MyJobLeads.Controllers
                     ContactId = selectedContactId,
                     Completed = model.Completed,
                     Category = model.Category,
-                    RequestingUserId = CurrentUserId
+                    RequestingUserId = CurrentUserId,
+                    Notes = model.Notes
                 });
             }
 

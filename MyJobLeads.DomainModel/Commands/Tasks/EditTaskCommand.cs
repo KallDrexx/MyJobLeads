@@ -22,6 +22,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         public string Name { get; set; }
         public bool? Completed { get; set; }
         public int RequestingUserId { get; set; }
+        public string Notes { get; set; }
 
         private DateTime? _taskDate;
         public DateTime? TaskDate
@@ -97,6 +98,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
             if (cmdParams.Name != null) { task.Name = cmdParams.Name; }
             if (cmdParams.Category != null) { task.Category = cmdParams.Category; }
             if (cmdParams.TaskDateSet) { task.TaskDate = cmdParams.TaskDate; }
+            if (cmdParams.Notes != null) { task.Notes = cmdParams.Notes; }
 
             if (cmdParams.Completed != null) 
             {
@@ -124,6 +126,8 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 CompletionDate = task.CompletionDate,
                 ContactId = task.ContactId,
                 Category = task.Category,
+                Notes = task.Notes,
+
                 AuthoringUser = user,
                 DateModified = DateTime.Now,
                 HistoryAction = MJLConstants.HistoryUpdate

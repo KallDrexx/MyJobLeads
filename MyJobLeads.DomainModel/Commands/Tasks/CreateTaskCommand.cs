@@ -23,6 +23,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
         public int RequestedUserId { get; set; }
         public int ContactId { get; set; }
         public string Category { get; set; }
+        public string Notes { get; set; }
     }
 
     /// <summary>
@@ -73,6 +74,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 TaskDate = cmdParams.TaskDate,
                 Contact = contact,
                 Category = cmdParams.Category,
+                Notes = cmdParams.Notes,
 
                 History = new List<TaskHistory>()
             };
@@ -83,6 +85,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 Name = cmdParams.Name,
                 TaskDate = cmdParams.TaskDate,
                 Category = cmdParams.Category,
+                Notes = cmdParams.Notes,
                 HistoryAction = MJLConstants.HistoryInsert,
                 DateModified = DateTime.Now,
                 AuthoringUser = user

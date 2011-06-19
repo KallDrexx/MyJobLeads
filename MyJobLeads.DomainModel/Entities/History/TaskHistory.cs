@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyJobLeads.DomainModel.Entities.History
 {
@@ -11,6 +12,9 @@ namespace MyJobLeads.DomainModel.Entities.History
         public DateTime? TaskDate { get; set; }
         public DateTime? CompletionDate { get; set; }
         public string Category { get; set; }
+
+        [StringLength(int.MaxValue)]
+        public string Notes { get; set; }
 
         public virtual int TaskId { get; set; }
         public virtual Task Task { get; set; }
