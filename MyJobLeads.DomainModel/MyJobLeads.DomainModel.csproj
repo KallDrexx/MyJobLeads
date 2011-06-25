@@ -105,6 +105,7 @@
     <Compile Include="Entities\EF\MyJobLeadsDbContext.cs" />
     <Compile Include="Entities\EF\MyJobLeadsDbInitializer.cs" />
     <Compile Include="Entities\Metrics\JobSearchMetrics.cs" />
+    <Compile Include="Entities\Organization.cs" />
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\UnitTestEntity.cs" />
     <Compile Include="Entities\User.cs" />
