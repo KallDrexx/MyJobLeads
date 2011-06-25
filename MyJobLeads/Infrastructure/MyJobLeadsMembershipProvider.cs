@@ -9,6 +9,9 @@ using MyJobLeads.DomainModel.Commands.Users;
 using MyJobLeads.DomainModel.Utilities;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.Providers;
+using MyJobLeads.Infrastructure.Providers;
+using MyJobLeads.App_Start;
 
 namespace MyJobLeads.Infrastructure
 {
@@ -18,13 +21,15 @@ namespace MyJobLeads.Infrastructure
 
         public MyJobLeadsMembershipProvider() : this(null) { }
 
-        public MyJobLeadsMembershipProvider(IUnitOfWork unitOfWork)
+        public MyJobLeadsMembershipProvider(IServiceFactory factory)
         {
-            // If no unit of work was specified, create a default one
-            if (unitOfWork == null)
-                _unitOfWork = new EFUnitOfWork();
+            // IF no factory was provided, we need to get one from the bootstrapper
+            if (factory == null)
+                _serviceFactory = new WindsorServiceFactory(Bootstrapper.WindsorContainer);
             else
-                _unitOfWork = unitOfWork;
+                _serviceFactory = factory;
+
+            _unitOfWork = _serviceFactory.GetService<IUnitOfWork>();
         }
 
         #endregion
@@ -58,9 +63,11 @@ namespace MyJobLeads.Infrastructure
 
             try
             {
-                user = new CreateUserCommand(_unitOfWork).SetPassword(password)
-                                                             .SetEmail(email)
-                                                             .Execute();
+                user = new CreateUserCommand(_serviceFactory).Execute(new CreateUserCommandParams
+                {
+                    Email = email,
+                    PlainTextPassword = password
+                });
             }
             catch (MJLDuplicateEmailException)
             {
@@ -121,6 +128,7 @@ namespace MyJobLeads.Infrastructure
         #region Member Variables
 
         protected IUnitOfWork _unitOfWork;
+        protected IServiceFactory _serviceFactory;
 
         #endregion
 

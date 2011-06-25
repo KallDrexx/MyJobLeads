@@ -19,7 +19,7 @@ namespace MyJobLeads.App_Start
 {
     public static class Bootstrapper
     {
-        private static readonly IWindsorContainer container = new WindsorContainer();
+        private static IWindsorContainer container = new WindsorContainer();
         private const string UpdateDbAppSettingName = "UpdateDatabaseOnModelChange";
 
         public static void Wire()
@@ -38,6 +38,11 @@ namespace MyJobLeads.App_Start
         public static void DeWire()
         {
             container.Dispose();
+        }
+
+        public static IWindsorContainer WindsorContainer
+        {
+            get { return container; }
         }
     }
 }

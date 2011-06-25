@@ -7,21 +7,33 @@ using MyJobLeads.DomainModel.Commands.Users;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Utilities;
 using MyJobLeads.DomainModel.Exceptions;
+using Moq;
+using MyJobLeads.DomainModel.Queries.Users;
 
 namespace MyJobLeads.Tests.Commands.Users
 {
     [TestClass]
     public class CreateUserCommandTests : EFTestBase
     {
+        [TestInitialize]
+        public void Initialize()
+        {
+            Mock<UserByEmailQuery> userQuery = new Mock<UserByEmailQuery>(_unitOfWork);
+            userQuery.Setup(x => x.Execute()).Returns((User)null);
+            _serviceFactory.Setup(x => x.GetService<UserByEmailQuery>()).Returns(userQuery.Object);
+        }
+
         [TestMethod]
         public void Can_Create_New_User()
         {
             // Setup
 
             // Act
-            new CreateUserCommand(_unitOfWork).SetEmail("test@email.com")
-                                              .SetPassword("password")
-                                              .Execute();
+            new CreateUserCommand(_serviceFactory.Object).Execute(new CreateUserCommandParams
+            {
+                Email = "test@email.com",
+                PlainTextPassword = "password"
+            });
 
             // Verify
             User user = _unitOfWork.Users.Fetch().SingleOrDefault();
@@ -36,9 +48,11 @@ namespace MyJobLeads.Tests.Commands.Users
             // Setup
 
             // Act
-            User user = new CreateUserCommand(_unitOfWork).SetEmail("test@email.com")
-                                                          .SetPassword("password")
-                                                          .Execute();
+            User user = new CreateUserCommand(_serviceFactory.Object).Execute(new CreateUserCommandParams
+            {
+                Email = "test@email.com",
+                PlainTextPassword = "password"
+            });
 
             // Verify
             Assert.IsNotNull(user, "Execute returned a null user");
@@ -52,9 +66,11 @@ namespace MyJobLeads.Tests.Commands.Users
             // Setup
 
             // Act
-            new CreateUserCommand(_unitOfWork).SetEmail(" TEST@email.com ")
-                                              .SetPassword("password")
-                                              .Execute();
+            new CreateUserCommand(_serviceFactory.Object).Execute(new CreateUserCommandParams
+            {
+                Email = " TEST@email.com ",
+                PlainTextPassword = "password"
+            });
 
             // Verify
             User user = _unitOfWork.Users.Fetch().SingleOrDefault();
@@ -70,12 +86,19 @@ namespace MyJobLeads.Tests.Commands.Users
             _unitOfWork.Users.Add(user);
             _unitOfWork.Commit();
 
+            Mock<UserByEmailQuery> userQuery = new Mock<UserByEmailQuery>(_unitOfWork);
+            userQuery.Setup(x => x.Execute()).Returns(user);
+            _serviceFactory.Setup(x => x.GetService<UserByEmailQuery>()).Returns(userQuery.Object);
+
             // Act
             try
             {
-                new CreateUserCommand(_unitOfWork).SetPassword("pass")
-                                                  .SetEmail("test@test.com")
-                                                  .Execute();
+                new CreateUserCommand(_serviceFactory.Object).Execute(new CreateUserCommandParams
+                {
+                    Email = "test@test.com",
+                    PlainTextPassword = "pass"
+                });
+
                 Assert.Fail("Command did not throw an exception");
             }
 
@@ -90,10 +113,14 @@ namespace MyJobLeads.Tests.Commands.Users
         public void Execute_Initializes_JobSearch_List()
         {
             // Act
-            User user = new CreateUserCommand(_unitOfWork).SetEmail("Email@email.com").Execute();
+            User result = new CreateUserCommand(_serviceFactory.Object).Execute(new CreateUserCommandParams
+            {
+                Email = "test@email.com",
+                PlainTextPassword = "password"
+            });
 
             // Verify
-            Assert.IsNotNull(user, "User's job search list was not initialized");
+            Assert.IsNotNull(result.JobSearches, "User's job search list was not initialized");
         }
     }
 }
