@@ -109,6 +109,7 @@
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\UnitTestEntity.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Exceptions\InvalidOrganizationRegistrationTokenException.cs" />
     <Compile Include="Exceptions\MJLDuplicateEmailException.cs" />
     <Compile Include="Exceptions\MJLEntityNotFoundException.cs" />
     <Compile Include="Exceptions\MJLException.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Queries\Contacts\IsUserAuthorizedForContactQuery.cs" />
     <Compile Include="Queries\JobSearches\IsUserAuthorizedForJobSearchQuery.cs" />
     <Compile Include="Queries\MilestoneConfigs\StartingMilestoneQuery.cs" />
+    <Compile Include="Queries\Organizations\OrganizationByRegistrationTokenQuery.cs" />
     <Compile Include="Queries\Search\EntitySearchQuery.cs" />
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQuery.cs" />
     <Compile Include="Queries\Tasks\IsUserAuthorizedForTaskQuery.cs" />

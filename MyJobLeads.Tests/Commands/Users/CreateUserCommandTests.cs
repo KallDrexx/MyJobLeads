@@ -9,6 +9,7 @@ using MyJobLeads.DomainModel.Utilities;
 using MyJobLeads.DomainModel.Exceptions;
 using Moq;
 using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.Queries.Organizations;
 
 namespace MyJobLeads.Tests.Commands.Users
 {
@@ -121,6 +122,86 @@ namespace MyJobLeads.Tests.Commands.Users
 
             // Verify
             Assert.IsNotNull(result.JobSearches, "User's job search list was not initialized");
+        }
+
+        [TestMethod]
+        public void User_Not_Associated_With_Organization_When_No_Registration_Token_Provided()
+        {
+            // Setup
+            Organization org = new Organization { RegistrationToken = Guid.NewGuid() };
+            _unitOfWork.Organizations.Add(org);
+            _unitOfWork.Commit();
+
+            // Act
+            new CreateUserCommand(_serviceFactory.Object).Execute(new CreateUserCommandParams
+            {
+                Email = "test@email.com",
+                PlainTextPassword = "password"
+            });
+
+            // Verify
+            User user = _unitOfWork.Users.Fetch().SingleOrDefault();
+            Assert.IsNull(user.Organization, "User was incorrectly associated with an organization");
+        }
+
+        [TestMethod]
+        public void User_Can_Be_Associated_With_An_Organization()
+        {
+            // Setup 
+            Organization org = new Organization { RegistrationToken = Guid.NewGuid() };
+            _unitOfWork.Organizations.Add(org);
+            _unitOfWork.Commit();
+
+            Mock<OrganizationByRegistrationTokenQuery> query = new Mock<OrganizationByRegistrationTokenQuery>(_serviceFactory.Object);
+            query.Setup(x => x.Execute(It.Is<OrganizationByRegistrationTokenQueryParams>(y => y.RegistrationToken == org.RegistrationToken)))
+                 .Returns(org);
+            _serviceFactory.Setup(x => x.GetService<OrganizationByRegistrationTokenQuery>()).Returns(query.Object);
+
+            // Act
+            new CreateUserCommand(_serviceFactory.Object).Execute(new CreateUserCommandParams
+            {
+                Email = "test",
+                PlainTextPassword = "pass",
+                RegistrationToken = org.RegistrationToken
+            });
+
+            // Verify
+            User user = _unitOfWork.Users.Fetch().Single();
+            Organization result = user.Organization;
+            Assert.AreEqual(org, result, "User was associated with an incorrect organization");
+        }
+
+        [TestMethod]
+        public void Command_Throws_InvalidOrganizationRegistrationTokenException_When_Registration_Token_Isnt_Found()
+        {
+            // Setup 
+            Guid badToken = Guid.NewGuid();
+            Organization org = new Organization { RegistrationToken = Guid.NewGuid() };
+            _unitOfWork.Organizations.Add(org);
+            _unitOfWork.Commit();
+
+            Mock<OrganizationByRegistrationTokenQuery> query = new Mock<OrganizationByRegistrationTokenQuery>(_serviceFactory.Object);
+            query.Setup(x => x.Execute(It.Is<OrganizationByRegistrationTokenQueryParams>(y => y.RegistrationToken == org.RegistrationToken)))
+                 .Returns(org);
+            _serviceFactory.Setup(x => x.GetService<OrganizationByRegistrationTokenQuery>()).Returns(query.Object);
+
+            // Act
+            try
+            {
+                new CreateUserCommand(_serviceFactory.Object).Execute(new CreateUserCommandParams
+                {
+                    Email = "test",
+                    PlainTextPassword = "pass",
+                    RegistrationToken = badToken
+                });
+                Assert.Fail("Command did not throw an exception");
+            }
+
+            // Verify
+            catch (InvalidOrganizationRegistrationTokenException ex)
+            {
+                Assert.AreEqual(badToken, ex.RegistrationToken, "Exception's registration token was incorrect");
+            }
         }
     }
 }
