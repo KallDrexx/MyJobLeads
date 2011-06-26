@@ -121,7 +121,7 @@ namespace MyJobLeads.Controllers
                 OrganizationName = org.Name
             };
 
-            return View();
+            return View(model);
         }
 
         [HttpPost]
