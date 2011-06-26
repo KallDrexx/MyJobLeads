@@ -11,7 +11,7 @@ namespace MyJobLeads.ViewModels.Accounts
         int MinPasswordLength { get; }
 
         bool ValidateUser(string userName, string password);
-        MembershipCreateStatus CreateUser(string userName, string password, string email);
+        MembershipCreateStatus CreateUser(string email, string password, Guid? orgRegistrationToken);
         bool ChangePassword(string userName, string oldPassword, string newPassword);
         MembershipUser GetUser();
     }

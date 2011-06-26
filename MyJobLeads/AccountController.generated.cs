@@ -23,9 +23,6 @@ using T4MVC;
 namespace MyJobLeads.Controllers {
     public partial class AccountController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public AccountController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected AccountController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -34,6 +31,11 @@ namespace MyJobLeads.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult RegisterWithOrganization() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.RegisterWithOrganization);
+        }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult ResetPasswordResult() {
@@ -55,6 +57,7 @@ namespace MyJobLeads.Controllers {
             public readonly string LogOn = "LogOn";
             public readonly string LogOff = "LogOff";
             public readonly string Register = "Register";
+            public readonly string RegisterWithOrganization = "RegisterWithOrganization";
             public readonly string ChangePassword = "ChangePassword";
             public readonly string ChangePasswordSuccess = "ChangePasswordSuccess";
             public readonly string ResetPassword = "ResetPassword";
@@ -71,6 +74,7 @@ namespace MyJobLeads.Controllers {
             public readonly string ChangePasswordSuccess = "~/Views/Account/ChangePasswordSuccess.cshtml";
             public readonly string LogOn = "~/Views/Account/LogOn.cshtml";
             public readonly string Register = "~/Views/Account/Register.cshtml";
+            public readonly string RegisterWithOrganization = "~/Views/Account/RegisterWithOrganization.cshtml";
             public readonly string ResetPassword = "~/Views/Account/ResetPassword.cshtml";
             public readonly string ResetPasswordResult = "~/Views/Account/ResetPasswordResult.cshtml";
         }
@@ -104,6 +108,18 @@ namespace MyJobLeads.Controllers {
 
         public override System.Web.Mvc.ActionResult Register(MyJobLeads.ViewModels.RegisterModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Register);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult RegisterWithOrganization(System.Guid? registrationToken) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.RegisterWithOrganization);
+            callInfo.RouteValueDictionary.Add("registrationToken", registrationToken);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult RegisterWithOrganization(MyJobLeads.ViewModels.Accounts.OrganizationRegistrationViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.RegisterWithOrganization);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }

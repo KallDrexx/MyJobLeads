@@ -16,7 +16,7 @@ namespace MyJobLeads.DomainModel.Commands.Users
     {
         public string Email { get; set; }
         public string PlainTextPassword { get; set; }
-        public Guid RegistrationToken { get; set; }
+        public Guid? RegistrationToken { get; set; }
     }
 
     /// <summary>
@@ -50,12 +50,12 @@ namespace MyJobLeads.DomainModel.Commands.Users
 
             // If a registration token was specified, retrieve the organization for it
             Organization org = null;
-            if (cmdParams.RegistrationToken != new Guid())
+            if (cmdParams.RegistrationToken != null)
             {
                 org = _serviceFactory.GetService<OrganizationByRegistrationTokenQuery>()
-                                    .Execute(new OrganizationByRegistrationTokenQueryParams { RegistrationToken = cmdParams.RegistrationToken });
+                                    .Execute(new OrganizationByRegistrationTokenQueryParams { RegistrationToken = (Guid)cmdParams.RegistrationToken });
                 if (org == null)
-                    throw new InvalidOrganizationRegistrationTokenException(cmdParams.RegistrationToken);
+                    throw new InvalidOrganizationRegistrationTokenException((Guid)cmdParams.RegistrationToken);
             }
 
             // Create the user
