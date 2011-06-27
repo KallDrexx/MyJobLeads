@@ -121,6 +121,10 @@ namespace MyJobLeads.Controllers
                 OrganizationName = org.Name
             };
 
+            foreach (var orgDomain in org.EmailDomains)
+                if (orgDomain.IsActive)
+                    model.RestrictedEmailDomains.Add(orgDomain.Domain);
+
             return View(model);
         }
 
@@ -129,8 +133,15 @@ namespace MyJobLeads.Controllers
         {
             if (ModelState.IsValid)
             {
+                MembershipCreateStatus createStatus;
+
                 // Attempt to register the user
-                MembershipCreateStatus createStatus = MembershipService.CreateUser(model.Email, model.Password, model.RegistrationToken);
+                try { createStatus = MembershipService.CreateUser(model.Email, model.Password, model.RegistrationToken); }
+                catch (InvalidEmailDomainForOrganizationException)
+                {
+                    ModelState.AddModelError("", "The entered email address is not allowed for this organization");
+                    createStatus = MembershipCreateStatus.ProviderError;
+                }
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
@@ -144,6 +155,15 @@ namespace MyJobLeads.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+
+            // Retrieve the organization based on the token
+            var org = _serviceFactory.GetService<OrganizationByRegistrationTokenQuery>()
+                                     .Execute(new OrganizationByRegistrationTokenQueryParams { RegistrationToken = model.RegistrationToken });
+
+            foreach (var orgDomain in org.EmailDomains)
+                if (orgDomain.IsActive)
+                    model.RestrictedEmailDomains.Add(orgDomain.Domain);
+
             model.MinPasswordLength = Membership.MinRequiredPasswordLength;
             return View(model);
         }
