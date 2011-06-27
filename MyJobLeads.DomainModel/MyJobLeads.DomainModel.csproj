@@ -106,9 +106,11 @@
     <Compile Include="Entities\EF\MyJobLeadsDbInitializer.cs" />
     <Compile Include="Entities\Metrics\JobSearchMetrics.cs" />
     <Compile Include="Entities\Organization.cs" />
+    <Compile Include="Entities\Configuration\OrganizationEmailDomain.cs" />
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\UnitTestEntity.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Exceptions\InvalidEmailDomainForOrganizationException.cs" />
     <Compile Include="Exceptions\InvalidOrganizationRegistrationTokenException.cs" />
     <Compile Include="Exceptions\MJLDuplicateEmailException.cs" />
     <Compile Include="Exceptions\MJLEntityNotFoundException.cs" />

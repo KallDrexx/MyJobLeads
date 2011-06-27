@@ -10,12 +10,21 @@ using MyJobLeads.DomainModel.Exceptions;
 using Moq;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Queries.Organizations;
+using MyJobLeads.DomainModel.Entities.Configuration;
 
 namespace MyJobLeads.Tests.Commands.Users
 {
     [TestClass]
     public class CreateUserCommandTests : EFTestBase
     {
+        private void SetupOrgByTokenMock(Organization org)
+        {
+            Mock<OrganizationByRegistrationTokenQuery> query = new Mock<OrganizationByRegistrationTokenQuery>(_serviceFactory.Object);
+            query.Setup(x => x.Execute(It.Is<OrganizationByRegistrationTokenQueryParams>(y => y.RegistrationToken == org.RegistrationToken)))
+                 .Returns(org);
+            _serviceFactory.Setup(x => x.GetService<OrganizationByRegistrationTokenQuery>()).Returns(query.Object);
+        }
+
         [TestInitialize]
         public void Initialize()
         {
@@ -152,10 +161,7 @@ namespace MyJobLeads.Tests.Commands.Users
             _unitOfWork.Organizations.Add(org);
             _unitOfWork.Commit();
 
-            Mock<OrganizationByRegistrationTokenQuery> query = new Mock<OrganizationByRegistrationTokenQuery>(_serviceFactory.Object);
-            query.Setup(x => x.Execute(It.Is<OrganizationByRegistrationTokenQueryParams>(y => y.RegistrationToken == org.RegistrationToken)))
-                 .Returns(org);
-            _serviceFactory.Setup(x => x.GetService<OrganizationByRegistrationTokenQuery>()).Returns(query.Object);
+            SetupOrgByTokenMock(org);
 
             // Act
             new CreateUserCommand(_serviceFactory.Object).Execute(new CreateUserCommandParams
@@ -201,6 +207,111 @@ namespace MyJobLeads.Tests.Commands.Users
             catch (InvalidOrganizationRegistrationTokenException ex)
             {
                 Assert.AreEqual(badToken, ex.RegistrationToken, "Exception's registration token was incorrect");
+            }
+        }
+
+        [TestMethod]
+        public void Command_Throws_InvalidEmailDomainForOrganizationException_When_Email_Not_Allowed_For_Org()
+        {
+            // Setup
+            Organization org = new Organization
+            {
+                IsEmailDomainRestricted = true,
+                Name = "Test",
+                RegistrationToken = Guid.NewGuid(),
+                EmailDomains = new List<OrganizationEmailDomain>()
+            };
+            org.EmailDomains.Add(new OrganizationEmailDomain { Domain = "test.com", IsActive = true, });
+
+            _unitOfWork.Organizations.Add(org);
+            _unitOfWork.Commit();
+
+            SetupOrgByTokenMock(org);
+
+            // Act
+            try
+            {
+                new CreateUserCommand(_serviceFactory.Object).Execute(new CreateUserCommandParams
+                {
+                    Email = "test@testa.com",
+                    PlainTextPassword = "pass",
+                    RegistrationToken = org.RegistrationToken
+                });
+                Assert.Fail("No exception was thrown");
+            }
+
+            // Verify
+            catch (InvalidEmailDomainForOrganizationException ex)
+            {
+                Assert.AreEqual("testa.com", ex.EmailDomain, "Exception's EmailDomain value was incorrect");
+            }
+        }
+
+        [TestMethod]
+        public void Can_Create_User_For_Organization_When_Email_Domain_Is_Acceptable()
+        {
+            // Setup
+            Organization org = new Organization
+            {
+                IsEmailDomainRestricted = true,
+                Name = "Test",
+                RegistrationToken = Guid.NewGuid(),
+                EmailDomains = new List<OrganizationEmailDomain>()
+            };
+            org.EmailDomains.Add(new OrganizationEmailDomain { Domain = "test.com", IsActive = true, });
+
+            _unitOfWork.Organizations.Add(org);
+            _unitOfWork.Commit();
+
+            SetupOrgByTokenMock(org);
+
+            // Act
+            new CreateUserCommand(_serviceFactory.Object).Execute(new CreateUserCommandParams
+            {
+                Email = "test@test.com",
+                PlainTextPassword = "pass",
+                RegistrationToken = org.RegistrationToken
+            });
+
+            // Verify
+            User user = _unitOfWork.Users.Fetch().Single();
+            Assert.AreEqual(org, user.Organization, "User was associated with an incorrect organization");
+        }
+
+        [TestMethod]
+        public void Command_Throws_InvalidEmailDomainForOrganizationException_When_Email_Domain_Not_Active_For_Org()
+        {
+            // Setup
+            Organization org = new Organization
+            {
+                IsEmailDomainRestricted = true,
+                Name = "Test",
+                RegistrationToken = Guid.NewGuid(),
+                EmailDomains = new List<OrganizationEmailDomain>()
+            };
+            org.EmailDomains.Add(new OrganizationEmailDomain { Domain = "test.com", IsActive = false, });
+
+            _unitOfWork.Organizations.Add(org);
+            _unitOfWork.Commit();
+
+            SetupOrgByTokenMock(org);
+
+            // Act
+            try
+            {
+                new CreateUserCommand(_serviceFactory.Object).Execute(new CreateUserCommandParams
+                {
+                    Email = "test@test.com",
+                    PlainTextPassword = "pass",
+                    RegistrationToken = org.RegistrationToken
+                });
+                Assert.Fail("No exception was thrown");
+            }
+
+            // Verify
+            catch (InvalidEmailDomainForOrganizationException ex)
+            {
+                Assert.AreEqual("test.com", ex.EmailDomain, "Exception's EmailDomain value was incorrect");
             }
         }
     }

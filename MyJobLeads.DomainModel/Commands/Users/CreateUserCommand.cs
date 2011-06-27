@@ -56,6 +56,21 @@ namespace MyJobLeads.DomainModel.Commands.Users
                                     .Execute(new OrganizationByRegistrationTokenQueryParams { RegistrationToken = (Guid)cmdParams.RegistrationToken });
                 if (org == null)
                     throw new InvalidOrganizationRegistrationTokenException((Guid)cmdParams.RegistrationToken);
+
+                // Check if this organization is restricted to specific email domains
+                if (org.IsEmailDomainRestricted)
+                {
+                    int atIndex = cmdParams.Email.LastIndexOf('@');
+                    string domain = cmdParams.Email.Substring(atIndex + 1, cmdParams.Email.Length - atIndex - 1).ToLower().Trim();
+                    bool domainFound = false;
+
+                    foreach (var orgDomain in org.EmailDomains)
+                        if (orgDomain.IsActive && orgDomain.Domain.ToLower().Trim() == domain)
+                            domainFound = true;
+
+                    if (!domainFound)
+                        throw new InvalidEmailDomainForOrganizationException(domain);
+                }
             }
 
             // Create the user
