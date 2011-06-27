@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.ViewModels.Accounts;
 using System.Web.Routing;
+using MyJobLeads.DomainModel.Providers;
 
 namespace MyJobLeads
 {

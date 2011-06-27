@@ -15,6 +15,13 @@ using MyJobLeads.App_Start;
 
 namespace MyJobLeads.Infrastructure
 {
+    public struct CreateUserParams
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public Guid? OrganizationRegistrationToken { get; set; }
+    }
+
     public class MyJobLeadsMembershipProvider : MembershipProvider
     {
         #region Constructors
@@ -56,8 +63,7 @@ namespace MyJobLeads.Infrastructure
             return true;
         }
 
-        public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer,
-                                                    bool isApproved, object providerUserKey, out MembershipCreateStatus status)
+        public MembershipUser CreateUser(CreateUserParams userParams, out MembershipCreateStatus status)
         {
             User user;
 
@@ -65,8 +71,9 @@ namespace MyJobLeads.Infrastructure
             {
                 user = new CreateUserCommand(_serviceFactory).Execute(new CreateUserCommandParams
                 {
-                    Email = email,
-                    PlainTextPassword = password
+                    Email = userParams.Email,
+                    PlainTextPassword = userParams.Password,
+                    RegistrationToken = userParams.OrganizationRegistrationToken
                 });
             }
             catch (MJLDuplicateEmailException)
@@ -76,7 +83,7 @@ namespace MyJobLeads.Infrastructure
             }
 
             status = MembershipCreateStatus.Success;
-            return new MyJobLeadsMembershipUser(user);   
+            return new MyJobLeadsMembershipUser(user); 
         }
 
         public override int MinRequiredPasswordLength
@@ -147,6 +154,12 @@ namespace MyJobLeads.Infrastructure
         }
 
         public override bool ChangePasswordQuestionAndAnswer(string username, string password, string newPasswordQuestion, string newPasswordAnswer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer,
+                                                    bool isApproved, object providerUserKey, out MembershipCreateStatus status)
         {
             throw new NotImplementedException();
         }

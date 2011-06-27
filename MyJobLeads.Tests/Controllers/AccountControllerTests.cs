@@ -338,7 +338,7 @@ namespace MyJobLeads.Tests.Controllers
         private static AccountController GetAccountController()
         {
             RequestContext requestContext = new RequestContext(new MockHttpContext(), new RouteData());
-            AccountController controller = new AccountController()
+            AccountController controller = new AccountController(null)
             {
                 FormsService = new MockFormsAuthenticationService(),
                 MembershipService = new MockMembershipService(),
@@ -384,9 +384,9 @@ namespace MyJobLeads.Tests.Controllers
                 return (userName == "goodEmail" && password == "goodPassword");
             }
 
-            public MembershipCreateStatus CreateUser(string userName, string password, string email)
+            public MembershipCreateStatus CreateUser(string email, string password, Guid? orgRegistrationtToken)
             {
-                if (userName == "duplicateUser")
+                if (email == "duplicateUser")
                 {
                     return MembershipCreateStatus.DuplicateUserName;
                 }

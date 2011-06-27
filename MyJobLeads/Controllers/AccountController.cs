@@ -11,13 +11,21 @@ using MyJobLeads.ViewModels;
 using MyJobLeads.ViewModels.Accounts;
 using MyJobLeads.DomainModel.Commands.Users;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Providers;
+using MyJobLeads.DomainModel.Queries.Organizations;
 
 namespace MyJobLeads.Controllers
 {
-    public partial class AccountController : Controller
+    public partial class AccountController : MyJobLeadsBaseController
     {
         public IFormsAuthenticationService FormsService { get; set; }
         public IMembershipService MembershipService { get; set; }
+
+        protected IServiceFactory _serviceFactory;
+        public AccountController(IServiceFactory factory)
+        {
+            _serviceFactory = factory;
+        }
 
         protected override void Initialize(RequestContext requestContext)
         {
@@ -25,10 +33,6 @@ namespace MyJobLeads.Controllers
             if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
             base.Initialize(requestContext);
         }
-
-        // **************************************
-        // URL: /Account/LogOn
-        // **************************************
 
         public virtual ActionResult LogOn()
         {
@@ -62,20 +66,12 @@ namespace MyJobLeads.Controllers
             return View(model);
         }
 
-        // **************************************
-        // URL: /Account/LogOff
-        // **************************************
-
         public virtual ActionResult LogOff()
         {
             FormsService.SignOut();
 
             return RedirectToAction("Index", "Home");
         }
-
-        // **************************************
-        // URL: /Account/Register
-        // **************************************
 
         public virtual ActionResult Register()
         {
@@ -89,7 +85,7 @@ namespace MyJobLeads.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                MembershipCreateStatus createStatus = MembershipService.CreateUser(model.Email, model.Password, model.Email);
+                MembershipCreateStatus createStatus = MembershipService.CreateUser(model.Email, model.Password, null);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
@@ -107,9 +103,72 @@ namespace MyJobLeads.Controllers
             return View(model);
         }
 
-        // **************************************
-        // URL: /Account/ChangePassword
-        // **************************************
+        public virtual ActionResult RegisterWithOrganization(Guid? registrationToken)
+        {
+            if (registrationToken == null)
+                return RedirectToAction(MVC.Account.Register());
+
+            // Retrieve the organization based on the token
+            var org = _serviceFactory.GetService<OrganizationByRegistrationTokenQuery>()
+                                     .Execute(new OrganizationByRegistrationTokenQueryParams { RegistrationToken = (Guid)registrationToken });
+            if (org == null)
+                return RedirectToAction(MVC.Account.Register());
+
+            var model = new OrganizationRegistrationViewModel
+            {
+                RegistrationToken = (Guid)registrationToken,
+                MinPasswordLength = Membership.MinRequiredPasswordLength,
+                OrganizationName = org.Name
+            };
+
+            foreach (var orgDomain in org.EmailDomains)
+                if (orgDomain.IsActive)
+                    model.RestrictedEmailDomains.Add(orgDomain.Domain);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public virtual ActionResult RegisterWithOrganization(OrganizationRegistrationViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                MembershipCreateStatus createStatus;
+
+                // Attempt to register the user
+                try 
+                { 
+                    createStatus = MembershipService.CreateUser(model.Email, model.Password, model.RegistrationToken);
+                    
+                    if (createStatus == MembershipCreateStatus.Success)
+                    {
+                        FormsService.SignIn(model.Email, false /* createPersistentCookie */);
+                        return RedirectToAction(MVC.Home.Index());
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", AccountValidation.ErrorCodeToString(createStatus));
+                    }
+                }
+                catch (InvalidEmailDomainForOrganizationException)
+                {
+                    ModelState.AddModelError("", "The entered email address is not allowed for this organization");
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+
+            // Retrieve the organization based on the token
+            var org = _serviceFactory.GetService<OrganizationByRegistrationTokenQuery>()
+                                     .Execute(new OrganizationByRegistrationTokenQueryParams { RegistrationToken = model.RegistrationToken });
+
+            foreach (var orgDomain in org.EmailDomains)
+                if (orgDomain.IsActive)
+                    model.RestrictedEmailDomains.Add(orgDomain.Domain);
+
+            model.MinPasswordLength = Membership.MinRequiredPasswordLength;
+            return View(model);
+        }
 
         [Authorize]
         public virtual ActionResult ChangePassword()
@@ -138,10 +197,6 @@ namespace MyJobLeads.Controllers
             ViewBag.PasswordLength = MembershipService.MinPasswordLength;
             return View(model);
         }
-
-        // **************************************
-        // URL: /Account/ChangePasswordSuccess
-        // **************************************
 
         public virtual ActionResult ChangePasswordSuccess()
         {

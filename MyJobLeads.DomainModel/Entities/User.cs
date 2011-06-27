@@ -12,6 +12,9 @@ namespace MyJobLeads.DomainModel.Entities
         public string Password { get; set; }
         public int? LastVisitedJobSearchId { get; set; }
 
+        public virtual int? OrganizationId { get; set; }
+        public virtual Organization Organization { get; set; }
+
         public virtual ICollection<JobSearch> JobSearches { get; set; }
     }
 }

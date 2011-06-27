@@ -105,9 +105,13 @@
     <Compile Include="Entities\EF\MyJobLeadsDbContext.cs" />
     <Compile Include="Entities\EF\MyJobLeadsDbInitializer.cs" />
     <Compile Include="Entities\Metrics\JobSearchMetrics.cs" />
+    <Compile Include="Entities\Organization.cs" />
+    <Compile Include="Entities\Configuration\OrganizationEmailDomain.cs" />
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\UnitTestEntity.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Exceptions\InvalidEmailDomainForOrganizationException.cs" />
+    <Compile Include="Exceptions\InvalidOrganizationRegistrationTokenException.cs" />
     <Compile Include="Exceptions\MJLDuplicateEmailException.cs" />
     <Compile Include="Exceptions\MJLEntityNotFoundException.cs" />
     <Compile Include="Exceptions\MJLException.cs" />
@@ -125,6 +129,7 @@
     <Compile Include="Queries\Contacts\IsUserAuthorizedForContactQuery.cs" />
     <Compile Include="Queries\JobSearches\IsUserAuthorizedForJobSearchQuery.cs" />
     <Compile Include="Queries\MilestoneConfigs\StartingMilestoneQuery.cs" />
+    <Compile Include="Queries\Organizations\OrganizationByRegistrationTokenQuery.cs" />
     <Compile Include="Queries\Search\EntitySearchQuery.cs" />
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQuery.cs" />
     <Compile Include="Queries\Tasks\IsUserAuthorizedForTaskQuery.cs" />

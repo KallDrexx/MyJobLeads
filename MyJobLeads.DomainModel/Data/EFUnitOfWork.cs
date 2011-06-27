@@ -119,6 +119,17 @@ namespace MyJobLeads.DomainModel.Data
             }
         }
 
+        private IRepository<Organization> _organizations;
+        public IRepository<Organization> Organizations
+        {
+            get
+            {
+                if (_organizations == null)
+                    _organizations = new EFRepository<Organization>(_context);
+                return _organizations;
+            }
+        }
+
         private IRepository<Task> _tasks;
         public IRepository<Task> Tasks
         {
