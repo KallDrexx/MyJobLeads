@@ -136,21 +136,23 @@ namespace MyJobLeads.Controllers
                 MembershipCreateStatus createStatus;
 
                 // Attempt to register the user
-                try { createStatus = MembershipService.CreateUser(model.Email, model.Password, model.RegistrationToken); }
+                try 
+                { 
+                    createStatus = MembershipService.CreateUser(model.Email, model.Password, model.RegistrationToken);
+                    
+                    if (createStatus == MembershipCreateStatus.Success)
+                    {
+                        FormsService.SignIn(model.Email, false /* createPersistentCookie */);
+                        return RedirectToAction(MVC.Home.Index());
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", AccountValidation.ErrorCodeToString(createStatus));
+                    }
+                }
                 catch (InvalidEmailDomainForOrganizationException)
                 {
                     ModelState.AddModelError("", "The entered email address is not allowed for this organization");
-                    createStatus = MembershipCreateStatus.ProviderError;
-                }
-
-                if (createStatus == MembershipCreateStatus.Success)
-                {
-                    FormsService.SignIn(model.Email, false /* createPersistentCookie */);
-                    return RedirectToAction(MVC.Home.Index());
-                }
-                else
-                {
-                    ModelState.AddModelError("", AccountValidation.ErrorCodeToString(createStatus));
                 }
             }
 
