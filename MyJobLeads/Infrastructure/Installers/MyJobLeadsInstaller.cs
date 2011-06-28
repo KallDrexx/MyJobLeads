@@ -13,6 +13,9 @@ using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.Infrastructure.Providers;
 using FluentValidation;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using MyJobLeads.DomainModel;
 
 namespace MyJobLeads.Infrastructure.Installers
 {
@@ -36,6 +39,17 @@ namespace MyJobLeads.Infrastructure.Installers
             //{
             //    context.Set<UnitTestEntity>().Any();
             //}
+
+            // Register all command and query classes
+            var classes = Assembly.GetAssembly(typeof(MJLConstants))
+                              .GetTypes()
+                              .Where(x => x.Namespace.StartsWith("MyJobLeads.DomainModel.Commands") || x.Namespace.StartsWith("MyJobLeads.DomainModel.Queries"))
+                              .Where(x => x.IsClass && !x.IsDefined(typeof(CompilerGeneratedAttribute), false))
+                              .Distinct()
+                              .ToList();
+
+            foreach (var cl in classes)
+                container.Register(Component.For(cl).ImplementedBy(cl).LifeStyle.PerWebRequest);
         }
     }
 }

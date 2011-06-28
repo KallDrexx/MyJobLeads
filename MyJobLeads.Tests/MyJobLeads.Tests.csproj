@@ -170,6 +170,7 @@
     <Compile Include="Utilities\EmailUtilsTest.cs" />
     <Compile Include="Utilities\PasswordUtilsTests.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgressTests.cs" />
+    <Compile Include="WebInfrastructure\WindsorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

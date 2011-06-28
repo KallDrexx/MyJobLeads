@@ -247,11 +247,6 @@
     <Compile Include="Infrastructure\HtmlHelpers\NumericDisplayHelpers.cs" />
     <Compile Include="Infrastructure\Providers\AppDataDirectoryProvider.cs" />
     <Compile Include="Infrastructure\Attributes\MJLAuthorizeAttribute.cs" />
-    <Compile Include="Infrastructure\Installers\CommandQueryInstaller.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CommandQueryInstaller.tt</DependentUpon>
-    </Compile>
     <Compile Include="Infrastructure\ModelBinders\EmptyStringModelBaseBinder.cs" />
     <Compile Include="Infrastructure\MyJobLeadsMembershipProvider.cs" />
     <Compile Include="Infrastructure\MyJobLeadsMembershipUser.cs" />
@@ -711,10 +706,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Infrastructure\Installers\CommandQueryInstaller.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CommandQueryInstaller.generated.cs</LastGenOutput>
-    </Content>
     <Content Include="T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
