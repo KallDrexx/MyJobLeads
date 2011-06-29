@@ -90,7 +90,7 @@
                     @if (task.ContactId != null) { <li>Task for @Html.ActionLink(task.Contact.Name, MVC.Contact.Details(task.Contact.Id))</li> }
                     else { <li>Task for @Html.ActionLink(task.Company.Name, MVC.Company.Details(task.Company.Id))</li> }
 
-                    @if (task.Completed) { <li>Task Completed</li> } else { <li>Not Completed</li> }
+                    @if (task.CompletionDate != null) { <li>Task Completed</li> } else { <li>Not Completed</li> }
                     @if (task.TaskDate != null && task.TaskDate.HasValue) { <li>Due: @task.TaskDate.Value.ToString()</li> }
                 </ul>
             </li>

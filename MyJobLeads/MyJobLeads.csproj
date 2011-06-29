@@ -66,6 +66,9 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="PrecompiledMvcViewEngine">
+      <HintPath>..\packages\PrecompiledMvcViewEngine.1.0\lib\net40\PrecompiledMvcViewEngine.dll</HintPath>
+    </Reference>
     <Reference Include="Simple.Data">
       <HintPath>..\packages\Simple.Data.Core.0.5.2\lib\net40\Simple.Data.dll</HintPath>
     </Reference>
@@ -116,8 +119,9 @@
     <Reference Include="Telerik.Web.Mvc">
       <HintPath>..\packages\TelerikMvcExtensions.2011.1.315\lib\net40\Telerik.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="WebActivator">
-      <HintPath>..\packages\WebActivator.1.4\lib\NETFramework40\WebActivator.dll</HintPath>
+    <Reference Include="WebActivator, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebActivator.1.4.1\lib\net40\WebActivator.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -225,6 +229,7 @@
       <DependentUpon>UploadLocalization.en-US.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\Bootstrapper.cs" />
+    <Compile Include="App_Start\PrecompiledMvcViewEngineStart.cs" />
     <Compile Include="CompanyController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -281,6 +286,166 @@
     </Compile>
     <Compile Include="TaskController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\ChangePassword.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangePassword.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\ChangePasswordSuccess.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangePasswordSuccess.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\LogOn.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogOn.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\Register.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Register.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\RegisterWithOrganization.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegisterWithOrganization.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\ResetPassword.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResetPassword.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\ResetPasswordResult.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResetPasswordResult.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Company\Details.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Details.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Company\Edit.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Company\_CompanySidebarDisplay.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_CompanySidebarDisplay.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contact\Details.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Details.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contact\Edit.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contact\_CompanyContactDisplay.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_CompanyContactDisplay.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contact\_ContactSidebarDisplay.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ContactSidebarDisplay.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\About.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>About.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\FixBlankTitles.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FixBlankTitles.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\Index.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\SubmitFeedback.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SubmitFeedback.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobSearch\Details.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Details.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobSearch\Edit.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobSearch\Index.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobSearch\Search.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Search.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobSearch\_JsMilestoneDisplay.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_JsMilestoneDisplay.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\RefreshSearchIndex.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RefreshSearchIndex.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Error.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Error.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\_Layout.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Layout.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\_LogOnPartial.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_LogOnPartial.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\Details.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Details.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\Edit.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\_CompanyTaskDisplay.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_CompanyTaskDisplay.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\_OpenTaskListItem.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_OpenTaskListItem.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\_OpenTaskSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_OpenTaskSummary.cshtml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -672,15 +837,42 @@
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Account\ChangePassword.cshtml" />
-    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
-    <Content Include="Views\Account\LogOn.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_LogOnPartial.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ChangePassword.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Account\ChangePasswordSuccess.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ChangePasswordSuccess.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Account\LogOn.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>LogOn.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Account\Register.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Register.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\About.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>About.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Error.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Error.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_LogOnPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_LogOnPartial.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_Layout.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Layout.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -696,10 +888,16 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\JobSearch\Index.cshtml" />
+    <Content Include="Views\JobSearch\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\JobSearch\Edit.cshtml" />
+    <Content Include="Views\JobSearch\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -712,27 +910,90 @@
     </Content>
     <Content Include="app_offline.htm_" />
     <None Include="T4MVC.tt.settings.t4" />
-    <Content Include="Views\JobSearch\Details.cshtml" />
-    <Content Include="Views\Company\Edit.cshtml" />
-    <Content Include="Views\Company\Details.cshtml" />
-    <Content Include="Views\Contact\Edit.cshtml" />
-    <Content Include="Views\Contact\Details.cshtml" />
-    <Content Include="Views\Task\Details.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordResult.cshtml" />
-    <Content Include="Views\Task\Edit.cshtml" />
-    <Content Include="Views\Home\SubmitFeedback.cshtml" />
-    <Content Include="Views\Task\_OpenTaskSummary.cshtml" />
-    <Content Include="Views\Company\_CompanySidebarDisplay.cshtml" />
-    <Content Include="Views\Contact\_ContactSidebarDisplay.cshtml" />
-    <Content Include="Views\Task\_OpenTaskListItem.cshtml" />
-    <Content Include="Views\Task\_CompanyTaskDisplay.cshtml" />
-    <Content Include="Views\Contact\_CompanyContactDisplay.cshtml" />
-    <Content Include="Views\Search\RefreshSearchIndex.cshtml" />
-    <Content Include="Views\JobSearch\Search.cshtml" />
-    <Content Include="Views\JobSearch\_JsMilestoneDisplay.cshtml" />
-    <Content Include="Views\Home\FixBlankTitles.cshtml" />
-    <Content Include="Views\Account\RegisterWithOrganization.cshtml" />
+    <Content Include="Views\JobSearch\Details.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Company\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Company\Details.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Contact\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Contact\Details.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\Details.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Account\ResetPassword.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ResetPassword.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Account\ResetPasswordResult.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ResetPasswordResult.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\SubmitFeedback.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SubmitFeedback.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\_OpenTaskSummary.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_OpenTaskSummary.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Company\_CompanySidebarDisplay.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_CompanySidebarDisplay.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Contact\_ContactSidebarDisplay.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ContactSidebarDisplay.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\_OpenTaskListItem.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_OpenTaskListItem.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\_CompanyTaskDisplay.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_CompanyTaskDisplay.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Contact\_CompanyContactDisplay.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_CompanyContactDisplay.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Search\RefreshSearchIndex.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>RefreshSearchIndex.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\JobSearch\Search.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Search.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\JobSearch\_JsMilestoneDisplay.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_JsMilestoneDisplay.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\FixBlankTitles.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FixBlankTitles.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Account\RegisterWithOrganization.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>RegisterWithOrganization.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\EditorLocalization.bg-BG.resx">

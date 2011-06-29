@@ -16,13 +16,13 @@ using MvcContrib.TestHelper;
 using MyJobLeads.DomainModel.Queries.Users;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using PrecompiledMvcViews.Testing;
 
 namespace MyJobLeads.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest : EFTestBase
     {
-
         [TestMethod]
         public void Windsor_Can_Resolve_HomeController_Dependencies()
         {
@@ -102,6 +102,16 @@ namespace MyJobLeads.Tests.Controllers
 
             // Verify
             result.AssertActionRedirect().ToController("JobSearch").ToAction("Details").WithParameter("id", 4);
+        }
+
+        [TestMethod]
+        public void Index_View_Renders_Correctly()
+        {
+            // Setup
+            var view = new MyJobLeads.Views.Home.Index();
+
+            // Act
+            view.RenderAsHtml();
         }
 
         [TestMethod]

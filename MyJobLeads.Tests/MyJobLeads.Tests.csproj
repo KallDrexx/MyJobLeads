@@ -53,6 +53,9 @@
     <Reference Include="FluentValidation">
       <HintPath>..\packages\FluentValidation.2.0.0.0\lib\NET35\FluentValidation.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.0\lib\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Lucene.Net">
       <HintPath>..\packages\Lucene.2.9.2.2\lib\Lucene.Net.dll</HintPath>
     </Reference>
@@ -69,6 +72,9 @@
     </Reference>
     <Reference Include="netDumbster">
       <HintPath>..\Libs\netDumbster.dll</HintPath>
+    </Reference>
+    <Reference Include="PrecompiledMvcViews.Testing">
+      <HintPath>..\packages\PrecompiledMvcViews.Testing.1.0\lib\net40\PrecompiledMvcViews.Testing.dll</HintPath>
     </Reference>
     <Reference Include="Rhino.Mocks">
       <HintPath>..\packages\RhinoMocks.3.6\lib\Rhino.Mocks.dll</HintPath>
