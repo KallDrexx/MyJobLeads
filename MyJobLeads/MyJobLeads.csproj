@@ -270,6 +270,7 @@
     <Compile Include="ViewModels\Accounts\AccountMembershipService.cs" />
     <Compile Include="ViewModels\Accounts\IMembershipService.cs" />
     <Compile Include="ViewModels\Accounts\OrganizationRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\Companies\JobSearchCompanyListViewModel.cs" />
     <Compile Include="ViewModels\Contacts\EditContactViewModel.cs" />
     <Compile Include="ViewModels\JobSearches\JobSearchDetailsViewModel.cs" />
     <Compile Include="ViewModels\PerformedSearchViewModel.cs" />
@@ -332,10 +333,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Edit.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Company\List.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>List.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Company\_CompanySidebarDisplay.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_CompanySidebarDisplay.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Company\_jobsearchCompanySummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_jobsearchCompanySummary.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Contact\Details.cs">
       <AutoGen>True</AutoGen>
@@ -993,6 +1004,14 @@
     <Content Include="Views\Account\RegisterWithOrganization.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>RegisterWithOrganization.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Company\List.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>List.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Company\_jobsearchCompanySummary.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_jobsearchCompanySummary.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

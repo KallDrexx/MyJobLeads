@@ -1,11 +1,13 @@
 ﻿@model MyJobLeads.ViewModels.JobSearches.JobSearchDetailsViewModel
 @using MyJobLeads.DomainModel.Entities;
 @using MyJobLeads.Infrastructure.HtmlHelpers;
+@using MyJobLeads.ViewModels.Companies;
 
 @{
     ViewBag.Title = Model.JobSearch.Name + " - Job Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Sidebar = Html.Partial(MVC.Task.Views._OpenTaskSummary, Model.OpenTasks);
+    ViewBag.Sidebar = new HtmlString(Html.Partial(MVC.Company.Views._jobsearchCompanySummary, new JobSearchCompanyListViewModel(Model)).ToString()
+                        + Html.Partial(MVC.Task.Views._OpenTaskSummary, Model.OpenTasks).ToString());
 }
 
 <h1>@Model.JobSearch.Name</h1>
@@ -31,19 +33,6 @@
 <h2>Job Search Progress</h2>
 <hr />
 
- @{Html.RenderPartial(MVC.JobSearch.Views._JsMilestoneDisplay, Model.JobSearch);}   
-
- <br /><br />
- <h2>Companies</h2>
- <hr />
-
- <p>
-    @Html.ActionLink("Add A New Company", MVC.Company.Add(@Model.JobSearch.Id))
-                
-    <ul>
-        @foreach (Company company in @Model.JobSearch.Companies.OrderBy(x => x.Name).ToList())
-        {
-            <li>@Html.ActionLink(company.Name, MVC.Company.Details(company.Id))</li>
-        }
-    </ul>
+<p>
+    @{Html.RenderPartial(MVC.JobSearch.Views._JsMilestoneDisplay, Model.JobSearch);}   
 </p>

@@ -1,0 +1,20 @@
+﻿@model MyJobLeads.ViewModels.Companies.JobSearchCompanyListViewModel
+
+@{
+    ViewBag.Title = "Company List";
+    string companyWord = Model.Companies.Count == 1 ? "company" : "companies";
+}
+
+<h2>Company List</h2>
+<hr />
+
+@Html.ActionLink("Add A Company", MVC.Company.Add(Model.JobSearchId)) <br /><br />
+
+You have @Model.Companies.Count @companyWord entered.
+<ul>
+    @foreach (var company in Model.Companies)
+    {
+        <li>@Html.ActionLink(company.Name, MVC.Company.Details(company.Id))</li>
+    }
+</ul>
+

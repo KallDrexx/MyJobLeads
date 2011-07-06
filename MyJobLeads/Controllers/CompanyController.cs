@@ -10,6 +10,7 @@ using MyJobLeads.DomainModel.Commands.Companies;
 using MyJobLeads.Infrastructure.Attributes;
 using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Providers;
+using MyJobLeads.ViewModels.Companies;
 
 namespace MyJobLeads.Controllers
 {
@@ -24,6 +25,21 @@ namespace MyJobLeads.Controllers
             _unitOfWork = unitOfWork;
             _searchProvider = searchProvider;
             _serviceFactory = serviceFactory;
+        }
+
+        public virtual ActionResult List(int jobSearchId)
+        {
+            var companies = _serviceFactory.GetService<CompaniesByJobSearchIdQuery>()
+                            .WithJobSearchId(jobSearchId)
+                            .Execute();
+
+            var model = new JobSearchCompanyListViewModel
+            {
+                Companies = companies,
+                JobSearchId = jobSearchId
+            };
+
+            return View(model);
         }
 
         public virtual ActionResult Add(int jobSearchId)

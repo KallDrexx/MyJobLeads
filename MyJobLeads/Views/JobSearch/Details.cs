@@ -37,6 +37,12 @@ namespace MyJobLeads.Views.JobSearch
     #line default
     #line hidden
     
+    #line 4 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
+    using MyJobLeads.ViewModels.Companies;
+    
+    #line default
+    #line hidden
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/JobSearch/Details.cshtml")]
     public class Details : System.Web.Mvc.WebViewPage<MyJobLeads.ViewModels.JobSearches.JobSearchDetailsViewModel>
@@ -49,15 +55,17 @@ namespace MyJobLeads.Views.JobSearch
 
 
 
+
 WriteLiteral("\r\n");
 
 
             
-            #line 5 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
+            #line 6 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
   
     ViewBag.Title = Model.JobSearch.Name + " - Job Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Sidebar = Html.Partial(MVC.Task.Views._OpenTaskSummary, Model.OpenTasks);
+    ViewBag.Sidebar = new HtmlString(Html.Partial(MVC.Company.Views._jobsearchCompanySummary, new JobSearchCompanyListViewModel(Model)).ToString()
+                        + Html.Partial(MVC.Task.Views._OpenTaskSummary, Model.OpenTasks).ToString());
 
 
             
@@ -67,7 +75,7 @@ WriteLiteral("\r\n<h1>");
 
 
             
-            #line 11 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
+            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
 Write(Model.JobSearch.Name);
 
             
@@ -77,7 +85,7 @@ WriteLiteral("</h1>\r\n<br />\r\n\r\n<p>\r\n    ");
 
 
             
-            #line 15 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
+            #line 17 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
 Write(Html.ActionLink("Edit This Job Search", MVC.JobSearch.Edit(Model.JobSearch.Id)));
 
             
@@ -87,7 +95,7 @@ WriteLiteral(" &nbsp; \r\n    ");
 
 
             
-            #line 16 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
+            #line 18 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
 Write(Html.ActionLink("View All Job Searches", MVC.JobSearch.Index()));
 
             
@@ -97,7 +105,7 @@ WriteLiteral("\r\n</p>\r\n\r\n<p>\r\n");
 
 
             
-            #line 20 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
+            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
      if (!string.IsNullOrWhiteSpace(Model.JobSearch.Description)) {
             
             #line default
@@ -108,7 +116,7 @@ WriteLiteral("<b>Description:</b> ");
 
 
             
-            #line 20 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
+            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
                                                                                          Write(Model.JobSearch.Description);
 
             
@@ -118,7 +126,7 @@ WriteLiteral(" ");
 
 
             
-            #line 20 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
+            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
                                                                                                                                   }
 
             
@@ -128,7 +136,7 @@ WriteLiteral("</p>\r\n\r\n<p>\r\n");
 
 
             
-            #line 24 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
+            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
      using (Html.BeginForm(MVC.JobSearch.Search(), FormMethod.Get))
     {
         
@@ -136,14 +144,14 @@ WriteLiteral("</p>\r\n\r\n<p>\r\n");
             #line default
             #line hidden
             
-            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
+            #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
    Write(Html.Hidden("id", Model.JobSearch.Id));
 
             
             #line default
             #line hidden
             
-            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
+            #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
                                               
 
             
@@ -155,7 +163,7 @@ WriteLiteral("Search: ");
 
 
             
-            #line 27 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
+            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
              Write(Html.TextBox("query"));
 
             
@@ -165,64 +173,23 @@ WriteLiteral(" <input type=\"submit\" value=\"Search\" />\r\n");
 
 
             
-            #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
+            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
     }
 
             
             #line default
             #line hidden
-WriteLiteral("</p>\r\n\r\n<h2>Job Search Progress</h2>\r\n<hr />\r\n\r\n");
+WriteLiteral("</p>\r\n\r\n<h2>Job Search Progress</h2>\r\n<hr />\r\n\r\n<p>\r\n");
 
 
             
-            #line 34 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
-   Html.RenderPartial(MVC.JobSearch.Views._JsMilestoneDisplay, Model.JobSearch);   
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n <br /><br />\r\n <h2>Companies</h2>\r\n <hr />\r\n\r\n <p>\r\n    ");
-
-
-            
-            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
-Write(Html.ActionLink("Add A New Company", MVC.Company.Add(@Model.JobSearch.Id)));
+            #line 37 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
+      Html.RenderPartial(MVC.JobSearch.Views._JsMilestoneDisplay, Model.JobSearch);   
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                \r\n    <ul>\r\n");
-
-
-            
-            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
-         foreach (Company company in @Model.JobSearch.Companies.OrderBy(x => x.Name).ToList())
-        {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("            <li>");
-
-
-            
-            #line 46 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
-           Write(Html.ActionLink(company.Name, MVC.Company.Details(company.Id)));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</li>\r\n");
-
-
-            
-            #line 47 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Details.cshtml"
-        }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    </ul>\r\n</p>");
+WriteLiteral("</p>");
 
 
         }

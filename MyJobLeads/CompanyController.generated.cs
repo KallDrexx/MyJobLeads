@@ -33,6 +33,11 @@ namespace MyJobLeads.Controllers {
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult List() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.List);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Add() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Add);
         }
@@ -59,6 +64,7 @@ namespace MyJobLeads.Controllers {
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
+            public readonly string List = "List";
             public readonly string Add = "Add";
             public readonly string Edit = "Edit";
             public readonly string Details = "Details";
@@ -71,14 +77,22 @@ namespace MyJobLeads.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string _CompanySidebarDisplay = "~/Views/Company/_CompanySidebarDisplay.cshtml";
+            public readonly string _jobsearchCompanySummary = "~/Views/Company/_jobsearchCompanySummary.cshtml";
             public readonly string Details = "~/Views/Company/Details.cshtml";
             public readonly string Edit = "~/Views/Company/Edit.cshtml";
+            public readonly string List = "~/Views/Company/List.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class T4MVC_CompanyController: MyJobLeads.Controllers.CompanyController {
         public T4MVC_CompanyController() : base(Dummy.Instance) { }
+
+        public override System.Web.Mvc.ActionResult List(int jobSearchId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.List);
+            callInfo.RouteValueDictionary.Add("jobSearchId", jobSearchId);
+            return callInfo;
+        }
 
         public override System.Web.Mvc.ActionResult Add(int jobSearchId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Add);
