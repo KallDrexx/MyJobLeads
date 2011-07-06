@@ -108,7 +108,7 @@ WriteLiteral("    <div>\r\n        <fieldset>\r\n            <legend>Account Inf
 
             
             #line 25 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.LabelFor(m => m.Email));
+           Write(Html.LabelFor(x => x.FullName));
 
             
             #line default
@@ -118,7 +118,7 @@ WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">
 
             
             #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.TextBoxFor(m => m.Email));
+           Write(Html.TextBoxFor(x => x.FullName));
 
             
             #line default
@@ -128,7 +128,7 @@ WriteLiteral("\r\n                ");
 
             
             #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.ValidationMessageFor(m => m.Email));
+           Write(Html.ValidationMessageFor(x => x.FullName));
 
             
             #line default
@@ -138,7 +138,7 @@ WriteLiteral("\r\n            </div>\r\n\r\n            <div class=\"editor-labe
 
             
             #line 33 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.LabelFor(m => m.Password));
+           Write(Html.LabelFor(m => m.Email));
 
             
             #line default
@@ -148,7 +148,7 @@ WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">
 
             
             #line 36 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.PasswordFor(m => m.Password));
+           Write(Html.TextBoxFor(m => m.Email));
 
             
             #line default
@@ -158,7 +158,7 @@ WriteLiteral("\r\n                ");
 
             
             #line 37 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.ValidationMessageFor(m => m.Password));
+           Write(Html.ValidationMessageFor(m => m.Email));
 
             
             #line default
@@ -168,7 +168,7 @@ WriteLiteral("\r\n            </div>\r\n\r\n            <div class=\"editor-labe
 
             
             #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.LabelFor(m => m.ConfirmPassword));
+           Write(Html.LabelFor(m => m.Password));
 
             
             #line default
@@ -178,7 +178,7 @@ WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">
 
             
             #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.PasswordFor(m => m.ConfirmPassword));
+           Write(Html.PasswordFor(m => m.Password));
 
             
             #line default
@@ -188,6 +188,36 @@ WriteLiteral("\r\n                ");
 
             
             #line 45 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
+           Write(Html.ValidationMessageFor(m => m.Password));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n            </div>\r\n\r\n            <div class=\"editor-label\">\r\n                ");
+
+
+            
+            #line 49 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
+           Write(Html.LabelFor(m => m.ConfirmPassword));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">\r\n                ");
+
+
+            
+            #line 52 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
+           Write(Html.PasswordFor(m => m.ConfirmPassword));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                ");
+
+
+            
+            #line 53 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
            Write(Html.ValidationMessageFor(m => m.ConfirmPassword));
 
             
@@ -198,7 +228,7 @@ WriteLiteral("\r\n            </div>\r\n\r\n            <p>\r\n                <
 
 
             
-            #line 53 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
+            #line 61 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
 }
 
             

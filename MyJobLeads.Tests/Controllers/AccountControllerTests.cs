@@ -384,16 +384,16 @@ namespace MyJobLeads.Tests.Controllers
                 return (userName == "goodEmail" && password == "goodPassword");
             }
 
-            public MembershipCreateStatus CreateUser(string email, string password, Guid? orgRegistrationtToken)
+            public MembershipCreateStatus CreateUser(CreateUserMembershipParams userParams)
             {
-                if (email == "duplicateUser")
+                if (userParams.Email == "duplicateUser")
                 {
                     return MembershipCreateStatus.DuplicateUserName;
                 }
 
                 // verify that values are what we expected
-                Assert.AreEqual("goodPassword", password);
-                Assert.AreEqual("goodEmail", email);
+                Assert.AreEqual("goodPassword", userParams.Password);
+                Assert.AreEqual("goodEmail", userParams.Email);
 
                 return MembershipCreateStatus.Success;
             }

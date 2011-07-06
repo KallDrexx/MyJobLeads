@@ -22,7 +22,8 @@ namespace MyJobLeads.Tests.Commands.Users
             {
                 Email = _startingEmail ,
                 Password = PasswordUtils.CreatePasswordHash(_startingEmail, _oldPassword),
-                LastVisitedJobSearchId = 2
+                LastVisitedJobSearchId = 2,
+                FullName = "starting name"
             };
 
             _unitOfWork.Users.Add(_user);

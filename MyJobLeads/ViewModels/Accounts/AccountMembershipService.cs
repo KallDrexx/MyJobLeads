@@ -44,18 +44,13 @@ namespace MyJobLeads.ViewModels.Accounts
             return _provider.ValidateUser(userName, password);
         }
 
-        public MembershipCreateStatus CreateUser(string email, string password, Guid? orgRegistrationToken)
+        public MembershipCreateStatus CreateUser(CreateUserMembershipParams userParams)
         {
-            if (String.IsNullOrEmpty(password)) throw new ArgumentException("Value cannot be null or empty.", "password");
-            if (String.IsNullOrEmpty(email)) throw new ArgumentException("Value cannot be null or empty.", "email");
+            if (String.IsNullOrEmpty(userParams.Password)) throw new ArgumentException("Value cannot be null or empty.", "password");
+            if (String.IsNullOrEmpty(userParams.Email)) throw new ArgumentException("Value cannot be null or empty.", "email");
 
             MembershipCreateStatus status;
-            _provider.CreateUser(new CreateUserParams
-            {
-                Email = email,
-                Password = password,
-                OrganizationRegistrationToken = orgRegistrationToken
-            }, out status);
+            _provider.CreateUser(userParams, out status);
             
             return status;
         }

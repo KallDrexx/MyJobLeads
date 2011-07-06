@@ -12,16 +12,10 @@ using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.Infrastructure.Providers;
 using MyJobLeads.App_Start;
+using MyJobLeads.ViewModels.Accounts;
 
 namespace MyJobLeads.Infrastructure
 {
-    public struct CreateUserParams
-    {
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public Guid? OrganizationRegistrationToken { get; set; }
-    }
-
     public class MyJobLeadsMembershipProvider : MembershipProvider
     {
         #region Constructors
@@ -63,7 +57,7 @@ namespace MyJobLeads.Infrastructure
             return true;
         }
 
-        public MembershipUser CreateUser(CreateUserParams userParams, out MembershipCreateStatus status)
+        public MembershipUser CreateUser(CreateUserMembershipParams userParams, out MembershipCreateStatus status)
         {
             User user;
 
@@ -73,7 +67,8 @@ namespace MyJobLeads.Infrastructure
                 {
                     Email = userParams.Email,
                     PlainTextPassword = userParams.Password,
-                    RegistrationToken = userParams.OrganizationRegistrationToken
+                    RegistrationToken = userParams.OrganizationRegistrationToken,
+                    FullName = userParams.FullName
                 });
             }
             catch (MJLDuplicateEmailException)

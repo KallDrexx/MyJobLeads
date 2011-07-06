@@ -314,5 +314,24 @@ namespace MyJobLeads.Tests.Commands.Users
                 Assert.AreEqual("test.com", ex.EmailDomain, "Exception's EmailDomain value was incorrect");
             }
         }
+
+        [TestMethod]
+        public void Can_Set_Users_Full_Name()
+        {
+            // Setup
+
+            // Act
+            new CreateUserCommand(_serviceFactory.Object).Execute(new CreateUserCommandParams
+            {
+                Email = "email",
+                PlainTextPassword = "password",
+                FullName = "test name"
+            });
+
+            User result = _unitOfWork.Users.Fetch().Single();
+
+            // Verify
+            Assert.AreEqual("test name", result.FullName, "Created user's full name was incorrect");
+        }
     }
 }

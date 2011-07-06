@@ -22,6 +22,14 @@
             <legend>Account Information</legend>
 
             <div class="editor-label">
+                @Html.LabelFor(x => x.FullName)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(x => x.FullName)
+                @Html.ValidationMessageFor(x => x.FullName)
+            </div>
+
+            <div class="editor-label">
                 @Html.LabelFor(m => m.Email)
             </div>
             <div class="editor-field">

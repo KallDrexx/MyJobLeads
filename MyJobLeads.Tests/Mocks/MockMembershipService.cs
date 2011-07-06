@@ -28,7 +28,7 @@ namespace MyJobLeads.Tests.Mocks
             throw new NotImplementedException();
         }
 
-        public MembershipCreateStatus CreateUser(string email, string password, Guid? orgRegistrationToken)
+        public MembershipCreateStatus CreateUser(CreateUserMembershipParams userParams)
         {
             throw new NotImplementedException();
         }

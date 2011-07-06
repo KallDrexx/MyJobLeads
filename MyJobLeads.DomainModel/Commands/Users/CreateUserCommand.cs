@@ -17,6 +17,7 @@ namespace MyJobLeads.DomainModel.Commands.Users
         public string Email { get; set; }
         public string PlainTextPassword { get; set; }
         public Guid? RegistrationToken { get; set; }
+        public string FullName { get; set; }
     }
 
     /// <summary>
@@ -79,6 +80,7 @@ namespace MyJobLeads.DomainModel.Commands.Users
                 Email = cmdParams.Email,
                 Password = PasswordUtils.CreatePasswordHash(cmdParams.Email, cmdParams.PlainTextPassword),
                 Organization = org,
+                FullName = cmdParams.FullName,
 
                 JobSearches = new List<JobSearch>()
             };

@@ -85,7 +85,12 @@ namespace MyJobLeads.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                MembershipCreateStatus createStatus = MembershipService.CreateUser(model.Email, model.Password, null);
+                var createStatus = MembershipService.CreateUser(new CreateUserMembershipParams
+                {
+                    Email = model.Email,
+                    Password = model.Password,
+                    FullName = model.FullName
+                });
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
@@ -137,8 +142,14 @@ namespace MyJobLeads.Controllers
 
                 // Attempt to register the user
                 try 
-                { 
-                    createStatus = MembershipService.CreateUser(model.Email, model.Password, model.RegistrationToken);
+                {
+                    createStatus = MembershipService.CreateUser(new CreateUserMembershipParams
+                    {
+                        Email = model.Email,
+                        Password = model.Password,
+                        OrganizationRegistrationToken = model.RegistrationToken,
+                        FullName = model.FullName
+                    });
                     
                     if (createStatus == MembershipCreateStatus.Success)
                     {

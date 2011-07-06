@@ -27,6 +27,11 @@ namespace MyJobLeads.ViewModels.Accounts
         public string Email { get; set; }
 
         [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
+
+        [Required]
         [ValidatePasswordLength]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
