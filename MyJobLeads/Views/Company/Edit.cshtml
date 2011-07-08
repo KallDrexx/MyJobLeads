@@ -1,4 +1,4 @@
-﻿@model MyJobLeads.DomainModel.Entities.Company
+﻿@model MyJobLeads.ViewModels.Companies.EditCompanyViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,7 +20,7 @@ else
 
 @using (Html.BeginForm(MVC.Company.Edit(Model.Id)))
 {
-    @Html.Hidden("jobSearchId", (int)ViewBag.JobSearchId)
+    @Html.HiddenFor(x => x.JobSearchId)
     @Html.HiddenFor(x => x.Id)
 
     <table>
@@ -28,6 +28,16 @@ else
             <td align="right">Name:</td>
             <td>@Html.EditorFor(x => x.Name)</td>
         </tr>
+
+        @if (Model.Id > 0)
+        {
+            <tr>
+                <td align="right">Status:</td>
+                <td>
+                    @Html.DropDownListFor(x => x.LeadStatus, new SelectList(Model.AvailableLeadStatuses, Model.LeadStatus))
+                </td>
+            </tr>
+        }
 
         <tr>
             <td align="right">Phone Number:</td>

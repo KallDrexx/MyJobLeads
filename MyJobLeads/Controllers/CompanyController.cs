@@ -44,46 +44,56 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Add(int jobSearchId)
         {
-            ViewBag.JobSearchId = jobSearchId;
-            return View(MVC.Company.Views.Edit, new Company());
+            var statuses = _serviceFactory.GetService<LeadStatusesAvailableForCompaniesQuery>().Execute();
+            var model = new EditCompanyViewModel
+            {
+                JobSearchId = jobSearchId,
+                AvailableLeadStatuses = _serviceFactory.GetService<LeadStatusesAvailableForCompaniesQuery>().Execute()
+            };
+
+            return View(MVC.Company.Views.Edit, model);
         }
 
         public virtual ActionResult Edit(int id)
         {
-            ViewBag.JobSearchId = 0;
             var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(id).Execute();
-            return View(company);
+            var statuses = _serviceFactory.GetService<LeadStatusesAvailableForCompaniesQuery>().Execute();
+
+            return View(new EditCompanyViewModel(company) { AvailableLeadStatuses = statuses });
         }
 
         [HttpPost]
-        public virtual ActionResult Edit(Company company, int jobSearchId)
+        public virtual ActionResult Edit(EditCompanyViewModel model)
         {
+            Company company;
+
             // Determine if this is a new company or not
-            if (company.Id == 0)
+            if (model.Id == 0)
             {
-                company = new CreateCompanyCommand(_serviceFactory).WithJobSearch(jobSearchId)
-                                                                      .SetName(company.Name)
-                                                                      .SetCity(company.City)
-                                                                      .SetIndustry(company.Industry)
-                                                                      .SetMetroArea(company.MetroArea)
-                                                                      .SetNotes(company.Notes)
-                                                                      .SetPhone(company.Phone)
-                                                                      .SetState(company.State)
-                                                                      .SetZip(company.Zip)
+                company = new CreateCompanyCommand(_serviceFactory).WithJobSearch(model.JobSearchId)
+                                                                      .SetName(model.Name)
+                                                                      .SetCity(model.City)
+                                                                      .SetIndustry(model.Industry)
+                                                                      .SetMetroArea(model.MetroArea)
+                                                                      .SetNotes(model.Notes)
+                                                                      .SetPhone(model.Phone)
+                                                                      .SetState(model.State)
+                                                                      .SetZip(model.Zip)
                                                                       .CalledByUserId(CurrentUserId)
                                                                       .Execute();
             }
             else
             {
-                company = new EditCompanyCommand(_serviceFactory).WithCompanyId(company.Id)
-                                                                      .SetName(company.Name)
-                                                                      .SetCity(company.City)
-                                                                      .SetIndustry(company.Industry)
-                                                                      .SetMetroArea(company.MetroArea)
-                                                                      .SetNotes(company.Notes)
-                                                                      .SetPhone(company.Phone)
-                                                                      .SetState(company.State)
-                                                                      .SetZip(company.Zip)
+                company = new EditCompanyCommand(_serviceFactory).WithCompanyId(model.Id)
+                                                                      .SetName(model.Name)
+                                                                      .SetCity(model.City)
+                                                                      .SetIndustry(model.Industry)
+                                                                      .SetMetroArea(model.MetroArea)
+                                                                      .SetNotes(model.Notes)
+                                                                      .SetPhone(model.Phone)
+                                                                      .SetState(model.State)
+                                                                      .SetZip(model.Zip)
+                                                                      .SetLeadStatus(model.LeadStatus)
                                                                       .RequestedByUserId(CurrentUserId)
                                                                       .Execute();
             }

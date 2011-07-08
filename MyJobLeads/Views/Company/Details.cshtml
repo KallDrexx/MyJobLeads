@@ -26,8 +26,9 @@
 
 <h2>@Model.Name's Details</h2>
 
-Phone: @Model.Phone<br />
-Location: @location<br />
+Phone: @Model.Phone <br />
+Status: @Model.LeadStatus <br />
+Location: @location <br />
 Notes: @Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))<br />
 
 <br />

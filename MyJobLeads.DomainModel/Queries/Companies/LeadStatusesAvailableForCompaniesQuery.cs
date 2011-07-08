@@ -15,8 +15,10 @@ namespace MyJobLeads.DomainModel.Queries.Companies
             {
                 MJLConstants.ProspectiveEmployerCompanyStatus,
                 MJLConstants.InterviewingCompanyStatus,
-                MJLConstants.ProspectiveEmployerCompanyStatus
-            };
+                MJLConstants.DeadLeadCompanyStatus
+            }
+                .OrderBy(x => x)
+                .ToList();
         }
     }
 }
