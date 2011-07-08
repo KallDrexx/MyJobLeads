@@ -514,5 +514,21 @@ namespace MyJobLeads.Tests.Commands.Companies
             // Verify
             _searchProvider.Verify(x => x.Index(_company), Times.Once());
         }
+
+        [TestMethod]
+        public void Can_Change_Companys_Lead_Status()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new EditCompanyCommand(_serviceFactory.Object).WithCompanyId(_company.Id)
+                                                          .SetLeadStatus("new status")
+                                                          .Execute();
+            Company result = _unitOfWork.Companies.Fetch().Single();
+
+            // Verify
+            Assert.AreEqual("new status", result.LeadStatus, "Company's lead status was incorrect");
+        }
     }
 }

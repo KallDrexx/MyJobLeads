@@ -19,5 +19,10 @@ namespace MyJobLeads.DomainModel
         public const string InitialContactTaskCategory = "Initial Contact";
         public const string PhoneInterviewTaskCategory = "Phone Interview";
         public const string OtherTaskCategory = "Other";
+
+        // Company Lead Statuses
+        public const string ProspectiveEmployerCompanyStatus = "Prospective Employer";
+        public const string DeadLeadCompanyStatus = "Dead Lead";
+        public const string InterviewingCompanyStatus = "In Process (Interviewing)";
     }
 }

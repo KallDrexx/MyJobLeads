@@ -18,6 +18,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         protected IServiceFactory _factory;
         protected int _companyId, _userId;
         protected string _name, _phone, _city, _state, _zip, _metro, _industry, _notes;
+        protected string _status;
 
         public EditCompanyCommand(IServiceFactory factory)
         {
@@ -135,6 +136,17 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         }
 
         /// <summary>
+        /// Specifies the lead status to give to the company
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public EditCompanyCommand SetLeadStatus(string status)
+        {
+            _status = status;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
@@ -162,6 +174,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
             if (_metro != null) { company.MetroArea = _metro; }
             if (_industry != null) { company.Industry = _industry; }
             if (_notes != null) { company.Notes = _notes; }
+            if (_status != null) { company.LeadStatus = _status; }
 
             // Create the history record
             company.History.Add(new CompanyHistory
@@ -174,6 +187,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
                 MetroArea = company.MetroArea,
                 Industry = company.Industry,
                 Notes = company.Notes,
+                LeadStatus = company.LeadStatus,
 
                 AuthoringUser = user,
                 HistoryAction = MJLConstants.HistoryUpdate,

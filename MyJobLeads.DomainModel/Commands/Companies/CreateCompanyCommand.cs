@@ -168,6 +168,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
                 MetroArea = _metro,
                 Industry = _industry,
                 Notes = _notes,
+                LeadStatus = MJLConstants.ProspectiveEmployerCompanyStatus,
 
                 Tasks = new List<Task>(),
                 Contacts = new List<Contact>(),
@@ -185,6 +186,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
                 MetroArea = _metro,
                 Industry = _industry,
                 Notes = _notes,
+                LeadStatus = MJLConstants.ProspectiveEmployerCompanyStatus,
 
                 AuthoringUser = user,
                 DateModified = DateTime.Now,

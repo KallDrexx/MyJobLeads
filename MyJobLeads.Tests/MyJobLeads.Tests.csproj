@@ -154,6 +154,7 @@
     <Compile Include="Providers\LuceneSearchProviderTests.cs" />
     <Compile Include="Queries\Companies\CompaniesByJobSearchIdQueryTests.cs" />
     <Compile Include="Queries\Companies\CompanyByIdQueryTests.cs" />
+    <Compile Include="Queries\Companies\LeadStatusesAvailableForCompaniesQueryTests.cs" />
     <Compile Include="Queries\Contacts\ContactByIdQueryTests.cs" />
     <Compile Include="Queries\Contacts\ContactsByCompanyIdQueryTests.cs" />
     <Compile Include="Queries\Contacts\IsUserAuthorizedForContactQueryTests.cs" />

@@ -277,5 +277,19 @@ namespace MyJobLeads.Tests.Commands.Companies
             // Verify
             _updateMetricsCmd.Verify(x => x.Execute(It.Is<UpdateJobSearchMetricsCmdParams>(y => y.JobSearchId == _search.Id)), Times.Once());
         }
+
+        [TestMethod]
+        public void New_Company_Has_Prospective_Employer_Status()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new CreateCompanyCommand(_serviceFactory.Object).WithJobSearch(_search.Id).Execute();
+            Company result = _unitOfWork.Companies.Fetch().Single();
+
+            // Verify
+            Assert.AreEqual(MJLConstants.ProspectiveEmployerCompanyStatus, result.LeadStatus, "Company's status was incorrect");
+        }
     }
 }

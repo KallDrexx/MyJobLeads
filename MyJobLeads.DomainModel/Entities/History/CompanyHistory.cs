@@ -15,6 +15,7 @@ namespace MyJobLeads.DomainModel.Entities.History
         public string Zip { get; set; }
         public string MetroArea { get; set; }
         public string Industry { get; set; }
+        public string LeadStatus { get; set; }
 
         [StringLength(Int32.MaxValue)]
         public string Notes { get; set; }
