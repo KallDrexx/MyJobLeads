@@ -20,12 +20,15 @@ namespace MyJobLeads.Views.Company
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Company/_jobsearchCompanySummary.cshtml")]
     public class _jobsearchCompanySummary : System.Web.Mvc.WebViewPage<MyJobLeads.ViewModels.Companies.JobSearchCompanyListViewModel>
     {
@@ -67,21 +70,21 @@ WriteLiteral(" ");
             
             #line default
             #line hidden
-WriteLiteral(" entered. ");
+WriteLiteral(" entered. \r\n    <br /><br />\r\n    ");
 
 
             
-            #line 10 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\_jobsearchCompanySummary.cshtml"
-                                                                Write(Html.ActionLink("View All", MVC.Company.List(Model.JobSearchId)));
+            #line 12 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\_jobsearchCompanySummary.cshtml"
+Write(Html.ActionLink("View All Companies", MVC.Company.List(Model.JobSearchId)));
 
             
             #line default
             #line hidden
-WriteLiteral(" <br />\r\n    ");
+WriteLiteral(" <br /><br />\r\n    ");
 
 
             
-            #line 11 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\_jobsearchCompanySummary.cshtml"
+            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\_jobsearchCompanySummary.cshtml"
 Write(Html.ActionLink("Add A New Company", MVC.Company.Add(Model.JobSearchId)));
 
             
