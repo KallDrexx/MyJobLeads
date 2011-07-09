@@ -177,5 +177,46 @@ namespace MyJobLeads.Tests.Commands.JobSearches
                 Assert.AreEqual(id.ToString(), ex.IdValue, "MJLEntityNotFoundException's id value was incorrect");
             }
         }
+
+        [TestMethod]
+        public void Can_Add_To_Hidden_Company_Status_List()
+        {
+            // Setup
+            InitializeTestEntities();
+            _jobSearch.HiddenCompanyStatuses = "status1;status2;";
+            _unitOfWork.Commit();
+
+            // Act
+            new EditJobSearchCommand(_unitOfWork).WithJobSearchId(_jobSearch.Id)
+                                                 .HideCompanyStatus("new1")
+                                                 .HideCompanyStatus("new2")
+                                                 .CalledByUserId(_user.Id)
+                                                 .Execute();
+            JobSearch result = _unitOfWork.JobSearches.Fetch().Single();
+
+            // Verify
+            Assert.AreEqual("status1;status2;new1;new2;", result.HiddenCompanyStatuses, "Hidden company statuses value was incorrect");
+        }
+
+        [TestMethod]
+        public void Can_Replace_Hidden_Company_Status_List()
+        {
+            // Setup
+            InitializeTestEntities();
+            _jobSearch.HiddenCompanyStatuses = "status1;status2;";
+            _unitOfWork.Commit();
+
+            // Act
+            new EditJobSearchCommand(_unitOfWork).WithJobSearchId(_jobSearch.Id)
+                                                 .ResetHiddenCompanyStatusList()
+                                                 .HideCompanyStatus("new1")
+                                                 .HideCompanyStatus("new2")
+                                                 .CalledByUserId(_user.Id)
+                                                 .Execute();
+            JobSearch result = _unitOfWork.JobSearches.Fetch().Single();
+
+            // Verify
+            Assert.AreEqual("new1;new2;", result.HiddenCompanyStatuses, "Hidden company statuses value was incorrect");
+        }
     }
 }

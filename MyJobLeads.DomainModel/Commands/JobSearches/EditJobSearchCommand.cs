@@ -19,10 +19,13 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
         protected IUnitOfWork _unitOfWork;
         protected int _jobSearchId, _userId;
         protected string _newName, _newDesc;
+        protected IList<string> _hiddenStatuses;
+        protected bool _resetHiddenStatusList;
 
         public EditJobSearchCommand(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            _hiddenStatuses = new List<string>();
         }
 
         /// <summary>
@@ -70,6 +73,27 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
         }
 
         /// <summary>
+        /// Specifies a company status to hide from the company list
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public EditJobSearchCommand HideCompanyStatus(string status)
+        {
+            _hiddenStatuses.Add(status);
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies that the hidden company status list should be reset
+        /// </summary>
+        /// <returns></returns>
+        public EditJobSearchCommand ResetHiddenCompanyStatusList()
+        {
+            _resetHiddenStatusList = true;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
@@ -93,6 +117,14 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
             if (_newDesc != null)
                 search.Description = _newDesc;
 
+            if (_resetHiddenStatusList)
+                search.HiddenCompanyStatuses = string.Empty;
+
+            // Append to the hidden company status list
+            if (_hiddenStatuses.Count > 0)
+                foreach (string status in _hiddenStatuses)
+                    search.HiddenCompanyStatuses += status + ";";
+
             // Create the history record
             search.History.Add(new JobSearchHistory
             {
@@ -100,7 +132,8 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
                 DateModified = DateTime.Now,
                 AuthoringUser = user,
                 Name = search.Name,
-                Description = search.Description
+                Description = search.Description,
+                HiddenCompanyStatuses = search.HiddenCompanyStatuses
             });
 
             // Commit

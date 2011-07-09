@@ -11,6 +11,8 @@ using MyJobLeads.Infrastructure.Attributes;
 using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.ViewModels.Companies;
+using MyJobLeads.DomainModel.Queries.JobSearches;
+using MyJobLeads.DomainModel.Commands.JobSearches;
 
 namespace MyJobLeads.Controllers
 {
@@ -29,15 +31,11 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult List(int jobSearchId)
         {
-            var companies = _serviceFactory.GetService<CompaniesByJobSearchIdQuery>()
-                            .WithJobSearchId(jobSearchId)
-                            .Execute();
+            var jobSearch = _serviceFactory.GetService<JobSearchByIdQuery>()
+                                           .WithJobSearchId(jobSearchId)
+                                           .Execute();
 
-            var model = new JobSearchCompanyListViewModel
-            {
-                Companies = companies,
-                JobSearchId = jobSearchId
-            };
+            var model = new JobSearchCompanyListViewModel(jobSearch);
 
             return View(model);
         }
@@ -105,6 +103,34 @@ namespace MyJobLeads.Controllers
         {
             var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(id).Execute();
             return View(company);
+        }
+
+        public virtual ActionResult ChangeCompanyStatusFilters(int jobSearchId, string[] shownStatus)
+        {
+            // If no statuses were marked to be shown (thus shownStatus is null) make it an empty array
+            if (shownStatus == null)
+                shownStatus = new string[0];
+
+            var companies = _serviceFactory.GetService<CompaniesByJobSearchIdQuery>()
+                                           .WithJobSearchId(jobSearchId)
+                                           .Execute();
+
+            var usedStatuses = companies.Select(x => x.LeadStatus).Distinct();
+
+            var cmd = _serviceFactory.GetService<EditJobSearchCommand>()
+                                     .WithJobSearchId(jobSearchId)
+                                     .CalledByUserId(CurrentUserId)
+                                     .ResetHiddenCompanyStatusList();
+
+            // For each status that isn't listed as a shown status, mark it as hidden in the job search preferences
+            foreach (string status in usedStatuses)
+                if (!shownStatus.Contains(status))
+                    cmd.HideCompanyStatus(status);
+
+            // Execute the command and go back to the company list
+            cmd.Execute();
+
+            return RedirectToAction(MVC.Company.List(jobSearchId));
         }
     }
 }

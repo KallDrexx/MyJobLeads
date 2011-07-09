@@ -51,6 +51,11 @@ namespace MyJobLeads.Controllers {
         public System.Web.Mvc.ActionResult Details() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Details);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ChangeCompanyStatusFilters() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ChangeCompanyStatusFilters);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public CompanyController Actions { get { return MVC.Company; } }
@@ -68,6 +73,7 @@ namespace MyJobLeads.Controllers {
             public readonly string Add = "Add";
             public readonly string Edit = "Edit";
             public readonly string Details = "Details";
+            public readonly string ChangeCompanyStatusFilters = "ChangeCompanyStatusFilters";
         }
 
 
@@ -115,6 +121,13 @@ namespace MyJobLeads.Controllers {
         public override System.Web.Mvc.ActionResult Details(int id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
             callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ChangeCompanyStatusFilters(int jobSearchId, string[] shownStatus) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangeCompanyStatusFilters);
+            callInfo.RouteValueDictionary.Add("jobSearchId", jobSearchId);
+            callInfo.RouteValueDictionary.Add("shownStatus", shownStatus);
             return callInfo;
         }
 

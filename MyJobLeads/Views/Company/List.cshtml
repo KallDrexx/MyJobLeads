@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Company List";
-    string companyWord = Model.Companies.Count == 1 ? "company" : "companies";
+    string companyWord = Model.TotalCompanyCount == 1 ? "company" : "companies";
 }
 
 <h2>Company List</h2>
@@ -10,11 +10,47 @@
 
 @Html.ActionLink("Add A Company", MVC.Company.Add(Model.JobSearchId)) <br /><br />
 
-You have @Model.Companies.Count @companyWord entered.
-<ul>
-    @foreach (var company in Model.Companies)
-    {
-        <li>@Html.ActionLink(company.Name, MVC.Company.Details(company.Id))</li>
-    }
-</ul>
+You have @Model.TotalCompanyCount @companyWord entered.<br /><br />
 
+@if (Model.UsedStatuses.Count > 0)
+{
+    using (Html.BeginForm(MVC.Company.ChangeCompanyStatusFilters()))
+    {
+        <p>
+            @Html.Hidden("jobSearchId", Model.JobSearchId)
+            Showing companies with the following statuses: <br /><br />
+
+            @foreach (string status in Model.UsedStatuses.OrderBy(x => x).ToArray())
+            {
+                @:&nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" name="shownStatus" value="@status"
+                    @if (!Model.HiddenStatuses.Contains(status))
+                    {
+                        @:checked
+                    }
+                 /> @status<br />
+            }
+            <br />
+            <input type="submit" value=" Filter Companies " />
+        </p>
+    }
+}
+    
+
+@if (Model.Companies.Count == 0 && Model.UsedStatuses.Count == 0)
+{
+    @: No companies have been entered for this job search yet
+}
+else if (Model.Companies.Count == 0 )
+{
+   @: No companies in this job search have the selected statuses
+}
+else
+{
+    <ul>
+        @foreach (var company in Model.Companies)
+        {
+            <li>@Html.ActionLink(company.Name, MVC.Company.Details(company.Id))</li>
+        }
+    </ul>
+}
