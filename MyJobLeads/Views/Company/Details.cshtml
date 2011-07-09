@@ -25,6 +25,7 @@
 }
 
 <h2>@Model.Name's Details</h2>
+@Html.ActionLink("Back To Company List", MVC.Company.List(Convert.ToInt32(Model.JobSearchID)))<br /><br />
 
 Phone: @Model.Phone <br />
 Status: @Model.LeadStatus <br />

@@ -86,11 +86,21 @@ Write(Model.Name);
             
             #line default
             #line hidden
-WriteLiteral("\'s Details</h2>\r\n\r\nPhone: ");
+WriteLiteral("\'s Details</h2>\r\n");
 
 
             
-            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+Write(Html.ActionLink("Back To Company List", MVC.Company.List(Convert.ToInt32(Model.JobSearchID))));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("<br /><br />\r\n\r\nPhone: ");
+
+
+            
+            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
   Write(Model.Phone);
 
             
@@ -100,7 +110,7 @@ WriteLiteral(" <br />\r\nStatus: ");
 
 
             
-            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 31 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
    Write(Model.LeadStatus);
 
             
@@ -110,7 +120,7 @@ WriteLiteral(" <br />\r\nLocation: ");
 
 
             
-            #line 31 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
      Write(location);
 
             
@@ -120,7 +130,7 @@ WriteLiteral(" <br />\r\nNotes: ");
 
 
             
-            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 33 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
   Write(Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />")));
 
             
@@ -130,7 +140,7 @@ WriteLiteral("<br />\r\n\r\n<br />\r\n");
 
 
             
-            #line 35 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 36 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
 Write(Html.ActionLink("Edit Company Details", MVC.Company.Edit(Model.Id)));
 
             
