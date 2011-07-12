@@ -10,6 +10,8 @@ using System.Reflection;
 using MyJobLeads.DomainModel.Data;
 using System.Runtime.CompilerServices;
 using Castle.MicroKernel;
+using FluentValidation;
+using MyJobLeads.Infrastructure.Providers;
 
 namespace MyJobLeads.Tests.WebInfrastructure
 {
@@ -48,6 +50,21 @@ namespace MyJobLeads.Tests.WebInfrastructure
 
             // Verify
             Assert.IsTrue(failureCount == 0, assertOutput + string.Format("{0} classes missing from Windsor", failureCount));
+        }
+
+        [TestMethod]
+        public void Can_Resolve_Validator_Factory()
+        {
+            // Setup
+            IWindsorContainer container = new WindsorContainer();
+            container.Kernel.ComponentModelBuilder.AddContributor(new SingletonLifestyleEqualizer());
+            container.Install(FromAssembly.Containing<HomeController>());
+
+            // Act
+            IValidatorFactory factory = container.Resolve<IValidatorFactory>();
+
+            // verify
+            Assert.AreEqual(typeof(WindsorValidatorFactory), factory.GetType(), "Unexpected validator factory found");
         }
     }
 }
