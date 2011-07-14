@@ -132,6 +132,7 @@
     <Compile Include="Providers\Search\ISearchProvider.cs" />
     <Compile Include="Providers\Search\LuceneSearchProvider.cs" />
     <Compile Include="Providers\IServiceFactory.cs" />
+    <Compile Include="Providers\Validation\CompanyValidator.cs" />
     <Compile Include="Providers\Validation\JobSearchValidator.cs" />
     <Compile Include="Queries\Companies\IsUserAuthorizedForCompanyQuery.cs" />
     <Compile Include="Queries\Companies\LeadStatusesAvailableForCompaniesQuery.cs" />
