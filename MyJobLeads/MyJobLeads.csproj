@@ -251,6 +251,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\HtmlHelpers\NumericDisplayHelpers.cs" />
+    <Compile Include="Infrastructure\Installers\ValidatorInstaller.cs" />
     <Compile Include="Infrastructure\Providers\AppDataDirectoryProvider.cs" />
     <Compile Include="Infrastructure\Attributes\MJLAuthorizeAttribute.cs" />
     <Compile Include="Infrastructure\ModelBinders\EmptyStringModelBaseBinder.cs" />
