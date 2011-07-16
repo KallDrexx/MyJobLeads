@@ -154,12 +154,32 @@ Write(Html.HiddenFor(x => x.Id));
             
             #line default
             #line hidden
-WriteLiteral("    <table>\r\n        <tr>\r\n            <td align=\"right\">Name:</td>\r\n            " +
-"<td>");
+WriteLiteral("    <p>");
 
 
             
-            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+  Write(Html.ValidationSummary());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</p>\r\n");
+
+
+            
+            #line 27 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <table>\r\n\r\n        <tr>\r\n            <td align=\"right\">Name:</td>\r\n          " +
+"  <td>");
+
+
+            
+            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
            Write(Html.EditorFor(x => x.Name));
 
             
@@ -169,7 +189,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n\r\n");
 
 
             
-            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 35 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
          if (Model.Id > 0)
         {
 
@@ -181,7 +201,7 @@ WriteLiteral("            <tr>\r\n                <td align=\"right\">Status:</t
 
 
             
-            #line 37 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
                Write(Html.DropDownListFor(x => x.LeadStatus, new SelectList(Model.AvailableLeadStatuses, Model.LeadStatus)));
 
             
@@ -191,7 +211,7 @@ WriteLiteral("\r\n                </td>\r\n            </tr>\r\n");
 
 
             
-            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 43 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
         }
 
             
@@ -202,7 +222,7 @@ WriteLiteral("\r\n        <tr>\r\n            <td align=\"right\">Phone Number:<
 
 
             
-            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 47 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
            Write(Html.EditorFor(x => x.Phone));
 
             
@@ -213,7 +233,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td alig
 
 
             
-            #line 49 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 52 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
            Write(Html.EditorFor(x => x.City));
 
             
@@ -224,7 +244,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td alig
 
 
             
-            #line 54 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 57 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
            Write(Html.EditorFor(x => x.State));
 
             
@@ -235,7 +255,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td alig
 
 
             
-            #line 59 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 62 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
            Write(Html.EditorFor(x => x.Zip));
 
             
@@ -246,7 +266,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td alig
 
 
             
-            #line 64 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 67 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
            Write(Html.TextAreaFor(x => x.Notes, new { rows = 10, cols = 50 }));
 
             
@@ -258,7 +278,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td></td
 
 
             
-            #line 74 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 77 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
 }
 
             
