@@ -9,6 +9,7 @@ using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Queries.MilestoneConfigs;
 using MyJobLeads.DomainModel.Providers;
+using FluentValidation;
 
 namespace MyJobLeads.DomainModel.Commands.JobSearches
 {
@@ -97,6 +98,10 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
                 HistoryAction = MJLConstants.HistoryInsert,
                 DateModified = DateTime.Now
             });
+
+            // Perform validation
+            var validator = _serviceFactory.GetService<IValidator<JobSearch>>();
+            validator.ValidateAndThrow(search);
 
             unitOfWork.JobSearches.Add(search);
             unitOfWork.Commit();
