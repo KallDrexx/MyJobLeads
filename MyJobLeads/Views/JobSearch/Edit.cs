@@ -20,12 +20,15 @@ namespace MyJobLeads.Views.JobSearch
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/JobSearch/Edit.cshtml")]
     public class Edit : System.Web.Mvc.WebViewPage<MyJobLeads.DomainModel.Entities.JobSearch>
     {
@@ -145,12 +148,22 @@ WriteLiteral("    <fieldset>\r\n        ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n    \r\n        <div class=\"required\">\r\n            <label>Job Search Title</labe" +
-"l>\r\n            ");
+WriteLiteral("\r\n\r\n        <p>");
 
 
             
-            #line 36 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 34 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+      Write(Html.ValidationSummary());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</p>\r\n    \r\n        <div class=\"required\">\r\n            <label>Job Search Title</" +
+"label>\r\n            ");
+
+
+            
+            #line 38 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
        Write(Html.TextBoxFor(x => x.Name));
 
             
@@ -161,7 +174,7 @@ WriteLiteral("\r\n        </div>\r\n\r\n        <div class=\"required\">\r\n    
 
 
             
-            #line 42 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
        Write(Html.TextAreaFor(x => x.Description, new { rows = 4 }));
 
             
@@ -172,7 +185,7 @@ WriteLiteral("\r\n        </div>\r\n        \r\n        <div class=\"submit\">\r
 
 
             
-            #line 47 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 49 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
              if (isNewJobSearch)
             {
                 
@@ -180,14 +193,14 @@ WriteLiteral("\r\n        </div>\r\n        \r\n        <div class=\"submit\">\r
             #line default
             #line hidden
             
-            #line 49 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
            Write(Html.ActionLink("Cancel", MVC.JobSearch.Index()));
 
             
             #line default
             #line hidden
             
-            #line 49 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
                                                                  ;
             }
             else
@@ -197,14 +210,14 @@ WriteLiteral("\r\n        </div>\r\n        \r\n        <div class=\"submit\">\r
             #line default
             #line hidden
             
-            #line 53 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 55 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
            Write(Html.ActionLink("Cancel", MVC.JobSearch.Details(Model.Id)));
 
             
             #line default
             #line hidden
             
-            #line 53 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 55 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
                                                                            ;
             }
 
@@ -215,7 +228,7 @@ WriteLiteral("\r\n        </div>\r\n    </fieldset>\r\n");
 
 
             
-            #line 58 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 60 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
 }
             
             #line default
