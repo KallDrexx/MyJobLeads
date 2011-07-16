@@ -136,6 +136,7 @@
     <Compile Include="Providers\Validation\ContactValidator.cs" />
     <Compile Include="Providers\Validation\JobSearchValidator.cs" />
     <Compile Include="Providers\Validation\TaskValidator.cs" />
+    <Compile Include="Providers\Validation\UserValidator.cs" />
     <Compile Include="Queries\Companies\IsUserAuthorizedForCompanyQuery.cs" />
     <Compile Include="Queries\Companies\LeadStatusesAvailableForCompaniesQuery.cs" />
     <Compile Include="Queries\Contacts\IsUserAuthorizedForContactQuery.cs" />

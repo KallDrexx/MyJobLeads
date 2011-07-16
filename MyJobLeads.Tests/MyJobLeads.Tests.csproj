@@ -136,6 +136,7 @@
     <Compile Include="Providers\General\WindsorServiceFactoryTests.cs" />
     <Compile Include="Providers\General\WindsorValidatorFactoryTests.cs" />
     <Compile Include="Providers\Validators\TaskValidatorTests.cs" />
+    <Compile Include="Providers\Validators\UserValidatorTests.cs" />
     <Compile Include="Queries\Companies\IsUserAuthorizedForCompanyQueryTests.cs" />
     <Compile Include="Commands\Contacts\CreateContactCommandTests.cs" />
     <Compile Include="Commands\Contacts\EditContactCommandTests.cs" />
