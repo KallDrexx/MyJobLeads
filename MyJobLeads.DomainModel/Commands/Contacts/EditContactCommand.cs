@@ -10,6 +10,7 @@ using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Providers;
+using FluentValidation;
 
 namespace MyJobLeads.DomainModel.Commands.Contacts
 {
@@ -182,6 +183,10 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
                 HistoryAction = MJLConstants.HistoryUpdate,
                 DateModified = DateTime.Now
             });
+
+            // Perform Validation
+            var validator = _serviceFactory.GetService<IValidator<Contact>>();
+            validator.ValidateAndThrow(contact);
 
             // Submit changes
             unitofWork.Commit();
