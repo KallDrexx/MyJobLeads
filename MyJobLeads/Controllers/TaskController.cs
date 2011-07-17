@@ -14,6 +14,7 @@ using MyJobLeads.DomainModel.Queries.Contacts;
 using MyJobLeads.Infrastructure.Attributes;
 using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Providers;
+using FluentValidation;
 
 namespace MyJobLeads.Controllers
 {
@@ -76,37 +77,56 @@ namespace MyJobLeads.Controllers
             Task task;
             int selectedContactId = model.AssociatedContactId == -1 ? 0 : model.AssociatedContactId;
 
-            // Determine if this is a new task or not
-            if (model.Id == 0)
+            try
             {
-                task = _serviceFactory.GetService<CreateTaskCommand>().Execute(new CreateTaskCommandParams
+                // Determine if this is a new task or not
+                if (model.Id == 0)
                 {
-                    CompanyId = model.AssociatedCompanyId,
-                    Name = model.Name,
-                    Category = model.Category,
-                    TaskDate = model.TaskDate,
-                    ContactId = selectedContactId,
-                    RequestedUserId = CurrentUserId,
-                    Notes = model.Notes
-                });
-            }
-            else
-            {
-                // Existing task
-                task = _serviceFactory.GetService<EditTaskCommand>().Execute(new EditTaskCommandParams
+                    task = _serviceFactory.GetService<CreateTaskCommand>().Execute(new CreateTaskCommandParams
+                    {
+                        CompanyId = model.AssociatedCompanyId,
+                        Name = model.Name,
+                        Category = model.Category,
+                        TaskDate = model.TaskDate,
+                        ContactId = selectedContactId,
+                        RequestedUserId = CurrentUserId,
+                        Notes = model.Notes
+                    });
+                }
+                else
                 {
-                    TaskId = model.Id,
-                    TaskDate = model.TaskDate,
-                    Name = model.Name,
-                    ContactId = selectedContactId,
-                    Completed = model.Completed,
-                    Category = model.Category,
-                    RequestingUserId = CurrentUserId,
-                    Notes = model.Notes
-                });
+                    // Existing task
+                    task = _serviceFactory.GetService<EditTaskCommand>().Execute(new EditTaskCommandParams
+                    {
+                        TaskId = model.Id,
+                        TaskDate = model.TaskDate,
+                        Name = model.Name,
+                        ContactId = selectedContactId,
+                        Completed = model.Completed,
+                        Category = model.Category,
+                        RequestingUserId = CurrentUserId,
+                        Notes = model.Notes
+                    });
+                }
+
+                return RedirectToAction(MVC.Task.Details(task.Id));
             }
 
-            return RedirectToAction(MVC.Task.Details(task.Id));
+            catch (ValidationException ex)
+            {
+                // Add all the errors to the model state
+                foreach (var error in ex.Errors)
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+
+                // Re-retrieve the contact and company entities from the database
+                model.Contact = _serviceFactory.GetService<ContactByIdQuery>().WithContactId(selectedContactId).Execute();
+                model.Company = _serviceFactory.GetService<CompanyByIdQuery>().WithCompanyId(model.AssociatedCompanyId).Execute();
+                model.AvailableCategoryList = _serviceFactory.GetService<CategoriesAvailableForTasksQuery>().Execute();
+                CreateCompanyContactList(Convert.ToInt32(model.AssociatedContactId), model.Company, model);
+
+                // Re-show form
+                return View(model);
+            }
         }
 
         public virtual ActionResult Details(int id)
