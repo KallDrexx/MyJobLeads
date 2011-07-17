@@ -11,6 +11,7 @@ using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.DomainModel.Commands.JobSearches;
+using FluentValidation;
 
 namespace MyJobLeads.DomainModel.Commands.Contacts
 {
@@ -191,6 +192,11 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
                 HistoryAction = MJLConstants.HistoryInsert
             });
 
+            // Perform Validation
+            var validator = _serviceFactory.GetService<IValidator<Contact>>();
+            validator.ValidateAndThrow(contact);
+
+            // Commit to database
             unitOfWork.Contacts.Add(contact);
             unitOfWork.Commit();
 

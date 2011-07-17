@@ -15,6 +15,8 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Commands.JobSearches;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace MyJobLeads.Tests.Commands.Contacts
 {
@@ -26,6 +28,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
         private User _user;
         private Mock<ISearchProvider> _searchProvider;
         private Mock<UpdateJobSearchMetricsCommand> _updateMetricsCmd;
+        private Mock<IValidator<Contact>> _validator;
 
         private void InitializeTestEntities()
         {
@@ -55,6 +58,10 @@ namespace MyJobLeads.Tests.Commands.Contacts
 
             _updateMetricsCmd = new Mock<UpdateJobSearchMetricsCommand>(_serviceFactory.Object);
             _serviceFactory.Setup(x => x.GetService<UpdateJobSearchMetricsCommand>()).Returns(_updateMetricsCmd.Object);
+
+            _validator = new Mock<IValidator<Contact>>();
+            _validator.Setup(x => x.Validate(It.IsAny<Contact>())).Returns(new ValidationResult());
+            _serviceFactory.Setup(x => x.GetService<IValidator<Contact>>()).Returns(_validator.Object);
         }
 
         [TestMethod]
@@ -121,7 +128,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             Assert.AreEqual("Notes", result.Notes, "The contact's notes was incorrect");
             Assert.AreEqual(_company, result.Company, "The contact is associated with the incorrect company");
         }
-       
+
         [TestMethod]
         public void Execute_Throws_Exception_When_Company_Not_Found()
         {
@@ -272,6 +279,43 @@ namespace MyJobLeads.Tests.Commands.Contacts
 
             // Verify
             _updateMetricsCmd.Verify(x => x.Execute(It.Is<UpdateJobSearchMetricsCmdParams>(y => y.JobSearchId == _jobSearch.Id)));
+        }
+
+        [TestMethod]
+        public void Command_Performs_Contact_Validation()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new CreateContactCommand(_serviceFactory.Object).Execute();
+
+            // Verify
+            _validator.Verify(x => x.Validate(It.IsAny<Contact>()), Times.Once());
+        }
+
+        [TestMethod]
+        public void Command_Throws_ValidationException_On_Contact_Validation_Failure()
+        {
+            // Setup
+            InitializeTestEntities();
+            _validator.Setup(x => x.Validate(It.IsAny<Contact>()))
+                        .Returns(new ValidationResult(new List<ValidationFailure> { new ValidationFailure("testp", "teste") }));
+
+            // Act
+            try
+            {
+                new CreateContactCommand(_serviceFactory.Object).Execute();
+                Assert.Fail("No exception was thrown");
+            }
+
+            // Verify
+            catch (ValidationException ex)
+            {
+                Assert.AreEqual(1, ex.Errors.Count(), "Incorrect number of errors returned");
+                Assert.AreEqual("testp", ex.Errors.First().PropertyName, "The error's property name was incorrect");
+                Assert.AreEqual("teste", ex.Errors.First().ErrorMessage, "The error's message was incorrect");
+            }
         }
     }
 }
