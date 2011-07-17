@@ -99,10 +99,9 @@ namespace MyJobLeads.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(MyJobLeads.ViewModels.Contacts.EditContactViewModel contactModel, int companyId) {
+        public override System.Web.Mvc.ActionResult Edit(MyJobLeads.ViewModels.Contacts.EditContactViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
-            callInfo.RouteValueDictionary.Add("contactModel", contactModel);
-            callInfo.RouteValueDictionary.Add("companyId", companyId);
+            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 
