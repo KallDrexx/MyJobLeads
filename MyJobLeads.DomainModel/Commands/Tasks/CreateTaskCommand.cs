@@ -12,6 +12,7 @@ using MyJobLeads.DomainModel.Queries.Contacts;
 using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.DomainModel.Commands.JobSearches;
+using FluentValidation;
 
 namespace MyJobLeads.DomainModel.Commands.Tasks
 {
@@ -90,6 +91,10 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 DateModified = DateTime.Now,
                 AuthoringUser = user
             });
+
+            // Perform Validation
+            var validation = _serviceFactory.GetService<IValidator<Task>>();
+            validation.ValidateAndThrow(task);
 
             unitOfWork.Tasks.Add(task);
             unitOfWork.Commit();
