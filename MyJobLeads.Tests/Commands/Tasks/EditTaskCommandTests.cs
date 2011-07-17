@@ -15,6 +15,8 @@ using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Queries.Tasks;
 using MyJobLeads.DomainModel.Queries.Contacts;
 using MyJobLeads.DomainModel.Commands.JobSearches;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace MyJobLeads.Tests.Commands.Tasks
 {
@@ -31,6 +33,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
         private Mock<TaskByIdQuery> _taskQuery;
         private Mock<ContactByIdQuery> _contactQuery;
         private Mock<UpdateJobSearchMetricsCommand> _updateMetricsCmd;
+        private Mock<IValidator<Task>> _validator;
 
         private void InitializeTestEntities()
         {
@@ -79,6 +82,10 @@ namespace MyJobLeads.Tests.Commands.Tasks
 
             _updateMetricsCmd = new Mock<UpdateJobSearchMetricsCommand>(_serviceFactory.Object);
             _serviceFactory.Setup(x => x.GetService<UpdateJobSearchMetricsCommand>()).Returns(_updateMetricsCmd.Object);
+
+            _validator = new Mock<IValidator<Task>>();
+            _validator.Setup(x => x.Validate(It.IsAny<Task>())).Returns(new ValidationResult());
+            _serviceFactory.Setup(x => x.GetService<IValidator<Task>>()).Returns(_validator.Object);
         }
 
         [TestMethod]
@@ -382,6 +389,43 @@ namespace MyJobLeads.Tests.Commands.Tasks
             // Verify
             Task result = _unitOfWork.Tasks.Fetch().Single();
             Assert.AreEqual("New Note", result.Notes, "The task's notes were incorrect");
+        }
+
+        [TestMethod]
+        public void Command_Performs_Contact_Validation()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams());
+
+            // Verify
+            _validator.Verify(x => x.Validate(It.IsAny<Task>()), Times.Once());
+        }
+
+        [TestMethod]
+        public void Command_Throws_ValidationException_On_Task_Validation_Failure()
+        {
+            // Setup
+            InitializeTestEntities();
+            _validator.Setup(x => x.Validate(It.IsAny<Task>()))
+                        .Returns(new ValidationResult(new List<ValidationFailure> { new ValidationFailure("testp", "teste") }));
+
+            // Act
+            try
+            {
+                new EditTaskCommand(_serviceFactory.Object).Execute(new EditTaskCommandParams());
+                Assert.Fail("No exception was thrown");
+            }
+
+            // Verify
+            catch (ValidationException ex)
+            {
+                Assert.AreEqual(1, ex.Errors.Count(), "Incorrect number of errors returned");
+                Assert.AreEqual("testp", ex.Errors.First().PropertyName, "The error's property name was incorrect");
+                Assert.AreEqual("teste", ex.Errors.First().ErrorMessage, "The error's message was incorrect");
+            }
         }
     }
 }
