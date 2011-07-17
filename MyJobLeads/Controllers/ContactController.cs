@@ -13,6 +13,7 @@ using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.Infrastructure.Attributes;
 using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Providers;
+using FluentValidation;
 
 namespace MyJobLeads.Controllers
 {
@@ -46,41 +47,55 @@ namespace MyJobLeads.Controllers
         }
 
         [HttpPost]
-        public virtual ActionResult Edit(EditContactViewModel contactModel, int companyId)
+        public virtual ActionResult Edit(EditContactViewModel model)
         {
-            var contact = contactModel.Contact;
+            var contact = model.Contact;
 
-            // Determine if this is a new contact or not
-            if (contact.Id == 0)
+            try
             {
-                contact = new CreateContactCommand(_serviceFactory).WithCompanyId(companyId)
-                                                               .SetAssistant(contact.Assistant)
-                                                               .SetDirectPhone(contact.DirectPhone)
-                                                               .SetEmail(contact.Email)
-                                                               .SetExtension(contact.Extension)
-                                                               .SetMobilePhone(contact.MobilePhone)
-                                                               .SetName(contact.Name)
-                                                               .SetNotes(contact.Notes)
-                                                               .SetReferredBy(contact.ReferredBy)
-                                                               .RequestedByUserId(CurrentUserId)
-                                                               .Execute();
-            }
-            else
-            {
-                contact = new EditContactCommand(_serviceFactory).WithContactId(contact.Id)
-                                                             .SetAssistant(contact.Assistant)
-                                                             .SetDirectPhone(contact.DirectPhone)
-                                                             .SetEmail(contact.Email)
-                                                             .SetExtension(contact.Extension)
-                                                             .SetMobilePhone(contact.MobilePhone)
-                                                             .SetName(contact.Name)
-                                                             .SetNotes(contact.Notes)
-                                                             .SetReferredBy(contact.ReferredBy)
-                                                             .RequestedByUserId(CurrentUserId)
-                                                             .Execute();
+                // Determine if this is a new contact or not
+                if (contact.Id == 0)
+                {
+                    contact = new CreateContactCommand(_serviceFactory).WithCompanyId(model.Company.Id)
+                                                                   .SetAssistant(contact.Assistant)
+                                                                   .SetDirectPhone(contact.DirectPhone)
+                                                                   .SetEmail(contact.Email)
+                                                                   .SetExtension(contact.Extension)
+                                                                   .SetMobilePhone(contact.MobilePhone)
+                                                                   .SetName(contact.Name)
+                                                                   .SetNotes(contact.Notes)
+                                                                   .SetReferredBy(contact.ReferredBy)
+                                                                   .RequestedByUserId(CurrentUserId)
+                                                                   .Execute();
+                }
+                else
+                {
+                    contact = new EditContactCommand(_serviceFactory).WithContactId(contact.Id)
+                                                                 .SetAssistant(contact.Assistant)
+                                                                 .SetDirectPhone(contact.DirectPhone)
+                                                                 .SetEmail(contact.Email)
+                                                                 .SetExtension(contact.Extension)
+                                                                 .SetMobilePhone(contact.MobilePhone)
+                                                                 .SetName(contact.Name)
+                                                                 .SetNotes(contact.Notes)
+                                                                 .SetReferredBy(contact.ReferredBy)
+                                                                 .RequestedByUserId(CurrentUserId)
+                                                                 .Execute();
+                }
+
+                return RedirectToAction(MVC.Contact.Details(contact.Id));
             }
 
-            return RedirectToAction(MVC.Contact.Details(contact.Id));
+            catch (ValidationException ex)
+            {
+                foreach (var error in ex.Errors)
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+
+                // Retrieve the company from the database for the sidebar
+                model.Company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(model.Company.Id).Execute();
+
+                return View(model);
+            }
         }
 
         public virtual ActionResult Details(int id)

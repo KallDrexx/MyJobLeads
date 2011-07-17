@@ -11,6 +11,8 @@ using MyJobLeads.DomainModel;
 using MyJobLeads.DomainModel.Queries.MilestoneConfigs;
 using Moq;
 using MyJobLeads.DomainModel.Entities.Configuration;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace MyJobLeads.Tests.Commands.JobSearches
 {
@@ -19,6 +21,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
     {
         private User _user;
         private Mock<StartingMilestoneQuery> _startingMilestoneQuery;
+        private Mock<IValidator<JobSearch>> _validator;
 
         public void InitializeTestEntities()
         {
@@ -29,6 +32,10 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             // Mocks
             _startingMilestoneQuery = new Mock<StartingMilestoneQuery>(_serviceFactory.Object);
             _serviceFactory.Setup(x => x.GetService<StartingMilestoneQuery>()).Returns(_startingMilestoneQuery.Object);
+
+            _validator = new Mock<IValidator<JobSearch>>();
+            _validator.Setup(x => x.Validate(It.IsAny<JobSearch>())).Returns(new ValidationResult());
+            _serviceFactory.Setup(x => x.GetService<IValidator<JobSearch>>()).Returns(_validator.Object);
         }
 
         [TestMethod]
@@ -152,6 +159,43 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             // Verify
             JobSearch result = _unitOfWork.JobSearches.Fetch().Single();
             Assert.AreEqual(config, result.CurrentMilestone, "Job Search's current milestone was incorrect");
+        }
+
+        [TestMethod]
+        public void Command_Calls_Validation_On_JobSearch()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new CreateJobSearchForUserCommand(_serviceFactory.Object).ForUserId(_user.Id).Execute();
+
+            // Verify
+            _validator.Verify(x => x.Validate(It.IsAny<JobSearch>()), Times.Once());
+        }
+
+        [TestMethod]
+        public void Command_Throws_ValidationException_When_Validation_Fails()
+        {
+            // Setup
+            InitializeTestEntities();
+            _validator.Setup(x => x.Validate(It.IsAny<JobSearch>()))
+                        .Returns(new ValidationResult(new List<ValidationFailure> { new ValidationFailure("testp", "teste") }));
+
+            // Act
+            try
+            {
+                new CreateJobSearchForUserCommand(_serviceFactory.Object).ForUserId(_user.Id).Execute();
+                Assert.Fail("No exception occured");
+            }
+
+            // Verify
+            catch (ValidationException ex)
+            {
+                Assert.AreEqual(1, ex.Errors.Count(), "Incorrect number of validation errors returned");
+                Assert.AreEqual("testp", ex.Errors.First().PropertyName, "The validation property name was incorrect");
+                Assert.AreEqual("teste", ex.Errors.First().ErrorMessage, "The validation error message was incorrect");
+            }
         }
     }
 }

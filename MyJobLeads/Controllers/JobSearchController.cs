@@ -15,6 +15,7 @@ using MyJobLeads.Infrastructure.Attributes;
 using MyJobLeads.DomainModel.Queries.Search;
 using MyJobLeads.ViewModels;
 using MyJobLeads.DomainModel.Providers;
+using FluentValidation;
 
 namespace MyJobLeads.Controllers
 {
@@ -73,23 +74,35 @@ namespace MyJobLeads.Controllers
         [HttpPost]
         public virtual ActionResult Edit(JobSearch jobSearch)
         {
-            // Determine if we are editing or adding a jobsearch
-            if (jobSearch.Id == 0)
+            try
             {
-                jobSearch = _createJobSearchCommand.ForUserId(CurrentUserId)
-                                                    .WithName(jobSearch.Name)
-                                                    .WithDescription(jobSearch.Description)
-                                                    .Execute();
-                return RedirectToAction(MVC.JobSearch.Details(jobSearch.Id));
+                // Determine if we are editing or adding a jobsearch
+                if (jobSearch.Id == 0)
+                {
+                    jobSearch = _createJobSearchCommand.ForUserId(CurrentUserId)
+                                                        .WithName(jobSearch.Name)
+                                                        .WithDescription(jobSearch.Description)
+                                                        .Execute();
+                    return RedirectToAction(MVC.JobSearch.Details(jobSearch.Id));
+                }
+                else
+                {
+                    _editJobSearchCommand.WithJobSearchId(jobSearch.Id)
+                                        .SetName(jobSearch.Name)
+                                        .SetDescription(jobSearch.Description)
+                                        .CalledByUserId(CurrentUserId)
+                                        .Execute();
+                    return RedirectToAction(MVC.JobSearch.Details(jobSearch.Id));
+                }
             }
-            else
+            
+            // Show validation errors to the user and allow them to fix them
+            catch (ValidationException ex)
             {
-                _editJobSearchCommand.WithJobSearchId(jobSearch.Id)
-                                    .SetName(jobSearch.Name)
-                                    .SetDescription(jobSearch.Description)
-                                    .CalledByUserId(CurrentUserId)
-                                    .Execute();
-                return RedirectToAction(MVC.JobSearch.Details(jobSearch.Id));
+                foreach (var error in ex.Errors)
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+
+                return View(jobSearch);
             }
         }
 

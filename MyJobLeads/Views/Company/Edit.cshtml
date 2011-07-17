@@ -23,7 +23,10 @@ else
     @Html.HiddenFor(x => x.JobSearchId)
     @Html.HiddenFor(x => x.Id)
 
+    <p>@Html.ValidationSummary()</p>
+
     <table>
+
         <tr>
             <td align="right">Name:</td>
             <td>@Html.EditorFor(x => x.Name)</td>

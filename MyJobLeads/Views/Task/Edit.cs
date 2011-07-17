@@ -20,7 +20,9 @@ namespace MyJobLeads.Views.Task
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
@@ -37,7 +39,7 @@ namespace MyJobLeads.Views.Task
     #line default
     #line hidden
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Task/Edit.cshtml")]
     public class Edit : System.Web.Mvc.WebViewPage<EditTaskViewModel>
     {
@@ -210,12 +212,32 @@ Write(Html.HiddenFor(x => x.AssociatedCompanyId));
             
             #line default
             #line hidden
+WriteLiteral("    <p>");
+
+
+            
+            #line 54 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+  Write(Html.ValidationSummary());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</p>\r\n");
+
+
+            
+            #line 55 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+
+
+            
+            #line default
+            #line hidden
 WriteLiteral("    <table>\r\n        <tr>\r\n            <td align=\"right\">Category:</td>\r\n        " +
 "    <td>\r\n                ");
 
 
             
-            #line 58 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 60 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
            Write(Html.DropDownListFor(x => x.Category, new SelectList(Model.AvailableCategoryList, Model.Category)));
 
             
@@ -226,7 +248,7 @@ WriteLiteral("\r\n            </td>\r\n        </tr>\r\n\r\n        <tr>\r\n    
 
 
             
-            #line 64 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 66 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
            Write(Html.TextBoxFor(x => x.Name, new { size = 30 }));
 
             
@@ -237,7 +259,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td alig
 
 
             
-            #line 70 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 72 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
            Write(Html.DropDownListFor(x => x.AssociatedContactId, Model.CompanyContactList, new { id = "contactlist" }));
 
             
@@ -248,7 +270,7 @@ WriteLiteral("\r\n            </td>\r\n        </tr>\r\n\r\n        <tr>\r\n    
 
 
             
-            #line 77 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 79 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
            Write(Html.Telerik().DateTimePickerFor(x => x.TaskDate));
 
             
@@ -262,7 +284,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 82 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 84 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
          if (Model.Id != 0)
         {
 
@@ -274,7 +296,7 @@ WriteLiteral("            <tr>\r\n                <td align=\"right\">Task Compl
 
 
             
-            #line 86 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 88 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                Write(Html.CheckBoxFor(x => x.Completed));
 
             
@@ -284,7 +306,7 @@ WriteLiteral("</td>\r\n            </tr>\r\n");
 
 
             
-            #line 88 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 90 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
         }
 
             
@@ -295,7 +317,7 @@ WriteLiteral("        \r\n        <tr>\r\n            <td align=\"right\" valign
 
 
             
-            #line 93 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 95 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
            Write(Html.TextAreaFor(x => x.Notes, 10, 75, null));
 
             
@@ -307,34 +329,34 @@ WriteLiteral("\r\n            </td>\r\n        </tr>\r\n        \r\n        <tr>
 
 
             
-            #line 102 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 104 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                  if (Model.Id != 0) { 
             
             #line default
             #line hidden
             
-            #line 102 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 104 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                                  Write(Html.ActionLink("Back To Task", MVC.Task.Details(Model.Id)));
 
             
             #line default
             #line hidden
             
-            #line 102 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 104 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                                                                                                   ; }
                 else if (Model.AssociatedCompanyId != 0) { 
             
             #line default
             #line hidden
             
-            #line 103 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 105 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                                                       Write(Html.ActionLink("Back To Company", MVC.Company.Details(Model.AssociatedCompanyId)));
 
             
             #line default
             #line hidden
             
-            #line 103 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 105 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                                                                                                                                                }                
 
             
@@ -344,7 +366,7 @@ WriteLiteral("            </td>\r\n        </tr>\r\n    </table>\r\n");
 
 
             
-            #line 107 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 109 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
         
 }
 

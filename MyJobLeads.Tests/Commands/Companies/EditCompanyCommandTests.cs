@@ -14,6 +14,8 @@ using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Queries.Companies;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace MyJobLeads.Tests.Commands.Companies
 {
@@ -24,6 +26,7 @@ namespace MyJobLeads.Tests.Commands.Companies
         private User _user;
         private Mock<ISearchProvider> _searchProvider;
         private Mock<IServiceFactory> _serviceFactory;
+        private Mock<IValidator<Company>> _validator;
 
         private void InitializeTestEntities()
         {
@@ -60,6 +63,10 @@ namespace MyJobLeads.Tests.Commands.Companies
             Mock<CompanyByIdQuery> companyQuery = new Mock<CompanyByIdQuery>(_unitOfWork);
             companyQuery.Setup(x => x.Execute()).Returns(_company);
             _serviceFactory.Setup(x => x.GetService<CompanyByIdQuery>()).Returns(companyQuery.Object);
+
+            _validator = new Mock<IValidator<Company>>();
+            _validator.Setup(x => x.Validate(It.IsAny<Company>())).Returns(new ValidationResult());
+            _serviceFactory.Setup(x => x.GetService<IValidator<Company>>()).Returns(_validator.Object);
         }
 
         [TestMethod]
@@ -529,6 +536,43 @@ namespace MyJobLeads.Tests.Commands.Companies
 
             // Verify
             Assert.AreEqual("new status", result.LeadStatus, "Company's lead status was incorrect");
+        }
+
+        [TestMethod]
+        public void Command_Calls_Validation()
+        {
+            // Setup
+            InitializeTestEntities();
+
+            // Act
+            new EditCompanyCommand(_serviceFactory.Object).Execute();
+
+            // Verify
+            _validator.Verify(x => x.Validate(It.IsAny<Company>()), Times.Once());
+        }
+
+        [TestMethod]
+        public void Command_Throws_ValidationException_When_Validation_Fails()
+        {
+            // Setup
+            InitializeTestEntities();
+            _validator.Setup(x => x.Validate(It.IsAny<Company>()))
+                      .Returns(new ValidationResult(new List<ValidationFailure> { new ValidationFailure("testp", "teste") }));
+
+            // Act
+            try
+            {
+                new EditCompanyCommand(_serviceFactory.Object).Execute();
+                Assert.Fail("No exception was thrown");
+            }
+
+            // Verify
+            catch (ValidationException ex)
+            {
+                Assert.AreEqual(1, ex.Errors.Count(), "The number of errors was incorrect");
+                Assert.AreEqual("testp", ex.Errors.First().PropertyName, "The error's property was incorrect");
+                Assert.AreEqual("teste", ex.Errors.First().ErrorMessage, "The error's message was incorrect");
+            }
         }
     }
 }

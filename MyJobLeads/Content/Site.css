@@ -121,3 +121,10 @@ a img {border:0;}
 .textcenter {text-align:center;}
 .clear {visibility:hidden; clear:both;}
 .hide {display:none;}
+
+/* Validation */
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: Red;
+}

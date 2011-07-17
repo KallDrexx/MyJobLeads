@@ -29,9 +29,11 @@ else
 @{ int companyId = Model.Company.Id; }
 @using (Html.BeginForm(MVC.Contact.Edit(Model.Contact.Id)))
 {
-    @Html.Hidden("companyId", companyId)
+    @Html.HiddenFor(x => x.Company.Id)
     @Html.HiddenFor(x => x.Contact.Id)
 
+    <p>@Html.ValidationSummary()</p>
+    
     <table>
         <tr>
             <td align="right">Name:</td>

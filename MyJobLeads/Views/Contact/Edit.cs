@@ -20,7 +20,9 @@ namespace MyJobLeads.Views.Contact
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
@@ -30,8 +32,9 @@ namespace MyJobLeads.Views.Contact
     
     #line default
     #line hidden
+    using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Contact/Edit.cshtml")]
     public class Edit : System.Web.Mvc.WebViewPage<EditContactViewModel>
     {
@@ -154,14 +157,14 @@ WriteLiteral("\r\n<br />\r\n\r\n");
             #line hidden
             
             #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-Write(Html.Hidden("companyId", companyId));
+Write(Html.HiddenFor(x => x.Company.Id));
 
             
             #line default
             #line hidden
             
             #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-                                        
+                                      
     
             
             #line default
@@ -181,12 +184,32 @@ Write(Html.HiddenFor(x => x.Contact.Id));
             
             #line default
             #line hidden
+WriteLiteral("    <p>");
+
+
+            
+            #line 35 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+  Write(Html.ValidationSummary());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</p>\r\n");
+
+
+            
+            #line 36 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+    
+
+            
+            #line default
+            #line hidden
 WriteLiteral("    <table>\r\n        <tr>\r\n            <td align=\"right\">Name:</td>\r\n            " +
 "<td>");
 
 
             
-            #line 38 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
            Write(Html.EditorFor(x => x.Contact.Name));
 
             
@@ -197,7 +220,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td alig
 
 
             
-            #line 43 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+            #line 45 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
            Write(Html.EditorFor(x => x.Contact.DirectPhone));
 
             
@@ -208,7 +231,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td alig
 
 
             
-            #line 48 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+            #line 50 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
            Write(Html.EditorFor(x => x.Contact.Extension));
 
             
@@ -219,7 +242,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td alig
 
 
             
-            #line 53 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+            #line 55 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
            Write(Html.EditorFor(x => x.Contact.MobilePhone));
 
             
@@ -230,7 +253,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td alig
 
 
             
-            #line 58 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+            #line 60 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
            Write(Html.EditorFor(x => x.Contact.Email));
 
             
@@ -241,7 +264,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td alig
 
 
             
-            #line 63 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+            #line 65 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
            Write(Html.EditorFor(x => x.Contact.Assistant));
 
             
@@ -252,7 +275,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td alig
 
 
             
-            #line 68 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+            #line 70 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
            Write(Html.EditorFor(x => x.Contact.ReferredBy));
 
             
@@ -263,7 +286,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td alig
 
 
             
-            #line 73 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+            #line 75 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
            Write(Html.TextAreaFor(x => x.Contact.Notes, new { rows = 8, cols = 50 }));
 
             
@@ -274,7 +297,7 @@ WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td></td
 
 
             
-            #line 80 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+            #line 82 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
                  if (Model.Contact.Id == 0) { Html.ActionLink("Back", MVC.Company.Details(companyId)); }
                 else { Html.ActionLink("Back", MVC.Contact.Details(Model.Contact.Id)); }
 
@@ -285,7 +308,7 @@ WriteLiteral("            </td>\r\n        </tr>\r\n    </table>\r\n");
 
 
             
-            #line 85 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+            #line 87 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
 }
 
             

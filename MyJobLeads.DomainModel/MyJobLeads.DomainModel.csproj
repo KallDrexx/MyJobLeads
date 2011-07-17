@@ -48,8 +48,9 @@
     <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="FluentValidation">
-      <HintPath>..\packages\FluentValidation.2.0.0.0\lib\NET35\FluentValidation.dll</HintPath>
+    <Reference Include="FluentValidation, Version=3.0.0.1, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentValidation.3.0.0.1\lib\Net40\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net">
       <HintPath>..\packages\Lucene.2.9.2.2\lib\Lucene.Net.dll</HintPath>
@@ -131,6 +132,11 @@
     <Compile Include="Providers\Search\ISearchProvider.cs" />
     <Compile Include="Providers\Search\LuceneSearchProvider.cs" />
     <Compile Include="Providers\IServiceFactory.cs" />
+    <Compile Include="Providers\Validation\CompanyValidator.cs" />
+    <Compile Include="Providers\Validation\ContactValidator.cs" />
+    <Compile Include="Providers\Validation\JobSearchValidator.cs" />
+    <Compile Include="Providers\Validation\TaskValidator.cs" />
+    <Compile Include="Providers\Validation\UserValidator.cs" />
     <Compile Include="Queries\Companies\IsUserAuthorizedForCompanyQuery.cs" />
     <Compile Include="Queries\Companies\LeadStatusesAvailableForCompaniesQuery.cs" />
     <Compile Include="Queries\Contacts\IsUserAuthorizedForContactQuery.cs" />
@@ -140,6 +146,7 @@
     <Compile Include="Queries\Search\EntitySearchQuery.cs" />
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQuery.cs" />
     <Compile Include="Queries\Tasks\IsUserAuthorizedForTaskQuery.cs" />
+    <Compile Include="TypeExtensions.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgress.cs" />
     <Compile Include="ViewModels\SearchProviderResult.cs" />
     <Compile Include="Queries\Companies\CompaniesByJobSearchIdQuery.cs" />

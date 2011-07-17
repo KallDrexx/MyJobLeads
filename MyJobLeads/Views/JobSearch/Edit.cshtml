@@ -30,6 +30,8 @@ else
 {
     <fieldset>
         @Html.HiddenFor(x => x.Id)
+
+        <p>@Html.ValidationSummary()</p>
     
         <div class="required">
             <label>Job Search Title</label>

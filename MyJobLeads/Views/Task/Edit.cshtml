@@ -51,6 +51,8 @@ else
     @Html.HiddenFor(x => x.Id)
     @Html.HiddenFor(x => x.AssociatedCompanyId)
 
+    <p>@Html.ValidationSummary()</p>
+
     <table>
         <tr>
             <td align="right">Category:</td>

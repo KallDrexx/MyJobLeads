@@ -11,6 +11,7 @@ using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.DomainModel.Commands.JobSearches;
+using FluentValidation;
 
 namespace MyJobLeads.DomainModel.Commands.Companies
 {
@@ -192,6 +193,10 @@ namespace MyJobLeads.DomainModel.Commands.Companies
                 DateModified = DateTime.Now,
                 HistoryAction = MJLConstants.HistoryInsert
             });
+
+            // Perform validation
+            var validator = _serviceFactory.GetService<IValidator<Company>>();
+            validator.ValidateAndThrow(company);
 
             var unitOfWork = _serviceFactory.GetService<IUnitOfWork>();
             unitOfWork.Companies.Add(company);

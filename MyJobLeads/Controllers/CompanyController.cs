@@ -13,6 +13,7 @@ using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.ViewModels.Companies;
 using MyJobLeads.DomainModel.Queries.JobSearches;
 using MyJobLeads.DomainModel.Commands.JobSearches;
+using FluentValidation;
 
 namespace MyJobLeads.Controllers
 {
@@ -65,38 +66,49 @@ namespace MyJobLeads.Controllers
         {
             Company company;
 
-            // Determine if this is a new company or not
-            if (model.Id == 0)
+            try
             {
-                company = new CreateCompanyCommand(_serviceFactory).WithJobSearch(model.JobSearchId)
-                                                                      .SetName(model.Name)
-                                                                      .SetCity(model.City)
-                                                                      .SetIndustry(model.Industry)
-                                                                      .SetMetroArea(model.MetroArea)
-                                                                      .SetNotes(model.Notes)
-                                                                      .SetPhone(model.Phone)
-                                                                      .SetState(model.State)
-                                                                      .SetZip(model.Zip)
-                                                                      .CalledByUserId(CurrentUserId)
-                                                                      .Execute();
-            }
-            else
-            {
-                company = new EditCompanyCommand(_serviceFactory).WithCompanyId(model.Id)
-                                                                      .SetName(model.Name)
-                                                                      .SetCity(model.City)
-                                                                      .SetIndustry(model.Industry)
-                                                                      .SetMetroArea(model.MetroArea)
-                                                                      .SetNotes(model.Notes)
-                                                                      .SetPhone(model.Phone)
-                                                                      .SetState(model.State)
-                                                                      .SetZip(model.Zip)
-                                                                      .SetLeadStatus(model.LeadStatus)
-                                                                      .RequestedByUserId(CurrentUserId)
-                                                                      .Execute();
+                // Determine if this is a new company or not
+                if (model.Id == 0)
+                {
+                    company = new CreateCompanyCommand(_serviceFactory).WithJobSearch(model.JobSearchId)
+                                                                          .SetName(model.Name)
+                                                                          .SetCity(model.City)
+                                                                          .SetIndustry(model.Industry)
+                                                                          .SetMetroArea(model.MetroArea)
+                                                                          .SetNotes(model.Notes)
+                                                                          .SetPhone(model.Phone)
+                                                                          .SetState(model.State)
+                                                                          .SetZip(model.Zip)
+                                                                          .CalledByUserId(CurrentUserId)
+                                                                          .Execute();
+                }
+                else
+                {
+                    company = new EditCompanyCommand(_serviceFactory).WithCompanyId(model.Id)
+                                                                          .SetName(model.Name)
+                                                                          .SetCity(model.City)
+                                                                          .SetIndustry(model.Industry)
+                                                                          .SetMetroArea(model.MetroArea)
+                                                                          .SetNotes(model.Notes)
+                                                                          .SetPhone(model.Phone)
+                                                                          .SetState(model.State)
+                                                                          .SetZip(model.Zip)
+                                                                          .SetLeadStatus(model.LeadStatus)
+                                                                          .RequestedByUserId(CurrentUserId)
+                                                                          .Execute();
+                }
+
+                return RedirectToAction(MVC.Company.Details(company.Id));
             }
 
-            return RedirectToAction(MVC.Company.Details(company.Id));
+            catch (ValidationException ex)
+            {
+                foreach (var error in ex.Errors)
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+
+                return View(model);
+            }
         }
 
         public virtual ActionResult Details(int id)
