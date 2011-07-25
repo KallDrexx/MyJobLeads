@@ -142,6 +142,7 @@
     <Compile Include="Queries\Contacts\IsUserAuthorizedForContactQuery.cs" />
     <Compile Include="Queries\JobSearches\IsUserAuthorizedForJobSearchQuery.cs" />
     <Compile Include="Queries\MilestoneConfigs\StartingMilestoneQuery.cs" />
+    <Compile Include="Queries\Organizations\OrganizationByAdministeringUserQuery.cs" />
     <Compile Include="Queries\Organizations\OrganizationByRegistrationTokenQuery.cs" />
     <Compile Include="Queries\Search\EntitySearchQuery.cs" />
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQuery.cs" />
