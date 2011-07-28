@@ -22,7 +22,6 @@ namespace MyJobLeads.Controllers
     public partial class TaskController : MyJobLeadsBaseController
     {
         protected ISearchProvider _searchProvider;
-        protected IServiceFactory _serviceFactory;
 
         public TaskController(IServiceFactory factory)
         {

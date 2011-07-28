@@ -1,0 +1,32 @@
+﻿@model MyJobLeads.DomainModel.Entities.Organization
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>University Dashboard</h2>
+
+<p>
+    Name: @Model.Name <br />
+    Number of users: @Model.Members.Count <br />
+    Registration URL: 
+        @Html.ActionLink("Registration URL", MVC.Account.RegisterWithOrganization((Guid?)Model.RegistrationToken)) <br />
+
+    @if (Model.IsEmailDomainRestricted)
+    {
+        @:User registration <b>IS</b> restricted by the following email domains:
+        <ul>
+            @foreach (var email in Model.EmailDomains)
+            {
+                <li>@email.Domain</li>   
+            }
+        </ul>
+    }
+
+    else
+    {
+        @:User registration is <b>NOT</b> restricted by email domains <br />
+    }
+</p>
+
+@Html.ActionLink("Edit Settings", MVC.Organization.EditOrganization.Index(Model.Id))

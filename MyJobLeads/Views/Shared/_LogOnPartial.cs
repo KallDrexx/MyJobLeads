@@ -20,12 +20,15 @@ namespace MyJobLeads.Views.Shared
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/_LogOnPartial.cshtml")]
     public class _LogOnPartial : System.Web.Mvc.WebViewPage<dynamic>
     {
@@ -69,7 +72,7 @@ WriteLiteral(" ]\r\n    [ ");
 
             
             #line 4 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Shared\_LogOnPartial.cshtml"
- Write(Html.ActionLink("Log Off", "LogOff", "Account"));
+ Write(Html.ActionLink("Log Off", MVC.Account.LogOff()));
 
             
             #line default

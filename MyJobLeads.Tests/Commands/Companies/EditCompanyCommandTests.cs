@@ -25,7 +25,6 @@ namespace MyJobLeads.Tests.Commands.Companies
         private Company _company;
         private User _user;
         private Mock<ISearchProvider> _searchProvider;
-        private Mock<IServiceFactory> _serviceFactory;
         private Mock<IValidator<Company>> _validator;
 
         private void InitializeTestEntities()

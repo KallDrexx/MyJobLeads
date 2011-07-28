@@ -21,7 +21,6 @@ namespace MyJobLeads.Controllers
     public partial class CompanyController : MyJobLeadsBaseController
     {
         protected ISearchProvider _searchProvider;
-        protected IServiceFactory _serviceFactory;
 
         public CompanyController(IUnitOfWork unitOfWork, ISearchProvider searchProvider, IServiceFactory serviceFactory)
         {

@@ -20,10 +20,10 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace MyJobLeads.Controllers {
-    public partial class HomeController {
+namespace MyJobLeads.Areas.Organization.Controllers {
+    public partial class EditOrganizationController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected HomeController(Dummy d) { }
+        protected EditOrganizationController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result) {
@@ -33,16 +33,16 @@ namespace MyJobLeads.Controllers {
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult SubmitFeedback() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.SubmitFeedback);
+        public System.Web.Mvc.ActionResult Index() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Index);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public HomeController Actions { get { return MVC.Home; } }
+        public EditOrganizationController Actions { get { return MVC.Organization.EditOrganization; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "";
+        public readonly string Area = "Organization";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Home";
+        public readonly string Name = "EditOrganization";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -50,9 +50,6 @@ namespace MyJobLeads.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string Index = "Index";
-            public readonly string About = "About";
-            public readonly string SubmitFeedback = "SubmitFeedback";
-            public readonly string FixBlankTitles = "FixBlankTitles";
         }
 
 
@@ -61,39 +58,23 @@ namespace MyJobLeads.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string About = "~/Views/Home/About.cshtml";
-            public readonly string FixBlankTitles = "~/Views/Home/FixBlankTitles.cshtml";
-            public readonly string Index = "~/Views/Home/Index.cshtml";
-            public readonly string SubmitFeedback = "~/Views/Home/SubmitFeedback.cshtml";
-            public readonly string Test = "~/Views/Home/Test.cshtml";
+            public readonly string Index = "~/Areas/Organization/Views/EditOrganization/Index.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_HomeController: MyJobLeads.Controllers.HomeController {
-        public T4MVC_HomeController() : base(Dummy.Instance) { }
+    public class T4MVC_EditOrganizationController: MyJobLeads.Areas.Organization.Controllers.EditOrganizationController {
+        public T4MVC_EditOrganizationController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult Index() {
+        public override System.Web.Mvc.ActionResult Index(int id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult About() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.About);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult SubmitFeedback(string name, string email, string feedback, string fromUrl) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SubmitFeedback);
-            callInfo.RouteValueDictionary.Add("name", name);
-            callInfo.RouteValueDictionary.Add("email", email);
-            callInfo.RouteValueDictionary.Add("feedback", feedback);
-            callInfo.RouteValueDictionary.Add("fromUrl", fromUrl);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult FixBlankTitles() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.FixBlankTitles);
+        public override System.Web.Mvc.ActionResult Index(MyJobLeads.ViewModels.Organizations.EditOrganizationViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 

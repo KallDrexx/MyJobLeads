@@ -28,5 +28,6 @@ namespace MyJobLeads
         public int CurrentUserId { get; set; }
 
         protected IUnitOfWork _unitOfWork;
+        protected IServiceFactory _serviceFactory;
     }
 }
