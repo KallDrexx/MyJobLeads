@@ -13,7 +13,6 @@ namespace MyJobLeads.Tests.Commands.JobSearches
     public class UpdateJobSearchMetricsCommandTests : EFTestBase
     {
         private JobSearch _search;
-        private Mock<IServiceFactory> _serviceFactory;
 
         private void InitializeTestEntities()
         {

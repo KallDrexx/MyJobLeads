@@ -21,7 +21,6 @@ namespace MyJobLeads.Controllers
     public partial class ContactController : MyJobLeadsBaseController
     {
         protected ISearchProvider _searchProvider;
-        protected IServiceFactory _serviceFactory;
 
         public ContactController(IServiceFactory factory)
         {

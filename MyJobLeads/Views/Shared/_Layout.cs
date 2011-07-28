@@ -20,7 +20,9 @@ namespace MyJobLeads.Views.Shared
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
@@ -31,7 +33,7 @@ namespace MyJobLeads.Views.Shared
     #line default
     #line hidden
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/_Layout.cshtml")]
     public class _Layout : System.Web.Mvc.WebViewPage<dynamic>
     {
@@ -121,9 +123,18 @@ WriteLiteral("</li>\r\n\t\t\t\t    <li>");
             
             #line default
             #line hidden
-WriteLiteral("</li>\r\n\t\t\t\t    <li><a href=\"#\">University Access</a></li>\r\n\t\t\t    </ul>\r\n\t\t    </" +
-"div>\r\n\t    </div>\r\n    </div>\r\n\r\n    <div id=\"wrap\">\r\n        <div class=\"inner\"" +
-">\r\n\r\n\t        <div id=\"content\">\r\n\t\t        ");
+WriteLiteral("</li>\r\n                    <li>");
+
+
+            
+            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Shared\_Layout.cshtml"
+                   Write(Html.ActionLink("University Admin", MVC.Organization.Dashboard.Index()));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</li>\r\n\t\t\t    </ul>\r\n\t\t    </div>\r\n\t    </div>\r\n    </div>\r\n\r\n    <div id=\"wrap\">" +
+"\r\n        <div class=\"inner\">\r\n\r\n\t        <div id=\"content\">\r\n\t\t        ");
 
 
             

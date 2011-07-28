@@ -26,7 +26,13 @@ namespace MyJobLeads.DomainModel.Entities.EF
             {
                 Email = "test@test.com",
                 Password = PasswordUtils.CreatePasswordHash("test@test.com", "test"),
-                LastVisitedJobSearchId = null
+                LastVisitedJobSearchId = null,
+                IsOrganizationAdmin = true,
+                Organization = new Organization
+                {
+                    RegistrationToken = Guid.NewGuid(),
+                    Name = "Seed Organization"
+                }
             });
 
             context.SaveChanges();

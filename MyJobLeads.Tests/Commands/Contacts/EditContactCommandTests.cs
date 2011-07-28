@@ -25,7 +25,6 @@ namespace MyJobLeads.Tests.Commands.Contacts
         private Contact _contact;
         private User _user;
         private Mock<ISearchProvider> _searchProvider;
-        private Mock<IServiceFactory> _serviceFactory;
         private Mock<UserByIdQuery> _userQuery;
         private Mock<ContactByIdQuery> _contactQuery;
         private Mock<IValidator<Contact>> _validator;

@@ -1,0 +1,39 @@
+﻿@model MyJobLeads.ViewModels.Organizations.EditOrganizationViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Edit Organization</h2>
+
+@using (Html.BeginForm())
+{
+    <table>
+        @Html.HiddenFor(x => x.Id)
+
+        <tr>
+            <td align="right">Name:</td>
+            <td>@Html.EditorFor(x => x.Name)</td>
+        </tr>
+
+        <tr>
+            <td align="right">Enable User Email Restriction?</td>
+            <td>@Html.EditorFor(x => x.IsEmailDomainRestricted)</td>
+        </tr>
+
+        <tr>
+            <td align="right">Restrictd Email Domain:</td>
+            <td>@Html.EditorFor(x => x.RestrictedDomain)</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Save" /> &nbsp;
+                @Html.ActionLink("Cancel", MVC.Organization.Dashboard.Index())
+            </td>
+        </tr>
+    </table>
+
+
+}

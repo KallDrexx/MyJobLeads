@@ -31,7 +31,6 @@ namespace MyJobLeads.Controllers
         protected OpenTasksByJobSearchQuery _openTasksByJobSearchQuery;
         protected EditUserCommand _editUserCommand;
         protected EntitySearchQuery _entitySearchQuery;
-        protected IServiceFactory _serviceFactory;
 
         public JobSearchController(JobSearchesByUserIdQuery jobSearchesByIdQuery,
                                     JobSearchByIdQuery jobSearchByIdQuery,

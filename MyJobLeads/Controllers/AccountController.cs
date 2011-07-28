@@ -21,7 +21,6 @@ namespace MyJobLeads.Controllers
         public IFormsAuthenticationService FormsService { get; set; }
         public IMembershipService MembershipService { get; set; }
 
-        protected IServiceFactory _serviceFactory;
         public AccountController(IServiceFactory factory)
         {
             _serviceFactory = factory;

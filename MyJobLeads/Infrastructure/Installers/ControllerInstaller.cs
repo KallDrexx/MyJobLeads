@@ -12,7 +12,6 @@ namespace MyJobLeads.Infrastructure.Installers
         {
             container.Register(AllTypes.FromThisAssembly()
                                 .BasedOn<IController>()
-                                .If(Component.IsInSameNamespaceAs<HomeController>())
                                 .If(t => t.Name.EndsWith("Controller"))
                                 .Configure(c => c.LifeStyle.Transient));
         }

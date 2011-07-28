@@ -20,7 +20,6 @@ namespace MyJobLeads.Controllers
         }
 
         private UserByIdQuery _userByIdQuery;
-        private IServiceFactory _serviceFactory;
 
         public virtual ActionResult Index()
         {

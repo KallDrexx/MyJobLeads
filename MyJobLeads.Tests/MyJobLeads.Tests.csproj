@@ -129,6 +129,7 @@
     <Compile Include="Commands\Companies\EditCompanyCommandTests.cs" />
     <Compile Include="Commands\JobSearches\StartNextJobSearchMilestoneCommandTests.cs" />
     <Compile Include="Commands\JobSearches\UpdateJobSearchMetricsCommandTests.cs" />
+    <Compile Include="Commands\Organizations\EditOrganizationCommandTests.cs" />
     <Compile Include="Controllers\TaskControllerTests.cs" />
     <Compile Include="Providers\Validators\CompanyValidatorTests.cs" />
     <Compile Include="Providers\Validators\ContactValidatorTests.cs" />
@@ -168,6 +169,8 @@
     <Compile Include="Queries\JobSearches\JobSearchByIdQueryTests.cs" />
     <Compile Include="Queries\JobSearches\JobSearchesByUserIdQueryTests.cs" />
     <Compile Include="Queries\MilestoneConfigs\StartingMilestoneQueryTests.cs" />
+    <Compile Include="Queries\Organizations\OrganizationByAdministeringUserQueryTests.cs" />
+    <Compile Include="Queries\Organizations\OrganizationByIdQueryTests.cs" />
     <Compile Include="Queries\Organizations\OrganizationByRegistrationTokenQueryTests.cs" />
     <Compile Include="Queries\Search\EntitySearchQueryTests.cs" />
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQueryTests.cs" />
