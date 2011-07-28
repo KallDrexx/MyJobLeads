@@ -88,6 +88,7 @@
     <Compile Include="Commands\Contacts\EditContactCommand.cs" />
     <Compile Include="Commands\JobSearches\StartNextJobSearchMilestoneCommand.cs" />
     <Compile Include="Commands\JobSearches\UpdateJobSearchMetricsCommand.cs" />
+    <Compile Include="Commands\Organizations\EditOrganizationCommand.cs" />
     <Compile Include="Commands\Search\RefreshSearchIndexCommand.cs" />
     <Compile Include="Commands\Tasks\CreateTaskCommand.cs" />
     <Compile Include="Commands\JobSearches\CreateJobSearchForUserCommand.cs" />

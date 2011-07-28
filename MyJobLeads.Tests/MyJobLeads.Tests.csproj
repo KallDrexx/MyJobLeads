@@ -129,6 +129,7 @@
     <Compile Include="Commands\Companies\EditCompanyCommandTests.cs" />
     <Compile Include="Commands\JobSearches\StartNextJobSearchMilestoneCommandTests.cs" />
     <Compile Include="Commands\JobSearches\UpdateJobSearchMetricsCommandTests.cs" />
+    <Compile Include="Commands\Organizations\EditOrganizationCommandTests.cs" />
     <Compile Include="Controllers\TaskControllerTests.cs" />
     <Compile Include="Providers\Validators\CompanyValidatorTests.cs" />
     <Compile Include="Providers\Validators\ContactValidatorTests.cs" />
