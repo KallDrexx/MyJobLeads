@@ -347,6 +347,7 @@
     <Compile Include="TaskController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Users\UserSidebarViewModel.cs" />
     <Compile Include="Views\Account\ChangePassword.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -451,6 +452,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Test.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\_AnonymousUserSidebarDisplay.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_AnonymousUserSidebarDisplay.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\_LoggedInSidebarDisplay.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_LoggedInSidebarDisplay.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\JobSearch\Details.cs">
       <AutoGen>True</AutoGen>
@@ -980,6 +991,14 @@
     <Content Include="Views\Home\Test.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Test.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\_LoggedInSidebarDisplay.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_LoggedInSidebarDisplay.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\_AnonymousUserSidebarDisplay.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_AnonymousUserSidebarDisplay.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -32,16 +32,7 @@
     	
     <div id="sidebar">
     	<div id="sidebar-content">
-    		Account Name <br>
-    		<a href="#">Edit My Account</a>
-    			
-    		<p>
-    			<a href="#">My Tasks</a><br>
-    			<a href="#">Contacts</a><br>
-    			<a href="#">Companies</a><br>
-    			<br>
-    			<a href="#">About</a><br>
-    		</p>
+    		@{ Html.RenderAction(MVC.Home.SidebarDisplay()); }
     	</div>
     </div>
     	

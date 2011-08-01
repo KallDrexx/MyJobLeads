@@ -7,6 +7,7 @@ using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Utilities;
 using MyJobLeads.DomainModel.Providers;
+using MyJobLeads.ViewModels.Users;
 
 namespace MyJobLeads.Controllers
 {
@@ -103,6 +104,21 @@ Feedback:
             _unitOfWork.Commit();
 
             return View(fixedCompanies + fixedContacts + fixedTasks);
+        }
+
+        public virtual ActionResult SidebarDisplay()
+        {
+            if (CurrentUserId != 0)
+            {
+                var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(CurrentUserId).Execute();
+                var model = new UserSidebarViewModel(user);
+                return PartialView(MVC.Home.Views._LoggedInSidebarDisplay, model);
+            }
+
+            else
+            {
+                return PartialView(MVC.Home.Views._AnonymousUserSidebarDisplay);
+            }
         }
     }
 }

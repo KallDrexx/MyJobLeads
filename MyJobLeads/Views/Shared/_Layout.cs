@@ -88,38 +88,24 @@ Write(Html.ActionLink("MyLeads", MVC.Home.Index(), new { id = "logo" }));
             
             #line default
             #line hidden
-WriteLiteral(@"
-			
-		<div id=""search-area"">
-			<form>
-				<input type=""text"" id=""search-box"" />
-				<input type=""submit"" value=""Search"" />
-			</form>
-		</div>
-    </div>
-    	
-    <div id=""sidebar"">
-    	<div id=""sidebar-content"">
-    		Account Name <br>
-    		<a href=""#"">Edit My Account</a>
-    			
-    		<p>
-    			<a href=""#"">My Tasks</a><br>
-    			<a href=""#"">Contacts</a><br>
-    			<a href=""#"">Companies</a><br>
-    			<br>
-    			<a href=""#"">About</a><br>
-    		</p>
-    	</div>
-    </div>
-    	
-    <div id=""main-area"">
-        <div id=""content"">
-            ");
+WriteLiteral("\r\n\t\t\t\r\n\t\t<div id=\"search-area\">\r\n\t\t\t<form>\r\n\t\t\t\t<input type=\"text\" id=\"search-box" +
+"\" />\r\n\t\t\t\t<input type=\"submit\" value=\"Search\" />\r\n\t\t\t</form>\r\n\t\t</div>\r\n    </di" +
+"v>\r\n    \t\r\n    <div id=\"sidebar\">\r\n    \t<div id=\"sidebar-content\">\r\n");
 
 
             
-            #line 50 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Shared\_Layout.cshtml"
+            #line 35 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Shared\_Layout.cshtml"
+      		 Html.RenderAction(MVC.Home.SidebarDisplay()); 
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    \t</div>\r\n    </div>\r\n    \t\r\n    <div id=\"main-area\">\r\n        <div id=\"conten" +
+"t\">\r\n            ");
+
+
+            
+            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Shared\_Layout.cshtml"
        Write(RenderBody());
 
             
