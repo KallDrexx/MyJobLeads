@@ -78,12 +78,17 @@ Write(Html.Telerik().StyleSheetRegistrar()
             
             #line default
             #line hidden
-WriteLiteral(@"
-</head>
+WriteLiteral("\r\n</head>\r\n\r\n<body>\r\n    <div id=\"header\">\r\n\t\t");
 
-<body>
-    <div id=""header"">
-		<a href=""#"" id=""logo"">My Site</a>
+
+            
+            #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Shared\_Layout.cshtml"
+Write(Html.ActionLink("MyLeads", MVC.Home.Index(), new { id = "logo" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"
 			
 		<div id=""search-area"">
 			<form>
