@@ -1,48 +1,46 @@
 ﻿#header {
-	background-color: #151B54;
-	height: 30px;
-	overflow: hidden;
+    background-color: #151B54;
+    height: 30px;
+    overflow: hidden;
 }
 
 #logo {
-	position: relative;
-	left: 10px;
-	color: white;
-	font-size: x-large;
-	font-weight: bold;
-	text-decoration: none;
-	float: left;
-	margin-top: 3px;
+    position: relative;
+    left: 10px;
+    color: white;
+    font-size: x-large;
+    font-weight: bold;
+    text-decoration: none;
+    float: left;
+    margin-top: 3px;
 }
 
 #search-area {
-	position: absolute;
-	left: 200px;
-	margin-top: 3px;
+    position: absolute;
+    left: 200px;
+    margin-top: 3px;
 }
 
 #sidebar {
-	float: left;
-	width: 150px;
-	left: 20px;
-	height: 100%;
-	padding: 0;
-	margin-right: 10px;
-	position: absolute;
-	overflow: hidden;
+    position: absolute;
+    float: left;
+    width: 150px;
+    left: 20px;
+    height: 100%;
+    padding: 0;
+    margin-right: 10px;
 }
 
 #sidebar-content {
-	position: relative;
-	top: 50px;
+    position: relative;
+    top: 50px;
 }
 
 #main-area {
-	position: absolute;
-	left: 160px;
-	border-left: solid;
-	border-bottom: solid;
-	min-height: 500px;
-	min-width: 100%;
-	padding: 15px;
+    margin-left: 160px;
+    border-left: solid;
+    border-bottom: solid;
+    border-right: solid;
+    min-height: 500px;
+    padding: 15px;
 }
