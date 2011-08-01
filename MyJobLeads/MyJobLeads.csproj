@@ -718,7 +718,6 @@
     <Content Include="Content\2011.2.712\Windows7\slider-v.gif" />
     <Content Include="Content\2011.2.712\Windows7\sprite-vertical.png" />
     <Content Include="Content\2011.2.712\Windows7\sprite.png" />
-    <Content Include="Content\Forms.css" />
     <Content Include="Content\images\footbg.gif" />
     <Content Include="Content\images\rss.png" />
     <Content Include="Content\images\topbg.gif" />
