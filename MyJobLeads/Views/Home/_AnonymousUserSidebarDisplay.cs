@@ -37,11 +37,21 @@ namespace MyJobLeads.Views.Home
         }
         public override void Execute()
         {
-WriteLiteral("<p>\r\n    ");
+WriteLiteral("<p id=\"sidebar-links\">\r\n    ");
 
 
             
             #line 2 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
+Write(Html.ActionLink("About", MVC.Home.About()));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" <br /><br />\r\n\r\n    ");
+
+
+            
+            #line 4 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
 Write(Html.ActionLink("Log In", MVC.Account.LogOn()));
 
             
@@ -51,7 +61,7 @@ WriteLiteral(" <br />\r\n    ");
 
 
             
-            #line 3 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
+            #line 5 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
 Write(Html.ActionLink("Register Account", MVC.Account.Register()));
 
             

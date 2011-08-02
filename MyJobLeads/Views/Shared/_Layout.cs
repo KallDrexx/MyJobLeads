@@ -88,24 +88,46 @@ Write(Html.ActionLink("MyLeads", MVC.Home.Index(), new { id = "logo" }));
             
             #line default
             #line hidden
-WriteLiteral("\r\n\t\t\t\r\n\t\t<div id=\"search-area\">\r\n\t\t\t<form>\r\n\t\t\t\t<input type=\"text\" id=\"search-box" +
-"\" />\r\n\t\t\t\t<input type=\"submit\" value=\"Search\" />\r\n\t\t\t</form>\r\n\t\t</div>\r\n    </di" +
-"v>\r\n    \t\r\n    <div id=\"sidebar\">\r\n    \t<div id=\"sidebar-content\">\r\n");
+WriteLiteral("\r\n\t\t\t\r\n\t\t<div id=\"search-area\">\r\n");
 
 
             
-            #line 35 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Shared\_Layout.cshtml"
-      		 Html.RenderAction(MVC.Home.SidebarDisplay()); 
+            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Shared\_Layout.cshtml"
+ 			using (Html.BeginForm(MVC.JobSearch.Search())) {
 
             
             #line default
             #line hidden
-WriteLiteral("    \t</div>\r\n    </div>\r\n    \t\r\n    <div id=\"main-area\">\r\n        <div id=\"conten" +
-"t\">\r\n            ");
+WriteLiteral("\t\t\t\t<input type=\"text\" id=\"query\" name=\"query\" />\r\n");
+
+
+
+WriteLiteral("\t\t\t\t<input type=\"submit\" value=\"Search\" />\r\n");
 
 
             
-            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Shared\_Layout.cshtml"
+            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Shared\_Layout.cshtml"
+			}
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\t\t</div>\r\n    </div>\r\n    \t\r\n    <div id=\"sidebar\">\r\n");
+
+
+            
+            #line 34 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Shared\_Layout.cshtml"
+      	 Html.RenderAction(MVC.Home.SidebarDisplay()); 
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    </div>\r\n    \t\r\n    <div id=\"main-area\">\r\n        <div id=\"content\">\r\n        " +
+"    ");
+
+
+            
+            #line 39 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Shared\_Layout.cshtml"
        Write(RenderBody());
 
             

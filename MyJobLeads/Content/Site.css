@@ -1,10 +1,12 @@
-﻿#header {
-    background-color: #151B54;
+﻿#header 
+{
+    background-color: #1569C7;
     height: 30px;
     overflow: hidden;
 }
 
-#logo {
+#logo 
+{
     position: relative;
     left: 10px;
     color: white;
@@ -15,32 +17,62 @@
     margin-top: 3px;
 }
 
-#search-area {
+#sidebar 
+{
     position: absolute;
-    left: 200px;
+    float: left;
+    width: 130px;
+    left: 10px;
+    padding: 0;
+    margin-top: 30px;
+}
+
+#sidebar-links
+{
+    margin-left: 10px;
+}
+
+#sidebar-links a
+{
+    font-weight: bold;
+    text-decoration: none;
+    color: #657383;
+}
+
+#user-name 
+{
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #1569C7;
+}
+
+#edit-account-link 
+{
+    color: Black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#search-area 
+{
+    position: absolute;
+    left: 170px;
     margin-top: 3px;
 }
 
-#sidebar {
-    position: absolute;
-    float: left;
-    width: 150px;
-    left: 20px;
-    height: 100%;
-    padding: 0;
-    margin-right: 10px;
+#search-area #query
+{
+    width: 200px;
 }
 
-#sidebar-content {
-    position: relative;
-    top: 50px;
-}
 
-#main-area {
+#main-area 
+{
     margin-left: 160px;
     border-left: solid;
     border-bottom: solid;
     border-right: solid;
-    min-height: 500px;
+    min-height: 250px;
     padding: 15px;
+    border-color: #C9C299;
 }
