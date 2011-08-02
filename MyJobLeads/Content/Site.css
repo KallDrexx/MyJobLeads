@@ -76,3 +76,8 @@
     padding: 15px;
     border-color: #C9C299;
 }
+
+.left { float: left; }
+.right { float: right; }
+.left-content { float: left; width: 48%; }
+.right-content { float: right; width: 49% }

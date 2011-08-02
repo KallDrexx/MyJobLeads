@@ -15,6 +15,7 @@ using MyJobLeads.Infrastructure.Attributes;
 using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Providers;
 using FluentValidation;
+using MyJobLeads.DomainModel.Queries.Users;
 
 namespace MyJobLeads.Controllers
 {
@@ -132,6 +133,14 @@ namespace MyJobLeads.Controllers
         {
             var task = _serviceFactory.GetService<TaskByIdQuery>().WithTaskId(id).Execute();
             return View(task);
+        }
+
+        public virtual ActionResult Overdue()
+        {
+            var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(CurrentUserId).Execute();
+            var model = new TaskDashboardViewModel(user);
+
+            return View(model);
         }
 
         #endregion

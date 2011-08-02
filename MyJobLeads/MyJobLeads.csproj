@@ -347,6 +347,7 @@
     <Compile Include="TaskController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Tasks\TaskDashboardViewModel.cs" />
     <Compile Include="ViewModels\Users\UserSidebarViewModel.cs" />
     <Compile Include="Views\Account\ChangePassword.cs">
       <AutoGen>True</AutoGen>
@@ -1000,6 +1001,8 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_AnonymousUserSidebarDisplay.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Task\Overdue.cshtml" />
+    <Content Include="Views\Task\TaskListControl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

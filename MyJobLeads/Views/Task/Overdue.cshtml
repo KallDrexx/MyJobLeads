@@ -1,0 +1,30 @@
+﻿@model MyJobLeads.ViewModels.Tasks.TaskDashboardViewModel
+
+@{
+    ViewBag.Title = "Overdue";
+}
+
+<div class="left-content">
+    <div class="left">
+        <b>Overdue Tasks</b>
+    </div>
+    
+    &nbsp; &nbsp; &nbsp;
+
+    <div class="right">
+        <a href="#">Today (@Model.TodaysTasks.Count)</a> &nbsp; 
+        <a href="#">Future (@Model.FutureTasks.Count)</a>
+    </div>
+
+    <br /><hr />
+
+    @if (Model.OverdueTasks.Count == 0)
+    {
+        @:You have no tasks that are overdue
+    }
+
+    else
+    {
+        Html.RenderPartial(MVC.Task.Views.TaskListControl, Model.OverdueTasks);
+    }
+</div>

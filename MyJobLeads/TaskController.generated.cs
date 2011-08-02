@@ -62,6 +62,7 @@ namespace MyJobLeads.Controllers {
             public readonly string Add = "Add";
             public readonly string Edit = "Edit";
             public readonly string Details = "Details";
+            public readonly string Overdue = "Overdue";
         }
 
 
@@ -75,6 +76,8 @@ namespace MyJobLeads.Controllers {
             public readonly string _OpenTaskSummary = "~/Views/Task/_OpenTaskSummary.cshtml";
             public readonly string Details = "~/Views/Task/Details.cshtml";
             public readonly string Edit = "~/Views/Task/Edit.cshtml";
+            public readonly string Overdue = "~/Views/Task/Overdue.cshtml";
+            public readonly string TaskListControl = "~/Views/Task/TaskListControl.cshtml";
         }
     }
 
@@ -104,6 +107,11 @@ namespace MyJobLeads.Controllers {
         public override System.Web.Mvc.ActionResult Details(int id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
             callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Overdue() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Overdue);
             return callInfo;
         }
 
