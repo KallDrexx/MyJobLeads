@@ -20,14 +20,18 @@ namespace MyJobLeads.ViewModels.Tasks
             var allTasks = user.LastVisitedJobSearch.Companies.SelectMany(x => x.Tasks).ToList();
             OverdueTasks = allTasks.Where(x => (x.TaskDate.HasValue && x.TaskDate.Value.Date < DateTime.Today) || !x.TaskDate.HasValue)
                                    .Where(x => x.CompletionDate == null)
+                                   .OrderBy(x => x.TaskDate)
+                                   .ThenBy(x => x.Name)
                                    .ToList();
 
             TodaysTasks = allTasks.Where(x => x.TaskDate.HasValue && x.TaskDate.Value.Date == DateTime.Today)
                                   .Where(x => x.CompletionDate == null)
+                                  .OrderBy(x => x.Name)
                                   .ToList();
 
             FutureTasks = allTasks.Where(x => x.TaskDate.HasValue && x.TaskDate.Value.Date > DateTime.Today)
                                   .Where(x => x.CompletionDate == null)
+                                  .OrderBy(x => x.TaskDate)
                                   .ToList();
 
             CurrentMilestone = user.LastVisitedJobSearch.CurrentMilestone;

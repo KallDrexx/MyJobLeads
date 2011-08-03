@@ -48,17 +48,19 @@ WriteLiteral("\r\n<p>\r\n    <span id=\"user-name\">");
             
             #line default
             #line hidden
-WriteLiteral(@"</span> <br />
-    <a href=""#"" id=""edit-account-link"">Edit My Account</a>
-</p>
-    			
-<p id=""sidebar-links"">
-    <a href=""#"">My Tasks</a><br />
-    <a href=""#"">Contacts</a><br />
-    <a href=""#"">Companies</a><br />
-    <br />
-    <a href=""#"">About</a><br />
-    ");
+WriteLiteral("</span> <br />\r\n    <a href=\"#\" id=\"edit-account-link\">Edit My Account</a>\r\n</p>\r" +
+"\n    \t\t\t\r\n<p id=\"sidebar-links\">\r\n    ");
+
+
+            
+            #line 9 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_LoggedInSidebarDisplay.cshtml"
+Write(Html.ActionLink("My Tasks", MVC.Task.Index()));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" <br />\r\n    <a href=\"#\">Contacts</a><br />\r\n    <a href=\"#\">Companies</a><br />\r" +
+"\n    <br />\r\n    <a href=\"#\">About</a><br />\r\n    ");
 
 
             

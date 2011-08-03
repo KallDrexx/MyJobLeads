@@ -1003,6 +1003,8 @@
     </Content>
     <Content Include="Views\Task\Overdue.cshtml" />
     <Content Include="Views\Task\TaskListControl.cshtml" />
+    <Content Include="Views\Task\Today.cshtml" />
+    <Content Include="Views\Task\Future.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

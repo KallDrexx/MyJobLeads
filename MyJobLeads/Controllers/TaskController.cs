@@ -31,6 +31,24 @@ namespace MyJobLeads.Controllers
 
         #region Actions 
 
+        public virtual ActionResult Index()
+        {
+            var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(CurrentUserId).Execute();
+            var model = new TaskDashboardViewModel(user);
+
+            if (model.TodaysTasks.Count > 0)
+                return View(MVC.Task.Views.Today, model);
+            
+            if (model.OverdueTasks.Count > 0)
+                return View(MVC.Task.Views.Overdue, model);
+
+            if (model.FutureTasks.Count > 0)
+                return View(MVC.Task.Views.Future, model);
+
+            // If no uncompleted tasks exist, go to the today view
+            return View(MVC.Task.Views.Today, model);
+        }
+
         public virtual ActionResult Add(int companyId, int contactId = 0)
         {
             var companyByIdQuery = _serviceFactory.GetService<CompanyByIdQuery>();
@@ -136,6 +154,22 @@ namespace MyJobLeads.Controllers
         }
 
         public virtual ActionResult Overdue()
+        {
+            var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(CurrentUserId).Execute();
+            var model = new TaskDashboardViewModel(user);
+
+            return View(model);
+        }
+
+        public virtual ActionResult Today()
+        {
+            var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(CurrentUserId).Execute();
+            var model = new TaskDashboardViewModel(user);
+
+            return View(model);
+        }
+
+        public virtual ActionResult Future()
         {
             var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(CurrentUserId).Execute();
             var model = new TaskDashboardViewModel(user);

@@ -28,6 +28,7 @@ namespace MyJobLeads.DomainModel.Entities.EF
                 Password = PasswordUtils.CreatePasswordHash("test@test.com", "test"),
                 LastVisitedJobSearchId = null,
                 IsOrganizationAdmin = true,
+                FullName = "Test Account",
                 Organization = new Organization
                 {
                     RegistrationToken = Guid.NewGuid(),

@@ -1,31 +1,31 @@
 ﻿@model MyJobLeads.ViewModels.Tasks.TaskDashboardViewModel
 
 @{
-    ViewBag.Title = "Overdue Tasks";
+    ViewBag.Title = "Today's Tasks";
 }
 
 <div class="left-content">
     <div class="left">
-        <b>Overdue Tasks</b>
+        <b>Today's Tasks</b>
     </div>
     
     &nbsp; &nbsp; &nbsp;
 
     <div class="right">
-        @Html.ActionLink(string.Format("Today ({0})", Model.TodaysTasks.Count), MVC.Task.Today(), new { @class = "item-subheading" }) &nbsp;
+        @Html.ActionLink(string.Format("Overdue ({0})", Model.OverdueTasks.Count), MVC.Task.Overdue(), new { @class = "item-subheading" }) &nbsp; 
         @Html.ActionLink(string.Format("Future ({0})", Model.FutureTasks.Count), MVC.Task.Future(), new { @class = "item-subheading" })
     </div>
 
     <br /><hr />
 
-    @if (Model.OverdueTasks.Count == 0)
+    @if (Model.TodaysTasks.Count == 0)
     {
-        @:You have no overdue tasks
+        @:You have no tasks due today
     }
 
     else
     {
-        Html.RenderPartial(MVC.Task.Views.TaskListControl, Model.OverdueTasks);
+        Html.RenderPartial(MVC.Task.Views.TaskListControl, Model.TodaysTasks);
     }
 </div>
 
