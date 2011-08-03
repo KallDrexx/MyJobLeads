@@ -104,3 +104,38 @@
     color: Black;
     font-weight: bold;
 }
+
+/**** Forms ****/
+.edit-form
+{
+    border: solid;
+    width: 98%;
+    padding: 5px;
+    background-color: #BDEDFF;
+}
+
+.form-header
+{
+    color: #1569C7;
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+.form-row
+{
+    clear: both;
+    padding-top: 5px;
+}
+
+.form-label
+{
+    float: left;
+    width: 150px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.form-field
+{
+    text-align: left;
+}

@@ -3,34 +3,21 @@
 @using Telerik.Web.Mvc.UI;
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
-    // Setup the sidebar
-    string sidebar = "<div id=\"contactsummary\">";
+    string editActionLabel;
     
-    if (Model.Contact != null)
+    if (Model.Id == 0)
     {
-        sidebar += Html.Partial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact).ToString();
+        ViewBag.Title = "Add Your Task";
+        editActionLabel = "Add Your Task";
     }
-
-    sidebar = string.Concat(sidebar, "</div>", Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company));
-    ViewBag.Sidebar = new HtmlString(sidebar);
+    else
+    {
+        ViewBag.Title = "Edit Your Task";
+        editActionLabel = "Edit Your Task";
+    }
 }
 
-@if (Model.Id == 0)
-{
-    ViewBag.Title = "Add A Task";
-    <h2>Add A New Task</h2>
-    <div class="ScreenHint">This screen allows you to create a new task.</div>
-}
-else
-{
-    ViewBag.Title = "Editing " + @Model.Name;
-    <h2>Editing @Model.Name</h2>
-    <div class="ScreenHint">This screen allows you to edit the @Model.Name task.</div>
-}
-
-<br />
+@*
 
 @{Html.Telerik().ScriptRegistrar().OnDocumentReady(
     @<text>
@@ -44,68 +31,71 @@ else
             });
         });
     </text>);
-}
+}*@
 
-@using (Html.BeginForm(MVC.Task.Edit()))
+@using (Html.BeginForm(MVC.Task.Edit(), FormMethod.Post, new { @class = "edit-form" }))
 {
+    <span class="form-header">@editActionLabel</span>
+    
     @Html.HiddenFor(x => x.Id)
     @Html.HiddenFor(x => x.AssociatedCompanyId)
 
     <p>@Html.ValidationSummary()</p>
+    
+    <div class="form-row">
+        <span class="form-label">Subject:</span>
+        <span class="form-field">@Html.TextBoxFor(x => x.Name, new { size = 30 })</span>
+    </div>
+    
+    <div class="form-row">
+        <span class="form-label">Category:</span>
+        <span class="form-field">@Html.DropDownListFor(x => x.Category, new SelectList(Model.AvailableCategoryList, Model.Category))</span>
+    </div>
+    
+    <br /><br />
+    
+    <div class="form-row">
+        <span class="form-label">Associate With:</span>
+        <span class="form-field">@Html.DropDownListFor(x => x.AssociatedContactId, Model.CompanyContactList, new { id = "contactlist" })</span>
+    </div>
+    
+    
+    <div class="form-row">
+        <span class="form-label">Task Due Date:</span>
+        <span class="form-field">@Html.Telerik().DatePickerFor(x => x.TaskDate)</span>
+    </div>
+    
+    @* Only show the completed checkbox if we are editing an existing task *@
+    @if (Model.Id != 0)
+    {
+        <div class="form-row">
+            <span class="form-label">Task Completed?</span>
+            <span class="form-field">@Html.CheckBoxFor(x => x.Completed)</span>
+        </div>
+    }
+    
+    <div class="form-row">
+        <span class="form-label">Notes:</span>
+        <span class="form-field">@Html.TextAreaFor(x => x.Notes, 10, 75, null)</span>
+    </div>
+    
+    <div class="form-row">
+        <span class="form-label"></span>
+        <span class="form-field">
+            <input type="submit" value="Save" /> &nbsp; &nbsp;
 
-    <table>
-        <tr>
-            <td align="right">Category:</td>
-            <td>
-                @Html.DropDownListFor(x => x.Category, new SelectList(Model.AvailableCategoryList, Model.Category))
-            </td>
-        </tr>
-
-        <tr>
-            <td align="right">Subject:</td>
-            <td>@Html.TextBoxFor(x => x.Name, new { size = 30 })</td>
-        </tr>
-
-        <tr>
-            <td align="right">Contact:</td>
-            <td>
-                @Html.DropDownListFor(x => x.AssociatedContactId, Model.CompanyContactList, new { id = "contactlist" })
-            </td>
-        </tr>
-
-        <tr>
-            <td align="right">Task Due Date:</td>
-            <td>
-                @Html.Telerik().DateTimePickerFor(x => x.TaskDate)
-            </td>
-        </tr>
-
-        @* Only show the completed checkbox if we are editing an existing task *@
-        @if (Model.Id != 0)
-        {
-            <tr>
-                <td align="right">Task Completed?</td>
-                <td>@Html.CheckBoxFor(x => x.Completed)</td>
-            </tr>
-        }
-        
-        <tr>
-            <td align="right" valign="top">Notes:</td>
-            <td>
-                @Html.TextAreaFor(x => x.Notes, 10, 75, null)
-            </td>
-        </tr>
-        
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Save" /> &nbsp; &nbsp; 
-
-                @if (Model.Id != 0) { @Html.ActionLink("Back To Task", MVC.Task.Details(Model.Id)); }
-                else if (Model.AssociatedCompanyId != 0) { @Html.ActionLink("Back To Company", MVC.Company.Details(Model.AssociatedCompanyId)) }                
-            </td>
-        </tr>
-    </table>
-        
+            @if (Model.Id != 0)
+            { 
+                @Html.ActionLink("Back To Task", MVC.Task.Details(Model.Id));
+            }
+            else if (Model.AssociatedCompanyId != 0)
+            { 
+                @Html.ActionLink("Back To Company", MVC.Company.Details(Model.AssociatedCompanyId)) 
+            }    
+        </span>
+    </div>        
 }
 
+<hr />
+
+Company here

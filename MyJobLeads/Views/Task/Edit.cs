@@ -57,19 +57,19 @@ WriteLiteral("\r\n");
             
             #line 5 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
   
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
-    // Setup the sidebar
-    string sidebar = "<div id=\"contactsummary\">";
+    string editActionLabel;
     
-    if (Model.Contact != null)
+    if (Model.Id == 0)
     {
-        sidebar += Html.Partial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact).ToString();
+        ViewBag.Title = "Add Your Task";
+        editActionLabel = "Add Your Task";
+    }
+    else
+    {
+        ViewBag.Title = "Edit Your Task";
+        editActionLabel = "Edit Your Task";
     }
 
-    sidebar = string.Concat(sidebar, "</div>", Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company));
-    ViewBag.Sidebar = new HtmlString(sidebar);
-
 
             
             #line default
@@ -77,135 +77,61 @@ WriteLiteral("\r\n");
 WriteLiteral("\r\n");
 
 
+
+WriteLiteral("\r\n\r\n");
+
+
             
-            #line 20 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
- if (Model.Id == 0)
+            #line 36 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+ using (Html.BeginForm(MVC.Task.Edit(), FormMethod.Post, new { @class = "edit-form" }))
 {
-    ViewBag.Title = "Add A Task";
 
             
             #line default
             #line hidden
-WriteLiteral("    <h2>Add A New Task</h2>\r\n");
-
-
-
-WriteLiteral("    <div class=\"ScreenHint\">This screen allows you to create a new task.</div>\r\n");
+WriteLiteral("    <span class=\"form-header\">");
 
 
             
-            #line 25 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-}
-else
-{
-    ViewBag.Title = "Editing " + @Model.Name;
+            #line 38 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+                         Write(editActionLabel);
 
             
             #line default
             #line hidden
-WriteLiteral("    <h2>Editing ");
+WriteLiteral("</span>\r\n");
 
 
             
-            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-           Write(Model.Name);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</h2>\r\n");
-
-
-
-WriteLiteral("    <div class=\"ScreenHint\">This screen allows you to edit the ");
-
-
-            
-            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-                                                          Write(Model.Name);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" task.</div>\r\n");
-
-
-            
-            #line 31 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-}
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n<br />\r\n\r\n");
-
-
-            
-            #line 35 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-  Html.Telerik().ScriptRegistrar().OnDocumentReady(
-item => new System.Web.WebPages.HelperResult(__razor_template_writer => {
-
-            
-            #line default
-            #line hidden
-
-WriteLiteralTo(@__razor_template_writer, "    ");
-
-WriteLiteralTo(@__razor_template_writer, @"
-        // Upon contact selection change, update the contact sidebar summary
-        $('#contactlist').change(function() {
-            $.ajax({
-                url: '/Contact/GetSummary/' + $(this).val(),
-                success: function(html) {
-                    $('#contactsummary').html(html);
-                }
-            });
-        });
-    ");
-
-
-            
-            #line 46 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-         }));
-
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-
-            
-            #line 49 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
- using (Html.BeginForm(MVC.Task.Edit()))
-{
+            #line 39 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+    
     
             
             #line default
             #line hidden
             
-            #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
 Write(Html.HiddenFor(x => x.Id));
 
             
             #line default
             #line hidden
             
-            #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                               
     
             
             #line default
             #line hidden
             
-            #line 52 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
 Write(Html.HiddenFor(x => x.AssociatedCompanyId));
 
             
             #line default
             #line hidden
             
-            #line 52 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                                                
 
 
@@ -216,7 +142,7 @@ WriteLiteral("    <p>");
 
 
             
-            #line 54 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 43 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
   Write(Html.ValidationSummary());
 
             
@@ -226,154 +152,232 @@ WriteLiteral("</p>\r\n");
 
 
             
-            #line 55 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    <table>\r\n        <tr>\r\n            <td align=\"right\">Category:</td>\r\n        " +
-"    <td>\r\n                ");
-
-
-            
-            #line 60 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-           Write(Html.DropDownListFor(x => x.Category, new SelectList(Model.AvailableCategoryList, Model.Category)));
+            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+    
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td align=\"right\"" +
-">Subject:</td>\r\n            <td>");
+WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\">Subject:</span>\r\n   " +
+"     <span class=\"form-field\">");
 
 
             
-            #line 66 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-           Write(Html.TextBoxFor(x => x.Name, new { size = 30 }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td align=\"right\">Contact:</td>" +
-"\r\n            <td>\r\n                ");
-
-
-            
-            #line 72 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-           Write(Html.DropDownListFor(x => x.AssociatedContactId, Model.CompanyContactList, new { id = "contactlist" }));
+            #line 47 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+                            Write(Html.TextBoxFor(x => x.Name, new { size = 30 }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td align=\"right\"" +
-">Task Due Date:</td>\r\n            <td>\r\n                ");
+WriteLiteral("</span>\r\n    </div>\r\n");
+
+
+            
+            #line 49 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+    
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\">Category:</span>\r\n  " +
+"      <span class=\"form-field\">");
+
+
+            
+            #line 52 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+                            Write(Html.DropDownListFor(x => x.Category, new SelectList(Model.AvailableCategoryList, Model.Category)));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n    </div>\r\n");
+
+
+            
+            #line 54 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+    
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <br />");
+
+
+
+WriteLiteral("<br />\r\n");
+
+
+            
+            #line 56 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+    
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\">Associate With:</spa" +
+"n>\r\n        <span class=\"form-field\">");
+
+
+            
+            #line 59 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+                            Write(Html.DropDownListFor(x => x.AssociatedContactId, Model.CompanyContactList, new { id = "contactlist" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n    </div>\r\n");
+
+
+            
+            #line 61 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+    
+    
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\">Task Due Date:</span" +
+">\r\n        <span class=\"form-field\">");
+
+
+            
+            #line 65 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+                            Write(Html.Telerik().DatePickerFor(x => x.TaskDate));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n    </div>\r\n");
+
+
+            
+            #line 67 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+    
+    
+            
+            #line default
+            #line hidden
+
+            
+            #line 68 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+                                                                             
+    
+            
+            #line default
+            #line hidden
+            
+            #line 69 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+     if (Model.Id != 0)
+    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        <div class=\"form-row\">\r\n            <span class=\"form-label\">Task Complet" +
+"ed?</span>\r\n            <span class=\"form-field\">");
+
+
+            
+            #line 73 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+                                Write(Html.CheckBoxFor(x => x.Completed));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n        </div>\r\n");
+
+
+            
+            #line 75 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+    }
+            
+            #line default
+            #line hidden
+            
+            #line 75 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+     
+    
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\">Notes:</span>\r\n     " +
+"   <span class=\"form-field\">");
 
 
             
             #line 79 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-           Write(Html.Telerik().DateTimePickerFor(x => x.TaskDate));
+                            Write(Html.TextAreaFor(x => x.Notes, 10, 75, null));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </td>\r\n        </tr>\r\n\r\n        ");
-
-
-
-WriteLiteral("\r\n");
+WriteLiteral("</span>\r\n    </div>\r\n");
 
 
             
-            #line 84 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-         if (Model.Id != 0)
-        {
+            #line 81 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+    
 
             
             #line default
             #line hidden
-WriteLiteral("            <tr>\r\n                <td align=\"right\">Task Completed?</td>\r\n       " +
-"         <td>");
+WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\"></span>\r\n        <sp" +
+"an class=\"form-field\">\r\n            <input type=\"submit\" value=\"Save\" /> &nbsp; " +
+"&nbsp;\r\n\r\n");
 
 
             
-            #line 88 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-               Write(Html.CheckBoxFor(x => x.Completed));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n            </tr>\r\n");
-
-
-            
-            #line 90 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-        }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        \r\n        <tr>\r\n            <td align=\"right\" valign=\"top\">Notes:</td>\r\n " +
-"           <td>\r\n                ");
-
-
-            
-            #line 95 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-           Write(Html.TextAreaFor(x => x.Notes, 10, 75, null));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n            </td>\r\n        </tr>\r\n        \r\n        <tr>\r\n            <td></td>" +
-"\r\n            <td>\r\n                <input type=\"submit\" value=\"Save\" /> &nbsp; " +
-"&nbsp; \r\n\r\n");
-
-
-            
-            #line 104 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-                 if (Model.Id != 0) { 
+            #line 87 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+             if (Model.Id != 0)
+            { 
+                
             
             #line default
             #line hidden
             
-            #line 104 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-                                 Write(Html.ActionLink("Back To Task", MVC.Task.Details(Model.Id)));
+            #line 89 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+           Write(Html.ActionLink("Back To Task", MVC.Task.Details(Model.Id)));
 
             
             #line default
             #line hidden
             
-            #line 104 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-                                                                                                  ; }
-                else if (Model.AssociatedCompanyId != 0) { 
+            #line 89 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+                                                                            ;
+            }
+            else if (Model.AssociatedCompanyId != 0)
+            { 
+                
             
             #line default
             #line hidden
             
-            #line 105 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-                                                      Write(Html.ActionLink("Back To Company", MVC.Company.Details(Model.AssociatedCompanyId)));
+            #line 93 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+           Write(Html.ActionLink("Back To Company", MVC.Company.Details(Model.AssociatedCompanyId)));
 
             
             #line default
             #line hidden
             
-            #line 105 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-                                                                                                                                               }                
+            #line 93 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+                                                                                                    
+            }    
 
             
             #line default
             #line hidden
-WriteLiteral("            </td>\r\n        </tr>\r\n    </table>\r\n");
+WriteLiteral("        </span>\r\n    </div>        \r\n");
 
 
             
-            #line 109 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-        
+            #line 97 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
 }
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("\r\n<hr />\r\n\r\nCompany here\r\n");
 
 
         }
