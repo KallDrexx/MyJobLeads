@@ -133,7 +133,17 @@ WriteLiteral("    </div>\r\n    \t\r\n    <div id=\"main-area\">\r\n        <div
             
             #line default
             #line hidden
-WriteLiteral("\r\n        </div>    \t\t\r\n    </div>\r\n</body>\r\n</html>\r\n");
+WriteLiteral("\r\n        </div>    \t\t\r\n    </div>\r\n\r\n    ");
+
+
+            
+            #line 43 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Shared\_Layout.cshtml"
+Write( Html.Telerik().ScriptRegistrar() );
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n</body>\r\n</html>\r\n");
 
 
         }
