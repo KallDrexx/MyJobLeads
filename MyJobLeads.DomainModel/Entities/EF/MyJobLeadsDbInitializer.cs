@@ -7,6 +7,8 @@ using Microsoft.SqlServer.Management.Smo;
 using Microsoft.SqlServer.Management.Common;
 using System.Data.SqlClient;
 using MyJobLeads.DomainModel.Utilities;
+using MyJobLeads.DomainModel.Entities.Configuration;
+using MyJobLeads.DomainModel.Entities.Metrics;
 
 namespace MyJobLeads.DomainModel.Entities.EF
 {
@@ -33,6 +35,18 @@ namespace MyJobLeads.DomainModel.Entities.EF
                 {
                     RegistrationToken = Guid.NewGuid(),
                     Name = "Seed Organization"
+                }
+            });
+
+            context.MilestoneConfigs.Add(new MilestoneConfig
+            {
+                Title = "Test Milestone",
+                IsStartingMilestone = true,
+                Instructions = "Add 3 companies",
+                CompletionDisplay = "Congrats on completing the test milestone",
+                JobSearchMetrics = new JobSearchMetrics
+                {
+                    NumCompaniesCreated = 3
                 }
             });
 
