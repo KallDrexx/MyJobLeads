@@ -79,5 +79,28 @@
 
 .left { float: left; }
 .right { float: right; }
-.left-content { float: left; width: 48%; }
-.right-content { float: right; width: 49% }
+.left-content { display: inline-block; width: 48%; }
+.right-content { float: right; width: 48% }
+
+#milestone-display
+{
+    border: solid;
+    padding: 5px;
+}
+
+.task-display a
+{
+    text-decoration: none;
+}
+
+.item-heading, .item-heading a:visited
+{
+    color: #1569C7;
+    font-weight: bold;
+}
+
+.item-subheading, .item-subheading a:visited
+{
+    color: Black;
+    font-weight: bold;
+}

@@ -20,20 +20,17 @@ namespace MyJobLeads.Views.JobSearch
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using Telerik.Web.Mvc.UI;
     
-    #line 2 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-    using MyJobLeads.DomainModel.ViewModels;
-    
-    #line default
-    #line hidden
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/JobSearch/_JsMilestoneDisplay.cshtml")]
-    public class _JsMilestoneDisplay : System.Web.Mvc.WebViewPage<MyJobLeads.DomainModel.Entities.JobSearch>
+    public class _JsMilestoneDisplay : System.Web.Mvc.WebViewPage<MyJobLeads.ViewModels.Tasks.TaskDashboardViewModel>
     {
         public _JsMilestoneDisplay()
         {
@@ -41,330 +38,104 @@ namespace MyJobLeads.Views.JobSearch
         public override void Execute()
         {
 
-
 WriteLiteral("\r\n");
 
 
             
-            #line 4 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
- if (Model.CurrentMilestone == null)
+            #line 3 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+ if (Model.CurrentMilestone != null)
 {
 
             
             #line default
             #line hidden
-WriteLiteral("    ");
-
-WriteLiteral(" You have completed all of your milestons for this job search\r\n");
+WriteLiteral("    <div id=\"milestone-display\">\r\n        <b>Current Milestone:</b> <br />\r\n     " +
+"   <span class=\"item-heading\">");
 
 
             
             #line 7 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-}
-else
-{
-    var milestone = Model.CurrentMilestone;
-    var msMetrics = milestone.JobSearchMetrics;
-    var jsMetrics = Model.Metrics;
-    var progress = new JobSearchMilestoneProgress(Model);
-    
+                              Write(Model.CurrentMilestone.Title);
 
             
             #line default
             #line hidden
-WriteLiteral("    ");
-
-WriteLiteral("\r\n        <p>\r\n            <b>Current Milestone:</b> ");
+WriteLiteral("</span> <br />\r\n        <span class=\"item-subheading\">Percent Completed: ");
 
 
             
-            #line 17 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                                 Write(milestone.Title);
+            #line 8 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+                                                    Write(Math.Round(Model.MilestoneProgress.TotalProgress * 100, 1));
 
             
             #line default
             #line hidden
-WriteLiteral(" <br />\r\n            <b>Percent Completed:</b> ");
+WriteLiteral("%</span> <br /> <br />\r\n\r\n");
 
 
             
-            #line 18 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                                  Write(Math.Round(progress.TotalProgress * 100,1));
+            #line 10 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+         if (Model.MilestoneProgress.TotalProgress == 1)
+        {
+            
+            
+            #line default
+            #line hidden
+            
+            #line 12 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+       Write(Html.Raw(Html.Encode(Model.CurrentMilestone.CompletionDisplay).Replace(Environment.NewLine, "<br />")));
 
             
             #line default
             #line hidden
-WriteLiteral("% <br />\r\n\r\n");
+
+WriteLiteral(" <br />");
+
+
+
+WriteLiteral("<br />\r\n");
 
 
             
-            #line 20 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-             if (progress.TotalProgress < 1)
-            {
+            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
 
-            
-            #line default
-            #line hidden
-WriteLiteral("                <b>To complete this milestone, you must:</b>\r\n");
-
-
-
-WriteLiteral("                <ul>\r\n");
-
-
-            
-            #line 24 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                     if (progress.NumCompaniesCreatedProgress < 1)
-                    {
 
             
             #line default
             #line hidden
-WriteLiteral("                        <li>Create <b>");
+WriteLiteral("            <span class=\"rights\"><a href=\"#\">Start Next Milestone</a></span>\r\n");
 
 
             
-            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                                  Write(msMetrics.NumCompaniesCreated - jsMetrics.NumCompaniesCreated);
+            #line 15 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+        }
+        
+        else
+        {
+            
+            
+            #line default
+            #line hidden
+            
+            #line 19 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+       Write(Html.Raw(Html.Encode(Model.CurrentMilestone.Instructions).Replace(Environment.NewLine, "<br />")));
 
             
             #line default
             #line hidden
-WriteLiteral("</b> more companies</li>\r\n");
-
-
             
-            #line 27 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                    }
+            #line 19 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+                                                                                                              
+        }
 
             
             #line default
             #line hidden
-WriteLiteral("                    \r\n");
+WriteLiteral("</div>\r\n");
 
 
             
-            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                     if (progress.NumContactsCreatedProgress < 1)
-                    {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                        <li>Create <b>");
-
-
-            
-            #line 31 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                                  Write(msMetrics.NumContactsCreated - jsMetrics.NumContactsCreated);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</b> more contacts</li>\r\n");
-
-
-            
-            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                    }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                    \r\n");
-
-
-            
-            #line 34 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                     if (progress.NumApplyTasksCreatedProgress < 1)
-                    {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                        <li>Create <b>");
-
-
-            
-            #line 36 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                                  Write(msMetrics.NumApplyTasksCreated - jsMetrics.NumApplyTasksCreated);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</b> more tasks to apply at companies</li>\r\n");
-
-
-            
-            #line 37 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                    }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                    \r\n");
-
-
-            
-            #line 39 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                     if (progress.NumApplyTasksCompletedProgress < 1)
-                    {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                        <li>Mark <b>");
-
-
-            
-            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                                Write(msMetrics.NumApplyTasksCompleted - jsMetrics.NumApplyTasksCompleted);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</b> more tasks to apply at companies as completed</li>\r\n");
-
-
-            
-            #line 42 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                    }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                    \r\n");
-
-
-            
-            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                     if (progress.NumPhoneInterviewTasksCreatedProgress < 1)
-                    {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                        <li>\r\n                            Schedule <b>");
-
-
-            
-            #line 47 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                                    Write(msMetrics.NumPhoneInterviewTasksCreated - jsMetrics.NumPhoneInterviewTasksCreated);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</b> more phone interviews\r\n                        </li>\r\n");
-
-
-            
-            #line 49 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                    }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                    \r\n");
-
-
-            
-            #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                     if (progress.NumInPersonInterviewTasksCreatedProgress < 1)
-                    {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                        <li>\r\n                            Schedule <b>");
-
-
-            
-            #line 54 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                                    Write(msMetrics.NumInPersonInterviewTasksCreated - jsMetrics.NumInPersonInterviewTasksCreated);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</b> more in person interviews\r\n                        </li>\r\n");
-
-
-            
-            #line 56 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                    }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                </ul>\r\n");
-
-
-            
-            #line 58 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                <p>\r\n                    ");
-
-
-            
-            #line 60 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-               Write(Html.Raw(Html.Encode(milestone.Instructions).Replace(Environment.NewLine, "<br />")));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                </p>\r\n");
-
-
-            
-            #line 62 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-            }
-
-            else
-            {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                <p>\r\n                    ");
-
-
-            
-            #line 67 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-               Write(Html.Raw(Html.Encode(milestone.CompletionDisplay).Replace(Environment.NewLine, "<br />")));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n\r\n                    <br /><br />\r\n                    ");
-
-
-            
-            #line 70 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-               Write(Html.ActionLink("Start Next Milestone", MVC.JobSearch.StartNextMilestone(Model.Id)));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                </p>\r\n");
-
-
-            
-            #line 72 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-            }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        </p>\r\n    ");
-
-WriteLiteral("\r\n");
-
-
-            
-            #line 75 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
 }
             
             #line default

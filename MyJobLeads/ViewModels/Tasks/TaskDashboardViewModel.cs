@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Entities.Configuration;
+using MyJobLeads.DomainModel.ViewModels;
 
 namespace MyJobLeads.ViewModels.Tasks
 {
@@ -30,11 +31,15 @@ namespace MyJobLeads.ViewModels.Tasks
                                   .ToList();
 
             CurrentMilestone = user.LastVisitedJobSearch.CurrentMilestone;
+
+            if (CurrentMilestone != null)
+                MilestoneProgress = new JobSearchMilestoneProgress(user.LastVisitedJobSearch);
         }
 
         public IList<Task> OverdueTasks;
         public IList<Task> TodaysTasks;
         public IList<Task> FutureTasks;
         public MilestoneConfig CurrentMilestone;
+        public JobSearchMilestoneProgress MilestoneProgress;
     }
 }

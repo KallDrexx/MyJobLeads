@@ -25,6 +25,10 @@
 
     else
     {
-        Html.RenderPartial(MVC.Task.Views.TaskListControl, Model.OverdueTasks);
+        Html.RenderPartial(MVC.Task.Views.TaskListControl, Model.OverdueTasks.OrderBy(x => x.TaskDate).ToList());
     }
+</div>
+
+<div class="right-content">
+    @{Html.RenderPartial(MVC.JobSearch.Views._JsMilestoneDisplay, Model);}
 </div>
