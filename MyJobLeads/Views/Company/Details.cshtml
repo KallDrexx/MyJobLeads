@@ -4,12 +4,7 @@
 @{
     ViewBag.Title = "Company: " + Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
-    // Form sidebar data
-    ViewBag.Sidebar = new HtmlString(
-                        string.Concat(
-                            Html.Partial(MVC.Contact.Views._CompanyContactDisplay, Model),
-                            Html.Partial(MVC.Task.Views._CompanyTaskDisplay, Model)));
+  
 
     // Form company location string
     bool citySpecified = !string.IsNullOrWhiteSpace(Model.City);

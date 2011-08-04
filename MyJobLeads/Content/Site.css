@@ -139,3 +139,22 @@
 {
     text-align: left;
 }
+
+/**** Data Display ****/
+h2
+{
+    color: #1569C7;
+    margin: 0px;
+}
+
+.data-label
+{
+    color: Gray;
+    font-weight: bold;
+}
+
+.details-link, .details-link:visited
+{
+    color: #1569C7;
+    text-decoration: none;
+}

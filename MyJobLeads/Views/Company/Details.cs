@@ -53,12 +53,7 @@ WriteLiteral("\r\n");
   
     ViewBag.Title = "Company: " + Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
-    // Form sidebar data
-    ViewBag.Sidebar = new HtmlString(
-                        string.Concat(
-                            Html.Partial(MVC.Contact.Views._CompanyContactDisplay, Model),
-                            Html.Partial(MVC.Task.Views._CompanyTaskDisplay, Model)));
+  
 
     // Form company location string
     bool citySpecified = !string.IsNullOrWhiteSpace(Model.City);
@@ -80,7 +75,7 @@ WriteLiteral("\r\n<h2>");
 
 
             
-            #line 27 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
 Write(Model.Name);
 
             
@@ -90,7 +85,7 @@ WriteLiteral("\'s Details</h2>\r\n");
 
 
             
-            #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
 Write(Html.ActionLink("Back To Company List", MVC.Company.List(Convert.ToInt32(Model.JobSearchID))));
 
             
@@ -100,7 +95,7 @@ WriteLiteral("<br /><br />\r\n\r\nPhone: ");
 
 
             
-            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 25 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
   Write(Model.Phone);
 
             
@@ -110,7 +105,7 @@ WriteLiteral(" <br />\r\nStatus: ");
 
 
             
-            #line 31 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
    Write(Model.LeadStatus);
 
             
@@ -120,7 +115,7 @@ WriteLiteral(" <br />\r\nLocation: ");
 
 
             
-            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 27 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
      Write(location);
 
             
@@ -130,7 +125,7 @@ WriteLiteral(" <br />\r\nNotes: ");
 
 
             
-            #line 33 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
   Write(Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />")));
 
             
@@ -140,7 +135,7 @@ WriteLiteral("<br />\r\n\r\n<br />\r\n");
 
 
             
-            #line 36 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 31 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
 Write(Html.ActionLink("Edit Company Details", MVC.Company.Edit(Model.Id)));
 
             

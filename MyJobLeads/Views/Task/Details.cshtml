@@ -2,15 +2,6 @@
 
 @{
     ViewBag.Title = "Task: " + Model.Name;
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
-    // Setup the sidebar
-    if (Model.ContactId != null) 
-    {
-        ViewBag.Sidebar = new HtmlString(Html.Partial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact).ToString() +
-                                            Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company).ToString());
-    }
-    else { ViewBag.Sidebar = Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company); }
 }
 
 <h2>@Model.Name</h2> <br />                                                                                      

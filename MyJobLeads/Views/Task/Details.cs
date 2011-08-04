@@ -20,12 +20,15 @@ namespace MyJobLeads.Views.Task
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Task/Details.cshtml")]
     public class Details : System.Web.Mvc.WebViewPage<MyJobLeads.DomainModel.Entities.Task>
     {
@@ -42,15 +45,6 @@ WriteLiteral("\r\n");
             #line 3 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
   
     ViewBag.Title = "Task: " + Model.Name;
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
-    // Setup the sidebar
-    if (Model.ContactId != null) 
-    {
-        ViewBag.Sidebar = new HtmlString(Html.Partial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact).ToString() +
-                                            Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company).ToString());
-    }
-    else { ViewBag.Sidebar = Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company); }
 
 
             
@@ -60,7 +54,7 @@ WriteLiteral("\r\n<h2>");
 
 
             
-            #line 16 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 7 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
 Write(Model.Name);
 
             
@@ -71,7 +65,7 @@ WriteLiteral("</h2> <br />                                                      
 
 
             
-            #line 19 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 10 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
      if (Model.ContactId != null) 
     { 
 
@@ -84,7 +78,7 @@ WriteLiteral("This task is associated with ");
 
 
             
-            #line 21 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 12 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
                                   Write(Html.ActionLink(Model.Contact.Name, MVC.Contact.Details((int)Model.ContactId)));
 
             
@@ -94,7 +88,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
     }
     else
     {
@@ -108,7 +102,7 @@ WriteLiteral("This task is associated with ");
 
 
             
-            #line 25 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 16 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
                                   Write(Html.ActionLink(Model.Company.Name, MVC.Company.Details((int)Model.CompanyId)));
 
             
@@ -118,7 +112,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 17 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
     }
 
             
@@ -128,7 +122,7 @@ WriteLiteral("\r\n    <p>\r\n        Category: ");
 
 
             
-            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 20 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
              Write(Model.Category);
 
             
@@ -136,27 +130,27 @@ WriteLiteral("\r\n    <p>\r\n        Category: ");
             #line hidden
 
             
-            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 20 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
                                  WriteLiteral(" <br />\r\n        Task Due Date: ");
 
             
             #line default
             #line hidden
             
-            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 21 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
                         if (Model.TaskDate.HasValue) { 
             
             #line default
             #line hidden
             
-            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 21 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
                                                   Write(Model.TaskDate.Value.ToString());
 
             
             #line default
             #line hidden
             
-            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 21 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
                                                                                         } else {
             
             #line default
@@ -169,7 +163,7 @@ WriteLiteral(" ");
 
 
             
-            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 21 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
                                                                                                                                   }
             
             #line default
@@ -178,7 +172,7 @@ WriteLiteral(" <br />\r\n\r\n");
 
 
             
-            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
          if (Model.CompletionDate == null) 
         { 
 
@@ -189,7 +183,7 @@ WriteLiteral("            <b>Not Completed</b>\r\n");
 
 
             
-            #line 35 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
         }
         else 
         { 
@@ -203,7 +197,7 @@ WriteLiteral("Completed on: ");
 
 
             
-            #line 38 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
                        Write(Model.CompletionDate.Value.ToString());
 
             
@@ -213,7 +207,7 @@ WriteLiteral(" \r\n");
 
 
             
-            #line 39 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
         }
 
             
@@ -224,7 +218,7 @@ WriteLiteral("        <br />\r\n\r\n        <table>\r\n            <tr>\r\n     
 
 
             
-            #line 45 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 36 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
                Write(Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />")));
 
             
@@ -235,7 +229,7 @@ WriteLiteral("</td>\r\n            </tr>\r\n        </table>\r\n    </p>        
 
 
             
-            #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 42 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
 Write(Html.ActionLink("Edit Task Details", MVC.Task.Edit(Model.Id)));
 
             

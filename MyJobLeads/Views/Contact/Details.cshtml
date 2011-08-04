@@ -4,7 +4,6 @@
 @{
     ViewBag.Title = "Contact: " + Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Sidebar = Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company);
 
     string taskString = Model.Tasks.Count == 1 ? "task" : "tasks";
 }

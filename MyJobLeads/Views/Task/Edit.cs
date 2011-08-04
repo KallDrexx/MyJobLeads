@@ -27,13 +27,19 @@ namespace MyJobLeads.Views.Task
     using System.Web.UI;
     using System.Web.WebPages;
     
+    #line 3 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+    using MyJobLeads.ViewModels.Companies;
+    
+    #line default
+    #line hidden
+    
     #line 2 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
     using MyJobLeads.ViewModels.Tasks;
     
     #line default
     #line hidden
     
-    #line 3 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+    #line 4 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
     using Telerik.Web.Mvc.UI;
     
     #line default
@@ -51,11 +57,12 @@ namespace MyJobLeads.Views.Task
 
 
 
+
 WriteLiteral("\r\n");
 
 
             
-            #line 5 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 6 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
   
     string editActionLabel;
     
@@ -82,7 +89,7 @@ WriteLiteral("\r\n\r\n");
 
 
             
-            #line 36 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 37 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
  using (Html.BeginForm(MVC.Task.Edit(), FormMethod.Post, new { @class = "edit-form" }))
 {
 
@@ -93,7 +100,7 @@ WriteLiteral("    <span class=\"form-header\">");
 
 
             
-            #line 38 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 39 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                          Write(editActionLabel);
 
             
@@ -103,35 +110,35 @@ WriteLiteral("</span>\r\n");
 
 
             
-            #line 39 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
     
     
             
             #line default
             #line hidden
             
-            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
 Write(Html.HiddenFor(x => x.Id));
 
             
             #line default
             #line hidden
             
-            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                               
     
             
             #line default
             #line hidden
             
-            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 42 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
 Write(Html.HiddenFor(x => x.AssociatedCompanyId));
 
             
             #line default
             #line hidden
             
-            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 42 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                                                
 
 
@@ -142,7 +149,7 @@ WriteLiteral("    <p>");
 
 
             
-            #line 43 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
   Write(Html.ValidationSummary());
 
             
@@ -152,7 +159,7 @@ WriteLiteral("</p>\r\n");
 
 
             
-            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 45 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
     
 
             
@@ -163,7 +170,7 @@ WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\"
 
 
             
-            #line 47 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 48 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                             Write(Html.TextBoxFor(x => x.Name, new { size = 30 }));
 
             
@@ -173,7 +180,7 @@ WriteLiteral("</span>\r\n    </div>\r\n");
 
 
             
-            #line 49 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 50 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
     
 
             
@@ -184,7 +191,7 @@ WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\"
 
 
             
-            #line 52 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 53 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                             Write(Html.DropDownListFor(x => x.Category, new SelectList(Model.AvailableCategoryList, Model.Category)));
 
             
@@ -194,7 +201,7 @@ WriteLiteral("</span>\r\n    </div>\r\n");
 
 
             
-            #line 54 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 55 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
     
 
             
@@ -208,7 +215,7 @@ WriteLiteral("<br />\r\n");
 
 
             
-            #line 56 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 57 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
     
 
             
@@ -219,7 +226,7 @@ WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\"
 
 
             
-            #line 59 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 60 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                             Write(Html.DropDownListFor(x => x.AssociatedContactId, Model.CompanyContactList, new { id = "contactlist" }));
 
             
@@ -229,7 +236,7 @@ WriteLiteral("</span>\r\n    </div>\r\n");
 
 
             
-            #line 61 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 62 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
     
     
 
@@ -241,7 +248,7 @@ WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\"
 
 
             
-            #line 65 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 66 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                             Write(Html.Telerik().DatePickerFor(x => x.TaskDate));
 
             
@@ -251,7 +258,7 @@ WriteLiteral("</span>\r\n    </div>\r\n");
 
 
             
-            #line 67 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 68 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
     
     
             
@@ -259,14 +266,14 @@ WriteLiteral("</span>\r\n    </div>\r\n");
             #line hidden
 
             
-            #line 68 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 69 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                                                                              
     
             
             #line default
             #line hidden
             
-            #line 69 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 70 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
      if (Model.Id != 0)
     {
 
@@ -278,7 +285,7 @@ WriteLiteral("        <div class=\"form-row\">\r\n            <span class=\"form
 
 
             
-            #line 73 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 74 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                                 Write(Html.CheckBoxFor(x => x.Completed));
 
             
@@ -288,13 +295,13 @@ WriteLiteral("</span>\r\n        </div>\r\n");
 
 
             
-            #line 75 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 76 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
     }
             
             #line default
             #line hidden
             
-            #line 75 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 76 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
      
     
 
@@ -306,7 +313,7 @@ WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\"
 
 
             
-            #line 79 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 80 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                             Write(Html.TextAreaFor(x => x.Notes, 10, 75, null));
 
             
@@ -316,7 +323,7 @@ WriteLiteral("</span>\r\n    </div>\r\n");
 
 
             
-            #line 81 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 82 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
     
 
             
@@ -328,7 +335,7 @@ WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\"
 
 
             
-            #line 87 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 88 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
              if (Model.Id != 0)
             { 
                 
@@ -336,14 +343,14 @@ WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\"
             #line default
             #line hidden
             
-            #line 89 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 90 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
            Write(Html.ActionLink("Back To Task", MVC.Task.Details(Model.Id)));
 
             
             #line default
             #line hidden
             
-            #line 89 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 90 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                                                                             ;
             }
             else if (Model.AssociatedCompanyId != 0)
@@ -353,14 +360,14 @@ WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\"
             #line default
             #line hidden
             
-            #line 93 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 94 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
            Write(Html.ActionLink("Back To Company", MVC.Company.Details(Model.AssociatedCompanyId)));
 
             
             #line default
             #line hidden
             
-            #line 93 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 94 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                                                                                                     
             }    
 
@@ -371,14 +378,28 @@ WriteLiteral("        </span>\r\n    </div>        \r\n");
 
 
             
-            #line 97 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 98 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
 }
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n<hr />\r\n\r\nCompany here\r\n");
+WriteLiteral("\r\n<hr />\r\n<br />\r\n\r\n");
 
+
+            
+            #line 103 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+ if (Model.AssociatedContactId > 0)
+{
+    Html.RenderPartial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact);
+}
+else
+{
+    Html.RenderPartial(MVC.Company.Views._CompanySidebarDisplay, new CompanyDisplayViewModel(Model.Company));
+}
+            
+            #line default
+            #line hidden
 
         }
     }

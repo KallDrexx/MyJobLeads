@@ -1,27 +1,23 @@
-﻿@model MyJobLeads.DomainModel.Entities.Company
+﻿@model MyJobLeads.ViewModels.Companies.CompanyDisplayViewModel
 
-@{
-    // Form company location string
-    bool citySpecified = !string.IsNullOrWhiteSpace(Model.City);
-    bool stateSpecified = !string.IsNullOrWhiteSpace(Model.State);
-    bool zipSpecified = !string.IsNullOrWhiteSpace(Model.Zip);
+<h2>@Model.Name</h2>
 
-    string location = string.Empty;
-    if (citySpecified && stateSpecified) { location = string.Concat(Model.City, ", ", Model.State, " "); }
-    else if (citySpecified) { location = Model.City + " "; }
-    else if (stateSpecified) { location = Model.State + " "; }
+<div class="left">
+    <span class="data-label">Phone:</span>
+    <span class="data-value">@Model.Phone</span>
+</div>
 
-    if (zipSpecified) { location += Model.Zip; }
-}
+<div class="right">
+    <span class="data-label">Location:</span>
+    <span class="data-value">@Model.Location</span>
+</div>
 
-<h2>@Html.ActionLink(Model.Name, MVC.Company.Details(Model.Id))'s Summary</h2>
-@Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Id))
+<br />
+
+<span class="data-label">Status:</span>
+<span class="data-value">@Model.LeadStatus</span>
 
 <br /><br />
 
-<p>
-    Phone: @Model.Phone <br />
-    Location: @location <br />
-    Notes: @Model.Notes <br />
-</p>
-
+@Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))<br />
+@Html.ActionLink("Show Details", MVC.Company.Details(Model.Id), new { @class = "details-link" })
