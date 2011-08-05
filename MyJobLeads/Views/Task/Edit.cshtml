@@ -60,14 +60,13 @@
         <span class="form-field">@Html.DropDownListFor(x => x.AssociatedContactId, Model.CompanyContactList, new { id = "contactlist" })</span>
     </div>
     
-    
     <div class="form-row">
         <span class="form-label">Task Due Date:</span>
         <span class="form-field">@Html.Telerik().DatePickerFor(x => x.TaskDate)</span>
     </div>
     
     @* Only show the completed checkbox if we are editing an existing task *@
-    @if (Model.Id != 0)
+    if (Model.Id != 0)
     {
         <div class="form-row">
             <span class="form-label">Task Completed?</span>

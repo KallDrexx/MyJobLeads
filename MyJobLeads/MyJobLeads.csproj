@@ -466,20 +466,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_LoggedInSidebarDisplay.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\JobSearch\Details.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Details.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Views\JobSearch\Edit.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Edit.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\JobSearch\Index.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Index.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\JobSearch\Search.cs">
       <AutoGen>True</AutoGen>
@@ -865,12 +855,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\JobSearch\Index.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Index.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\JobSearch\Edit.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Edit.cs</LastGenOutput>
@@ -886,10 +870,6 @@
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </Content>
     <Content Include="app_offline.htm_" />
-    <Content Include="Views\JobSearch\Details.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Details.cs</LastGenOutput>
-    </Content>
     <Content Include="Views\Company\Edit.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Edit.cs</LastGenOutput>

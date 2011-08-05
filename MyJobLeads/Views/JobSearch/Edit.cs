@@ -194,14 +194,14 @@ WriteLiteral("\r\n        </div>\r\n        \r\n        <div class=\"submit\">\r
             #line hidden
             
             #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-           Write(Html.ActionLink("Cancel", MVC.JobSearch.Index()));
+           Write(Html.ActionLink("Cancel", MVC.Home.Index()));
 
             
             #line default
             #line hidden
             
             #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-                                                                 ;
+                                                            ;
             }
             else
             {
