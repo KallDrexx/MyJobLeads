@@ -106,7 +106,7 @@
 }
 
 /**** Forms ****/
-.edit-form
+.display-form
 {
     border: solid;
     width: 98%;
@@ -133,12 +133,15 @@
     width: 150px;
     text-align: right;
     margin-right: 10px;
+    color: #595454;
 }
 
 .form-field
 {
+    display: inline-block;
     text-align: left;
 }
+
 
 /**** Data Display ****/
 h2

@@ -349,6 +349,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Tasks\TaskDashboardViewModel.cs" />
+    <Compile Include="ViewModels\Tasks\TaskDisplayViewModel.cs" />
     <Compile Include="ViewModels\Users\UserSidebarViewModel.cs" />
     <Compile Include="Views\Account\ChangePassword.cs">
       <AutoGen>True</AutoGen>

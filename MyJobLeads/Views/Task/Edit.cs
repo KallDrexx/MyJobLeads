@@ -90,23 +90,23 @@ WriteLiteral("\r\n\r\n");
 
             
             #line 37 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
- using (Html.BeginForm(MVC.Task.Edit(), FormMethod.Post, new { @class = "edit-form" }))
+ using (Html.BeginForm(MVC.Task.Edit(), FormMethod.Post, new { @class = "display-form" }))
 {
 
             
             #line default
             #line hidden
-WriteLiteral("    <span class=\"form-header\">");
+WriteLiteral("    <h2>");
 
 
             
             #line 39 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-                         Write(editActionLabel);
+   Write(editActionLabel);
 
             
             #line default
             #line hidden
-WriteLiteral("</span>\r\n");
+WriteLiteral("</h2>\r\n");
 
 
             
@@ -329,9 +329,9 @@ WriteLiteral("</span>\r\n    </div>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\"></span>\r\n        <sp" +
-"an class=\"form-field\">\r\n            <input type=\"submit\" value=\"Save\" /> &nbsp; " +
-"&nbsp;\r\n\r\n");
+WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\">&nbsp;</span>\r\n     " +
+"   <span class=\"form-field\">\r\n            <input type=\"submit\" value=\"Save\" /> &" +
+"nbsp; &nbsp;\r\n\r\n");
 
 
             
@@ -344,14 +344,14 @@ WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\"
             #line hidden
             
             #line 90 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-           Write(Html.ActionLink("Back To Task", MVC.Task.Details(Model.Id)));
+           Write(Html.ActionLink("Back To Task", MVC.Task.Details(Model.Id), new { @class = "details-link" }));
 
             
             #line default
             #line hidden
             
             #line 90 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-                                                                            ;
+                                                                                                             ;
             }
             else if (Model.AssociatedCompanyId != 0)
             { 
@@ -361,14 +361,14 @@ WriteLiteral("    <div class=\"form-row\">\r\n        <span class=\"form-label\"
             #line hidden
             
             #line 94 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-           Write(Html.ActionLink("Back To Company", MVC.Company.Details(Model.AssociatedCompanyId)));
+           Write(Html.ActionLink("Back To Company", MVC.Company.Details(Model.AssociatedCompanyId), new { @class = "details-link" }));
 
             
             #line default
             #line hidden
             
             #line 94 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-                                                                                                    
+                                                                                                                                     
             }    
 
             
@@ -384,11 +384,11 @@ WriteLiteral("        </span>\r\n    </div>        \r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n<hr />\r\n<br />\r\n\r\n");
+WriteLiteral("\r\n<hr />\r\n\r\n");
 
 
             
-            #line 103 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 102 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
  if (Model.AssociatedContactId > 0)
 {
     Html.RenderPartial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact);

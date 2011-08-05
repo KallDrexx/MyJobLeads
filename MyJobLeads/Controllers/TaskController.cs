@@ -150,7 +150,8 @@ namespace MyJobLeads.Controllers
         public virtual ActionResult Details(int id)
         {
             var task = _serviceFactory.GetService<TaskByIdQuery>().WithTaskId(id).Execute();
-            return View(task);
+            var model = new TaskDisplayViewModel(task);
+            return View(model);
         }
 
         public virtual ActionResult Overdue()

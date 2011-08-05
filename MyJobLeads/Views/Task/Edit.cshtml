@@ -34,9 +34,9 @@
     </text>);
 }*@
 
-@using (Html.BeginForm(MVC.Task.Edit(), FormMethod.Post, new { @class = "edit-form" }))
+@using (Html.BeginForm(MVC.Task.Edit(), FormMethod.Post, new { @class = "display-form" }))
 {
-    <span class="form-header">@editActionLabel</span>
+    <h2>@editActionLabel</h2>
     
     @Html.HiddenFor(x => x.Id)
     @Html.HiddenFor(x => x.AssociatedCompanyId)
@@ -81,24 +81,23 @@
     </div>
     
     <div class="form-row">
-        <span class="form-label"></span>
+        <span class="form-label">&nbsp;</span>
         <span class="form-field">
             <input type="submit" value="Save" /> &nbsp; &nbsp;
 
             @if (Model.Id != 0)
             { 
-                @Html.ActionLink("Back To Task", MVC.Task.Details(Model.Id));
+                @Html.ActionLink("Back To Task", MVC.Task.Details(Model.Id), new { @class = "details-link" });
             }
             else if (Model.AssociatedCompanyId != 0)
             { 
-                @Html.ActionLink("Back To Company", MVC.Company.Details(Model.AssociatedCompanyId)) 
+                @Html.ActionLink("Back To Company", MVC.Company.Details(Model.AssociatedCompanyId), new { @class = "details-link" }) 
             }    
         </span>
     </div>        
 }
 
 <hr />
-<br />
 
 @if (Model.AssociatedContactId > 0)
 {
