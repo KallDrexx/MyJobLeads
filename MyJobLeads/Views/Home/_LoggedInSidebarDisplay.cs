@@ -59,8 +59,18 @@ Write(Html.ActionLink("My Tasks", MVC.Task.Index()));
             
             #line default
             #line hidden
-WriteLiteral(" <br />\r\n    <a href=\"#\">Contacts</a><br />\r\n    <a href=\"#\">Companies</a><br />\r" +
-"\n    <br />\r\n    <a href=\"#\">About</a><br />\r\n    ");
+WriteLiteral(" <br />\r\n    ");
+
+
+            
+            #line 10 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_LoggedInSidebarDisplay.cshtml"
+Write(Html.ActionLink("Companies", MVC.Company.List()));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" <br />\r\n    <a href=\"#\">Contacts</a><br />\r\n    <br />\r\n    <a href=\"#\">About</a" +
+"><br />\r\n    ");
 
 
             

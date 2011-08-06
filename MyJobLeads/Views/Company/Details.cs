@@ -86,7 +86,7 @@ WriteLiteral("\'s Details</h2>\r\n");
 
             
             #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-Write(Html.ActionLink("Back To Company List", MVC.Company.List(Convert.ToInt32(Model.JobSearchID))));
+Write(Html.ActionLink("Back To Company List", MVC.Company.List()));
 
             
             #line default

@@ -75,7 +75,7 @@ WriteLiteral(" entered. \r\n    <br /><br />\r\n    ");
 
             
             #line 12 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\_jobsearchCompanySummary.cshtml"
-Write(Html.ActionLink("View All Companies", MVC.Company.List(Model.JobSearchId)));
+Write(Html.ActionLink("View All Companies", MVC.Company.List()));
 
             
             #line default
@@ -85,7 +85,7 @@ WriteLiteral(" <br /><br />\r\n    ");
 
             
             #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\_jobsearchCompanySummary.cshtml"
-Write(Html.ActionLink("Add A New Company", MVC.Company.Add(Model.JobSearchId)));
+Write(Html.ActionLink("Add A New Company", MVC.Company.Add()));
 
             
             #line default
