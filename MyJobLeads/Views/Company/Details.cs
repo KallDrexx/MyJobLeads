@@ -26,17 +26,11 @@ namespace MyJobLeads.Views.Company
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    
-    #line 2 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-    using MyJobLeads.DomainModel.Entities;
-    
-    #line default
-    #line hidden
     using Telerik.Web.Mvc.UI;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Company/Details.cshtml")]
-    public class Details : System.Web.Mvc.WebViewPage<Company>
+    public class Details : System.Web.Mvc.WebViewPage<MyJobLeads.ViewModels.Companies.CompanyDisplayViewModel>
     {
         public Details()
         {
@@ -44,104 +38,83 @@ namespace MyJobLeads.Views.Company
         public override void Execute()
         {
 
-
 WriteLiteral("\r\n");
 
 
             
-            #line 4 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 3 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
   
     ViewBag.Title = "Company: " + Model.Name;
-    Layout = "~/Views/Shared/_Layout.cshtml";
-  
-
-    // Form company location string
-    bool citySpecified = !string.IsNullOrWhiteSpace(Model.City);
-    bool stateSpecified = !string.IsNullOrWhiteSpace(Model.State);
-    bool zipSpecified = !string.IsNullOrWhiteSpace(Model.Zip);
-
-    string location = string.Empty;
-    if (citySpecified && stateSpecified) { location = string.Concat(Model.City, ", ", Model.State, " "); }
-    else if (citySpecified) { location = Model.City + " "; }
-    else if (stateSpecified) { location = Model.State + " "; }
-
-    if (zipSpecified) { location += Model.Zip; }
 
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n<h2>");
+WriteLiteral("\r\n<div class=\"display-form\">\r\n    <h2>");
 
 
             
-            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-Write(Model.Name);
+            #line 8 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+   Write(Model.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("\'s Details</h2>\r\n");
+WriteLiteral("</h2>\r\n    ");
+
+
+            
+            #line 9 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+Write(Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Id), new { @class = "details-link" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n\r\n    <div class=\"form-row\">\r\n        <span class=\"form-label\">Phone:</span>\r\n " +
+"       <span class=\"form-field\">");
+
+
+            
+            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                            Write(Model.Phone);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n    </div>\r\n    \r\n    <div class=\"form-row\">\r\n        <span class=\"form-" +
+"label\">Location:</span>\r\n        <span class=\"form-field\">");
+
+
+            
+            #line 18 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                            Write(Model.Location);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n    </div>\r\n\r\n    <div class=\"form-row\">\r\n        <span class=\"form-labe" +
+"l\">Status:</span>\r\n        <span class=\"form-field\">");
 
 
             
             #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-Write(Html.ActionLink("Back To Company List", MVC.Company.List()));
+                            Write(Model.LeadStatus);
 
             
             #line default
             #line hidden
-WriteLiteral("<br /><br />\r\n\r\nPhone: ");
-
-
-            
-            #line 25 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-  Write(Model.Phone);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" <br />\r\nStatus: ");
-
-
-            
-            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-   Write(Model.LeadStatus);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" <br />\r\nLocation: ");
-
-
-            
-            #line 27 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-     Write(location);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" <br />\r\nNotes: ");
+WriteLiteral("</span>\r\n    </div>\r\n\r\n    <div class=\"form-row\">\r\n        <span class=\"form-labe" +
+"l\">Notes:</span>\r\n        <span class=\"form-field\">");
 
 
             
             #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-  Write(Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />")));
+                            Write(Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />")));
 
             
             #line default
             #line hidden
-WriteLiteral("<br />\r\n\r\n<br />\r\n");
-
-
-            
-            #line 31 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-Write(Html.ActionLink("Edit Company Details", MVC.Company.Edit(Model.Id)));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("</span>\r\n    </div>\r\n</div>\r\n\r\n<hr />");
 
 
         }

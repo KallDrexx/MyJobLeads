@@ -1,31 +1,32 @@
-﻿@model Company
-@using MyJobLeads.DomainModel.Entities;           
+﻿@model MyJobLeads.ViewModels.Companies.CompanyDisplayViewModel
 
 @{
     ViewBag.Title = "Company: " + Model.Name;
-    Layout = "~/Views/Shared/_Layout.cshtml";
-  
-
-    // Form company location string
-    bool citySpecified = !string.IsNullOrWhiteSpace(Model.City);
-    bool stateSpecified = !string.IsNullOrWhiteSpace(Model.State);
-    bool zipSpecified = !string.IsNullOrWhiteSpace(Model.Zip);
-
-    string location = string.Empty;
-    if (citySpecified && stateSpecified) { location = string.Concat(Model.City, ", ", Model.State, " "); }
-    else if (citySpecified) { location = Model.City + " "; }
-    else if (stateSpecified) { location = Model.State + " "; }
-
-    if (zipSpecified) { location += Model.Zip; }
 }
 
-<h2>@Model.Name's Details</h2>
-@Html.ActionLink("Back To Company List", MVC.Company.List())<br /><br />
+<div class="display-form">
+    <h2>@Model.Name</h2>
+    @Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Id), new { @class = "details-link" })
 
-Phone: @Model.Phone <br />
-Status: @Model.LeadStatus <br />
-Location: @location <br />
-Notes: @Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))<br />
+    <div class="form-row">
+        <span class="form-label">Phone:</span>
+        <span class="form-field">@Model.Phone</span>
+    </div>
+    
+    <div class="form-row">
+        <span class="form-label">Location:</span>
+        <span class="form-field">@Model.Location</span>
+    </div>
 
-<br />
-@Html.ActionLink("Edit Company Details", MVC.Company.Edit(Model.Id))
+    <div class="form-row">
+        <span class="form-label">Status:</span>
+        <span class="form-field">@Model.LeadStatus</span>
+    </div>
+
+    <div class="form-row">
+        <span class="form-label">Notes:</span>
+        <span class="form-field">@Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))</span>
+    </div>
+</div>
+
+<hr />

@@ -111,7 +111,8 @@ namespace MyJobLeads.Controllers
         public virtual ActionResult Details(int id)
         {
             var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(id).Execute();
-            return View(company);
+            var model = new CompanyDisplayViewModel(company);
+            return View(model);
         }
 
         public virtual ActionResult ChangeCompanyStatusFilters(int jobSearchId, string[] shownStatus)
