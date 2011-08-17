@@ -9,6 +9,14 @@ namespace MyJobLeads.DomainModel.Entities
 {
     public class Company
     {
+        public Company()
+        {
+            Contacts = new List<Contact>();
+            Tasks = new List<Task>();
+            History = new List<CompanyHistory>();
+            Positions = new List<Position>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
@@ -28,5 +36,6 @@ namespace MyJobLeads.DomainModel.Entities
         public virtual ICollection<Contact> Contacts { get; set; }
         public virtual ICollection<Task> Tasks { get; set; }
         public virtual ICollection<CompanyHistory> History { get; set; }
+        public virtual ICollection<Position> Positions { get; set; }
     }
 }
