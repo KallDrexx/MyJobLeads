@@ -30,6 +30,11 @@ namespace MyJobLeads.ViewModels.Companies
             else if (stateSpecified) { Location = company.State + " "; }
 
             if (zipSpecified) { Location += company.Zip; }
+
+            // Form the task list
+            Tasks = company.Tasks.ToList()
+                                 .Select(x => new CompanyTaskViewModel(x))
+                                 .ToList();
         }
 
         public int Id { get; set; }
@@ -38,5 +43,30 @@ namespace MyJobLeads.ViewModels.Companies
         public string Location { get; set; }
         public string Notes { get; set; }
         public string LeadStatus { get; set; }
+
+        public IList<CompanyTaskViewModel> Tasks { get; set; }
+
+        public class CompanyTaskViewModel
+        {
+            public CompanyTaskViewModel(Task task)
+            {
+                Id = task.Id;
+                Name = task.Name;
+                Completed = task.CompletionDate != null;
+                DueDate = task.TaskDate;
+                Notes = task.Notes;
+
+                AssociatedWith = task.Contact != null
+                                ? task.Contact.Name
+                                : task.Company.Name;
+            }
+
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public bool Completed { get; set; }
+            public DateTime? DueDate { get; set; }
+            public string AssociatedWith { get; set; }
+            public string Notes { get; set; }
+        }
     }
 }

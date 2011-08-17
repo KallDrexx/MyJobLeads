@@ -1,19 +1,15 @@
-﻿#header 
+﻿/**** Content Areas ****/
+#header 
 {
     background-color: #1569C7;
     height: 30px;
     overflow: hidden;
 }
 
-#logo 
+#search-area 
 {
-    position: relative;
-    left: 10px;
-    color: white;
-    font-size: x-large;
-    font-weight: bold;
-    text-decoration: none;
-    float: left;
+    position: absolute;
+    left: 170px;
     margin-top: 3px;
 }
 
@@ -26,45 +22,6 @@
     padding: 0;
     margin-top: 30px;
 }
-
-#sidebar-links
-{
-    margin-left: 10px;
-}
-
-#sidebar-links a
-{
-    font-weight: bold;
-    text-decoration: none;
-    color: #657383;
-}
-
-#user-name 
-{
-    font-weight: bold;
-    font-size: 1.1em;
-    color: #1569C7;
-}
-
-#edit-account-link 
-{
-    color: Black;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-#search-area 
-{
-    position: absolute;
-    left: 170px;
-    margin-top: 3px;
-}
-
-#search-area #query
-{
-    width: 200px;
-}
-
 
 #main-area 
 {
@@ -82,6 +39,56 @@
 .left-content { display: inline-block; width: 48%; }
 .right-content { float: right; width: 48% }
 
+.left-subcontent { float: left; width: 200px; }
+.right-subcontent { float: left; width: 200px; }
+.clear { clear: both; }
+
+/**** Misc ****/
+
+#sidebar-links
+{
+    margin-left: 10px;
+}
+
+#sidebar-links a
+{
+    font-weight: bold;
+    text-decoration: none;
+    color: #657383;
+}
+
+#logo 
+{
+    position: relative;
+    left: 10px;
+    color: white;
+    font-size: x-large;
+    font-weight: bold;
+    text-decoration: none;
+    float: left;
+    margin-top: 3px;
+}
+
+
+#user-name 
+{
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #1569C7;
+}
+
+#edit-account-link 
+{
+    color: Black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#search-area #query
+{
+    width: 200px;
+}
+
 #milestone-display
 {
     border: solid;
@@ -93,16 +100,18 @@
     text-decoration: none;
 }
 
-.item-heading, .item-heading a:visited
+.item-heading, .item-heading:visited, .item-heading:link
 {
     color: #1569C7;
     font-weight: bold;
+    text-decoration: none;
 }
 
-.item-subheading, .item-subheading a:visited
+.item-subheading, .item-subheading:visited, .item-subheading:link
 {
     color: Black;
     font-weight: bold;
+    text-decoration: none;
 }
 
 /**** Forms ****/
@@ -154,6 +163,7 @@ h2
 {
     color: Gray;
     font-weight: bold;
+    text-decoration: none;
 }
 
 .details-link, .details-link:visited

@@ -6,9 +6,6 @@
     
     // Make sure the contact is at least initialized to an empty contact
     if (Model.Contact == null) { Model.Contact = new MyJobLeads.DomainModel.Entities.Contact(); }
-    
-    // Setup the sidebar
-    ViewBag.Sidebar = Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company);
 }
 
 @if (Model.Contact.Id == 0)

@@ -26,6 +26,7 @@ namespace MyJobLeads.Views.Company
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using MyJobLeads.Infrastructure.HtmlHelpers;
     using Telerik.Web.Mvc.UI;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
@@ -114,7 +115,59 @@ WriteLiteral("</span>\r\n    </div>\r\n\r\n    <div class=\"form-row\">\r\n     
             
             #line default
             #line hidden
-WriteLiteral("</span>\r\n    </div>\r\n</div>\r\n\r\n<hr />");
+WriteLiteral("</span>\r\n    </div>\r\n</div>\r\n\r\n<hr />\r\n\r\n<div class=\"left-subcontent\">\r\n");
+
+
+            
+            #line 35 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+     if (Model.Tasks.Where(x => !x.Completed).Count() > 0)
+    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        <h3>Open Tasks</h3>\r\n");
+
+
+            
+            #line 38 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+        
+        
+            
+            #line default
+            #line hidden
+            
+            #line 39 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+         foreach (var task in Model.Tasks.Where(x => !x.Completed).ToList())
+         {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <p>\r\n");
+
+
+            
+            #line 42 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                   Html.RenderPartial(MVC.Company.Views._CompanyTaskDisplay, task); 
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            </p>\r\n");
+
+
+
+            
+            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+         }
+    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n\r\n<div class=\"right-subcontent\">\r\n    <h3>Test content</h3>\r\n</div>\r\n\r\n<d" +
+"iv class=\"clear\"></div>");
 
 
         }

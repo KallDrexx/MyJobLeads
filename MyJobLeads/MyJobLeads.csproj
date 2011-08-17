@@ -296,6 +296,7 @@
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\HtmlHelpers\DateHtmlHelpers.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\NumericDisplayHelpers.cs" />
     <Compile Include="Infrastructure\Installers\ValidatorInstaller.cs" />
     <Compile Include="Infrastructure\Providers\AppDataDirectoryProvider.cs" />
@@ -987,6 +988,7 @@
     <Content Include="Views\Task\TaskListControl.cshtml" />
     <Content Include="Views\Task\Today.cshtml" />
     <Content Include="Views\Task\Future.cshtml" />
+    <Content Include="Views\Company\_CompanyTaskDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

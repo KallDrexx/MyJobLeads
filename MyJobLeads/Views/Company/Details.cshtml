@@ -30,3 +30,23 @@
 </div>
 
 <hr />
+
+<div class="left-subcontent">
+    @if (Model.Tasks.Where(x => !x.Completed).Count() > 0)
+    {
+        <h3>Open Tasks</h3>
+        
+        @foreach (var task in Model.Tasks.Where(x => !x.Completed).ToList())
+         {
+            <p>
+                @{ Html.RenderPartial(MVC.Company.Views._CompanyTaskDisplay, task); }
+            </p>
+         }
+    }
+</div>
+
+<div class="right-subcontent">
+    <h3>Test content</h3>
+</div>
+
+<div class="clear"></div>
