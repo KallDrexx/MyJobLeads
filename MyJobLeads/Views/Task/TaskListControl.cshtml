@@ -1,0 +1,50 @@
+﻿@model IList<MyJobLeads.DomainModel.Entities.Task>
+
+@foreach (var task in Model)
+{
+    <p class="task-display">
+        @Html.ActionLink(task.Name, MVC.Task.Details(task.Id), new { @class = "item-heading" })
+
+        <span class="right">
+            @if (task.TaskDate.HasValue)
+            {
+                if (task.TaskDate.Value.Date == DateTime.Today)
+                {
+                    @:Due Today
+                }
+
+                else if (task.TaskDate.Value.Date == DateTime.Today.Subtract(new TimeSpan(1, 0, 0, 0)))
+                {
+                    @:Due Yesterday
+                }
+
+                else if (task.TaskDate.Value.Date == DateTime.Today.Add(new TimeSpan(1, 0, 0, 0)))
+                {
+                    @:Due Tomorrow
+                }
+
+                else
+                {
+                    @:Due @task.TaskDate.Value.Date.ToShortDateString()
+                }
+            }
+            else
+            {
+                @:No Due Date
+            }
+        </span>
+        
+        <br />
+        
+        <span class="item-subheading">
+            @if (task.Contact != null)
+            {
+                @Html.ActionLink(task.Contact.Name, MVC.Task.Details(task.Id)) @: - 
+            }
+        
+            @Html.ActionLink(task.Company.Name, MVC.Task.Details(task.Id))
+        </span>
+    </p>
+    
+    <br />
+}

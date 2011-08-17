@@ -20,14 +20,17 @@ namespace MyJobLeads.Views.Company
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Company/_CompanySidebarDisplay.cshtml")]
-    public class _CompanySidebarDisplay : System.Web.Mvc.WebViewPage<MyJobLeads.DomainModel.Entities.Company>
+    public class _CompanySidebarDisplay : System.Web.Mvc.WebViewPage<MyJobLeads.ViewModels.Companies.CompanyDisplayViewModel>
     {
         public _CompanySidebarDisplay()
         {
@@ -35,79 +38,70 @@ namespace MyJobLeads.Views.Company
         public override void Execute()
         {
 
-WriteLiteral("\r\n");
-
-
-            
-            #line 3 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\_CompanySidebarDisplay.cshtml"
-  
-    // Form company location string
-    bool citySpecified = !string.IsNullOrWhiteSpace(Model.City);
-    bool stateSpecified = !string.IsNullOrWhiteSpace(Model.State);
-    bool zipSpecified = !string.IsNullOrWhiteSpace(Model.Zip);
-
-    string location = string.Empty;
-    if (citySpecified && stateSpecified) { location = string.Concat(Model.City, ", ", Model.State, " "); }
-    else if (citySpecified) { location = Model.City + " "; }
-    else if (stateSpecified) { location = Model.State + " "; }
-
-    if (zipSpecified) { location += Model.Zip; }
-
-
-            
-            #line default
-            #line hidden
 WriteLiteral("\r\n<h2>");
 
 
             
-            #line 17 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\_CompanySidebarDisplay.cshtml"
-Write(Html.ActionLink(Model.Name, MVC.Company.Details(Model.Id)));
+            #line 3 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\_CompanySidebarDisplay.cshtml"
+Write(Model.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("\'s Summary</h2>\r\n");
+WriteLiteral("</h2>\r\n\r\n<div class=\"left\">\r\n    <span class=\"data-label\">Phone:</span>\r\n    <spa" +
+"n class=\"data-value\">");
+
+
+            
+            #line 7 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\_CompanySidebarDisplay.cshtml"
+                        Write(Model.Phone);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n</div>\r\n\r\n<div class=\"right\">\r\n    <span class=\"data-label\">Location:</s" +
+"pan>\r\n    <span class=\"data-value\">");
+
+
+            
+            #line 12 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\_CompanySidebarDisplay.cshtml"
+                        Write(Model.Location);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n</div>\r\n\r\n<br />\r\n\r\n<span class=\"data-label\">Status:</span>\r\n<span class" +
+"=\"data-value\">");
 
 
             
             #line 18 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\_CompanySidebarDisplay.cshtml"
-Write(Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Id)));
+                    Write(Model.LeadStatus);
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n<br /><br />\r\n\r\n<p>\r\n    Phone: ");
+WriteLiteral("</span>\r\n\r\n<br /><br />\r\n\r\n");
+
+
+            
+            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\_CompanySidebarDisplay.cshtml"
+Write(Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />")));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("<br />\r\n");
 
 
             
             #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\_CompanySidebarDisplay.cshtml"
-      Write(Model.Phone);
+Write(Html.ActionLink("Show Details", MVC.Company.Details(Model.Id), new { @class = "details-link" }));
 
             
             #line default
             #line hidden
-WriteLiteral(" <br />\r\n    Location: ");
-
-
-            
-            #line 24 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\_CompanySidebarDisplay.cshtml"
-         Write(location);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" <br />\r\n    Notes: ");
-
-
-            
-            #line 25 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\_CompanySidebarDisplay.cshtml"
-      Write(Model.Notes);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" <br />\r\n</p>\r\n\r\n");
+WriteLiteral("\r\n");
 
 
         }

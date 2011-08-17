@@ -7,6 +7,7 @@ using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Utilities;
 using MyJobLeads.DomainModel.Providers;
+using MyJobLeads.ViewModels.Users;
 
 namespace MyJobLeads.Controllers
 {
@@ -28,14 +29,9 @@ namespace MyJobLeads.Controllers
                 var user = _userByIdQuery.WithUserId(CurrentUserId).Execute();
 
                 if (user.LastVisitedJobSearchId == null)
-                {
-                    if (user.JobSearches.Count == 0)
-                        return RedirectToAction(MVC.JobSearch.Add());
-                    else
-                        return RedirectToAction(MVC.JobSearch.Index());
-                }
+                    return RedirectToAction(MVC.JobSearch.Add());
 
-                return RedirectToAction(MVC.JobSearch.Details(user.LastVisitedJobSearchId.Value));
+                return RedirectToAction(MVC.Task.Index());
             }
 
             
@@ -103,6 +99,21 @@ Feedback:
             _unitOfWork.Commit();
 
             return View(fixedCompanies + fixedContacts + fixedTasks);
+        }
+
+        public virtual ActionResult SidebarDisplay()
+        {
+            if (CurrentUserId != 0)
+            {
+                var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(CurrentUserId).Execute();
+                var model = new UserSidebarViewModel(user);
+                return PartialView(MVC.Home.Views._LoggedInSidebarDisplay, model);
+            }
+
+            else
+            {
+                return PartialView(MVC.Home.Views._AnonymousUserSidebarDisplay);
+            }
         }
     }
 }

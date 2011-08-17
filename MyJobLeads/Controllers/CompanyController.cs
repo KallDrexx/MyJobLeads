@@ -14,6 +14,7 @@ using MyJobLeads.ViewModels.Companies;
 using MyJobLeads.DomainModel.Queries.JobSearches;
 using MyJobLeads.DomainModel.Commands.JobSearches;
 using FluentValidation;
+using MyJobLeads.DomainModel.Queries.Users;
 
 namespace MyJobLeads.Controllers
 {
@@ -29,13 +30,10 @@ namespace MyJobLeads.Controllers
             _serviceFactory = serviceFactory;
         }
 
-        public virtual ActionResult List(int jobSearchId)
+        public virtual ActionResult List()
         {
-            var jobSearch = _serviceFactory.GetService<JobSearchByIdQuery>()
-                                           .WithJobSearchId(jobSearchId)
-                                           .Execute();
-
-            var model = new JobSearchCompanyListViewModel(jobSearch);
+            var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(CurrentUserId).Execute();
+            var model = new JobSearchCompanyListViewModel(user.LastVisitedJobSearch);
 
             return View(model);
         }
@@ -113,7 +111,8 @@ namespace MyJobLeads.Controllers
         public virtual ActionResult Details(int id)
         {
             var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(id).Execute();
-            return View(company);
+            var model = new CompanyDisplayViewModel(company);
+            return View(model);
         }
 
         public virtual ActionResult ChangeCompanyStatusFilters(int jobSearchId, string[] shownStatus)
@@ -141,7 +140,7 @@ namespace MyJobLeads.Controllers
             // Execute the command and go back to the company list
             cmd.Execute();
 
-            return RedirectToAction(MVC.Company.List(jobSearchId));
+            return RedirectToAction(MVC.Company.List());
         }
     }
 }

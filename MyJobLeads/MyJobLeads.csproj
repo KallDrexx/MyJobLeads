@@ -296,6 +296,7 @@
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\HtmlHelpers\DateHtmlHelpers.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\NumericDisplayHelpers.cs" />
     <Compile Include="Infrastructure\Installers\ValidatorInstaller.cs" />
     <Compile Include="Infrastructure\Providers\AppDataDirectoryProvider.cs" />
@@ -327,6 +328,7 @@
     <Compile Include="ViewModels\Accounts\AccountMembershipService.cs" />
     <Compile Include="ViewModels\Accounts\IMembershipService.cs" />
     <Compile Include="ViewModels\Accounts\OrganizationRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\Companies\CompanyDisplayViewModel.cs" />
     <Compile Include="ViewModels\Companies\EditCompanyViewModel.cs" />
     <Compile Include="ViewModels\Companies\JobSearchCompanyListViewModel.cs" />
     <Compile Include="ViewModels\Contacts\EditContactViewModel.cs" />
@@ -347,6 +349,9 @@
     <Compile Include="TaskController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Tasks\TaskDashboardViewModel.cs" />
+    <Compile Include="ViewModels\Tasks\TaskDisplayViewModel.cs" />
+    <Compile Include="ViewModels\Users\UserSidebarViewModel.cs" />
     <Compile Include="Views\Account\ChangePassword.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -452,20 +457,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Test.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\JobSearch\Details.cs">
+    <Compile Include="Views\Home\_AnonymousUserSidebarDisplay.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Details.cshtml</DependentUpon>
+      <DependentUpon>_AnonymousUserSidebarDisplay.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\_LoggedInSidebarDisplay.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_LoggedInSidebarDisplay.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\JobSearch\Edit.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Edit.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\JobSearch\Index.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Index.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\JobSearch\Search.cs">
       <AutoGen>True</AutoGen>
@@ -718,7 +723,6 @@
     <Content Include="Content\2011.2.712\Windows7\slider-v.gif" />
     <Content Include="Content\2011.2.712\Windows7\sprite-vertical.png" />
     <Content Include="Content\2011.2.712\Windows7\sprite.png" />
-    <Content Include="Content\Forms.css" />
     <Content Include="Content\images\footbg.gif" />
     <Content Include="Content\images\rss.png" />
     <Content Include="Content\images\topbg.gif" />
@@ -852,12 +856,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\JobSearch\Index.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Index.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\JobSearch\Edit.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Edit.cs</LastGenOutput>
@@ -873,10 +871,6 @@
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </Content>
     <Content Include="app_offline.htm_" />
-    <Content Include="Views\JobSearch\Details.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Details.cs</LastGenOutput>
-    </Content>
     <Content Include="Views\Company\Edit.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Edit.cs</LastGenOutput>
@@ -982,6 +976,19 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Test.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Home\_LoggedInSidebarDisplay.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_LoggedInSidebarDisplay.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\_AnonymousUserSidebarDisplay.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_AnonymousUserSidebarDisplay.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\Overdue.cshtml" />
+    <Content Include="Views\Task\TaskListControl.cshtml" />
+    <Content Include="Views\Task\Today.cshtml" />
+    <Content Include="Views\Task\Future.cshtml" />
+    <Content Include="Views\Company\_CompanyTaskDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

@@ -64,7 +64,6 @@ namespace MyJobLeads.Controllers {
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string Index = "Index";
             public readonly string Add = "Add";
             public readonly string Edit = "Edit";
             public readonly string Details = "Details";
@@ -79,9 +78,7 @@ namespace MyJobLeads.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string _JsMilestoneDisplay = "~/Views/JobSearch/_JsMilestoneDisplay.cshtml";
-            public readonly string Details = "~/Views/JobSearch/Details.cshtml";
             public readonly string Edit = "~/Views/JobSearch/Edit.cshtml";
-            public readonly string Index = "~/Views/JobSearch/Index.cshtml";
             public readonly string Search = "~/Views/JobSearch/Search.cshtml";
         }
     }
@@ -89,11 +86,6 @@ namespace MyJobLeads.Controllers {
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class T4MVC_JobSearchController: MyJobLeads.Controllers.JobSearchController {
         public T4MVC_JobSearchController() : base(Dummy.Instance) { }
-
-        public override System.Web.Mvc.ActionResult Index() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
-            return callInfo;
-        }
 
         public override System.Web.Mvc.ActionResult Add() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Add);

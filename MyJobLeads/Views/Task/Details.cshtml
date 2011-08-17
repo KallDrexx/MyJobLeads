@@ -1,51 +1,71 @@
-﻿@model MyJobLeads.DomainModel.Entities.Task
+﻿@model MyJobLeads.ViewModels.Tasks.TaskDisplayViewModel
 
 @{
     ViewBag.Title = "Task: " + Model.Name;
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
-    // Setup the sidebar
-    if (Model.ContactId != null) 
-    {
-        ViewBag.Sidebar = new HtmlString(Html.Partial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact).ToString() +
-                                            Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company).ToString());
-    }
-    else { ViewBag.Sidebar = Html.Partial(MVC.Company.Views._CompanySidebarDisplay, Model.Company); }
 }
 
-<h2>@Model.Name</h2> <br />                                                                                      
+<div class="display-form">
+    <h2>View Your Task</h2>
 
-<p>
-    @if (Model.ContactId != null) 
-    { 
-        @:This task is associated with @Html.ActionLink(Model.Contact.Name, MVC.Contact.Details((int)Model.ContactId))
-    }
-    else
-    {
-        @:This task is associated with @Html.ActionLink(Model.Company.Name, MVC.Company.Details((int)Model.CompanyId))
-    }
+    <br />
+    @Html.ActionLink("Edit Details", MVC.Task.Edit(Model.Id), new { @class = "details-link" })
 
-    <p>
-        Category: @Model.Category <br />
-        Task Due Date: @if (Model.TaskDate.HasValue) { @Model.TaskDate.Value.ToString() } else { <text>&lt;No Date Set&gt;</text> } <br />
+    <br />
 
-        @if (Model.CompletionDate == null) 
-        { 
-            <b>Not Completed</b>
-        }
-        else 
-        { 
-            @:Completed on: @Model.CompletionDate.Value.ToString() 
-        }
-        <br />
+    <div class="form-row">
+        <span class="form-label">Subject:</span>
+        <span class="form-field">@Model.Name</span>
+    </div>
 
-        <table>
-            <tr>
-                <td valign="top">Notes:  &nbsp;</td>
-                <td>@Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))</td>
-            </tr>
-        </table>
-    </p>                                                       
-</p>
+    <div class="form-row">
+        <span class="form-label">Category:</span>
+        <span class="form-field">@Model.Category</span>
+    </div>
 
-@Html.ActionLink("Edit Task Details", MVC.Task.Edit(Model.Id)) &nbsp; 
+    <div class="form-row">
+        <span class="form-label">Associated With:</span>
+        <span class="form-field">@Model.AssociatedWith</span>
+    </div>
+
+    <div class="form-row">
+        <span class="form-label">Due Date:</span>
+        <span class="form-field">
+            @if (Model.TaskDueDate == null)
+            {
+                @:No Due Date Set
+            }
+            else
+            {
+                @Model.TaskDueDate.Value.ToShortDateString();
+            }
+        </span>
+    </div>
+
+    <div class="form-row">
+        <span class="form-label">Completed?</span>
+        <span class="form-field">@(Model.Completed? "Yes" : "No")</span>
+    </div>
+
+    <div class="form-row">
+        <span class="form-label">Notes:</span>
+        <span class="form-field">@Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))</span>
+    </div>
+
+    <br />
+
+@*    <div class="form-row">
+        <span class="form-label">&nbsp;</span>
+        <span class="form-field">@Html.ActionLink("Edit Details", MVC.Task.Edit(Model.Id), new { @class = "details-link" })</span>
+    </div>*@
+</div>
+
+<hr />
+
+@if (Model.Contact == null)
+{
+    Html.RenderPartial(MVC.Company.Views._CompanySidebarDisplay, Model.Company);
+}
+else
+{
+    Html.RenderPartial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact);
+}

@@ -20,12 +20,15 @@ namespace MyJobLeads.Views.Contact
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Contact/_ContactSidebarDisplay.cshtml")]
     public class _ContactSidebarDisplay : System.Web.Mvc.WebViewPage<MyJobLeads.DomainModel.Entities.Contact>
     {
@@ -40,75 +43,74 @@ WriteLiteral("\r\n<h2>");
 
             
             #line 3 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
-Write(Html.ActionLink(Model.Name, MVC.Contact.Details(@Model.Id)));
+Write(Model.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("\'s Summary</h2>\r\n");
+WriteLiteral("</h2>\r\n\r\n<span class=\"data-label\">Direct Phone:</span>\r\n<span class=\"data-value\">" +
+"");
 
 
             
-            #line 4 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
-Write(Html.ActionLink("Edit Details", MVC.Contact.Edit(Model.Id)));
+            #line 6 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
+                    Write(Model.DirectPhone);
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n<br /><br />\r\n\r\n<p>\r\n    Direct Phone: ");
+WriteLiteral("</span>\r\n\r\n");
 
 
             
             #line 8 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
-             Write(Model.DirectPhone);
+ if (!string.IsNullOrWhiteSpace(Model.Extension))
+{
 
             
             #line default
             #line hidden
+WriteLiteral("    <span class=\"data-label\">Ext:</span>\r\n");
 
-            
-            #line 8 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
-                                      if (!string.IsNullOrWhiteSpace(Model.Extension)) {
-            
-            #line default
-            #line hidden
-WriteLiteral(" ");
 
-WriteLiteral("Ext: ");
+
+WriteLiteral("    <span class=\"data-value\">");
 
 
             
-            #line 8 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
-                                                                                               Write(Model.Extension);
+            #line 11 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
+                        Write(Model.Extension);
 
             
             #line default
             #line hidden
-WriteLiteral(" ");
+WriteLiteral("</span>\r\n");
 
 
             
-            #line 8 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
-                                                                                                                            }
-            
-            #line default
-            #line hidden
-WriteLiteral(" <br />\r\n    Mobile Phone: ");
-
-
-            
-            #line 9 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
-             Write(Model.MobilePhone);
+            #line 12 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
+}
 
             
             #line default
             #line hidden
-WriteLiteral(" <br />\r\n    Email: <a href=\"mailto:");
+WriteLiteral("\r\n<br />\r\n\r\n<span class=\"data-label\">Mobile Phone:</span> <span class=\"data-value" +
+"\">");
 
 
             
-            #line 10 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
-                      Write(Model.Email);
+            #line 16 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
+                                                                  Write(Model.MobilePhone);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span> <br />\r\n<span class=\"data-label\">Email:</span> <a href=\"mailto:");
+
+
+            
+            #line 17 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
+                                                  Write(Model.Email);
 
             
             #line default
@@ -117,44 +119,55 @@ WriteLiteral("\">");
 
 
             
-            #line 10 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
-                                    Write(Model.Email);
+            #line 17 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
+                                                                Write(Model.Email);
 
             
             #line default
             #line hidden
-WriteLiteral("</a> <br />\r\n    Assistant: ");
+WriteLiteral("</a> <br />\r\n<span class=\"data-label\">Assistant:</span> <span class=\"data-value\">" +
+"");
 
 
             
-            #line 11 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
-          Write(Model.Assistant);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" <br />\r\n    Referred By: ");
-
-
-            
-            #line 12 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
-            Write(Model.ReferredBy);
+            #line 18 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
+                                                               Write(Model.Assistant);
 
             
             #line default
             #line hidden
-WriteLiteral(" <br />\r\n    Notes: ");
+WriteLiteral("</span> <br />\r\n<span class=\"data-label\">Referred By:</span> <span class=\"data-va" +
+"lue\">");
 
 
             
-            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
-      Write(Model.Notes);
+            #line 19 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
+                                                                 Write(Model.ReferredBy);
 
             
             #line default
             #line hidden
-WriteLiteral(" <br />\r\n</p>\r\n\r\n");
+WriteLiteral("</span> <br />\r\n\r\n<span class=\"data-label\">Notes:</span> \r\n<span class=\"data-valu" +
+"e\">");
 
+
+            
+            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
+                    Write(Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />")));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span> <br />\r\n\r\n");
+
+
+            
+            #line 24 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\_ContactSidebarDisplay.cshtml"
+Write(Html.ActionLink("Show Details", MVC.Contact.Details(Model.Id), new { @class = "details-link" }));
+
+            
+            #line default
+            #line hidden
 
         }
     }

@@ -11,12 +11,14 @@ namespace MyJobLeads.DomainModel.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         public string FullName { get; set; }
-        public int? LastVisitedJobSearchId { get; set; }
         public bool IsOrganizationAdmin { get; set; }
 
         public int? OrganizationId { get; set; }
         public virtual Organization Organization { get; set; }
 
         public virtual ICollection<JobSearch> JobSearches { get; set; }
+        
+        public int? LastVisitedJobSearchId { get; set; }
+        public virtual JobSearch LastVisitedJobSearch { get; set; }
     }
 }

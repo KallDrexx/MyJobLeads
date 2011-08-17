@@ -53,12 +53,6 @@ namespace MyJobLeads.Controllers
 
         #endregion
 
-        public virtual ActionResult Index()
-        {
-            var searches = _jobSearchesByUserIdQuery.WithUserId(CurrentUserId).Execute();
-            return View(searches);
-        }
-
         public virtual ActionResult Add()
         {
             return View(MVC.JobSearch.Views.Edit, new JobSearch());
@@ -82,7 +76,6 @@ namespace MyJobLeads.Controllers
                                                         .WithName(jobSearch.Name)
                                                         .WithDescription(jobSearch.Description)
                                                         .Execute();
-                    return RedirectToAction(MVC.JobSearch.Details(jobSearch.Id));
                 }
                 else
                 {
@@ -91,8 +84,11 @@ namespace MyJobLeads.Controllers
                                         .SetDescription(jobSearch.Description)
                                         .CalledByUserId(CurrentUserId)
                                         .Execute();
-                    return RedirectToAction(MVC.JobSearch.Details(jobSearch.Id));
                 }
+
+                // Set the current user's last visited job search to this one
+                _editUserCommand.WithUserId(CurrentUserId).SetLastVisitedJobSearchId(jobSearch.Id).Execute();
+                return RedirectToAction(MVC.Task.Index());
             }
             
             // Show validation errors to the user and allow them to fix them

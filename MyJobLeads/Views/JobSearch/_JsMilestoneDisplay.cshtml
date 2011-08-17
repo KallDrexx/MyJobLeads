@@ -1,75 +1,22 @@
-﻿@model MyJobLeads.DomainModel.Entities.JobSearch
-@using MyJobLeads.DomainModel.ViewModels;
+﻿@model MyJobLeads.ViewModels.Tasks.TaskDashboardViewModel
 
-@if (Model.CurrentMilestone == null)
+@if (Model.CurrentMilestone != null)
 {
-    @: You have completed all of your milestons for this job search
-}
-else
-{
-    var milestone = Model.CurrentMilestone;
-    var msMetrics = milestone.JobSearchMetrics;
-    var jsMetrics = Model.Metrics;
-    var progress = new JobSearchMilestoneProgress(Model);
-    
-    <text>
-        <p>
-            <b>Current Milestone:</b> @milestone.Title <br />
-            <b>Percent Completed:</b> @(Math.Round(progress.TotalProgress * 100,1))% <br />
+    <div id="milestone-display">
+        <b>Current Milestone:</b> <br />
+        <span class="item-heading">@Model.CurrentMilestone.Title</span> <br />
+        <span class="item-subheading">Percent Completed: @Math.Round(Model.MilestoneProgress.TotalProgress * 100, 1)%</span> <br /> <br />
 
-            @if (progress.TotalProgress < 1)
-            {
-                <b>To complete this milestone, you must:</b>
-                <ul>
-                    @if (progress.NumCompaniesCreatedProgress < 1)
-                    {
-                        <li>Create <b>@(msMetrics.NumCompaniesCreated - jsMetrics.NumCompaniesCreated)</b> more companies</li>
-                    }
-                    
-                    @if (progress.NumContactsCreatedProgress < 1)
-                    {
-                        <li>Create <b>@(msMetrics.NumContactsCreated - jsMetrics.NumContactsCreated)</b> more contacts</li>
-                    }
-                    
-                    @if (progress.NumApplyTasksCreatedProgress < 1)
-                    {
-                        <li>Create <b>@(msMetrics.NumApplyTasksCreated - jsMetrics.NumApplyTasksCreated)</b> more tasks to apply at companies</li>
-                    }
-                    
-                    @if (progress.NumApplyTasksCompletedProgress < 1)
-                    {
-                        <li>Mark <b>@(msMetrics.NumApplyTasksCompleted - jsMetrics.NumApplyTasksCompleted)</b> more tasks to apply at companies as completed</li>
-                    }
-                    
-                    @if (progress.NumPhoneInterviewTasksCreatedProgress < 1)
-                    {
-                        <li>
-                            Schedule <b>@(msMetrics.NumPhoneInterviewTasksCreated - jsMetrics.NumPhoneInterviewTasksCreated)</b> more phone interviews
-                        </li>
-                    }
-                    
-                    @if (progress.NumInPersonInterviewTasksCreatedProgress < 1)
-                    {
-                        <li>
-                            Schedule <b>@(msMetrics.NumInPersonInterviewTasksCreated - jsMetrics.NumInPersonInterviewTasksCreated)</b> more in person interviews
-                        </li>
-                    }
-                </ul>
-                
-                <p>
-                    @Html.Raw(Html.Encode(milestone.Instructions).Replace(Environment.NewLine, "<br />"))
-                </p>
-            }
+        @if (Model.MilestoneProgress.TotalProgress == 1)
+        {
+            @Html.Raw(Html.Encode(Model.CurrentMilestone.CompletionDisplay).Replace(Environment.NewLine, "<br />")) <br /><br />
 
-            else
-            {
-                <p>
-                    @Html.Raw(Html.Encode(milestone.CompletionDisplay).Replace(Environment.NewLine, "<br />"))
-
-                    <br /><br />
-                    @Html.ActionLink("Start Next Milestone", MVC.JobSearch.StartNextMilestone(Model.Id))
-                </p>
-            }
-        </p>
-    </text>
+            <span class="rights"><a href="#">Start Next Milestone</a></span>
+        }
+        
+        else
+        {
+            @Html.Raw(Html.Encode(Model.CurrentMilestone.Instructions).Replace(Environment.NewLine, "<br />"))
+        }
+</div>
 }

@@ -707,7 +707,6 @@ namespace Links {
         
         }
     
-        public static readonly string Forms_css = Url("Forms.css");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class images {
             private const string URLPATH = "~/Content/images";

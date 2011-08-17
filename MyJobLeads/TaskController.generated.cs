@@ -59,9 +59,13 @@ namespace MyJobLeads.Controllers {
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
+            public readonly string Index = "Index";
             public readonly string Add = "Add";
             public readonly string Edit = "Edit";
             public readonly string Details = "Details";
+            public readonly string Overdue = "Overdue";
+            public readonly string Today = "Today";
+            public readonly string Future = "Future";
         }
 
 
@@ -75,12 +79,21 @@ namespace MyJobLeads.Controllers {
             public readonly string _OpenTaskSummary = "~/Views/Task/_OpenTaskSummary.cshtml";
             public readonly string Details = "~/Views/Task/Details.cshtml";
             public readonly string Edit = "~/Views/Task/Edit.cshtml";
+            public readonly string Future = "~/Views/Task/Future.cshtml";
+            public readonly string Overdue = "~/Views/Task/Overdue.cshtml";
+            public readonly string TaskListControl = "~/Views/Task/TaskListControl.cshtml";
+            public readonly string Today = "~/Views/Task/Today.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class T4MVC_TaskController: MyJobLeads.Controllers.TaskController {
         public T4MVC_TaskController() : base(Dummy.Instance) { }
+
+        public override System.Web.Mvc.ActionResult Index() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            return callInfo;
+        }
 
         public override System.Web.Mvc.ActionResult Add(int companyId, int contactId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Add);
@@ -104,6 +117,21 @@ namespace MyJobLeads.Controllers {
         public override System.Web.Mvc.ActionResult Details(int id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
             callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Overdue() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Overdue);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Today() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Today);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Future() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Future);
             return callInfo;
         }
 

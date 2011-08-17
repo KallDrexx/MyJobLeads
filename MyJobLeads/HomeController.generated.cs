@@ -53,6 +53,7 @@ namespace MyJobLeads.Controllers {
             public readonly string About = "About";
             public readonly string SubmitFeedback = "SubmitFeedback";
             public readonly string FixBlankTitles = "FixBlankTitles";
+            public readonly string SidebarDisplay = "SidebarDisplay";
         }
 
 
@@ -61,6 +62,8 @@ namespace MyJobLeads.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string _AnonymousUserSidebarDisplay = "~/Views/Home/_AnonymousUserSidebarDisplay.cshtml";
+            public readonly string _LoggedInSidebarDisplay = "~/Views/Home/_LoggedInSidebarDisplay.cshtml";
             public readonly string About = "~/Views/Home/About.cshtml";
             public readonly string FixBlankTitles = "~/Views/Home/FixBlankTitles.cshtml";
             public readonly string Index = "~/Views/Home/Index.cshtml";
@@ -94,6 +97,11 @@ namespace MyJobLeads.Controllers {
 
         public override System.Web.Mvc.ActionResult FixBlankTitles() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.FixBlankTitles);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SidebarDisplay() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SidebarDisplay);
             return callInfo;
         }
 
