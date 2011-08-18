@@ -148,6 +148,7 @@
     <Compile Include="Queries\Organizations\OrganizationByAdministeringUserQuery.cs" />
     <Compile Include="Queries\Organizations\OrganizationByIdQuery.cs" />
     <Compile Include="Queries\Organizations\OrganizationByRegistrationTokenQuery.cs" />
+    <Compile Include="Queries\Positions\PositionByIdQuery.cs" />
     <Compile Include="Queries\Search\EntitySearchQuery.cs" />
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQuery.cs" />
     <Compile Include="Queries\Tasks\IsUserAuthorizedForTaskQuery.cs" />

@@ -172,6 +172,7 @@
     <Compile Include="Queries\Organizations\OrganizationByAdministeringUserQueryTests.cs" />
     <Compile Include="Queries\Organizations\OrganizationByIdQueryTests.cs" />
     <Compile Include="Queries\Organizations\OrganizationByRegistrationTokenQueryTests.cs" />
+    <Compile Include="Queries\Positions\PositionByIdQueryTests.cs" />
     <Compile Include="Queries\Search\EntitySearchQueryTests.cs" />
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQueryTests.cs" />
     <Compile Include="Queries\Tasks\IsUserAuthorizedForTaskQueryTests.cs" />
