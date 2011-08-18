@@ -130,6 +130,17 @@ namespace MyJobLeads.DomainModel.Data
             }
         }
 
+        private IRepository<Position> _position;
+        public IRepository<Position> Positions
+        {
+            get
+            {
+                if (_position == null)
+                    _position = new EFRepository<Position>(_context);
+                return _position;
+            }
+        }
+
         private IRepository<Task> _tasks;
         public IRepository<Task> Tasks
         {

@@ -108,6 +108,7 @@
     <Compile Include="Entities\History\ContactHistory.cs" />
     <Compile Include="Entities\History\EntityHistoryBase.cs" />
     <Compile Include="Entities\History\JobSearchHistory.cs" />
+    <Compile Include="Entities\History\PositionHistory.cs" />
     <Compile Include="Entities\History\TaskHistory.cs" />
     <Compile Include="Entities\JobSearch.cs" />
     <Compile Include="Entities\EF\MyJobLeadsDbContext.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Entities\Metrics\JobSearchMetrics.cs" />
     <Compile Include="Entities\Organization.cs" />
     <Compile Include="Entities\Configuration\OrganizationEmailDomain.cs" />
+    <Compile Include="Entities\Position.cs" />
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\UnitTestEntity.cs" />
     <Compile Include="Entities\User.cs" />
@@ -146,6 +148,7 @@
     <Compile Include="Queries\Organizations\OrganizationByAdministeringUserQuery.cs" />
     <Compile Include="Queries\Organizations\OrganizationByIdQuery.cs" />
     <Compile Include="Queries\Organizations\OrganizationByRegistrationTokenQuery.cs" />
+    <Compile Include="Queries\Positions\PositionByIdQuery.cs" />
     <Compile Include="Queries\Search\EntitySearchQuery.cs" />
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQuery.cs" />
     <Compile Include="Queries\Tasks\IsUserAuthorizedForTaskQuery.cs" />
