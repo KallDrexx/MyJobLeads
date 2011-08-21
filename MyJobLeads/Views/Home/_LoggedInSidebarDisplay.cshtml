@@ -1,15 +1,13 @@
 ﻿@model MyJobLeads.ViewModels.Users.UserSidebarViewModel
+@using MyJobLeads.Controllers;
 
-<p>
-    <span id="user-name">@Model.DisplayName</span> <br />
-    <a href="#" id="edit-account-link">Edit My Account</a>
-</p>
-    			
-<p id="sidebar-links">
-    @Html.ActionLink("My Tasks", MVC.Task.Index()) <br />
-    @Html.ActionLink("Companies", MVC.Company.List()) <br />
-    <a href="#">Contacts</a><br />
-    <br />
-    <a href="#">About</a><br />
-    @Html.ActionLink("Log out", MVC.Account.LogOff())
-</p>
+<h2 id="accountName">@Model.DisplayName</h2>
+<div class="accountEdit"><a href="#">Edit Your Account</a></div>
+
+<div id="leftHandNav">
+    <ul>
+        <li>@Html.ActionLink("Your Tasks", MVC.Task.Index(), new { @class = Model.ActiveLink == ActiveSidebarLink.Tasks? "active" : "" })</li>
+        <li>@Html.ActionLink("Your Companies", MVC.Company.List(), new { @class = Model.ActiveLink == ActiveSidebarLink.Companies? "active" : "" })</li>
+        <li>@Html.ActionLink("About", MVC.Home.About(), new { @class = Model.ActiveLink == ActiveSidebarLink.About? "active" : "" })</li>
+    </ul>
+</div>
