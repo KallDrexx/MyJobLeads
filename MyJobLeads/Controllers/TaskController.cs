@@ -33,7 +33,11 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Index()
         {
+            // Make sure the user has a created job search
             var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(CurrentUserId).Execute();
+            if (user.LastVisitedJobSearch == null)
+                return RedirectToAction(MVC.JobSearch.Add());
+
             var model = new TaskDashboardViewModel(user);
 
             if (model.TodaysTasks.Count > 0)

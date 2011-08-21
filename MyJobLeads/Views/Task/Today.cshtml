@@ -1,22 +1,22 @@
 ﻿@model MyJobLeads.ViewModels.Tasks.TaskDashboardViewModel
+@using MyJobLeads.Controllers;
 
 @{
     ViewBag.Title = "Today's Tasks";
 }
 
-<div class="left-content">
-    <div class="left">
-        <b>Today's Tasks</b>
-    </div>
-    
-    &nbsp; &nbsp; &nbsp;
+@section SideBar {
+    @{Html.RenderAction(MVC.Home.SidebarDisplay(ActiveSidebarLink.Tasks));}
+}
 
-    <div class="right">
-        @Html.ActionLink(string.Format("Overdue ({0})", Model.OverdueTasks.Count), MVC.Task.Overdue(), new { @class = "item-subheading" }) &nbsp; 
-        @Html.ActionLink(string.Format("Future ({0})", Model.FutureTasks.Count), MVC.Task.Future(), new { @class = "item-subheading" })
+<div class="grid2 floatLeft">
+    <div class="taskHeader">
+        <h3>Today's Tasks</h3>
+        <ul class="taskNotification">
+            <li><a href="@Url.Action(MVC.Task.Overdue())" title="Overdue Tasks">Overdue: <span>(@Model.OverdueTasks.Count)</span></a></li>
+            <li><a href="@Url.Action(MVC.Task.Future())" title="Future Tasks">Future: <span>(@Model.FutureTasks.Count)</span></a></li>
+        </ul>       
     </div>
-
-    <br /><hr />
 
     @if (Model.TodaysTasks.Count == 0)
     {
@@ -29,6 +29,26 @@
     }
 </div>
 
-<div class="right-content">
-    @{Html.RenderPartial(MVC.JobSearch.Views._JsMilestoneDisplay, Model);}
-</div>
+@if (Model.CurrentMilestone != null)
+{
+    <div class="grid2 floatRight">
+        <div class="currentMilestone">
+            <h3 class="current">Current Milestone:</h3>
+            <h3 class="mileStoneNumber">@Model.CurrentMilestone.Title</h3>
+            <h3 class="mileStonePercent">Percent Completed: @Math.Round(Model.MilestoneProgress.TotalProgress * 100, 1)%</h3>
+            
+            <p>
+                @if (Model.MilestoneProgress.TotalProgress >= 1)
+                {
+                    @Html.Raw(Html.Encode(Model.CurrentMilestone.CompletionDisplay).Replace(Environment.NewLine, "<br />"))
+                }
+                else
+                {
+                    @Html.Raw(Html.Encode(Model.CurrentMilestone.Instructions).Replace(Environment.NewLine, "<br />"))
+                }
+            </p>
+
+            <div class="nextMilestone"><a href="#">Start Next Milestone</a></div>
+        </div>
+    </div>
+}

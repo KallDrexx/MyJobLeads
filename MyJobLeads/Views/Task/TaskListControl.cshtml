@@ -1,50 +1,50 @@
 ﻿@model IList<MyJobLeads.DomainModel.Entities.Task>
 
-@foreach (var task in Model)
-{
-    <p class="task-display">
-        @Html.ActionLink(task.Name, MVC.Task.Details(task.Id), new { @class = "item-heading" })
-
-        <span class="right">
-            @if (task.TaskDate.HasValue)
+<div id="taskRole">
+    <ul>
+        @foreach (var task in Model)
+        {
+            string dueDate, taskDescription;
+            
+            // Create the task due date string
+            dueDate = string.Empty;
+            if (task.TaskDate != null)
             {
                 if (task.TaskDate.Value.Date == DateTime.Today)
                 {
-                    @:Due Today
+                    dueDate = "Due Today";
                 }
-
                 else if (task.TaskDate.Value.Date == DateTime.Today.Subtract(new TimeSpan(1, 0, 0, 0)))
                 {
-                    @:Due Yesterday
+                    dueDate = "Due Yesterday";
                 }
-
                 else if (task.TaskDate.Value.Date == DateTime.Today.Add(new TimeSpan(1, 0, 0, 0)))
                 {
-                    @:Due Tomorrow
+                    dueDate = "Due Tomorrow";
                 }
-
                 else
                 {
-                    @:Due @task.TaskDate.Value.Date.ToShortDateString()
+                    dueDate = task.TaskDate.Value.ToShortDateString();
                 }
+            }
+                 
+            // Create the description string
+            if (task.Contact == null)
+            {
+                taskDescription = task.Company.Name;
             }
             else
             {
-                @:No Due Date
+                taskDescription = string.Format("{0} -- {1}", task.Contact.Name, task.Company.Name);
             }
-        </span>
-        
-        <br />
-        
-        <span class="item-subheading">
-            @if (task.Contact != null)
-            {
-                @Html.ActionLink(task.Contact.Name, MVC.Task.Details(task.Id)) @: - 
-            }
-        
-            @Html.ActionLink(task.Company.Name, MVC.Task.Details(task.Id))
-        </span>
-    </p>
-    
-    <br />
-}
+            
+            <li>
+                <a href="@Url.Action(MVC.Task.Details(task.Id))">
+                    <div class="greyHighlight date">@dueDate</div>
+                    <div class="taskName">@task.Name</div>
+                    <div class="taskDescription">@taskDescription</div>
+                </a>
+            </li>
+        }
+    </ul>
+</div>
