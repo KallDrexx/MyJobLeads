@@ -36,6 +36,11 @@ namespace MyJobLeads.Controllers {
         public System.Web.Mvc.ActionResult SubmitFeedback() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.SubmitFeedback);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult SidebarDisplay() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.SidebarDisplay);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public HomeController Actions { get { return MVC.Home; } }
@@ -100,8 +105,9 @@ namespace MyJobLeads.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult SidebarDisplay() {
+        public override System.Web.Mvc.ActionResult SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink activeLink) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SidebarDisplay);
+            callInfo.RouteValueDictionary.Add("activeLink", activeLink);
             return callInfo;
         }
 

@@ -492,11 +492,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Error.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Shared\_Layout.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_Layout.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Shared\_LogOnPartial.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -835,10 +830,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_LogOnPartial.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Shared\_Layout.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_Layout.cs</LastGenOutput>
-    </Content>
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>

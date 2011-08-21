@@ -2,6 +2,10 @@
     ViewBag.Title = "About Us";
 }
 
+@section SideBar {
+    @{Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.About));}
+}
+
 <h2>About</h2>
 <p>
      Put content here.

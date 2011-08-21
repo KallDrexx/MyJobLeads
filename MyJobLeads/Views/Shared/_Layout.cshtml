@@ -19,27 +19,49 @@
 </head>
 
 <body>
-    <div id="header">
-		@Html.ActionLink("MyLeads", MVC.Home.Index(), new { id = "logo" })
-			
-		<div id="search-area">
-			@using (Html.BeginForm(MVC.JobSearch.Search())) {
-				<input type="text" id="query" name="query" />
-				<input type="submit" value="Search" />
-			}
-		</div>
-    </div>
-    	
-    <div id="sidebar">
-    	@{ Html.RenderAction(MVC.Home.SidebarDisplay()); }
-    </div>
-    	
-    <div id="main-area">
-        <div id="content">
-            @RenderBody()
-        </div>    		
-    </div>
 
-    @( Html.Telerik().ScriptRegistrar() )
+<div id="myLeadsheader"> 
+		<div id="headerWrap"> 
+        	<div class="leftColumn"> 
+            	<h1 id="myLogo">MyLeads</h1> 
+            </div> 
+            <div class="rightColumn"> 
+            	<div id="heaerNavWrapper"> 
+                		<div id="headerSearch"> 
+                        	<input id="headerInput" type="text" name="headerInput" value="Search" /> 
+                        </div> 
+                        
+                        <div id="headerNav"> 
+                        	<ul> 
+                        	<li>@Html.ActionLink("Home", MVC.Home.Index())</li>
+                            </ul> 
+                        </div> 
+                </div> 
+            </div>  	
+        </div> 
+</div> 
+<div id="myLeadsBodyWrap"> 
+ 
+		<div class="leftColumn"> 
+            @if (IsSectionDefined("SideBar"))
+            {
+                @RenderSection("SideBar");
+            }
+            else
+            {
+                Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.None));
+            }
+        </div> 
+        <div class="rightColumn"> 
+            	<div id="contentWrapper"> 
+                    @RenderBody()                
+                <div class="clear"></div> 
+                </div> 
+                <div class="footer">MyLeads © 2011</div> 
+        </div> 
+</div> 
+
+@( Html.Telerik().ScriptRegistrar() )
+
 </body>
 </html>

@@ -20,12 +20,16 @@ namespace MyJobLeads.Views.Home
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using MyJobLeads.Infrastructure.HtmlHelpers;
+    using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/About.cshtml")]
     public class About : System.Web.Mvc.WebViewPage<dynamic>
     {
@@ -44,7 +48,25 @@ namespace MyJobLeads.Views.Home
             
             #line default
             #line hidden
-WriteLiteral("\r\n<h2>About</h2>\r\n<p>\r\n     Put content here.\r\n</p>\r\n");
+WriteLiteral("\r\n");
+
+
+DefineSection("SideBar", () => {
+
+WriteLiteral("\r\n");
+
+
+            
+            #line 6 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\About.cshtml"
+      Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.About));
+
+            
+            #line default
+            #line hidden
+
+});
+
+WriteLiteral("\r\n\r\n<h2>About</h2>\r\n<p>\r\n     Put content here.\r\n</p>\r\n");
 
 
         }

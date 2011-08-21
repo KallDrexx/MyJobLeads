@@ -11,6 +11,8 @@ using MyJobLeads.ViewModels.Users;
 
 namespace MyJobLeads.Controllers
 {
+    public enum ActiveSidebarLink { None, Logon, Register, Tasks, Companies, About };
+
     public partial class HomeController : MyJobLeadsBaseController
     {
         public HomeController(UserByIdQuery userByIdQuery, IServiceFactory factory)
@@ -101,18 +103,18 @@ Feedback:
             return View(fixedCompanies + fixedContacts + fixedTasks);
         }
 
-        public virtual ActionResult SidebarDisplay()
+        public virtual ActionResult SidebarDisplay(ActiveSidebarLink activeLink)
         {
             if (CurrentUserId != 0)
             {
                 var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(CurrentUserId).Execute();
-                var model = new UserSidebarViewModel(user);
+                var model = new UserSidebarViewModel(user) { ActiveLink = activeLink };
                 return PartialView(MVC.Home.Views._LoggedInSidebarDisplay, model);
             }
 
             else
             {
-                return PartialView(MVC.Home.Views._AnonymousUserSidebarDisplay);
+                return PartialView(MVC.Home.Views._AnonymousUserSidebarDisplay, activeLink);
             }
         }
     }
