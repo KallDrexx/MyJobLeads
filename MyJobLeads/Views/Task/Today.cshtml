@@ -31,24 +31,5 @@
 
 @if (Model.CurrentMilestone != null)
 {
-    <div class="grid2 floatRight">
-        <div class="currentMilestone">
-            <h3 class="current">Current Milestone:</h3>
-            <h3 class="mileStoneNumber">@Model.CurrentMilestone.Title</h3>
-            <h3 class="mileStonePercent">Percent Completed: @Math.Round(Model.MilestoneProgress.TotalProgress * 100, 1)%</h3>
-            
-            <p>
-                @if (Model.MilestoneProgress.TotalProgress >= 1)
-                {
-                    @Html.Raw(Html.Encode(Model.CurrentMilestone.CompletionDisplay).Replace(Environment.NewLine, "<br />"))
-                }
-                else
-                {
-                    @Html.Raw(Html.Encode(Model.CurrentMilestone.Instructions).Replace(Environment.NewLine, "<br />"))
-                }
-            </p>
-
-            <div class="nextMilestone"><a href="#">Start Next Milestone</a></div>
-        </div>
-    </div>
+    Html.RenderPartial(MVC.JobSearch.Views._JsMilestoneDisplay, Model);
 }
