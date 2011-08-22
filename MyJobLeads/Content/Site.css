@@ -72,13 +72,20 @@ ul{
 	}
 .grid1{
 	width:773px;
+	display:inline;
 	}
 
 .grid2{
 	width:386px;
+	display:inline;
 	}
 .grid3{
 	width:700px;
+	display:inline;
+	}
+.grid4{
+	width:350px;
+	display:inline;
 	}
 .marginAuto{
 	margin:0 auto;
@@ -135,6 +142,9 @@ input{
 	
 	width:70px;
 	}
+.largerInput{
+	width:200px;
+	}
 .infoSpan{
 	padding:3px 0 0 20px;
 	}
@@ -147,17 +157,6 @@ input{
 	height:100px;
 	}
 	
-
-.submitBTN a{
-	display:block;
-	width:149px;
-	height:27px;
-	background:url(images/submit.jpg) 0 0;
-
-	}
-.submitBTN a:hover{
-	color:#fff;
-	}
 /******header*******/
 #myLeadsheader{
 	width:100%;
@@ -267,12 +266,13 @@ input{
 	margin:0 auto;
 	width:960px;
 	text-align:left;
-	height:500px;
+	
 	}
 
 
 #contentWrapper{
 	width:773px;
+	min-height:300px;
 	border-bottom:1px solid #666;
 	border-left:1px solid #666;
 	border-right:1px solid #666;
@@ -492,15 +492,43 @@ a.viewContact{
 	font-size:10px;
 	}
 	
+.footerLinks{
+	float:right;
+	}	
+.footerLinks li{
+	float:left;
+	}
+.footerLinks li a{
+	padding:0 5px 0 0;
+	margin:5px 0 0 0;
+	color:#666;
+	font-size:10px;
+	}
+.footerLinks li a:hover{
+	text-decoration:underline;
+	}
 	
+.submitBTN{
 	
+	padding:0;
+	margin:20px 0 20px 20px;
+
+	}
+.submitBTN a{
+	text-align:center;
+	line-height:0;
+	margin:0;
+	padding:5px 10px;
+	color:#fff;
+	background:#6e8dc4;
+	border:1px solid #7787a8;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius:10px;
+	-webkit-box-shadow: 2px 2px 6px rgba(0,0,0,0.6);
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}
+.submitBTN a:hover{
+	background:#627aaa;
+	color:#fff;
+	}
