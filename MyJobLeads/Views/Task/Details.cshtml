@@ -7,31 +7,29 @@
 <div class="grid1 floatLeft"> 
     <div class="lineSeperater"> 
         <div class="pageInfoBox"> 
-            <form> 
-                <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
-                        <h3 class="floatLeft">View your Task</h3> 
-                        @Html.ActionLink("Edit Details", MVC.Task.Edit(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" })
-                </div> 
+            <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                    <h3 class="floatLeft">View your Task</h3> 
+                    @Html.ActionLink("Edit Details", MVC.Task.Edit(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" })
+            </div> 
 
-                <div class="grid3 marginBottom_10 floatLeft"> 
-                    <div class="grid4 floatLeft"> 
-                        <p class="greyHighlight">Subject: <span class="setTask">@Model.Name</span></p> 
-                        <p class="greyHighlight">Associate with: <span class="setTask">@Model.AssociatedWith</span></p> 
-                    </div> 
-                    <div class="grid4 floatRight"> 
-                        <p class="greyHighlight">Category: <span class="setTask">@Model.Category</span></p> 
-                        <p class="greyHighlight">Task Due Date: <span class="setTask">@Model.TaskDueDateString</span></p> 
-                    </div> 
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="grid4 floatLeft"> 
+                    <p class="greyHighlight">Subject: <span class="setTask">@Model.Name</span></p> 
+                    <p class="greyHighlight">Associate with: <span class="setTask">@Model.AssociatedWith</span></p> 
                 </div> 
+                <div class="grid4 floatRight"> 
+                    <p class="greyHighlight">Category: <span class="setTask">@Model.Category</span></p> 
+                    <p class="greyHighlight">Task Due Date: <span class="setTask">@Model.TaskDueDateString</span></p> 
+                </div> 
+            </div> 
                                 
-                <div class="grid3 marginBottom_10 floatLeft"> 
-                    <div class="floatLeft">
-                        <p class="greyHighlight">Notes: 
-                            <span class="setTask">@Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))</span>
-                        </p>
-                    </div> 
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft">
+                    <p class="greyHighlight">Notes: 
+                        <span class="setTask">@Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))</span>
+                    </p>
                 </div> 
-            </form> 
+            </div> 
         <div class="clear"></div> 
         </div> 
     </div> 

@@ -55,87 +55,85 @@ WriteLiteral(@"
 <div class=""grid1 floatLeft""> 
     <div class=""lineSeperater""> 
         <div class=""pageInfoBox""> 
-            <form> 
-                <div class=""grid3 marginBottom_10 marginAuto floatLeft""> 
-                        <h3 class=""floatLeft"">View your Task</h3> 
-                        ");
+            <div class=""grid3 marginBottom_10 marginAuto floatLeft""> 
+                    <h3 class=""floatLeft"">View your Task</h3> 
+                    ");
 
 
             
-            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
-                   Write(Html.ActionLink("Edit Details", MVC.Task.Edit(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                </div> \r\n\r\n                <div class=\"grid3 marginBottom_10 fl" +
-"oatLeft\"> \r\n                    <div class=\"grid4 floatLeft\"> \r\n                " +
-"        <p class=\"greyHighlight\">Subject: <span class=\"setTask\">");
-
-
-            
-            #line 18 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
-                                                                           Write(Model.Name);
+            #line 12 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+               Write(Html.ActionLink("Edit Details", MVC.Task.Edit(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" }));
 
             
             #line default
             #line hidden
-WriteLiteral("</span></p> \r\n                        <p class=\"greyHighlight\">Associate with: <s" +
-"pan class=\"setTask\">");
+WriteLiteral("\r\n            </div> \r\n\r\n            <div class=\"grid3 marginBottom_10 floatLeft\"" +
+"> \r\n                <div class=\"grid4 floatLeft\"> \r\n                    <p class" +
+"=\"greyHighlight\">Subject: <span class=\"setTask\">");
 
 
             
-            #line 19 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
-                                                                                  Write(Model.AssociatedWith);
+            #line 17 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+                                                                       Write(Model.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("</span></p> \r\n                    </div> \r\n                    <div class=\"grid4 " +
-"floatRight\"> \r\n                        <p class=\"greyHighlight\">Category: <span " +
+WriteLiteral("</span></p> \r\n                    <p class=\"greyHighlight\">Associate with: <span " +
 "class=\"setTask\">");
 
 
             
-            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
-                                                                            Write(Model.Category);
+            #line 18 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+                                                                              Write(Model.AssociatedWith);
 
             
             #line default
             #line hidden
-WriteLiteral("</span></p> \r\n                        <p class=\"greyHighlight\">Task Due Date: <sp" +
-"an class=\"setTask\">");
+WriteLiteral("</span></p> \r\n                </div> \r\n                <div class=\"grid4 floatRig" +
+"ht\"> \r\n                    <p class=\"greyHighlight\">Category: <span class=\"setTa" +
+"sk\">");
 
 
             
-            #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
-                                                                                 Write(Model.TaskDueDateString);
+            #line 21 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+                                                                        Write(Model.Category);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span></p> \r\n                    <p class=\"greyHighlight\">Task Due Date: <span c" +
+"lass=\"setTask\">");
+
+
+            
+            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+                                                                             Write(Model.TaskDueDateString);
 
             
             #line default
             #line hidden
 WriteLiteral(@"</span></p> 
-                    </div> 
                 </div> 
+            </div> 
                                 
-                <div class=""grid3 marginBottom_10 floatLeft""> 
-                    <div class=""floatLeft"">
-                        <p class=""greyHighlight"">Notes: 
-                            <span class=""setTask"">");
+            <div class=""grid3 marginBottom_10 floatLeft""> 
+                <div class=""floatLeft"">
+                    <p class=""greyHighlight"">Notes: 
+                        <span class=""setTask"">");
 
 
             
-            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
-                                             Write(Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />")));
+            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+                                         Write(Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />")));
 
             
             #line default
             #line hidden
 WriteLiteral(@"</span>
-                        </p>
-                    </div> 
+                    </p>
                 </div> 
-            </form> 
+            </div> 
         <div class=""clear""></div> 
         </div> 
     </div> 
@@ -148,7 +146,7 @@ WriteLiteral(@"</span>
 
 
             
-            #line 43 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
                              Write(Model.Company.Name);
 
             
@@ -158,7 +156,7 @@ WriteLiteral("</h3> \r\n            ");
 
 
             
-            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 42 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
        Write(Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Company.Id), new { @class = "floatRight blueLinks", title = "Edit Details" }));
 
             
@@ -169,7 +167,7 @@ WriteLiteral("\r\n        </div> \r\n\r\n        <div class=\"grid3 floatLeft\">
 
 
             
-            #line 48 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 46 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
                                                                       Write(Model.Company.Phone);
 
             
@@ -180,7 +178,7 @@ WriteLiteral("</p> \r\n            <p class=\"floatRight\"><span class=\"greyHig
 
 
             
-            #line 49 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 47 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
                                                                          Write(Model.Company.LeadStatus);
 
             
@@ -191,7 +189,7 @@ WriteLiteral("</p> \r\n        </div> \r\n\r\n        <div class=\"grid3 marginB
 
 
             
-            #line 53 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
                                                        Write(Model.Company.Location);
 
             
@@ -201,7 +199,7 @@ WriteLiteral("</p> \r\n        </div> \r\n\r\n        <p>");
 
 
             
-            #line 56 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 54 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
       Write(Html.Raw(Html.Encode(Model.Company.Notes).Replace(Environment.NewLine, "<br />")));
 
             
@@ -211,7 +209,7 @@ WriteLiteral("</p>\r\n\r\n        ");
 
 
             
-            #line 58 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 56 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
    Write(Html.ActionLink("Show Details", MVC.Company.Details(Model.Company.Id), new { @class = "blueLinks", title = "Show Details" }));
 
             
