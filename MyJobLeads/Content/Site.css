@@ -374,6 +374,7 @@ input{
 	font-weight:800;
 	}	
 .taskDescription {
+	color:#3d3d3d;
 	font-weight:800;
 	font-size:14px;
 	}
@@ -511,12 +512,12 @@ a.viewContact{
 .submitBTN{
 	
 	padding:0;
-	margin:20px 0 20px 20px;
+	margin:0 0 0 20px;
 
 	}
-.submitBTN a, .submitBTN input{
+.submitBTN input{
+	cursor:pointer;
 	text-align:center;
-	line-height:0;
 	margin:0;
 	padding:5px 10px;
 	color:#fff;
@@ -528,7 +529,15 @@ a.viewContact{
 	-webkit-box-shadow: 2px 2px 6px rgba(0,0,0,0.6);
 	
 	}
-.submitBTN a:hover, .submitBTN input:hover{
+.submitBTN input:hover{
 	background:#627aaa;
 	color:#fff;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
