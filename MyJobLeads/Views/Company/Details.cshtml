@@ -36,7 +36,7 @@
     {
         <h3>Open Tasks</h3>
         
-        @foreach (var task in Model.Tasks.Where(x => !x.Completed).ToList())
+        foreach (var task in Model.Tasks.Where(x => !x.Completed).ToList())
          {
             <p>
                 @{ Html.RenderPartial(MVC.Company.Views._CompanyTaskDisplay, task); }

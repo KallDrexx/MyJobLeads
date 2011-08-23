@@ -132,13 +132,7 @@ WriteLiteral("        <h3>Open Tasks</h3>\r\n");
             
             #line 38 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
         
-        
-            
-            #line default
-            #line hidden
-            
-            #line 39 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-         foreach (var task in Model.Tasks.Where(x => !x.Completed).ToList())
+        foreach (var task in Model.Tasks.Where(x => !x.Completed).ToList())
          {
 
             
@@ -155,7 +149,6 @@ WriteLiteral("            <p>\r\n");
             #line default
             #line hidden
 WriteLiteral("            </p>\r\n");
-
 
 
             

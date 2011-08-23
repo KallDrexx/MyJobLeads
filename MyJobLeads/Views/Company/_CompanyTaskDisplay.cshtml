@@ -2,6 +2,6 @@
 @using MyJobLeads.Infrastructure.HtmlHelpers;
 
 @Html.ActionLink(Model.Name, MVC.Task.Details(Model.Id), new { @class = "item-heading left" })
-@Html.ActionLink(Html.GetDateString(Model.DueDate), MVC.Task.Details(Model.Id), new { @class = "data-label right" }) <br />
+@*@Html.ActionLink(Html.GetDateString(Model.DueDate), MVC.Task.Details(Model.Id), new { @class = "data-label right" }) <br />*@
 @Html.ActionLink(Model.AssociatedWith, MVC.Task.Details(Model.Id), new { @class = "item-subheading" }) <br />
 @Model.Notes<br />
