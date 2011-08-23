@@ -4,49 +4,86 @@
     ViewBag.Title = "Company: " + Model.Name;
 }
 
-<div class="display-form">
-    <h2>@Model.Name</h2>
-    @Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Id), new { @class = "details-link" })
+<div class="grid1 floatLeft"> 
+    <div class="lineSeperater"> 
+        <div class="pageInfoBox">
+            <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                    <h3 class="floatLeft">@Model.Name</h3> 
+                    @Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" })
+            </div> 
 
-    <div class="form-row">
-        <span class="form-label">Phone:</span>
-        <span class="form-field">@Model.Phone</span>
-    </div>
-    
-    <div class="form-row">
-        <span class="form-label">Location:</span>
-        <span class="form-field">@Model.Location</span>
-    </div>
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="grid4 floatLeft"> 
+                    <p class="greyHighlight">Phone: <span class="setTask">@Model.Phone</span></p> 
+                    <p class="greyHighlight">Location: <span class="setTask">@Model.Location</span></p> 
+                </div> 
+                <div class="grid4 floatRight"> 
+                    <p class="greyHighlight">Status: <span class="setTask">@Model.LeadStatus</span></p> 
+                </div> 
+            </div> 
+                                
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft">
+                    <p class="greyHighlight">Notes: 
+                        <span class="setTask">@Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))</span>
+                    </p>
+                </div> 
+            </div> 
 
-    <div class="form-row">
-        <span class="form-label">Status:</span>
-        <span class="form-field">@Model.LeadStatus</span>
-    </div>
+            <div class="clear"></div>
+        </div> 
+    </div> 
+</div> 
+                    
+<div class="grid1 marginTop_20 floatLeft"> 
+    <div class="grid2 floatLeft"> 
+        <h3 class="taskCalls">Open Tasks</h3> 
+        <div id="taskRole"> 
+            <ul> 
+                <li> 
+                    <div class="greyHighlight date">Due Today</div> 
+                    <div class="taskName">Cold Call</div> 
+                    <p class="taskDescription">Warren Buffett   --   CEO and President</p> 
+                    <p>7/28 Left a message   7/27 Another Message 7/15 <br /> Spoke to Warren. He's a smart man but Is too rich for his own good and therefore he cannot…</p> 
+                </li> 
+                                    
+                <li> 
+                    <div class="greyHighlight date">Due  Tomorrow</div> 
+                    <div class="taskName">Manatron Inc. </div> 
+                    <div class="taskDescription">Manatron Inc. </div> 
+                    <p>7/28 Left a message   7/27 Another Message 7/15 <br /> Spoke to Warren. He's a smart man but Is too rich for his own good and therefore he cannot…</p> 
+                </li>                       
+            </ul> 
+         </div>	
+                            
+        <h3 class="taskCalls">Completed Tasks</h3> 
 
-    <div class="form-row">
-        <span class="form-label">Notes:</span>
-        <span class="form-field">@Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))</span>
-    </div>
-</div>
-
-<hr />
-
-<div class="left-subcontent">
-    @if (Model.Tasks.Where(x => !x.Completed).Count() > 0)
-    {
-        <h3>Open Tasks</h3>
-        
-        foreach (var task in Model.Tasks.Where(x => !x.Completed).ToList())
-         {
-            <p>
-                @{ Html.RenderPartial(MVC.Company.Views._CompanyTaskDisplay, task); }
-            </p>
-         }
-    }
-</div>
-
-<div class="right-subcontent">
-    <h3>Test content</h3>
-</div>
-
-<div class="clear"></div>
+        <div id="taskRole"> 
+            <ul> 
+                <li> 
+                    <div class="greyHighlight date">Completed</div> 
+                    <div class="taskName">Manatron Inc. </div> 
+                    <div class="taskDescription">Manatron Inc. </div> 
+                    <p>7/28 Left a message   7/27 Another Message 7/15 <br /> Spoke to Warren. He's a smart man but Is too rich for his own good and therefore he cannot…</p> 
+                </li> 
+            </ul> 
+        </div>                     
+    </div> 
+                    
+    <div class="grid2 floatRight"> 
+        <div class="contactsPositionsNv"><a class="active" href="" title="Contacts">Contacts</a> | <a href="#" title="Positions">Positions</a></div> 
+        <a class="add blueLinks">Add New Position</a> 
+                            
+        <div id="contactsList"> 
+            <ul> 
+                <li> 
+                    <div class="contactName">Sr. QA Analyst</div> 
+                    <p class="greyHighlight">Not Applied Yet</p> 
+                    <p><span class="greyHighlight">Direct:</span> (201) 293-9355 <span class="greyHighlight">Mobile:</span> (201) 293-2312</p> 
+                    <p>8/4 I need to figure out who is working The job because it doesn't make sense …</p> 
+                </li> 
+                                  
+            </ul> 
+        </div> 
+    </div> 
+</div> 

@@ -402,16 +402,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>List.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Company\_CompanySidebarDisplay.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_CompanySidebarDisplay.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Company\_jobsearchCompanySummary.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_jobsearchCompanySummary.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Contact\Details.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -903,10 +893,6 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_OpenTaskSummary.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Company\_CompanySidebarDisplay.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_CompanySidebarDisplay.cs</LastGenOutput>
-    </Content>
     <Content Include="Views\Contact\_ContactSidebarDisplay.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_ContactSidebarDisplay.cs</LastGenOutput>
@@ -946,10 +932,6 @@
     <Content Include="Views\Company\List.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>List.cs</LastGenOutput>
-    </Content>
-    <Content Include="Views\Company\_jobsearchCompanySummary.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_jobsearchCompanySummary.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

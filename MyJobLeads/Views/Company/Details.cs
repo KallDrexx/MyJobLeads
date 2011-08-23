@@ -51,116 +51,116 @@ WriteLiteral("\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n<div class=\"display-form\">\r\n    <h2>");
+WriteLiteral("\r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"lineSeperater\"> \r\n        <div " +
+"class=\"pageInfoBox\">\r\n            <div class=\"grid3 marginBottom_10 marginAuto f" +
+"loatLeft\"> \r\n                    <h3 class=\"floatLeft\">");
 
 
             
-            #line 8 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-   Write(Model.Name);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</h2>\r\n    ");
-
-
-            
-            #line 9 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-Write(Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Id), new { @class = "details-link" }));
+            #line 11 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                     Write(Model.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n    <div class=\"form-row\">\r\n        <span class=\"form-label\">Phone:</span>\r\n " +
-"       <span class=\"form-field\">");
+WriteLiteral("</h3> \r\n                    ");
 
 
             
-            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                            Write(Model.Phone);
+            #line 12 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+               Write(Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" }));
 
             
             #line default
             #line hidden
-WriteLiteral("</span>\r\n    </div>\r\n    \r\n    <div class=\"form-row\">\r\n        <span class=\"form-" +
-"label\">Location:</span>\r\n        <span class=\"form-field\">");
+WriteLiteral("\r\n            </div> \r\n\r\n            <div class=\"grid3 marginBottom_10 floatLeft\"" +
+"> \r\n                <div class=\"grid4 floatLeft\"> \r\n                    <p class" +
+"=\"greyHighlight\">Phone: <span class=\"setTask\">");
+
+
+            
+            #line 17 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                                     Write(Model.Phone);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span></p> \r\n                    <p class=\"greyHighlight\">Location: <span class=" +
+"\"setTask\">");
 
 
             
             #line 18 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                            Write(Model.Location);
+                                                                        Write(Model.Location);
 
             
             #line default
             #line hidden
-WriteLiteral("</span>\r\n    </div>\r\n\r\n    <div class=\"form-row\">\r\n        <span class=\"form-labe" +
-"l\">Status:</span>\r\n        <span class=\"form-field\">");
+WriteLiteral("</span></p> \r\n                </div> \r\n                <div class=\"grid4 floatRig" +
+"ht\"> \r\n                    <p class=\"greyHighlight\">Status: <span class=\"setTask" +
+"\">");
 
 
             
-            #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                            Write(Model.LeadStatus);
+            #line 21 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                                      Write(Model.LeadStatus);
 
             
             #line default
             #line hidden
-WriteLiteral("</span>\r\n    </div>\r\n\r\n    <div class=\"form-row\">\r\n        <span class=\"form-labe" +
-"l\">Notes:</span>\r\n        <span class=\"form-field\">");
+WriteLiteral(@"</span></p> 
+                </div> 
+            </div> 
+                                
+            <div class=""grid3 marginBottom_10 floatLeft""> 
+                <div class=""floatLeft"">
+                    <p class=""greyHighlight"">Notes: 
+                        <span class=""setTask"">");
 
 
             
             #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                            Write(Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />")));
+                                         Write(Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />")));
 
             
             #line default
             #line hidden
-WriteLiteral("</span>\r\n    </div>\r\n</div>\r\n\r\n<hr />\r\n\r\n<div class=\"left-subcontent\">\r\n");
-
-
-            
-            #line 35 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-     if (Model.Tasks.Where(x => !x.Completed).Count() > 0)
-    {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        <h3>Open Tasks</h3>\r\n");
-
-
-            
-            #line 38 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-        
-        foreach (var task in Model.Tasks.Where(x => !x.Completed).ToList())
-         {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("            <p>\r\n");
-
-
-            
-            #line 42 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                   Html.RenderPartial(MVC.Company.Views._CompanyTaskDisplay, task); 
-
-            
-            #line default
-            #line hidden
-WriteLiteral("            </p>\r\n");
-
-
-            
-            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-         }
-    }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</div>\r\n\r\n<div class=\"right-subcontent\">\r\n    <h3>Test content</h3>\r\n</div>\r\n\r\n<d" +
-"iv class=\"clear\"></div>");
+WriteLiteral("</span>\r\n                    </p>\r\n                </div> \r\n            </div> \r\n" +
+"\r\n            <div class=\"clear\"></div>\r\n        </div> \r\n    </div> \r\n</div> \r\n" +
+"                    \r\n<div class=\"grid1 marginTop_20 floatLeft\"> \r\n    <div clas" +
+"s=\"grid2 floatLeft\"> \r\n        <h3 class=\"taskCalls\">Open Tasks</h3> \r\n        <" +
+"div id=\"taskRole\"> \r\n            <ul> \r\n                <li> \r\n                 " +
+"   <div class=\"greyHighlight date\">Due Today</div> \r\n                    <div cl" +
+"ass=\"taskName\">Cold Call</div> \r\n                    <p class=\"taskDescription\">" +
+"Warren Buffett   --   CEO and President</p> \r\n                    <p>7/28 Left a" +
+" message   7/27 Another Message 7/15 <br /> Spoke to Warren. He\'s a smart man bu" +
+"t Is too rich for his own good and therefore he cannot…</p> \r\n                </" +
+"li> \r\n                                    \r\n                <li> \r\n             " +
+"       <div class=\"greyHighlight date\">Due  Tomorrow</div> \r\n                   " +
+" <div class=\"taskName\">Manatron Inc. </div> \r\n                    <div class=\"ta" +
+"skDescription\">Manatron Inc. </div> \r\n                    <p>7/28 Left a message" +
+"   7/27 Another Message 7/15 <br /> Spoke to Warren. He\'s a smart man but Is too" +
+" rich for his own good and therefore he cannot…</p> \r\n                </li>     " +
+"                  \r\n            </ul> \r\n         </div>\t\r\n                      " +
+"      \r\n        <h3 class=\"taskCalls\">Completed Tasks</h3> \r\n\r\n        <div id=\"" +
+"taskRole\"> \r\n            <ul> \r\n                <li> \r\n                    <div " +
+"class=\"greyHighlight date\">Completed</div> \r\n                    <div class=\"tas" +
+"kName\">Manatron Inc. </div> \r\n                    <div class=\"taskDescription\">M" +
+"anatron Inc. </div> \r\n                    <p>7/28 Left a message   7/27 Another " +
+"Message 7/15 <br /> Spoke to Warren. He\'s a smart man but Is too rich for his ow" +
+"n good and therefore he cannot…</p> \r\n                </li> \r\n            </ul> " +
+"\r\n        </div>                     \r\n    </div> \r\n                    \r\n    <d" +
+"iv class=\"grid2 floatRight\"> \r\n        <div class=\"contactsPositionsNv\"><a class" +
+"=\"active\" href=\"\" title=\"Contacts\">Contacts</a> | <a href=\"#\" title=\"Positions\">" +
+"Positions</a></div> \r\n        <a class=\"add blueLinks\">Add New Position</a> \r\n  " +
+"                          \r\n        <div id=\"contactsList\"> \r\n            <ul> \r" +
+"\n                <li> \r\n                    <div class=\"contactName\">Sr. QA Anal" +
+"yst</div> \r\n                    <p class=\"greyHighlight\">Not Applied Yet</p> \r\n " +
+"                   <p><span class=\"greyHighlight\">Direct:</span> (201) 293-9355 " +
+"<span class=\"greyHighlight\">Mobile:</span> (201) 293-2312</p> \r\n                " +
+"    <p>8/4 I need to figure out who is working The job because it doesn\'t make s" +
+"ense …</p> \r\n                </li> \r\n                                  \r\n       " +
+"     </ul> \r\n        </div> \r\n    </div> \r\n</div> ");
 
 
         }
