@@ -16,6 +16,7 @@ namespace MyJobLeads.ViewModels.Tasks
             Id = task.Id;
             Name = task.Name;
             TaskDueDate = task.TaskDate;
+            TaskDueDateString = task.TaskDate != null ? task.TaskDate.Value.ToLongDateString() : string.Empty;
             Completed = task.CompletionDate != null;
             Category = task.Category;
             Notes = task.Notes;
@@ -28,6 +29,7 @@ namespace MyJobLeads.ViewModels.Tasks
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime? TaskDueDate { get; set; }
+        public string TaskDueDateString { get; set; }
         public bool Completed { get; set; }
         public string Notes { get; set; }
         public string AssociatedWith { get; set; }
