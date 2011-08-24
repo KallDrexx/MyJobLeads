@@ -32,9 +32,15 @@ namespace MyJobLeads.ViewModels.Companies
             if (zipSpecified) { Location += company.Zip; }
 
             // Form the task list
-            Tasks = company.Tasks.ToList()
-                                 .Select(x => new CompanyTaskViewModel(x))
-                                 .ToList();
+            OpenTasks = company.Tasks.Where(x => x.CompletionDate == null)
+                                     .ToList()
+                                     .Select(x => new CompanyTaskViewModel(x))
+                                     .ToList();
+
+            CompletedTasks = company.Tasks.Where(x => x.CompletionDate != null)
+                                          .ToList()
+                                          .Select(x => new CompanyTaskViewModel(x))
+                                          .ToList();
         }
 
         public int Id { get; set; }
@@ -44,7 +50,8 @@ namespace MyJobLeads.ViewModels.Companies
         public string Notes { get; set; }
         public string LeadStatus { get; set; }
 
-        public IList<CompanyTaskViewModel> Tasks { get; set; }
+        public IList<CompanyTaskViewModel> OpenTasks { get; set; }
+        public IList<CompanyTaskViewModel> CompletedTasks { get; set; }
 
         public class CompanyTaskViewModel
         {
@@ -52,7 +59,7 @@ namespace MyJobLeads.ViewModels.Companies
             {
                 Id = task.Id;
                 Name = task.Name;
-                Completed = task.CompletionDate != null;
+                CompletionDate = task.CompletionDate;
                 DueDate = task.TaskDate;
                 Notes = task.Notes;
 
@@ -63,7 +70,7 @@ namespace MyJobLeads.ViewModels.Companies
 
             public int Id { get; set; }
             public string Name { get; set; }
-            public bool Completed { get; set; }
+            public DateTime? CompletionDate { get; set; }
             public DateTime? DueDate { get; set; }
             public string AssociatedWith { get; set; }
             public string Notes { get; set; }

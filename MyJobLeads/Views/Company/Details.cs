@@ -53,22 +53,22 @@ WriteLiteral("\r\n");
             #line hidden
 WriteLiteral("\r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"lineSeperater\"> \r\n        <div " +
 "class=\"pageInfoBox\">\r\n            <div class=\"grid3 marginBottom_10 marginAuto f" +
-"loatLeft\"> \r\n                    <h3 class=\"floatLeft\">");
+"loatLeft\"> \r\n                <h3 class=\"floatLeft\">");
 
 
             
             #line 11 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                                     Write(Model.Name);
+                                 Write(Model.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("</h3> \r\n                    ");
+WriteLiteral("</h3> \r\n                ");
 
 
             
             #line 12 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-               Write(Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" }));
+           Write(Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" }));
 
             
             #line default
@@ -125,42 +125,223 @@ WriteLiteral(@"</span></p>
             
             #line default
             #line hidden
-WriteLiteral("</span>\r\n                    </p>\r\n                </div> \r\n            </div> \r\n" +
-"\r\n            <div class=\"clear\"></div>\r\n        </div> \r\n    </div> \r\n</div> \r\n" +
-"                    \r\n<div class=\"grid1 marginTop_20 floatLeft\"> \r\n    <div clas" +
-"s=\"grid2 floatLeft\"> \r\n        <h3 class=\"taskCalls\">Open Tasks</h3> \r\n        <" +
-"div id=\"taskRole\"> \r\n            <ul> \r\n                <li> \r\n                 " +
-"   <div class=\"greyHighlight date\">Due Today</div> \r\n                    <div cl" +
-"ass=\"taskName\">Cold Call</div> \r\n                    <p class=\"taskDescription\">" +
-"Warren Buffett   --   CEO and President</p> \r\n                    <p>7/28 Left a" +
-" message   7/27 Another Message 7/15 <br /> Spoke to Warren. He\'s a smart man bu" +
-"t Is too rich for his own good and therefore he cannot…</p> \r\n                </" +
-"li> \r\n                                    \r\n                <li> \r\n             " +
-"       <div class=\"greyHighlight date\">Due  Tomorrow</div> \r\n                   " +
-" <div class=\"taskName\">Manatron Inc. </div> \r\n                    <div class=\"ta" +
-"skDescription\">Manatron Inc. </div> \r\n                    <p>7/28 Left a message" +
-"   7/27 Another Message 7/15 <br /> Spoke to Warren. He\'s a smart man but Is too" +
-" rich for his own good and therefore he cannot…</p> \r\n                </li>     " +
-"                  \r\n            </ul> \r\n         </div>\t\r\n                      " +
-"      \r\n        <h3 class=\"taskCalls\">Completed Tasks</h3> \r\n\r\n        <div id=\"" +
-"taskRole\"> \r\n            <ul> \r\n                <li> \r\n                    <div " +
-"class=\"greyHighlight date\">Completed</div> \r\n                    <div class=\"tas" +
-"kName\">Manatron Inc. </div> \r\n                    <div class=\"taskDescription\">M" +
-"anatron Inc. </div> \r\n                    <p>7/28 Left a message   7/27 Another " +
-"Message 7/15 <br /> Spoke to Warren. He\'s a smart man but Is too rich for his ow" +
-"n good and therefore he cannot…</p> \r\n                </li> \r\n            </ul> " +
-"\r\n        </div>                     \r\n    </div> \r\n                    \r\n    <d" +
-"iv class=\"grid2 floatRight\"> \r\n        <div class=\"contactsPositionsNv\"><a class" +
-"=\"active\" href=\"\" title=\"Contacts\">Contacts</a> | <a href=\"#\" title=\"Positions\">" +
-"Positions</a></div> \r\n        <a class=\"add blueLinks\">Add New Position</a> \r\n  " +
-"                          \r\n        <div id=\"contactsList\"> \r\n            <ul> \r" +
-"\n                <li> \r\n                    <div class=\"contactName\">Sr. QA Anal" +
-"yst</div> \r\n                    <p class=\"greyHighlight\">Not Applied Yet</p> \r\n " +
-"                   <p><span class=\"greyHighlight\">Direct:</span> (201) 293-9355 " +
-"<span class=\"greyHighlight\">Mobile:</span> (201) 293-2312</p> \r\n                " +
-"    <p>8/4 I need to figure out who is working The job because it doesn\'t make s" +
-"ense …</p> \r\n                </li> \r\n                                  \r\n       " +
-"     </ul> \r\n        </div> \r\n    </div> \r\n</div> ");
+WriteLiteral(@"</span>
+                    </p>
+                </div> 
+            </div> 
+
+            <div class=""clear""></div>
+        </div> 
+    </div> 
+</div> 
+                    
+<div class=""grid1 marginTop_20 floatLeft""> 
+    <div class=""grid2 floatLeft""> 
+
+");
+
+
+            
+            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+         if (Model.OpenTasks.Count > 0)
+        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <h3 class=\"taskCalls\">Open Tasks</h3> \r\n");
+
+
+
+WriteLiteral("            <div id=\"taskRole\"> \r\n                <ul>\r\n");
+
+
+            
+            #line 46 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                     foreach (var task in Model.OpenTasks.OrderBy(x => x.DueDate))
+                    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                        <li>\r\n                            <a href=\"");
+
+
+            
+            #line 49 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                Write(Url.Action(MVC.Task.Details(task.Id)));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" title=\"Show Task Details\">\r\n                                <div class=\"greyHig" +
+"hlight date\">");
+
+
+            
+            #line 50 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                           Write(Html.GetDueDateString(task.DueDate));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                                <div class=\"taskName\">");
+
+
+            
+            #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                 Write(task.Name);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                                <p class=\"taskDescription\">");
+
+
+            
+            #line 52 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                      Write(task.AssociatedWith);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</p>\r\n                                <p>");
+
+
+            
+            #line 53 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                              Write(task.Notes);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</p>\r\n                            </a>\r\n                        </li>\r\n");
+
+
+            
+            #line 56 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                </ul> \r\n             </div>\t\r\n");
+
+
+            
+            #line 59 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                \r\n");
+
+
+            
+            #line 61 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+         if (Model.CompletedTasks.Count > 0)
+        {           
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <h3 class=\"taskCalls\">Completed Tasks</h3> \r\n");
+
+
+
+WriteLiteral("            <div id=\"taskRole\"> \r\n                <ul>\r\n");
+
+
+            
+            #line 66 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                     foreach (var task in Model.CompletedTasks.OrderBy(x => x.CompletionDate))
+                    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                        <li>\r\n                            <a href=\"");
+
+
+            
+            #line 69 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                Write(Url.Action(MVC.Task.Details(task.Id)));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\">\r\n                                <div class=\"greyHighlight date\">Completed</di" +
+"v>\r\n                                <div class=\"taskName\">");
+
+
+            
+            #line 71 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                 Write(task.Name);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                                <p class=\"taskDescription\">");
+
+
+            
+            #line 72 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                      Write(task.AssociatedWith);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</p>\r\n                                <p>");
+
+
+            
+            #line 73 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                              Write(task.Notes);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</p>\r\n                            </a>\r\n                        </li>\r\n");
+
+
+            
+            #line 76 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                </ul>  \r\n            </div>                        \r\n");
+
+
+            
+            #line 79 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"        
+    </div> 
+                    
+    <div class=""grid2 floatRight""> 
+        <div class=""contactsPositionsNv""><a class=""active"" href="""" title=""Contacts"">Contacts</a> | <a href=""#"" title=""Positions"">Positions</a></div> 
+        <a class=""add blueLinks"">Add New Position</a> 
+                            
+        <div id=""contactsList""> 
+            <ul> 
+                <li> 
+                    <div class=""contactName"">Sr. QA Analyst</div> 
+                    <p class=""greyHighlight"">Not Applied Yet</p> 
+                    <p><span class=""greyHighlight"">Direct:</span> (201) 293-9355 <span class=""greyHighlight"">Mobile:</span> (201) 293-2312</p> 
+                    <p>8/4 I need to figure out who is working The job because it doesn't make sense …</p> 
+                </li> 
+                                  
+            </ul> 
+        </div> 
+    </div> 
+</div> ");
 
 
         }

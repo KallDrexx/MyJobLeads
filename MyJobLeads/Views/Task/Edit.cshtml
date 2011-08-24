@@ -97,12 +97,3 @@
 }
 
 <hr />
-
-@if (Model.AssociatedContactId > 0)
-{
-    Html.RenderPartial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact);
-}
-else
-{
-    Html.RenderPartial(MVC.Company.Views._CompanySidebarDisplay, new CompanyDisplayViewModel(Model.Company));
-}

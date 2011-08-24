@@ -26,6 +26,7 @@ namespace MyJobLeads.Views.Task
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using MyJobLeads.Infrastructure.HtmlHelpers;
     
     #line 3 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
     using MyJobLeads.ViewModels.Companies;
@@ -371,22 +372,8 @@ WriteLiteral("        </span>\r\n    </div>        \r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n<hr />\r\n\r\n");
+WriteLiteral("\r\n<hr />");
 
-
-            
-            #line 101 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
- if (Model.AssociatedContactId > 0)
-{
-    Html.RenderPartial(MVC.Contact.Views._ContactSidebarDisplay, Model.Contact);
-}
-else
-{
-    Html.RenderPartial(MVC.Company.Views._CompanySidebarDisplay, new CompanyDisplayViewModel(Model.Company));
-}
-            
-            #line default
-            #line hidden
 
         }
     }
