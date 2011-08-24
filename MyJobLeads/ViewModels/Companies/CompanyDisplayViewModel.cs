@@ -18,6 +18,7 @@ namespace MyJobLeads.ViewModels.Companies
             Notes = company.Notes;
             LeadStatus = company.LeadStatus;
             Contacts = company.Contacts.Select(x => new CompanyContactViewModel(x)).ToList();
+            Positions = company.Positions.Select(x => new CompanyPositionViewModel(x)).ToList();
 
             // Form company location string
             Location = string.Empty;
@@ -50,10 +51,12 @@ namespace MyJobLeads.ViewModels.Companies
         public string Location { get; set; }
         public string Notes { get; set; }
         public string LeadStatus { get; set; }
+        public bool showPositions { get; set; }
 
         public IList<CompanyTaskViewModel> OpenTasks { get; set; }
         public IList<CompanyTaskViewModel> CompletedTasks { get; set; }
         public IList<CompanyContactViewModel> Contacts { get; set; }
+        public IList<CompanyPositionViewModel> Positions { get; set; }
 
         public class CompanyTaskViewModel
         {
@@ -95,6 +98,24 @@ namespace MyJobLeads.ViewModels.Companies
             public string Name { get; set; }
             public string DirectPhone { get; set; }
             public string MobilePhone { get; set; }
+            public string Notes { get; set; }
+        }
+
+        public class CompanyPositionViewModel
+        {
+            public CompanyPositionViewModel() { }
+
+            public CompanyPositionViewModel(Position position)
+            {
+                Id = position.Id;
+                Title = position.Title;
+                HasApplied = position.HasApplied;
+                Notes = position.Notes;
+            }
+
+            public int Id { get; set; }
+            public string Title { get; set; }
+            public bool HasApplied { get; set; }
             public string Notes { get; set; }
         }
     }

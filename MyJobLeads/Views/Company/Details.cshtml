@@ -79,21 +79,60 @@
     </div> 
                     
     <div class="grid2 floatRight"> 
-        <div class="contactsPositionsNv"><a class="active" href="" title="Contacts">Contacts</a> | <a href="#" title="Positions">Positions</a></div>
-        @Html.ActionLink("Add New Contact", MVC.Contact.Add(Model.Id), new { @class = "add blueLinks" })
+        <div class="contactsPositionsNv">
+            @if (Model.showPositions)
+            {
+                @Html.ActionLink("Contacts", MVC.Company.Details(Model.Id), new { title = "Show Relevant Contacts" })
+                @:|
+                @Html.ActionLink("Positions", MVC.Company.Details(Model.Id, true), new { title = "Show Relevant Positions", @class = "active" })
+            }
+            else
+            {
+                @Html.ActionLink("Contacts", MVC.Company.Details(Model.Id), new { title = "Show Relevant Contacts", @class = "active" })
+                @:|
+                @Html.ActionLink("Positions", MVC.Company.Details(Model.Id, true), new { title = "Show Relevant Positions" })
+            }
+        </div>
+
+        @if (Model.showPositions)
+        {
+            @Html.ActionLink("Add New Position", MVC.Company.Details(Model.Id, true), new { @class = "add blueLinks" })
                             
-        <div id="contactsList"> 
-            <ul> 
-                @foreach (var contact in Model.Contacts.OrderBy(x => x.Name))
-                {
-                    <li> 
-                        <div class="contactName">@contact.Name <span></span></div> 
-                        <p><span class="greyHighlight">Direct:</span> @contact.DirectPhone <span class="greyHighlight">Mobile:</span> @contact.MobilePhone</p> 
-                        <p>@Html.ShortString(contact.Notes, 110)</p> 
-                        @Html.ActionLink("View Contact", MVC.Contact.Details(contact.Id), new { @class = "blueLinks viewContact" })
-                    </li> 
-                }             
-            </ul> 
-        </div> 
+            <div id="contactsList"> 
+                <ul> 
+                    @foreach (var positions in Model.Positions.OrderBy(x => x.Title))
+                    {
+                        <ul> 
+                            <li> 
+                                <div class="contactName">@positions.Title</div> 
+                                <p class="greyHighlight">@(positions.HasApplied? "Applied" : "Not Yet Applied")</p> 
+                                <p>@Html.ShortString(positions.Notes, 110)</p> 
+                                @Html.ActionLink("View Position", MVC.Company.Details(Model.Id, true), new { @class = "blueLinks viewContact" })
+                            </li>       
+                        </ul>
+                    }             
+                </ul> 
+            </div> 
+        }
+
+        else
+        {
+            @Html.ActionLink("Add New Contact", MVC.Contact.Add(Model.Id), new { @class = "add blueLinks" })
+                            
+            <div id="contactsList"> 
+                <ul> 
+                    @foreach (var contact in Model.Contacts.OrderBy(x => x.Name))
+                    {
+                        <li> 
+                            <div class="contactName">@contact.Name <span></span></div> 
+                            <p><span class="greyHighlight">Direct:</span> @contact.DirectPhone <span class="greyHighlight">Mobile:</span> @contact.MobilePhone</p> 
+                            <p>@Html.ShortString(contact.Notes, 110)</p> 
+                            @Html.ActionLink("View Contact", MVC.Contact.Details(contact.Id), new { @class = "blueLinks viewContact" })
+                        </li> 
+                    }             
+                </ul> 
+            </div> 
+        }
+
     </div> 
 </div> 

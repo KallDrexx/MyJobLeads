@@ -108,10 +108,10 @@ namespace MyJobLeads.Controllers
             }
         }
 
-        public virtual ActionResult Details(int id)
+        public virtual ActionResult Details(int id, bool showPositions = false)
         {
             var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(id).Execute();
-            var model = new CompanyDisplayViewModel(company);
+            var model = new CompanyDisplayViewModel(company) { showPositions = showPositions };
             return View(model);
         }
 

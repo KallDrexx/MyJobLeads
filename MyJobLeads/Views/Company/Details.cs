@@ -323,46 +323,244 @@ WriteLiteral("                </ul>  \r\n            </div>                     
             #line default
             #line hidden
 WriteLiteral("        \r\n    </div> \r\n                    \r\n    <div class=\"grid2 floatRight\"> \r" +
-"\n        <div class=\"contactsPositionsNv\"><a class=\"active\" href=\"\" title=\"Conta" +
-"cts\">Contacts</a> | <a href=\"#\" title=\"Positions\">Positions</a></div>\r\n        ");
+"\n        <div class=\"contactsPositionsNv\">\r\n");
 
 
             
             #line 83 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-   Write(Html.ActionLink("Add New Contact", MVC.Contact.Add(Model.Id), new { @class = "add blueLinks" }));
+             if (Model.showPositions)
+            {
+                
+            
+            #line default
+            #line hidden
+            
+            #line 85 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+           Write(Html.ActionLink("Contacts", MVC.Company.Details(Model.Id), new { title = "Show Relevant Contacts" }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                            \r\n        <div id=\"contactsList\"> \r\n            <ul" +
-"> \r\n");
+            
+            #line 85 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                                                                                     
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                ");
+
+WriteLiteral("|\r\n");
 
 
             
             #line 87 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                 foreach (var contact in Model.Contacts.OrderBy(x => x.Name))
-                {
+                
+            
+            #line default
+            #line hidden
+            
+            #line 87 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+           Write(Html.ActionLink("Positions", MVC.Company.Details(Model.Id, true), new { title = "Show Relevant Positions", @class = "active" }));
 
             
             #line default
             #line hidden
-WriteLiteral("                    <li> \r\n                        <div class=\"contactName\">");
-
-
             
-            #line 90 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                                            Write(contact.Name);
-
+            #line 87 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                                                                                                                
+            }
+            else
+            {
+                
             
             #line default
             #line hidden
-WriteLiteral(" <span></span></div> \r\n                        <p><span class=\"greyHighlight\">Dir" +
-"ect:</span> ");
-
-
             
             #line 91 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                                                                 Write(contact.DirectPhone);
+           Write(Html.ActionLink("Contacts", MVC.Company.Details(Model.Id), new { title = "Show Relevant Contacts", @class = "active" }));
+
+            
+            #line default
+            #line hidden
+            
+            #line 91 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                                                                                                        
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                ");
+
+WriteLiteral("|\r\n");
+
+
+            
+            #line 93 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                
+            
+            #line default
+            #line hidden
+            
+            #line 93 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+           Write(Html.ActionLink("Positions", MVC.Company.Details(Model.Id, true), new { title = "Show Relevant Positions" }));
+
+            
+            #line default
+            #line hidden
+            
+            #line 93 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                                                                                             
+            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        </div>\r\n\r\n");
+
+
+            
+            #line 97 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+         if (Model.showPositions)
+        {
+            
+            
+            #line default
+            #line hidden
+            
+            #line 99 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+       Write(Html.ActionLink("Add New Position", MVC.Company.Details(Model.Id, true), new { @class = "add blueLinks" }));
+
+            
+            #line default
+            #line hidden
+            
+            #line 99 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                                                                                       
+                            
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <div id=\"contactsList\"> \r\n                <ul> \r\n");
+
+
+            
+            #line 103 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                     foreach (var positions in Model.Positions.OrderBy(x => x.Title))
+                    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                        <ul> \r\n                            <li> \r\n               " +
+"                 <div class=\"contactName\">");
+
+
+            
+            #line 107 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                    Write(positions.Title);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div> \r\n                                <p class=\"greyHighlight\">");
+
+
+            
+            #line 108 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                     Write(positions.HasApplied? "Applied" : "Not Yet Applied");
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</p> \r\n                                <p>");
+
+
+            
+            #line 109 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                              Write(Html.ShortString(positions.Notes, 110));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</p> \r\n                                ");
+
+
+            
+            #line 110 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                           Write(Html.ActionLink("View Position", MVC.Company.Details(Model.Id, true), new { @class = "blueLinks viewContact" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                            </li>       \r\n                        </ul>\r\n");
+
+
+            
+            #line 113 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                    }             
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                </ul> \r\n            </div> \r\n");
+
+
+            
+            #line 116 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+        }
+
+        else
+        {
+            
+            
+            #line default
+            #line hidden
+            
+            #line 120 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+       Write(Html.ActionLink("Add New Contact", MVC.Contact.Add(Model.Id), new { @class = "add blueLinks" }));
+
+            
+            #line default
+            #line hidden
+            
+            #line 120 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                                                                            
+                            
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <div id=\"contactsList\"> \r\n                <ul> \r\n");
+
+
+            
+            #line 124 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                     foreach (var contact in Model.Contacts.OrderBy(x => x.Name))
+                    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                        <li> \r\n                            <div class=\"contactNam" +
+"e\">");
+
+
+            
+            #line 127 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                Write(contact.Name);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" <span></span></div> \r\n                            <p><span class=\"greyHighlight\"" +
+">Direct:</span> ");
+
+
+            
+            #line 128 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                                     Write(contact.DirectPhone);
 
             
             #line default
@@ -371,43 +569,53 @@ WriteLiteral(" <span class=\"greyHighlight\">Mobile:</span> ");
 
 
             
-            #line 91 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                                                                                                                                 Write(contact.MobilePhone);
+            #line 128 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                                                                                                     Write(contact.MobilePhone);
 
             
             #line default
             #line hidden
-WriteLiteral("</p> \r\n                        <p>");
+WriteLiteral("</p> \r\n                            <p>");
 
 
             
-            #line 92 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                      Write(Html.ShortString(contact.Notes, 110));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</p> \r\n                        ");
-
-
-            
-            #line 93 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                   Write(Html.ActionLink("View Contact", MVC.Contact.Details(contact.Id), new { @class = "blueLinks viewContact" }));
+            #line 129 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                          Write(Html.ShortString(contact.Notes, 110));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                    </li> \r\n");
+WriteLiteral("</p> \r\n                            ");
 
 
             
-            #line 95 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                }             
+            #line 130 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                       Write(Html.ActionLink("View Contact", MVC.Contact.Details(contact.Id), new { @class = "blueLinks viewContact" }));
 
             
             #line default
             #line hidden
-WriteLiteral("            </ul> \r\n        </div> \r\n    </div> \r\n</div> ");
+WriteLiteral("\r\n                        </li> \r\n");
+
+
+            
+            #line 132 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                    }             
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                </ul> \r\n            </div> \r\n");
+
+
+            
+            #line 135 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n    </div> \r\n</div> ");
 
 
         }
