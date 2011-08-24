@@ -49,10 +49,11 @@
 
         <div class="grid3 marginBottom_10 floatLeft"> 
             <p><span class="greyHighlight">Location: </span>@Model.Company.Location</p> 
-        </div> 
-
-        <p>@Html.Raw(Html.Encode(Model.Company.Notes).Replace(Environment.NewLine, "<br />"))</p>
-
-        @Html.ActionLink("Show Details", MVC.Company.Details(Model.Company.Id), new { @class = "blueLinks", title = "Show Details" })
+        </div>
+         
+        <div class="grid3 marginBottom_10 floatLeft">
+            <p>@Html.Raw(Html.Encode(Model.Company.Notes).Replace(Environment.NewLine, "<br />"))</p>
+            @Html.ActionLink("Show Details", MVC.Company.Details(Model.Company.Id), new { @class = "blueLinks", title = "Show Details" })
+        </div>
     </div> 
 </div>

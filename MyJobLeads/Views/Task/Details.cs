@@ -195,27 +195,28 @@ WriteLiteral("</p> \r\n        </div> \r\n\r\n        <div class=\"grid3 marginB
             
             #line default
             #line hidden
-WriteLiteral("</p> \r\n        </div> \r\n\r\n        <p>");
+WriteLiteral("</p> \r\n        </div>\r\n         \r\n        <div class=\"grid3 marginBottom_10 float" +
+"Left\">\r\n            <p>");
 
 
             
-            #line 54 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
-      Write(Html.Raw(Html.Encode(Model.Company.Notes).Replace(Environment.NewLine, "<br />")));
+            #line 55 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+          Write(Html.Raw(Html.Encode(Model.Company.Notes).Replace(Environment.NewLine, "<br />")));
 
             
             #line default
             #line hidden
-WriteLiteral("</p>\r\n\r\n        ");
+WriteLiteral("</p>\r\n            ");
 
 
             
             #line 56 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
-   Write(Html.ActionLink("Show Details", MVC.Company.Details(Model.Company.Id), new { @class = "blueLinks", title = "Show Details" }));
+       Write(Html.ActionLink("Show Details", MVC.Company.Details(Model.Company.Id), new { @class = "blueLinks", title = "Show Details" }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n    </div> \r\n</div>");
+WriteLiteral("\r\n        </div>\r\n    </div> \r\n</div>");
 
 
         }
