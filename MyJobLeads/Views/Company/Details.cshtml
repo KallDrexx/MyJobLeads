@@ -46,12 +46,11 @@
                     @foreach (var task in Model.OpenTasks.OrderBy(x => x.DueDate))
                     {
                         <li>
-                            <a href="@Url.Action(MVC.Task.Details(task.Id))" title="Show Task Details">
-                                <div class="greyHighlight date">@Html.GetDueDateString(task.DueDate)</div>
-                                <div class="taskName">@task.Name</div>
-                                <p class="taskDescription">@task.AssociatedWith</p>
-                                <p>@task.Notes</p>
-                            </a>
+                            <div class="greyHighlight date">@Html.GetDueDateString(task.DueDate)</div>
+                            <div class="taskName">@task.Name</div>
+                            <p class="taskDescription">@task.AssociatedWith</p>
+                            <p>@Html.ShortString(task.Notes, 110)</p>
+                            @Html.ActionLink("View Task", MVC.Task.Details(task.Id), new { @class = "blueLinks viewContact" })
                         </li>
                     }
                 </ul> 
@@ -66,12 +65,11 @@
                     @foreach (var task in Model.CompletedTasks.OrderBy(x => x.CompletionDate))
                     {
                         <li>
-                            <a href="@Url.Action(MVC.Task.Details(task.Id))">
-                                <div class="greyHighlight date">Completed</div>
-                                <div class="taskName">@task.Name</div>
-                                <p class="taskDescription">@task.AssociatedWith</p>
-                                <p>@task.Notes</p>
-                            </a>
+                            <div class="greyHighlight date">Completed</div>
+                            <div class="taskName">@task.Name</div>
+                            <p class="taskDescription">@task.AssociatedWith</p>
+                            <p>@Html.ShortString(task.Notes, 110)</p>
+                            @Html.ActionLink("View Task", MVC.Task.Details(task.Id), new { @class = "blueLinks viewContact" })
                         </li>
                     }
                 </ul>  
@@ -81,18 +79,20 @@
     </div> 
                     
     <div class="grid2 floatRight"> 
-        <div class="contactsPositionsNv"><a class="active" href="" title="Contacts">Contacts</a> | <a href="#" title="Positions">Positions</a></div> 
-        <a class="add blueLinks">Add New Position</a> 
+        <div class="contactsPositionsNv"><a class="active" href="" title="Contacts">Contacts</a> | <a href="#" title="Positions">Positions</a></div>
+        @Html.ActionLink("Add New Contact", MVC.Contact.Add(Model.Id), new { @class = "add blueLinks" })
                             
         <div id="contactsList"> 
             <ul> 
-                <li> 
-                    <div class="contactName">Sr. QA Analyst</div> 
-                    <p class="greyHighlight">Not Applied Yet</p> 
-                    <p><span class="greyHighlight">Direct:</span> (201) 293-9355 <span class="greyHighlight">Mobile:</span> (201) 293-2312</p> 
-                    <p>8/4 I need to figure out who is working The job because it doesn't make sense …</p> 
-                </li> 
-                                  
+                @foreach (var contact in Model.Contacts.OrderBy(x => x.Name))
+                {
+                    <li> 
+                        <div class="contactName">@contact.Name <span></span></div> 
+                        <p><span class="greyHighlight">Direct:</span> @contact.DirectPhone <span class="greyHighlight">Mobile:</span> @contact.MobilePhone</p> 
+                        <p>@Html.ShortString(contact.Notes, 110)</p> 
+                        @Html.ActionLink("View Contact", MVC.Contact.Details(contact.Id), new { @class = "blueLinks viewContact" })
+                    </li> 
+                }             
             </ul> 
         </div> 
     </div> 
