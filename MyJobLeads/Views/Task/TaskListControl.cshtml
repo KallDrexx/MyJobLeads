@@ -4,29 +4,7 @@
     <ul>
         @foreach (var task in Model)
         {
-            string dueDate, taskDescription;
-            
-            // Create the task due date string
-            dueDate = string.Empty;
-            if (task.TaskDate != null)
-            {
-                if (task.TaskDate.Value.Date == DateTime.Today)
-                {
-                    dueDate = "Due Today";
-                }
-                else if (task.TaskDate.Value.Date == DateTime.Today.Subtract(new TimeSpan(1, 0, 0, 0)))
-                {
-                    dueDate = "Due Yesterday";
-                }
-                else if (task.TaskDate.Value.Date == DateTime.Today.Add(new TimeSpan(1, 0, 0, 0)))
-                {
-                    dueDate = "Due Tomorrow";
-                }
-                else
-                {
-                    dueDate = task.TaskDate.Value.ToShortDateString();
-                }
-            }
+            string taskDescription;
                  
             // Create the description string
             if (task.Contact == null)
@@ -40,7 +18,7 @@
             
             <li>
                 <a href="@Url.Action(MVC.Task.Details(task.Id))">
-                    <div class="greyHighlight date">@dueDate</div>
+                    <div class="greyHighlight date">@Html.GetDueDateString(task.TaskDate)</div>
                     <div class="taskName">@task.Name</div>
                     <div class="taskDescription">@taskDescription</div>
                 </a>
