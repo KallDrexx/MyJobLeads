@@ -546,13 +546,23 @@ WriteLiteral("                        <li> \r\n                            <div 
             
             #line default
             #line hidden
-WriteLiteral(" <span></span></div> \r\n                            <p><span class=\"greyHighlight\"" +
-">Direct:</span> ");
+WriteLiteral(" <span>- ");
+
+
+            
+            #line 131 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                                      Write(contact.Title);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" </span></div> \r\n                            <p><span class=\"greyHighlight\">Direc" +
+"t:</span> ");
 
 
             
             #line 132 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                                                                     Write(contact.DirectPhone);
+                                                                     Write(contact.DirectPhoneWithExtension);
 
             
             #line default
@@ -562,7 +572,7 @@ WriteLiteral(" <span class=\"greyHighlight\">Mobile:</span> ");
 
             
             #line 132 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                                                                                                                                     Write(contact.MobilePhone);
+                                                                                                                                                  Write(contact.MobilePhone);
 
             
             #line default

@@ -61,6 +61,7 @@ namespace MyJobLeads.Controllers
                                                                    .SetMobilePhone(model.MobilePhone)
                                                                    .SetName(model.Name)
                                                                    .SetNotes(model.Notes)
+                                                                   .SetTitle(model.Title)
                                                                    .SetReferredBy(model.ReferredBy)
                                                                    .RequestedByUserId(CurrentUserId)
                                                                    .Execute();
@@ -75,6 +76,7 @@ namespace MyJobLeads.Controllers
                                                                  .SetMobilePhone(model.MobilePhone)
                                                                  .SetName(model.Name)
                                                                  .SetNotes(model.Notes)
+                                                                 .SetTitle(model.Title)
                                                                  .SetReferredBy(model.ReferredBy)
                                                                  .RequestedByUserId(CurrentUserId)
                                                                  .Execute();

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Entities.Extensions;
+using MyJobLeads.ViewModels.Contacts;
 
 namespace MyJobLeads.ViewModels.Companies
 {
@@ -18,7 +19,7 @@ namespace MyJobLeads.ViewModels.Companies
             Phone = company.Phone;
             Notes = company.Notes;
             LeadStatus = company.LeadStatus;
-            Contacts = company.Contacts.Select(x => new CompanyContactViewModel(x)).ToList();
+            Contacts = company.Contacts.Select(x => new ContactSummaryViewModel(x)).ToList();
             Positions = company.Positions.Select(x => new CompanyPositionViewModel(x)).ToList();
             Location = company.LocationString();            
 
@@ -44,7 +45,7 @@ namespace MyJobLeads.ViewModels.Companies
 
         public IList<CompanyTaskViewModel> OpenTasks { get; set; }
         public IList<CompanyTaskViewModel> CompletedTasks { get; set; }
-        public IList<CompanyContactViewModel> Contacts { get; set; }
+        public IList<ContactSummaryViewModel> Contacts { get; set; }
         public IList<CompanyPositionViewModel> Positions { get; set; }
 
         public class CompanyTaskViewModel
@@ -67,26 +68,6 @@ namespace MyJobLeads.ViewModels.Companies
             public DateTime? CompletionDate { get; set; }
             public DateTime? DueDate { get; set; }
             public string AssociatedWith { get; set; }
-            public string Notes { get; set; }
-        }
-
-        public class CompanyContactViewModel
-        {
-            public CompanyContactViewModel() { }
-
-            public CompanyContactViewModel(Contact contact)
-            {
-                Id = contact.Id;
-                Name = contact.Name;
-                DirectPhone = contact.DirectPhone;
-                MobilePhone = contact.MobilePhone;
-                Notes = contact.Notes;
-            }
-
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public string DirectPhone { get; set; }
-            public string MobilePhone { get; set; }
             public string Notes { get; set; }
         }
 

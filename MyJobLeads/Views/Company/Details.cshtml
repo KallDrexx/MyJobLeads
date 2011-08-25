@@ -128,8 +128,8 @@
                     @foreach (var contact in Model.Contacts.OrderBy(x => x.Name))
                     {
                         <li> 
-                            <div class="contactName">@contact.Name <span></span></div> 
-                            <p><span class="greyHighlight">Direct:</span> @contact.DirectPhone <span class="greyHighlight">Mobile:</span> @contact.MobilePhone</p> 
+                            <div class="contactName">@contact.Name <span>- @contact.Title </span></div> 
+                            <p><span class="greyHighlight">Direct:</span> @contact.DirectPhoneWithExtension <span class="greyHighlight">Mobile:</span> @contact.MobilePhone</p> 
                             <p>@Html.ShortString(contact.Notes, 110)</p> 
                             @Html.ActionLink("View Contact", MVC.Contact.Details(contact.Id), new { @class = "blueLinks viewContact" })
                         </li> 
