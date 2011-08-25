@@ -415,16 +415,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Edit.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Contact\_CompanyContactDisplay.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_CompanyContactDisplay.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Contact\_ContactSidebarDisplay.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_ContactSidebarDisplay.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Home\About.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -896,10 +886,6 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_OpenTaskSummary.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Contact\_ContactSidebarDisplay.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_ContactSidebarDisplay.cs</LastGenOutput>
-    </Content>
     <Content Include="Views\Task\_OpenTaskListItem.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_OpenTaskListItem.cs</LastGenOutput>
@@ -907,10 +893,6 @@
     <Content Include="Views\Task\_CompanyTaskDisplay.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_CompanyTaskDisplay.cs</LastGenOutput>
-    </Content>
-    <Content Include="Views\Contact\_CompanyContactDisplay.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_CompanyContactDisplay.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Search\RefreshSearchIndex.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -965,7 +947,6 @@
     <Content Include="Views\Task\TaskListControl.cshtml" />
     <Content Include="Views\Task\Today.cshtml" />
     <Content Include="Views\Task\Future.cshtml" />
-    <Content Include="Views\Company\_CompanyTaskDisplay.cshtml" />
     <Content Include="Views\Company\_CompanySummaryDisplay.cshtml" />
     <Content Include="Views\Contact\_ContactSummaryDisplay.cshtml" />
   </ItemGroup>
