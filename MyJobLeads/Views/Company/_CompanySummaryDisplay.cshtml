@@ -1,0 +1,25 @@
+﻿@model MyJobLeads.ViewModels.Companies.CompanySummaryViewModel
+           
+<div class="grid1 marginBottom_20 floatLeft"> 
+    <div class="BottomPageInfo"> 
+        <div class="grid3 marginAuto floatLeft"> 
+            <h3 class="floatLeft">@Model.Name</h3> 
+            @Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" })
+        </div> 
+
+        <div class="grid3 floatLeft"> 
+            <p class="floatLeft"><span class="greyHighlight">Phone: </span>@Model.Phone</p> 
+            <p class="floatRight"><span class="greyHighlight">Status: </span> @Model.LeadStatus</p> 
+        </div> 
+
+        <div class="grid3 marginBottom_10 floatLeft"> 
+            <p><span class="greyHighlight">Location: </span>@Model.Location</p> 
+        </div>
+         
+        <div class="grid3 marginBottom_10 floatLeft">
+            <p>@Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))</p>
+            @Html.ActionLink("Show Details", MVC.Company.Details(Model.Id), new { @class = "blueLinks", title = "Show Details" })
+        </div>
+    </div> 
+</div>
+

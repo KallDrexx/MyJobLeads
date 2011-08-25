@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.ViewModels.Companies;
+using MyJobLeads.ViewModels.Contacts;
 
 namespace MyJobLeads.ViewModels.Tasks
 {
@@ -22,8 +23,8 @@ namespace MyJobLeads.ViewModels.Tasks
             Notes = task.Notes;
             AssociatedWith = task.ContactId == null ? task.Company.Name : task.Contact.Name;
 
-            Company = new CompanyDisplayViewModel(task.Company);
-            Contact = task.Contact;
+            Company = new CompanySummaryViewModel(task.Company);
+            Contact = new ContactSummaryViewModel(task.Contact);
         }
 
         public int Id { get; set; }
@@ -35,7 +36,7 @@ namespace MyJobLeads.ViewModels.Tasks
         public string AssociatedWith { get; set; }
         public string Category { get; set; }
 
-        public CompanyDisplayViewModel Company { get; set; }
-        public Contact Contact { get; set; }
+        public CompanySummaryViewModel Company { get; set; }
+        public ContactSummaryViewModel Contact { get; set; }
     }
 }

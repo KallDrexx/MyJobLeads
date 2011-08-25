@@ -333,6 +333,7 @@
     <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
     <Compile Include="ViewModels\Companies\EditCompanyViewModel.cs" />
     <Compile Include="ViewModels\Companies\JobSearchCompanyListViewModel.cs" />
+    <Compile Include="ViewModels\Contacts\ContactSummaryViewModel.cs" />
     <Compile Include="ViewModels\Contacts\EditContactViewModel.cs" />
     <Compile Include="ViewModels\JobSearches\JobSearchDetailsViewModel.cs" />
     <Compile Include="ViewModels\Organizations\EditOrganizationViewModel.cs" />
@@ -965,6 +966,8 @@
     <Content Include="Views\Task\Today.cshtml" />
     <Content Include="Views\Task\Future.cshtml" />
     <Content Include="Views\Company\_CompanyTaskDisplay.cshtml" />
+    <Content Include="Views\Company\_CompanySummaryDisplay.cshtml" />
+    <Content Include="Views\Contact\_ContactSummaryDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

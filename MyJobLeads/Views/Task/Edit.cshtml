@@ -68,7 +68,7 @@
  
                 <div class="grid3 marginBottom_10 floatLeft"> 
                     <div class="floatLeft"><p class="greyHighlight">Notes:</p>
-                        <div class="infoSpan">@Html.TextAreaFor(x => x.Notes, new { @class = "textAreaInfo" })</textarea></div>
+                        <div class="infoSpan">@Html.TextAreaFor(x => x.Notes, new { @class = "textAreaInfo" })</div>
                     </div> 
                 </div> 
 
@@ -87,6 +87,16 @@
                 </div> 
             }
             <div class="clear"></div> 
-    </div> 
+        </div> 
     </div> 
 </div> 
+
+@if (Model.Contact.Id != 0)
+{
+    Html.RenderPartial(MVC.Contact.Views._ContactSummaryDisplay, Model.Contact);
+}
+
+else
+{
+    Html.RenderPartial(MVC.Company.Views._CompanySummaryDisplay, Model.Company);
+}

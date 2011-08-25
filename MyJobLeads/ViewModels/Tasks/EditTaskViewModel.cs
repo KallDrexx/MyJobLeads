@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.ViewModels.Companies;
+using MyJobLeads.ViewModels.Contacts;
 
 namespace MyJobLeads.ViewModels.Tasks
 {
@@ -16,7 +18,7 @@ namespace MyJobLeads.ViewModels.Tasks
 
         public EditTaskViewModel(Company company) 
         {
-            Company = company;
+            Company = new CompanySummaryViewModel(company);
             AssociatedCompanyId = company.Id;
             AvailableCategoryList = new List<string>();
         }
@@ -28,8 +30,8 @@ namespace MyJobLeads.ViewModels.Tasks
             TaskDate = task.TaskDate;
             Completed = task.CompletionDate != null;
             AssociatedContactId = Convert.ToInt32(task.ContactId);
-            Company = task.Company;
-            Contact = task.Contact;
+            Company = new CompanySummaryViewModel(task.Company);
+            Contact = new ContactSummaryViewModel(task.Contact);
             Category = task.Category;
             Notes = task.Notes;
 
@@ -41,11 +43,12 @@ namespace MyJobLeads.ViewModels.Tasks
         public string Name { get; set; }
         public DateTime? TaskDate { get; set; }
         public bool Completed { get; set; }
-        public Company Company { get; set; }
-        public Contact Contact { get; set; }
         public string Category { get; set; }
         public string SubCategory { get; set; }
         public string Notes { get; set; }
+
+        public CompanySummaryViewModel Company { get; set; }
+        public ContactSummaryViewModel Contact { get; set; }
 
         public int AssociatedContactId { get; set; }
         public int AssociatedCompanyId { get; set; }

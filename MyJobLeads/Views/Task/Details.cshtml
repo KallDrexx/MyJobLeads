@@ -34,26 +34,13 @@
         </div> 
     </div> 
 </div> 
-                    
-<div class="grid1 marginBottom_20 floatLeft"> 
-    <div class="BottomPageInfo"> 
-        <div class="grid3 marginAuto floatLeft"> 
-            <h3 class="floatLeft">@Model.Company.Name</h3> 
-            @Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Company.Id), new { @class = "floatRight blueLinks", title = "Edit Details" })
-        </div> 
 
-        <div class="grid3 floatLeft"> 
-            <p class="floatLeft"><span class="greyHighlight">Phone: </span>@Model.Company.Phone</p> 
-            <p class="floatRight"><span class="greyHighlight">Status: </span> @Model.Company.LeadStatus</p> 
-        </div> 
+@if (Model.Contact.Id == 0)
+{
+    Html.RenderPartial(MVC.Company.Views._CompanySummaryDisplay, Model.Company);
+}
 
-        <div class="grid3 marginBottom_10 floatLeft"> 
-            <p><span class="greyHighlight">Location: </span>@Model.Company.Location</p> 
-        </div>
-         
-        <div class="grid3 marginBottom_10 floatLeft">
-            <p>@Html.Raw(Html.Encode(Model.Company.Notes).Replace(Environment.NewLine, "<br />"))</p>
-            @Html.ActionLink("Show Details", MVC.Company.Details(Model.Company.Id), new { @class = "blueLinks", title = "Show Details" })
-        </div>
-    </div> 
-</div>
+else
+{
+    Html.RenderPartial(MVC.Contact.Views._ContactSummaryDisplay, Model.Contact);
+}

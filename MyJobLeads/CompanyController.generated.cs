@@ -77,6 +77,7 @@ namespace MyJobLeads.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string _CompanySummaryDisplay = "~/Views/Company/_CompanySummaryDisplay.cshtml";
             public readonly string _CompanyTaskDisplay = "~/Views/Company/_CompanyTaskDisplay.cshtml";
             public readonly string Details = "~/Views/Company/Details.cshtml";
             public readonly string Edit = "~/Views/Company/Edit.cshtml";

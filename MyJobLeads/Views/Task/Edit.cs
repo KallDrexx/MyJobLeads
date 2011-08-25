@@ -204,19 +204,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r
             
             #line default
             #line hidden
-WriteLiteral("</textarea>");
-
-
-
-WriteLiteral("</div>\r\n");
-
-
-
-WriteLiteral("                    </div> \r\n");
-
-
-
-WriteLiteral("                </div> \r\n");
+WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r\n");
 
 
             
@@ -281,8 +269,24 @@ WriteLiteral("                    </div> \r\n                </div> \r\n");
             
             #line default
             #line hidden
-WriteLiteral("            <div class=\"clear\"></div> \r\n    </div> \r\n    </div> \r\n</div> ");
+WriteLiteral("            <div class=\"clear\"></div> \r\n        </div> \r\n    </div> \r\n</div> \r\n\r\n" +
+"");
 
+
+            
+            #line 94 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+ if (Model.Contact.Id != 0)
+{
+    Html.RenderPartial(MVC.Contact.Views._ContactSummaryDisplay, Model.Contact);
+}
+
+else
+{
+    Html.RenderPartial(MVC.Company.Views._CompanySummaryDisplay, Model.Company);
+}
+            
+            #line default
+            #line hidden
 
         }
     }

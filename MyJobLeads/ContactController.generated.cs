@@ -78,6 +78,7 @@ namespace MyJobLeads.Controllers {
         public class ViewNames {
             public readonly string _CompanyContactDisplay = "~/Views/Contact/_CompanyContactDisplay.cshtml";
             public readonly string _ContactSidebarDisplay = "~/Views/Contact/_ContactSidebarDisplay.cshtml";
+            public readonly string _ContactSummaryDisplay = "~/Views/Contact/_ContactSummaryDisplay.cshtml";
             public readonly string Details = "~/Views/Contact/Details.cshtml";
             public readonly string Edit = "~/Views/Contact/Edit.cshtml";
         }

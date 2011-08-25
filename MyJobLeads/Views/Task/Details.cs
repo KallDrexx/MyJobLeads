@@ -130,94 +130,24 @@ WriteLiteral(@"</span></p>
             
             #line default
             #line hidden
-WriteLiteral(@"</span>
-                    </p>
-                </div> 
-            </div> 
-        <div class=""clear""></div> 
-        </div> 
-    </div> 
-</div> 
-                    
-<div class=""grid1 marginBottom_20 floatLeft""> 
-    <div class=""BottomPageInfo""> 
-        <div class=""grid3 marginAuto floatLeft""> 
-            <h3 class=""floatLeft"">");
+WriteLiteral("</span>\r\n                    </p>\r\n                </div> \r\n            </div> \r\n" +
+"        <div class=\"clear\"></div> \r\n        </div> \r\n    </div> \r\n</div> \r\n\r\n");
 
 
             
-            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
-                             Write(Model.Company.Name);
+            #line 38 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+ if (Model.Contact.Id == 0)
+{
+    Html.RenderPartial(MVC.Company.Views._CompanySummaryDisplay, Model.Company);
+}
 
+else
+{
+    Html.RenderPartial(MVC.Contact.Views._ContactSummaryDisplay, Model.Contact);
+}
             
             #line default
             #line hidden
-WriteLiteral("</h3> \r\n            ");
-
-
-            
-            #line 42 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
-       Write(Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Company.Id), new { @class = "floatRight blueLinks", title = "Edit Details" }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n        </div> \r\n\r\n        <div class=\"grid3 floatLeft\"> \r\n            <p class" +
-"=\"floatLeft\"><span class=\"greyHighlight\">Phone: </span>");
-
-
-            
-            #line 46 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
-                                                                      Write(Model.Company.Phone);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</p> \r\n            <p class=\"floatRight\"><span class=\"greyHighlight\">Status: </sp" +
-"an> ");
-
-
-            
-            #line 47 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
-                                                                         Write(Model.Company.LeadStatus);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</p> \r\n        </div> \r\n\r\n        <div class=\"grid3 marginBottom_10 floatLeft\"> \r" +
-"\n            <p><span class=\"greyHighlight\">Location: </span>");
-
-
-            
-            #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
-                                                       Write(Model.Company.Location);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</p> \r\n        </div>\r\n         \r\n        <div class=\"grid3 marginBottom_10 float" +
-"Left\">\r\n            <p>");
-
-
-            
-            #line 55 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
-          Write(Html.Raw(Html.Encode(Model.Company.Notes).Replace(Environment.NewLine, "<br />")));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</p>\r\n            ");
-
-
-            
-            #line 56 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
-       Write(Html.ActionLink("Show Details", MVC.Company.Details(Model.Company.Id), new { @class = "blueLinks", title = "Show Details" }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n        </div>\r\n    </div> \r\n</div>");
-
 
         }
     }
