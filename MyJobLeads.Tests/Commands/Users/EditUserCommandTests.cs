@@ -14,15 +14,18 @@ namespace MyJobLeads.Tests.Commands.Users
     public class EditUserCommandTests : EFTestBase
     {
         private User _user;
+        private JobSearch _search;
         private const string _oldPassword = "starting password", _startingEmail = "starting@email.com";
 
         private void InitializeTestEntities()
         {
+            _search = new JobSearch();
+
             _user = new User
             {
                 Email = _startingEmail ,
                 Password = PasswordUtils.CreatePasswordHash(_startingEmail, _oldPassword),
-                LastVisitedJobSearchId = 2,
+                LastVisitedJobSearch = _search,
                 FullName = "starting name"
             };
 
@@ -40,7 +43,7 @@ namespace MyJobLeads.Tests.Commands.Users
             new EditUserCommand(_unitOfWork).WithUserId(_user.Id)
                                             .SetEmail("new@email.com")
                                             .SetPassword("new password")
-                                            .SetLastVisitedJobSearchId(5)
+                                            .SetLastVisitedJobSearchId(_search.Id)
                                             .WithExistingPassword(_oldPassword)
                                             .Execute();
             User result = _unitOfWork.Users.Fetch().SingleOrDefault();
@@ -50,11 +53,11 @@ namespace MyJobLeads.Tests.Commands.Users
             Assert.AreEqual(_user, result, "User was incorrect");
             Assert.AreEqual("new@email.com", result.Email, "User's email was incorrect");
             Assert.IsTrue(PasswordUtils.CheckPasswordHash("new@email.com", "new password", result.Password), "User's password was incorrect");
-            Assert.AreEqual(5, result.LastVisitedJobSearchId, "User's last visited jobsearch id was incorrect");
+            Assert.AreEqual(_search.Id, result.LastVisitedJobSearchId, "User's last visited jobsearch id was incorrect");
         }
 
         [TestMethod]
-        public void Execute_Returns_Editted_User()
+        public void Execute_Returns_Edited_User()
         {
             // Setup
             InitializeTestEntities();
@@ -63,7 +66,7 @@ namespace MyJobLeads.Tests.Commands.Users
             User result = new EditUserCommand(_unitOfWork).WithUserId(_user.Id)
                                                         .SetEmail("new@email.com")
                                                         .SetPassword("new password")
-                                                        .SetLastVisitedJobSearchId(5)
+                                                        .SetLastVisitedJobSearchId(_search.Id)
                                                         .WithExistingPassword(_oldPassword)
                                                         .Execute();
 
@@ -72,7 +75,7 @@ namespace MyJobLeads.Tests.Commands.Users
             Assert.AreEqual(_user, result, "User was incorrect");
             Assert.AreEqual("new@email.com", result.Email, "User's email was incorrect");
             Assert.IsTrue(PasswordUtils.CheckPasswordHash("new@email.com", "new password", result.Password), "User's password was incorrect");
-            Assert.AreEqual(5, result.LastVisitedJobSearchId, "User's last visited jobsearch id was incorrect");
+            Assert.AreEqual(_search.Id, result.LastVisitedJobSearchId, "User's last visited jobsearch id was incorrect");
         }
 
         [TestMethod]
@@ -109,7 +112,7 @@ namespace MyJobLeads.Tests.Commands.Users
             // Act
             new EditUserCommand(_unitOfWork).WithUserId(_user.Id)
                                             .SetPassword("new password")
-                                            .SetLastVisitedJobSearchId(5)
+                                            .SetLastVisitedJobSearchId(_search.Id)
                                             .WithExistingPassword(_oldPassword)
                                             .Execute();
             User result = _unitOfWork.Users.Fetch().SingleOrDefault();
@@ -119,7 +122,7 @@ namespace MyJobLeads.Tests.Commands.Users
             Assert.AreEqual(_user, result, "User was incorrect");
             Assert.AreEqual("starting@email.com", result.Email, "User's email was incorrect");
             Assert.IsTrue(PasswordUtils.CheckPasswordHash(result.Email, "new password", result.Password), "User's password was incorrect");
-            Assert.AreEqual(5, result.LastVisitedJobSearchId, "User's last visited jobsearch id was incorrect");
+            Assert.AreEqual(_search.Id, result.LastVisitedJobSearchId, "User's last visited jobsearch id was incorrect");
         }
 
         [TestMethod]
@@ -131,7 +134,7 @@ namespace MyJobLeads.Tests.Commands.Users
             // Act
             new EditUserCommand(_unitOfWork).WithUserId(_user.Id)
                                             .SetEmail("new@email.com")
-                                            .SetLastVisitedJobSearchId(5)
+                                            .SetLastVisitedJobSearchId(_search.Id)
                                             .WithExistingPassword(_oldPassword)
                                             .Execute();
             User result = _unitOfWork.Users.Fetch().SingleOrDefault();
@@ -141,7 +144,7 @@ namespace MyJobLeads.Tests.Commands.Users
             Assert.AreEqual(_user, result, "User was incorrect");
             Assert.AreEqual("new@email.com", result.Email, "User's email was incorrect");
             Assert.IsTrue(PasswordUtils.CheckPasswordHash(result.Email, "starting password", result.Password), "User's password was incorrect");
-            Assert.AreEqual(5, result.LastVisitedJobSearchId, "User's last visited jobsearch id was incorrect");
+            Assert.AreEqual(_search.Id, result.LastVisitedJobSearchId, "User's last visited jobsearch id was incorrect");
         }
 
         [TestMethod]
@@ -163,7 +166,7 @@ namespace MyJobLeads.Tests.Commands.Users
             Assert.AreEqual(_user, result, "User was incorrect");
             Assert.AreEqual("new@email.com", result.Email, "User's email was incorrect");
             Assert.IsTrue(PasswordUtils.CheckPasswordHash(result.Email, "new password", result.Password), "User's password was incorrect");
-            Assert.AreEqual(2, result.LastVisitedJobSearchId, "User's last visited jobsearch id was incorrect");
+            Assert.AreEqual(_search.Id, result.LastVisitedJobSearchId, "User's last visited jobsearch id was incorrect");
         }
 
         [TestMethod]
@@ -174,12 +177,12 @@ namespace MyJobLeads.Tests.Commands.Users
 
             // Act
             new EditUserCommand(_unitOfWork).WithUserId(_user.Id)
-                                            .SetLastVisitedJobSearchId(6)
+                                            .SetLastVisitedJobSearchId(_search.Id)
                                             .Execute();
             User result = _unitOfWork.Users.Fetch().SingleOrDefault();
 
             // Verify
-            Assert.AreEqual(6, result.LastVisitedJobSearchId, "LastVisitedJobSearchId value was incorrect");
+            Assert.AreEqual(_search.Id, result.LastVisitedJobSearchId, "LastVisitedJobSearchId value was incorrect");
         }
 
         [TestMethod]

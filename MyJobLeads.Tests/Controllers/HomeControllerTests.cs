@@ -68,43 +68,6 @@ namespace MyJobLeads.Tests.Controllers
         }
 
         [TestMethod]
-        public void Index_Redirects_To_Jobsearch_Index_When_User_Has_Job_Searches_But_Null_LastVisitedJobSearchId()
-        {
-            // Setup
-            User user = new User { Id = 40, JobSearches = new List<JobSearch>() };
-            user.JobSearches.Add(new JobSearch());
-            var userByIdMock = new Mock<UserByIdQuery>(null);
-            userByIdMock.Setup(x => x.Execute()).Returns(user);
-
-            HomeController controller = new HomeController(userByIdMock.Object, _serviceFactory.Object);
-            controller.CurrentUserId = 40;
-
-            // Act
-            ActionResult result = controller.Index();
-
-            // Verify
-            result.AssertActionRedirect().ToController("JobSearch").ToAction("Index");
-        }
-
-        [TestMethod]
-        public void Index_Redirects_To_Jobsearch_View_When_User_Has_Job_Searches_And_LastVisitedJobSearchId()
-        {
-            // Setup
-            User user = new User { Id = 20, JobSearches = new List<JobSearch>(), LastVisitedJobSearchId = 4 };
-            var userByIdMock = new Mock<UserByIdQuery>(null);
-            userByIdMock.Setup(x => x.Execute()).Returns(user);
-
-            HomeController controller = new HomeController(userByIdMock.Object, _serviceFactory.Object);
-            controller.CurrentUserId = 20;
-
-            // Act
-            ActionResult result = controller.Index();
-
-            // Verify
-            result.AssertActionRedirect().ToController("JobSearch").ToAction("Details").WithParameter("id", 4);
-        }
-
-        [TestMethod]
         public void Index_View_Renders_Correctly()
         {
             // Setup
@@ -112,19 +75,6 @@ namespace MyJobLeads.Tests.Controllers
 
             // Act
             view.RenderAsHtml();
-        }
-
-        [TestMethod]
-        public void About()
-        {
-            // Arrange
-            HomeController controller = new HomeController(null, _serviceFactory.Object);
-
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            result.AssertViewRendered();
         }
     }
 }
