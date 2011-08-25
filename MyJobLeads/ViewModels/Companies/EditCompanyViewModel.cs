@@ -8,7 +8,11 @@ namespace MyJobLeads.ViewModels.Companies
 {
     public class EditCompanyViewModel
     {
-        public EditCompanyViewModel() { }
+        public EditCompanyViewModel() 
+        { 
+            // Set the Lead Status to default to Prospective Employer
+            LeadStatus = "Prospective Employer";
+        }
 
         public EditCompanyViewModel(Company company)
         {
