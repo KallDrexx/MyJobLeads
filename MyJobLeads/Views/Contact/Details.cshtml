@@ -1,42 +1,42 @@
-﻿@model Contact
-@using MyJobLeads.DomainModel.Entities;
+﻿@model MyJobLeads.ViewModels.Contacts.ContactDisplayViewModel
 
 @{
     ViewBag.Title = "Contact: " + Model.Name;
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
-    string taskString = Model.Tasks.Count == 1 ? "task" : "tasks";
 }
 
-<h2>@Model.Name's Details</h2>
+<div class="grid1 floatLeft"> 
+    <div class="lineSeperater"> 
+        <div class="pageInfoBox">
+            <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                <h3 class="floatLeft">@Model.Name</h3> 
+                @Html.ActionLink("Edit Details", MVC.Contact.Edit(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" })
+            </div> 
 
-<p>
-    @Model.Name is a contact for @Html.ActionLink(Model.Company.Name, MVC.Company.Details(Model.Company.Id)) <br /><br />
-    Direct Phone: @Model.DirectPhone @if (!string.IsNullOrWhiteSpace(Model.Extension)) { <text>Ext: @Model.Extension</text> } <br />
-    Mobile Phone: @Model.MobilePhone <br />
-    Email Address: <a href="mailto:@Model.Email">@Model.Email</a> <br />
-    Assistant: @Model.Assistant <br />
-    Referred By: @Model.ReferredBy <br />
-    Notes: @Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))
-</p>
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="grid4 floatLeft"> 
+                    <p class="greyHighlight">Title: <span class="setTask">@Model.Title</span></p> 
+                    <p class="greyHighlight">Email: <span class="setTask">@Model.Email</span></p> 
+                    <p class="greyHighlight">Assistant: <span class="setTask">@Model.Assistant</span></p> 
+                    <p class="greyHighlight">Referred By: <span class="setTask">@Model.ReferredBy</span></p>
+                </div> 
 
-@Html.ActionLink("Edit Contact Details", MVC.Contact.Edit(Model.Id))
+                <div class="grid4 floatRight"> 
+                    <p class="greyHighlight">Direct Phone: <span class="setTask">@Model.DirectPhoneWithExtension</span></p> 
+                    <p class="greyHighlight">Mobile Phone: <span class="setTask">@Model.MobilePhone</span></p> 
+                </div> 
+            </div> 
+                                
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft">
+                    <p class="greyHighlight">Notes: 
+                        <span class="setTask">@Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))</span>
+                    </p>
+                </div> 
+            </div> 
 
-<br /><br />
-<h2>Tasks</h2>
-This contact has @Model.Tasks.Count @taskString entered 
-(@Html.ActionLink("Add", MVC.Task.Add((int)Model.CompanyId, Model.Id)))
+            <div class="clear"></div>
+        </div> 
+    </div> 
+</div>
 
-<ul>
-    @foreach (Task task in Model.Tasks)
-    {
-        <li>
-            @Html.ActionLink(task.Name, MVC.Task.Details(task.Id)) - 
-
-            @if (task.CompletionDate != null) { <text>Completed on @task.CompletionDate.Value.ToString()</text> }
-            else { <b>Not Completed</b> }
-
-            @if (task.TaskDate != null && task.CompletionDate == null) { <text> - Due: @task.TaskDate.Value.ToString()</text> }
-        </li>
-    }
-</ul>
+@{Html.RenderPartial(MVC.Company.Views._CompanySummaryDisplay, Model.Company);}

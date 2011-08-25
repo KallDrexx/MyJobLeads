@@ -99,7 +99,8 @@ namespace MyJobLeads.Controllers
         public virtual ActionResult Details(int id)
         {
             var contact = new ContactByIdQuery(_unitOfWork).WithContactId(id).Execute();
-            return View(contact);
+            var model = new ContactDisplayViewModel(contact);
+            return View(model);
         }
 
         public virtual ActionResult GetSummary(int id)
