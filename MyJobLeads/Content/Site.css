@@ -443,15 +443,17 @@ input{
 	color:#7f7f7f;
 	font-size:15px;
 	font-weight:800;
-
 	}
 .contactsPositionsNv a:hover{
 	text-decoration:underline;
 
 	}
-.contactsPositionsNv a.active{
+.contactsPositionsNv .active{
 	text-decoration:underline;
-
+	padding:0;
+	color:#7f7f7f;
+	font-size:15px;
+	font-weight:800;
 	}
 .add{
 	cursor:pointer;

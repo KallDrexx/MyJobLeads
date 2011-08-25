@@ -37,6 +37,10 @@
                     
 <div class="grid1 marginTop_20 floatLeft"> 
     <div class="grid2 floatLeft"> 
+        <div class="contactsPositionsNv">
+            <span class="active">Tasks</span>
+        </div>
+        @Html.ActionLink("Add New Task", MVC.Task.Add(Model.Id), new { @class = "add blueLinks" })
 
         @if (Model.OpenTasks.Count > 0)
         {
@@ -84,11 +88,11 @@
             {
                 @Html.ActionLink("Contacts", MVC.Company.Details(Model.Id), new { title = "Show Relevant Contacts" })
                 @:|
-                @Html.ActionLink("Positions", MVC.Company.Details(Model.Id, true), new { title = "Show Relevant Positions", @class = "active" })
+                <span class="active">Positions</span>
             }
             else
             {
-                @Html.ActionLink("Contacts", MVC.Company.Details(Model.Id), new { title = "Show Relevant Contacts", @class = "active" })
+                <span class="active">Contacts</span>
                 @:|
                 @Html.ActionLink("Positions", MVC.Company.Details(Model.Id, true), new { title = "Show Relevant Positions" })
             }
