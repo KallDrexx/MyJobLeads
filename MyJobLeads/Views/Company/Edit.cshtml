@@ -1,78 +1,59 @@
 ﻿@model MyJobLeads.ViewModels.Companies.EditCompanyViewModel
 
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+<div class="grid1 floatLeft"> 
+    <div class="lineSeperater"> 
+        <div class="pageInfoBox"> 
+            @using (Html.BeginForm(MVC.Company.Edit())) 
+            {
+                <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                        <h3 class="floatLeft">Edit  Company</h3> 
+                </div> 
 
-@if (Model.Id == 0)
-{
-    ViewBag.Title = "Add A Company";
-    <h2>Add A Company</h2>
-    <div class="ScreenHint">This screen allows you to add a company to your job search.</div>
-}
-else
-{
-    ViewBag.Title = "Editing " + @Model.Name;
-    <h2>Editing @Model.Name</h2>
-    <div class="ScreenHint">This screen allows you to edit the @Model.Name company.</div>
-}
-<br />
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">Name:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.Name, new { @class = "info" })</div>
+                    </div> 
 
-@using (Html.BeginForm(MVC.Company.Edit(Model.Id)))
-{
-    @Html.HiddenFor(x => x.JobSearchId)
-    @Html.HiddenFor(x => x.Id)
+                    <div class="floatLeft"><p class="greyHighlight">Phone:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.Phone, new { @class = "info" })</div>
+                    </div> 
+                </div> 
 
-    <p>@Html.ValidationSummary()</p>
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">City:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.City, new { @class = "info "})</div>
+                    </div> 
 
-    <table>
+                    <div class="floatLeft"><p class="greyHighlight">State:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.State, new { @class = "info" })</div>
+                    </div> 
 
-        <tr>
-            <td align="right">Name:</td>
-            <td>@Html.EditorFor(x => x.Name)</td>
-        </tr>
+                    <div class="floatLeft"><p class="greyHighlight">Zip:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.Zip, new { @class = "smallerInput" })</div>
+                    </div> 
+                </div> 
+                                
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">Status:</p>
+                        <div class="infoSpan">@Html.DropDownListFor(x => x.LeadStatus, new SelectList(Model.AvailableLeadStatuses, Model.LeadStatus))</div>
+                    </div>                            
+                </div> 
+ 
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">Notes:</p>
+                        <div class="infoSpan">@Html.TextAreaFor(x => x.Notes, new { @class = "textAreaInfo" })</div>
+                    </div> 
+                </div> 
 
-        @if (Model.Id > 0)
-        {
-            <tr>
-                <td align="right">Status:</td>
-                <td>
-                    @Html.DropDownListFor(x => x.LeadStatus, new SelectList(Model.AvailableLeadStatuses, Model.LeadStatus))
-                </td>
-            </tr>
-        }
+                <div class="grid3 marginBottom_20 floatLeft"> 
+                    <div class="submitBTN ">
+                        <input type="submit" value="Save Changes" /> &nbsp;
+                        @Html.ActionLink("Cancel Changes", MVC.Company.Details(Model.Id))
+                    </div>                    
+                </div> 
+            }
 
-        <tr>
-            <td align="right">Phone Number:</td>
-            <td>@Html.EditorFor(x => x.Phone)</td>
-        </tr>
-
-        <tr>
-            <td align="right">City:</td>
-            <td>@Html.EditorFor(x => x.City)</td>
-        </tr>
-
-        <tr>
-            <td align="right">State:</td>
-            <td>@Html.EditorFor(x => x.State)</td>
-        </tr>
-
-        <tr>
-            <td align="right">Zip:</td>
-            <td>@Html.EditorFor(x => x.Zip)</td>
-        </tr>
-
-        <tr>
-            <td align="right" valign="top">Notes:</td>
-            <td>@Html.TextAreaFor(x => x.Notes, new { rows = 10, cols = 50 })</td>
-        </tr>
-
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Save" />
-            </td>
-        </tr>
-    </table>
-}
-
+            <div class="clear"></div> 
+        </div> 
+    </div> 
+</div> 

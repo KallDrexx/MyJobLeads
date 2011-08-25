@@ -515,7 +515,7 @@ a.viewContact{
 	margin:0 0 0 20px;
 
 	}
-.submitBTN input{
+.submitBTN input, .submitBTN a{
 	cursor:pointer;
 	text-align:center;
 	margin:0;
@@ -529,7 +529,7 @@ a.viewContact{
 	-webkit-box-shadow: 2px 2px 6px rgba(0,0,0,0.6);
 	
 	}
-.submitBTN input:hover{
+.submitBTN input:hover, .submitBTN a:hover{
 	background:#627aaa;
 	color:#fff;
 	}
