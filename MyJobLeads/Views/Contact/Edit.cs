@@ -26,17 +26,12 @@ namespace MyJobLeads.Views.Contact
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    
-    #line 2 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-    using MyJobLeads.ViewModels.Contacts;
-    
-    #line default
-    #line hidden
+    using MyJobLeads.Infrastructure.HtmlHelpers;
     using Telerik.Web.Mvc.UI;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Contact/Edit.cshtml")]
-    public class Edit : System.Web.Mvc.WebViewPage<EditContactViewModel>
+    public class Edit : System.Web.Mvc.WebViewPage<MyJobLeads.ViewModels.Contacts.EditContactViewModel>
     {
         public Edit()
         {
@@ -44,274 +39,273 @@ namespace MyJobLeads.Views.Contact
         public override void Execute()
         {
 
-
-WriteLiteral("\r\n");
+WriteLiteral("           \r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"lineSeperater\"> \r\n  " +
+"      <div class=\"pageInfoBox\"> \r\n");
 
 
             
-            #line 4 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-  
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    
-    // Make sure the contact is at least initialized to an empty contact
-    if (Model.Contact == null) { Model.Contact = new MyJobLeads.DomainModel.Entities.Contact(); }
-
+            #line 6 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+             using (Html.BeginForm(MVC.Contact.Edit()))
+            {
+                
+            
+            #line default
+            #line hidden
+            
+            #line 8 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+           Write(Html.HiddenFor(x => x.Id));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
-
-
             
-            #line 11 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
- if (Model.Contact.Id == 0)
-{
-    ViewBag.Title = "Add A Contact";
+            #line 8 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+                                          
+                
+            
+            #line default
+            #line hidden
+            
+            #line 9 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+           Write(Html.HiddenFor(x => x.Company.Id));
 
             
             #line default
             #line hidden
-WriteLiteral("    <h2>Add A Contact</h2>\r\n");
-
-
-
-WriteLiteral("    <div class=\"ScreenHint\">This screen allows you to add a contact for ");
-
-
             
-            #line 15 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-                                                                   Write(Model.Company.Name);
+            #line 9 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+                                                  
+                
 
             
             #line default
             #line hidden
-WriteLiteral(".</div>\r\n");
+WriteLiteral("                <div class=\"grid3 marginBottom_10 marginAuto floatLeft\"> \r\n      " +
+"                  <h3 class=\"floatLeft\">Edit your Contact</h3> \r\n               " +
+" </div>\r\n");
 
 
             
-            #line 16 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-}
-else
-{
-    ViewBag.Title = "Editing " + @Model.Contact.Name;
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    <h2>Editing ");
-
-
-            
-            #line 20 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-           Write(Model.Contact.Name);
+            #line 14 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+                 
 
             
             #line default
             #line hidden
-WriteLiteral("</h2>\r\n");
+WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n                 " +
+"   <div class=\"floatLeft\"><p class=\"greyHighlight\">Name:</p>\r\n                  " +
+"      <div class=\"infoSpan\">");
 
 
+            
+            #line 17 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+                                         Write(Html.TextBoxFor(x => x.Name, new { @class = "info" }));
 
-WriteLiteral("    <div class=\"ScreenHint\">This screen allows you to edit the details for ");
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                    </div> \r\n\r\n                    <div class=\"floatLeft\"" +
+"><p class=\"greyHighlight\">Title:</p>\r\n                        <div class=\"infoSp" +
+"an\">");
 
 
             
             #line 21 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-                                                                      Write(Model.Contact.Name);
+                                         Write(Html.TextBoxFor(x => x.Title, new { @class = "info" }));
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n");
+WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r\n");
 
 
             
-            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-}
+            #line 24 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
 
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n<br />\r\n\r\n");
-
-
-            
-            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-   int companyId = Model.Company.Id; 
 
             
             #line default
             #line hidden
+WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n                 " +
+"   <div class=\"floatLeft\"><p class=\"greyHighlight\">Direct Phone:</p>\r\n          " +
+"              <div class=\"infoSpan\">");
+
 
             
             #line 27 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
- using (Html.BeginForm(MVC.Contact.Edit(Model.Contact.Id)))
-{
-    
-            
-            #line default
-            #line hidden
-            
-            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-Write(Html.HiddenFor(x => x.Company.Id));
+                                         Write(Html.TextBoxFor(x => x.DirectPhone, new { @class = "info" }));
 
             
             #line default
             #line hidden
+WriteLiteral("</div>\r\n                    </div> \r\n\r\n                    <div class=\"floatLeft\"" +
+"><p class=\"greyHighlight\">Extension:</p>\r\n                        <div class=\"in" +
+"foSpan\">");
+
+
             
-            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-                                      
-    
-            
-            #line default
-            #line hidden
-            
-            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-Write(Html.HiddenFor(x => x.Contact.Id));
+            #line 31 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+                                         Write(Html.TextBoxFor(x => x.Extension, new { @class = "smallerInput" }));
 
             
             #line default
             #line hidden
-            
-            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-                                      
+WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r\n");
 
 
             
-            #line default
-            #line hidden
-WriteLiteral("    <p>");
-
-
-            
-            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-  Write(Html.ValidationSummary());
+            #line 34 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+                                
 
             
             #line default
             #line hidden
-WriteLiteral("</p>\r\n");
-
-
-            
-            #line 33 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-    
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    <table>\r\n        <tr>\r\n            <td align=\"right\">Name:</td>\r\n            " +
-"<td>");
+WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n                 " +
+"   <div class=\"floatLeft\"><p class=\"greyHighlight\">Mobile Phone:</p>\r\n          " +
+"              <div class=\"infoSpan\">");
 
 
             
             #line 37 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-           Write(Html.EditorFor(x => x.Contact.Name));
+                                         Write(Html.TextBoxFor(x => x.MobilePhone, new { @class = "info" }));
 
             
             #line default
             #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td align=\"right\">Direct Phone:" +
-"</td>\r\n            <td>");
+WriteLiteral("</div>\r\n                    </div> \r\n\r\n                    <div class=\"floatLeft\"" +
+"><p class=\"greyHighlight\">Email:</p>\r\n                        <div class=\"infoSp" +
+"an\">");
 
 
             
-            #line 42 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-           Write(Html.EditorFor(x => x.Contact.DirectPhone));
+            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+                                         Write(Html.TextBoxFor(x => x.Email, new { @class = "info" }));
 
             
             #line default
             #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td align=\"right\">Extension:</t" +
-"d>\r\n            <td>");
+WriteLiteral("</div>\r\n                    </div>                   \r\n                </div> \r\n");
+
+
+            
+            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+                                
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n                 " +
+"   <div class=\"floatLeft\"><p class=\"greyHighlight\">Assistant:</p>\r\n             " +
+"           <div class=\"infoSpan\">");
 
 
             
             #line 47 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-           Write(Html.EditorFor(x => x.Contact.Extension));
+                                         Write(Html.TextBoxFor(x => x.Assistant, new { @class = "info" }));
 
             
             #line default
             #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td align=\"right\">Mobile Phone:" +
-"</td>\r\n            <td>");
+WriteLiteral("</div>\r\n                    </div> \r\n\r\n                    <div class=\"floatLeft\"" +
+"><p class=\"greyHighlight\">Referred By:</p>\r\n                        <div class=\"" +
+"infoSpan\">");
 
 
             
-            #line 52 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-           Write(Html.EditorFor(x => x.Contact.MobilePhone));
+            #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+                                         Write(Html.TextBoxFor(x => x.ReferredBy, new { @class = "info" }));
 
             
             #line default
             #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td align=\"right\">Email:</td>\r\n" +
-"            <td>");
+WriteLiteral("</div>\r\n                    </div>                   \r\n                </div> \r\n");
+
+
+            
+            #line 54 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+ 
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n                 " +
+"   <div class=\"floatLeft\"><p class=\"greyHighlight\">Notes:</p>\r\n                 " +
+"       <div class=\"infoSpan\">");
 
 
             
             #line 57 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-           Write(Html.EditorFor(x => x.Contact.Email));
+                                         Write(Html.TextAreaFor(x => x.Notes, new { @class = "textAreaInfo" }));
 
             
             #line default
             #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td align=\"right\">Assistant:</t" +
-"d>\r\n            <td>");
+WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r\n");
 
 
             
-            #line 62 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-           Write(Html.EditorFor(x => x.Contact.Assistant));
+            #line 60 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
 
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td align=\"right\">Referred By:<" +
-"/td>\r\n            <td>");
-
-
-            
-            #line 67 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-           Write(Html.EditorFor(x => x.Contact.ReferredBy));
 
             
             #line default
             #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td align=\"right\" valign=\"top\">" +
-"Notes:</td>\r\n            <td>");
+WriteLiteral("                <div class=\"grid3 marginBottom_20 floatLeft\"> \r\n                 " +
+"   <div class=\"submitBTN \">\r\n                        <input type=\"submit\" value=" +
+"\"Save\" /> &nbsp;\r\n");
 
 
             
-            #line 72 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-           Write(Html.TextAreaFor(x => x.Contact.Notes, new { rows = 8, cols = 50 }));
+            #line 64 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+                         if (Model.Id != 0)
+                        {
+                            
+            
+            #line default
+            #line hidden
+            
+            #line 66 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+                       Write(Html.ActionLink("Cancel", MVC.Contact.Details(Model.Id)));
 
             
             #line default
             #line hidden
-WriteLiteral("</td>\r\n        </tr>\r\n\r\n        <tr>\r\n            <td></td>\r\n            <td>\r\n  " +
-"              <input type=\"submit\" value=\"Save\" /> &nbsp; &nbsp;\r\n");
-
-
             
-            #line 79 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-                 if (Model.Contact.Id == 0) { Html.ActionLink("Back", MVC.Company.Details(companyId)); }
-                else { Html.ActionLink("Back", MVC.Contact.Details(Model.Contact.Id)); }
+            #line 66 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+                                                                                     
+                        }
+                        else
+                        {
+                            
+            
+            #line default
+            #line hidden
+            
+            #line 70 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+                       Write(Html.ActionLink("Cancel", MVC.Company.Details(Model.Company.Id)));
 
             
             #line default
             #line hidden
-WriteLiteral("            </td>\r\n        </tr>\r\n    </table>\r\n");
-
-
             
-            #line 84 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
-}
+            #line 70 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+                                                                                             
+                        }
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("                    </div>                   \r\n                </div> \r\n");
+
+
+            
+            #line 74 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Edit.cshtml"
+            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <div class=\"clear\"></div> \r\n        </div> \r\n    </div> \r\n</div> ");
 
 
         }

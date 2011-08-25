@@ -5,6 +5,9 @@
         <div class="pageInfoBox"> 
             @using (Html.BeginForm(MVC.Company.Edit())) 
             {
+                @Html.HiddenFor(x => x.JobSearchId)
+                @Html.HiddenFor(x => x.Id)
+
                 <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
                         <h3 class="floatLeft">Edit  Company</h3> 
                 </div> 
@@ -47,8 +50,16 @@
 
                 <div class="grid3 marginBottom_20 floatLeft"> 
                     <div class="submitBTN ">
-                        <input type="submit" value="Save Changes" /> &nbsp;
-                        @Html.ActionLink("Cancel Changes", MVC.Company.Details(Model.Id))
+                        <input type="submit" value="Save" /> &nbsp;
+                        @if (Model.Id != 0)
+                        {
+                            @Html.ActionLink("Cancel", MVC.Company.Details(Model.Id))
+                        }
+
+                        else
+                        {
+                            @Html.ActionLink("Cancel", MVC.Company.List())
+                        }
                     </div>                    
                 </div> 
             }

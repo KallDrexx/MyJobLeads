@@ -47,6 +47,35 @@ WriteLiteral("\r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"lineSeper
             #line 6 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
              using (Html.BeginForm(MVC.Company.Edit())) 
             {
+                
+            
+            #line default
+            #line hidden
+            
+            #line 8 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+           Write(Html.HiddenFor(x => x.JobSearchId));
+
+            
+            #line default
+            #line hidden
+            
+            #line 8 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+                                                   
+                
+            
+            #line default
+            #line hidden
+            
+            #line 9 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+           Write(Html.HiddenFor(x => x.Id));
+
+            
+            #line default
+            #line hidden
+            
+            #line 9 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+                                          
+
 
             
             #line default
@@ -57,7 +86,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_10 marginAuto floa
 
 
             
-            #line 11 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 14 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
 
 
             
@@ -69,7 +98,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r
 
 
             
-            #line 14 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 17 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
                                          Write(Html.TextBoxFor(x => x.Name, new { @class = "info" }));
 
             
@@ -81,7 +110,7 @@ WriteLiteral("</div>\r\n                    </div> \r\n\r\n                    <
 
 
             
-            #line 18 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 21 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
                                          Write(Html.TextBoxFor(x => x.Phone, new { @class = "info" }));
 
             
@@ -91,7 +120,7 @@ WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r
 
 
             
-            #line 21 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 24 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
 
 
             
@@ -103,7 +132,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r
 
 
             
-            #line 24 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 27 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
                                          Write(Html.TextBoxFor(x => x.City, new { @class = "info "}));
 
             
@@ -115,7 +144,7 @@ WriteLiteral("</div>\r\n                    </div> \r\n\r\n                    <
 
 
             
-            #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 31 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
                                          Write(Html.TextBoxFor(x => x.State, new { @class = "info" }));
 
             
@@ -127,7 +156,7 @@ WriteLiteral("</div>\r\n                    </div> \r\n\r\n                    <
 
 
             
-            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 35 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
                                          Write(Html.TextBoxFor(x => x.Zip, new { @class = "smallerInput" }));
 
             
@@ -137,7 +166,7 @@ WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r
 
 
             
-            #line 35 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 38 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
                                 
 
             
@@ -149,7 +178,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r
 
 
             
-            #line 38 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
                                          Write(Html.DropDownListFor(x => x.LeadStatus, new SelectList(Model.AvailableLeadStatuses, Model.LeadStatus)));
 
             
@@ -160,7 +189,7 @@ WriteLiteral("</div>\r\n                    </div>                            \r
 
 
             
-            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
  
 
             
@@ -172,7 +201,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r
 
 
             
-            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 47 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
                                          Write(Html.TextAreaFor(x => x.Notes, new { @class = "textAreaInfo" }));
 
             
@@ -182,7 +211,7 @@ WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r
 
 
             
-            #line 47 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+            #line 50 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
 
 
             
@@ -190,21 +219,55 @@ WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r
             #line hidden
 WriteLiteral("                <div class=\"grid3 marginBottom_20 floatLeft\"> \r\n                 " +
 "   <div class=\"submitBTN \">\r\n                        <input type=\"submit\" value=" +
-"\"Save Changes\" /> &nbsp;\r\n                        ");
-
-
-            
-            #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
-                   Write(Html.ActionLink("Cancel Changes", MVC.Company.Details(Model.Id)));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                    </div>                    \r\n                </div> \r\n");
+"\"Save\" /> &nbsp;\r\n");
 
 
             
             #line 54 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+                         if (Model.Id != 0)
+                        {
+                            
+            
+            #line default
+            #line hidden
+            
+            #line 56 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+                       Write(Html.ActionLink("Cancel", MVC.Company.Details(Model.Id)));
+
+            
+            #line default
+            #line hidden
+            
+            #line 56 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+                                                                                     
+                        }
+
+                        else
+                        {
+                            
+            
+            #line default
+            #line hidden
+            
+            #line 61 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+                       Write(Html.ActionLink("Cancel", MVC.Company.List()));
+
+            
+            #line default
+            #line hidden
+            
+            #line 61 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
+                                                                          
+                        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    </div>                    \r\n                </div> \r\n");
+
+
+            
+            #line 65 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Edit.cshtml"
             }
 
             

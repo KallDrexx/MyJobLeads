@@ -330,6 +330,7 @@
     <Compile Include="ViewModels\Accounts\IMembershipService.cs" />
     <Compile Include="ViewModels\Accounts\OrganizationRegistrationViewModel.cs" />
     <Compile Include="ViewModels\Companies\CompanyDisplayViewModel.cs" />
+    <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
     <Compile Include="ViewModels\Companies\EditCompanyViewModel.cs" />
     <Compile Include="ViewModels\Companies\JobSearchCompanyListViewModel.cs" />
     <Compile Include="ViewModels\Contacts\EditContactViewModel.cs" />

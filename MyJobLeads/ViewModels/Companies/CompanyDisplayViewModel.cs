@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.Entities.Extensions;
 
 namespace MyJobLeads.ViewModels.Companies
 {
@@ -19,19 +20,7 @@ namespace MyJobLeads.ViewModels.Companies
             LeadStatus = company.LeadStatus;
             Contacts = company.Contacts.Select(x => new CompanyContactViewModel(x)).ToList();
             Positions = company.Positions.Select(x => new CompanyPositionViewModel(x)).ToList();
-
-            // Form company location string
-            Location = string.Empty;
-
-            bool citySpecified = !string.IsNullOrWhiteSpace(company.City);
-            bool stateSpecified = !string.IsNullOrWhiteSpace(company.State);
-            bool zipSpecified = !string.IsNullOrWhiteSpace(company.Zip);
-
-            if (citySpecified && stateSpecified) { Location = string.Concat(company.City, ", ", company.State, " "); }
-            else if (citySpecified) { Location = company.City + " "; }
-            else if (stateSpecified) { Location = company.State + " "; }
-
-            if (zipSpecified) { Location += company.Zip; }
+            Location = company.LocationString();            
 
             // Form the task list
             OpenTasks = company.Tasks.Where(x => x.CompletionDate == null)
