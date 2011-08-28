@@ -102,14 +102,5 @@ namespace MyJobLeads.Controllers
             var model = new ContactDisplayViewModel(contact);
             return View(model);
         }
-
-        public virtual ActionResult GetSummary(int id)
-        {
-            var contact = new ContactByIdQuery(_unitOfWork).WithContactId(id).Execute();
-            if (contact == null)
-                return new EmptyResult();
-
-            return PartialView(MVC.Contact.Views._ContactSidebarDisplay, contact);
-        }
     }
 }

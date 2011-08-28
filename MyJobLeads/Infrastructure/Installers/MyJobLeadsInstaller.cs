@@ -32,13 +32,9 @@ namespace MyJobLeads.Infrastructure.Installers
             container.Register(Component.For<IDataDirectoryProvider>().ImplementedBy<AppDataDirectoryProvider>().LifeStyle.Singleton);
             container.Register(Component.For<IValidatorFactory>().ImplementedBy<WindsorValidatorFactory>().LifeStyle.Singleton);
 
-            // After registering the EFUnitOfWork, we have to create a new MyJobLeadsDbContext, or else the
-            //   errors will occur if the site is starting up and a 2nd request is made
+            // Register the EF unit of work and db context
             container.Register(Component.For<IUnitOfWork>().ImplementedBy<EFUnitOfWork>().LifeStyle.PerWebRequest);
-            //using (var context = new MyJobLeadsDbContext())
-            //{
-            //    context.Set<UnitTestEntity>().Any();
-            //}
+            container.Register(Component.For<MyJobLeadsDbContext>().ImplementedBy<MyJobLeadsDbContext>().LifeStyle.PerWebRequest);
 
             // Register all command and query classes
             var classes = Assembly.GetAssembly(typeof(MJLConstants))
@@ -50,6 +46,20 @@ namespace MyJobLeads.Infrastructure.Installers
 
             foreach (var cl in classes)
                 container.Register(Component.For(cl).ImplementedBy(cl).LifeStyle.PerWebRequest);
+
+            // Register all implemented process interfaces
+            var procTypes = AppDomain.CurrentDomain
+                                     .GetAssemblies()
+                                     .SelectMany(x => x.GetTypes())
+                                     .Where(x => x.HasGenericInterface(typeof(IProcess<,>)))
+                                     .ToList();
+
+            foreach (var procType in procTypes)
+            {
+                var procInterfaces = procType.GetInterfaces().Where(x => x.IsDerivedFromOpenGenericType(typeof(IProcess<,>))).ToArray();
+                if (procInterfaces.Length > 0)
+                    container.Register(Component.For(procInterfaces).ImplementedBy(procType).LifeStyle.Transient);
+            }
         }
     }
 }

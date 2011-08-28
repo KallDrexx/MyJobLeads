@@ -46,11 +46,6 @@ namespace MyJobLeads.Controllers {
         public System.Web.Mvc.ActionResult Details() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Details);
         }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult GetSummary() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.GetSummary);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ContactController Actions { get { return MVC.Contact; } }
@@ -67,7 +62,6 @@ namespace MyJobLeads.Controllers {
             public readonly string Add = "Add";
             public readonly string Edit = "Edit";
             public readonly string Details = "Details";
-            public readonly string GetSummary = "GetSummary";
         }
 
 
@@ -76,8 +70,6 @@ namespace MyJobLeads.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string _CompanyContactDisplay = "~/Views/Contact/_CompanyContactDisplay.cshtml";
-            public readonly string _ContactSidebarDisplay = "~/Views/Contact/_ContactSidebarDisplay.cshtml";
             public readonly string _ContactSummaryDisplay = "~/Views/Contact/_ContactSummaryDisplay.cshtml";
             public readonly string Details = "~/Views/Contact/Details.cshtml";
             public readonly string Edit = "~/Views/Contact/Edit.cshtml";
@@ -108,12 +100,6 @@ namespace MyJobLeads.Controllers {
 
         public override System.Web.Mvc.ActionResult Details(int id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
-            callInfo.RouteValueDictionary.Add("id", id);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult GetSummary(int id) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.GetSummary);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }

@@ -21,9 +21,9 @@ using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
 namespace MyJobLeads.Controllers {
-    public partial class CompanyController {
+    public partial class PositionController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected CompanyController(Dummy d) { }
+        protected PositionController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result) {
@@ -31,6 +31,11 @@ namespace MyJobLeads.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Details() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Details);
+        }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Add() {
@@ -41,34 +46,22 @@ namespace MyJobLeads.Controllers {
         public System.Web.Mvc.ActionResult Edit() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
         }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult Details() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.Details);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult ChangeCompanyStatusFilters() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.ChangeCompanyStatusFilters);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public CompanyController Actions { get { return MVC.Company; } }
+        public PositionController Actions { get { return MVC.Position; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Company";
+        public readonly string Name = "Position";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string List = "List";
+            public readonly string Details = "Details";
             public readonly string Add = "Add";
             public readonly string Edit = "Edit";
-            public readonly string Details = "Details";
-            public readonly string ChangeCompanyStatusFilters = "ChangeCompanyStatusFilters";
         }
 
 
@@ -77,25 +70,22 @@ namespace MyJobLeads.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string _CompanySummaryDisplay = "~/Views/Company/_CompanySummaryDisplay.cshtml";
-            public readonly string Details = "~/Views/Company/Details.cshtml";
-            public readonly string Edit = "~/Views/Company/Edit.cshtml";
-            public readonly string List = "~/Views/Company/List.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_CompanyController: MyJobLeads.Controllers.CompanyController {
-        public T4MVC_CompanyController() : base(Dummy.Instance) { }
+    public class T4MVC_PositionController: MyJobLeads.Controllers.PositionController {
+        public T4MVC_PositionController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult List() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.List);
+        public override System.Web.Mvc.ActionResult Details(int id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
+            callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Add(int jobSearchId) {
+        public override System.Web.Mvc.ActionResult Add(int companyId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Add);
-            callInfo.RouteValueDictionary.Add("jobSearchId", jobSearchId);
+            callInfo.RouteValueDictionary.Add("companyId", companyId);
             return callInfo;
         }
 
@@ -105,23 +95,9 @@ namespace MyJobLeads.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(MyJobLeads.ViewModels.Companies.EditCompanyViewModel model) {
+        public override System.Web.Mvc.ActionResult Edit(MyJobLeads.ViewModels.Positions.EditPositionViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
             callInfo.RouteValueDictionary.Add("model", model);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult Details(int id, bool showPositions) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
-            callInfo.RouteValueDictionary.Add("id", id);
-            callInfo.RouteValueDictionary.Add("showPositions", showPositions);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult ChangeCompanyStatusFilters(int jobSearchId, string[] shownStatus) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangeCompanyStatusFilters);
-            callInfo.RouteValueDictionary.Add("jobSearchId", jobSearchId);
-            callInfo.RouteValueDictionary.Add("shownStatus", shownStatus);
             return callInfo;
         }
 

@@ -126,7 +126,8 @@
     <Compile Include="Entities\UnitTestEntity.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="EntityMapping\EntityMapLoader.cs" />
-    <Compile Include="EntityMapping\Mappings\PositionMapping.cs" />
+    <Compile Include="EntityMapping\Mappings\CompanyMappings.cs" />
+    <Compile Include="EntityMapping\Mappings\PositionMappings.cs" />
     <Compile Include="Exceptions\InvalidEmailDomainForOrganizationException.cs" />
     <Compile Include="Exceptions\InvalidOrganizationRegistrationTokenException.cs" />
     <Compile Include="Exceptions\MJLDuplicateEmailException.cs" />
@@ -164,7 +165,9 @@
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQuery.cs" />
     <Compile Include="Queries\Tasks\IsUserAuthorizedForTaskQuery.cs" />
     <Compile Include="TypeExtensions.cs" />
+    <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgress.cs" />
+    <Compile Include="ViewModels\Positions\EditPositionViewModel.cs" />
     <Compile Include="ViewModels\Positions\PositionDisplayViewModel.cs" />
     <Compile Include="ViewModels\SearchProviderResult.cs" />
     <Compile Include="Queries\Companies\CompaniesByJobSearchIdQuery.cs" />
