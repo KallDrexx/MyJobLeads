@@ -10,6 +10,7 @@ using MyJobLeads.Infrastructure;
 using System.Configuration;
 using MyJobLeads.DomainModel.Entities.EF;
 using System.Data.Entity;
+using MyJobLeads.DomainModel.EntityMapping;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(Bootstrapper), "Wire")]
 
@@ -33,6 +34,9 @@ namespace MyJobLeads.App_Start
             container.Install(FromAssembly.This());
 			var controllerFactory = new WindsorControllerFactory(container.Kernel);
 			ControllerBuilder.Current.SetControllerFactory(controllerFactory);
+
+            // Load all entity mapping configurations
+            EntityMapLoader.LoadEntityMappings();
         }
 
         public static void DeWire()
