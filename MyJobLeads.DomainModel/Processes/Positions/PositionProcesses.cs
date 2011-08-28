@@ -12,7 +12,9 @@ using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.DomainModel.Processes.Positions
 {
-    public class PositionProcesses : IProcess<CreatePositionParams, PositionDisplayViewModel>
+    public class PositionProcesses 
+        : IProcess<CreatePositionParams, PositionDisplayViewModel>,
+          IProcess<EditPositionParams, PositionDisplayViewModel>
     {
         protected MyJobLeadsDbContext _context;
 
@@ -36,6 +38,21 @@ namespace MyJobLeads.DomainModel.Processes.Positions
             };
 
             _context.Positions.Add(position);
+            _context.SaveChanges();
+
+            return Mapper.Map<Position, PositionDisplayViewModel>(position);
+        }
+
+        public PositionDisplayViewModel Execute(EditPositionParams procParams)
+        {
+            Position position = _context.Positions.SingleOrDefault(x => x.Id == procParams.Id);
+            if (position == null)
+                throw new MJLEntityNotFoundException(typeof(Position), procParams.Id);
+
+            position.Title = procParams.Title;
+            position.HasApplied = procParams.HasApplied;
+            position.Notes = procParams.Notes;
+
             _context.SaveChanges();
 
             return Mapper.Map<Position, PositionDisplayViewModel>(position);

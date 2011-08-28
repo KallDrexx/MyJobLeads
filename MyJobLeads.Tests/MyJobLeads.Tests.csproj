@@ -136,6 +136,7 @@
     <Compile Include="Commands\Organizations\EditOrganizationCommandTests.cs" />
     <Compile Include="Controllers\TaskControllerTests.cs" />
     <Compile Include="Processes\Positions\CreatePositionTests.cs" />
+    <Compile Include="Processes\Positions\EditPositionTests.cs" />
     <Compile Include="Providers\Validators\CompanyValidatorTests.cs" />
     <Compile Include="Providers\Validators\ContactValidatorTests.cs" />
     <Compile Include="Providers\Validators\JobSearchValidatorTests.cs" />
