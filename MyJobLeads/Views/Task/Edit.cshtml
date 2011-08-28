@@ -91,7 +91,7 @@
     </div> 
 </div> 
 
-@if (Model.Contact.Id != 0)
+@if (Model.Contact != null && Model.Contact.Id != 0)
 {
     Html.RenderPartial(MVC.Contact.Views._ContactSummaryDisplay, Model.Contact);
 }
@@ -99,4 +99,4 @@
 else
 {
     Html.RenderPartial(MVC.Company.Views._CompanySummaryDisplay, Model.Company);
-}
+}   

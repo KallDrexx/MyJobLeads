@@ -275,7 +275,7 @@ WriteLiteral("            <div class=\"clear\"></div> \r\n        </div> \r\n   
 
             
             #line 94 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
- if (Model.Contact.Id != 0)
+ if (Model.Contact != null && Model.Contact.Id != 0)
 {
     Html.RenderPartial(MVC.Contact.Views._ContactSummaryDisplay, Model.Contact);
 }
@@ -287,6 +287,8 @@ else
             
             #line default
             #line hidden
+WriteLiteral("   ");
+
 
         }
     }
