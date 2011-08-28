@@ -9,6 +9,7 @@ using MyJobLeads.DomainModel.Entities.EF;
 using System.Data.Entity;
 using Moq;
 using MyJobLeads.DomainModel.Providers;
+using MyJobLeads.DomainModel.EntityMapping;
 
 namespace MyJobLeads.Tests
 {
@@ -18,14 +19,19 @@ namespace MyJobLeads.Tests
         protected IUnitOfWork _unitOfWork;
         protected Mock<IServiceFactory> _serviceFactory;
         protected TransactionScope _transaction;
+        protected MyJobLeadsDbContext _context;
 
         [TestInitialize]
         public void Setup()
         {
+            // Configure entity mappings
+            EntityMapLoader.LoadEntityMappings();
+
             // Initialize the database connection
             Database.SetInitializer<MyJobLeadsDbContext>(new DropCreateDatabaseAlways<MyJobLeadsDbContext>());
             _unitOfWork = new EFUnitOfWork();
             _unitOfWork.UnitTestEntities.Fetch().Count(); // Required to make sure database is created outside of transaction scope
+            _context = (_unitOfWork as EFUnitOfWork).DbContext;
 
             _transaction = new TransactionScope();
 

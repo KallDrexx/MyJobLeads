@@ -42,6 +42,9 @@
     <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.1.1.0.118\lib\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL" />
     <Reference Include="Castle.Windsor, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL" />
     <Reference Include="Elmah">
@@ -125,12 +128,14 @@
     <Reference Include="WebActivator, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutomapperConfigurationTests.cs" />
     <Compile Include="Commands\Companies\CreateCompanyCommandTests.cs" />
     <Compile Include="Commands\Companies\EditCompanyCommandTests.cs" />
     <Compile Include="Commands\JobSearches\StartNextJobSearchMilestoneCommandTests.cs" />
     <Compile Include="Commands\JobSearches\UpdateJobSearchMetricsCommandTests.cs" />
     <Compile Include="Commands\Organizations\EditOrganizationCommandTests.cs" />
     <Compile Include="Controllers\TaskControllerTests.cs" />
+    <Compile Include="Processes\Positions\CreatePositionTests.cs" />
     <Compile Include="Providers\Validators\CompanyValidatorTests.cs" />
     <Compile Include="Providers\Validators\ContactValidatorTests.cs" />
     <Compile Include="Providers\Validators\JobSearchValidatorTests.cs" />

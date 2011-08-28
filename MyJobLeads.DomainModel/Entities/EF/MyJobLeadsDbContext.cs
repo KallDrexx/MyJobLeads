@@ -19,6 +19,7 @@ namespace MyJobLeads.DomainModel.Entities.EF
         public DbSet<JobSearch> JobSearches { get; set; }
         public DbSet<JobSearchHistory> JobSearchHistory { get; set; }
         public DbSet<Organization> Organizations { get; set; }
+        public DbSet<Position> Positions { get; set; }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<TaskHistory> TaskHistory { get; set; }
         public DbSet<UnitTestEntity> UnitTestEntities { get; set; }
