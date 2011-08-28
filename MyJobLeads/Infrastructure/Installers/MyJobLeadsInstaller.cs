@@ -16,6 +16,7 @@ using FluentValidation;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using MyJobLeads.DomainModel;
+using Castle.Windsor.Installer;
 
 namespace MyJobLeads.Infrastructure.Installers
 {
@@ -48,18 +49,11 @@ namespace MyJobLeads.Infrastructure.Installers
                 container.Register(Component.For(cl).ImplementedBy(cl).LifeStyle.PerWebRequest);
 
             // Register all implemented process interfaces
-            var procTypes = AppDomain.CurrentDomain
-                                     .GetAssemblies()
-                                     .SelectMany(x => x.GetTypes())
-                                     .Where(x => x.HasGenericInterface(typeof(IProcess<,>)))
-                                     .ToList();
-
-            foreach (var procType in procTypes)
-            {
-                var procInterfaces = procType.GetInterfaces().Where(x => x.IsDerivedFromOpenGenericType(typeof(IProcess<,>))).ToArray();
-                if (procInterfaces.Length > 0)
-                    container.Register(Component.For(procInterfaces).ImplementedBy(procType).LifeStyle.Transient);
-            }
+            BasedOnDescriptor processes = AllTypes.FromAssembly(Assembly.GetAssembly(typeof(IProcess<,>)))
+                                                  .BasedOn(typeof(IProcess<,>))
+                                                  .WithService.AllInterfaces()
+                                                  .Configure(x => x.LifeStyle.Transient);
+            container.Register(processes);
         }
     }
 }
