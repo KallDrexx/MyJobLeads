@@ -34,6 +34,10 @@
                         <div id="headerNav"> 
                         	<ul> 
                         	<li>@Html.ActionLink("Home", MVC.Home.Index())</li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Log Off", MVC.Account.LogOff())</li>
+                            }
                             </ul> 
                         </div> 
                 </div> 
@@ -68,7 +72,7 @@
         </div> 
 </div> 
 
-@( Html.Telerik().ScriptRegistrar() )
+@( Html.Telerik().ScriptRegistrar())
 
 </body>
 </html>
