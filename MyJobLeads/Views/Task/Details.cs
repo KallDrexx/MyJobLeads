@@ -113,7 +113,19 @@ WriteLiteral("</span></p> \r\n                    <p class=\"greyHighlight\">Tas
             
             #line default
             #line hidden
-WriteLiteral(@"</span></p> 
+WriteLiteral("</span></p>\r\n                    <p class=\"greyHighlight\">\r\n                     " +
+"   Completed On: <span class=\"setTask\">");
+
+
+            
+            #line 24 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+                                                        Write(Model.CompletionDate == null ? string.Empty : Model.CompletionDate.Value.ToShortDateString());
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"</span>
+                    </p> 
                 </div> 
             </div> 
                                 
@@ -124,7 +136,7 @@ WriteLiteral(@"</span></p>
 
 
             
-            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
                                          Write(Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />")));
 
             
@@ -135,7 +147,7 @@ WriteLiteral("</span>\r\n                    </p>\r\n                </div> \r\n
 
 
             
-            #line 38 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
+            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Details.cshtml"
  if (Model.Contact.Id == 0)
 {
     Html.RenderPartial(MVC.Company.Views._CompanySummaryDisplay, Model.Company);

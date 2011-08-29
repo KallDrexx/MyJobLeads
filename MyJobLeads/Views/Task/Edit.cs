@@ -187,29 +187,67 @@ WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r
 
             
             #line 68 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
- 
+                
 
             
             #line default
             #line hidden
-WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n                 " +
-"   <div class=\"floatLeft\"><p class=\"greyHighlight\">Notes:</p>\r\n                 " +
-"       <div class=\"infoSpan\">");
+WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\">\r\n                  " +
+"  <div class=\"floatLeft\"><p class=\"greyHighlight\">Task Completed?</p>\r\n         " +
+"               <div class=\"infoSpan\">\r\n                            ");
 
 
             
-            #line 71 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
-                                         Write(Html.TextAreaFor(x => x.Notes, new { @class = "textAreaInfo" }));
+            #line 72 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+                       Write(Html.CheckBoxFor(x => x.Completed));
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r\n");
+WriteLiteral("\r\n                        </div>\r\n                    </div>\r\n                </d" +
+"iv>\r\n");
 
 
             
-            #line 74 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 76 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+                
+                
+            
+            #line default
+            #line hidden
+            
+            #line 77 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+                 if (Model.Id != 0)
+                {
 
+            
+            #line default
+            #line hidden
+WriteLiteral("                    <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n             " +
+"           <div class=\"floatLeft\"><p class=\"greyHighlight\">Notes:</p>\r\n         " +
+"                   <div class=\"infoSpan\">");
+
+
+            
+            #line 81 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+                                             Write(Html.TextAreaFor(x => x.Notes, new { @class = "textAreaInfo" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                        </div> \r\n                    </div> \r\n");
+
+
+            
+            #line 84 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+                }
+            
+            #line default
+            #line hidden
+            
+            #line 84 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+                 
+                
 
             
             #line default
@@ -220,7 +258,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_20 floatLeft\"> \r
 
 
             
-            #line 78 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 89 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                          if (Model.Id != 0)
                         {
                             
@@ -228,14 +266,14 @@ WriteLiteral("                <div class=\"grid3 marginBottom_20 floatLeft\"> \r
             #line default
             #line hidden
             
-            #line 80 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 91 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                        Write(Html.ActionLink("Cancel", MVC.Task.Details(Model.Id)));
 
             
             #line default
             #line hidden
             
-            #line 80 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 91 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                                                                                   
                         }
                         else
@@ -245,14 +283,14 @@ WriteLiteral("                <div class=\"grid3 marginBottom_20 floatLeft\"> \r
             #line default
             #line hidden
             
-            #line 84 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 95 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                        Write(Html.ActionLink("Cancel", MVC.Company.Details(Model.AssociatedCompanyId)));
 
             
             #line default
             #line hidden
             
-            #line 84 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 95 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
                                                                                                       
                         }
 
@@ -263,7 +301,7 @@ WriteLiteral("                    </div> \r\n                </div> \r\n");
 
 
             
-            #line 88 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 99 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
             }
 
             
@@ -274,7 +312,7 @@ WriteLiteral("            <div class=\"clear\"></div> \r\n        </div> \r\n   
 
 
             
-            #line 94 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
+            #line 105 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Task\Edit.cshtml"
  if (Model.Contact != null && Model.Contact.Id != 0)
 {
     Html.RenderPartial(MVC.Contact.Views._ContactSummaryDisplay, Model.Contact);

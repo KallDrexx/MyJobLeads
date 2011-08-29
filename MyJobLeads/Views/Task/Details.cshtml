@@ -19,7 +19,10 @@
                 </div> 
                 <div class="grid4 floatRight"> 
                     <p class="greyHighlight">Category: <span class="setTask">@Model.Category</span></p> 
-                    <p class="greyHighlight">Task Due Date: <span class="setTask">@Model.TaskDueDateString</span></p> 
+                    <p class="greyHighlight">Task Due Date: <span class="setTask">@Model.TaskDueDateString</span></p>
+                    <p class="greyHighlight">
+                        Completed On: <span class="setTask">@(Model.CompletionDate == null ? string.Empty : Model.CompletionDate.Value.ToShortDateString())</span>
+                    </p> 
                 </div> 
             </div> 
                                 
