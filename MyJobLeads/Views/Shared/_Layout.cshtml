@@ -27,23 +27,26 @@
             </div> 
             <div class="rightColumn"> 
             	<div id="heaerNavWrapper"> 
-                		<div id="headerSearch"> 
-                        	<input id="headerInput" type="text" name="headerInput" value="Search" /> 
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                	    <div id="headerSearch"> 
+                            <input id="headerInput" type="text" name="headerInput" value="Search" /> 
                         </div> 
-                        
-                        <div id="headerNav"> 
-                        	<ul> 
-                        	<li>@Html.ActionLink("Home", MVC.Home.Index())</li>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <li>@Html.ActionLink("Log Off", MVC.Account.LogOff())</li>
-                            }
-                            else
-                            {
-                                <li>@Html.ActionLink("Log On", MVC.Account.LogOn())</li>
-                            }
-                            </ul> 
-                        </div> 
+                    }
+                       
+                    <div id="headerNav"> 
+                        <ul> 
+                        <li>@Html.ActionLink("Home", MVC.Home.Index())</li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Log Off", MVC.Account.LogOff())</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Log On", MVC.Account.LogOn())</li>
+                        }
+                        </ul> 
+                    </div> 
                 </div> 
             </div>  	
         </div> 
