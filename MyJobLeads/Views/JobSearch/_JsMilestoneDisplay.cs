@@ -104,8 +104,29 @@ WriteLiteral("%</h3>\r\n            \r\n            <p>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("            </p>\r\n\r\n            <div class=\"nextMilestone\"><a href=\"#\">Start Next" +
-" Milestone</a></div>\r\n        </div>\r\n    </div>");
+WriteLiteral("            </p>\r\n\r\n");
+
+
+            
+            #line 20 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+             if (Model.MilestoneProgress.TotalProgress >= 1)
+            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                <div class=\"nextMilestone\"><a href=\"#\">Start Next Milestone</a></" +
+"div>\r\n");
+
+
+            
+            #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        </div>\r\n    </div>");
 
 
         }

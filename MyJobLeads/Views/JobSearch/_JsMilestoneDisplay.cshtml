@@ -17,6 +17,9 @@
                 }
             </p>
 
-            <div class="nextMilestone"><a href="#">Start Next Milestone</a></div>
+            @if (Model.MilestoneProgress.TotalProgress >= 1)
+            {
+                <div class="nextMilestone"><a href="#">Start Next Milestone</a></div>
+            }
         </div>
     </div>
