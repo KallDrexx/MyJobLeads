@@ -69,7 +69,7 @@
                         <a href="@Url.Action(MVC.Company.Details(company.Id))">
                             <div class="greyHighlight date">@company.LeadStatus</div>
                             <div class="taskName">@company.Name</div>
-                            <p>@company.Notes</p>
+                            <div class="taskDescription">@Html.ShortString(company.Notes, 85)</div>
                         </a>
                     </li>
                 }

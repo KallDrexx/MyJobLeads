@@ -279,17 +279,17 @@ WriteLiteral("</div>\r\n                            <div class=\"taskName\">");
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n                            <p>");
+WriteLiteral("</div>\r\n                            <div class=\"taskDescription\">");
 
 
             
             #line 72 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-                          Write(company.Notes);
+                                                    Write(Html.ShortString(company.Notes, 85));
 
             
             #line default
             #line hidden
-WriteLiteral("</p>\r\n                        </a>\r\n                    </li>\r\n");
+WriteLiteral("</div>\r\n                        </a>\r\n                    </li>\r\n");
 
 
             
