@@ -1005,6 +1005,8 @@
     <Content Include="Views\Task\Future.cshtml" />
     <Content Include="Views\Company\_CompanySummaryDisplay.cshtml" />
     <Content Include="Views\Contact\_ContactSummaryDisplay.cshtml" />
+    <Content Include="Views\Position\Edit.cshtml" />
+    <Content Include="Views\Position\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

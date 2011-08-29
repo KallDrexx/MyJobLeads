@@ -421,14 +421,14 @@ WriteLiteral("        </div>\r\n\r\n");
             #line hidden
             
             #line 103 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-       Write(Html.ActionLink("Add New Position", MVC.Company.Details(Model.Id, true), new { @class = "add blueLinks" }));
+       Write(Html.ActionLink("Add New Position", MVC.Position.Add(Model.Id), new { @class = "add blueLinks" }));
 
             
             #line default
             #line hidden
             
             #line 103 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                                                                                                                       
+                                                                                                              
                             
 
             
@@ -481,7 +481,7 @@ WriteLiteral("</p> \r\n                                ");
 
             
             #line 114 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                           Write(Html.ActionLink("View Position", MVC.Company.Details(Model.Id, true), new { @class = "blueLinks viewContact" }));
+                           Write(Html.ActionLink("View Position", MVC.Position.Details(positions.Id), new { @class = "blueLinks viewContact" }));
 
             
             #line default

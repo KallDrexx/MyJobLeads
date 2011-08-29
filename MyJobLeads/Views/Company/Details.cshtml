@@ -100,7 +100,7 @@
 
         @if (Model.showPositions)
         {
-            @Html.ActionLink("Add New Position", MVC.Company.Details(Model.Id, true), new { @class = "add blueLinks" })
+            @Html.ActionLink("Add New Position", MVC.Position.Add(Model.Id), new { @class = "add blueLinks" })
                             
             <div id="contactsList"> 
                 <ul> 
@@ -111,7 +111,7 @@
                                 <div class="contactName">@positions.Title</div> 
                                 <p class="greyHighlight">@(positions.HasApplied? "Applied" : "Not Yet Applied")</p> 
                                 <p>@Html.ShortString(positions.Notes, 110)</p> 
-                                @Html.ActionLink("View Position", MVC.Company.Details(Model.Id, true), new { @class = "blueLinks viewContact" })
+                                @Html.ActionLink("View Position", MVC.Position.Details(positions.Id), new { @class = "blueLinks viewContact" })
                             </li>       
                         </ul>
                     }             

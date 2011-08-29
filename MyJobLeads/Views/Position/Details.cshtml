@@ -1,0 +1,34 @@
+﻿@model MyJobLeads.DomainModel.ViewModels.Positions.PositionDisplayViewModel
+
+@{
+    ViewBag.Title = "Position Details";
+}
+
+<div class="grid1 floatLeft"> 
+    <div class="lineSeperater"> 
+        <div class="pageInfoBox">
+            <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                <h3 class="floatLeft">@Model.Title</h3> 
+                @Html.ActionLink("Edit Details", MVC.Position.Edit(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" })
+            </div> 
+
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="grid4 floatLeft"> 
+                    <p class="greyHighlight">Has Applied? <span class="setTask">@(Model.HasApplied? "Yes" : "No")</span></p> 
+                </div> 
+            </div> 
+                                
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft">
+                    <p class="greyHighlight">Notes: 
+                        <span class="setTask">@Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))</span>
+                    </p>
+                </div> 
+            </div> 
+
+            <div class="clear"></div>
+        </div> 
+    </div> 
+</div> 
+
+@{Html.RenderPartial(MVC.Company.Views._CompanySummaryDisplay, Model.Company);}

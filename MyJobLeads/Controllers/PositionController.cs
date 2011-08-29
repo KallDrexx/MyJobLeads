@@ -51,7 +51,7 @@ namespace MyJobLeads.Controllers
                 Company = Mapper.Map<Company, CompanySummaryViewModel>(company)
             };
 
-            return View("Edit", model);
+            return View(MVC.Position.Views.Edit, model);
         }
 
         public virtual ActionResult Edit(int id)
@@ -64,6 +64,12 @@ namespace MyJobLeads.Controllers
         [HttpPost]
         public virtual ActionResult Edit(EditPositionViewModel model)
         {
+            if (string.IsNullOrWhiteSpace(model.Title))
+            {
+                model.Company = new CompanySummaryViewModel(_companyByIdQuery.WithCompanyId(model.Company.Id).Execute());
+                return View(model);
+            }
+
             PositionDisplayViewModel editedModel;
 
             if (model.Id == 0)
