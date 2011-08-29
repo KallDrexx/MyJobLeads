@@ -69,193 +69,162 @@ WriteLiteral("\r\n");
 
 });
 
-WriteLiteral("\r\n\r\n<h2>Create a New Account</h2>\r\n<p>\r\n    Use the form below to create a new ac" +
-"count. \r\n</p>\r\n<p>\r\n    Passwords are required to be a minimum of ");
+WriteLiteral("\r\n\r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"lineSeperater\"> \r\n        <di" +
+"v class=\"pageInfoBox\"> \r\n");
 
 
             
-            #line 16 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-                                         Write(ViewBag.PasswordLength);
+            #line 14 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
+             using (Html.BeginForm()) 
+            {
 
             
             #line default
             #line hidden
-WriteLiteral(" characters in length.\r\n</p>\r\n\r\n<script src=\"");
+WriteLiteral("                <div class=\"grid3 marginBottom_10 marginAuto floatLeft\"> \r\n      " +
+"              <h3 class=\"floatLeft\">Create A New Account</h3> \r\n                " +
+"</div> \r\n");
 
 
             
             #line 19 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-        Write(Url.Content("~/Scripts/jquery.validate.min.js"));
+                
+               
+            
+            #line default
+            #line hidden
+
+            
+            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
+                        
+                
 
             
             #line default
             #line hidden
-WriteLiteral("\" type=\"text/javascript\"></script>\r\n<script src=\"");
+WriteLiteral("                <div class=\"grid3 marginBottom_10 marginAuto floatleft\">\r\n       " +
+"             <div class=\"floatLeft infoSpan\">\r\n                        ");
 
 
             
-            #line 20 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-        Write(Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js"));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\" type=\"text/javascript\"></script>\r\n\r\n");
-
-
-            
-            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
- using (Html.BeginForm()) {
-    
-            
-            #line default
-            #line hidden
-            
-            #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-Write(Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again."));
+            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
+                   Write(Html.ValidationSummary());
 
             
             #line default
             #line hidden
-            
-            #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-                                                                                                                
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    <div>\r\n        <fieldset>\r\n            <legend>Account Information</legend>\r\n" +
-"\r\n            <div class=\"editor-label\">\r\n                ");
-
-
-            
-            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.LabelFor(x => x.FullName));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">\r\n                ");
-
-
-            
-            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.TextBoxFor(x => x.FullName));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                ");
+WriteLiteral("\r\n                    </div>\r\n                </div>\r\n");
 
 
             
             #line 33 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.ValidationMessageFor(x => x.FullName));
+                
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n\r\n            <div class=\"editor-label\">\r\n                ");
+WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n                 " +
+"   <div class=\"floatLeft\"><p class=\"greyHighlight\">Full Name:</p>\r\n             " +
+"           <div class=\"infoSpan\">");
 
 
             
-            #line 37 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.LabelFor(m => m.Email));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">\r\n                ");
-
-
-            
-            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.TextBoxFor(m => m.Email));
+            #line 36 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
+                                         Write(Html.TextBoxFor(x => x.FullName, new { @class = "info" }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                ");
+WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r\n");
 
 
             
-            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.ValidationMessageFor(m => m.Email));
+            #line 39 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
+
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n\r\n            <div class=\"editor-label\">\r\n                ");
+WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n                 " +
+"   <div class=\"floatLeft\"><p class=\"greyHighlight\">Email:</p>\r\n                 " +
+"       <div class=\"infoSpan\">");
+
+
+            
+            #line 42 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
+                                         Write(Html.TextBoxFor(x => x.Email, new { @class = "info "}));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r\n");
 
 
             
             #line 45 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.LabelFor(m => m.Password));
+                
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">\r\n                ");
+WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\">\r\n                  " +
+"  <div class=\"floatLeft\"><p class=\"greyHighlight\">Password:</p>\r\n               " +
+"         <div class=\"infoSpan\">");
 
 
             
             #line 48 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.PasswordFor(m => m.Password));
+                                         Write(Html.PasswordFor(x => x.Password, new { @class = "info"}));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                ");
+WriteLiteral("</div>\r\n                    </div>\r\n                </div>\r\n");
 
 
             
-            #line 49 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.ValidationMessageFor(m => m.Password));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n            </div>\r\n\r\n            <div class=\"editor-label\">\r\n                ");
-
-
-            
-            #line 53 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.LabelFor(m => m.ConfirmPassword));
+            #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
+                
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">\r\n                ");
+WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\">\r\n                  " +
+"  <div class=\"floatLeft\"><p class=\"greyHighlight\">Confirm Password:</p>\r\n       " +
+"                 <div class=\"infoSpan\">");
 
 
             
-            #line 56 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.PasswordFor(m => m.ConfirmPassword));
+            #line 54 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
+                                         Write(Html.PasswordFor(x => x.ConfirmPassword, new { @class = "info" }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                ");
+WriteLiteral("</div>\r\n                    </div>\r\n                </div>\r\n");
 
 
             
             #line 57 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-           Write(Html.ValidationMessageFor(m => m.ConfirmPassword));
+
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n\r\n            <p>\r\n                <input type=\"submit\" val" +
-"ue=\"Register\" />\r\n            </p>\r\n        </fieldset>\r\n    </div>\r\n");
+WriteLiteral("                <div class=\"grid3 marginBottom_20 floatLeft\"> \r\n                 " +
+"   <div class=\"submitBTN \"><input type=\"submit\" value=\"Register\" /></div>       " +
+"             \r\n                </div> \r\n");
 
 
             
-            #line 65 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
-}
+            #line 61 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\Register.cshtml"
+            }
 
             
             #line default
             #line hidden
+WriteLiteral("\r\n            <div class=\"clear\"></div> \r\n        </div> \r\n    </div> \r\n</div> ");
+
 
         }
     }
