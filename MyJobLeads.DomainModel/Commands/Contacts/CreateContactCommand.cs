@@ -22,7 +22,7 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
     {
         protected IServiceFactory _serviceFactory;
         protected int _companyId, _userId;
-        protected string _name, _directPhone, _mobilePhone, _ext, _email, _assistant, _referredBy, _notes;
+        protected string _name, _directPhone, _mobilePhone, _ext, _email, _assistant, _referredBy, _notes, _title;
 
         public CreateContactCommand(IServiceFactory factory)
         {
@@ -140,6 +140,17 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
         }
 
         /// <summary>
+        /// Specifies the title to for the new contact
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public CreateContactCommand SetTitle(string title)
+        {
+            _title = title;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
@@ -170,6 +181,7 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
                 Assistant = _assistant,
                 ReferredBy = _referredBy,
                 Notes = _notes,
+                Title = _title,
 
                 Tasks = new List<Task>(),
                 History = new List<ContactHistory>()
@@ -186,6 +198,7 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
                 Assistant = _assistant,
                 ReferredBy = _referredBy,
                 Notes = _notes,
+                Title = _title,
 
                 DateModified = DateTime.Now,
                 AuthoringUser = user,

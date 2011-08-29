@@ -1,0 +1,59 @@
+﻿@model MyJobLeads.ViewModels.Positions.EditPositionViewModel
+
+@{
+    string action = Model.Id == 0 ? "Add" : "Edit";
+    ViewBag.Title = action + " Position";
+}
+
+<div class="grid1 floatLeft"> 
+    <div class="lineSeperater"> 
+        <div class="pageInfoBox"> 
+            @using (Html.BeginForm(MVC.Position.Edit()))
+            {
+                @Html.HiddenFor(x => x.Id)
+                @Html.HiddenFor(x => x.Company.Id)
+
+                <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                        <h3 class="floatLeft">@action Position</h3> 
+                </div> 
+
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">Title:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.Title, new { @class = "info" })</div>
+                    </div> 
+                </div> 
+
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">Have You Applied Yet?</p>
+                        <div class="infoSpan">
+                            @Html.CheckBoxFor(x => x.HasApplied)
+                        </div>
+                    </div> 
+                </div> 
+ 
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">Notes:</p>
+                        <div class="infoSpan">@Html.TextAreaFor(x => x.Notes, new { @class = "textAreaInfo" })</div>
+                    </div> 
+                </div> 
+
+                <div class="grid3 marginBottom_20 floatLeft"> 
+                    <div class="submitBTN ">
+                        <input type="submit" value="Save" /> &nbsp;
+                        @if (Model.Id != 0)
+                        {
+                            @Html.ActionLink("Cancel", MVC.Position.Details(Model.Id))
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Cancel", MVC.Company.Details(Model.Company.Id))
+                        }
+                    </div> 
+                </div> 
+            }
+            <div class="clear"></div> 
+        </div> 
+    </div> 
+</div> 
+
+@{Html.RenderPartial(MVC.Company.Views._CompanySummaryDisplay, Model.Company);}

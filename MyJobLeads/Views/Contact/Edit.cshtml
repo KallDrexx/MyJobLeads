@@ -1,85 +1,78 @@
-﻿@model EditContactViewModel
-@using MyJobLeads.ViewModels.Contacts;
+﻿@model MyJobLeads.ViewModels.Contacts.EditContactViewModel
+           
+<div class="grid1 floatLeft"> 
+    <div class="lineSeperater"> 
+        <div class="pageInfoBox"> 
+            @using (Html.BeginForm(MVC.Contact.Edit()))
+            {
+                @Html.HiddenFor(x => x.Id)
+                @Html.HiddenFor(x => x.Company.Id)
+                
+                <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                        <h3 class="floatLeft">Edit your Contact</h3> 
+                </div>
+                 
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">Name:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.Name, new { @class = "info" })</div>
+                    </div> 
 
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    
-    // Make sure the contact is at least initialized to an empty contact
-    if (Model.Contact == null) { Model.Contact = new MyJobLeads.DomainModel.Entities.Contact(); }
-}
+                    <div class="floatLeft"><p class="greyHighlight">Title:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.Title, new { @class = "info" })</div>
+                    </div> 
+                </div> 
 
-@if (Model.Contact.Id == 0)
-{
-    ViewBag.Title = "Add A Contact";
-    <h2>Add A Contact</h2>
-    <div class="ScreenHint">This screen allows you to add a contact for @Model.Company.Name.</div>
-}
-else
-{
-    ViewBag.Title = "Editing " + @Model.Contact.Name;
-    <h2>Editing @Model.Contact.Name</h2>
-    <div class="ScreenHint">This screen allows you to edit the details for @Model.Contact.Name</div>
-}
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">Direct Phone:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.DirectPhone, new { @class = "info" })</div>
+                    </div> 
 
-<br />
+                    <div class="floatLeft"><p class="greyHighlight">Extension:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.Extension, new { @class = "smallerInput" })</div>
+                    </div> 
+                </div> 
+                                
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">Mobile Phone:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.MobilePhone, new { @class = "info" })</div>
+                    </div> 
 
-@{ int companyId = Model.Company.Id; }
-@using (Html.BeginForm(MVC.Contact.Edit(Model.Contact.Id)))
-{
-    @Html.HiddenFor(x => x.Company.Id)
-    @Html.HiddenFor(x => x.Contact.Id)
+                    <div class="floatLeft"><p class="greyHighlight">Email:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.Email, new { @class = "info" })</div>
+                    </div>                   
+                </div> 
+                                
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">Assistant:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.Assistant, new { @class = "info" })</div>
+                    </div> 
 
-    <p>@Html.ValidationSummary()</p>
-    
-    <table>
-        <tr>
-            <td align="right">Name:</td>
-            <td>@Html.EditorFor(x => x.Contact.Name)</td>
-        </tr>
+                    <div class="floatLeft"><p class="greyHighlight">Referred By:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.ReferredBy, new { @class = "info" })</div>
+                    </div>                   
+                </div> 
+ 
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">Notes:</p>
+                        <div class="infoSpan">@Html.TextAreaFor(x => x.Notes, new { @class = "textAreaInfo" })</div>
+                    </div> 
+                </div> 
 
-        <tr>
-            <td align="right">Direct Phone:</td>
-            <td>@Html.EditorFor(x => x.Contact.DirectPhone)</td>
-        </tr>
-
-        <tr>
-            <td align="right">Extension:</td>
-            <td>@Html.EditorFor(x => x.Contact.Extension)</td>
-        </tr>
-
-        <tr>
-            <td align="right">Mobile Phone:</td>
-            <td>@Html.EditorFor(x => x.Contact.MobilePhone)</td>
-        </tr>
-
-        <tr>
-            <td align="right">Email:</td>
-            <td>@Html.EditorFor(x => x.Contact.Email)</td>
-        </tr>
-
-        <tr>
-            <td align="right">Assistant:</td>
-            <td>@Html.EditorFor(x => x.Contact.Assistant)</td>
-        </tr>
-
-        <tr>
-            <td align="right">Referred By:</td>
-            <td>@Html.EditorFor(x => x.Contact.ReferredBy)</td>
-        </tr>
-
-        <tr>
-            <td align="right" valign="top">Notes:</td>
-            <td>@Html.TextAreaFor(x => x.Contact.Notes, new { rows = 8, cols = 50 })</td>
-        </tr>
-
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Save" /> &nbsp; &nbsp;
-                @if (Model.Contact.Id == 0) { Html.ActionLink("Back", MVC.Company.Details(companyId)); }
-                else { Html.ActionLink("Back", MVC.Contact.Details(Model.Contact.Id)); }
-            </td>
-        </tr>
-    </table>
-}
-
+                <div class="grid3 marginBottom_20 floatLeft"> 
+                    <div class="submitBTN ">
+                        <input type="submit" value="Save" /> &nbsp;
+                        @if (Model.Id != 0)
+                        {
+                            @Html.ActionLink("Cancel", MVC.Contact.Details(Model.Id))
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Cancel", MVC.Company.Details(Model.Company.Id))
+                        }
+                    </div>                   
+                </div> 
+            }
+            <div class="clear"></div> 
+        </div> 
+    </div> 
+</div> 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MyJobLeads.DomainModel.Entities.History;
 
 namespace MyJobLeads.DomainModel.Entities
 {
@@ -14,5 +15,7 @@ namespace MyJobLeads.DomainModel.Entities
 
         public int? CompanyId { get; set; }
         public virtual Company Company { get; set; }
+
+        public virtual ICollection<PositionHistory> History { get; set; }
     }
 }

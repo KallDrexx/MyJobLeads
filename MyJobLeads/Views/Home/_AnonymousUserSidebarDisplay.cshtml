@@ -1,6 +1,12 @@
-﻿<p id="sidebar-links">
-    @Html.ActionLink("About", MVC.Home.About()) <br /><br />
+﻿@model MyJobLeads.Controllers.ActiveSidebarLink
+@using MyJobLeads.Controllers;
 
-    @Html.ActionLink("Log In", MVC.Account.LogOn()) <br />
-    @Html.ActionLink("Register Account", MVC.Account.Register())
-</p>
+<h2 id="accountName">Not Logged In</h2>
+
+<div id="leftHandNav">
+    <ul>
+        <li>@Html.ActionLink("Log In", MVC.Account.LogOn(), new { @class = Model == ActiveSidebarLink.Logon ? "active" : "" })</li>
+        <li>@Html.ActionLink("Register", MVC.Account.Register(), new { @class = Model == ActiveSidebarLink.Register ? "active" : ""} )</li>
+        <li>@Html.ActionLink("About", MVC.Home.About(), new { @class = Model == ActiveSidebarLink.About ? "active" : "" })</li>
+    </ul>
+</div>

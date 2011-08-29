@@ -1,22 +1,22 @@
 ﻿@model MyJobLeads.ViewModels.Tasks.TaskDashboardViewModel
+@using MyJobLeads.Controllers;
 
 @{
     ViewBag.Title = "Future Tasks";
 }
 
-<div class="left-content">
-    <div class="left">
-        <b>Future Tasks</b>
-    </div>
-    
-    &nbsp; &nbsp; &nbsp;
+@section SideBar {
+    @{Html.RenderAction(MVC.Home.SidebarDisplay(ActiveSidebarLink.Tasks));}
+}
 
-    <div class="right">
-        @Html.ActionLink(string.Format("Overdue ({0})", Model.OverdueTasks.Count), MVC.Task.Overdue(), new { @class = "item-subheading" }) &nbsp; 
-        @Html.ActionLink(string.Format("Today ({0})", Model.TodaysTasks.Count), MVC.Task.Today(), new { @class = "item-subheading" })
+<div class="grid2 floatLeft">
+    <div class="taskHeader">
+        <h3>Future Tasks</h3>
+        <ul class="taskNotification">
+            <li><a href="@Url.Action(MVC.Task.Overdue())" title="Overdue Tasks">Overdue: <span>(@Model.OverdueTasks.Count)</span></a></li>
+            <li><a href="@Url.Action(MVC.Task.Today())" title="Today's Tasks">Today: <span>(@Model.TodaysTasks.Count)</span></a></li>
+        </ul>       
     </div>
-
-    <br /><hr />
 
     @if (Model.FutureTasks.Count == 0)
     {
@@ -29,6 +29,7 @@
     }
 </div>
 
-<div class="right-content">
-    @{Html.RenderPartial(MVC.JobSearch.Views._JsMilestoneDisplay, Model);}
-</div>
+@if (Model.CurrentMilestone != null)
+{
+    Html.RenderPartial(MVC.JobSearch.Views._JsMilestoneDisplay, Model);
+}

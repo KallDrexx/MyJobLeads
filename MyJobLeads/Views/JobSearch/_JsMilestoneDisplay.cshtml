@@ -1,22 +1,25 @@
 ﻿@model MyJobLeads.ViewModels.Tasks.TaskDashboardViewModel
 
-@if (Model.CurrentMilestone != null)
-{
-    <div id="milestone-display">
-        <b>Current Milestone:</b> <br />
-        <span class="item-heading">@Model.CurrentMilestone.Title</span> <br />
-        <span class="item-subheading">Percent Completed: @Math.Round(Model.MilestoneProgress.TotalProgress * 100, 1)%</span> <br /> <br />
+    <div class="grid2 floatRight">
+        <div class="currentMilestone">
+            <h3 class="current">Current Milestone:</h3>
+            <h3 class="mileStoneNumber">@Model.CurrentMilestone.Title</h3>
+            <h3 class="mileStonePercent">Percent Completed: @Math.Round(Model.MilestoneProgress.TotalProgress * 100, 1)%</h3>
+            
+            <p>
+                @if (Model.MilestoneProgress.TotalProgress >= 1)
+                {
+                    @Html.Raw(Html.Encode(Model.CurrentMilestone.CompletionDisplay).Replace(Environment.NewLine, "<br />"))
+                }
+                else
+                {
+                    @Html.Raw(Html.Encode(Model.CurrentMilestone.Instructions).Replace(Environment.NewLine, "<br />"))
+                }
+            </p>
 
-        @if (Model.MilestoneProgress.TotalProgress == 1)
-        {
-            @Html.Raw(Html.Encode(Model.CurrentMilestone.CompletionDisplay).Replace(Environment.NewLine, "<br />")) <br /><br />
-
-            <span class="rights"><a href="#">Start Next Milestone</a></span>
-        }
-        
-        else
-        {
-            @Html.Raw(Html.Encode(Model.CurrentMilestone.Instructions).Replace(Environment.NewLine, "<br />"))
-        }
-</div>
-}
+            @if (Model.MilestoneProgress.TotalProgress >= 1)
+            {
+                <div class="nextMilestone"><a href="#">Start Next Milestone</a></div>
+            }
+        </div>
+    </div>

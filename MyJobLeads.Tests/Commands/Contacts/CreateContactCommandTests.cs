@@ -80,6 +80,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
                                                  .SetAssistant("Assistant")
                                                  .SetReferredBy("Referred By")
                                                  .SetNotes("Notes")
+                                                 .SetTitle("Contact Title")
                                                  .RequestedByUserId(_user.Id)
                                                  .Execute();
 
@@ -95,6 +96,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             Assert.AreEqual("Referred By", result.ReferredBy, "The contact's referred by was incorrect");
             Assert.AreEqual("Notes", result.Notes, "The contact's notes was incorrect");
             Assert.AreEqual(_company, result.Company, "The contact is associated with the incorrect company");
+            Assert.AreEqual("Contact Title", result.Title, "The contact's title was incorrect");
         }
 
         [TestMethod]
@@ -231,6 +233,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
                                                  .SetAssistant("Assistant")
                                                  .SetReferredBy("Referred By")
                                                  .SetNotes("Notes")
+                                                 .SetTitle("Title")
                                                  .RequestedByUserId(_user.Id)
                                                  .Execute();
             DateTime end = DateTime.Now;
@@ -247,6 +250,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             Assert.AreEqual("Assistant", history.Assistant, "The history record's assistant was incorrect");
             Assert.AreEqual("Referred By", history.ReferredBy, "The history record's referred by was incorrect");
             Assert.AreEqual("Notes", history.Notes, "The history record's notes was incorrect");
+            Assert.AreEqual("Title", history.Title, "The history record's title was incorrect");
             Assert.AreEqual(_user, history.AuthoringUser, "The history record's author was incorrect");
             Assert.AreEqual(MJLConstants.HistoryInsert, history.HistoryAction, "The history record's action value was incorrect");
             Assert.IsTrue(history.DateModified >= start && history.DateModified <= end, "The history record's modification date was incorrect");

@@ -20,12 +20,16 @@ namespace MyJobLeads.Views.Account
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using MyJobLeads.Infrastructure.HtmlHelpers;
+    using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Account/RegisterWithOrganization.cshtml")]
     public class RegisterWithOrganization : System.Web.Mvc.WebViewPage<MyJobLeads.ViewModels.Accounts.OrganizationRegistrationViewModel>
     {
@@ -48,11 +52,29 @@ WriteLiteral("\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n<h2>Create A New Account</h2>\r\n\r\n<p>\r\n    As a member of the <b>");
+WriteLiteral("\r\n");
+
+
+DefineSection("SideBar", () => {
+
+WriteLiteral("\r\n");
 
 
             
-            #line 11 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 9 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+      Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.Register));
+
+            
+            #line default
+            #line hidden
+
+});
+
+WriteLiteral("\r\n\r\n<h2>Create A New Account</h2>\r\n\r\n<p>\r\n    As a member of the <b>");
+
+
+            
+            #line 15 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
                      Write(Model.OrganizationName);
 
             
@@ -62,7 +84,7 @@ WriteLiteral("</b> you are entitled to a free account.\r\n</p>\r\n\r\n");
 
 
             
-            #line 14 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 18 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
  if (Model.RestrictedEmailDomains.Count > 0)
 {
 
@@ -73,7 +95,7 @@ WriteLiteral("    <p>\r\n        ");
 
 
             
-            #line 17 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 21 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
    Write(Model.OrganizationName);
 
             
@@ -84,7 +106,7 @@ WriteLiteral(" only allows users to sign up with an email address belonging to t
 
 
             
-            #line 19 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
              foreach (string domain in Model.RestrictedEmailDomains)
             {
 
@@ -98,7 +120,7 @@ WriteLiteral("@");
 
 
             
-            #line 21 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 25 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
                  Write(domain);
 
             
@@ -108,7 +130,7 @@ WriteLiteral("</li>\r\n");
 
 
             
-            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
             }
 
             
@@ -118,7 +140,7 @@ WriteLiteral("        </ul>\r\n    </p>\r\n");
 
 
             
-            #line 25 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
 }
 
             
@@ -128,7 +150,7 @@ WriteLiteral("\r\n<script src=\"");
 
 
             
-            #line 27 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 31 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
         Write(Url.Content("~/Scripts/jquery.validate.min.js"));
 
             
@@ -138,7 +160,7 @@ WriteLiteral("\" type=\"text/javascript\"></script>\r\n<script src=\"");
 
 
             
-            #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
         Write(Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js"));
 
             
@@ -148,21 +170,21 @@ WriteLiteral("\" type=\"text/javascript\"></script>\r\n\r\n");
 
 
             
-            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 34 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
  using (Html.BeginForm()) {
     
             
             #line default
             #line hidden
             
-            #line 31 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 35 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
 Write(Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again."));
 
             
             #line default
             #line hidden
             
-            #line 31 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 35 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
                                                                                                                 
 
             
@@ -173,7 +195,7 @@ WriteLiteral("    <div>\r\n        <fieldset>\r\n            <legend>Account Inf
 
 
             
-            #line 36 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
        Write(Html.HiddenFor(x => x.OrganizationName));
 
             
@@ -183,7 +205,7 @@ WriteLiteral("\r\n            ");
 
 
             
-            #line 37 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
        Write(Html.HiddenFor(x => x.MinPasswordLength));
 
             
@@ -193,7 +215,7 @@ WriteLiteral("\r\n            ");
 
 
             
-            #line 38 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 42 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
        Write(Html.HiddenFor(x => x.RegistrationToken));
 
             
@@ -203,7 +225,7 @@ WriteLiteral("\r\n\r\n            <div class=\"editor-label\">\r\n              
 
 
             
-            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 45 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
            Write(Html.LabelFor(x => x.FullName));
 
             
@@ -213,7 +235,7 @@ WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">
 
 
             
-            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 48 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
            Write(Html.TextBoxFor(x => x.FullName));
 
             
@@ -223,7 +245,7 @@ WriteLiteral("\r\n                ");
 
 
             
-            #line 45 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 49 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
            Write(Html.ValidationMessageFor(x => x.FullName));
 
             
@@ -233,7 +255,7 @@ WriteLiteral("\r\n            </div>\r\n\r\n            <div class=\"editor-labe
 
 
             
-            #line 49 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 53 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
            Write(Html.LabelFor(m => m.Email));
 
             
@@ -243,7 +265,7 @@ WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">
 
 
             
-            #line 52 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 56 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
            Write(Html.TextBoxFor(m => m.Email));
 
             
@@ -253,7 +275,7 @@ WriteLiteral("\r\n                ");
 
 
             
-            #line 53 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 57 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
            Write(Html.ValidationMessageFor(m => m.Email));
 
             
@@ -263,7 +285,7 @@ WriteLiteral("\r\n            </div>\r\n\r\n            <div class=\"editor-labe
 
 
             
-            #line 57 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 61 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
            Write(Html.LabelFor(m => m.Password));
 
             
@@ -273,7 +295,7 @@ WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">
 
 
             
-            #line 60 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 64 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
            Write(Html.PasswordFor(m => m.Password));
 
             
@@ -283,7 +305,7 @@ WriteLiteral("\r\n                ");
 
 
             
-            #line 61 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 65 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
            Write(Html.ValidationMessageFor(m => m.Password));
 
             
@@ -293,7 +315,7 @@ WriteLiteral("\r\n            </div>\r\n\r\n            <div class=\"editor-labe
 
 
             
-            #line 65 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 69 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
            Write(Html.LabelFor(m => m.ConfirmPassword));
 
             
@@ -303,7 +325,7 @@ WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">
 
 
             
-            #line 68 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 72 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
            Write(Html.PasswordFor(m => m.ConfirmPassword));
 
             
@@ -313,7 +335,7 @@ WriteLiteral("\r\n                ");
 
 
             
-            #line 69 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 73 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
            Write(Html.ValidationMessageFor(m => m.ConfirmPassword));
 
             
@@ -324,7 +346,7 @@ WriteLiteral("\r\n            </div>\r\n\r\n            <p>\r\n                <
 
 
             
-            #line 77 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
+            #line 81 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\RegisterWithOrganization.cshtml"
 }
 
             

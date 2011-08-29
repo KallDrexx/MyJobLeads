@@ -5,52 +5,75 @@
     string companyWord = Model.TotalCompanyCount == 1 ? "company" : "companies";
 }
 
-<h2>Company List</h2>
-<hr />
+@section SideBar {
+    @{Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.Companies));}
+}
 
-@Html.ActionLink("Add A Company", MVC.Company.Add(Model.JobSearchId)) <br /><br />
-
-You have @Model.TotalCompanyCount @companyWord entered.<br /><br />
-
-@if (Model.UsedStatuses.Count > 0)
-{
-    using (Html.BeginForm(MVC.Company.ChangeCompanyStatusFilters()))
-    {
-        <p>
-            @Html.Hidden("jobSearchId", Model.JobSearchId)
-            Showing companies with the following statuses: <br /><br />
-
-            @foreach (string status in Model.UsedStatuses.OrderBy(x => x).ToArray())
+<div class="grid1 floatLeft">
+    <div class="lineSeperator">
+        <div class="pageInfoBox">
+            @using (Html.BeginForm(MVC.Company.ChangeCompanyStatusFilters()))
             {
-                @:&nbsp; &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" name="shownStatus" value="@status"
-                    @if (!Model.HiddenStatuses.Contains(status))
-                    {
-                        @:checked
-                    }
-                 /> @status<br />
-            }
-            <br />
-            <input type="submit" value=" Filter Companies " />
-        </p>
-    }
-}
-    
+                <div class="grid3 floatLeft">
+                    <h3 class="floatLeft">List All Companies</h3>
+                    <p class="floatRight greyHighlight">You have @(Model.TotalCompanyCount == 0? "no" : Model.TotalCompanyCount.ToString()) companies entered</p>
+                </div>
 
-@if (Model.Companies.Count == 0 && Model.UsedStatuses.Count == 0)
-{
-    @: No companies have been entered for this job search yet
-}
-else if (Model.Companies.Count == 0 )
-{
-   @: No companies in this job search have the selected statuses
-}
-else
-{
-    <ul>
-        @foreach (var company in Model.Companies)
-        {
-            <li>@Html.ActionLink(company.Name, MVC.Company.Details(company.Id))</li>
-        }
-    </ul>
-}
+                <div class="grid3 marginBottom_10 floatLeft">
+                    @Html.ActionLink("Add New Company", MVC.Company.Add(Model.JobSearchId), new { @class = "blueLinks", title = "Add New Company" })
+                </div>
+
+                if (Model.UsedStatuses.Count > 0)
+                {
+                    @Html.Hidden("jobSearchId", Model.JobSearchId)
+                    
+                    <div class="grid3 marginBottom_10 floatLeft">
+                        <p>Show all firms with the following status:</p>
+                    </div>
+
+                    foreach (string status in Model.UsedStatuses.OrderBy(x => x))
+                    {
+                        string checkedString = !Model.HiddenStatuses.Contains(status) ? "checked" : "";
+                            
+                        <div class="grid3 marginBottom_10 floatLeft">
+                            <div class="floatLeft infoSpan">
+                                <input type="checkbox" name="shownStatus" value="@status" @checkedString />@status
+                            </div>
+                        </div>
+                    }
+                
+                    <div class="grid3 marginBottom_20 floatLeft">
+                        <div class="submitBTN"><input type="submit" value="Filter Companies" /></div>
+                    </div>
+                }
+            }
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+
+<div class="grid1 marginTop_20 floatLeft">
+    <div class="grid2 floatLeft">
+        <div id="taskRole">
+            <ul>
+                @if (Model.Companies.Count == 0)
+                {
+                    <li>
+                        <div class="taskName">No companies match the selected statuses</div>
+                    </li>
+                }
+                
+                @foreach (var company in Model.Companies)
+                {
+                    <li>
+                        <a href="@Url.Action(MVC.Company.Details(company.Id))">
+                            <div class="greyHighlight date">@company.LeadStatus</div>
+                            <div class="taskName">@company.Name</div>
+                            <div class="taskDescription">@Html.ShortString(company.Notes, 85)</div>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

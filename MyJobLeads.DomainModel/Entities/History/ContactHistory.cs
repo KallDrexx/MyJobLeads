@@ -9,6 +9,7 @@ namespace MyJobLeads.DomainModel.Entities.History
     public class ContactHistory : EntityHistoryBase
     {
         public string Name { get; set; }
+        public string Title { get; set; }
         public string DirectPhone { get; set; }
         public string MobilePhone { get; set; }
         public string Extension { get; set; }

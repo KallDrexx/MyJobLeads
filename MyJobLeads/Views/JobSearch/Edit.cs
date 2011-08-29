@@ -26,6 +26,7 @@ namespace MyJobLeads.Views.JobSearch
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using MyJobLeads.Infrastructure.HtmlHelpers;
     using Telerik.Web.Mvc.UI;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
@@ -51,188 +52,143 @@ WriteLiteral("\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("\r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"lineSeperater\"> \r\n        <div " +
+"class=\"pageInfoBox\"> \r\n");
 
 
             
-            #line 8 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
- if (isNewJobSearch)
-{
-    ViewBag.Title = "Start a New Job Search";
-    
+            #line 11 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+             using (Html.BeginForm(MVC.JobSearch.Edit())) 
+            {
+                
+            
+            #line default
+            #line hidden
+            
+            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+           Write(Html.HiddenFor(x => x.Id));
 
             
             #line default
             #line hidden
-WriteLiteral("    <h2>Start a New Job Search</h2>\r\n");
-
-
-
-WriteLiteral(@"    <p>
-        Your first step is to setup a job search. Interview Tools allows you to organize multiple job searches. Some uses of this are:
-        <ul>
-            <li>Organize your job search by year, such as ""2011 Full Time Position"", ""2012 Internship Hunt"", or ""May 2012 Need Part-Time Job""</li>
-            <li>Organize job search by function, such as ""Sales and Marketing Opportunities"" or ""Engineering Job Search""</li>
-        </ul>
-    </p>
-");
-
-
             
-            #line 20 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-}
-else
-{
-    ViewBag.Title = "Editing " + @Model.Name;
-    
+            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+                                          
+                
 
             
             #line default
             #line hidden
-WriteLiteral("    <h2>Editing the \'");
+WriteLiteral("                <div class=\"grid3 marginBottom_10 marginAuto floatLeft\"> \r\n      " +
+"              <h3 class=\"floatLeft\">");
 
 
             
-            #line 25 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-                Write(Model.Name);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\' Job Search</h2>\r\n");
-
-
-
-WriteLiteral("    <div class=\"ScreenHint\">This screen allows you to edit the details of the ");
-
-
-            
-            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-                                                                         Write(Model.Name);
+            #line 16 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+                                      Write(isNewJobSearch ? "Start Job Search" : "Edit Job Search");
 
             
             #line default
             #line hidden
-WriteLiteral(" job search.</div>");
-
-
-
-WriteLiteral("<br />\r\n");
+WriteLiteral("</h3> \r\n                </div> \r\n");
 
 
             
-            #line 27 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-}
-
+            #line 18 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+                
+               
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
-
 
             
             #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
- using (Html.BeginForm(MVC.JobSearch.Edit(), FormMethod.Post, new { @class = "editform" }))
-{
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    <fieldset>\r\n        ");
-
-
-            
-            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-   Write(Html.HiddenFor(x => x.Id));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n\r\n        <p>");
-
-
-            
-            #line 34 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-      Write(Html.ValidationSummary());
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</p>\r\n    \r\n        <div class=\"required\">\r\n            <label>Job Search Title</" +
-"label>\r\n            ");
-
-
-            
-            #line 38 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-       Write(Html.TextBoxFor(x => x.Name));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n        </div>\r\n\r\n        <div class=\"required\">\r\n            <label>Descriptio" +
-"n\r\n            </label>\r\n            ");
-
-
-            
-            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-       Write(Html.TextAreaFor(x => x.Description, new { rows = 4 }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n        </div>\r\n        \r\n        <div class=\"submit\">\r\n            <input type" +
-"=\"submit\" value=\"Submit\" class=\"inputSubmit\" /> &nbsp; &nbsp;\r\n");
-
-
-            
-            #line 49 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-             if (isNewJobSearch)
-            {
+                        
                 
-            
-            #line default
-            #line hidden
-            
-            #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-           Write(Html.ActionLink("Cancel", MVC.Home.Index()));
 
             
             #line default
             #line hidden
+WriteLiteral("                <div class=\"grid3 marginBottom_10 marginAuto floatleft\">\r\n       " +
+"             <div class=\"floatLeft infoSpan\">\r\n                        ");
+
+
             
-            #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-                                                            ;
-            }
-            else
-            {
+            #line 33 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+                   Write(Html.ValidationSummary());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                    </div>\r\n                </div>\r\n");
+
+
+            
+            #line 36 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
                 
-            
-            #line default
-            #line hidden
-            
-            #line 55 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-           Write(Html.ActionLink("Cancel", MVC.JobSearch.Details(Model.Id)));
 
             
             #line default
             #line hidden
+WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n                 " +
+"   <div class=\"floatLeft\"><p class=\"greyHighlight\">Title:</p>\r\n                 " +
+"       <div class=\"infoSpan\">");
+
+
             
-            #line 55 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-                                                                           ;
+            #line 39 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+                                         Write(Html.TextBoxFor(x => x.Name, new { @class = "info" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r\n");
+
+
+            
+            #line 42 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n                 " +
+"   <div class=\"floatLeft\"><p class=\"greyHighlight\">Description:</p>\r\n           " +
+"             <div class=\"infoSpan\">");
+
+
+            
+            #line 45 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+                                         Write(Html.TextAreaFor(x => x.Description, new { @class = "textAreaInfo" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r\n");
+
+
+            
+            #line 48 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                <div class=\"grid3 marginBottom_20 floatLeft\"> \r\n                 " +
+"   <div class=\"submitBTN \"><input type=\"submit\" value=\"Save\" /></div>           " +
+"         \r\n                </div> \r\n");
+
+
+            
+            #line 52 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
             }
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n        </div>\r\n    </fieldset>\r\n");
+WriteLiteral("\r\n            <div class=\"clear\"></div> \r\n        </div> \r\n    </div> \r\n</div> \r\n" +
+"");
 
-
-            
-            #line 60 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-}
-            
-            #line default
-            #line hidden
 
         }
     }

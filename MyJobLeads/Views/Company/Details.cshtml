@@ -4,49 +4,144 @@
     ViewBag.Title = "Company: " + Model.Name;
 }
 
-<div class="display-form">
-    <h2>@Model.Name</h2>
-    @Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Id), new { @class = "details-link" })
+<div class="grid1 floatLeft"> 
+    <div class="lineSeperater"> 
+        <div class="pageInfoBox">
+            <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                <h3 class="floatLeft">@Model.Name</h3> 
+                @Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" })
+            </div> 
 
-    <div class="form-row">
-        <span class="form-label">Phone:</span>
-        <span class="form-field">@Model.Phone</span>
-    </div>
-    
-    <div class="form-row">
-        <span class="form-label">Location:</span>
-        <span class="form-field">@Model.Location</span>
-    </div>
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="grid4 floatLeft"> 
+                    <p class="greyHighlight">Phone: <span class="setTask">@Model.Phone</span></p> 
+                    <p class="greyHighlight">Location: <span class="setTask">@Model.Location</span></p> 
+                </div> 
+                <div class="grid4 floatRight"> 
+                    <p class="greyHighlight">Status: <span class="setTask">@Model.LeadStatus</span></p> 
+                </div> 
+            </div> 
+                                
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft">
+                    <p class="greyHighlight">Notes: 
+                        <span class="setTask">@Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))</span>
+                    </p>
+                </div> 
+            </div> 
 
-    <div class="form-row">
-        <span class="form-label">Status:</span>
-        <span class="form-field">@Model.LeadStatus</span>
-    </div>
+            <div class="clear"></div>
+        </div> 
+    </div> 
+</div> 
+                    
+<div class="grid1 marginTop_20 floatLeft"> 
+    <div class="grid2 floatLeft"> 
+        <div class="contactsPositionsNv">
+            <span class="active">Tasks</span>
+        </div>
+        @Html.ActionLink("Add New Task", MVC.Task.Add(Model.Id), new { @class = "add blueLinks" })
 
-    <div class="form-row">
-        <span class="form-label">Notes:</span>
-        <span class="form-field">@Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))</span>
-    </div>
-</div>
-
-<hr />
-
-<div class="left-subcontent">
-    @if (Model.Tasks.Where(x => !x.Completed).Count() > 0)
-    {
-        <h3>Open Tasks</h3>
+        @if (Model.OpenTasks.Count > 0)
+        {
+            <h3 class="taskCalls">Open Tasks</h3> 
+            <div id="taskRole"> 
+                <ul>
+                    @foreach (var task in Model.OpenTasks.OrderBy(x => x.DueDate))
+                    {
+                        <li>
+                            <div class="greyHighlight date">@Html.GetDueDateString(task.DueDate)</div>
+                            <div class="taskName">@task.Name</div>
+                            <p class="taskDescription">@task.AssociatedWith</p>
+                            <p>@Html.ShortString(task.Notes, 110)</p>
+                            @Html.ActionLink("View Task", MVC.Task.Details(task.Id), new { @class = "blueLinks viewContact" })
+                        </li>
+                    }
+                </ul> 
+             </div>	
+        }
+                
+        @if (Model.CompletedTasks.Count > 0)
+        {           
+            <h3 class="taskCalls">Completed Tasks</h3> 
+            <div id="taskRole"> 
+                <ul>
+                    @foreach (var task in Model.CompletedTasks.OrderBy(x => x.CompletionDate))
+                    {
+                        <li>
+                            <div class="greyHighlight date">Completed</div>
+                            <div class="taskName">@task.Name</div>
+                            <p class="taskDescription">@task.AssociatedWith</p>
+                            <p>@Html.ShortString(task.Notes, 110)</p>
+                            @Html.ActionLink("View Task", MVC.Task.Details(task.Id), new { @class = "blueLinks viewContact" })
+                        </li>
+                    }
+                </ul>  
+            </div>                        
+        }
         
-        @foreach (var task in Model.Tasks.Where(x => !x.Completed).ToList())
-         {
-            <p>
-                @{ Html.RenderPartial(MVC.Company.Views._CompanyTaskDisplay, task); }
-            </p>
-         }
-    }
-</div>
+    </div> 
+                    
+    <div class="grid2 floatRight"> 
+        <div class="contactsPositionsNv">
+            @{
+                string contactLinkString = string.Format("Contacts ({0})", Model.Contacts.Count);
+                string positionLinkString = string.Format("Positions ({0})", Model.Positions.Count);
+            }
 
-<div class="right-subcontent">
-    <h3>Test content</h3>
-</div>
+            @if (Model.showPositions)
+            {
+                @Html.ActionLink(contactLinkString, MVC.Company.Details(Model.Id), new { title = "Show Relevant Contacts" })
+                @:|
+                <span class="active">@positionLinkString</span>
+            }
+            else
+            {
+                <span class="active">@contactLinkString</span>
+                @:|
+                @Html.ActionLink(positionLinkString, MVC.Company.Details(Model.Id, true), new { title = "Show Relevant Positions" })
+            }
+        </div>
 
-<div class="clear"></div>
+        @if (Model.showPositions)
+        {
+            @Html.ActionLink("Add New Position", MVC.Position.Add(Model.Id), new { @class = "add blueLinks" })
+                            
+            <div id="contactsList"> 
+                <ul> 
+                    @foreach (var positions in Model.Positions.OrderBy(x => x.Title))
+                    {
+                        <ul> 
+                            <li> 
+                                <div class="contactName">@positions.Title</div> 
+                                <p class="greyHighlight">@(positions.HasApplied? "Applied" : "Not Yet Applied")</p> 
+                                <p>@Html.ShortString(positions.Notes, 110)</p> 
+                                @Html.ActionLink("View Position", MVC.Position.Details(positions.Id), new { @class = "blueLinks viewContact" })
+                            </li>       
+                        </ul>
+                    }             
+                </ul> 
+            </div> 
+        }
+
+        else
+        {
+            @Html.ActionLink("Add New Contact", MVC.Contact.Add(Model.Id), new { @class = "add blueLinks" })
+                            
+            <div id="contactsList"> 
+                <ul> 
+                    @foreach (var contact in Model.Contacts.OrderBy(x => x.Name))
+                    {
+                        <li> 
+                            <div class="contactName">@contact.Name <span>- @contact.Title </span></div> 
+                            <p><span class="greyHighlight">Direct:</span> @contact.DirectPhoneWithExtension <span class="greyHighlight">Mobile:</span> @contact.MobilePhone</p> 
+                            <p>@Html.ShortString(contact.Notes, 110)</p> 
+                            @Html.ActionLink("View Contact", MVC.Contact.Details(contact.Id), new { @class = "blueLinks viewContact" })
+                        </li> 
+                    }             
+                </ul> 
+            </div> 
+        }
+
+    </div> 
+</div> 

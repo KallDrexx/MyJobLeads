@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.Entities.Extensions;
+using MyJobLeads.ViewModels.Contacts;
 
 namespace MyJobLeads.ViewModels.Companies
 {
@@ -17,24 +19,20 @@ namespace MyJobLeads.ViewModels.Companies
             Phone = company.Phone;
             Notes = company.Notes;
             LeadStatus = company.LeadStatus;
-
-            // Form company location string
-            Location = string.Empty;
-
-            bool citySpecified = !string.IsNullOrWhiteSpace(company.City);
-            bool stateSpecified = !string.IsNullOrWhiteSpace(company.State);
-            bool zipSpecified = !string.IsNullOrWhiteSpace(company.Zip);
-
-            if (citySpecified && stateSpecified) { Location = string.Concat(company.City, ", ", company.State, " "); }
-            else if (citySpecified) { Location = company.City + " "; }
-            else if (stateSpecified) { Location = company.State + " "; }
-
-            if (zipSpecified) { Location += company.Zip; }
+            Contacts = company.Contacts.Select(x => new ContactSummaryViewModel(x)).ToList();
+            Positions = company.Positions.Select(x => new CompanyPositionViewModel(x)).ToList();
+            Location = company.LocationString();            
 
             // Form the task list
-            Tasks = company.Tasks.ToList()
-                                 .Select(x => new CompanyTaskViewModel(x))
-                                 .ToList();
+            OpenTasks = company.Tasks.Where(x => x.CompletionDate == null)
+                                     .ToList()
+                                     .Select(x => new CompanyTaskViewModel(x))
+                                     .ToList();
+
+            CompletedTasks = company.Tasks.Where(x => x.CompletionDate != null)
+                                          .ToList()
+                                          .Select(x => new CompanyTaskViewModel(x))
+                                          .ToList();
         }
 
         public int Id { get; set; }
@@ -43,8 +41,12 @@ namespace MyJobLeads.ViewModels.Companies
         public string Location { get; set; }
         public string Notes { get; set; }
         public string LeadStatus { get; set; }
+        public bool showPositions { get; set; }
 
-        public IList<CompanyTaskViewModel> Tasks { get; set; }
+        public IList<CompanyTaskViewModel> OpenTasks { get; set; }
+        public IList<CompanyTaskViewModel> CompletedTasks { get; set; }
+        public IList<ContactSummaryViewModel> Contacts { get; set; }
+        public IList<CompanyPositionViewModel> Positions { get; set; }
 
         public class CompanyTaskViewModel
         {
@@ -52,7 +54,7 @@ namespace MyJobLeads.ViewModels.Companies
             {
                 Id = task.Id;
                 Name = task.Name;
-                Completed = task.CompletionDate != null;
+                CompletionDate = task.CompletionDate;
                 DueDate = task.TaskDate;
                 Notes = task.Notes;
 
@@ -63,9 +65,27 @@ namespace MyJobLeads.ViewModels.Companies
 
             public int Id { get; set; }
             public string Name { get; set; }
-            public bool Completed { get; set; }
+            public DateTime? CompletionDate { get; set; }
             public DateTime? DueDate { get; set; }
             public string AssociatedWith { get; set; }
+            public string Notes { get; set; }
+        }
+
+        public class CompanyPositionViewModel
+        {
+            public CompanyPositionViewModel() { }
+
+            public CompanyPositionViewModel(Position position)
+            {
+                Id = position.Id;
+                Title = position.Title;
+                HasApplied = position.HasApplied;
+                Notes = position.Notes;
+            }
+
+            public int Id { get; set; }
+            public string Title { get; set; }
+            public bool HasApplied { get; set; }
             public string Notes { get; set; }
         }
     }

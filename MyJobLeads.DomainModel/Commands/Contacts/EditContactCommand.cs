@@ -21,7 +21,7 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
     {
         protected IServiceFactory _serviceFactory;
         protected int _contactId, _userid;
-        protected string _name, _directPhone, _mobilePhone, _ext, _email, _assistant, _referredBy, _notes;
+        protected string _name, _directPhone, _mobilePhone, _ext, _email, _assistant, _referredBy, _notes, _title;
 
         public EditContactCommand(IServiceFactory factory)
         {
@@ -139,6 +139,17 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
         }
 
         /// <summary>
+        /// Specifies the title for the contact
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public EditContactCommand SetTitle(string title)
+        {
+            _title = title;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
@@ -166,6 +177,7 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
             if (_assistant != null) { contact.Assistant = _assistant; }
             if (_referredBy != null) { contact.ReferredBy = _referredBy; }
             if (_notes != null) { contact.Notes = _notes; }
+            if (_title != null) { contact.Title = _title; }
 
             // Create a history record
             contact.History.Add(new ContactHistory
@@ -178,6 +190,7 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
                 Assistant = contact.Assistant,
                 ReferredBy = contact.ReferredBy,
                 Notes = contact.Notes,
+                Title = contact.Title,
 
                 AuthoringUser = user,
                 HistoryAction = MJLConstants.HistoryUpdate,

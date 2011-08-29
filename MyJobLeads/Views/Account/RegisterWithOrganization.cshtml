@@ -5,6 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section SideBar {
+    @{Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.Register));}
+}
+
 <h2>Create A New Account</h2>
 
 <p>

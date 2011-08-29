@@ -46,6 +46,9 @@
     <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=1.1.0.188, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.1.1.0.118\lib\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.2.5.2\lib\NET35\Castle.Core.dll</HintPath>
     </Reference>
@@ -288,6 +291,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobSearchController.cs" />
+    <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
@@ -298,6 +302,7 @@
     </Compile>
     <Compile Include="Infrastructure\HtmlHelpers\DateHtmlHelpers.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\NumericDisplayHelpers.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\StringHtmlHelpers.cs" />
     <Compile Include="Infrastructure\Installers\ValidatorInstaller.cs" />
     <Compile Include="Infrastructure\Providers\AppDataDirectoryProvider.cs" />
     <Compile Include="Infrastructure\Attributes\MJLAuthorizeAttribute.cs" />
@@ -321,6 +326,9 @@
     <Compile Include="Organization.SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="PositionController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="SearchController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -331,6 +339,8 @@
     <Compile Include="ViewModels\Companies\CompanyDisplayViewModel.cs" />
     <Compile Include="ViewModels\Companies\EditCompanyViewModel.cs" />
     <Compile Include="ViewModels\Companies\JobSearchCompanyListViewModel.cs" />
+    <Compile Include="ViewModels\Contacts\ContactDisplayViewModel.cs" />
+    <Compile Include="ViewModels\Contacts\ContactSummaryViewModel.cs" />
     <Compile Include="ViewModels\Contacts\EditContactViewModel.cs" />
     <Compile Include="ViewModels\JobSearches\JobSearchDetailsViewModel.cs" />
     <Compile Include="ViewModels\Organizations\EditOrganizationViewModel.cs" />
@@ -402,16 +412,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>List.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Company\_CompanySidebarDisplay.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_CompanySidebarDisplay.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Company\_jobsearchCompanySummary.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_jobsearchCompanySummary.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Contact\Details.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -421,16 +421,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Edit.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Contact\_CompanyContactDisplay.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_CompanyContactDisplay.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Contact\_ContactSidebarDisplay.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_ContactSidebarDisplay.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Home\About.cs">
       <AutoGen>True</AutoGen>
@@ -491,11 +481,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Error.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Shared\_Layout.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_Layout.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Shared\_LogOnPartial.cs">
       <AutoGen>True</AutoGen>
@@ -761,6 +746,55 @@
     <Content Include="Scripts\2011.2.712\telerik.treeview.min.js" />
     <Content Include="Scripts\2011.2.712\telerik.upload.min.js" />
     <Content Include="Scripts\2011.2.712\telerik.window.min.js" />
+    <Content Include="Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.4.js" />
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.1.315\jquery-1.5.1.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.1.315\jquery.validate.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\jquery-1.5.1.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\jquery.validate.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.autocomplete.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.calendar.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.chart.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.combobox.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.common.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.datepicker.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.datetimepicker.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.draganddrop.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.editor.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.grid.editing.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.grid.filtering.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.grid.grouping.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.grid.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.grid.reordering.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.grid.resizing.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.imagebrowser.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.list.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.menu.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.panelbar.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.slider.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.splitter.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.tabstrip.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.textbox.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.timepicker.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.treeview.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.upload.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.window.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -784,24 +818,24 @@
     <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Scripts\jquery-1.4.4.js" />
-    <Content Include="Scripts\jquery-1.4.4.min.js" />
-    <Content Include="Scripts\jquery-1.4.4-vsdoc.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery-ui.js" />
-    <Content Include="Scripts\jquery-ui.min.js" />
-    <Content Include="Scripts\MicrosoftAjax.js" />
-    <Content Include="Scripts\MicrosoftAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery-1.4.4.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery-1.4.4.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery.validate.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery.validate.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery-ui.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery-ui.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\MicrosoftAjax.js" />
+    <Content Include="ViewModels\Companies\Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="ViewModels\Companies\Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="ViewModels\Companies\Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="ViewModels\Companies\Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="ViewModels\Companies\Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -835,10 +869,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_LogOnPartial.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Shared\_Layout.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_Layout.cs</LastGenOutput>
-    </Content>
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -911,14 +942,6 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_OpenTaskSummary.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Company\_CompanySidebarDisplay.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_CompanySidebarDisplay.cs</LastGenOutput>
-    </Content>
-    <Content Include="Views\Contact\_ContactSidebarDisplay.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_ContactSidebarDisplay.cs</LastGenOutput>
-    </Content>
     <Content Include="Views\Task\_OpenTaskListItem.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_OpenTaskListItem.cs</LastGenOutput>
@@ -926,10 +949,6 @@
     <Content Include="Views\Task\_CompanyTaskDisplay.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_CompanyTaskDisplay.cs</LastGenOutput>
-    </Content>
-    <Content Include="Views\Contact\_CompanyContactDisplay.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_CompanyContactDisplay.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Search\RefreshSearchIndex.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -954,10 +973,6 @@
     <Content Include="Views\Company\List.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>List.cs</LastGenOutput>
-    </Content>
-    <Content Include="Views\Company\_jobsearchCompanySummary.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_jobsearchCompanySummary.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -988,7 +1003,10 @@
     <Content Include="Views\Task\TaskListControl.cshtml" />
     <Content Include="Views\Task\Today.cshtml" />
     <Content Include="Views\Task\Future.cshtml" />
-    <Content Include="Views\Company\_CompanyTaskDisplay.cshtml" />
+    <Content Include="Views\Company\_CompanySummaryDisplay.cshtml" />
+    <Content Include="Views\Contact\_ContactSummaryDisplay.cshtml" />
+    <Content Include="Views\Position\Edit.cshtml" />
+    <Content Include="Views\Position\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

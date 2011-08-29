@@ -26,6 +26,7 @@ namespace MyJobLeads.Views.Company
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using MyJobLeads.Infrastructure.HtmlHelpers;
     using Telerik.Web.Mvc.UI;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
@@ -51,228 +52,255 @@ WriteLiteral("\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n<h2>Company List</h2>\r\n<hr />\r\n\r\n");
+WriteLiteral("\r\n");
+
+
+DefineSection("SideBar", () => {
+
+WriteLiteral("\r\n");
 
 
             
-            #line 11 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-Write(Html.ActionLink("Add A Company", MVC.Company.Add(Model.JobSearchId)));
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" <br /><br />\r\n\r\nYou have ");
-
-
-            
-            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-    Write(Model.TotalCompanyCount);
+            #line 9 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+      Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.Companies));
 
             
             #line default
             #line hidden
-WriteLiteral(" ");
 
+});
 
-            
-            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-                             Write(companyWord);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" entered.<br /><br />\r\n\r\n");
+WriteLiteral("\r\n\r\n<div class=\"grid1 floatLeft\">\r\n    <div class=\"lineSeperator\">\r\n        <div " +
+"class=\"pageInfoBox\">\r\n");
 
 
             
             #line 15 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
- if (Model.UsedStatuses.Count > 0)
-{
-    using (Html.BeginForm(MVC.Company.ChangeCompanyStatusFilters()))
-    {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        <p>\r\n            ");
-
-
-            
-            #line 20 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-       Write(Html.Hidden("jobSearchId", Model.JobSearchId));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n            Showing companies with the following statuses: <br /><br />\r\n\r\n");
-
-
-            
-            #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-             foreach (string status in Model.UsedStatuses.OrderBy(x => x).ToArray())
+             using (Html.BeginForm(MVC.Company.ChangeCompanyStatusFilters()))
             {
 
             
             #line default
             #line hidden
-WriteLiteral("                ");
-
-WriteLiteral("&nbsp; &nbsp; &nbsp; &nbsp;\r\n");
-
-
-
-WriteLiteral("                <input type=\"checkbox\" name=\"shownStatus\" value=\"");
+WriteLiteral("                <div class=\"grid3 floatLeft\">\r\n                    <h3 class=\"flo" +
+"atLeft\">List All Companies</h3>\r\n                    <p class=\"floatRight greyHi" +
+"ghlight\">You have ");
 
 
             
-            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-                                                            Write(status);
+            #line 19 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+                                                             Write(Model.TotalCompanyCount == 0? "no" : Model.TotalCompanyCount.ToString());
 
             
             #line default
             #line hidden
-WriteLiteral("\"\r\n");
+WriteLiteral(" companies entered</p>\r\n                </div>\r\n");
 
 
             
-            #line 27 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-                     if (!Model.HiddenStatuses.Contains(status))
-                    {
+            #line 21 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
 
-            
-            #line default
-            #line hidden
-WriteLiteral("                        ");
-
-WriteLiteral("checked\r\n");
-
-
-            
-            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-                    }
 
             
             #line default
             #line hidden
-WriteLiteral("                 /> ");
+WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\">\r\n                  " +
+"  ");
 
 
             
-            #line 31 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+               Write(Html.ActionLink("Add New Company", MVC.Company.Add(Model.JobSearchId), new { @class = "blueLinks", title = "Add New Company" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                </div>\r\n");
+
+
+            
+            #line 25 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+
+                if (Model.UsedStatuses.Count > 0)
+                {
                     
             
             #line default
             #line hidden
             
-            #line 31 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-               Write(status);
+            #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+               Write(Html.Hidden("jobSearchId", Model.JobSearchId));
 
             
             #line default
             #line hidden
+            
+            #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+                                                                  
+                    
 
-WriteLiteral("<br />\r\n");
+            
+            #line default
+            #line hidden
+WriteLiteral("                    <div class=\"grid3 marginBottom_10 floatLeft\">\r\n              " +
+"          <p>Show all firms with the following status:</p>\r\n                    " +
+"</div>\r\n");
 
 
             
-            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 33 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+
+                    foreach (string status in Model.UsedStatuses.OrderBy(x => x))
+                    {
+                        string checkedString = !Model.HiddenStatuses.Contains(status) ? "checked" : "";
+                            
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                        <div class=\"grid3 marginBottom_10 floatLeft\">\r\n          " +
+"                  <div class=\"floatLeft infoSpan\">\r\n                            " +
+"    <input type=\"checkbox\" name=\"shownStatus\" value=\"");
+
+
+            
+            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+                                                                            Write(status);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" ");
+
+
+            
+            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+                                                                                     Write(checkedString);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" />");
+
+
+            
+            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+                                                                                                      Write(status);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                            </div>\r\n                        </div>\r\n");
+
+
+            
+            #line 43 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+                    }
+                
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    <div class=\"grid3 marginBottom_20 floatLeft\">\r\n              " +
+"          <div class=\"submitBTN\"><input type=\"submit\" value=\"Filter Companies\" /" +
+"></div>\r\n                    </div>\r\n");
+
+
+            
+            #line 48 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+                }
             }
 
             
             #line default
             #line hidden
-WriteLiteral("            <br />\r\n            <input type=\"submit\" value=\" Filter Companies \" /" +
-">\r\n        </p>\r\n");
+WriteLiteral("            <div class=\"clear\"></div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div" +
+" class=\"grid1 marginTop_20 floatLeft\">\r\n    <div class=\"grid2 floatLeft\">\r\n     " +
+"   <div id=\"taskRole\">\r\n            <ul>\r\n");
 
 
             
-            #line 36 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-    }
-}
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    \r\n\r\n");
-
-
-            
-            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
- if (Model.Companies.Count == 0 && Model.UsedStatuses.Count == 0)
-{
+            #line 59 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+                 if (Model.Companies.Count == 0)
+                {
 
             
             #line default
             #line hidden
-WriteLiteral("    ");
-
-WriteLiteral(" No companies have been entered for this job search yet\r\n");
+WriteLiteral("                    <li>\r\n                        <div class=\"taskName\">No compan" +
+"ies match the selected statuses</div>\r\n                    </li>\r\n");
 
 
             
-            #line 43 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-}
-else if (Model.Companies.Count == 0 )
-{
+            #line 64 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+                }
 
             
             #line default
             #line hidden
-WriteLiteral("   ");
-
-WriteLiteral(" No companies in this job search have the selected statuses\r\n");
+WriteLiteral("                \r\n");
 
 
             
-            #line 47 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-}
-else
-{
+            #line 66 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+                 foreach (var company in Model.Companies)
+                {
 
             
             #line default
             #line hidden
-WriteLiteral("    <ul>\r\n");
+WriteLiteral("                    <li>\r\n                        <a href=\"");
 
 
             
-            #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-         foreach (var company in Model.Companies)
-        {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("            <li>");
-
-
-            
-            #line 53 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-           Write(Html.ActionLink(company.Name, MVC.Company.Details(company.Id)));
+            #line 69 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+                            Write(Url.Action(MVC.Company.Details(company.Id)));
 
             
             #line default
             #line hidden
-WriteLiteral("</li>\r\n");
+WriteLiteral("\">\r\n                            <div class=\"greyHighlight date\">");
 
 
             
-            #line 54 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-        }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    </ul>\r\n");
-
-
-            
-            #line 56 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-}
+            #line 70 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+                                                       Write(company.LeadStatus);
 
             
             #line default
             #line hidden
+WriteLiteral("</div>\r\n                            <div class=\"taskName\">");
+
+
+            
+            #line 71 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+                                             Write(company.Name);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                            <div class=\"taskDescription\">");
+
+
+            
+            #line 72 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+                                                    Write(Html.ShortString(company.Notes, 85));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                        </a>\r\n                    </li>\r\n");
+
+
+            
+            #line 75 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+                }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            </ul>\r\n        </div>\r\n    </div>\r\n</div>");
+
 
         }
     }

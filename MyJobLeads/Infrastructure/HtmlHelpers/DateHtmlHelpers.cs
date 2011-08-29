@@ -8,23 +8,23 @@ namespace MyJobLeads.Infrastructure.HtmlHelpers
 {
     public static class DateHtmlHelpers
     {
-        public static string GetDateString(this HtmlHelper html, DateTime? date)
+        public static string GetDueDateString(this HtmlHelper html, DateTime? date)
         {
             if (date == null || date.HasValue == false)
                 return string.Empty;
 
             // Determine if the date is today, yesterday, or tomorrow for friendly strings
             if (date.Value.Date == DateTime.Today - new TimeSpan(1, 0, 0, 0))
-                return "Yesterday";
+                return "Due Yesterday";
 
             if (date.Value.Date == DateTime.Today)
-                return "Today";
+                return "Due Today";
 
             if (date.Value.Date == DateTime.Today + new TimeSpan(1, 0, 0, 0))
-                return "Tomorrow";
+                return "Due Tomorrow";
 
             // Otherwise just return the date string
-            return date.Value.ToShortDateString();
+            return "Due " + date.Value.ToString("M");
         }
     }
 }

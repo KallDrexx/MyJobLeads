@@ -42,6 +42,9 @@
     <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.1.1.0.118\lib\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="DevOne.Security.Cryptography.BCrypt">
       <HintPath>..\packages\BCrypt.1.0.0.0\lib\DevOne.Security.Cryptography.BCrypt.dll</HintPath>
     </Reference>
@@ -99,11 +102,13 @@
     <Compile Include="Commands\Users\ResetUserPasswordCommand.cs" />
     <Compile Include="Data\EFRepository.cs" />
     <Compile Include="Data\EFUnitOfWork.cs" />
+    <Compile Include="Data\IProcess.cs" />
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Configuration\MilestoneConfig.cs" />
     <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\Extensions\EntityExtensions.cs" />
     <Compile Include="Entities\History\CompanyHistory.cs" />
     <Compile Include="Entities\History\ContactHistory.cs" />
     <Compile Include="Entities\History\EntityHistoryBase.cs" />
@@ -120,6 +125,9 @@
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\UnitTestEntity.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="EntityMapping\EntityMapLoader.cs" />
+    <Compile Include="EntityMapping\Mappings\CompanyMappings.cs" />
+    <Compile Include="EntityMapping\Mappings\PositionMappings.cs" />
     <Compile Include="Exceptions\InvalidEmailDomainForOrganizationException.cs" />
     <Compile Include="Exceptions\InvalidOrganizationRegistrationTokenException.cs" />
     <Compile Include="Exceptions\MJLDuplicateEmailException.cs" />
@@ -129,7 +137,11 @@
     <Compile Include="Exceptions\MJLServiceNotFoundException.cs" />
     <Compile Include="Exceptions\MJLUserNotFoundException.cs" />
     <Compile Include="Exceptions\MJLValidatorNotFoundException.cs" />
+    <Compile Include="EntityMapping\IEntityMapConfiguration.cs" />
     <Compile Include="MJLConstants.cs" />
+    <Compile Include="Processes\Positions\PositionProcesses.cs" />
+    <Compile Include="ProcessParams\Positions\CreatePositionParams.cs" />
+    <Compile Include="ProcessParams\Positions\EditPositionParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\DataDirectory\IDataDirectoryProvider.cs" />
     <Compile Include="Providers\Search\ISearchProvider.cs" />
@@ -153,7 +165,10 @@
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQuery.cs" />
     <Compile Include="Queries\Tasks\IsUserAuthorizedForTaskQuery.cs" />
     <Compile Include="TypeExtensions.cs" />
+    <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgress.cs" />
+    <Compile Include="ViewModels\Positions\EditPositionViewModel.cs" />
+    <Compile Include="ViewModels\Positions\PositionDisplayViewModel.cs" />
     <Compile Include="ViewModels\SearchProviderResult.cs" />
     <Compile Include="Queries\Companies\CompaniesByJobSearchIdQuery.cs" />
     <Compile Include="Queries\Companies\CompanyByIdQuery.cs" />

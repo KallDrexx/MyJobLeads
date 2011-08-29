@@ -11,6 +11,7 @@ namespace MyJobLeads.DomainModel.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Title { get; set; }
         public string DirectPhone { get; set; }
         public string MobilePhone { get; set; }
         public string Extension { get; set; }

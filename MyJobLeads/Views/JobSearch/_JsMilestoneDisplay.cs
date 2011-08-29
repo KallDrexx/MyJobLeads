@@ -26,6 +26,7 @@ namespace MyJobLeads.Views.JobSearch
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using MyJobLeads.Infrastructure.HtmlHelpers;
     using Telerik.Web.Mvc.UI;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
@@ -38,108 +39,95 @@ namespace MyJobLeads.Views.JobSearch
         public override void Execute()
         {
 
-WriteLiteral("\r\n");
+WriteLiteral("\r\n    <div class=\"grid2 floatRight\">\r\n        <div class=\"currentMilestone\">\r\n   " +
+"         <h3 class=\"current\">Current Milestone:</h3>\r\n            <h3 class=\"mil" +
+"eStoneNumber\">");
 
 
             
-            #line 3 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
- if (Model.CurrentMilestone != null)
-{
+            #line 6 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+                                   Write(Model.CurrentMilestone.Title);
 
             
             #line default
             #line hidden
-WriteLiteral("    <div id=\"milestone-display\">\r\n        <b>Current Milestone:</b> <br />\r\n     " +
-"   <span class=\"item-heading\">");
+WriteLiteral("</h3>\r\n            <h3 class=\"mileStonePercent\">Percent Completed: ");
 
 
             
             #line 7 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                              Write(Model.CurrentMilestone.Title);
+                                                       Write(Math.Round(Model.MilestoneProgress.TotalProgress * 100, 1));
 
             
             #line default
             #line hidden
-WriteLiteral("</span> <br />\r\n        <span class=\"item-subheading\">Percent Completed: ");
-
-
-            
-            #line 8 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                                                    Write(Math.Round(Model.MilestoneProgress.TotalProgress * 100, 1));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("%</span> <br /> <br />\r\n\r\n");
+WriteLiteral("%</h3>\r\n            \r\n            <p>\r\n");
 
 
             
             #line 10 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-         if (Model.MilestoneProgress.TotalProgress == 1)
-        {
-            
+                 if (Model.MilestoneProgress.TotalProgress >= 1)
+                {
+                    
             
             #line default
             #line hidden
             
             #line 12 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-       Write(Html.Raw(Html.Encode(Model.CurrentMilestone.CompletionDisplay).Replace(Environment.NewLine, "<br />")));
-
-            
-            #line default
-            #line hidden
-
-WriteLiteral(" <br />");
-
-
-
-WriteLiteral("<br />\r\n");
-
-
-            
-            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-
-
-            
-            #line default
-            #line hidden
-WriteLiteral("            <span class=\"rights\"><a href=\"#\">Start Next Milestone</a></span>\r\n");
-
-
-            
-            #line 15 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-        }
-        
-        else
-        {
-            
-            
-            #line default
-            #line hidden
-            
-            #line 19 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-       Write(Html.Raw(Html.Encode(Model.CurrentMilestone.Instructions).Replace(Environment.NewLine, "<br />")));
+               Write(Html.Raw(Html.Encode(Model.CurrentMilestone.CompletionDisplay).Replace(Environment.NewLine, "<br />")));
 
             
             #line default
             #line hidden
             
-            #line 19 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-                                                                                                              
-        }
+            #line 12 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+                                                                                                                           
+                }
+                else
+                {
+                    
+            
+            #line default
+            #line hidden
+            
+            #line 16 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+               Write(Html.Raw(Html.Encode(Model.CurrentMilestone.Instructions).Replace(Environment.NewLine, "<br />")));
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n");
-
-
             
-            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
-}
+            #line 16 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+                                                                                                                      
+                }
+
             
             #line default
             #line hidden
+WriteLiteral("            </p>\r\n\r\n");
+
+
+            
+            #line 20 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+             if (Model.MilestoneProgress.TotalProgress >= 1)
+            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                <div class=\"nextMilestone\"><a href=\"#\">Start Next Milestone</a></" +
+"div>\r\n");
+
+
+            
+            #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        </div>\r\n    </div>");
+
 
         }
     }

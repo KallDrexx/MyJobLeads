@@ -77,9 +77,7 @@ namespace MyJobLeads.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string _CompanySidebarDisplay = "~/Views/Company/_CompanySidebarDisplay.cshtml";
-            public readonly string _CompanyTaskDisplay = "~/Views/Company/_CompanyTaskDisplay.cshtml";
-            public readonly string _jobsearchCompanySummary = "~/Views/Company/_jobsearchCompanySummary.cshtml";
+            public readonly string _CompanySummaryDisplay = "~/Views/Company/_CompanySummaryDisplay.cshtml";
             public readonly string Details = "~/Views/Company/Details.cshtml";
             public readonly string Edit = "~/Views/Company/Edit.cshtml";
             public readonly string List = "~/Views/Company/List.cshtml";
@@ -113,9 +111,10 @@ namespace MyJobLeads.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Details(int id) {
+        public override System.Web.Mvc.ActionResult Details(int id, bool showPositions) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
             callInfo.RouteValueDictionary.Add("id", id);
+            callInfo.RouteValueDictionary.Add("showPositions", showPositions);
             return callInfo;
         }
 

@@ -16,6 +16,8 @@ using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Providers;
 using FluentValidation;
 using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.ViewModels.Contacts;
+using MyJobLeads.ViewModels.Companies;
 
 namespace MyJobLeads.Controllers
 {
@@ -33,7 +35,11 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Index()
         {
+            // Make sure the user has a created job search
             var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(CurrentUserId).Execute();
+            if (user.LastVisitedJobSearch == null)
+                return RedirectToAction(MVC.JobSearch.Add());
+
             var model = new TaskDashboardViewModel(user);
 
             if (model.TodaysTasks.Count > 0)
@@ -137,10 +143,14 @@ namespace MyJobLeads.Controllers
                     ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
 
                 // Re-retrieve the contact and company entities from the database
-                model.Contact = _serviceFactory.GetService<ContactByIdQuery>().WithContactId(selectedContactId).Execute();
-                model.Company = _serviceFactory.GetService<CompanyByIdQuery>().WithCompanyId(model.AssociatedCompanyId).Execute();
+                var contact = _serviceFactory.GetService<ContactByIdQuery>().WithContactId(selectedContactId).Execute();
+                var company = _serviceFactory.GetService<CompanyByIdQuery>().WithCompanyId(model.AssociatedCompanyId).Execute();
+
+                model.Contact = new ContactSummaryViewModel(contact);
+                model.Company = new CompanySummaryViewModel(company);
+
                 model.AvailableCategoryList = _serviceFactory.GetService<CategoriesAvailableForTasksQuery>().Execute();
-                CreateCompanyContactList(Convert.ToInt32(model.AssociatedContactId), model.Company, model);
+                CreateCompanyContactList(Convert.ToInt32(model.AssociatedContactId), company, model);
 
                 // Re-show form
                 return View(model);

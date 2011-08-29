@@ -26,48 +26,58 @@ namespace MyJobLeads.Views.Home
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    
+    #line 2 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
+    using MyJobLeads.Controllers;
+    
+    #line default
+    #line hidden
+    using MyJobLeads.Infrastructure.HtmlHelpers;
     using Telerik.Web.Mvc.UI;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/_AnonymousUserSidebarDisplay.cshtml")]
-    public class _AnonymousUserSidebarDisplay : System.Web.Mvc.WebViewPage<dynamic>
+    public class _AnonymousUserSidebarDisplay : System.Web.Mvc.WebViewPage<MyJobLeads.Controllers.ActiveSidebarLink>
     {
         public _AnonymousUserSidebarDisplay()
         {
         }
         public override void Execute()
         {
-WriteLiteral("<p id=\"sidebar-links\">\r\n    ");
+
+
+WriteLiteral("\r\n<h2 id=\"accountName\">Not Logged In</h2>\r\n\r\n<div id=\"leftHandNav\">\r\n    <ul>\r\n  " +
+"      <li>");
 
 
             
-            #line 2 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
-Write(Html.ActionLink("About", MVC.Home.About()));
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" <br /><br />\r\n\r\n    ");
-
-
-            
-            #line 4 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
-Write(Html.ActionLink("Log In", MVC.Account.LogOn()));
+            #line 8 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
+       Write(Html.ActionLink("Log In", MVC.Account.LogOn(), new { @class = Model == ActiveSidebarLink.Logon ? "active" : "" }));
 
             
             #line default
             #line hidden
-WriteLiteral(" <br />\r\n    ");
+WriteLiteral("</li>\r\n        <li>");
 
 
             
-            #line 5 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
-Write(Html.ActionLink("Register Account", MVC.Account.Register()));
+            #line 9 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
+       Write(Html.ActionLink("Register", MVC.Account.Register(), new { @class = Model == ActiveSidebarLink.Register ? "active" : ""} ));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n</p>");
+WriteLiteral("</li>\r\n        <li>");
+
+
+            
+            #line 10 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
+       Write(Html.ActionLink("About", MVC.Home.About(), new { @class = Model == ActiveSidebarLink.About ? "active" : "" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</li>\r\n    </ul>\r\n</div>\r\n");
 
 
         }

@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
     <meta name="description" content="Your description goes here" />
 	<meta name="keywords" content="your,keywords,goes,here" />
 	<meta name="author" content="Your Name" />
@@ -19,27 +19,64 @@
 </head>
 
 <body>
-    <div id="header">
-		@Html.ActionLink("MyLeads", MVC.Home.Index(), new { id = "logo" })
-			
-		<div id="search-area">
-			@using (Html.BeginForm(MVC.JobSearch.Search())) {
-				<input type="text" id="query" name="query" />
-				<input type="submit" value="Search" />
-			}
-		</div>
-    </div>
-    	
-    <div id="sidebar">
-    	@{ Html.RenderAction(MVC.Home.SidebarDisplay()); }
-    </div>
-    	
-    <div id="main-area">
-        <div id="content">
-            @RenderBody()
-        </div>    		
-    </div>
 
-    @( Html.Telerik().ScriptRegistrar() )
+<div id="myLeadsheader"> 
+		<div id="headerWrap"> 
+        	<div class="leftColumn"> 
+            	<h1 id="myLogo">MyLeads</h1> 
+            </div> 
+            <div class="rightColumn"> 
+            	<div id="heaerNavWrapper"> 
+                		<div id="headerSearch"> 
+                        	<input id="headerInput" type="text" name="headerInput" value="Search" /> 
+                        </div> 
+                        
+                        <div id="headerNav"> 
+                        	<ul> 
+                        	<li>@Html.ActionLink("Home", MVC.Home.Index())</li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Log Off", MVC.Account.LogOff())</li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("Log On", MVC.Account.LogOn())</li>
+                            }
+                            </ul> 
+                        </div> 
+                </div> 
+            </div>  	
+        </div> 
+</div> 
+<div id="myLeadsBodyWrap"> 
+ 
+		<div class="leftColumn"> 
+            @if (IsSectionDefined("SideBar"))
+            {
+                @RenderSection("SideBar");
+            }
+            else
+            {
+                Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.None));
+            }
+        </div> 
+        <div class="rightColumn"> 
+            	<div id="contentWrapper"> 
+                    @RenderBody()                
+                <div class="clear"></div> 
+                </div> 
+                <div class="footer">
+                    <div class="grid2 floatLeft">MyLeads © 2011</div>
+                    <div class="grid2 floatRight">
+                        <ul class="footerLinks">
+                            <li><a href="http://interviewtools.net/">InterviewTools</a></li>
+                        </ul>
+                    </div>
+                </div> 
+        </div> 
+</div> 
+
+@( Html.Telerik().ScriptRegistrar())
+
 </body>
 </html>

@@ -23,6 +23,8 @@ namespace MyJobLeads.DomainModel.Data
             _context = new MyJobLeadsDbContext();
         }
 
+        public MyJobLeadsDbContext DbContext { get { return _context; } }
+
         #region Unit Of Work Methods
 
         public void Commit()
