@@ -536,10 +536,8 @@ a.viewContact{
 	color:#fff;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
+.validation-summary-errors 
+{
+    font-weight: bold;
+    color: Red;
+}

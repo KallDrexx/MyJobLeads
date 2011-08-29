@@ -84,17 +84,22 @@
                     
     <div class="grid2 floatRight"> 
         <div class="contactsPositionsNv">
+            @{
+                string contactLinkString = string.Format("Contacts ({0})", Model.Contacts.Count);
+                string positionLinkString = string.Format("Positions ({0})", Model.Positions.Count);
+            }
+
             @if (Model.showPositions)
             {
-                @Html.ActionLink("Contacts", MVC.Company.Details(Model.Id), new { title = "Show Relevant Contacts" })
+                @Html.ActionLink(contactLinkString, MVC.Company.Details(Model.Id), new { title = "Show Relevant Contacts" })
                 @:|
-                <span class="active">Positions</span>
+                <span class="active">@positionLinkString</span>
             }
             else
             {
-                <span class="active">Contacts</span>
+                <span class="active">@contactLinkString</span>
                 @:|
-                @Html.ActionLink("Positions", MVC.Company.Details(Model.Id, true), new { title = "Show Relevant Positions" })
+                @Html.ActionLink(positionLinkString, MVC.Company.Details(Model.Id, true), new { title = "Show Relevant Positions" })
             }
         </div>
 
