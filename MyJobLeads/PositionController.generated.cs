@@ -70,6 +70,7 @@ namespace MyJobLeads.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string Details = "~/Views/Position/Details.cshtml";
             public readonly string Edit = "~/Views/Position/Edit.cshtml";
         }
     }

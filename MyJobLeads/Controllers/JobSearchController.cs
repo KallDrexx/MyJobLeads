@@ -31,6 +31,7 @@ namespace MyJobLeads.Controllers
         protected OpenTasksByJobSearchQuery _openTasksByJobSearchQuery;
         protected EditUserCommand _editUserCommand;
         protected EntitySearchQuery _entitySearchQuery;
+        protected UserByIdQuery _userByIdQuery;
 
         public JobSearchController(JobSearchesByUserIdQuery jobSearchesByIdQuery,
                                     JobSearchByIdQuery jobSearchByIdQuery,
@@ -39,6 +40,7 @@ namespace MyJobLeads.Controllers
                                     OpenTasksByJobSearchQuery openTasksByJobSearchQuery,
                                     EditUserCommand editUserCommand,
                                     EntitySearchQuery entitySearchQuery,
+                                    UserByIdQuery userByIdQuery,
                                     IServiceFactory serviceFactory)
         {
             _jobSearchByIdQuery = jobSearchByIdQuery;
@@ -49,6 +51,7 @@ namespace MyJobLeads.Controllers
             _editUserCommand = editUserCommand;
             _entitySearchQuery = entitySearchQuery;
             _serviceFactory = serviceFactory;
+            _userByIdQuery = userByIdQuery;
         }
 
         #endregion
@@ -113,10 +116,11 @@ namespace MyJobLeads.Controllers
             return View(new JobSearchDetailsViewModel { JobSearch = search, OpenTasks = openTasks });
         }
 
-        public virtual ActionResult Search(int id, string query)
+        public virtual ActionResult Search(string query)
         {
-            var results = _entitySearchQuery.WithJobSearchId(id).WithSearchQuery(query).Execute();
-            return View(new PerformedSearchViewModel { SearchQuery = query, Results = results, JobSearchId = id });
+            var user = _userByIdQuery.WithUserId(CurrentUserId).Execute();
+            var results = _entitySearchQuery.WithJobSearchId((int)user.LastVisitedJobSearchId).WithSearchQuery(query).Execute();
+            return View(new PerformedSearchViewModel { SearchQuery = query, Results = results, JobSearchId = (int)user.LastVisitedJobSearchId });
         }
 
         public virtual ActionResult StartNextMilestone(int id)

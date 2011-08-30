@@ -110,9 +110,8 @@ namespace MyJobLeads.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Search(int id, string query) {
+        public override System.Web.Mvc.ActionResult Search(string query) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Search);
-            callInfo.RouteValueDictionary.Add("id", id);
             callInfo.RouteValueDictionary.Add("query", query);
             return callInfo;
         }
