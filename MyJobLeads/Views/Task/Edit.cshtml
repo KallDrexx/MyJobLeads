@@ -66,22 +66,23 @@
                     </div> 
                 </div> 
                 
-                <div class="grid3 marginBottom_10 floatLeft">
-                    <div class="floatLeft"><p class="greyHighlight">Task Completed?</p>
-                        <div class="infoSpan">
-                            @Html.CheckBoxFor(x => x.Completed)
-                        </div>
-                    </div>
-                </div>
-                
                 @if (Model.Id != 0)
                 {
-                    <div class="grid3 marginBottom_10 floatLeft"> 
-                        <div class="floatLeft"><p class="greyHighlight">Notes:</p>
-                            <div class="infoSpan">@Html.TextAreaFor(x => x.Notes, new { @class = "textAreaInfo" })</div>
-                        </div> 
-                    </div> 
+                    <div class="grid3 marginBottom_10 floatLeft">
+                        <div class="floatLeft"><p class="greyHighlight">Task Completed?</p>
+                            <div class="infoSpan">
+                                @Html.CheckBoxFor(x => x.Completed)
+                            </div>
+                        </div>
+                    </div>
                 }
+                
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">Notes:</p>
+                        <div class="infoSpan">@Html.TextAreaFor(x => x.Notes, new { @class = "textAreaInfo" })</div>
+                    </div> 
+                </div> 
+                
                 
                 <div class="grid3 marginBottom_20 floatLeft"> 
                     <div class="submitBTN ">
