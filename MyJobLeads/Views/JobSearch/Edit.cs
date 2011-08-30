@@ -96,14 +96,26 @@ WriteLiteral("</h3> \r\n                </div> \r\n");
             
             #line 18 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
                 
-               
+
             
             #line default
             #line hidden
+WriteLiteral(@"                <div class=""grid3 marginBottom_10 marginAuto floatLeft"">
+                    <div class=""floatLeft"">
+                        <p>
+                            Your first step is to setup a job search. <br /><br />
+                            
+                            Interview Tools allows you to organize multiple job searches. Some uses of this are to
+                            prganize your job search by year, such as ""2011 Full Time Position"", ""2012 Internship Hunt"", or ""May 2012 Need Part-Time Job""
+                            and to organize job search by function, such as ""Sales and Marketing Opportunities"" or ""Engineering Job Search""
+                        </p>    
+                    </div>
+                </div>
+");
+
 
             
-            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
-                        
+            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
                 
 
             
