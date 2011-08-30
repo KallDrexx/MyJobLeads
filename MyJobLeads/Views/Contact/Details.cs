@@ -53,12 +53,12 @@ WriteLiteral("\r\n");
             #line hidden
 WriteLiteral("\r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"lineSeperater\"> \r\n        <div " +
 "class=\"pageInfoBox\">\r\n            <div class=\"grid3 marginBottom_10 marginAuto f" +
-"loatLeft\"> \r\n                <h3 class=\"floatLeft\">");
+"loatLeft\"> \r\n                <h3 class=\"floatLeft\">Contact: ");
 
 
             
             #line 11 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
-                                 Write(Model.Name);
+                                          Write(Model.Name);
 
             
             #line default
@@ -73,13 +73,23 @@ WriteLiteral("</h3> \r\n                ");
             
             #line default
             #line hidden
+WriteLiteral("\r\n                ");
+
+
+            
+            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
+           Write(Html.ActionLink("Add Task", MVC.Task.Add(Model.Company.Id, Model.Id), new { @class = "floatRight blueLinks", title = "Add task" }));
+
+            
+            #line default
+            #line hidden
 WriteLiteral("\r\n            </div> \r\n\r\n            <div class=\"grid3 marginBottom_10 floatLeft\"" +
 "> \r\n                <div class=\"grid4 floatLeft\"> \r\n                    <p class" +
 "=\"greyHighlight\">Title: <span class=\"setTask\">");
 
 
             
-            #line 17 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
+            #line 18 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
                                                                      Write(Model.Title);
 
             
@@ -90,7 +100,7 @@ WriteLiteral("</span></p> \r\n                    <p class=\"greyHighlight\">Ema
 
 
             
-            #line 18 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
+            #line 19 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
                                                                      Write(Model.Email);
 
             
@@ -101,7 +111,7 @@ WriteLiteral("</span></p> \r\n                    <p class=\"greyHighlight\">Ass
 
 
             
-            #line 19 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
+            #line 20 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
                                                                          Write(Model.Assistant);
 
             
@@ -112,7 +122,7 @@ WriteLiteral("</span></p> \r\n                    <p class=\"greyHighlight\">Ref
 
 
             
-            #line 20 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
+            #line 21 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
                                                                            Write(Model.ReferredBy);
 
             
@@ -124,7 +134,7 @@ WriteLiteral("</span></p>\r\n                </div> \r\n\r\n                <div
 
 
             
-            #line 24 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
+            #line 25 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
                                                                             Write(Model.DirectPhoneWithExtension);
 
             
@@ -135,7 +145,7 @@ WriteLiteral("</span></p> \r\n                    <p class=\"greyHighlight\">Mob
 
 
             
-            #line 25 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
+            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
                                                                             Write(Model.MobilePhone);
 
             
@@ -152,7 +162,7 @@ WriteLiteral(@"</span></p>
 
 
             
-            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
+            #line 33 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
                                          Write(Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />")));
 
             
@@ -164,7 +174,7 @@ WriteLiteral("</span>\r\n                    </p>\r\n                </div> \r\n
 
 
             
-            #line 42 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
+            #line 43 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Contact\Details.cshtml"
   Html.RenderPartial(MVC.Company.Views._CompanySummaryDisplay, Model.Company);
             
             #line default

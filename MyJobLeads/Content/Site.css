@@ -179,8 +179,9 @@ input{
 	border-left:1px solid #666;
 	border-right:1px solid #666;
 	}
-#myLogo{
+#myLogo, #myLogo a:visited{
 	padding:10px 0 0 10px;
+	color: White;
 	}	
 #headerSearch{
 	position:absolute;
@@ -369,13 +370,12 @@ input{
 #taskRole ul .date{
 	float:right;
 	}
-.taskName{
+.taskName, .taskName a:visited{
 	color:#3b5998;
 	font-weight:800;
 	}	
 .taskDescription {
 	color:#3d3d3d;
-	font-weight:800;
 	font-size:14px;
 	}
 .BottomPageInfo{
@@ -467,7 +467,7 @@ input{
 #contactsList ul li{
 	padding:0 20px 20px 20px;
 	}
-.contactName{
+.contactName, .contactName a:visited{
 	color:#3b5998;
 	font-weight:800;
 	}
@@ -485,7 +485,6 @@ a.viewContact{
 	padding:0 0 0 5px;
 	font-size:14px;
 	font-style:normal;
-	font-weight:600;
 	color:#3d3d3d;
 	}
 	

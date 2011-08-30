@@ -8,8 +8,9 @@
     <div class="lineSeperater"> 
         <div class="pageInfoBox">
             <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
-                <h3 class="floatLeft">@Model.Name</h3> 
+                <h3 class="floatLeft">Company: @Model.Name</h3> 
                 @Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" })
+                @Html.ActionLink("Add Task", MVC.Task.Add(Model.Id), new { @class = "floatRight blueLinks", title = "Add Tasks" })
             </div> 
 
             <div class="grid3 marginBottom_10 floatLeft"> 
@@ -51,11 +52,16 @@
                     {
                         <li>
                             <div class="greyHighlight date">@Html.GetDueDateString(task.DueDate)</div>
-                            <div class="taskName">@task.Name</div>
+                            <div class="taskName">@Html.ActionLink(task.Name, MVC.Task.Details(task.Id))</div>
                             <p class="taskDescription">@task.AssociatedWith</p>
                             <p>@Html.ShortString(task.Notes, 110)</p>
                             @Html.ActionLink("View Task", MVC.Task.Details(task.Id), new { @class = "blueLinks viewContact" })
                         </li>
+                        
+                        @if (Model.OpenTasks.OrderBy(x => x.DueDate).Last() != task)
+                        {
+                            <li><hr /></li>
+                        }
                     }
                 </ul> 
              </div>	
@@ -70,11 +76,16 @@
                     {
                         <li>
                             <div class="greyHighlight date">Completed</div>
-                            <div class="taskName">@task.Name</div>
+                            <div class="taskName">@Html.ActionLink(task.Name, MVC.Task.Details(task.Id))</div>
                             <p class="taskDescription">@task.AssociatedWith</p>
                             <p>@Html.ShortString(task.Notes, 110)</p>
                             @Html.ActionLink("View Task", MVC.Task.Details(task.Id), new { @class = "blueLinks viewContact" })
                         </li>
+                        
+                        @if (Model.CompletedTasks.OrderBy(x => x.CompletionDate).Last() != task)
+                        {
+                            <li><hr /></li>
+                        }
                     }
                 </ul>  
             </div>                        
@@ -109,15 +120,21 @@
                             
             <div id="contactsList"> 
                 <ul> 
-                    @foreach (var positions in Model.Positions.OrderBy(x => x.Title))
+                    @{ var lastPosition = Model.Positions.OrderBy(x => x.Title).LastOrDefault(); }
+                    @foreach (var position in Model.Positions.OrderBy(x => x.Title))
                     {
                         <ul> 
                             <li> 
-                                <div class="contactName">@positions.Title</div> 
-                                <p class="greyHighlight">@(positions.HasApplied? "Applied" : "Not Yet Applied")</p> 
-                                <p>@Html.ShortString(positions.Notes, 110)</p> 
-                                @Html.ActionLink("View Position", MVC.Position.Details(positions.Id), new { @class = "blueLinks viewContact" })
-                            </li>       
+                                <div class="contactName">@Html.ActionLink(position.Title, MVC.Position.Details(position.Id))</div> 
+                                <p class="greyHighlight">@(position.HasApplied ? "Applied" : "Not Yet Applied")</p> 
+                                <p>@Html.ShortString(position.Notes, 110)</p> 
+                                @Html.ActionLink("View Position", MVC.Position.Details(position.Id), new { @class = "blueLinks viewContact" })
+                            </li>
+                            
+                            @if (position != lastPosition)
+                            {
+                                <li><hr /></li>
+                            }       
                         </ul>
                     }             
                 </ul> 
@@ -130,14 +147,26 @@
                             
             <div id="contactsList"> 
                 <ul> 
+                    @{ var lastContact = Model.Contacts.OrderBy(x => x.Name).LastOrDefault(); }
                     @foreach (var contact in Model.Contacts.OrderBy(x => x.Name))
                     {
                         <li> 
-                            <div class="contactName">@contact.Name <span>- @contact.Title </span></div> 
+                            <div class="contactName"> 
+                                @Html.ActionLink(contact.Name, MVC.Contact.Details(Model.Id))
+                                @if (!string.IsNullOrWhiteSpace(contact.Title))
+                                {
+                                    <span>- @Html.ActionLink(contact.Title, MVC.Contact.Details(Model.Id))</span>
+                                }
+                            </div> 
                             <p><span class="greyHighlight">Direct:</span> @contact.DirectPhoneWithExtension <span class="greyHighlight">Mobile:</span> @contact.MobilePhone</p> 
                             <p>@Html.ShortString(contact.Notes, 110)</p> 
                             @Html.ActionLink("View Contact", MVC.Contact.Details(contact.Id), new { @class = "blueLinks viewContact" })
                         </li> 
+                        
+                        @if (contact != lastContact)
+                        {
+                            <li><hr /></li>
+                        }
                     }             
                 </ul> 
             </div> 
