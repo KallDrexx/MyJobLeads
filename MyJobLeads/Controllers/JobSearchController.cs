@@ -32,6 +32,7 @@ namespace MyJobLeads.Controllers
         protected EditUserCommand _editUserCommand;
         protected EntitySearchQuery _entitySearchQuery;
         protected UserByIdQuery _userByIdQuery;
+        protected StartNextJobSearchMilestoneCommand _startNextMilestoneCmd;
 
         public JobSearchController(JobSearchesByUserIdQuery jobSearchesByIdQuery,
                                     JobSearchByIdQuery jobSearchByIdQuery,
@@ -41,6 +42,7 @@ namespace MyJobLeads.Controllers
                                     EditUserCommand editUserCommand,
                                     EntitySearchQuery entitySearchQuery,
                                     UserByIdQuery userByIdQuery,
+                                    StartNextJobSearchMilestoneCommand startNextMilestoneCmd,
                                     IServiceFactory serviceFactory)
         {
             _jobSearchByIdQuery = jobSearchByIdQuery;
@@ -52,6 +54,7 @@ namespace MyJobLeads.Controllers
             _entitySearchQuery = entitySearchQuery;
             _serviceFactory = serviceFactory;
             _userByIdQuery = userByIdQuery;
+            _startNextMilestoneCmd = startNextMilestoneCmd;
         }
 
         #endregion
@@ -123,11 +126,11 @@ namespace MyJobLeads.Controllers
             return View(new PerformedSearchViewModel { SearchQuery = query, Results = results, JobSearchId = (int)user.LastVisitedJobSearchId });
         }
 
-        public virtual ActionResult StartNextMilestone(int id)
+        public virtual ActionResult StartNextMilestone()
         {
-            _serviceFactory.GetService<StartNextJobSearchMilestoneCommand>()
-                .Execute(new StartNextJobSearchMilestoneCommandParams { JobSearchId = id });
-            return RedirectToAction(MVC.JobSearch.Details(id));
+            var user = _userByIdQuery.WithUserId(CurrentUserId).Execute();
+            _startNextMilestoneCmd.Execute(new StartNextJobSearchMilestoneCommandParams { JobSearchId = Convert.ToInt32(user.LastVisitedJobSearchId) });
+            return RedirectToAction(MVC.Home.Index());
         }
     }
 }

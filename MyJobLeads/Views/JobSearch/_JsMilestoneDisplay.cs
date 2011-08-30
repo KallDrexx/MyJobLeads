@@ -115,8 +115,17 @@ WriteLiteral("            </p>\r\n\r\n");
             
             #line default
             #line hidden
-WriteLiteral("                <div class=\"nextMilestone\"><a href=\"#\">Start Next Milestone</a></" +
-"div>\r\n");
+WriteLiteral("                <div class=\"nextMilestone\">");
+
+
+            
+            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\_JsMilestoneDisplay.cshtml"
+                                      Write(Html.ActionLink("Start Next Milestone", MVC.JobSearch.StartNextMilestone()));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n");
 
 
             
