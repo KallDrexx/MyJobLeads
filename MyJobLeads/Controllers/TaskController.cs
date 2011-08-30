@@ -68,6 +68,12 @@ namespace MyJobLeads.Controllers
             var model = new EditTaskViewModel(company);
             model.AvailableCategoryList = _serviceFactory.GetService<CategoriesAvailableForTasksQuery>().Execute();
 
+            if (contactId != 0)
+            {
+                model.Contact = new ContactSummaryViewModel(_serviceFactory.GetService<ContactByIdQuery>().WithContactId(contactId).Execute());
+                model.AssociatedContactId = contactId;
+            }
+
             // Create contact list
             CreateCompanyContactList(contactId, company, model);
 
