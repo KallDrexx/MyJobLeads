@@ -18,12 +18,10 @@
                 </div> 
                 
                 <div class="grid3 marginBottom_10 marginAuto floatLeft">
-                    <div class="floatLeft">
-                        <p>
-                            If you do not have an account, you can @Html.ActionLink("create one now", MVC.Account.Register()) <br />
-                            If you have forgotten your password, you can @Html.ActionLink("generate a new one", MVC.Account.ResetPassword())
-                        </p>    
-                    </div>
+                    <p>
+                        If you do not have an account, you can @Html.ActionLink("create one now", MVC.Account.Register(), new { @class = "inlineBlue" }) <br />
+                        If you have forgotten your password, you can @Html.ActionLink("generate a new one", MVC.Account.ResetPassword(), new { @class = "inlineBlue" })
+                    </p>    
                 </div>
                 
                 <div class="grid3 marginBottom_10 marginAuto floatleft">

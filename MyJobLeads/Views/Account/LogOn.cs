@@ -93,34 +93,32 @@ WriteLiteral("                <div class=\"grid3 marginBottom_10 marginAuto floa
             #line default
             #line hidden
 WriteLiteral("                <div class=\"grid3 marginBottom_10 marginAuto floatLeft\">\r\n       " +
-"             <div class=\"floatLeft\">\r\n                        <p>\r\n             " +
-"               If you do not have an account, you can ");
-
-
-            
-            #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
-                                                              Write(Html.ActionLink("create one now", MVC.Account.Register()));
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" <br />\r\n                            If you have forgotten your password, you can" +
+"             <p>\r\n                        If you do not have an account, you can" +
 " ");
 
 
             
-            #line 24 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
-                                                                    Write(Html.ActionLink("generate a new one", MVC.Account.ResetPassword()));
+            #line 22 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
+                                                          Write(Html.ActionLink("create one now", MVC.Account.Register(), new { @class = "inlineBlue" }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                        </p>    \r\n                    </div>\r\n                <" +
-"/div>\r\n");
+WriteLiteral(" <br />\r\n                        If you have forgotten your password, you can ");
 
 
             
-            #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
+            #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
+                                                                Write(Html.ActionLink("generate a new one", MVC.Account.ResetPassword(), new { @class = "inlineBlue" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                    </p>    \r\n                </div>\r\n");
+
+
+            
+            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
                 
 
             
@@ -131,7 +129,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_10 marginAuto floa
 
 
             
-            #line 31 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
+            #line 29 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
                    Write(Html.ValidationSummary());
 
             
@@ -141,7 +139,7 @@ WriteLiteral("\r\n                    </div>\r\n                </div>\r\n");
 
 
             
-            #line 34 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
+            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
                 
 
             
@@ -153,7 +151,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r
 
 
             
-            #line 37 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
+            #line 35 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
                                          Write(Html.TextBoxFor(x => x.UserName, new { @class = "info" }));
 
             
@@ -163,7 +161,7 @@ WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r
 
 
             
-            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
+            #line 38 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
 
 
             
@@ -175,7 +173,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r
 
 
             
-            #line 43 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
+            #line 41 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
                                          Write(Html.PasswordFor(x => x.Password, new { @class = "info "}));
 
             
@@ -185,7 +183,7 @@ WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r
 
 
             
-            #line 46 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
+            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
 
 
             
@@ -197,7 +195,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_20 floatLeft\"> \r
 
 
             
-            #line 50 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
+            #line 48 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Account\LogOn.cshtml"
             }
 
             

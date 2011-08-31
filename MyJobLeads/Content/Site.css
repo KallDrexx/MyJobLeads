@@ -184,14 +184,17 @@ input{
 	color: White;
 	}	
 #headerSearch{
-	position:absolute;
-	top:5px;
-	left:5px;
-	width:300px;
+	position:relative;
+	float:left;
+	margin:5px 0 0 0;
+	padding:0 0 0 5px;
 	}
 .headerInput{
 	height:15px;
 	width:250px;
+	}
+#searchSubmit{
+	height:19px;
 	}
 #headerNav{
 	float:right;
@@ -382,8 +385,16 @@ input{
 	position:relative;
 	margin:0 auto 0 auto;
 	width:730px;
-	
 	}	
+.pageInfoBox a.inlineBlue{
+	padding:0;
+	color:#3b5998;
+	font-style:oblique;
+	font-weight:400;
+	}
+.pageInfoBox a.inlineBlue:hover{
+	text-decoration:underline;
+	}
 .lineSeperater{
 	width:720px;
 	padding:0 0 10px 0;
