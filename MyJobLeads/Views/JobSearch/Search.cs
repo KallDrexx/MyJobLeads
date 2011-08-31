@@ -20,12 +20,16 @@ namespace MyJobLeads.Views.JobSearch
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using MyJobLeads.Infrastructure.HtmlHelpers;
+    using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/JobSearch/Search.cshtml")]
     public class Search : System.Web.Mvc.WebViewPage<MyJobLeads.ViewModels.PerformedSearchViewModel>
     {
@@ -42,86 +46,31 @@ WriteLiteral("\r\n");
             #line 3 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
   
     ViewBag.Title = "Search Results";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n<p>\r\n");
-
-
-            
-            #line 9 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-     using (Html.BeginForm(MVC.JobSearch.Search()))
-    {
-        
-            
-            #line default
-            #line hidden
-            
-            #line 11 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-   Write(Html.Hidden("id", Model.JobSearchId));
-
-            
-            #line default
-            #line hidden
-            
-            #line 11 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                             
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        ");
-
-WriteLiteral("Search: ");
-
-
-            
-            #line 12 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-             Write(Html.TextBox("query"));
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" <input type=\"submit\" value=\"Search\" />\r\n");
-
-
-            
-            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-    }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</p>\r\n\r\n<p>Search results matching \"");
+WriteLiteral("\r\n<div class=\"grid2 floatLeft\">\r\n    <div class=\"taskHeader\">\r\n        <h3>Search" +
+" Results</h3>\r\n    </div>\r\n\r\n    <h3 class=\"taskCalls\">Companies</h3>\r\n\r\n    <di" +
+"v id=\"taskRole\">\r\n        <ul>\r\n");
 
 
             
             #line 16 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                       Write(Model.SearchQuery);
+             if (Model.Results.Companies.Count == 0)
+            {
 
             
             #line default
             #line hidden
-WriteLiteral("\"</p>\r\n\r\n");
-
-
-            
-            #line 18 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
- if (Model.Results.Companies.Count == 0 && Model.Results.Contacts.Count == 0 && Model.Results.Tasks.Count == 0)
-{
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    <p>No companies, contacts or tasks were found for your search phrase</p>\r\n");
+WriteLiteral("                <li>\r\n                    <div class=\"taskName\">No companies matc" +
+"hed the search terms</div>\r\n                </li>\r\n");
 
 
             
             #line 21 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-}
+            }
 
             
             #line default
@@ -131,591 +80,253 @@ WriteLiteral("\r\n");
 
             
             #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
- if (Model.Results.Companies.Count > 0)
-{
+             foreach (var company in Model.Results.Companies)
+            {
 
             
             #line default
             #line hidden
-WriteLiteral("    <h2>Companies That Match</h2>\r\n");
+WriteLiteral("                <li>\r\n                    <a href=\"");
 
 
+            
+            #line 26 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
+                        Write(Url.Action(MVC.Company.Details(company.Id)));
 
-WriteLiteral("    <ul>\r\n");
+            
+            #line default
+            #line hidden
+WriteLiteral("\">\r\n                        <div class=\"taskName\">");
 
 
             
             #line 27 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-         foreach (var company in Model.Results.Companies.OrderBy(x => x.Name).ToArray())
-        {
+                                         Write(company.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("            <li>\r\n                ");
+WriteLiteral("</div>\r\n                        <div class=\"taskDescription\">");
 
 
             
-            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-           Write(Html.ActionLink(company.Name, MVC.Company.Details(company.Id)));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                <ul>\r\n");
-
-
-            
-            #line 32 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                      
-                        // Form company location string
-                        bool citySpecified = !string.IsNullOrWhiteSpace(company.City);
-                        bool stateSpecified = !string.IsNullOrWhiteSpace(company.State);
-                        bool zipSpecified = !string.IsNullOrWhiteSpace(company.Zip);
-
-                        string location = string.Empty;
-                        if (citySpecified && stateSpecified) { location = string.Concat(company.City, ", ", company.State, " "); }
-                        else if (citySpecified) { location = company.City + " "; }
-                        else if (stateSpecified) { location = company.State + " "; }
-
-                        if (zipSpecified) { location += company.Zip; }
-                    
+            #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
+                                                Write(Html.ShortString(company.Notes, 90));
 
             
             #line default
             #line hidden
-WriteLiteral("                    \r\n");
+WriteLiteral("</div>\r\n                    </a>\r\n                </li>\r\n");
+
+
+            
+            #line 31 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
+            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        </ul>\r\n    </div>\r\n\r\n    <h3 class=\"taskCalls\">Contacts</h3>\r\n\r\n    <div " +
+"id=\"taskRole\">\r\n        <ul>\r\n");
+
+
+            
+            #line 39 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
+             if (Model.Results.Contacts.Count == 0)
+            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                <li>\r\n                    <div class=\"taskName\">No contacts match" +
+"ed the search terms</div>\r\n                </li>\r\n");
+
+
+            
+            #line 44 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
+            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
 
 
             
             #line 46 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                     if (!string.IsNullOrWhiteSpace(company.Phone)) {
-            
-            #line default
-            #line hidden
-WriteLiteral(" <li>Phone: ");
-
-
-            
-            #line 46 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                            Write(company.Phone);
+             foreach (var contact in Model.Results.Contacts )
+            {
 
             
             #line default
             #line hidden
-WriteLiteral(":</li> ");
+WriteLiteral("                <li>\r\n                    <a href=\"");
 
 
             
-            #line 46 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                                      }
-
-            
-            #line default
-            #line hidden
-
-            
-            #line 47 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                     if (!string.IsNullOrWhiteSpace(location)) {
-            
-            #line default
-            #line hidden
-WriteLiteral(" <li>Location: ");
-
-
-            
-            #line 47 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                          Write(location);
+            #line 49 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
+                        Write(Url.Action(MVC.Contact.Details(contact.Id)));
 
             
             #line default
             #line hidden
-WriteLiteral("</li> ");
+WriteLiteral("\">\r\n                        <div class=\"taskName\">");
 
 
             
-            #line 47 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                              }
-
-            
-            #line default
-            #line hidden
-
-            
-            #line 48 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                     if (!string.IsNullOrWhiteSpace(company.Notes)) {
-            
-            #line default
-            #line hidden
-WriteLiteral(" <li>");
-
-
-            
-            #line 48 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                     Write(company.Notes);
+            #line 50 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
+                                         Write(contact.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("</li> ");
-
-
-            
-            #line 48 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                              }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                </ul>\r\n            </li>\r\n");
+WriteLiteral("</div>\r\n                        <div class=\"taskDescription\">Employee of ");
 
 
             
             #line 51 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-        }
+                                                            Write(contact.Company.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("    </ul>\r\n");
+WriteLiteral("</div>\r\n                        <div class=\"taskDescription\">");
 
 
             
-            #line 53 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-}
+            #line 52 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
+                                                Write(Html.ShortString(contact.Notes, 90));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("</div>\r\n                    </a>\r\n                </li>\r\n");
 
 
             
             #line 55 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
- if (Model.Results.Contacts.Count > 0)
-{
+            }
 
             
             #line default
             #line hidden
-WriteLiteral("    <h2>Contacts</h2>\r\n");
-
-
-
-WriteLiteral("    <ul>\r\n");
+WriteLiteral("        </ul>\r\n    </div>\r\n\r\n    <h3 class=\"taskCalls\">Tasks</h3>\r\n\r\n    <div id=" +
+"\"taskRole\">\r\n        <ul>\r\n");
 
 
             
-            #line 59 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-         foreach (var contact in Model.Results.Contacts.OrderBy(x => x.Name).ToArray())
-        {
+            #line 63 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
+             if (Model.Results.Contacts.Count == 0)
+            {
 
             
             #line default
             #line hidden
-WriteLiteral("            <li>\r\n                ");
-
-
-            
-            #line 62 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-           Write(Html.ActionLink(contact.Name, MVC.Contact.Details(contact.Id)));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                <ul>\r\n                    <li>Contact for ");
-
-
-            
-            #line 64 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                               Write(Html.ActionLink(contact.Company.Name, MVC.Company.Details(contact.Company.Id)));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</li>\r\n\r\n");
-
-
-            
-            #line 66 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                     if (!string.IsNullOrWhiteSpace(contact.DirectPhone)) 
-                    { 
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                        <li>Direct Phone: ");
+WriteLiteral("                <li>\r\n                    <div class=\"taskName\">No tasks matched " +
+"the search terms</div>\r\n                </li>\r\n");
 
 
             
             #line 68 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                     Write(contact.DirectPhone);
+            }
 
             
             #line default
             #line hidden
-
-            
-            #line 68 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                if (!string.IsNullOrWhiteSpace(contact.Extension)) {
-            
-            #line default
-            #line hidden
-WriteLiteral(" ");
-
-WriteLiteral("Ext: ");
-
-
-            
-            #line 68 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                                                           Write(contact.Extension);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" ");
-
-
-            
-            #line 68 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                                                                                          }
-            
-            #line default
-            #line hidden
-WriteLiteral("</li>\r\n");
-
-
-            
-            #line 69 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                    }
-
-            
-            #line default
-            #line hidden
-
-            
-            #line 70 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                     if (!string.IsNullOrWhiteSpace(contact.MobilePhone)) {
-            
-            #line default
-            #line hidden
-WriteLiteral(" <li>Mobile Phone: ");
+WriteLiteral("\r\n");
 
 
             
             #line 70 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                         Write(contact.MobilePhone);
+             foreach (var task in Model.Results.Tasks)
+            {
 
             
             #line default
             #line hidden
-WriteLiteral("</li> ");
-
-
-            
-            #line 70 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                                                        }
-
-            
-            #line default
-            #line hidden
-
-            
-            #line 71 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                     if (!string.IsNullOrWhiteSpace(contact.Email)) {
-            
-            #line default
-            #line hidden
-WriteLiteral(" <li>Email: <a href=\"mailto:");
-
-
-            
-            #line 71 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                            Write(contact.Email);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\">");
-
-
-            
-            #line 71 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                                            Write(contact.Email);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</a></li> ");
-
-
-            
-            #line 71 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                                                                         }
-
-            
-            #line default
-            #line hidden
-
-            
-            #line 72 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                     if (!string.IsNullOrWhiteSpace(contact.Assistant)) {
-            
-            #line default
-            #line hidden
-WriteLiteral(" <li>Assistant: ");
-
-
-            
-            #line 72 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                    Write(contact.Assistant);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</li> ");
-
-
-            
-            #line 72 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                                                 }
-
-            
-            #line default
-            #line hidden
-
-            
-            #line 73 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                     if (!string.IsNullOrWhiteSpace(contact.ReferredBy)) {
-            
-            #line default
-            #line hidden
-WriteLiteral(" <li>Referred By: ");
+WriteLiteral("                <li>\r\n                    <a href=\"");
 
 
             
             #line 73 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                       Write(contact.ReferredBy);
+                        Write(Url.Action(MVC.Task.Details(task.Id)));
 
             
             #line default
             #line hidden
-WriteLiteral("</li> ");
-
-
-            
-            #line 73 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                                                     }
-
-            
-            #line default
-            #line hidden
-
-            
-            #line 74 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                     if (!string.IsNullOrWhiteSpace(contact.Notes)) {
-            
-            #line default
-            #line hidden
-WriteLiteral(" <li>Notes: ");
+WriteLiteral("\">\r\n                        <div class=\"taskName\">");
 
 
             
             #line 74 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                            Write(contact.Notes);
+                                         Write(task.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("</li> ");
+WriteLiteral("</div>\r\n                        <div class=\"taskDescription\">Company: ");
 
 
             
-            #line 74 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                                     }
+            #line 75 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
+                                                         Write(task.Company.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("                </ul>\r\n            </li>\r\n");
+WriteLiteral("</div>\r\n\r\n");
 
 
             
             #line 77 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-        }
+                         if (task.Contact != null)
+                        {
 
             
             #line default
             #line hidden
-WriteLiteral("    </ul>\r\n");
+WriteLiteral("                            <div class=\"taskDescription\">Contact: ");
 
 
             
             #line 79 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-}
+                                                             Write(task.Contact.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("</div>\r\n");
 
 
             
-            #line 81 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
- if (Model.Results.Tasks.Count > 0)
-{
+            #line 80 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
+                        }
 
             
             #line default
             #line hidden
-WriteLiteral("    <h2>Tasks</h2>\r\n");
+WriteLiteral("\r\n                        <div class=\"taskDescription\">");
 
 
+            
+            #line 82 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
+                                                Write(Html.ShortString(task.Notes, 90));
 
-WriteLiteral("    <ul>\r\n");
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                    </a>\r\n                </li>\r\n");
 
 
             
             #line 85 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-         foreach (var task in Model.Results.Tasks.OrderBy(x => x.TaskDate).ThenBy(x => x.Name).ToArray())
-        {
+            }
 
             
             #line default
             #line hidden
-WriteLiteral("            <li>\r\n                ");
+WriteLiteral("        </ul>\r\n    </div>\r\n</div>");
 
-
-            
-            #line 88 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-           Write(Html.ActionLink(task.Name, MVC.Task.Details(task.Id)));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                <ul>\r\n");
-
-
-            
-            #line 90 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                     if (task.ContactId != null) {
-            
-            #line default
-            #line hidden
-WriteLiteral(" <li>Task for ");
-
-
-            
-            #line 90 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                           Write(Html.ActionLink(task.Contact.Name, MVC.Contact.Details(task.Contact.Id)));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</li> ");
-
-
-            
-            #line 90 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                                                                               }
-                    else {
-            
-            #line default
-            #line hidden
-WriteLiteral(" <li>Task for ");
-
-
-            
-            #line 91 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                   Write(Html.ActionLink(task.Company.Name, MVC.Company.Details(task.Company.Id)));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</li> ");
-
-
-            
-            #line 91 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                                                       }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-
-            
-            #line 93 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                     if (task.CompletionDate != null) {
-            
-            #line default
-            #line hidden
-WriteLiteral(" <li>Task Completed</li> ");
-
-
-            
-            #line 93 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                } else {
-            
-            #line default
-            #line hidden
-WriteLiteral(" <li>Not Completed</li> ");
-
-
-            
-            #line 93 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                                                }
-
-            
-            #line default
-            #line hidden
-
-            
-            #line 94 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                     if (task.TaskDate != null && task.TaskDate.HasValue) {
-            
-            #line default
-            #line hidden
-WriteLiteral(" <li>Due: ");
-
-
-            
-            #line 94 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                Write(task.TaskDate.Value.ToString());
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</li> ");
-
-
-            
-            #line 94 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-                                                                                                                          }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                </ul>\r\n            </li>\r\n");
-
-
-            
-            #line 97 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-        }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    </ul>\r\n");
-
-
-            
-            #line 99 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Search.cshtml"
-}
-            
-            #line default
-            #line hidden
 
         }
     }

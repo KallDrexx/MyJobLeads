@@ -33,7 +33,7 @@
                 	    <div id="headerSearch"> 
                             @using (Html.BeginForm(MVC.JobSearch.Search()))
                             {
-                                <input class="headerInput" type="text" name="query" id="query" value="Search" /> 
+                                <input class="headerInput" type="text" name="query" id="query" value="@TempData["LastSearchQuery"]" /> 
                                 <input type="submit" value="Search" class="searchSubmit" />
                             }
                         </div> 

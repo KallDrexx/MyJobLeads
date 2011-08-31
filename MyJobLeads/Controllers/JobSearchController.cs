@@ -123,6 +123,8 @@ namespace MyJobLeads.Controllers
         {
             var user = _userByIdQuery.WithUserId(CurrentUserId).Execute();
             var results = _entitySearchQuery.WithJobSearchId((int)user.LastVisitedJobSearchId).WithSearchQuery(query).Execute();
+
+            TempData["LastSearchQuery"] = query;
             return View(new PerformedSearchViewModel { SearchQuery = query, Results = results, JobSearchId = (int)user.LastVisitedJobSearchId });
         }
 

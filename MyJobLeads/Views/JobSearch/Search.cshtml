@@ -2,98 +2,87 @@
 
 @{
     ViewBag.Title = "Search Results";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<p>
-    @using (Html.BeginForm(MVC.JobSearch.Search()))
-    {
-        @Html.Hidden("id", Model.JobSearchId)
-        @:Search: @Html.TextBox("query") <input type="submit" value="Search" />
-    }
-</p>
+<div class="grid2 floatLeft">
+    <div class="taskHeader">
+        <h3>Search Results</h3>
+    </div>
 
-<p>Search results matching "@Model.SearchQuery"</p>
+    <h3 class="taskCalls">Companies</h3>
 
-@if (Model.Results.Companies.Count == 0 && Model.Results.Contacts.Count == 0 && Model.Results.Tasks.Count == 0)
-{
-    <p>No companies, contacts or tasks were found for your search phrase</p>
-}
+    <div id="taskRole">
+        <ul>
+            @if (Model.Results.Companies.Count == 0)
+            {
+                <li>
+                    <div class="taskName">No companies matched the search terms</div>
+                </li>
+            }
 
-@if (Model.Results.Companies.Count > 0)
-{
-    <h2>Companies That Match</h2>
-    <ul>
-        @foreach (var company in Model.Results.Companies.OrderBy(x => x.Name).ToArray())
-        {
-            <li>
-                @Html.ActionLink(company.Name, MVC.Company.Details(company.Id))
-                <ul>
-                    @{
-                        // Form company location string
-                        bool citySpecified = !string.IsNullOrWhiteSpace(company.City);
-                        bool stateSpecified = !string.IsNullOrWhiteSpace(company.State);
-                        bool zipSpecified = !string.IsNullOrWhiteSpace(company.Zip);
+            @foreach (var company in Model.Results.Companies)
+            {
+                <li>
+                    <a href="@Url.Action(MVC.Company.Details(company.Id))">
+                        <div class="taskName">@company.Name</div>
+                        <div class="taskDescription">@Html.ShortString(company.Notes, 90)</div>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
 
-                        string location = string.Empty;
-                        if (citySpecified && stateSpecified) { location = string.Concat(company.City, ", ", company.State, " "); }
-                        else if (citySpecified) { location = company.City + " "; }
-                        else if (stateSpecified) { location = company.State + " "; }
+    <h3 class="taskCalls">Contacts</h3>
 
-                        if (zipSpecified) { location += company.Zip; }
-                    }
-                    
-                    @if (!string.IsNullOrWhiteSpace(company.Phone)) { <li>Phone: @company.Phone:</li> }
-                    @if (!string.IsNullOrWhiteSpace(location)) { <li>Location: @location</li> }
-                    @if (!string.IsNullOrWhiteSpace(company.Notes)) { <li>@company.Notes</li> }
-                </ul>
-            </li>
-        }
-    </ul>
-}
+    <div id="taskRole">
+        <ul>
+            @if (Model.Results.Contacts.Count == 0)
+            {
+                <li>
+                    <div class="taskName">No contacts matched the search terms</div>
+                </li>
+            }
 
-@if (Model.Results.Contacts.Count > 0)
-{
-    <h2>Contacts</h2>
-    <ul>
-        @foreach (var contact in Model.Results.Contacts.OrderBy(x => x.Name).ToArray())
-        {
-            <li>
-                @Html.ActionLink(contact.Name, MVC.Contact.Details(contact.Id))
-                <ul>
-                    <li>Contact for @Html.ActionLink(contact.Company.Name, MVC.Company.Details(contact.Company.Id))</li>
+            @foreach (var contact in Model.Results.Contacts )
+            {
+                <li>
+                    <a href="@Url.Action(MVC.Contact.Details(contact.Id))">
+                        <div class="taskName">@contact.Name</div>
+                        <div class="taskDescription">Employee of @contact.Company.Name</div>
+                        <div class="taskDescription">@Html.ShortString(contact.Notes, 90)</div>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
 
-                    @if (!string.IsNullOrWhiteSpace(contact.DirectPhone)) 
-                    { 
-                        <li>Direct Phone: @contact.DirectPhone @if (!string.IsNullOrWhiteSpace(contact.Extension)) { <text>Ext: @contact.Extension</text> }</li>
-                    }
-                    @if (!string.IsNullOrWhiteSpace(contact.MobilePhone)) { <li>Mobile Phone: @contact.MobilePhone</li> }
-                    @if (!string.IsNullOrWhiteSpace(contact.Email)) { <li>Email: <a href="mailto:@contact.Email">@contact.Email</a></li> }
-                    @if (!string.IsNullOrWhiteSpace(contact.Assistant)) { <li>Assistant: @contact.Assistant</li> }
-                    @if (!string.IsNullOrWhiteSpace(contact.ReferredBy)) { <li>Referred By: @contact.ReferredBy</li> }
-                    @if (!string.IsNullOrWhiteSpace(contact.Notes)) { <li>Notes: @contact.Notes</li> }
-                </ul>
-            </li>
-        }
-    </ul>
-}
+    <h3 class="taskCalls">Tasks</h3>
 
-@if (Model.Results.Tasks.Count > 0)
-{
-    <h2>Tasks</h2>
-    <ul>
-        @foreach (var task in Model.Results.Tasks.OrderBy(x => x.TaskDate).ThenBy(x => x.Name).ToArray())
-        {
-            <li>
-                @Html.ActionLink(task.Name, MVC.Task.Details(task.Id))
-                <ul>
-                    @if (task.ContactId != null) { <li>Task for @Html.ActionLink(task.Contact.Name, MVC.Contact.Details(task.Contact.Id))</li> }
-                    else { <li>Task for @Html.ActionLink(task.Company.Name, MVC.Company.Details(task.Company.Id))</li> }
+    <div id="taskRole">
+        <ul>
+            @if (Model.Results.Contacts.Count == 0)
+            {
+                <li>
+                    <div class="taskName">No tasks matched the search terms</div>
+                </li>
+            }
 
-                    @if (task.CompletionDate != null) { <li>Task Completed</li> } else { <li>Not Completed</li> }
-                    @if (task.TaskDate != null && task.TaskDate.HasValue) { <li>Due: @task.TaskDate.Value.ToString()</li> }
-                </ul>
-            </li>
-        }
-    </ul>
-}
+            @foreach (var task in Model.Results.Tasks)
+            {
+                <li>
+                    <a href="@Url.Action(MVC.Task.Details(task.Id))">
+                        <div class="taskName">@task.Name</div>
+                        <div class="taskDescription">Company: @task.Company.Name</div>
+
+                        @if (task.Contact != null)
+                        {
+                            <div class="taskDescription">Contact: @task.Contact.Name</div>
+                        }
+
+                        <div class="taskDescription">@Html.ShortString(task.Notes, 90)</div>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
