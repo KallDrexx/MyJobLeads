@@ -82,6 +82,7 @@ namespace MyJobLeads.DomainModel.Providers.Search
             document.Add(new Field(Constants.CONTACT_NOTES, contact.Notes ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
             document.Add(new Field(Constants.CONTACT_REFERREDBY, contact.ReferredBy ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
             document.Add(new Field(Constants.JOBSEARCH_ID, contact.Company.JobSearch.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            document.Add(new Field(Constants.CONTACT_TITLE, contact.Title ?? string.Empty, Field.Store.YES, Field.Index.ANALYZED));
 
             // Remove any previous documents for the contact and add the new one
             Remove(contact);
@@ -182,7 +183,7 @@ namespace MyJobLeads.DomainModel.Providers.Search
                 Constants.COMPANY_CITY, Constants.COMPANY_INDUSTRY, Constants.COMPANY_METRO, Constants.COMPANY_NAME, Constants.COMPANY_NOTES,
                 Constants.COMPANY_PHONE, Constants.COMPANY_STATE, Constants.COMPANY_ZIP, Constants.CONTACT_ASSISTANT, Constants.CONTACT_DIRECTPHONE,
                 Constants.CONTACT_EMAIL, Constants.CONTACT_EXTENSION, Constants.CONTACT_MOBILEPHONE, Constants.CONTACT_NAME, Constants.CONTACT_NOTES,
-                Constants.CONTACT_REFERREDBY, Constants.TASK_NAME
+                Constants.CONTACT_REFERREDBY, Constants.TASK_NAME, Constants.CONTACT_TITLE
             };
 
             // Split the search into seperate queries per word, and combine them into one major query
@@ -273,6 +274,7 @@ namespace MyJobLeads.DomainModel.Providers.Search
 
             public const string CONTACT_ID = "contact_id";
             public const string CONTACT_NAME = "contact_name";
+            public const string CONTACT_TITLE = "contact_title";
             public const string CONTACT_DIRECTPHONE = "contact_directphone";
             public const string CONTACT_MOBILEPHONE = "contact_mobilephone";
             public const string CONTACT_EXTENSION = "contact_extension";

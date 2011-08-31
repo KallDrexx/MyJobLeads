@@ -205,6 +205,7 @@ namespace MyJobLeads.Tests.Providers
                 Name = "Name",
                 Notes = "Notes",
                 ReferredBy = "ReferredBy",
+                Title = "Title",
 
                 Company = new Company { JobSearch = new JobSearch { Id = 6 } }
             };
@@ -228,6 +229,7 @@ namespace MyJobLeads.Tests.Providers
             Assert.AreEqual("Notes", doc.Get(LuceneSearchProvider.Constants.CONTACT_NOTES), "Document had an incorrect notes value");
             Assert.AreEqual("ReferredBy", doc.Get(LuceneSearchProvider.Constants.CONTACT_REFERREDBY), "Document had an incorrect referred by value");
             Assert.AreEqual("6", doc.Get(LuceneSearchProvider.Constants.JOBSEARCH_ID), "Document had an incorrect job search id value ");
+            Assert.AreEqual("Title", doc.Get(LuceneSearchProvider.Constants.CONTACT_TITLE), "Document had an incorrect title value");
         }
 
         [TestMethod]
@@ -808,6 +810,25 @@ namespace MyJobLeads.Tests.Providers
 
             // Act
             SearchProviderResult result = _provider.SearchByJobSearchId("ReferredBy", 4);
+
+            // Verify
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.FoundCompanyIds.Count, "Found company count was incorrect");
+            Assert.AreEqual(1, result.FoundContactIds.Count, "Found contact count was incorrect");
+            Assert.AreEqual(contact.Id, result.FoundContactIds[0], "Found contact id value was incorrect");
+
+            Assert.AreEqual(0, result.FoundTaskIds.Count, "Found task count was incorrect");
+        }
+
+        [TestMethod]
+        public void Search_Finds_Contact_By_Title()
+        {
+            // Setup 
+            Contact contact = new Contact { Id = 2, Title = "Title", Company = new Company { JobSearch = new JobSearch { Id = 4 } } };
+            _provider.Index(contact);
+
+            // Act
+            SearchProviderResult result = _provider.SearchByJobSearchId("Title", 4);
 
             // Verify
             Assert.IsNotNull(result);
