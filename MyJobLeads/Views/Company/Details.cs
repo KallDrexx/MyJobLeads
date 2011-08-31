@@ -671,7 +671,7 @@ WriteLiteral("                        <li> \r\n                            <div 
 
             
             #line 155 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                           Write(Html.ActionLink(contact.Name, MVC.Contact.Details(Model.Id)));
+                           Write(Html.ActionLink(contact.Name, MVC.Contact.Details(contact.Id)));
 
             
             #line default
@@ -718,12 +718,12 @@ WriteLiteral("                            </div> \r\n                           
             
             #line default
             #line hidden
-WriteLiteral(" <span class=\"greyHighlight\">Mobile:</span> ");
+WriteLiteral("</p>\r\n                            <p><span class=\"greyHighlight\">Mobile:</span> ");
 
 
             
-            #line 161 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
-                                                                                                                                                  Write(contact.MobilePhone);
+            #line 162 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+                                                                     Write(contact.MobilePhone);
 
             
             #line default
@@ -732,7 +732,7 @@ WriteLiteral("</p> \r\n                            <p>");
 
 
             
-            #line 162 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 163 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
                           Write(Html.ShortString(contact.Notes, 110));
 
             
@@ -742,7 +742,7 @@ WriteLiteral("</p> \r\n                            ");
 
 
             
-            #line 163 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 164 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
                        Write(Html.ActionLink("View Contact", MVC.Contact.Details(contact.Id), new { @class = "blueLinks viewContact" }));
 
             
@@ -752,14 +752,14 @@ WriteLiteral("\r\n                        </li> \r\n");
 
 
             
-            #line 165 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 166 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
                         
                         
             
             #line default
             #line hidden
             
-            #line 166 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 167 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
                          if (contact != lastContact)
                         {
 
@@ -770,13 +770,13 @@ WriteLiteral("                            <li><hr /></li>\r\n");
 
 
             
-            #line 169 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 170 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
                         }
             
             #line default
             #line hidden
             
-            #line 169 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 170 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
                          
                     }             
 
@@ -787,7 +787,7 @@ WriteLiteral("                </ul> \r\n            </div> \r\n");
 
 
             
-            #line 173 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
+            #line 174 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\Details.cshtml"
         }
 
             

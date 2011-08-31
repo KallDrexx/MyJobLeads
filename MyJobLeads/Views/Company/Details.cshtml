@@ -152,13 +152,14 @@
                     {
                         <li> 
                             <div class="contactName"> 
-                                @Html.ActionLink(contact.Name, MVC.Contact.Details(Model.Id))
+                                @Html.ActionLink(contact.Name, MVC.Contact.Details(contact.Id))
                                 @if (!string.IsNullOrWhiteSpace(contact.Title))
                                 {
                                     <span>- @Html.ActionLink(contact.Title, MVC.Contact.Details(Model.Id))</span>
                                 }
                             </div> 
-                            <p><span class="greyHighlight">Direct:</span> @contact.DirectPhoneWithExtension <span class="greyHighlight">Mobile:</span> @contact.MobilePhone</p> 
+                            <p><span class="greyHighlight">Direct:</span> @contact.DirectPhoneWithExtension</p>
+                            <p><span class="greyHighlight">Mobile:</span> @contact.MobilePhone</p> 
                             <p>@Html.ShortString(contact.Notes, 110)</p> 
                             @Html.ActionLink("View Contact", MVC.Contact.Details(contact.Id), new { @class = "blueLinks viewContact" })
                         </li> 
