@@ -15,7 +15,7 @@
             {
                 <div class="grid3 floatLeft">
                     <h3 class="floatLeft">All Entered Positions</h3>
-                    <p class="floatRight greyHighlight">You have @(Model.Positions.Count == 0? "no" : Model.Positions.Count.ToString()) positions entered</p>
+                    <p class="floatRight greyHighlight">You have @(Model.Positions.Count == 0 ? "no" : Model.Positions.Count.ToString()) positions entered</p>
                 </div>
 
                 <div class="grid3 marginBottom_10 floatLeft">
@@ -51,27 +51,46 @@
     </div>
 </div>
 
-<div class="grid1 marginTop_20 floatLeft">
-    <div class="grid2 floatLeft">
+<div class="grid1 marginTop_20 floatLeft"> 
+    <div class="grid2 floatLeft"> 
+        <h3 class="taskCalls">Not Yet Applied (@Model.Positions.Where(x => !x.HasApplied).Count())</h3>
+
         <div id="taskRole">
             <ul>
-                @if (Model.Positions.Count == 0)
+                @if (Model.Positions.Where(x => !x.HasApplied).Count() != 0)
                 {
-                    <li>
-                        <div class="taskName">No positions have been entered into MyLeads yet</div>
-                    </li>
+                    foreach (var position in Model.Positions.Where(x => !x.HasApplied).OrderBy(x => x.Company.Name).ThenBy(x => x.Title))
+                    {
+                        <li>
+                            <a href="@Url.Action(MVC.Position.Details(position.Id))">
+                                <div class="taskName">@position.Title</div>
+                                <div class="taskDescription">Company: @position.Company.Name</div>
+                                <div class="taskDescription">@Html.ShortString(position.Notes, 85)</div>
+                            </a>
+                        </li>
+                    }
                 }
-                
-                @foreach (var position in Model.Positions.OrderBy(x => x.HasApplied).ThenBy(x => x.Company).ThenBy(x => x.Title))
+            </ul>
+        </div>
+    </div>
+
+    <div class="grid2 floatRight">
+        <h3 class="taskCalls">Already Applied (@Model.Positions.Where(x => x.HasApplied).Count())</h3>
+
+        <div id="taskRole">
+            <ul>
+                @if (Model.Positions.Where(x => x.HasApplied).Count() != 0)
                 {
-                    <li>
-                        <a href="@Url.Action(MVC.Position.Details(position.Id))">
-                            <div class="greyHighlight date">@(position.HasApplied? "Applied" : "Not Yet Applied")</div>
-                            <div class="taskName">@position.Title</div>
-                            <div class="taskDescription">Company: @position.Company.Name</div>
-                            <div class="taskDescription">@Html.ShortString(position.Notes, 85)</div>
-                        </a>
-                    </li>
+                    foreach (var position in Model.Positions.Where(x => x.HasApplied).OrderBy(x => x.Company.Name).ThenBy(x => x.Title))
+                    {
+                        <li>
+                            <a href="@Url.Action(MVC.Position.Details(position.Id))">
+                                <div class="taskName">@position.Title</div>
+                                <div class="taskDescription">Company: @position.Company.Name</div>
+                                <div class="taskDescription">@Html.ShortString(position.Notes, 85)</div>
+                            </a>
+                        </li>
+                    }
                 }
             </ul>
         </div>
