@@ -13,19 +13,23 @@ using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.ViewModels.Positions;
 using MyJobLeads.ViewModels.Companies;
+using MyJobLeads.Infrastructure.Attributes;
 
 namespace MyJobLeads.Controllers
 {
+    [MJLAuthorize]
     public partial class PositionController : MyJobLeadsBaseController
     {
         protected IProcess<CreatePositionParams, PositionDisplayViewModel> _createProcess;
         protected IProcess<EditPositionParams, PositionDisplayViewModel> _editProcess;
         protected PositionByIdQuery _posByIdQuery;
         protected CompanyByIdQuery _companyByIdQuery;
+        protected IProcess<GetPositionListForUserParams, PositionListViewModel> _getPositionListProcess;
 
         public PositionController(MyJobLeadsDbContext context,
                                     IProcess<CreatePositionParams, PositionDisplayViewModel> createProcess,
                                     IProcess<EditPositionParams, PositionDisplayViewModel> editProcess,
+                                    IProcess<GetPositionListForUserParams, PositionListViewModel> getPositionListProcess,
                                     PositionByIdQuery posByIdQuery,
                                     CompanyByIdQuery compByIdQuery)
         {
@@ -34,6 +38,13 @@ namespace MyJobLeads.Controllers
             _editProcess = editProcess;
             _posByIdQuery = posByIdQuery;
             _companyByIdQuery = compByIdQuery;
+            _getPositionListProcess = getPositionListProcess;
+        }
+
+        public virtual ActionResult List()
+        {
+            var positions = _getPositionListProcess.Execute(new GetPositionListForUserParams { UserId = CurrentUserId });
+            return View(positions);
         }
 
         public virtual ActionResult Details(int id)

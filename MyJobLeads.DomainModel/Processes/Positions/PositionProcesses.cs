@@ -9,12 +9,15 @@ using MyJobLeads.DomainModel.Entities.EF;
 using MyJobLeads.DomainModel.Entities;
 using AutoMapper;
 using MyJobLeads.DomainModel.Exceptions;
+using System.Diagnostics.Contracts;
+using System.Data.Entity;
 
 namespace MyJobLeads.DomainModel.Processes.Positions
 {
     public class PositionProcesses 
         : IProcess<CreatePositionParams, PositionDisplayViewModel>,
-          IProcess<EditPositionParams, PositionDisplayViewModel>
+          IProcess<EditPositionParams, PositionDisplayViewModel>,
+          IProcess<GetPositionListForUserParams, PositionListViewModel>
     {
         protected MyJobLeadsDbContext _context;
 
@@ -56,6 +59,25 @@ namespace MyJobLeads.DomainModel.Processes.Positions
             _context.SaveChanges();
 
             return Mapper.Map<Position, PositionDisplayViewModel>(position);
+        }
+
+        public PositionListViewModel Execute(GetPositionListForUserParams procParams)
+        {
+            var user = _context.Users.Where(x => x.Id == procParams.UserId).FirstOrDefault();
+            if (user == null)
+                throw new MJLEntityNotFoundException(typeof(User), procParams.UserId);
+
+            var positions = _context.Positions
+                                    .Where(x => x.Company.JobSearch.Id == user.LastVisitedJobSearchId)
+                                    .Include(x => x.Company)
+                                    .ToList();
+
+            var model = new PositionListViewModel { Positions = new List<PositionDisplayViewModel>() };
+
+            foreach (var pos in positions)
+                model.Positions.Add(Mapper.Map<Position, PositionDisplayViewModel>(pos));
+
+            return model;
         }
     }
 }
