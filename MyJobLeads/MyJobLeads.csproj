@@ -452,7 +452,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_AnonymousUserSidebarDisplay.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home\_LoggedInSidebarDisplay.cs">
+    <Compile Include="Views\Home\_LoggedInSidebarDisplay.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_LoggedInSidebarDisplay.cshtml</DependentUpon>
@@ -993,7 +993,7 @@
     </Content>
     <Content Include="Views\Home\_LoggedInSidebarDisplay.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_LoggedInSidebarDisplay.cs</LastGenOutput>
+      <LastGenOutput>_LoggedInSidebarDisplay.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Home\_AnonymousUserSidebarDisplay.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -1007,6 +1007,7 @@
     <Content Include="Views\Contact\_ContactSummaryDisplay.cshtml" />
     <Content Include="Views\Position\Edit.cshtml" />
     <Content Include="Views\Position\Details.cshtml" />
+    <Content Include="Views\Position\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

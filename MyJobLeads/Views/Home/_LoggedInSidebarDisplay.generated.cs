@@ -27,7 +27,7 @@ namespace MyJobLeads.Views.Home
     using System.Web.UI;
     using System.Web.WebPages;
     
-    #line 2 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_LoggedInSidebarDisplay.cshtml"
+    #line 2 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
     using MyJobLeads.Controllers;
     
     #line default
@@ -35,7 +35,7 @@ namespace MyJobLeads.Views.Home
     using MyJobLeads.Infrastructure.HtmlHelpers;
     using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/_LoggedInSidebarDisplay.cshtml")]
     public class _LoggedInSidebarDisplay : System.Web.Mvc.WebViewPage<MyJobLeads.ViewModels.Users.UserSidebarViewModel>
     {
@@ -50,7 +50,7 @@ WriteLiteral("\r\n<h2 id=\"accountName\">");
 
 
             
-            #line 4 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_LoggedInSidebarDisplay.cshtml"
+            #line 4 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
                 Write(Model.DisplayName);
 
             
@@ -61,7 +61,7 @@ WriteLiteral("</h2>\r\n<div class=\"accountEdit\"><a href=\"#\">Edit Your Accoun
 
 
             
-            #line 9 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_LoggedInSidebarDisplay.cshtml"
+            #line 9 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
        Write(Html.ActionLink("Your Tasks", MVC.Task.Index(), new { @class = Model.ActiveLink == ActiveSidebarLink.Tasks? "active" : "" }));
 
             
@@ -71,8 +71,8 @@ WriteLiteral("</li>\r\n        <li>");
 
 
             
-            #line 10 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_LoggedInSidebarDisplay.cshtml"
-       Write(Html.ActionLink("Your Companies", MVC.Company.List(), new { @class = Model.ActiveLink == ActiveSidebarLink.Companies? "active" : "" }));
+            #line 10 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
+       Write(Html.ActionLink("Companies", MVC.Company.List(), new { @class = Model.ActiveLink == ActiveSidebarLink.Companies? "active" : "" }));
 
             
             #line default
@@ -81,7 +81,17 @@ WriteLiteral("</li>\r\n        <li>");
 
 
             
-            #line 11 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_LoggedInSidebarDisplay.cshtml"
+            #line 11 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
+       Write(Html.ActionLink("Positions", MVC.Position.List(), new { @class = Model.ActiveLink == ActiveSidebarLink.Positions? "active" : "" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</li>\r\n        <li>");
+
+
+            
+            #line 12 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
        Write(Html.ActionLink("About", MVC.Home.About(), new { @class = Model.ActiveLink == ActiveSidebarLink.About? "active" : "" }));
 
             

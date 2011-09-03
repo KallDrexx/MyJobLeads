@@ -59,6 +59,7 @@ namespace MyJobLeads.Controllers {
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
+            public readonly string List = "List";
             public readonly string Details = "Details";
             public readonly string Add = "Add";
             public readonly string Edit = "Edit";
@@ -72,12 +73,18 @@ namespace MyJobLeads.Controllers {
         public class ViewNames {
             public readonly string Details = "~/Views/Position/Details.cshtml";
             public readonly string Edit = "~/Views/Position/Edit.cshtml";
+            public readonly string List = "~/Views/Position/List.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class T4MVC_PositionController: MyJobLeads.Controllers.PositionController {
         public T4MVC_PositionController() : base(Dummy.Instance) { }
+
+        public override System.Web.Mvc.ActionResult List() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.List);
+            return callInfo;
+        }
 
         public override System.Web.Mvc.ActionResult Details(int id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);

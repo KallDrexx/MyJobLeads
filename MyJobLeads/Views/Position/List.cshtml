@@ -1,0 +1,79 @@
+﻿@model MyJobLeads.DomainModel.ViewModels.Positions.PositionListViewModel
+
+@{
+    ViewBag.Title = "Position List";
+}
+
+@section SideBar {
+    @{Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.Positions));}
+}
+
+<div class="grid1 floatLeft">
+    <div class="lineSeperator">
+        <div class="pageInfoBox">
+            @using (Html.BeginForm(MVC.Company.ChangeCompanyStatusFilters()))
+            {
+                <div class="grid3 floatLeft">
+                    <h3 class="floatLeft">All Entered Positions</h3>
+                    <p class="floatRight greyHighlight">You have @(Model.Positions.Count == 0? "no" : Model.Positions.Count.ToString()) positions entered</p>
+                </div>
+
+                <div class="grid3 marginBottom_10 floatLeft">
+                    @*@Html.ActionLink("Add New position", MVC.Position.Add(), new { @class = "blueLinks", title = "Add New Company" })*@
+                </div>
+                @*
+                if (Model.UsedStatuses.Count > 0)
+                {
+                    @Html.Hidden("jobSearchId", Model.JobSearchId)
+                    
+                    <div class="grid3 marginBottom_10 floatLeft">
+                        <p>Show all firms with the following status:</p>
+                    </div>
+
+                    foreach (string status in Model.UsedStatuses.OrderBy(x => x))
+                    {
+                        string checkedString = !Model.HiddenStatuses.Contains(status) ? "checked" : "";
+                            
+                        <div class="grid3 marginBottom_10 floatLeft">
+                            <div class="floatLeft infoSpan">
+                                <input type="checkbox" name="shownStatus" value="@status" @checkedString />@status
+                            </div>
+                        </div>
+                    }
+                
+                    <div class="grid3 marginBottom_20 floatLeft">
+                        <div class="submitBTN"><input type="submit" value="Filter Companies" /></div>
+                    </div>
+                } *@
+            }
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+
+<div class="grid1 marginTop_20 floatLeft">
+    <div class="grid2 floatLeft">
+        <div id="taskRole">
+            <ul>
+                @if (Model.Positions.Count == 0)
+                {
+                    <li>
+                        <div class="taskName">No positions have been entered into MyLeads yet</div>
+                    </li>
+                }
+                
+                @foreach (var position in Model.Positions.OrderBy(x => x.HasApplied).ThenBy(x => x.Company).ThenBy(x => x.Title))
+                {
+                    <li>
+                        <a href="@Url.Action(MVC.Position.Details(position.Id))">
+                            <div class="greyHighlight date">@(position.HasApplied? "Applied" : "Not Yet Applied")</div>
+                            <div class="taskName">@position.Title</div>
+                            <div class="taskDescription">Company: @position.Company.Name</div>
+                            <div class="taskDescription">@Html.ShortString(position.Notes, 85)</div>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
