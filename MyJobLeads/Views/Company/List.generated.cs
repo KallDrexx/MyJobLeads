@@ -29,7 +29,7 @@ namespace MyJobLeads.Views.Company
     using MyJobLeads.Infrastructure.HtmlHelpers;
     using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Company/List.cshtml")]
     public class List : System.Web.Mvc.WebViewPage<MyJobLeads.ViewModels.Companies.JobSearchCompanyListViewModel>
     {
@@ -43,7 +43,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 3 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 3 "..\..\Views\Company\List.cshtml"
   
     ViewBag.Title = "Company List";
     string companyWord = Model.TotalCompanyCount == 1 ? "company" : "companies";
@@ -61,7 +61,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 9 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 9 "..\..\Views\Company\List.cshtml"
       Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.Companies));
 
             
@@ -75,7 +75,7 @@ WriteLiteral("\r\n\r\n<div class=\"grid1 floatLeft\">\r\n    <div class=\"lineSe
 
 
             
-            #line 15 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 15 "..\..\Views\Company\List.cshtml"
              using (Html.BeginForm(MVC.Company.ChangeCompanyStatusFilters()))
             {
 
@@ -88,7 +88,7 @@ WriteLiteral("                <div class=\"grid3 floatLeft\">\r\n               
 
 
             
-            #line 19 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 19 "..\..\Views\Company\List.cshtml"
                                                              Write(Model.TotalCompanyCount == 0? "no" : Model.TotalCompanyCount.ToString());
 
             
@@ -98,7 +98,7 @@ WriteLiteral(" companies entered</p>\r\n                </div>\r\n");
 
 
             
-            #line 21 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 21 "..\..\Views\Company\List.cshtml"
 
 
             
@@ -109,7 +109,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\">\r\
 
 
             
-            #line 23 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 23 "..\..\Views\Company\List.cshtml"
                Write(Html.ActionLink("Add New Company", MVC.Company.Add(Model.JobSearchId), new { @class = "blueLinks", title = "Add New Company" }));
 
             
@@ -119,7 +119,7 @@ WriteLiteral("\r\n                </div>\r\n");
 
 
             
-            #line 25 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 25 "..\..\Views\Company\List.cshtml"
 
                 if (Model.UsedStatuses.Count > 0)
                 {
@@ -128,14 +128,14 @@ WriteLiteral("\r\n                </div>\r\n");
             #line default
             #line hidden
             
-            #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 28 "..\..\Views\Company\List.cshtml"
                Write(Html.Hidden("jobSearchId", Model.JobSearchId));
 
             
             #line default
             #line hidden
             
-            #line 28 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 28 "..\..\Views\Company\List.cshtml"
                                                                   
                     
 
@@ -148,7 +148,7 @@ WriteLiteral("                    <div class=\"grid3 marginBottom_10 floatLeft\"
 
 
             
-            #line 33 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 33 "..\..\Views\Company\List.cshtml"
 
                     foreach (string status in Model.UsedStatuses.OrderBy(x => x))
                     {
@@ -164,7 +164,7 @@ WriteLiteral("                        <div class=\"grid3 marginBottom_10 floatLe
 
 
             
-            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 40 "..\..\Views\Company\List.cshtml"
                                                                             Write(status);
 
             
@@ -174,7 +174,7 @@ WriteLiteral("\" ");
 
 
             
-            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 40 "..\..\Views\Company\List.cshtml"
                                                                                      Write(checkedString);
 
             
@@ -184,7 +184,7 @@ WriteLiteral(" />");
 
 
             
-            #line 40 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 40 "..\..\Views\Company\List.cshtml"
                                                                                                       Write(status);
 
             
@@ -194,7 +194,7 @@ WriteLiteral("\r\n                            </div>\r\n                        
 
 
             
-            #line 43 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 43 "..\..\Views\Company\List.cshtml"
                     }
                 
 
@@ -207,7 +207,7 @@ WriteLiteral("                    <div class=\"grid3 marginBottom_20 floatLeft\"
 
 
             
-            #line 48 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 48 "..\..\Views\Company\List.cshtml"
                 }
             }
 
@@ -220,7 +220,7 @@ WriteLiteral("            <div class=\"clear\"></div>\r\n        </div>\r\n    <
 
 
             
-            #line 59 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 59 "..\..\Views\Company\List.cshtml"
                  if (Model.Companies.Count == 0)
                 {
 
@@ -232,7 +232,7 @@ WriteLiteral("                    <li>\r\n                        <div class=\"t
 
 
             
-            #line 64 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 64 "..\..\Views\Company\List.cshtml"
                 }
 
             
@@ -242,8 +242,8 @@ WriteLiteral("                \r\n");
 
 
             
-            #line 66 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
-                 foreach (var company in Model.Companies)
+            #line 66 "..\..\Views\Company\List.cshtml"
+                 foreach (var company in Model.Companies.OrderBy(x => x.Name))
                 {
 
             
@@ -253,7 +253,7 @@ WriteLiteral("                    <li>\r\n                        <a href=\"");
 
 
             
-            #line 69 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 69 "..\..\Views\Company\List.cshtml"
                             Write(Url.Action(MVC.Company.Details(company.Id)));
 
             
@@ -263,7 +263,7 @@ WriteLiteral("\">\r\n                            <div class=\"greyHighlight date
 
 
             
-            #line 70 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 70 "..\..\Views\Company\List.cshtml"
                                                        Write(company.LeadStatus);
 
             
@@ -273,7 +273,7 @@ WriteLiteral("</div>\r\n                            <div class=\"taskName\">");
 
 
             
-            #line 71 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 71 "..\..\Views\Company\List.cshtml"
                                              Write(company.Name);
 
             
@@ -283,7 +283,7 @@ WriteLiteral("</div>\r\n                            <div class=\"taskDescription
 
 
             
-            #line 72 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 72 "..\..\Views\Company\List.cshtml"
                                                     Write(Html.ShortString(company.Notes, 85));
 
             
@@ -293,7 +293,7 @@ WriteLiteral("</div>\r\n                        </a>\r\n                    </li
 
 
             
-            #line 75 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Company\List.cshtml"
+            #line 75 "..\..\Views\Company\List.cshtml"
                 }
 
             

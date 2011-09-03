@@ -63,7 +63,7 @@
                     </li>
                 }
                 
-                @foreach (var company in Model.Companies)
+                @foreach (var company in Model.Companies.OrderBy(x => x.Name))
                 {
                     <li>
                         <a href="@Url.Action(MVC.Company.Details(company.Id))">

@@ -407,7 +407,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Edit.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Company\List.cs">
+    <Compile Include="Views\Company\List.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>List.cshtml</DependentUpon>
@@ -972,7 +972,7 @@
     </Content>
     <Content Include="Views\Company\List.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>List.cs</LastGenOutput>
+      <LastGenOutput>List.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
