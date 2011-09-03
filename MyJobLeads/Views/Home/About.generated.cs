@@ -29,7 +29,7 @@ namespace MyJobLeads.Views.Home
     using MyJobLeads.Infrastructure.HtmlHelpers;
     using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/About.cshtml")]
     public class About : System.Web.Mvc.WebViewPage<dynamic>
     {
@@ -40,7 +40,7 @@ namespace MyJobLeads.Views.Home
         {
 
             
-            #line 1 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\About.cshtml"
+            #line 1 "..\..\Views\Home\About.cshtml"
   
     ViewBag.Title = "About Us";
 
@@ -57,7 +57,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 6 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\About.cshtml"
+            #line 6 "..\..\Views\Home\About.cshtml"
       Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.About));
 
             
@@ -66,7 +66,29 @@ WriteLiteral("\r\n");
 
 });
 
-WriteLiteral("\r\n\r\n<h2>About</h2>\r\n<p>\r\n     Put content here.\r\n</p>\r\n");
+WriteLiteral(@"
+
+<div class=""grid1 floatLeft""> 
+    <div class=""lineSeperater""> 
+        <div class=""pageInfoBox""> 
+            <div class=""grid3 marginBottom_10 marginAuto floatLeft"">
+                <h3>About MyLeads</h3>
+            </div>
+
+            <div class=""grid3 marginBottom_10 marginAuto floatLeft"">
+                <p>
+                    MyLeads version 3.0. Property of <a class=""inlineBlue"" href=""http://interviewtools.net"">InterviewTools</a>.
+                </p>
+
+                <p>
+                    Please contact us at <a class=""inlineBlue"" href=""mailto:support@interviewtools.net"">support@interviewtools.net</a>
+                </p>
+            </div>
+            
+            <div class=""clear""></div>
+        </div>
+    </div>
+</div>");
 
 
         }

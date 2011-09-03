@@ -422,7 +422,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Edit.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home\About.cs">
+    <Compile Include="Views\Home\About.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>About.cshtml</DependentUpon>
@@ -855,7 +855,7 @@
     </Content>
     <Content Include="Views\Home\About.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>About.cs</LastGenOutput>
+      <LastGenOutput>About.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Home\Index.cshtml">
       <Generator>RazorGenerator</Generator>
