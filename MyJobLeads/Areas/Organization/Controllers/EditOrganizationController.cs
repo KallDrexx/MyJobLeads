@@ -31,6 +31,13 @@ namespace MyJobLeads.Areas.Organization.Controllers
         [HttpPost]
         public virtual ActionResult Index(EditOrganizationViewModel model)
         {
+            // Make sure a domain was entered if DomainRestricted is true
+            if (model.IsEmailDomainRestricted && string.IsNullOrWhiteSpace(model.RestrictedDomain))
+            {
+                ModelState.AddModelError("RestrictedDomain", "When restricting registration to a specific email domain, a valid domain name is required");
+                return View(model);
+            }
+
             _serviceFactory.GetService<EditOrganizationCommand>()
                            .Execute(new EditOrganizationCommandParams
                            {

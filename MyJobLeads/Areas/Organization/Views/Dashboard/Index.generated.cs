@@ -120,43 +120,25 @@ WriteLiteral("\r\n                    </div>\r\n                </div> \r\n     
             #line default
             #line hidden
 WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n                 " +
-"   <div class=\"floatLeft\"><p class=\"greyHighlight\">Students must register with a" +
-"n email with the following domains:</p>\r\n                        <div class=\"inf" +
-"oSpan\">\r\n");
+"   <div class=\"floatLeft\">\r\n                        <p class=\"greyHighlight\">Stu" +
+"dents must register with an email from the <span class=\"greyHighlight\">");
+
+
+WriteLiteral("@");
 
 
             
-            #line 41 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
-                             foreach (var email in Model.EmailDomains)
-                            {
-                                
+            #line 40 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                                                                                                                        Write(Model.EmailDomains.First().Domain);
+
             
             #line default
             #line hidden
+WriteLiteral("</span> domain</p>\r\n                    </div> \r\n                </div>\r\n");
+
+
             
             #line 43 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
-                           Write(email.Domain);
-
-            
-            #line default
-            #line hidden
-
-WriteLiteral("<br />\r\n");
-
-
-            
-            #line 44 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
-                            }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                        </div>\r\n                    </div> \r\n                </di" +
-"v>\r\n");
-
-
-            
-            #line 48 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
             }
 
             else
@@ -174,7 +156,7 @@ WriteLiteral(@"                <div class=""grid3 marginBottom_10 floatLeft"">
 
 
             
-            #line 57 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 52 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
             }
 
             

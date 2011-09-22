@@ -36,13 +36,8 @@
             @if (Model.IsEmailDomainRestricted)
             {
                 <div class="grid3 marginBottom_10 floatLeft"> 
-                    <div class="floatLeft"><p class="greyHighlight">Students must register with an email with the following domains:</p>
-                        <div class="infoSpan">
-                            @foreach (var email in Model.EmailDomains)
-                            {
-                                @email.Domain<br />
-                            }
-                        </div>
+                    <div class="floatLeft">
+                        <p class="greyHighlight">Students must register with an email from the <span class="greyHighlight">@@@Model.EmailDomains.First().Domain</span> domain</p>
                     </div> 
                 </div>
             }
