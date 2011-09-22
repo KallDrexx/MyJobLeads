@@ -1,39 +1,53 @@
 ﻿@model MyJobLeads.ViewModels.Organizations.EditOrganizationViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Edit University Details";
 }
 
-<h2>Edit Organization</h2>
+<div class="grid1 floatLeft"> 
+    <div class="lineSeperater"> 
+        <div class="pageInfoBox"> 
+            @using (Html.BeginForm(MVC.Organization.EditOrganization.Index())) 
+            {
+                @Html.HiddenFor(x => x.Id)
+                
+                <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                    <h3 class="floatLeft">Edit University Details</h3> 
+                </div> 
+                
+                <div class="grid3 marginBottom_10 marginAuto floatleft">
+                    <div class="floatLeft infoSpan">
+                        @Html.ValidationSummary()
+                    </div>
+                </div>
+                
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">University Name:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.Name, new { @class = "info" })</div>
+                    </div> 
+                </div> 
 
-@using (Html.BeginForm())
-{
-    <table>
-        @Html.HiddenFor(x => x.Id)
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">Restrict Student Registrations To Specific Email Domains:</p>
+                        <div class="infoSpan">@Html.CheckBoxFor(x => x.IsEmailDomainRestricted)</div>
+                    </div> 
+                </div>
+                
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">Restricted Email Domain:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.RestrictedDomain, new { @class = "info" })</div>
+                    </div> 
+                </div> 
 
-        <tr>
-            <td align="right">Name:</td>
-            <td>@Html.EditorFor(x => x.Name)</td>
-        </tr>
+                <div class="grid3 marginBottom_20 floatLeft"> 
+                    <div class="submitBTN ">
+                        <input type="submit" value="Save" /> &nbsp;
+                        @Html.ActionLink("Cancel", MVC.Organization.Dashboard.Index())
+                    </div>
+                </div> 
+            }
 
-        <tr>
-            <td align="right">Enable User Email Restriction?</td>
-            <td>@Html.EditorFor(x => x.IsEmailDomainRestricted)</td>
-        </tr>
-
-        <tr>
-            <td align="right">Restrictd Email Domain:</td>
-            <td>@Html.EditorFor(x => x.RestrictedDomain)</td>
-        </tr>
-
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Save" /> &nbsp;
-                @Html.ActionLink("Cancel", MVC.Organization.Dashboard.Index())
-            </td>
-        </tr>
-    </table>
-
-
-}
+            <div class="clear"></div> 
+        </div> 
+    </div> 
+</div>

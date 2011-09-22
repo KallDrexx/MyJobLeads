@@ -29,7 +29,7 @@ namespace MyJobLeads.Views.JobSearch
     using MyJobLeads.Infrastructure.HtmlHelpers;
     using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/JobSearch/Edit.cshtml")]
     public class Edit : System.Web.Mvc.WebViewPage<MyJobLeads.DomainModel.Entities.JobSearch>
     {
@@ -43,7 +43,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 3 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 3 "..\..\Views\JobSearch\Edit.cshtml"
   
     Layout = "~/Views/Shared/_Layout.cshtml";
     bool isNewJobSearch = Model.Id == 0;
@@ -57,7 +57,7 @@ WriteLiteral("\r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"lineSeper
 
 
             
-            #line 11 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 11 "..\..\Views\JobSearch\Edit.cshtml"
              using (Html.BeginForm(MVC.JobSearch.Edit())) 
             {
                 
@@ -65,14 +65,14 @@ WriteLiteral("\r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"lineSeper
             #line default
             #line hidden
             
-            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 13 "..\..\Views\JobSearch\Edit.cshtml"
            Write(Html.HiddenFor(x => x.Id));
 
             
             #line default
             #line hidden
             
-            #line 13 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 13 "..\..\Views\JobSearch\Edit.cshtml"
                                           
                 
 
@@ -84,7 +84,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_10 marginAuto floa
 
 
             
-            #line 16 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 16 "..\..\Views\JobSearch\Edit.cshtml"
                                       Write(isNewJobSearch ? "Start Job Search" : "Edit Job Search");
 
             
@@ -94,7 +94,7 @@ WriteLiteral("</h3> \r\n                </div> \r\n");
 
 
             
-            #line 18 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 18 "..\..\Views\JobSearch\Edit.cshtml"
                 
 
             
@@ -115,7 +115,7 @@ WriteLiteral(@"                <div class=""grid3 marginBottom_10 marginAuto flo
 
 
             
-            #line 30 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 30 "..\..\Views\JobSearch\Edit.cshtml"
                 
 
             
@@ -126,7 +126,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_10 marginAuto floa
 
 
             
-            #line 33 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 33 "..\..\Views\JobSearch\Edit.cshtml"
                    Write(Html.ValidationSummary());
 
             
@@ -136,7 +136,7 @@ WriteLiteral("\r\n                    </div>\r\n                </div>\r\n");
 
 
             
-            #line 36 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 36 "..\..\Views\JobSearch\Edit.cshtml"
                 
 
             
@@ -148,7 +148,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r
 
 
             
-            #line 39 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 39 "..\..\Views\JobSearch\Edit.cshtml"
                                          Write(Html.TextBoxFor(x => x.Name, new { @class = "info" }));
 
             
@@ -158,7 +158,7 @@ WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r
 
 
             
-            #line 42 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 42 "..\..\Views\JobSearch\Edit.cshtml"
 
 
             
@@ -170,7 +170,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r
 
 
             
-            #line 45 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 45 "..\..\Views\JobSearch\Edit.cshtml"
                                          Write(Html.TextAreaFor(x => x.Description, new { @class = "textAreaInfo" }));
 
             
@@ -180,7 +180,7 @@ WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r
 
 
             
-            #line 48 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 48 "..\..\Views\JobSearch\Edit.cshtml"
 
 
             
@@ -192,7 +192,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_20 floatLeft\"> \r
 
 
             
-            #line 52 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\JobSearch\Edit.cshtml"
+            #line 52 "..\..\Views\JobSearch\Edit.cshtml"
             }
 
             
