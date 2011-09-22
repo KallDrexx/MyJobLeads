@@ -66,7 +66,7 @@ namespace MyJobLeads.DomainModel.Commands.Users
                     bool domainFound = false;
 
                     foreach (var orgDomain in org.EmailDomains)
-                        if (orgDomain.IsActive && orgDomain.Domain.ToLower().Trim() == domain)
+                        if (cmdParams.Email.ToLower().Contains(orgDomain.Domain.ToLower().Trim()))
                             domainFound = true;
 
                     if (!domainFound)

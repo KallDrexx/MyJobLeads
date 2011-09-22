@@ -125,9 +125,8 @@ namespace MyJobLeads.Controllers
                 OrganizationName = org.Name
             };
 
-            foreach (var orgDomain in org.EmailDomains)
-                if (orgDomain.IsActive)
-                    model.RestrictedEmailDomains.Add(orgDomain.Domain);
+            if (org.EmailDomains.Count > 0)
+                model.RestrictedEmailDomain = org.EmailDomains.First().Domain;
 
             return View(model);
         }
@@ -172,9 +171,8 @@ namespace MyJobLeads.Controllers
             var org = _serviceFactory.GetService<OrganizationByRegistrationTokenQuery>()
                                      .Execute(new OrganizationByRegistrationTokenQueryParams { RegistrationToken = model.RegistrationToken });
 
-            foreach (var orgDomain in org.EmailDomains)
-                if (orgDomain.IsActive)
-                    model.RestrictedEmailDomains.Add(orgDomain.Domain);
+            if (org.EmailDomains.Count > 0)
+                model.RestrictedEmailDomain = org.EmailDomains.First().Domain;
 
             model.MinPasswordLength = Membership.MinRequiredPasswordLength;
             return View(model);

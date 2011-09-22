@@ -382,7 +382,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Register.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Account\RegisterWithOrganization.cs">
+    <Compile Include="Views\Account\RegisterWithOrganization.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RegisterWithOrganization.cshtml</DependentUpon>
@@ -968,7 +968,7 @@
     </Content>
     <Content Include="Views\Account\RegisterWithOrganization.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>RegisterWithOrganization.cs</LastGenOutput>
+      <LastGenOutput>RegisterWithOrganization.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Company\List.cshtml">
       <Generator>RazorGenerator</Generator>

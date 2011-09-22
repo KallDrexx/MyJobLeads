@@ -10,16 +10,11 @@ namespace MyJobLeads.ViewModels.Accounts
 {
     public class OrganizationRegistrationViewModel
     {
-        public OrganizationRegistrationViewModel()
-        {
-            RestrictedEmailDomains = new List<string>();
-        }
-
         public int MinPasswordLength { get; set; }
         public Guid RegistrationToken { get; set; }
         public string OrganizationName { get; set; }
 
-        public IList<string> RestrictedEmailDomains { get; set; }
+        public string RestrictedEmailDomain { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
