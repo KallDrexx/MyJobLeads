@@ -4,6 +4,10 @@
     ViewBag.Title = "University Dashboard";
 }
 
+@section SideBar {
+    @{Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.OrgAdmin));}
+}
+
 <div class="grid1 floatLeft"> 
     <div class="lineSeperater"> 
         <div class="pageInfoBox">         

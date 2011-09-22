@@ -11,7 +11,7 @@ using MyJobLeads.ViewModels.Users;
 
 namespace MyJobLeads.Controllers
 {
-    public enum ActiveSidebarLink { None, Logon, Register, Tasks, Companies, Positions, About };
+    public enum ActiveSidebarLink { None, Logon, Register, Tasks, Companies, Positions, About, OrgAdmin };
 
     public partial class HomeController : MyJobLeadsBaseController
     {

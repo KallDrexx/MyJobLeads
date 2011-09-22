@@ -49,7 +49,26 @@ WriteLiteral("\r\n");
             
             #line default
             #line hidden
+WriteLiteral("\r\n");
+
+
+DefineSection("SideBar", () => {
+
+WriteLiteral("\r\n");
+
+
+            
+            #line 8 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+      Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.OrgAdmin));
+
+            
+            #line default
+            #line hidden
+
+});
+
 WriteLiteral(@"
+
 <div class=""grid1 floatLeft""> 
     <div class=""lineSeperater""> 
         <div class=""pageInfoBox"">         
@@ -59,7 +78,7 @@ WriteLiteral(@"
 
 
             
-            #line 12 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 16 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
            Write(Html.ActionLink("Edit Details", MVC.Organization.EditOrganization.Index(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" }));
 
             
@@ -71,7 +90,7 @@ WriteLiteral("\r\n            </div> \r\n                \r\n            <div cl
 
 
             
-            #line 17 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 21 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                                      Write(Model.Name);
 
             
@@ -84,7 +103,7 @@ WriteLiteral("</div>\r\n                </div> \r\n            </div> \r\n\r\n  
 
 
             
-            #line 23 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 27 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                                      Write(Model.Members.Count);
 
             
@@ -101,7 +120,7 @@ WriteLiteral(@"</div>
 
 
             
-            #line 30 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 34 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                    Write(Html.ActionLink(Url.Action("RegisterWithOrganization", "Account", new { area = "", registrationToke = Model.RegistrationToken }),
                             MVC.Account.RegisterWithOrganization(Model.RegistrationToken), new { @class = "inlineBlue" }));
 
@@ -112,7 +131,7 @@ WriteLiteral("\r\n                    </div>\r\n                </div> \r\n     
 
 
             
-            #line 36 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 40 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
              if (Model.IsEmailDomainRestricted)
             {
 
@@ -128,7 +147,7 @@ WriteLiteral("@");
 
 
             
-            #line 40 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 44 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                                                                                                                         Write(Model.EmailDomains.First().Domain);
 
             
@@ -138,7 +157,7 @@ WriteLiteral("</span> domain</p>\r\n                    </div> \r\n             
 
 
             
-            #line 43 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 47 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
             }
 
             else
@@ -156,7 +175,7 @@ WriteLiteral(@"                <div class=""grid3 marginBottom_10 floatLeft"">
 
 
             
-            #line 52 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 56 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
             }
 
             

@@ -15,7 +15,7 @@
 
         @if (Model.UserType == MyJobLeads.ViewModels.Users.UserSidebarViewModel.AccountType.OrganizationAdmin)
         {
-            <li>@Html.ActionLink("University Dashboard", MVC.Organization.Dashboard.Index())</li>
+            <li>@Html.ActionLink("University Dashboard", MVC.Organization.Dashboard.Index(), new { @class = Model.ActiveLink == ActiveSidebarLink.OrgAdmin ? "active" : "" })</li>
         }
     </ul>
 </div>

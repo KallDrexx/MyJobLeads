@@ -113,7 +113,7 @@ WriteLiteral("            <li>");
 
             
             #line 18 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
-           Write(Html.ActionLink("University Dashboard", MVC.Organization.Dashboard.Index()));
+           Write(Html.ActionLink("University Dashboard", MVC.Organization.Dashboard.Index(), new { @class = Model.ActiveLink == ActiveSidebarLink.OrgAdmin ? "active" : "" }));
 
             
             #line default
