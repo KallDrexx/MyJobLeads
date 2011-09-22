@@ -10,5 +10,12 @@
         <li>@Html.ActionLink("Companies", MVC.Company.List(), new { @class = Model.ActiveLink == ActiveSidebarLink.Companies? "active" : "" })</li>
         <li>@Html.ActionLink("Positions", MVC.Position.List(), new { @class = Model.ActiveLink == ActiveSidebarLink.Positions? "active" : "" })</li>
         <li>@Html.ActionLink("About", MVC.Home.About(), new { @class = Model.ActiveLink == ActiveSidebarLink.About? "active" : "" })</li>
+
+        <li>&nbsp;</li>
+
+        @if (Model.UserType == MyJobLeads.ViewModels.Users.UserSidebarViewModel.AccountType.OrganizationAdmin)
+        {
+            <li>@Html.ActionLink("University Dashboard", MVC.Organization.Dashboard.Index())</li>
+        }
     </ul>
 </div>

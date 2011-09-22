@@ -1,32 +1,62 @@
 ﻿@model MyJobLeads.DomainModel.Entities.Organization
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "University Dashboard";
 }
 
-<h2>University Dashboard</h2>
+<div class="grid1 floatLeft"> 
+    <div class="lineSeperater"> 
+        <div class="pageInfoBox">         
+            <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                <h3 class="floatLeft">University Dashboard</h3> 
+                @Html.ActionLink("Edit Details", MVC.Organization.EditOrganization.Index(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" })
+            </div> 
+                
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">University Name:</p>
+                    <div class="infoSpan">@Model.Name</div>
+                </div> 
+            </div> 
 
-<p>
-    Name: @Model.Name <br />
-    Number of users: @Model.Members.Count <br />
-    Registration URL: 
-        @Html.ActionLink("Registration URL", MVC.Account.RegisterWithOrganization((Guid?)Model.RegistrationToken)) <br />
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Number of Students:</p>
+                    <div class="infoSpan">@Model.Members.Count</div>
+                </div> 
+            </div> 
 
-    @if (Model.IsEmailDomainRestricted)
-    {
-        @:User registration <b>IS</b> restricted by the following email domains:
-        <ul>
-            @foreach (var email in Model.EmailDomains)
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Registration URL:</p>
+                    <div class="infoSpan">
+                        @Html.ActionLink(Url.Action("RegisterWithOrganization", "Account", new { area = "", registrationToke = Model.RegistrationToken }),
+                            MVC.Account.RegisterWithOrganization(Model.RegistrationToken), new { @class = "inlineBlue" })
+                    </div>
+                </div> 
+            </div> 
+
+            @if (Model.IsEmailDomainRestricted)
             {
-                <li>@email.Domain</li>   
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">Students must register with an email with the following domains:</p>
+                        <div class="infoSpan">
+                            @foreach (var email in Model.EmailDomains)
+                            {
+                                @email.Domain<br />
+                            }
+                        </div>
+                    </div> 
+                </div>
             }
-        </ul>
-    }
 
-    else
-    {
-        @:User registration is <b>NOT</b> restricted by email domains <br />
-    }
-</p>
+            else
+            {
+                <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight"></p>
+                        <div class="infoSpan">Students can register with any email address</div>
+                    </div> 
+                </div>
+            }
 
-@Html.ActionLink("Edit Settings", MVC.Organization.EditOrganization.Index(Model.Id))
+            <div class="clear"></div> 
+        </div> 
+    </div> 
+</div> 

@@ -270,7 +270,7 @@
     <Compile Include="Areas\Organization\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Organization\Controllers\EditOrganizationController.cs" />
     <Compile Include="Areas\Organization\OrganizationAreaRegistration.cs" />
-    <Compile Include="Areas\Organization\Views\Dashboard\Index.cs">
+    <Compile Include="Areas\Organization\Views\Dashboard\Index.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.cshtml</DependentUpon>
@@ -979,7 +979,7 @@
     <Content Include="Areas\Organization\Views\Web.config" />
     <Content Include="Areas\Organization\Views\Dashboard\Index.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Index.cs</LastGenOutput>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Areas\Organization\Views\EditOrganization\Index.cshtml">
       <Generator>RazorGenerator</Generator>

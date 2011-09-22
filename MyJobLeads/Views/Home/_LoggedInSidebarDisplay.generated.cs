@@ -97,7 +97,38 @@ WriteLiteral("</li>\r\n        <li>");
             
             #line default
             #line hidden
-WriteLiteral("</li>\r\n    </ul>\r\n</div>");
+WriteLiteral("</li>\r\n\r\n        <li>&nbsp;</li>\r\n\r\n");
+
+
+            
+            #line 16 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
+         if (Model.UserType == MyJobLeads.ViewModels.Users.UserSidebarViewModel.AccountType.OrganizationAdmin)
+        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <li>");
+
+
+            
+            #line 18 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
+           Write(Html.ActionLink("University Dashboard", MVC.Organization.Dashboard.Index()));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</li>\r\n");
+
+
+            
+            #line 19 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
+        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    </ul>\r\n</div>");
 
 
         }
