@@ -20,32 +20,49 @@ namespace MyJobLeads.Views.Home
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using MyJobLeads.Infrastructure.HtmlHelpers;
+    using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/SubmitFeedback.cshtml")]
-    public class SubmitFeedback : System.Web.Mvc.WebViewPage<dynamic>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/FixBlankTitles.cshtml")]
+    public class FixBlankTitles : System.Web.Mvc.WebViewPage<int>
     {
-        public SubmitFeedback()
+        public FixBlankTitles()
         {
         }
         public override void Execute()
         {
 
+WriteLiteral("\r\n");
+
+
             
-            #line 1 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\SubmitFeedback.cshtml"
+            #line 3 "..\..\Views\Home\FixBlankTitles.cshtml"
   
-    ViewBag.Title = "Feedback Submitted";
+    ViewBag.Title = "FixBlankTitles";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n<h2>Feedback Submitted</h2>\r\n\r\nThank you for your feedback!\r\n\r\n");
+WriteLiteral("\r\n<h2>FixBlankTitles</h2>\r\n\r\nFixed ");
+
+
+            
+            #line 10 "..\..\Views\Home\FixBlankTitles.cshtml"
+ Write(Model);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" entities with blank names\r\n");
 
 
         }

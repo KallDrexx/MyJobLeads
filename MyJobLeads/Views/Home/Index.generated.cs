@@ -20,12 +20,16 @@ namespace MyJobLeads.Views.Home
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using MyJobLeads.Infrastructure.HtmlHelpers;
+    using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/Index.cshtml")]
     public class Index : System.Web.Mvc.WebViewPage<dynamic>
     {
@@ -36,7 +40,7 @@ namespace MyJobLeads.Views.Home
         {
 
             
-            #line 1 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\Index.cshtml"
+            #line 1 "..\..\Views\Home\Index.cshtml"
   
     ViewBag.Title = "Home Page";
 
@@ -48,7 +52,7 @@ WriteLiteral("\r\n<h2>");
 
 
             
-            #line 5 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\Index.cshtml"
+            #line 5 "..\..\Views\Home\Index.cshtml"
 Write(ViewBag.Message);
 
             

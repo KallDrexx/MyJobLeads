@@ -26,19 +26,30 @@ namespace MyJobLeads.Views.Home
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using MyJobLeads.Infrastructure.HtmlHelpers;
     using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/Test.cshtml")]
-    public class Test : System.Web.Mvc.WebViewPage<dynamic>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/SubmitFeedback.cshtml")]
+    public class SubmitFeedback : System.Web.Mvc.WebViewPage<dynamic>
     {
-        public Test()
+        public SubmitFeedback()
         {
         }
         public override void Execute()
         {
-WriteLiteral("<h2>Test precompiled view</h2>\r\n<p>\r\n     This view needs to have its CustomTool " +
-"set to RazorGenerator\r\n</p>\r\n");
+
+            
+            #line 1 "..\..\Views\Home\SubmitFeedback.cshtml"
+  
+    ViewBag.Title = "Feedback Submitted";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n<h2>Feedback Submitted</h2>\r\n\r\nThank you for your feedback!\r\n\r\n");
 
 
         }

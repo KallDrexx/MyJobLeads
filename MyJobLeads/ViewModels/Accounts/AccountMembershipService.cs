@@ -19,7 +19,7 @@ namespace MyJobLeads.ViewModels.Accounts
         public AccountMembershipService(MembershipProvider provider)
         {
             // Only support the MyJobLeadsMembershipProvider
-            var tempProvider = provider ?? Membership.Provider;
+            var tempProvider = provider ?? new MyJobLeadsMembershipProvider();
             _provider = tempProvider as MyJobLeadsMembershipProvider;
             
             if (_provider == null)

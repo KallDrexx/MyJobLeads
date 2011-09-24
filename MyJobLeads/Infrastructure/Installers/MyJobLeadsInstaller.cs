@@ -46,7 +46,7 @@ namespace MyJobLeads.Infrastructure.Installers
                               .ToList();
 
             foreach (var cl in classes)
-                container.Register(Component.For(cl).ImplementedBy(cl).LifeStyle.PerWebRequest);
+                container.Register(Component.For(cl).ImplementedBy(cl).LifeStyle.Transient);
 
             // Register all implemented process interfaces
             BasedOnDescriptor processes = AllTypes.FromAssembly(Assembly.GetAssembly(typeof(IProcess<,>)))

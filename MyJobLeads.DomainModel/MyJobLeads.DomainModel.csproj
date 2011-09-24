@@ -128,6 +128,7 @@
     <Compile Include="EntityMapping\EntityMapLoader.cs" />
     <Compile Include="EntityMapping\Mappings\CompanyMappings.cs" />
     <Compile Include="EntityMapping\Mappings\PositionMappings.cs" />
+    <Compile Include="EntityMapping\Mappings\UserMappings.cs" />
     <Compile Include="Exceptions\InvalidEmailDomainForOrganizationException.cs" />
     <Compile Include="Exceptions\InvalidOrganizationRegistrationTokenException.cs" />
     <Compile Include="Exceptions\MJLDuplicateEmailException.cs" />
@@ -140,9 +141,11 @@
     <Compile Include="EntityMapping\IEntityMapConfiguration.cs" />
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Processes\Positions\PositionProcesses.cs" />
+    <Compile Include="Processes\Users\UserProcesses.cs" />
     <Compile Include="ProcessParams\Positions\CreatePositionParams.cs" />
     <Compile Include="ProcessParams\Positions\EditPositionParams.cs" />
     <Compile Include="ProcessParams\Positions\GetPositionListForUserParams.cs" />
+    <Compile Include="ProcessParams\Users\EditUserDetailsParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\DataDirectory\IDataDirectoryProvider.cs" />
     <Compile Include="Providers\Search\ISearchProvider.cs" />
@@ -152,6 +155,7 @@
     <Compile Include="Providers\Validation\ContactValidator.cs" />
     <Compile Include="Providers\Validation\JobSearchValidator.cs" />
     <Compile Include="Providers\Validation\TaskValidator.cs" />
+    <Compile Include="Providers\Validation\Users\EditUserDetailsParamsValidator.cs" />
     <Compile Include="Providers\Validation\UserValidator.cs" />
     <Compile Include="Queries\Companies\IsUserAuthorizedForCompanyQuery.cs" />
     <Compile Include="Queries\Companies\LeadStatusesAvailableForCompaniesQuery.cs" />

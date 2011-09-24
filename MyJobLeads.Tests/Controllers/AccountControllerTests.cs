@@ -338,7 +338,7 @@ namespace MyJobLeads.Tests.Controllers
         private static AccountController GetAccountController()
         {
             RequestContext requestContext = new RequestContext(new MockHttpContext(), new RouteData());
-            AccountController controller = new AccountController(null)
+            AccountController controller = new AccountController(null, null)
             {
                 FormsService = new MockFormsAuthenticationService(),
                 MembershipService = new MockMembershipService(),

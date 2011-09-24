@@ -41,7 +41,6 @@ namespace MyJobLeads.Tests.Commands.Users
 
             // Act
             new EditUserCommand(_unitOfWork).WithUserId(_user.Id)
-                                            .SetEmail("new@email.com")
                                             .SetPassword("new password")
                                             .SetLastVisitedJobSearchId(_search.Id)
                                             .WithExistingPassword(_oldPassword)
@@ -51,7 +50,7 @@ namespace MyJobLeads.Tests.Commands.Users
             // Verify
             Assert.IsNotNull(result, "No user was found in the repository");
             Assert.AreEqual(_user, result, "User was incorrect");
-            Assert.AreEqual("new@email.com", result.Email, "User's email was incorrect");
+            Assert.AreEqual(_startingEmail, result.Email, "User's email was incorrect");
             Assert.IsTrue(PasswordUtils.CheckPasswordHash("new@email.com", "new password", result.Password), "User's password was incorrect");
             Assert.AreEqual(_search.Id, result.LastVisitedJobSearchId, "User's last visited jobsearch id was incorrect");
         }
@@ -64,8 +63,6 @@ namespace MyJobLeads.Tests.Commands.Users
 
             // Act
             User result = new EditUserCommand(_unitOfWork).WithUserId(_user.Id)
-                                                        .SetEmail("new@email.com")
-                                                        .SetPassword("new password")
                                                         .SetLastVisitedJobSearchId(_search.Id)
                                                         .WithExistingPassword(_oldPassword)
                                                         .Execute();
@@ -73,7 +70,7 @@ namespace MyJobLeads.Tests.Commands.Users
             // Verify
             Assert.IsNotNull(result, "No user was found in the repository");
             Assert.AreEqual(_user, result, "User was incorrect");
-            Assert.AreEqual("new@email.com", result.Email, "User's email was incorrect");
+            Assert.AreEqual(_startingEmail, result.Email, "User's email was incorrect");
             Assert.IsTrue(PasswordUtils.CheckPasswordHash("new@email.com", "new password", result.Password), "User's password was incorrect");
             Assert.AreEqual(_search.Id, result.LastVisitedJobSearchId, "User's last visited jobsearch id was incorrect");
         }
@@ -89,7 +86,6 @@ namespace MyJobLeads.Tests.Commands.Users
             try
             {
                 new EditUserCommand(_unitOfWork).WithUserId(id)
-                                                .SetEmail("new@email.com")
                                                 .SetPassword("new password")
                                                 .Execute();
                 Assert.Fail("No exception was thrown");
@@ -133,7 +129,6 @@ namespace MyJobLeads.Tests.Commands.Users
 
             // Act
             new EditUserCommand(_unitOfWork).WithUserId(_user.Id)
-                                            .SetEmail("new@email.com")
                                             .SetLastVisitedJobSearchId(_search.Id)
                                             .WithExistingPassword(_oldPassword)
                                             .Execute();
@@ -142,7 +137,7 @@ namespace MyJobLeads.Tests.Commands.Users
             // Verify
             Assert.IsNotNull(result, "No user was found in the repository");
             Assert.AreEqual(_user, result, "User was incorrect");
-            Assert.AreEqual("new@email.com", result.Email, "User's email was incorrect");
+            Assert.AreEqual(_startingEmail, result.Email, "User's email was incorrect");
             Assert.IsTrue(PasswordUtils.CheckPasswordHash(result.Email, "starting password", result.Password), "User's password was incorrect");
             Assert.AreEqual(_search.Id, result.LastVisitedJobSearchId, "User's last visited jobsearch id was incorrect");
         }
@@ -155,7 +150,6 @@ namespace MyJobLeads.Tests.Commands.Users
 
             // Act
             new EditUserCommand(_unitOfWork).WithUserId(_user.Id)
-                                            .SetEmail("new@email.com")
                                             .SetPassword("new password")
                                             .WithExistingPassword(_oldPassword)
                                             .Execute();
@@ -164,7 +158,7 @@ namespace MyJobLeads.Tests.Commands.Users
             // Verify
             Assert.IsNotNull(result, "No user was found in the repository");
             Assert.AreEqual(_user, result, "User was incorrect");
-            Assert.AreEqual("new@email.com", result.Email, "User's email was incorrect");
+            Assert.AreEqual(_startingEmail, result.Email, "User's email was incorrect");
             Assert.IsTrue(PasswordUtils.CheckPasswordHash(result.Email, "new password", result.Password), "User's password was incorrect");
             Assert.AreEqual(_search.Id, result.LastVisitedJobSearchId, "User's last visited jobsearch id was incorrect");
         }
@@ -195,7 +189,6 @@ namespace MyJobLeads.Tests.Commands.Users
             try
             {
                 new EditUserCommand(_unitOfWork).WithUserId(_user.Id)
-                                                .SetEmail("new@email.com")
                                                 .SetLastVisitedJobSearchId(5)
                                                 .Execute();
                 Assert.Fail("Command did not throw an exception");
@@ -218,7 +211,6 @@ namespace MyJobLeads.Tests.Commands.Users
             try
             {
                 new EditUserCommand(_unitOfWork).WithUserId(_user.Id)
-                                                .SetEmail("new@email.com")
                                                 .SetLastVisitedJobSearchId(5)
                                                 .WithExistingPassword("wrong password")
                                                 .Execute();

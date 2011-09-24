@@ -20,45 +20,26 @@ namespace MyJobLeads.Views.Home
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
     using System.Web.Mvc.Html;
+    using System.Web.Routing;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using MyJobLeads.Infrastructure.HtmlHelpers;
+    using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.0.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/FixBlankTitles.cshtml")]
-    public class FixBlankTitles : System.Web.Mvc.WebViewPage<int>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/Test.cshtml")]
+    public class Test : System.Web.Mvc.WebViewPage<dynamic>
     {
-        public FixBlankTitles()
+        public Test()
         {
         }
         public override void Execute()
         {
-
-WriteLiteral("\r\n");
-
-
-            
-            #line 3 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\FixBlankTitles.cshtml"
-  
-    ViewBag.Title = "FixBlankTitles";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n<h2>FixBlankTitles</h2>\r\n\r\nFixed ");
-
-
-            
-            #line 10 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\FixBlankTitles.cshtml"
- Write(Model);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" entities with blank names\r\n");
+WriteLiteral("<h2>Test precompiled view</h2>\r\n<p>\r\n     This view needs to have its CustomTool " +
+"set to RazorGenerator\r\n</p>\r\n");
 
 
         }

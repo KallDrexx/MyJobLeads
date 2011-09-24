@@ -7,6 +7,7 @@ using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Utilities;
+using FluentValidation.Results; 
 
 namespace MyJobLeads.DomainModel.Commands.Users
 {
@@ -16,7 +17,7 @@ namespace MyJobLeads.DomainModel.Commands.Users
     public class EditUserCommand
     {
         protected IUnitOfWork _unitOfWork;
-        protected string _newEmail, _newPassword, _oldPassword;
+        protected string _newPassword, _oldPassword, _newName;
         protected int _userId, _lastJobSearchId;
         protected bool _updateLastJobSearch;
 
@@ -33,17 +34,6 @@ namespace MyJobLeads.DomainModel.Commands.Users
         public EditUserCommand WithUserId(int userId)
         {
             _userId = userId;
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the email for the user
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
-        public EditUserCommand SetEmail(string email)
-        {
-            _newEmail = email;
             return this;
         }
 
@@ -82,6 +72,17 @@ namespace MyJobLeads.DomainModel.Commands.Users
         }
 
         /// <summary>
+        /// Specifies the new name for the user
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public EditUserCommand SetFullName(string name)
+        {
+            _newName = name;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
@@ -93,17 +94,15 @@ namespace MyJobLeads.DomainModel.Commands.Users
             if (user == null)
                 throw new MJLEntityNotFoundException(typeof(User), _userId);
 
+            // Verify the user's current password is correct
+            if (new UserByCredentialsQuery(_unitOfWork).WithEmail(user.Email).WithPassword(_oldPassword).Execute() == null)
+                throw new MJLIncorrectPasswordException(_userId);
+
             // Edit the properties
-            if (_newEmail != null || _newPassword != null)
-            {
-                // Verify the user's current password is correct
-                if (!PasswordUtils.CheckPasswordHash(user.Email, _oldPassword, user.Password))
-                    throw new MJLIncorrectPasswordException(_userId);
+            if (!string.IsNullOrWhiteSpace(_newPassword))
+                user.Password = PasswordUtils.CreatePasswordHash(user.Email, _newPassword);
 
-                if (_newEmail != null) { user.Email = _newEmail; }
-                user.Password = PasswordUtils.CreatePasswordHash(user.Email, _newPassword ?? _oldPassword);
-            }
-
+            if (_newName != null) { user.FullName = _newName.Trim(); }
             if (_updateLastJobSearch) { user.LastVisitedJobSearchId = _lastJobSearchId; }
 
             // Save

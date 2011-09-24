@@ -56,8 +56,17 @@ WriteLiteral("\r\n<h2 id=\"accountName\">");
             
             #line default
             #line hidden
-WriteLiteral("</h2>\r\n<div class=\"accountEdit\"><a href=\"#\">Edit Your Account</a></div>\r\n\r\n<div i" +
-"d=\"leftHandNav\">\r\n    <ul>\r\n        <li>");
+WriteLiteral("</h2>\r\n<div class=\"accountEdit\">");
+
+
+            
+            #line 5 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
+                    Write(Html.ActionLink("Edit Your Account", MVC.Account.Edit()));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n\r\n<div id=\"leftHandNav\">\r\n    <ul>\r\n        <li>");
 
 
             

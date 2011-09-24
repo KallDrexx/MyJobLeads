@@ -362,7 +362,7 @@
     <Compile Include="ViewModels\Tasks\TaskDashboardViewModel.cs" />
     <Compile Include="ViewModels\Tasks\TaskDisplayViewModel.cs" />
     <Compile Include="ViewModels\Users\UserSidebarViewModel.cs" />
-    <Compile Include="Views\Account\ChangePassword.cs">
+    <Compile Include="Views\Account\ChangePassword.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ChangePassword.cshtml</DependentUpon>
@@ -427,27 +427,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>About.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home\FixBlankTitles.cs">
+    <Compile Include="Views\Home\FixBlankTitles.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FixBlankTitles.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home\Index.cs">
+    <Compile Include="Views\Home\Index.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home\SubmitFeedback.cs">
+    <Compile Include="Views\Home\SubmitFeedback.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SubmitFeedback.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home\Test.cs">
+    <Compile Include="Views\Home\Test.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Test.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home\_AnonymousUserSidebarDisplay.cs">
+    <Compile Include="Views\Home\_AnonymousUserSidebarDisplay.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_AnonymousUserSidebarDisplay.cshtml</DependentUpon>
@@ -839,7 +839,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>ChangePassword.cs</LastGenOutput>
+      <LastGenOutput>ChangePassword.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Account\ChangePasswordSuccess.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -859,7 +859,7 @@
     </Content>
     <Content Include="Views\Home\Index.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Index.cs</LastGenOutput>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Shared\Error.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -936,7 +936,7 @@
     </Content>
     <Content Include="Views\Home\SubmitFeedback.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>SubmitFeedback.cs</LastGenOutput>
+      <LastGenOutput>SubmitFeedback.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Task\_OpenTaskSummary.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -964,7 +964,7 @@
     </Content>
     <Content Include="Views\Home\FixBlankTitles.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>FixBlankTitles.cs</LastGenOutput>
+      <LastGenOutput>FixBlankTitles.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Account\RegisterWithOrganization.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -989,7 +989,7 @@
     <None Include="T4MVC.tt.settings.t4" />
     <Content Include="Views\Home\Test.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Test.cs</LastGenOutput>
+      <LastGenOutput>Test.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Home\_LoggedInSidebarDisplay.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -997,7 +997,7 @@
     </Content>
     <Content Include="Views\Home\_AnonymousUserSidebarDisplay.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_AnonymousUserSidebarDisplay.cs</LastGenOutput>
+      <LastGenOutput>_AnonymousUserSidebarDisplay.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Task\Overdue.cshtml" />
     <Content Include="Views\Task\TaskListControl.cshtml" />
@@ -1008,6 +1008,7 @@
     <Content Include="Views\Position\Edit.cshtml" />
     <Content Include="Views\Position\Details.cshtml" />
     <Content Include="Views\Position\List.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

@@ -27,7 +27,7 @@ namespace MyJobLeads.Views.Home
     using System.Web.UI;
     using System.Web.WebPages;
     
-    #line 2 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
+    #line 2 "..\..\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
     using MyJobLeads.Controllers;
     
     #line default
@@ -35,7 +35,7 @@ namespace MyJobLeads.Views.Home
     using MyJobLeads.Infrastructure.HtmlHelpers;
     using Telerik.Web.Mvc.UI;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.1.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/_AnonymousUserSidebarDisplay.cshtml")]
     public class _AnonymousUserSidebarDisplay : System.Web.Mvc.WebViewPage<MyJobLeads.Controllers.ActiveSidebarLink>
     {
@@ -51,7 +51,7 @@ WriteLiteral("\r\n<h2 id=\"accountName\">Not Logged In</h2>\r\n\r\n<div id=\"lef
 
 
             
-            #line 8 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
+            #line 8 "..\..\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
        Write(Html.ActionLink("Log In", MVC.Account.LogOn(), new { @class = Model == ActiveSidebarLink.Logon ? "active" : "" }));
 
             
@@ -61,7 +61,7 @@ WriteLiteral("</li>\r\n        <li>");
 
 
             
-            #line 9 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
+            #line 9 "..\..\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
        Write(Html.ActionLink("Register", MVC.Account.Register(), new { @class = Model == ActiveSidebarLink.Register ? "active" : ""} ));
 
             
@@ -71,7 +71,7 @@ WriteLiteral("</li>\r\n        <li>");
 
 
             
-            #line 10 "C:\Users\KallDrexx\Documents\Projects\MyJobLeads\MyJobLeads\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
+            #line 10 "..\..\Views\Home\_AnonymousUserSidebarDisplay.cshtml"
        Write(Html.ActionLink("About", MVC.Home.About(), new { @class = Model == ActiveSidebarLink.About ? "active" : "" }));
 
             

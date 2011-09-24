@@ -13,17 +13,27 @@ using MyJobLeads.DomainModel.Commands.Users;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.DomainModel.Queries.Organizations;
+using MyJobLeads.DomainModel.Queries.Users;
+using AutoMapper;
+using MyJobLeads.DomainModel.ProcessParams.Users;
+using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.Data;
+using FluentValidation;
 
 namespace MyJobLeads.Controllers
 {
     public partial class AccountController : MyJobLeadsBaseController
     {
+        protected EditUserCommand _editUserCmd;
         public IFormsAuthenticationService FormsService { get; set; }
         public IMembershipService MembershipService { get; set; }
 
-        public AccountController(IServiceFactory factory)
+        public AccountController(IServiceFactory factory, EditUserCommand editUserCmd)
         {
             _serviceFactory = factory;
+            _editUserCmd = editUserCmd;
+
+
         }
 
         protected override void Initialize(RequestContext requestContext)
@@ -225,6 +235,51 @@ namespace MyJobLeads.Controllers
 
             user.ResetPassword();
             return View(true);
+        }
+
+        public virtual ActionResult Edit()
+        {
+            // If the user isn't logged in, redirect to home
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction(MVC.Home.Index());
+
+            var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(CurrentUserId).Execute();
+            var model = Mapper.Map<User, EditUserDetailsParams>(user);
+            return View(model);
+        }
+
+        [HttpPost]
+        public virtual ActionResult Edit(EditUserDetailsParams model)
+        {
+            if (model.NewPassword != model.NewPasswordConfirmation)
+                ModelState.AddModelError("", "Your new password and the new password confirmation do not match");
+
+            if (string.IsNullOrWhiteSpace(model.FullName))
+                ModelState.AddModelError("FullName", "You must enter a valid full name");
+
+            try
+            {
+                _editUserCmd.WithUserId(CurrentUserId)
+                            .WithExistingPassword(model.CurrentPassword)
+                            .SetPassword(model.NewPassword)
+                            .SetFullName(model.FullName)
+                            .Execute();
+            }
+
+            catch (MJLDuplicateEmailException)
+            {
+                ModelState.AddModelError("NewEmail", "A user already exists with the specified email address");
+            }
+
+            catch (MJLIncorrectPasswordException)
+            {
+                ModelState.AddModelError("CurrentPassword", "Your current password is incorrect");
+            }
+
+            if (!ModelState.IsValid)
+                return View(model);
+
+            return RedirectToAction(MVC.Home.Index());
         }
     }
 }

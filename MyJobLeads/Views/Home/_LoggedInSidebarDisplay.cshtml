@@ -2,7 +2,7 @@
 @using MyJobLeads.Controllers;
 
 <h2 id="accountName">@Model.DisplayName</h2>
-<div class="accountEdit"><a href="#">Edit Your Account</a></div>
+<div class="accountEdit">@Html.ActionLink("Edit Your Account", MVC.Account.Edit())</div>
 
 <div id="leftHandNav">
     <ul>
