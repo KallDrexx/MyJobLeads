@@ -29,8 +29,6 @@ namespace MyJobLeads.Infrastructure
                 _serviceFactory = new WindsorServiceFactory(Bootstrapper.WindsorContainer);
             else
                 _serviceFactory = factory;
-
-            _unitOfWork = _serviceFactory.GetService<IUnitOfWork>();
         }
 
         #endregion
@@ -39,15 +37,17 @@ namespace MyJobLeads.Infrastructure
 
         public override bool ChangePassword(string email, string oldPassword, string newPassword)
         {
+            var unitOfWork = GetUnitOfWork();
+
             // Retrieve the user with the specified email
-            var user = new UserByEmailQuery(_unitOfWork).WithEmail(email).Execute();
+            var user = new UserByEmailQuery(unitOfWork).WithEmail(email).Execute();
             if (user == null)
                 return false;
 
             // Update the password
             try
             {
-                new EditUserCommand(_unitOfWork).WithUserId(user.Id)
+                new EditUserCommand(unitOfWork).WithUserId(user.Id)
                                                 .WithExistingPassword(oldPassword)
                                                 .SetPassword(newPassword)
                                                 .Execute();
@@ -59,6 +59,7 @@ namespace MyJobLeads.Infrastructure
 
         public MembershipUser CreateUser(CreateUserMembershipParams userParams, out MembershipCreateStatus status)
         {
+            var unitOfWork = GetUnitOfWork();
             User user;
 
             try
@@ -94,7 +95,8 @@ namespace MyJobLeads.Infrastructure
         /// <returns></returns>
         public override bool ValidateUser(string email, string password)
         {
-            var user = new UserByCredentialsQuery(_unitOfWork).WithEmail(email)
+            var unitOfWork = GetUnitOfWork();
+            var user = new UserByCredentialsQuery(unitOfWork).WithEmail(email)
                                                               .WithPassword(password)
                                                               .Execute();
 
@@ -106,9 +108,11 @@ namespace MyJobLeads.Infrastructure
 
         public override MembershipUser GetUser(string email, bool userIsOnline)
         {
+            var unitOfWork = GetUnitOfWork();
+
             try 
             { 
-                var user = new UserByEmailQuery(_unitOfWork).WithEmail(email).Execute();
+                var user = new UserByEmailQuery(unitOfWork).WithEmail(email).Execute();
                 if (user == null)
                     return null;
 
@@ -122,14 +126,27 @@ namespace MyJobLeads.Infrastructure
 
         public override string ResetPassword(string email, string answer)
         {
-            return new ResetUserPasswordCommand(_unitOfWork).WithUserEmail(email).Execute();
+            var unitOfWork = GetUnitOfWork();
+            return new ResetUserPasswordCommand(unitOfWork).WithUserEmail(email).Execute();
+        }
+
+        #endregion
+
+        #region Provider Utility Methods
+
+        /// <summary>
+        /// Retrieves the current unit of work from the system, to prevent object contexts from being kept around
+        /// </summary>
+        /// <returns></returns>
+        public IUnitOfWork GetUnitOfWork()
+        {
+           return _serviceFactory.GetService<IUnitOfWork>();
         }
 
         #endregion
 
         #region Member Variables
 
-        protected IUnitOfWork _unitOfWork;
         protected IServiceFactory _serviceFactory;
 
         #endregion
