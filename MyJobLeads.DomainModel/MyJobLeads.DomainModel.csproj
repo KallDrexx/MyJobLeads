@@ -140,11 +140,13 @@
     <Compile Include="Exceptions\MJLValidatorNotFoundException.cs" />
     <Compile Include="EntityMapping\IEntityMapConfiguration.cs" />
     <Compile Include="MJLConstants.cs" />
+    <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
     <Compile Include="Processes\Positions\PositionProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
     <Compile Include="ProcessParams\Positions\CreatePositionParams.cs" />
     <Compile Include="ProcessParams\Positions\EditPositionParams.cs" />
     <Compile Include="ProcessParams\Positions\GetPositionListForUserParams.cs" />
+    <Compile Include="ProcessParams\Security\CompanyQueryAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Users\EditUserDetailsParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\DataDirectory\IDataDirectoryProvider.cs" />
@@ -170,6 +172,7 @@
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQuery.cs" />
     <Compile Include="Queries\Tasks\IsUserAuthorizedForTaskQuery.cs" />
     <Compile Include="TypeExtensions.cs" />
+    <Compile Include="ViewModels\Authorizations\AuthorizationResultViewModel.cs" />
     <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgress.cs" />
     <Compile Include="ViewModels\Positions\EditPositionViewModel.cs" />
