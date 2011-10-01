@@ -289,7 +289,7 @@ namespace MyJobLeads.Tests.Commands.Users
                 RegistrationToken = Guid.NewGuid(),
                 EmailDomains = new List<OrganizationEmailDomain>()
             };
-            org.EmailDomains.Add(new OrganizationEmailDomain { Domain = "test.com", IsActive = false, });
+            org.EmailDomains.Add(new OrganizationEmailDomain { Domain = "qa.com", IsActive = false, });
 
             _unitOfWork.Organizations.Add(org);
             _unitOfWork.Commit();
