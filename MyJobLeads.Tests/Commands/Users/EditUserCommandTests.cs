@@ -51,7 +51,7 @@ namespace MyJobLeads.Tests.Commands.Users
             Assert.IsNotNull(result, "No user was found in the repository");
             Assert.AreEqual(_user, result, "User was incorrect");
             Assert.AreEqual(_startingEmail, result.Email, "User's email was incorrect");
-            Assert.IsTrue(PasswordUtils.CheckPasswordHash("new@email.com", "new password", result.Password), "User's password was incorrect");
+            Assert.IsTrue(PasswordUtils.CheckPasswordHash(_startingEmail, "new password", result.Password), "User's password was incorrect");
             Assert.AreEqual(_search.Id, result.LastVisitedJobSearchId, "User's last visited jobsearch id was incorrect");
         }
 
@@ -71,7 +71,7 @@ namespace MyJobLeads.Tests.Commands.Users
             Assert.IsNotNull(result, "No user was found in the repository");
             Assert.AreEqual(_user, result, "User was incorrect");
             Assert.AreEqual(_startingEmail, result.Email, "User's email was incorrect");
-            Assert.IsTrue(PasswordUtils.CheckPasswordHash("new@email.com", "new password", result.Password), "User's password was incorrect");
+            Assert.IsTrue(PasswordUtils.CheckPasswordHash(_startingEmail, _oldPassword, result.Password), "User's password was incorrect");
             Assert.AreEqual(_search.Id, result.LastVisitedJobSearchId, "User's last visited jobsearch id was incorrect");
         }
 
