@@ -9,7 +9,9 @@ using MyJobLeads.DomainModel.ProcessParams.Security;
 
 namespace MyJobLeads.DomainModel.Processes.Authorization
 {
-    public class AuthorizationProcesses : IProcess<CompanyQueryAuthorizationParams, AuthorizationResultViewModel>
+    public class AuthorizationProcesses 
+        : IProcess<CompanyQueryAuthorizationParams, AuthorizationResultViewModel>,
+          IProcess<ContactAutorizationParams, AuthorizationResultViewModel>
     {
         public AuthorizationProcesses(MyJobLeadsDbContext context)
         {
@@ -26,6 +28,20 @@ namespace MyJobLeads.DomainModel.Processes.Authorization
             return new AuthorizationResultViewModel
             {
                 UserAuthorized = _context.Companies.Any(x => x.Id == procParams.CompanyId && x.JobSearch.User.Id == procParams.RequestingUserId)
+            };
+        }
+
+        /// <summary>
+        /// Determines if a user has access to a contact
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        public AuthorizationResultViewModel Execute(ContactAutorizationParams procParams)
+        {
+            return new AuthorizationResultViewModel
+            {
+                UserAuthorized = _context.Contacts
+                           .Any(x => x.Id == procParams.ContactId && x.Company.JobSearch.User.Id == procParams.RequestingUserId)
             };
         }
 

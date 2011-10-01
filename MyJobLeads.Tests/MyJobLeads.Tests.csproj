@@ -137,6 +137,7 @@
     <Compile Include="Controllers\PositionControllerTests.cs" />
     <Compile Include="Controllers\TaskControllerTests.cs" />
     <Compile Include="Processes\Authorization\CompanyAuthorizationTests.cs" />
+    <Compile Include="Processes\Authorization\ContactAuthorizationTests.cs" />
     <Compile Include="Processes\Positions\CreatePositionTests.cs" />
     <Compile Include="Processes\Positions\EditPositionTests.cs" />
     <Compile Include="Processes\Positions\GetPositionListTests.cs" />
