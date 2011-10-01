@@ -16,7 +16,10 @@ namespace MyJobLeads.DomainModel.EntityMapping.Mappings
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.CurrentEmail, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.NewEmail, opt => opt.MapFrom(src => src.Email))
-                .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName));
+                .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName))
+                .ForMember(dest => dest.CurrentPassword, opt => opt.Ignore())
+                .ForMember(dest => dest.NewPassword, opt => opt.Ignore())
+                .ForMember(dest => dest.NewPasswordConfirmation, opt => opt.Ignore());
         }
     }
 }
