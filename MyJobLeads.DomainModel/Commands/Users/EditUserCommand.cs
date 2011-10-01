@@ -94,9 +94,13 @@ namespace MyJobLeads.DomainModel.Commands.Users
             if (user == null)
                 throw new MJLEntityNotFoundException(typeof(User), _userId);
 
-            // Verify the user's current password is correct
-            if (new UserByCredentialsQuery(_unitOfWork).WithEmail(user.Email).WithPassword(_oldPassword).Execute() == null)
-                throw new MJLIncorrectPasswordException(_userId);
+            // Only check the current password if the user is only changing the last visited job search
+            if (!string.IsNullOrWhiteSpace(_newPassword) || !string.IsNullOrWhiteSpace(_newName))
+            {
+                // Verify the user's current password is correct
+                if (new UserByCredentialsQuery(_unitOfWork).WithEmail(user.Email).WithPassword(_oldPassword).Execute() == null)
+                    throw new MJLIncorrectPasswordException(_userId);
+            }
 
             // Edit the properties
             if (!string.IsNullOrWhiteSpace(_newPassword))

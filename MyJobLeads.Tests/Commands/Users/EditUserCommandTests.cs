@@ -189,7 +189,7 @@ namespace MyJobLeads.Tests.Commands.Users
             try
             {
                 new EditUserCommand(_unitOfWork).WithUserId(_user.Id)
-                                                .SetLastVisitedJobSearchId(5)
+                                                .SetFullName("Test ABC")
                                                 .Execute();
                 Assert.Fail("Command did not throw an exception");
             }
@@ -211,7 +211,7 @@ namespace MyJobLeads.Tests.Commands.Users
             try
             {
                 new EditUserCommand(_unitOfWork).WithUserId(_user.Id)
-                                                .SetLastVisitedJobSearchId(5)
+                                                .SetFullName("New Name")
                                                 .WithExistingPassword("wrong password")
                                                 .Execute();
                 Assert.Fail("Command did not throw an exception");
