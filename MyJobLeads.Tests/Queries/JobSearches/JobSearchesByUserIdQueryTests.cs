@@ -17,18 +17,12 @@ namespace MyJobLeads.Tests.Queries.JobSearches
 
         private void InitializeTestEntities()
         {
-            _user1 = new User { JobSearches = new List<JobSearch>() };
-            _user2 = new User { JobSearches = new List<JobSearch>() };
-            _search1 = new JobSearch();
-            _search2 = new JobSearch();
-            _search3 = new JobSearch();
+            _user1 = new User();
+            _user2 = new User();
+            _search1 = new JobSearch { User = _user1 };
+            _search2 = new JobSearch { User = _user2 };
+            _search3 = new JobSearch { User = _user1 };
 
-            _user1.JobSearches.Add(_search1);
-            _user2.JobSearches.Add(_search2);
-            _user1.JobSearches.Add(_search3);
-
-            _unitOfWork.Users.Add(_user1);
-            _unitOfWork.Users.Add(_user2);
             _unitOfWork.JobSearches.Add(_search1);
             _unitOfWork.JobSearches.Add(_search2);
             _unitOfWork.JobSearches.Add(_search3);
