@@ -148,6 +148,7 @@
     <Compile Include="ProcessParams\Positions\GetPositionListForUserParams.cs" />
     <Compile Include="ProcessParams\Security\CompanyQueryAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\ContactAutorizationParams.cs" />
+    <Compile Include="ProcessParams\Security\TaskAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Users\EditUserDetailsParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\DataDirectory\IDataDirectoryProvider.cs" />
