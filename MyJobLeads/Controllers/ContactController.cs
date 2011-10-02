@@ -15,6 +15,8 @@ using MyJobLeads.DomainModel.Providers.Search;
 using MyJobLeads.DomainModel.Providers;
 using FluentValidation;
 using MyJobLeads.ViewModels.Companies;
+using MyJobLeads.DomainModel.ProcessParams.Security;
+using MyJobLeads.DomainModel.ViewModels.Authorizations;
 
 namespace MyJobLeads.Controllers
 {
@@ -22,16 +24,18 @@ namespace MyJobLeads.Controllers
     public partial class ContactController : MyJobLeadsBaseController
     {
         protected ISearchProvider _searchProvider;
+        protected IProcess<CompanyQueryAuthorizationParams, AuthorizationResultViewModel> _companyAuthProcess;
 
-        public ContactController(IServiceFactory factory)
+        public ContactController(IServiceFactory factory, IProcess<CompanyQueryAuthorizationParams, AuthorizationResultViewModel> compAuthProcess)
         {
             _serviceFactory = factory;
             _unitOfWork = _serviceFactory.GetService<IUnitOfWork>();
+            _companyAuthProcess = compAuthProcess;
         }
 
         public virtual ActionResult Add(int companyId)
         {
-            var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(companyId).Execute();
+            var company = new CompanyByIdQuery(_unitOfWork, _companyAuthProcess).WithCompanyId(companyId).Execute();
             var model = new EditContactViewModel(company);
             return View(MVC.Contact.Views.Edit, model);
         }
@@ -91,7 +95,7 @@ namespace MyJobLeads.Controllers
                     ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
 
                 // Retrieve the company from the database for the sidebar
-                model.Company = new CompanySummaryViewModel(new CompanyByIdQuery(_unitOfWork).WithCompanyId(model.Company.Id).Execute());
+                model.Company = new CompanySummaryViewModel(new CompanyByIdQuery(_unitOfWork, _companyAuthProcess).WithCompanyId(model.Company.Id).Execute());
                 return View(model);
             }
         }

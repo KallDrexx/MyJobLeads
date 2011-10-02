@@ -15,6 +15,8 @@ using MyJobLeads.DomainModel.Queries.JobSearches;
 using MyJobLeads.DomainModel.Commands.JobSearches;
 using FluentValidation;
 using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.ProcessParams.Security;
+using MyJobLeads.DomainModel.ViewModels.Authorizations;
 
 namespace MyJobLeads.Controllers
 {
@@ -22,12 +24,17 @@ namespace MyJobLeads.Controllers
     public partial class CompanyController : MyJobLeadsBaseController
     {
         protected ISearchProvider _searchProvider;
+        protected IProcess<CompanyQueryAuthorizationParams, AuthorizationResultViewModel> _companyAuthProcess;
 
-        public CompanyController(IUnitOfWork unitOfWork, ISearchProvider searchProvider, IServiceFactory serviceFactory)
+        public CompanyController(IUnitOfWork unitOfWork, 
+                                 ISearchProvider searchProvider, 
+                                 IServiceFactory serviceFactory,
+                                 IProcess<CompanyQueryAuthorizationParams, AuthorizationResultViewModel> compAuthProcess)
         {
             _unitOfWork = unitOfWork;
             _searchProvider = searchProvider;
             _serviceFactory = serviceFactory;
+            _companyAuthProcess = compAuthProcess;
         }
 
         public virtual ActionResult List()
@@ -52,7 +59,7 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Edit(int id)
         {
-            var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(id).Execute();
+            var company = new CompanyByIdQuery(_unitOfWork, _companyAuthProcess).WithCompanyId(id).Execute();
             var statuses = _serviceFactory.GetService<LeadStatusesAvailableForCompaniesQuery>().Execute();
 
             return View(new EditCompanyViewModel(company) { AvailableLeadStatuses = statuses });
@@ -110,7 +117,7 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Details(int id, bool showPositions = false)
         {
-            var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(id).Execute();
+            var company = new CompanyByIdQuery(_unitOfWork, _companyAuthProcess).WithCompanyId(id).Execute();
             var model = new CompanyDisplayViewModel(company) { showPositions = showPositions };
             return View(model);
         }
