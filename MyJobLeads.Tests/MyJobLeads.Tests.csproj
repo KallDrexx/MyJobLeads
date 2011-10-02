@@ -174,7 +174,6 @@
     <Compile Include="Queries\Companies\LeadStatusesAvailableForCompaniesQueryTests.cs" />
     <Compile Include="Queries\Contacts\ContactByIdQueryTests.cs" />
     <Compile Include="Queries\Contacts\ContactsByCompanyIdQueryTests.cs" />
-    <Compile Include="Queries\Contacts\IsUserAuthorizedForContactQueryTests.cs" />
     <Compile Include="Queries\JobSearches\IsUserAuthorizedForJobSearchQueryTests.cs" />
     <Compile Include="Queries\JobSearches\JobSearchByIdQueryTests.cs" />
     <Compile Include="Queries\JobSearches\JobSearchesByUserIdQueryTests.cs" />
