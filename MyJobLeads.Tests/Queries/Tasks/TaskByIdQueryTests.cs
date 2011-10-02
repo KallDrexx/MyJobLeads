@@ -6,6 +6,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Tasks;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Data;
+using MyJobLeads.DomainModel.ViewModels.Authorizations;
+using MyJobLeads.DomainModel.ProcessParams.Security;
+using Moq;
 
 namespace MyJobLeads.Tests.Queries.Tasks
 {
@@ -32,9 +36,11 @@ namespace MyJobLeads.Tests.Queries.Tasks
         {
             // Setup
             InitializeTestEntities();
+            var authMock = new Mock<IProcess<TaskAuthorizationParams, AuthorizationResultViewModel>>();
+            authMock.Setup(x => x.Execute(It.IsAny<TaskAuthorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = true });
 
             // Act
-            Task result = new TaskByIdQuery(_unitOfWork).WithTaskId(_task2.Id).Execute();
+            Task result = new TaskByIdQuery(_unitOfWork, authMock.Object).WithTaskId(_task2.Id).Execute();
 
             // Verify
             Assert.IsNotNull(result, "Query returned a null task");
@@ -47,13 +53,34 @@ namespace MyJobLeads.Tests.Queries.Tasks
         {
             // Setup
             InitializeTestEntities();
+            var authMock = new Mock<IProcess<TaskAuthorizationParams, AuthorizationResultViewModel>>();
+            authMock.Setup(x => x.Execute(It.IsAny<TaskAuthorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = true });
             int id = _task2.Id + 100;
 
             // Act
-            Task result = new TaskByIdQuery(_unitOfWork).WithTaskId(id).Execute();
+            Task result = new TaskByIdQuery(_unitOfWork, authMock.Object).WithTaskId(id).Execute();
 
             // Verify
             Assert.IsNull(result, "Query returned a non-null task");
+        }
+
+        [TestMethod]
+        public void Execute_Returns_Null_Task_When_Not_Authorized()
+        {
+            // Setup
+            InitializeTestEntities();
+            var authMock = new Mock<IProcess<TaskAuthorizationParams, AuthorizationResultViewModel>>();
+            authMock.Setup(x => x.Execute(It.IsAny<TaskAuthorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = false });
+
+            // Act
+            Task result = new TaskByIdQuery(_unitOfWork, authMock.Object)
+                                .WithTaskId(_task2.Id)
+                                .RequestedByUserId(15)
+                                .Execute();
+
+            // Verify
+            Assert.IsNull(result, "Query returned a non-null task");
+            authMock.Verify(x => x.Execute(It.Is<TaskAuthorizationParams>(y => y.RequestingUserId == 15)));
         }
     }
 }
