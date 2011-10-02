@@ -12,7 +12,8 @@ namespace MyJobLeads.DomainModel.Processes.Authorization
     public class AuthorizationProcesses 
         : IProcess<CompanyQueryAuthorizationParams, AuthorizationResultViewModel>,
           IProcess<ContactAutorizationParams, AuthorizationResultViewModel>,
-          IProcess<TaskAuthorizationParams, AuthorizationResultViewModel>
+          IProcess<TaskAuthorizationParams, AuthorizationResultViewModel>,
+          IProcess<PositionAuthorizationParams, AuthorizationResultViewModel>
     {
         public AuthorizationProcesses(MyJobLeadsDbContext context)
         {
@@ -57,6 +58,20 @@ namespace MyJobLeads.DomainModel.Processes.Authorization
             {
                 UserAuthorized = _context.Tasks
                                          .Any(x => x.Id == procParams.TaskId && x.Company.JobSearch.User.Id == procParams.RequestingUserId)
+            };
+        }
+
+        /// <summary>
+        /// Determines if the specified user has authorization to a specific position
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        public AuthorizationResultViewModel Execute(PositionAuthorizationParams procParams)
+        {
+            return new AuthorizationResultViewModel
+            {
+                UserAuthorized = _context.Positions
+                                         .Any(x => x.Id == procParams.PositionId && x.Company.JobSearch.User.Id == procParams.RequestingUserId)
             };
         }
 
