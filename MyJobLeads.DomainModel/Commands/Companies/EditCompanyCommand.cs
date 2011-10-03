@@ -162,7 +162,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
                 throw new MJLEntityNotFoundException(typeof(User), _userId);
 
             // Retrieve the entity
-            var company = _factory.GetService<CompanyByIdQuery>().WithCompanyId(_companyId).Execute();
+            var company = _factory.GetService<CompanyByIdQuery>().WithCompanyId(_companyId).RequestedByUserId(_userId).Execute();
             if (company == null)
                 throw new MJLEntityNotFoundException(typeof(Company), _companyId);
 

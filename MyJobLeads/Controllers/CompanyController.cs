@@ -59,9 +59,14 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Edit(int id)
         {
-            var company = new CompanyByIdQuery(_unitOfWork, _companyAuthProcess).WithCompanyId(id).Execute();
-            var statuses = _serviceFactory.GetService<LeadStatusesAvailableForCompaniesQuery>().Execute();
+            var company = new CompanyByIdQuery(_unitOfWork, _companyAuthProcess).WithCompanyId(id).RequestedByUserId(CurrentUserId).Execute();
+            if (company == null)
+            {
+                ViewBag.EntityType = "Company";
+                return View(MVC.Shared.Views.EntityNotFound);
+            }
 
+            var statuses = _serviceFactory.GetService<LeadStatusesAvailableForCompaniesQuery>().Execute();
             return View(new EditCompanyViewModel(company) { AvailableLeadStatuses = statuses });
         }
 
