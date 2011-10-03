@@ -79,7 +79,7 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 throw new MJLEntityNotFoundException(typeof(User), cmdParams.RequestingUserId);
 
             // Retrieve the task
-            var task = _serviceFactory.GetService<TaskByIdQuery>().WithTaskId(cmdParams.TaskId).Execute();
+            var task = _serviceFactory.GetService<TaskByIdQuery>().WithTaskId(cmdParams.TaskId).RequestedByUserId(cmdParams.RequestingUserId).Execute();
             if (task == null)
                 throw new MJLEntityNotFoundException(typeof(Task), cmdParams.TaskId);
 

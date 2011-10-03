@@ -60,9 +60,12 @@ namespace MyJobLeads.Controllers
             var companyByIdQuery = _serviceFactory.GetService<CompanyByIdQuery>();
 
             // Retrieve the specified company value
-            var company = companyByIdQuery.WithCompanyId(companyId).Execute();
+            var company = companyByIdQuery.WithCompanyId(companyId).RequestedByUserId(CurrentUserId).Execute();
             if (company == null)
-                throw new MJLEntityNotFoundException(typeof(Company), companyId);
+            {
+                ViewBag.EntityType = "Company";
+                return View(MVC.Shared.Views.EntityNotFound);
+            }
 
             // Form the view model
             var model = new EditTaskViewModel(company);
@@ -84,9 +87,12 @@ namespace MyJobLeads.Controllers
         {
             // Retrieve the task
             var taskByIdQuery = _serviceFactory.GetService<TaskByIdQuery>();
-            var task = taskByIdQuery.WithTaskId(id).Execute();
+            var task = taskByIdQuery.WithTaskId(id).RequestedByUserId(CurrentUserId).Execute();
             if (task == null)
-                throw new MJLEntityNotFoundException(typeof(Task), id);
+            {
+                ViewBag.EntityType = "Task";
+                return View(MVC.Shared.Views.EntityNotFound);
+            }
 
             // Get the list of available task categories
             var categories = _serviceFactory.GetService<CategoriesAvailableForTasksQuery>().Execute();
@@ -165,7 +171,7 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Details(int id)
         {
-            var task = _serviceFactory.GetService<TaskByIdQuery>().WithTaskId(id).Execute();
+            var task = _serviceFactory.GetService<TaskByIdQuery>().WithTaskId(id).RequestedByUserId(CurrentUserId).Execute();
             var model = new TaskDisplayViewModel(task);
             return View(model);
         }

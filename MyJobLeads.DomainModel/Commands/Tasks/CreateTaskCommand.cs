@@ -54,7 +54,9 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 throw new MJLEntityNotFoundException(typeof(User), cmdParams.RequestedUserId);
 
             // Retrieve the company
-            var company = _serviceFactory.GetService<CompanyByIdQuery>().WithCompanyId(cmdParams.CompanyId).Execute();
+            var company = _serviceFactory.GetService<CompanyByIdQuery>().WithCompanyId(cmdParams.CompanyId)
+                                                                        .RequestedByUserId(cmdParams.RequestedUserId)
+                                                                        .Execute();
             if (company == null)
                 throw new MJLEntityNotFoundException(typeof(Company), cmdParams.CompanyId);
 
