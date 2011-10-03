@@ -1009,6 +1009,7 @@
     <Content Include="Views\Position\Details.cshtml" />
     <Content Include="Views\Position\List.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Shared\EntityNotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

@@ -1,0 +1,25 @@
+﻿@{
+    string entityType = ViewBag.EntityType ?? "Entity";
+    ViewBag.Title = entityType + " Not Found";
+}
+
+<div class="grid1 floatLeft"> 
+    <div class="lineSeperater"> 
+        <div class="pageInfoBox"> 
+            <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                <h3 class="floatLeft">@entityType Not Found</h3> 
+            </div> 
+                
+            <div class="grid3 marginBottom_10 marginAuto floatLeft">
+                <div class="floatLeft">
+                    <p>
+                        The @entityType.ToLower() you requested could not be retrieved.  This could be due to the specified @entityType.ToLower()
+                        not existing, or your account not having access to the @entityType.ToLower().
+                    </p>    
+                </div>
+            </div>
+
+            <div class="clear"></div> 
+        </div> 
+    </div> 
+</div> 
