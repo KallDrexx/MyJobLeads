@@ -117,7 +117,15 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Details(int id, bool showPositions = false)
         {
-            var company = new CompanyByIdQuery(_unitOfWork, _companyAuthProcess).WithCompanyId(id).Execute();
+            var company = new CompanyByIdQuery(_unitOfWork, _companyAuthProcess).WithCompanyId(id)
+                                                                                .RequestedByUserId(CurrentUserId)
+                                                                                .Execute();
+            if (company == null)
+            {
+                ViewBag.EntityType = "Company";
+                return View(MVC.Shared.Views.EntityNotFound);
+            }
+
             var model = new CompanyDisplayViewModel(company) { showPositions = showPositions };
             return View(model);
         }

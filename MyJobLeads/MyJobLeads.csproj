@@ -397,7 +397,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ResetPasswordResult.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Company\Details.cs">
+    <Compile Include="Views\Company\Details.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Details.cshtml</DependentUpon>
@@ -476,6 +476,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RefreshSearchIndex.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EntityNotFound.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityNotFound.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Shared\Error.cs">
       <AutoGen>True</AutoGen>
@@ -908,7 +913,7 @@
     </Content>
     <Content Include="Views\Company\Details.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Details.cs</LastGenOutput>
+      <LastGenOutput>Details.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Contact\Edit.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -1009,7 +1014,10 @@
     <Content Include="Views\Position\Details.cshtml" />
     <Content Include="Views\Position\List.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
-    <Content Include="Views\Shared\EntityNotFound.cshtml" />
+    <Content Include="Views\Shared\EntityNotFound.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EntityNotFound.generated.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

@@ -58,7 +58,7 @@
                             @Html.ActionLink("View Task", MVC.Task.Details(task.Id), new { @class = "blueLinks viewContact" })
                         </li>
                         
-                        @if (Model.OpenTasks.OrderBy(x => x.DueDate).Last() != task)
+                        if (Model.OpenTasks.OrderBy(x => x.DueDate).Last() != task)
                         {
                             <li><hr /></li>
                         }
@@ -82,7 +82,7 @@
                             @Html.ActionLink("View Task", MVC.Task.Details(task.Id), new { @class = "blueLinks viewContact" })
                         </li>
                         
-                        @if (Model.CompletedTasks.OrderBy(x => x.CompletionDate).Last() != task)
+                        if (Model.CompletedTasks.OrderBy(x => x.CompletionDate).Last() != task)
                         {
                             <li><hr /></li>
                         }
@@ -164,7 +164,7 @@
                             @Html.ActionLink("View Contact", MVC.Contact.Details(contact.Id), new { @class = "blueLinks viewContact" })
                         </li> 
                         
-                        @if (contact != lastContact)
+                        if (contact != lastContact)
                         {
                             <li><hr /></li>
                         }
