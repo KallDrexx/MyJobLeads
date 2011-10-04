@@ -164,7 +164,7 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
                 throw new MJLEntityNotFoundException(typeof(User), _userid);
 
             // Retrieve the contact
-            var contact = _serviceFactory.GetService<ContactByIdQuery>().WithContactId(_contactId).Execute();
+            var contact = _serviceFactory.GetService<ContactByIdQuery>().WithContactId(_contactId).RequestedByUserId(_userid).Execute();
             if (contact == null)
                 throw new MJLEntityNotFoundException(typeof(Contact), _contactId);
 

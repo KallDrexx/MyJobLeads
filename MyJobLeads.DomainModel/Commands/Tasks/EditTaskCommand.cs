@@ -89,7 +89,10 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
             {
                 if (cmdParams.ContactId != 0)
                 {
-                    contact = _serviceFactory.GetService<ContactByIdQuery>().WithContactId(cmdParams.ContactId).Execute();
+                    contact = _serviceFactory.GetService<ContactByIdQuery>()
+                                             .WithContactId(cmdParams.ContactId)
+                                             .RequestedByUserId(cmdParams.RequestingUserId)
+                                             .Execute();
                     if (contact == null)
                         throw new MJLEntityNotFoundException(typeof(Contact), cmdParams.ContactId);
                 }

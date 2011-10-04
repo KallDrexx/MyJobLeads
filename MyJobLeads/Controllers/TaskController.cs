@@ -73,7 +73,11 @@ namespace MyJobLeads.Controllers
 
             if (contactId != 0)
             {
-                model.Contact = new ContactSummaryViewModel(_serviceFactory.GetService<ContactByIdQuery>().WithContactId(contactId).Execute());
+                model.Contact = new ContactSummaryViewModel(
+                                        _serviceFactory.GetService<ContactByIdQuery>()
+                                                       .WithContactId(contactId)
+                                                       .RequestedByUserId(CurrentUserId)
+                                                       .Execute());
                 model.AssociatedContactId = contactId;
             }
 
@@ -207,6 +211,7 @@ namespace MyJobLeads.Controllers
         protected void CreateCompanyContactList(int selectedContactId, Company company, EditTaskViewModel model)
         {
             model.CompanyContactList = _serviceFactory.GetService<ContactsByCompanyIdQuery>().WithCompanyId(company.Id)
+                                                                                            .RequestedByUserId(CurrentUserId)
                                                                                             .Execute()
                                                                                             .Select(x => new SelectListItem
                                                                                             {
