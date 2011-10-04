@@ -35,7 +35,15 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Add(int companyId)
         {
-            var company = new CompanyByIdQuery(_unitOfWork, _companyAuthProcess).WithCompanyId(companyId).Execute();
+            var company = new CompanyByIdQuery(_unitOfWork, _companyAuthProcess).WithCompanyId(companyId)
+                                                                                .RequestedByUserId(CurrentUserId)
+                                                                                .Execute();
+            if (company == null)
+            {
+                ViewBag.EntityType = "Company";
+                return View(MVC.Shared.Views.EntityNotFound);
+            }
+
             var model = new EditContactViewModel(company);
             return View(MVC.Contact.Views.Edit, model);
         }
