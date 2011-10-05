@@ -159,8 +159,20 @@ namespace MyJobLeads.Controllers
                     ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
 
                 // Re-retrieve the contact and company entities from the database
-                var contact = _serviceFactory.GetService<ContactByIdQuery>().WithContactId(selectedContactId).Execute();
-                var company = _serviceFactory.GetService<CompanyByIdQuery>().WithCompanyId(model.AssociatedCompanyId).Execute();
+                var contact = _serviceFactory.GetService<ContactByIdQuery>().WithContactId(selectedContactId).RequestedByUserId(CurrentUserId).Execute();
+                var company = _serviceFactory.GetService<CompanyByIdQuery>().WithCompanyId(model.AssociatedCompanyId).RequestedByUserId(CurrentUserId).Execute();
+
+                if (contact == null)
+                {
+                    ViewBag.EntityType = "Contact";
+                    return View(MVC.Shared.Views.EntityNotFound);
+                }
+
+                if (company == null)
+                {
+                    ViewBag.EntityType = "Company";
+                    return View(MVC.Shared.Views.EntityNotFound);
+                }
 
                 model.Contact = new ContactSummaryViewModel(contact);
                 model.Company = new CompanySummaryViewModel(company);
