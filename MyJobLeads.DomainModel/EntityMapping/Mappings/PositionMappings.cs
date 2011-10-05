@@ -21,9 +21,12 @@ namespace MyJobLeads.DomainModel.EntityMapping.Mappings
             Mapper.CreateMap<Position, EditPositionViewModel>()
                 .ForMember(dest => dest.Company, opt => opt.MapFrom(src => Mapper.Map<Company, CompanySummaryViewModel>(src.Company)));
 
-            Mapper.CreateMap<EditPositionViewModel, EditPositionParams>();
+            Mapper.CreateMap<EditPositionViewModel, EditPositionParams>()
+                .ForMember(dest => dest.RequestingUserId, opt => opt.MapFrom(src => src.RequestedUserId));
+
             Mapper.CreateMap<EditPositionViewModel, CreatePositionParams>()
-                .ForMember(dest => dest.CompanyId, opt => opt.MapFrom(src => src.Company.Id));
+                .ForMember(dest => dest.CompanyId, opt => opt.MapFrom(src => src.Company.Id))
+                .ForMember(dest => dest.RequestingUserId, opt => opt.MapFrom(src => src.RequestedUserId));
         }
     }
 }

@@ -6,6 +6,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Contacts;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Data;
+using MyJobLeads.DomainModel.ViewModels.Authorizations;
+using MyJobLeads.DomainModel.ProcessParams.Security;
+using Moq;
 
 namespace MyJobLeads.Tests.Queries.Contacts
 {
@@ -32,9 +36,11 @@ namespace MyJobLeads.Tests.Queries.Contacts
         {
             // Setup
             InitializeTestEntities();
+            var authMock = new Mock<IProcess<ContactAutorizationParams, AuthorizationResultViewModel>>();
+            authMock.Setup(x => x.Execute(It.IsAny<ContactAutorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = true });
 
             // Act
-            Contact result = new ContactByIdQuery(_unitOfWork).WithContactId(_contact2.Id).Execute();
+            Contact result = new ContactByIdQuery(_unitOfWork, authMock.Object).WithContactId(_contact2.Id).Execute();
 
             // Verify
             Assert.IsNotNull(result, "Query returned a null contact");
@@ -47,13 +53,35 @@ namespace MyJobLeads.Tests.Queries.Contacts
         {
             // Setup
             InitializeTestEntities();
+            var authMock = new Mock<IProcess<ContactAutorizationParams, AuthorizationResultViewModel>>();
+            authMock.Setup(x => x.Execute(It.IsAny<ContactAutorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = true });
+
             int id = _contact2.Id + 100;
 
             // Act
-            Contact result = new ContactByIdQuery(_unitOfWork).WithContactId(id).Execute();
+            Contact result = new ContactByIdQuery(_unitOfWork, authMock.Object).WithContactId(id).Execute();
 
             // Verify
             Assert.IsNull(result, "Query returned a non-null contact");
+        }
+
+        [TestMethod]
+        public void Execute_Returns_Null_Contact_When_User_Not_Authorized()
+        {
+            // Setup
+            InitializeTestEntities();
+            var authMock = new Mock<IProcess<ContactAutorizationParams, AuthorizationResultViewModel>>();
+            authMock.Setup(x => x.Execute(It.IsAny<ContactAutorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = false });
+
+            // Act
+            Contact result = new ContactByIdQuery(_unitOfWork, authMock.Object)
+                                    .WithContactId(_contact2.Id)
+                                    .RequestedByUserId(15)
+                                    .Execute();
+
+            // Verify
+            Assert.IsNull(result, "Query returned a non-null contact");
+            authMock.Verify(x => x.Execute(It.Is<ContactAutorizationParams>(y => y.RequestingUserId == 15)));
         }
     }
 }

@@ -30,6 +30,7 @@ namespace T4MVC {
         public class ViewNames {
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
             public readonly string _LogOnPartial = "~/Views/Shared/_LogOnPartial.cshtml";
+            public readonly string EntityNotFound = "~/Views/Shared/EntityNotFound.cshtml";
             public readonly string Error = "~/Views/Shared/Error.cshtml";
         }
     }

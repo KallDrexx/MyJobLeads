@@ -54,7 +54,9 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
                 throw new MJLEntityNotFoundException(typeof(User), cmdParams.RequestedUserId);
 
             // Retrieve the company
-            var company = _serviceFactory.GetService<CompanyByIdQuery>().WithCompanyId(cmdParams.CompanyId).Execute();
+            var company = _serviceFactory.GetService<CompanyByIdQuery>().WithCompanyId(cmdParams.CompanyId)
+                                                                        .RequestedByUserId(cmdParams.RequestedUserId)
+                                                                        .Execute();
             if (company == null)
                 throw new MJLEntityNotFoundException(typeof(Company), cmdParams.CompanyId);
 
@@ -62,7 +64,10 @@ namespace MyJobLeads.DomainModel.Commands.Tasks
             Contact contact = null;
             if (cmdParams.ContactId != 0)
             {
-                contact = _serviceFactory.GetService<ContactByIdQuery>().WithContactId(cmdParams.ContactId).Execute();
+                contact = _serviceFactory.GetService<ContactByIdQuery>()
+                                         .WithContactId(cmdParams.ContactId)
+                                         .RequestedByUserId(cmdParams.RequestedUserId)
+                                         .Execute();
                 if (contact == null)
                     throw new MJLEntityNotFoundException(typeof(Contact), cmdParams.ContactId);
             }

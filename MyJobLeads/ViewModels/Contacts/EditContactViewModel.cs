@@ -14,6 +14,9 @@ namespace MyJobLeads.ViewModels.Contacts
 
         public EditContactViewModel(Contact contact)
         {
+            if (contact == null)
+                throw new ArgumentNullException("contact");
+
             Id = contact.Id;
             Name = contact.Name;
             Title = contact.Title;
@@ -30,6 +33,9 @@ namespace MyJobLeads.ViewModels.Contacts
 
         public EditContactViewModel(Company company)
         {
+            if (company == null)
+                throw new ArgumentNullException("company");
+
             Company = new CompanySummaryViewModel(company);
         }
 

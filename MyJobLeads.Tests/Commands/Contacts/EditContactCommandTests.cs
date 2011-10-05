@@ -16,6 +16,8 @@ using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.DomainModel.Queries.Contacts;
 using FluentValidation;
 using FluentValidation.Results;
+using MyJobLeads.DomainModel.ProcessParams.Security;
+using MyJobLeads.DomainModel.ViewModels.Authorizations;
 
 namespace MyJobLeads.Tests.Commands.Contacts
 {
@@ -28,6 +30,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
         private Mock<UserByIdQuery> _userQuery;
         private Mock<ContactByIdQuery> _contactQuery;
         private Mock<IValidator<Contact>> _validator;
+        private Mock<IProcess<ContactAutorizationParams, AuthorizationResultViewModel>> _contactAuthMock;
 
         private void InitializeTestEntities()
         {
@@ -51,6 +54,9 @@ namespace MyJobLeads.Tests.Commands.Contacts
             _unitOfWork.Commit();
 
             // Mocks
+            _contactAuthMock = new Mock<IProcess<ContactAutorizationParams, AuthorizationResultViewModel>>();
+            _contactAuthMock.Setup(x => x.Execute(It.IsAny<ContactAutorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = true });
+
             _serviceFactory = new Mock<IServiceFactory>();
             _serviceFactory.Setup(x => x.GetService<IUnitOfWork>()).Returns(_unitOfWork);
 
@@ -61,7 +67,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             _userQuery.Setup(x => x.Execute()).Returns(_user);
             _serviceFactory.Setup(x => x.GetService<UserByIdQuery>()).Returns(_userQuery.Object);
 
-            _contactQuery = new Mock<ContactByIdQuery>(_unitOfWork);
+            _contactQuery = new Mock<ContactByIdQuery>(_unitOfWork, _contactAuthMock.Object);
             _contactQuery.Setup(x => x.Execute()).Returns(_contact);
             _serviceFactory.Setup(x => x.GetService<ContactByIdQuery>()).Returns(_contactQuery.Object);
 

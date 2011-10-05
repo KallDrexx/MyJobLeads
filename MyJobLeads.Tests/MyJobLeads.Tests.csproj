@@ -136,6 +136,10 @@
     <Compile Include="Commands\Organizations\EditOrganizationCommandTests.cs" />
     <Compile Include="Controllers\PositionControllerTests.cs" />
     <Compile Include="Controllers\TaskControllerTests.cs" />
+    <Compile Include="Processes\Authorization\CompanyAuthorizationTests.cs" />
+    <Compile Include="Processes\Authorization\ContactAuthorizationTests.cs" />
+    <Compile Include="Processes\Authorization\PositionAuthorizationTests.cs" />
+    <Compile Include="Processes\Authorization\TaskAuthorizationsTests.cs" />
     <Compile Include="Processes\Positions\CreatePositionTests.cs" />
     <Compile Include="Processes\Positions\EditPositionTests.cs" />
     <Compile Include="Processes\Positions\GetPositionListTests.cs" />
@@ -146,7 +150,6 @@
     <Compile Include="Providers\General\WindsorValidatorFactoryTests.cs" />
     <Compile Include="Providers\Validators\TaskValidatorTests.cs" />
     <Compile Include="Providers\Validators\UserValidatorTests.cs" />
-    <Compile Include="Queries\Companies\IsUserAuthorizedForCompanyQueryTests.cs" />
     <Compile Include="Commands\Contacts\CreateContactCommandTests.cs" />
     <Compile Include="Commands\Contacts\EditContactCommandTests.cs" />
     <Compile Include="Commands\Search\RefreshSearchIndexCommandTests.cs" />
@@ -172,7 +175,6 @@
     <Compile Include="Queries\Companies\LeadStatusesAvailableForCompaniesQueryTests.cs" />
     <Compile Include="Queries\Contacts\ContactByIdQueryTests.cs" />
     <Compile Include="Queries\Contacts\ContactsByCompanyIdQueryTests.cs" />
-    <Compile Include="Queries\Contacts\IsUserAuthorizedForContactQueryTests.cs" />
     <Compile Include="Queries\JobSearches\IsUserAuthorizedForJobSearchQueryTests.cs" />
     <Compile Include="Queries\JobSearches\JobSearchByIdQueryTests.cs" />
     <Compile Include="Queries\JobSearches\JobSearchesByUserIdQueryTests.cs" />
@@ -183,7 +185,6 @@
     <Compile Include="Queries\Positions\PositionByIdQueryTests.cs" />
     <Compile Include="Queries\Search\EntitySearchQueryTests.cs" />
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQueryTests.cs" />
-    <Compile Include="Queries\Tasks\IsUserAuthorizedForTaskQueryTests.cs" />
     <Compile Include="Queries\Tasks\OpenTasksByJobSearchQueryTests.cs" />
     <Compile Include="Queries\Tasks\TaskByIdQueryTests.cs" />
     <Compile Include="Queries\Tasks\TasksByCompanyIdQueryTests.cs" />

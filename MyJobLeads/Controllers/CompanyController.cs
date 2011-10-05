@@ -15,6 +15,8 @@ using MyJobLeads.DomainModel.Queries.JobSearches;
 using MyJobLeads.DomainModel.Commands.JobSearches;
 using FluentValidation;
 using MyJobLeads.DomainModel.Queries.Users;
+using MyJobLeads.DomainModel.ProcessParams.Security;
+using MyJobLeads.DomainModel.ViewModels.Authorizations;
 
 namespace MyJobLeads.Controllers
 {
@@ -22,12 +24,20 @@ namespace MyJobLeads.Controllers
     public partial class CompanyController : MyJobLeadsBaseController
     {
         protected ISearchProvider _searchProvider;
+        protected IProcess<CompanyQueryAuthorizationParams, AuthorizationResultViewModel> _companyAuthProcess;
+        protected UserByIdQuery _userByIdQuery;
 
-        public CompanyController(IUnitOfWork unitOfWork, ISearchProvider searchProvider, IServiceFactory serviceFactory)
+        public CompanyController(IUnitOfWork unitOfWork, 
+                                 ISearchProvider searchProvider, 
+                                 IServiceFactory serviceFactory,
+                                 UserByIdQuery userByIdQuery,
+                                 IProcess<CompanyQueryAuthorizationParams, AuthorizationResultViewModel> compAuthProcess)
         {
             _unitOfWork = unitOfWork;
             _searchProvider = searchProvider;
             _serviceFactory = serviceFactory;
+            _companyAuthProcess = compAuthProcess;
+            _userByIdQuery = userByIdQuery;
         }
 
         public virtual ActionResult List()
@@ -38,12 +48,13 @@ namespace MyJobLeads.Controllers
             return View(model);
         }
 
-        public virtual ActionResult Add(int jobSearchId)
+        public virtual ActionResult Add()
         {
+            var user = _userByIdQuery.WithUserId(CurrentUserId).Execute();
             var statuses = _serviceFactory.GetService<LeadStatusesAvailableForCompaniesQuery>().Execute();
             var model = new EditCompanyViewModel
             {
-                JobSearchId = jobSearchId,
+                JobSearchId = Convert.ToInt32(user.LastVisitedJobSearchId),
                 AvailableLeadStatuses = _serviceFactory.GetService<LeadStatusesAvailableForCompaniesQuery>().Execute()
             };
 
@@ -52,9 +63,14 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Edit(int id)
         {
-            var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(id).Execute();
-            var statuses = _serviceFactory.GetService<LeadStatusesAvailableForCompaniesQuery>().Execute();
+            var company = new CompanyByIdQuery(_unitOfWork, _companyAuthProcess).WithCompanyId(id).RequestedByUserId(CurrentUserId).Execute();
+            if (company == null)
+            {
+                ViewBag.EntityType = "Company";
+                return View(MVC.Shared.Views.EntityNotFound);
+            }
 
+            var statuses = _serviceFactory.GetService<LeadStatusesAvailableForCompaniesQuery>().Execute();
             return View(new EditCompanyViewModel(company) { AvailableLeadStatuses = statuses });
         }
 
@@ -110,7 +126,15 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Details(int id, bool showPositions = false)
         {
-            var company = new CompanyByIdQuery(_unitOfWork).WithCompanyId(id).Execute();
+            var company = new CompanyByIdQuery(_unitOfWork, _companyAuthProcess).WithCompanyId(id)
+                                                                                .RequestedByUserId(CurrentUserId)
+                                                                                .Execute();
+            if (company == null)
+            {
+                ViewBag.EntityType = "Company";
+                return View(MVC.Shared.Views.EntityNotFound);
+            }
+
             var model = new CompanyDisplayViewModel(company) { showPositions = showPositions };
             return View(model);
         }

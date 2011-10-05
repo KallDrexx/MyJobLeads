@@ -158,6 +158,12 @@ namespace MyJobLeads.Controllers {
             return callInfo;
         }
 
+        public override System.Web.Mvc.ActionResult Edit(MyJobLeads.DomainModel.ProcessParams.Users.EditUserDetailsParams model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
     }
 }
 

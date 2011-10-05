@@ -5,6 +5,8 @@ using System.Text;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.ProcessParams.Security;
+using MyJobLeads.DomainModel.ViewModels.Authorizations;
 
 namespace MyJobLeads.DomainModel.Queries.Companies
 {
@@ -14,11 +16,13 @@ namespace MyJobLeads.DomainModel.Queries.Companies
     public class CompanyByIdQuery
     {
         protected IUnitOfWork _unitOfWork;
-        protected int _companyId;
+        protected IProcess<CompanyQueryAuthorizationParams, AuthorizationResultViewModel> _authProcess;
+        protected int _companyId, _reqUserId;
 
-        public CompanyByIdQuery(IUnitOfWork unitOfWork)
+        public CompanyByIdQuery(IUnitOfWork unitOfWork, IProcess<CompanyQueryAuthorizationParams, AuthorizationResultViewModel> authProcess)
         {
             _unitOfWork = unitOfWork;
+            _authProcess = authProcess;
         }
 
         /// <summary>
@@ -33,11 +37,26 @@ namespace MyJobLeads.DomainModel.Queries.Companies
         }
 
         /// <summary>
+        /// Specifies the id value of the user requesting the company
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public CompanyByIdQuery RequestedByUserId(int userId)
+        {
+            _reqUserId = userId;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the query
         /// </summary>
         /// <returns></returns>
         public virtual Company Execute()
         {
+            // Make sure the user has authorization for the specified company
+            if (!_authProcess.Execute(new CompanyQueryAuthorizationParams { CompanyId = _companyId, RequestingUserId = _reqUserId }).UserAuthorized)
+                return null;
+
             // Attempt to retrieve the company
             return _unitOfWork.Companies.Fetch().Where(x => x.Id == _companyId).SingleOrDefault();
         }

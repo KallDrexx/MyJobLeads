@@ -16,6 +16,9 @@ namespace MyJobLeads.ViewModels.Companies
 
         public EditCompanyViewModel(Company company)
         {
+            if (company == null)
+                throw new ArgumentNullException("company");
+
             Id = company.Id;
             Name = company.Name;
             Phone = company.Phone;

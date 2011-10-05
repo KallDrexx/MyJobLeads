@@ -12,6 +12,7 @@ namespace MyJobLeads.ViewModels.Positions
         public string Title { get; set; }
         public bool HasApplied { get; set; }
         public string Notes { get; set; }
+        public int RequestedUserId { get; set; }
 
         public CompanySummaryViewModel Company { get; set; }
     }

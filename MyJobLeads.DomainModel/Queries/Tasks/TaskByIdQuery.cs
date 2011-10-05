@@ -5,6 +5,8 @@ using System.Text;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.ProcessParams.Security;
+using MyJobLeads.DomainModel.ViewModels.Authorizations;
 
 namespace MyJobLeads.DomainModel.Queries.Tasks
 {
@@ -14,11 +16,13 @@ namespace MyJobLeads.DomainModel.Queries.Tasks
     public class TaskByIdQuery
     {
         protected IUnitOfWork _unitOfWork;
-        protected int _taskId;
+        protected IProcess<TaskAuthorizationParams, AuthorizationResultViewModel> _taskAuthProcess;
+        protected int _taskId, _userId;
 
-        public TaskByIdQuery(IUnitOfWork unitOfWork)
+        public TaskByIdQuery(IUnitOfWork unitOfWork, IProcess<TaskAuthorizationParams, AuthorizationResultViewModel> taskAuthProcess)
         {
             _unitOfWork = unitOfWork;
+            _taskAuthProcess = taskAuthProcess;
         }
 
         /// <summary>
@@ -33,11 +37,26 @@ namespace MyJobLeads.DomainModel.Queries.Tasks
         }
 
         /// <summary>
+        /// Specifies the id value of the user running the query
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public TaskByIdQuery RequestedByUserId(int userId)
+        {
+            _userId = userId;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the query
         /// </summary>
         /// <returns></returns>
         public virtual Task Execute()
         {
+            // Make sure the user is authorized for the task
+            if (!_taskAuthProcess.Execute(new TaskAuthorizationParams { TaskId = _taskId, RequestingUserId = _userId }).UserAuthorized)
+                return null;
+
             // Retrieve the task
             return _unitOfWork.Tasks.Fetch().Where(x => x.Id == _taskId).SingleOrDefault();
         }
