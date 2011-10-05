@@ -188,6 +188,12 @@ namespace MyJobLeads.Controllers
         public virtual ActionResult Details(int id)
         {
             var task = _serviceFactory.GetService<TaskByIdQuery>().WithTaskId(id).RequestedByUserId(CurrentUserId).Execute();
+            if (task == null)
+            {
+                ViewBag.EntityType = "Task";
+                return View(MVC.Shared.Views.EntityNotFound);
+            }
+
             var model = new TaskDisplayViewModel(task);
             return View(model);
         }
