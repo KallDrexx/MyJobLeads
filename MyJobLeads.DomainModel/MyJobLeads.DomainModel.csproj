@@ -139,6 +139,7 @@
     <Compile Include="Exceptions\MJLUserNotFoundException.cs" />
     <Compile Include="Exceptions\MJLValidatorNotFoundException.cs" />
     <Compile Include="EntityMapping\IEntityMapConfiguration.cs" />
+    <Compile Include="Exceptions\UserNotAuthorizedForEntityException.cs" />
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
     <Compile Include="Processes\Positions\PositionProcesses.cs" />

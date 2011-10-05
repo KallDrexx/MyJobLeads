@@ -14,6 +14,7 @@ using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.ViewModels.Positions;
 using MyJobLeads.ViewModels.Companies;
 using MyJobLeads.Infrastructure.Attributes;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.Controllers
 {
@@ -49,14 +50,26 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Details(int id)
         {
-            var position = _posByIdQuery.WithPositionId(id).Execute();
+            var position = _posByIdQuery.WithPositionId(id).RequestedByUserId(CurrentUserId).Execute();
+            if (position == null)
+            {
+                ViewBag.EntityType = "Position";
+                return View(MVC.Shared.Views.EntityNotFound);
+            }
+
             var model = Mapper.Map<Position, PositionDisplayViewModel>(position);
             return View(model);
         }
 
         public virtual ActionResult Add(int companyId)
         {
-            var company = _companyByIdQuery.WithCompanyId(companyId).Execute();
+            var company = _companyByIdQuery.WithCompanyId(companyId).RequestedByUserId(CurrentUserId).Execute();
+            if (company == null)
+            {
+                ViewBag.EntityType = "Position";
+                return View(MVC.Shared.Views.EntityNotFound);
+            }
+
             var model = new EditPositionViewModel
             {
                 Company = Mapper.Map<Company, CompanySummaryViewModel>(company)
@@ -67,7 +80,13 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult Edit(int id)
         {
-            var position = _posByIdQuery.WithPositionId(id).Execute();
+            var position = _posByIdQuery.WithPositionId(id).RequestedByUserId(CurrentUserId).Execute();
+            if (position == null)
+            {
+                ViewBag.EntityType = "Position";
+                return View(MVC.Shared.Views.EntityNotFound);
+            }
+
             var model = Mapper.Map<Position, EditPositionViewModel>(position);
             return View(model);
         }
@@ -75,18 +94,27 @@ namespace MyJobLeads.Controllers
         [HttpPost]
         public virtual ActionResult Edit(EditPositionViewModel model)
         {
+            PositionDisplayViewModel editedModel;
+            model.RequestedUserId = CurrentUserId;
+
             if (string.IsNullOrWhiteSpace(model.Title))
             {
                 model.Company = new CompanySummaryViewModel(_companyByIdQuery.WithCompanyId(model.Company.Id).Execute());
                 return View(model);
             }
 
-            PositionDisplayViewModel editedModel;
-
-            if (model.Id == 0)
-                editedModel = _createProcess.Execute(Mapper.Map<EditPositionViewModel, CreatePositionParams>(model));
-            else
-                editedModel = _editProcess.Execute(Mapper.Map<EditPositionViewModel, EditPositionParams>(model));
+            try
+            {
+                if (model.Id == 0)
+                    editedModel = _createProcess.Execute(Mapper.Map<EditPositionViewModel, CreatePositionParams>(model));
+                else
+                    editedModel = _editProcess.Execute(Mapper.Map<EditPositionViewModel, EditPositionParams>(model));
+            }
+            catch (UserNotAuthorizedForEntityException ex)
+            {
+                ViewBag.EntityType = ex.EntityType.Name;
+                return View(MVC.Shared.Views.EntityNotFound);
+            }
 
             return RedirectToAction(MVC.Position.Details(editedModel.Id));
         }

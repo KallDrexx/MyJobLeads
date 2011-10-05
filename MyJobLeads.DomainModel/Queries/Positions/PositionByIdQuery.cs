@@ -30,7 +30,7 @@ namespace MyJobLeads.DomainModel.Queries.Positions
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public PositionByIdQuery WithPositionId(int id)
+        virtual public PositionByIdQuery WithPositionId(int id)
         {
             _posId = id;
             return this;
@@ -41,7 +41,7 @@ namespace MyJobLeads.DomainModel.Queries.Positions
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public PositionByIdQuery RequestedByUserId(int userId)
+        virtual public PositionByIdQuery RequestedByUserId(int userId)
         {
             _userId = userId;
             return this;
@@ -51,7 +51,7 @@ namespace MyJobLeads.DomainModel.Queries.Positions
         /// Executes the query
         /// </summary>
         /// <returns></returns>
-        public Position Execute()
+        virtual public Position Execute()
         {
             // Make sure the user is authorized for the position
             if (!_positionAuthProcess.Execute(new PositionAuthorizationParams { RequestingUserId = _userId, PositionId = _posId }).UserAuthorized)
