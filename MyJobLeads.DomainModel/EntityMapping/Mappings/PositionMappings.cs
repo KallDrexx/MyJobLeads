@@ -19,7 +19,8 @@ namespace MyJobLeads.DomainModel.EntityMapping.Mappings
                 .ForMember(dest => dest.Company, opt => opt.MapFrom(src => Mapper.Map<Company, CompanySummaryViewModel>(src.Company)));
 
             Mapper.CreateMap<Position, EditPositionViewModel>()
-                .ForMember(dest => dest.Company, opt => opt.MapFrom(src => Mapper.Map<Company, CompanySummaryViewModel>(src.Company)));
+                .ForMember(dest => dest.Company, opt => opt.MapFrom(src => Mapper.Map<Company, CompanySummaryViewModel>(src.Company)))
+                .ForMember(dest => dest.RequestedUserId, opt => opt.Ignore());
 
             Mapper.CreateMap<EditPositionViewModel, EditPositionParams>()
                 .ForMember(dest => dest.RequestingUserId, opt => opt.MapFrom(src => src.RequestedUserId));
