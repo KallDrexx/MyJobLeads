@@ -17,6 +17,8 @@ using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Commands.JobSearches;
 using FluentValidation;
 using FluentValidation.Results;
+using MyJobLeads.DomainModel.ViewModels.Authorizations;
+using MyJobLeads.DomainModel.ProcessParams.Security;
 
 namespace MyJobLeads.Tests.Commands.Contacts
 {
@@ -29,6 +31,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
         private Mock<ISearchProvider> _searchProvider;
         private Mock<UpdateJobSearchMetricsCommand> _updateMetricsCmd;
         private Mock<IValidator<Contact>> _validator;
+        private Mock<IProcess<CompanyQueryAuthorizationParams, AuthorizationResultViewModel>> _companyAuthMock;
 
         private void InitializeTestEntities()
         {
@@ -42,6 +45,9 @@ namespace MyJobLeads.Tests.Commands.Contacts
             _unitOfWork.Commit();
 
             // Mocks
+            _companyAuthMock = new Mock<IProcess<CompanyQueryAuthorizationParams, AuthorizationResultViewModel>>();
+            _companyAuthMock.Setup(x => x.Execute(It.IsAny<CompanyQueryAuthorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = true });
+
             _serviceFactory = new Mock<IServiceFactory>();
             _serviceFactory.Setup(x => x.GetService<IUnitOfWork>()).Returns(_unitOfWork);
 
@@ -52,7 +58,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             userQuery.Setup(x => x.Execute()).Returns(_user);
             _serviceFactory.Setup(x => x.GetService<UserByIdQuery>()).Returns(userQuery.Object);
 
-            Mock<CompanyByIdQuery> companyQuery = new Mock<CompanyByIdQuery>(_unitOfWork);
+            Mock<CompanyByIdQuery> companyQuery = new Mock<CompanyByIdQuery>(_unitOfWork, _companyAuthMock.Object);
             companyQuery.Setup(x => x.Execute()).Returns(_company);
             _serviceFactory.Setup(x => x.GetService<CompanyByIdQuery>()).Returns(companyQuery.Object);
 
@@ -138,7 +144,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             InitializeTestEntities();
             int id = _company.Id + 1;
 
-            Mock<CompanyByIdQuery> query = new Mock<CompanyByIdQuery>(_unitOfWork);
+            Mock<CompanyByIdQuery> query = new Mock<CompanyByIdQuery>(_unitOfWork, _companyAuthMock.Object);
             query.Setup(x => x.Execute()).Returns((Company)null);
             _serviceFactory.Setup(x => x.GetService<CompanyByIdQuery>()).Returns(query.Object);
 
