@@ -33,11 +33,6 @@ namespace MyJobLeads.Controllers {
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult Add() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.Add);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Edit() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
         }
@@ -93,9 +88,8 @@ namespace MyJobLeads.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Add(int jobSearchId) {
+        public override System.Web.Mvc.ActionResult Add() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Add);
-            callInfo.RouteValueDictionary.Add("jobSearchId", jobSearchId);
             return callInfo;
         }
 
