@@ -1018,6 +1018,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>EntityNotFound.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Home\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

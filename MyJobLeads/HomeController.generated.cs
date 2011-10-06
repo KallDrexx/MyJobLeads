@@ -59,6 +59,7 @@ namespace MyJobLeads.Controllers {
             public readonly string SubmitFeedback = "SubmitFeedback";
             public readonly string FixBlankTitles = "FixBlankTitles";
             public readonly string SidebarDisplay = "SidebarDisplay";
+            public readonly string Error = "Error";
         }
 
 
@@ -70,6 +71,7 @@ namespace MyJobLeads.Controllers {
             public readonly string _AnonymousUserSidebarDisplay = "~/Views/Home/_AnonymousUserSidebarDisplay.cshtml";
             public readonly string _LoggedInSidebarDisplay = "~/Views/Home/_LoggedInSidebarDisplay.cshtml";
             public readonly string About = "~/Views/Home/About.cshtml";
+            public readonly string Error = "~/Views/Home/Error.cshtml";
             public readonly string FixBlankTitles = "~/Views/Home/FixBlankTitles.cshtml";
             public readonly string Index = "~/Views/Home/Index.cshtml";
             public readonly string SubmitFeedback = "~/Views/Home/SubmitFeedback.cshtml";
@@ -108,6 +110,11 @@ namespace MyJobLeads.Controllers {
         public override System.Web.Mvc.ActionResult SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink activeLink) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SidebarDisplay);
             callInfo.RouteValueDictionary.Add("activeLink", activeLink);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Error() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Error);
             return callInfo;
         }
 

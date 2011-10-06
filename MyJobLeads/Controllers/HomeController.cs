@@ -117,5 +117,10 @@ Feedback:
                 return PartialView(MVC.Home.Views._AnonymousUserSidebarDisplay, activeLink);
             }
         }
+
+        public virtual ActionResult Error()
+        {
+            return View();
+        }
     }
 }
