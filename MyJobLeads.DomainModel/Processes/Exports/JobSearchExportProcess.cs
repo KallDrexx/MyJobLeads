@@ -64,6 +64,7 @@ namespace MyJobLeads.DomainModel.Processes
             sheet.Cell("E1").Value = "Zip";
             sheet.Cell("F1").Value = "Status";
             sheet.Cell("G1").Value = "Notes";
+            sheet.Row(1).Style.Font.Bold = true;
 
             // Write the data 
             var companies = jobSearch.Companies.OrderBy(x => x.Name).ToList();
@@ -101,6 +102,7 @@ namespace MyJobLeads.DomainModel.Processes
             sheet.Cell(1, 8).Value = "Assistant";
             sheet.Cell(1, 9).Value = "Referred By";
             sheet.Cell(1, 10).Value = "Notes";
+            sheet.Row(1).Style.Font.Bold = true;
 
             // Write the data
             var contacts = jobSearch.Companies.SelectMany(x => x.Contacts).ToList();
@@ -134,6 +136,7 @@ namespace MyJobLeads.DomainModel.Processes
             sheet.Cell(1, 5).Value = "Due Date";
             sheet.Cell(1, 6).Value = "Completion Date";
             sheet.Cell(1, 7).Value = "Notes";
+            sheet.Row(1).Style.Font.Bold = true;
 
             // Write the data
             var tasks = jobSearch.Companies.SelectMany(x => x.Tasks).ToList();
@@ -162,6 +165,7 @@ namespace MyJobLeads.DomainModel.Processes
             sheet.Cell(1, 2).Value = "Company";
             sheet.Cell(1, 3).Value = "Has Applied";
             sheet.Cell(1, 4).Value = "Notes";
+            sheet.Row(1).Style.Font.Bold = true;
 
             // Write the data
             var positions = jobSearch.Companies.SelectMany(x => x.Positions).ToList();
