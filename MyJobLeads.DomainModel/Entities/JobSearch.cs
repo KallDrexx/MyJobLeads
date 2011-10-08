@@ -11,7 +11,11 @@ namespace MyJobLeads.DomainModel.Entities
 {
     public class JobSearch
     {
-        public JobSearch() { Metrics = new JobSearchMetrics(); }
+        public JobSearch() 
+        { 
+            Metrics = new JobSearchMetrics();
+            Companies = new List<Company>();
+        }
 
         public int Id { get; set; }
         public string Name { get; set; }

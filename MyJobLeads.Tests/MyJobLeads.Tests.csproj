@@ -47,6 +47,12 @@
     </Reference>
     <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL" />
     <Reference Include="Castle.Windsor, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL" />
+    <Reference Include="ClosedXML, Version=0.59.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML_NET_4.0.59.0\lib\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.1.0\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="Elmah">
       <HintPath>..\packages\elmah.1.1\lib\Elmah.dll</HintPath>
     </Reference>
@@ -140,6 +146,7 @@
     <Compile Include="Processes\Authorization\ContactAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\PositionAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\TaskAuthorizationsTests.cs" />
+    <Compile Include="Processes\Export\JobSearchExportProcessTests.cs" />
     <Compile Include="Processes\Positions\CreatePositionTests.cs" />
     <Compile Include="Processes\Positions\EditPositionTests.cs" />
     <Compile Include="Processes\Positions\GetPositionListTests.cs" />
