@@ -32,6 +32,9 @@ namespace MyJobLeads.DomainModel.Processes
             // Form the workbook
             var workbook = new XLWorkbook();
             CreateCompaniesWorksheet(workbook, search);
+            CreateContactsWorksheet(workbook, search);
+            CreateTaskWorksheet(workbook, search);
+            CreatePositionWorksheet(workbook, search);
 
             // Save it to the memory string and return it
             var stream = new MemoryStream();
@@ -73,6 +76,98 @@ namespace MyJobLeads.DomainModel.Processes
 
                 sheet.Cell(row, "B").DataType = XLCellValues.Text;
                 sheet.Cell(row, "E").DataType = XLCellValues.Text;
+            }
+        }
+
+        protected void CreateContactsWorksheet(XLWorkbook workbook, JobSearch jobSearch)
+        {
+            // Create the worksheet
+            var sheet = workbook.Worksheets.Add("Contacts");
+
+            // Create the headers
+            sheet.Cell(1, 1).Value = "Name";
+            sheet.Cell(1, 2).Value = "Company";
+            sheet.Cell(1, 3).Value = "Title";
+            sheet.Cell(1, 4).Value = "Direct Phone";
+            sheet.Cell(1, 5).Value = "Extension";
+            sheet.Cell(1, 6).Value = "Mobile Phone";
+            sheet.Cell(1, 7).Value = "Email";
+            sheet.Cell(1, 8).Value = "Assistant";
+            sheet.Cell(1, 9).Value = "Referred By";
+            sheet.Cell(1, 10).Value = "Notes";
+
+            // Write the data
+            var contacts = jobSearch.Companies.SelectMany(x => x.Contacts).ToList();
+            for (int x = 0; x < contacts.Count; x++)
+            {
+                int row = x + 2;
+
+                sheet.Cell(row, 1).Value = contacts[x].Name;
+                sheet.Cell(row, 2).Value = contacts[x].Company.Name;
+                sheet.Cell(row, 3).Value = contacts[x].Title;
+                sheet.Cell(row, 4).Value = contacts[x].DirectPhone;
+                sheet.Cell(row, 5).Value = contacts[x].Extension;
+                sheet.Cell(row, 6).Value = contacts[x].MobilePhone;
+                sheet.Cell(row, 7).Value = contacts[x].Email;
+                sheet.Cell(row, 8).Value = contacts[x].Assistant;
+                sheet.Cell(row, 9).Value = contacts[x].ReferredBy;
+                sheet.Cell(row, 10).Value = contacts[x].Notes;
+            }
+        }
+
+        protected void CreateTaskWorksheet(XLWorkbook workbook, JobSearch jobSearch)
+        {
+            // Create the worksheet
+            var sheet = workbook.Worksheets.Add("Tasks");
+
+            // Write the headers
+            sheet.Cell(1, 1).Value = "Name";
+            sheet.Cell(1, 2).Value = "Company";
+            sheet.Cell(1, 3).Value = "Contact";
+            sheet.Cell(1, 4).Value = "Category";
+            sheet.Cell(1, 5).Value = "Due Date";
+            sheet.Cell(1, 6).Value = "Completion Date";
+            sheet.Cell(1, 7).Value = "Notes";
+
+            // Write the data
+            var tasks = jobSearch.Companies.SelectMany(x => x.Tasks).ToList();
+            for (int x = 0; x < tasks.Count; x++)
+            {
+                var task = tasks[x];
+                int row = x + 2;
+
+                sheet.Cell(row, 1).Value = task.Name;
+                sheet.Cell(row, 2).Value = task.Company.Name;
+                sheet.Cell(row, 3).Value = task.Contact != null ? task.Contact.Name : string.Empty;
+                sheet.Cell(row, 4).Value = task.Category;
+                sheet.Cell(row, 5).Value = task.TaskDate != null ? task.TaskDate.ToString() : string.Empty;
+                sheet.Cell(row, 6).Value = task.CompletionDate != null ? task.CompletionDate.ToString() : string.Empty;
+                sheet.Cell(row, 7).Value = tasks[x].Notes;
+            }
+        }
+
+        protected void CreatePositionWorksheet(XLWorkbook workbook, JobSearch jobSearch)
+        {
+            // Create the worksheet
+            var sheet = workbook.Worksheets.Add("Positions");
+
+            // Write the headers
+            sheet.Cell(1, 1).Value = "Title";
+            sheet.Cell(1, 2).Value = "Company";
+            sheet.Cell(1, 3).Value = "Has Applied";
+            sheet.Cell(1, 4).Value = "Notes";
+
+            // Write the data
+            var positions = jobSearch.Companies.SelectMany(x => x.Positions).ToList();
+            for (int x = 0; x < positions.Count; x++)
+            {
+                var position = positions[x];
+                int row = x + 2;
+
+                sheet.Cell(row, 1).Value = position.Title;
+                sheet.Cell(row, 2).Value = position.Company.Name;
+                sheet.Cell(row, 3).Value = position.HasApplied ? "Yes" : "No";
+                sheet.Cell(row, 4).Value = position.Notes;
             }
         }
     }
