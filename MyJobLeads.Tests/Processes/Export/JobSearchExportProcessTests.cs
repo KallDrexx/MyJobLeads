@@ -23,6 +23,7 @@ namespace MyJobLeads.Tests.Processes.Export
         protected const string CONTACT_SHEET_NAME = "Contacts";
         protected const string TASK_SHEET_NAME = "Tasks";
         protected const string POSITION_SHEET_NAME = "Positions";
+        protected const string SUMMARY_SHEET_NAME = "Summary";
 
         protected IProcess<ByJobSearchParams, JobsearchExportViewModel> _process;
         protected Mock<JobSearchByIdQuery> _jsQueryMock;
@@ -32,7 +33,7 @@ namespace MyJobLeads.Tests.Processes.Export
         [TestInitialize]
         public void InitializeTestEntities()
         {
-            var search = new JobSearch();
+            var search = new JobSearch { User = new User { FullName = "Full Name" } };
             _comp1 = new Company
             {
                 Name = "company",
@@ -263,6 +264,16 @@ namespace MyJobLeads.Tests.Processes.Export
 
             // Verify
             Assert.AreEqual(1, workbook.Worksheets.Where(x => x.Name == POSITION_SHEET_NAME).Count(), "Incorrect number of position worksheets found");
+        }
+
+        [TestMethod]
+        public void Summary_Sheet_Exists()
+        {
+            // Act
+            var workbook = GetWorkbook();
+
+            // Verify
+            Assert.AreEqual(1, workbook.Worksheets.Where(x => x.Name == SUMMARY_SHEET_NAME).Count(), "Incorrect number of summary worksheets found");
         }
     }
 }

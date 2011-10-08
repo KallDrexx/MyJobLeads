@@ -31,6 +31,7 @@ namespace MyJobLeads.DomainModel.Processes
 
             // Form the workbook
             var workbook = new XLWorkbook();
+            CreateSummaryWorksheet(workbook, search);
             CreateCompaniesWorksheet(workbook, search);
             CreateContactsWorksheet(workbook, search);
             CreateTaskWorksheet(workbook, search);
@@ -169,6 +170,33 @@ namespace MyJobLeads.DomainModel.Processes
                 sheet.Cell(row, 3).Value = position.HasApplied ? "Yes" : "No";
                 sheet.Cell(row, 4).Value = position.Notes;
             }
+        }
+
+        protected void CreateSummaryWorksheet(XLWorkbook workbook, JobSearch jobSearch)
+        {
+            // Create the sheet
+            var sheet = workbook.Worksheets.Add("Summary");
+
+            // Write out the summary data
+            sheet.Cell(1, 1).Value = "Owner:";
+            sheet.Cell(1, 2).Value = jobSearch.User.FullName;
+
+            sheet.Cell(2, 1).Value = "Export Made On:";
+            sheet.Cell(2, 2).Value = DateTime.Now;
+
+            sheet.Cell(3, 1).Value = "# of Companies:";
+            sheet.Cell(3, 2).Value = jobSearch.Companies.Count;
+
+            sheet.Cell(4, 1).Value = "# of Contacts:";
+            sheet.Cell(4, 2).Value = jobSearch.Companies.SelectMany(x => x.Contacts).Count();
+
+            sheet.Cell(5, 1).Value = "# of Tasks";
+            sheet.Cell(5, 2).Value = jobSearch.Companies.SelectMany(x => x.Tasks).Count();
+
+            sheet.Cell(6, 1).Value = "# of Positions";
+            sheet.Cell(6, 2).Value = jobSearch.Companies.SelectMany(x => x.Positions).Count();
+
+            sheet.Columns().AdjustToContents();
         }
     }
 }
