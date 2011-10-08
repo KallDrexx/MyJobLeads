@@ -45,8 +45,14 @@
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.1.1.0.118\lib\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="ClosedXML">
+      <HintPath>..\packages\ClosedXML_NET_4.0.59.0\lib\ClosedXML.dll</HintPath>
+    </Reference>
     <Reference Include="DevOne.Security.Cryptography.BCrypt">
       <HintPath>..\packages\BCrypt.1.0.0.0\lib\DevOne.Security.Cryptography.BCrypt.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>..\packages\DocumentFormat.OpenXml.1.0\lib\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
@@ -142,8 +148,10 @@
     <Compile Include="Exceptions\UserNotAuthorizedForEntityException.cs" />
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
+    <Compile Include="Processes\Exports\JobSearchExportProcess.cs" />
     <Compile Include="Processes\Positions\PositionProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
+    <Compile Include="ProcessParams\JobSearches\ByJobSearchParams.cs" />
     <Compile Include="ProcessParams\Positions\CreatePositionParams.cs" />
     <Compile Include="ProcessParams\Positions\EditPositionParams.cs" />
     <Compile Include="ProcessParams\Positions\GetPositionListForUserParams.cs" />
@@ -176,6 +184,7 @@
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="ViewModels\Authorizations\AuthorizationResultViewModel.cs" />
     <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
+    <Compile Include="ViewModels\Exports\JobsearchExportViewModel.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgress.cs" />
     <Compile Include="ViewModels\Positions\EditPositionViewModel.cs" />
     <Compile Include="ViewModels\Positions\PositionDisplayViewModel.cs" />

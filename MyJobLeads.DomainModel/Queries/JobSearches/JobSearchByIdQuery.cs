@@ -26,7 +26,7 @@ namespace MyJobLeads.DomainModel.Queries.JobSearches
         /// </summary>
         /// <param name="jobSearchId"></param>
         /// <returns></returns>
-        public JobSearchByIdQuery WithJobSearchId(int jobSearchId)
+        public virtual JobSearchByIdQuery WithJobSearchId(int jobSearchId)
         {
             _jobSearchId = jobSearchId;
             return this;
