@@ -157,6 +157,26 @@ namespace MyJobLeads.Tests.Processes.Export
         }
 
         [TestMethod]
+        public void Export_Returns_Correct_FileName()
+        {
+            // Act
+            JobsearchExportViewModel result = _process.Execute(new ByJobSearchParams());
+
+            // Verify
+            Assert.AreEqual("MyLeadsJobsExport.xlsx", result.FileName, "Filename was incorrect");
+        }
+
+        [TestMethod]
+        public void Export_Returns_Correct_Mimetype()
+        {
+            // Act
+            JobsearchExportViewModel result = _process.Execute(new ByJobSearchParams());
+
+            // Verify
+            Assert.AreEqual("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", result.Mimetype, "Mimetype was incorrect");
+        }
+
+        [TestMethod]
         public void Export_Contains_Companies_Worksheet()
         {
             // Act

@@ -40,7 +40,12 @@ namespace MyJobLeads.DomainModel.Processes
             // Save it to the memory string and return it
             var stream = new MemoryStream();
             workbook.SaveAs(stream);
-            var result = new JobsearchExportViewModel { FileName = "JobSearchExport.xlsx", ExportFileContents = stream.ToArray() };
+            var result = new JobsearchExportViewModel 
+            {
+                FileName = "MyLeadsJobsExport.xlsx", 
+                ExportFileContents = stream.ToArray(),
+                Mimetype = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            };
             stream.Close();
 
             return result;

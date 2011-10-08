@@ -10,5 +10,6 @@ namespace MyJobLeads.DomainModel.ViewModels.Exports
     {
         public string FileName { get; set; }
         public byte[] ExportFileContents { get; set; }
+        public string Mimetype { get; set; }
     }
 }
