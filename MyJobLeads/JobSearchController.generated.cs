@@ -64,6 +64,7 @@ namespace MyJobLeads.Controllers {
             public readonly string Details = "Details";
             public readonly string Search = "Search";
             public readonly string StartNextMilestone = "StartNextMilestone";
+            public readonly string Export = "Export";
         }
 
 
@@ -113,6 +114,11 @@ namespace MyJobLeads.Controllers {
 
         public override System.Web.Mvc.ActionResult StartNextMilestone() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.StartNextMilestone);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Export() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Export);
             return callInfo;
         }
 

@@ -16,6 +16,9 @@ using MyJobLeads.DomainModel.Queries.Search;
 using MyJobLeads.ViewModels;
 using MyJobLeads.DomainModel.Providers;
 using FluentValidation;
+using MyJobLeads.DomainModel.ViewModels.Exports;
+using MyJobLeads.DomainModel.ProcessParams.JobSearches;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.Controllers
 {
@@ -33,6 +36,7 @@ namespace MyJobLeads.Controllers
         protected EntitySearchQuery _entitySearchQuery;
         protected UserByIdQuery _userByIdQuery;
         protected StartNextJobSearchMilestoneCommand _startNextMilestoneCmd;
+        protected IProcess<ByJobSearchParams, JobsearchExportViewModel> _exportProcess;
 
         public JobSearchController(JobSearchesByUserIdQuery jobSearchesByIdQuery,
                                     JobSearchByIdQuery jobSearchByIdQuery,
@@ -43,6 +47,7 @@ namespace MyJobLeads.Controllers
                                     EntitySearchQuery entitySearchQuery,
                                     UserByIdQuery userByIdQuery,
                                     StartNextJobSearchMilestoneCommand startNextMilestoneCmd,
+                                    IProcess<ByJobSearchParams, JobsearchExportViewModel> exportProcess,
                                     IServiceFactory serviceFactory)
         {
             _jobSearchByIdQuery = jobSearchByIdQuery;
@@ -55,6 +60,7 @@ namespace MyJobLeads.Controllers
             _serviceFactory = serviceFactory;
             _userByIdQuery = userByIdQuery;
             _startNextMilestoneCmd = startNextMilestoneCmd;
+            _exportProcess = exportProcess;
         }
 
         #endregion
@@ -133,6 +139,20 @@ namespace MyJobLeads.Controllers
             var user = _userByIdQuery.WithUserId(CurrentUserId).Execute();
             _startNextMilestoneCmd.Execute(new StartNextJobSearchMilestoneCommandParams { JobSearchId = Convert.ToInt32(user.LastVisitedJobSearchId) });
             return RedirectToAction(MVC.Home.Index());
+        }
+
+        public virtual ActionResult Export()
+        {
+            JobsearchExportViewModel export;
+            var user = _userByIdQuery.WithUserId(CurrentUserId).Execute();
+
+            try { export = _exportProcess.Execute(new ByJobSearchParams { JobSearchId = Convert.ToInt32(user.LastVisitedJobSearchId) }); }
+            catch (MJLEntityNotFoundException)
+            {
+                return RedirectToAction(MVC.Home.Index());
+            }
+
+            return File(export.ExportFileContents, export.Mimetype, export.FileName);
         }
     }
 }

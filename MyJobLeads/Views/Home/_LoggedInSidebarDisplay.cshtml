@@ -9,6 +9,12 @@
         <li>@Html.ActionLink("Your Tasks", MVC.Task.Index(), new { @class = Model.ActiveLink == ActiveSidebarLink.Tasks? "active" : "" })</li>
         <li>@Html.ActionLink("Companies", MVC.Company.List(), new { @class = Model.ActiveLink == ActiveSidebarLink.Companies? "active" : "" })</li>
         <li>@Html.ActionLink("Positions", MVC.Position.List(), new { @class = Model.ActiveLink == ActiveSidebarLink.Positions? "active" : "" })</li>
+
+        @if (Model.HasCurrentJobSearchId)
+        {
+            <li>@Html.ActionLink("Download My Data", MVC.JobSearch.Export())</li>
+        }
+        
         <li>@Html.ActionLink("About", MVC.Home.About(), new { @class = Model.ActiveLink == ActiveSidebarLink.About? "active" : "" })</li>
 
         <li>&nbsp;</li>
