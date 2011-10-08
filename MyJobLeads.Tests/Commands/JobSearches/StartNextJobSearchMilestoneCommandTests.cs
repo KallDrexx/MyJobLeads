@@ -28,6 +28,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             _unitOfWork.Commit();
 
             Mock<JobSearchByIdQuery> jobSearchQuery = new Mock<JobSearchByIdQuery>(_unitOfWork);
+            jobSearchQuery.Setup(x => x.WithJobSearchId(It.IsAny<int>())).Returns(jobSearchQuery.Object);
             jobSearchQuery.Setup(x => x.Execute()).Returns(search);
             _serviceFactory.Setup(x => x.GetService<JobSearchByIdQuery>()).Returns(jobSearchQuery.Object);
 
@@ -52,6 +53,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             _unitOfWork.Commit();
 
             Mock<JobSearchByIdQuery> jobSearchQuery = new Mock<JobSearchByIdQuery>(_unitOfWork);
+            jobSearchQuery.Setup(x => x.WithJobSearchId(It.IsAny<int>())).Returns(jobSearchQuery.Object);
             jobSearchQuery.Setup(x => x.Execute()).Returns(search);
             _serviceFactory.Setup(x => x.GetService<JobSearchByIdQuery>()).Returns(jobSearchQuery.Object);
 
@@ -69,6 +71,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
         {
             // Setup
             Mock<JobSearchByIdQuery> jobSearchQuery = new Mock<JobSearchByIdQuery>(_unitOfWork);
+            jobSearchQuery.Setup(x => x.WithJobSearchId(It.IsAny<int>())).Returns(jobSearchQuery.Object);
             jobSearchQuery.Setup(x => x.Execute()).Returns((JobSearch)null);
             _serviceFactory.Setup(x => x.GetService<JobSearchByIdQuery>()).Returns(jobSearchQuery.Object);
 
