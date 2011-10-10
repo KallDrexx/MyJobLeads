@@ -1019,6 +1019,7 @@
       <LastGenOutput>EntityNotFound.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Account\ClosedRegistrationView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

@@ -85,7 +85,7 @@ namespace MyJobLeads.Controllers
         public virtual ActionResult Register()
         {
             ViewBag.PasswordLength = MembershipService.MinPasswordLength;
-            return View();
+            return View(MVC.Account.Views.ClosedRegistrationView);
         }
 
         [HttpPost]

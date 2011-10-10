@@ -60,6 +60,7 @@ namespace MyJobLeads.Controllers {
             public readonly string FixBlankTitles = "FixBlankTitles";
             public readonly string SidebarDisplay = "SidebarDisplay";
             public readonly string Error = "Error";
+            public readonly string ThrowError = "ThrowError";
         }
 
 
@@ -115,6 +116,11 @@ namespace MyJobLeads.Controllers {
 
         public override System.Web.Mvc.ActionResult Error() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Error);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ThrowError() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ThrowError);
             return callInfo;
         }
 

@@ -122,5 +122,10 @@ Feedback:
         {
             return View();
         }
+
+        public virtual ActionResult ThrowError()
+        {
+            throw new InvalidOperationException("Test exception");
+        }
     }
 }

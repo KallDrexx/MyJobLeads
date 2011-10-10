@@ -73,6 +73,7 @@ namespace MyJobLeads.Controllers {
         public class ViewNames {
             public readonly string ChangePassword = "~/Views/Account/ChangePassword.cshtml";
             public readonly string ChangePasswordSuccess = "~/Views/Account/ChangePasswordSuccess.cshtml";
+            public readonly string ClosedRegistrationView = "~/Views/Account/ClosedRegistrationView.cshtml";
             public readonly string Edit = "~/Views/Account/Edit.cshtml";
             public readonly string LogOn = "~/Views/Account/LogOn.cshtml";
             public readonly string Register = "~/Views/Account/Register.cshtml";

@@ -6,7 +6,6 @@
 <div id="leftHandNav">
     <ul>
         <li>@Html.ActionLink("Log In", MVC.Account.LogOn(), new { @class = Model == ActiveSidebarLink.Logon ? "active" : "" })</li>
-        <li>@Html.ActionLink("Register", MVC.Account.Register(), new { @class = Model == ActiveSidebarLink.Register ? "active" : ""} )</li>
         <li>@Html.ActionLink("About", MVC.Home.About(), new { @class = Model == ActiveSidebarLink.About ? "active" : "" })</li>
     </ul>
 </div>
