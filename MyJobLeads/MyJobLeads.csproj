@@ -372,7 +372,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ChangePasswordSuccess.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Account\LogOn.cs">
+    <Compile Include="Views\Account\LogOn.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LogOn.cshtml</DependentUpon>
@@ -852,7 +852,7 @@
     </Content>
     <Content Include="Views\Account\LogOn.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>LogOn.cs</LastGenOutput>
+      <LastGenOutput>LogOn.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Account\Register.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -1020,6 +1020,7 @@
     </Content>
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Account\ClosedRegistrationView.cshtml" />
+    <Content Include="Views\Account\InvalidOrgRegistrationTokenView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

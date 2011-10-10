@@ -120,13 +120,13 @@ namespace MyJobLeads.Controllers
         public virtual ActionResult RegisterWithOrganization(Guid? registrationToken)
         {
             if (registrationToken == null)
-                return RedirectToAction(MVC.Account.Register());
+                return View(MVC.Account.Views.InvalidOrgRegistrationTokenView);
 
             // Retrieve the organization based on the token
             var org = _serviceFactory.GetService<OrganizationByRegistrationTokenQuery>()
                                      .Execute(new OrganizationByRegistrationTokenQueryParams { RegistrationToken = (Guid)registrationToken });
             if (org == null)
-                return RedirectToAction(MVC.Account.Register());
+                return View(MVC.Account.Views.InvalidOrgRegistrationTokenView);
 
             var model = new OrganizationRegistrationViewModel
             {
