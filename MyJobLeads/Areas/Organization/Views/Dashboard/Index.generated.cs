@@ -286,7 +286,7 @@ WriteLiteral("</a> - \r\n                                    [ ");
 
             
             #line 86 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
-                                 Write(Html.ActionLink("Hide From Members", MVC.Organization.Dashboard.HideDocumentFromMembers(doc.Id), new { @class = "inlineBlue" }));
+                                 Write(Html.ActionLink("Hide From Students", MVC.Organization.Dashboard.HideDocumentFromMembers(doc.Id), new { @class = "inlineBlue" }));
 
             
             #line default
@@ -367,7 +367,7 @@ WriteLiteral("</a> - \r\n                                    [ ");
 
             
             #line 113 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
-                                 Write(Html.ActionLink("Show To Members", MVC.Organization.Dashboard.ShowDocumentToMembers(doc.Id), new { @class = "inlineBlue" }));
+                                 Write(Html.ActionLink("Show To Students", MVC.Organization.Dashboard.ShowDocumentToMembers(doc.Id), new { @class = "inlineBlue" }));
 
             
             #line default

@@ -83,7 +83,7 @@
                             {
                                 <li>
                                     <a href="@doc.DownloadUrl" class="inlineBlue">@doc.Name</a> - 
-                                    [ @Html.ActionLink("Hide From Members", MVC.Organization.Dashboard.HideDocumentFromMembers(doc.Id), new { @class = "inlineBlue" }) ]
+                                    [ @Html.ActionLink("Hide From Students", MVC.Organization.Dashboard.HideDocumentFromMembers(doc.Id), new { @class = "inlineBlue" }) ]
                                 </li>
                             }
                         }
@@ -110,7 +110,7 @@
                             {
                                 <li>
                                     <a href="@doc.DownloadUrl" class="inlineBlue">@doc.Name</a> - 
-                                    [ @Html.ActionLink("Show To Members", MVC.Organization.Dashboard.ShowDocumentToMembers(doc.Id), new { @class = "inlineBlue" }) ]
+                                    [ @Html.ActionLink("Show To Students", MVC.Organization.Dashboard.ShowDocumentToMembers(doc.Id), new { @class = "inlineBlue" }) ]
                                 </li>
                             }
                         }

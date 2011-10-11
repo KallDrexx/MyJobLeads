@@ -31,6 +31,9 @@ namespace MyJobLeads.DomainModel.Processes.Organizations
             if (user == null)
                 throw new MJLEntityNotFoundException(typeof(User), procParams.RequestingUserId);
 
+            if (!user.IsOrganizationAdmin)
+                throw new UserNotAuthorizedForEntityException(typeof(Organization), Convert.ToInt32(user.OrganizationId), user.Id);
+
             var doc = _context.OfficialDocuments.Where(x => x.Id == procParams.OfficialDocumentId).FirstOrDefault();
             if (procParams.ShowToMembers)
                 user.Organization.MemberOfficialDocuments.Add(doc);
