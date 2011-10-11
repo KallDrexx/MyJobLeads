@@ -10,5 +10,6 @@ namespace MyJobLeads.DomainModel.ViewModels.Organizations
     {
         public Organization Organization { get; set; }
         public IList<OfficialDocument> NonMemberOfficialDocuments { get; set; }
+        public IList<OfficialDocument> HiddenMemberDocuments { get; set; }
     }
 }

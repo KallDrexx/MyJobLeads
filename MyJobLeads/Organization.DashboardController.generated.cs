@@ -31,6 +31,16 @@ namespace MyJobLeads.Areas.Organization.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult HideDocumentFromMembers() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.HideDocumentFromMembers);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ShowDocumentToMembers() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ShowDocumentToMembers);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public DashboardController Actions { get { return MVC.Organization.Dashboard; } }
@@ -45,6 +55,8 @@ namespace MyJobLeads.Areas.Organization.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string Index = "Index";
+            public readonly string HideDocumentFromMembers = "HideDocumentFromMembers";
+            public readonly string ShowDocumentToMembers = "ShowDocumentToMembers";
         }
 
 
@@ -63,6 +75,18 @@ namespace MyJobLeads.Areas.Organization.Controllers {
 
         public override System.Web.Mvc.ActionResult Index() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult HideDocumentFromMembers(int docId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.HideDocumentFromMembers);
+            callInfo.RouteValueDictionary.Add("docId", docId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ShowDocumentToMembers(int docId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ShowDocumentToMembers);
+            callInfo.RouteValueDictionary.Add("docId", docId);
             return callInfo;
         }
 

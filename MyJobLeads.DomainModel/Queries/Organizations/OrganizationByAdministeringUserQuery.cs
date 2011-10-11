@@ -26,19 +26,26 @@ namespace MyJobLeads.DomainModel.Queries.Organizations
         public OrganizationDashboardViewModel Execute(OrganizationByAdministeringUserQueryParams queryParams)
         {
             var unitofwork = _serviceFactory.GetService<IUnitOfWork>();
-            return new OrganizationDashboardViewModel
-            {
-                Organization = unitofwork.Users
+            var org = unitofwork.Users
                              .Fetch()
                              .Where(x => x.Id == queryParams.AdministeringUserId)
                              .Where(x => x.IsOrganizationAdmin)
                              .Select(x => x.Organization)
-                             .FirstOrDefault(),
+                             .FirstOrDefault();
+
+            return new OrganizationDashboardViewModel
+            {
+                Organization = org,
 
                 NonMemberOfficialDocuments = unitofwork.OfficialDocuments
                                                        .Fetch()
                                                        .Where(x => !x.MeantForMembers)
-                                                       .ToList()
+                                                       .ToList(),
+
+                HiddenMemberDocuments = unitofwork.OfficialDocuments
+                                                  .Fetch()
+                                                  .Where(x => x.MeantForMembers && !x.Organizations.Any(y =>y.Id == org.Id))
+                                                  .ToList()
             };
         }
     }

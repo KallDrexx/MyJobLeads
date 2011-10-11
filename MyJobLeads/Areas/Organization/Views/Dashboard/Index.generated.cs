@@ -260,11 +260,12 @@ WriteLiteral("        \r\n        <div class=\"grid3 marginBottom_10 floatLeft\"
             
             #line default
             #line hidden
-WriteLiteral("                                <li><a href=\"");
+WriteLiteral("                                <li>\r\n                                    <a href" +
+"=\"");
 
 
             
-            #line 84 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 85 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                                         Write(doc.DownloadUrl);
 
             
@@ -274,17 +275,27 @@ WriteLiteral("\" class=\"inlineBlue\">");
 
 
             
-            #line 84 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 85 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                                                                              Write(doc.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("</a></li>\r\n");
+WriteLiteral("</a> - \r\n                                    [ ");
 
 
             
-            #line 85 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 86 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                                 Write(Html.ActionLink("Hide From Members", MVC.Organization.Dashboard.HideDocumentFromMembers(doc.Id), new { @class = "inlineBlue" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ]\r\n                                </li>\r\n");
+
+
+            
+            #line 88 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                             }
                         }
 
@@ -295,11 +306,91 @@ WriteLiteral("</a></li>\r\n");
             #line default
             #line hidden
 WriteLiteral("                            <li>No documentation has been selected to be visible " +
-"students.  This can be changed in the university options</li>\r\n");
+"students.</li>\r\n");
 
 
             
-            #line 91 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 94 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class=""grid3 marginBottom_10 floatLeft"">
+            <div class=""floatLeft"">
+                <p class=""greyHighlight"">Documentation NOT Visible To Students:</p>
+                <div class=""infoSpan"">
+                    <ul>
+
+");
+
+
+            
+            #line 107 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                         if (Model.HiddenMemberDocuments.Count > 0)
+                        {
+                            foreach (var doc in Model.HiddenMemberDocuments)
+                            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                <li>\r\n                                    <a href" +
+"=\"");
+
+
+            
+            #line 112 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                                        Write(doc.DownloadUrl);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" class=\"inlineBlue\">");
+
+
+            
+            #line 112 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                                                                             Write(doc.Name);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</a> - \r\n                                    [ ");
+
+
+            
+            #line 113 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                                 Write(Html.ActionLink("Show To Members", MVC.Organization.Dashboard.ShowDocumentToMembers(doc.Id), new { @class = "inlineBlue" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ]\r\n                                </li>\r\n");
+
+
+            
+            #line 115 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                            }
+                        }
+
+                        else
+                        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                            <li>All documentation is visible to students</li>\r\n");
+
+
+            
+            #line 121 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                         }
 
             

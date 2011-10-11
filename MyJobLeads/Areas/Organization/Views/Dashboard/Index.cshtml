@@ -81,13 +81,43 @@
                         {
                             foreach (var doc in Model.Organization.MemberOfficialDocuments)
                             {
-                                <li><a href="@doc.DownloadUrl" class="inlineBlue">@doc.Name</a></li>
+                                <li>
+                                    <a href="@doc.DownloadUrl" class="inlineBlue">@doc.Name</a> - 
+                                    [ @Html.ActionLink("Hide From Members", MVC.Organization.Dashboard.HideDocumentFromMembers(doc.Id), new { @class = "inlineBlue" }) ]
+                                </li>
                             }
                         }
 
                         else
                         {
-                            <li>No documentation has been selected to be visible students.  This can be changed in the university options</li>
+                            <li>No documentation has been selected to be visible students.</li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid3 marginBottom_10 floatLeft">
+            <div class="floatLeft">
+                <p class="greyHighlight">Documentation NOT Visible To Students:</p>
+                <div class="infoSpan">
+                    <ul>
+
+                        @if (Model.HiddenMemberDocuments.Count > 0)
+                        {
+                            foreach (var doc in Model.HiddenMemberDocuments)
+                            {
+                                <li>
+                                    <a href="@doc.DownloadUrl" class="inlineBlue">@doc.Name</a> - 
+                                    [ @Html.ActionLink("Show To Members", MVC.Organization.Dashboard.ShowDocumentToMembers(doc.Id), new { @class = "inlineBlue" }) ]
+                                </li>
+                            }
+                        }
+
+                        else
+                        {
+                            <li>All documentation is visible to students</li>
                         }
 
                     </ul>
