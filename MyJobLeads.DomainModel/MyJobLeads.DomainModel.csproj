@@ -187,6 +187,7 @@
     <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
     <Compile Include="ViewModels\Exports\JobsearchExportViewModel.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgress.cs" />
+    <Compile Include="ViewModels\Organizations\OrganizationDashboardViewModel.cs" />
     <Compile Include="ViewModels\Positions\EditPositionViewModel.cs" />
     <Compile Include="ViewModels\Positions\PositionDisplayViewModel.cs" />
     <Compile Include="ViewModels\Positions\PositionListViewModel.cs" />

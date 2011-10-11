@@ -5,6 +5,7 @@ using System.Text;
 using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.ViewModels.Organizations;
 
 namespace MyJobLeads.DomainModel.Queries.Organizations
 {
@@ -22,15 +23,23 @@ namespace MyJobLeads.DomainModel.Queries.Organizations
             _serviceFactory = factory;
         }
 
-        public Organization Execute(OrganizationByAdministeringUserQueryParams queryParams)
+        public OrganizationDashboardViewModel Execute(OrganizationByAdministeringUserQueryParams queryParams)
         {
             var unitofwork = _serviceFactory.GetService<IUnitOfWork>();
-            return unitofwork.Users
+            return new OrganizationDashboardViewModel
+            {
+                Organization = unitofwork.Users
                              .Fetch()
                              .Where(x => x.Id == queryParams.AdministeringUserId)
                              .Where(x => x.IsOrganizationAdmin)
                              .Select(x => x.Organization)
-                             .FirstOrDefault();
+                             .FirstOrDefault(),
+
+                NonMemberOfficialDocuments = unitofwork.OfficialDocuments
+                                                       .Fetch()
+                                                       .Where(x => !x.MeantForMembers)
+                                                       .ToList()
+            };
         }
     }
 }
