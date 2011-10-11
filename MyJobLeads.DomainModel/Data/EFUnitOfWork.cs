@@ -121,6 +121,17 @@ namespace MyJobLeads.DomainModel.Data
             }
         }
 
+        private IRepository<OfficialDocument> _officialDocs;
+        public IRepository<OfficialDocument> OfficialDocuments
+        {
+            get
+            {
+                if (_officialDocs == null)
+                    _officialDocs = new EFRepository<OfficialDocument>(_context);
+                return _officialDocs;
+            }
+        }
+
         private IRepository<Organization> _organizations;
         public IRepository<Organization> Organizations
         {
