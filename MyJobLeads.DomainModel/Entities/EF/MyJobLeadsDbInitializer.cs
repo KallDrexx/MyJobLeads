@@ -50,6 +50,20 @@ namespace MyJobLeads.DomainModel.Entities.EF
                 }
             });
 
+            context.OfficialDocuments.Add(new OfficialDocument
+            {
+                MeantForMembers = false,
+                DownloadUrl = "http://interviewtools.net",
+                Name = "Non-member document"
+            });
+
+            context.OfficialDocuments.Add(new OfficialDocument
+            {
+                MeantForMembers = true,
+                DownloadUrl = "http://myleads.interviewtools.net",
+                Name = "Member document"
+            });
+
             context.SaveChanges();
         }
 

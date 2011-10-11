@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Queries.Organizations;
+using MyJobLeads.DomainModel.ViewModels.Organizations;
 
 namespace MyJobLeads.Tests.Queries.Organizations
 {
@@ -26,11 +27,11 @@ namespace MyJobLeads.Tests.Queries.Organizations
             _unitOfWork.Commit();
 
             // Act
-            Organization result =
+            OrganizationDashboardViewModel result =
                 new OrganizationByAdministeringUserQuery(_serviceFactory.Object).Execute(new OrganizationByAdministeringUserQueryParams { AdministeringUserId = user1.Id });
 
             // Verify
-            Assert.AreEqual(org1, result, "Query returned an incorrect organization");
+            Assert.AreEqual(org1, result.Organization, "Query returned an incorrect organization");
         }
 
         [TestMethod]
@@ -43,11 +44,35 @@ namespace MyJobLeads.Tests.Queries.Organizations
             _unitOfWork.Commit();
 
             // Act
-            Organization result =
+            OrganizationDashboardViewModel result =
                 new OrganizationByAdministeringUserQuery(_serviceFactory.Object).Execute(new OrganizationByAdministeringUserQueryParams { AdministeringUserId = user1.Id });
 
             // Verify
             Assert.IsNull(result, "Query did not return a null organization");
+        }
+
+        [TestMethod]
+        public void Can_Get_All_Non_Member_Official_Documents()
+        {
+            // Setup
+            Organization org = new Organization();
+            User user = new User { Organization = org, IsOrganizationAdmin = true };
+            _unitOfWork.Users.Add(user);
+
+            _unitOfWork.OfficialDocuments.Add(new OfficialDocument { Name = "Doc 1", MeantForMembers = false });
+            _unitOfWork.OfficialDocuments.Add(new OfficialDocument { Name = "Doc 2", MeantForMembers = true });
+            _unitOfWork.OfficialDocuments.Add(new OfficialDocument { Name = "Doc 3", MeantForMembers = false });
+
+            _unitOfWork.Commit();
+
+            // Act
+            OrganizationDashboardViewModel result =
+                new OrganizationByAdministeringUserQuery(_serviceFactory.Object).Execute(new OrganizationByAdministeringUserQueryParams { AdministeringUserId = user.Id });
+
+            // Verify
+            Assert.AreEqual(2, result.NonMemberOfficialDocuments.Count, "Incorrect number of official non-member documents retrieved");
+            Assert.IsTrue(result.NonMemberOfficialDocuments.Any(x => x.Name == "Doc 1"), "Document list did not contain doc 1");
+            Assert.IsTrue(result.NonMemberOfficialDocuments.Any(x => x.Name == "Doc 3"), "Document list did not contain doc 3");
         }
     }
 }

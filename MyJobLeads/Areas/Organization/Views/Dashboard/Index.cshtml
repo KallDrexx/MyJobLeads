@@ -1,4 +1,4 @@
-﻿@model MyJobLeads.DomainModel.Entities.Organization
+﻿@model MyJobLeads.DomainModel.ViewModels.Organizations.OrganizationDashboardViewModel
 
 @{
     ViewBag.Title = "University Dashboard";
@@ -12,35 +12,35 @@
     <div class="pageInfoBox">         
         <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
             <h3 class="floatLeft">University Dashboard</h3> 
-            @Html.ActionLink("Edit University Options", MVC.Organization.EditOrganization.Index(Model.Id), new { @class = "floatRight blueLinks", title = "Edit University Options" })
+            @Html.ActionLink("Edit University Options", MVC.Organization.EditOrganization.Index(Model.Organization.Id), new { @class = "floatRight blueLinks", title = "Edit University Options" })
         </div> 
                 
         <div class="grid3 marginBottom_10 floatLeft"> 
             <div class="floatLeft"><p class="greyHighlight">University Name:</p>
-                <div class="infoSpan">@Model.Name</div>
+                <div class="infoSpan">@Model.Organization.Name</div>
             </div> 
         </div> 
 
         <div class="grid3 marginBottom_10 floatLeft"> 
             <div class="floatLeft"><p class="greyHighlight">Number of Students with an Account in MyLeads:</p>
-                <div class="infoSpan">@Model.Members.Count</div>
+                <div class="infoSpan">@Model.Organization.Members.Count</div>
             </div> 
         </div> 
 
         <div class="grid3 marginBottom_10 floatLeft"> 
             <div class="floatLeft"><p class="greyHighlight">Registration URL for Students:</p>
                 <div class="infoSpan">
-                    @Html.ActionLink(Url.Action("RegisterWithOrganization", "Account", new { area = "", registrationToke = Model.RegistrationToken }),
-                        MVC.Account.RegisterWithOrganization(Model.RegistrationToken), new { @class = "inlineBlue" })
+                    @Html.ActionLink(Url.Action("RegisterWithOrganization", "Account", new { area = "", registrationToke = Model.Organization.RegistrationToken }),
+                        MVC.Account.RegisterWithOrganization(Model.Organization.RegistrationToken), new { @class = "inlineBlue" })
                 </div>
             </div> 
         </div> 
 
-        @if (Model.IsEmailDomainRestricted)
+        @if (Model.Organization.IsEmailDomainRestricted)
         {
             <div class="grid3 marginBottom_10 floatLeft"> 
                 <div class="floatLeft">
-                    <p class="greyHighlight">Students must register with an email from the <span class="greyHighlight">@@@Model.EmailDomains.First().Domain</span> domain</p>
+                    <p class="greyHighlight">Students must register with an email from the <span class="greyHighlight">@@@Model.Organization.EmailDomains.First().Domain</span> domain</p>
                 </div> 
             </div>
         }
@@ -53,6 +53,77 @@
                 </div> 
             </div>
         }
+
+        @if (Model.NonMemberOfficialDocuments.Count > 0)
+        {
+            <div class="grid3 marginBottom_10 floatLeft">
+                <div class="floatLeft">
+                    <p class="greyHighlight">Documentation For Career Services (not visible to students):</p>
+                    <div class="infoSpan">
+                        <ul>
+                            @foreach (var doc in Model.NonMemberOfficialDocuments)
+                            {
+                                <li><a href="@doc.DownloadUrl" class="inlineBlue">@doc.Name</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+        
+        <div class="grid3 marginBottom_10 floatLeft">
+            <div class="floatLeft">
+                <p class="greyHighlight">Documentation Visible To Students:</p>
+                <div class="infoSpan">
+                    <ul>
+
+                        @if (Model.Organization.MemberOfficialDocuments.Count > 0)
+                        {
+                            foreach (var doc in Model.Organization.MemberOfficialDocuments)
+                            {
+                                <li>
+                                    <a href="@doc.DownloadUrl" class="inlineBlue">@doc.Name</a> - 
+                                    [ @Html.ActionLink("Hide From Students", MVC.Organization.Dashboard.HideDocumentFromMembers(doc.Id), new { @class = "inlineBlue" }) ]
+                                </li>
+                            }
+                        }
+
+                        else
+                        {
+                            <li>No documentation has been selected to be visible students.</li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid3 marginBottom_10 floatLeft">
+            <div class="floatLeft">
+                <p class="greyHighlight">Documentation NOT Visible To Students:</p>
+                <div class="infoSpan">
+                    <ul>
+
+                        @if (Model.HiddenMemberDocuments.Count > 0)
+                        {
+                            foreach (var doc in Model.HiddenMemberDocuments)
+                            {
+                                <li>
+                                    <a href="@doc.DownloadUrl" class="inlineBlue">@doc.Name</a> - 
+                                    [ @Html.ActionLink("Show To Students", MVC.Organization.Dashboard.ShowDocumentToMembers(doc.Id), new { @class = "inlineBlue" }) ]
+                                </li>
+                            }
+                        }
+
+                        else
+                        {
+                            <li>All documentation is visible to students</li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
 
         <div class="clear"></div> 
     </div> 

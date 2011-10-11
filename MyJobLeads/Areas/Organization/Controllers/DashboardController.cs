@@ -6,15 +6,23 @@ using System.Web.Mvc;
 using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Queries.Organizations;
+using MyJobLeads.Infrastructure.Attributes;
+using MyJobLeads.DomainModel.ViewModels;
+using MyJobLeads.DomainModel.ProcessParams.Organizations;
 
 namespace MyJobLeads.Areas.Organization.Controllers
 {
+    [MJLAuthorize]
     public partial class DashboardController : MyJobLeadsBaseController
     {
-        public DashboardController(IServiceFactory factory)
+        protected IProcess<OrgMemberDocVisibilityByOrgAdminParams, GeneralSuccessResultViewModel> _orgDocVisibilityProcess;
+
+        public DashboardController(IServiceFactory factory, 
+                                   IProcess<OrgMemberDocVisibilityByOrgAdminParams, GeneralSuccessResultViewModel> orgDocVisibilityProcess)
         {
             _serviceFactory = factory;
             _unitOfWork = factory.GetService<IUnitOfWork>();
+            _orgDocVisibilityProcess = orgDocVisibilityProcess;
         }
 
         public virtual ActionResult Index()
@@ -28,5 +36,28 @@ namespace MyJobLeads.Areas.Organization.Controllers
             return View(org);
         }
 
+        public virtual ActionResult HideDocumentFromMembers(int docId)
+        {
+            _orgDocVisibilityProcess.Execute(new OrgMemberDocVisibilityByOrgAdminParams
+            {
+                RequestingUserId = CurrentUserId,
+                OfficialDocumentId = docId,
+                ShowToMembers = false
+            });
+
+            return RedirectToAction(MVC.Organization.Dashboard.Index());
+        }
+
+        public virtual ActionResult ShowDocumentToMembers(int docId)
+        {
+            _orgDocVisibilityProcess.Execute(new OrgMemberDocVisibilityByOrgAdminParams
+            {
+                RequestingUserId = CurrentUserId,
+                OfficialDocumentId = docId,
+                ShowToMembers = true
+            });
+
+            return RedirectToAction(MVC.Organization.Dashboard.Index());
+        }
     }
 }

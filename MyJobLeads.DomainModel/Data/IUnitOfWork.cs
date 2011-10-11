@@ -17,6 +17,7 @@ namespace MyJobLeads.DomainModel.Data
         IRepository<ContactHistory> ContactHistory { get; }
         IRepository<JobSearch> JobSearches { get; }
         IRepository<JobSearchHistory> JobSearchHistory { get; }
+        IRepository<OfficialDocument> OfficialDocuments { get; }
         IRepository<Organization> Organizations { get; }
         IRepository<Position> Positions { get; }
         IRepository<Task> Tasks { get; }
