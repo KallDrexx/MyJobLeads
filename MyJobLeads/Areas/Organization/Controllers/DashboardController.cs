@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Queries.Organizations;
+using MyJobLeads.Infrastructure.Attributes;
 
 namespace MyJobLeads.Areas.Organization.Controllers
 {
+    [MJLAuthorize]
     public partial class DashboardController : MyJobLeadsBaseController
     {
         public DashboardController(IServiceFactory factory)
@@ -27,6 +29,5 @@ namespace MyJobLeads.Areas.Organization.Controllers
 
             return View(org);
         }
-
     }
 }
