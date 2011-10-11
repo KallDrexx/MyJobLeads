@@ -33,6 +33,9 @@ namespace MyJobLeads.DomainModel.Queries.Organizations
                              .Select(x => x.Organization)
                              .FirstOrDefault();
 
+            if (org == null)
+                return null;
+
             return new OrganizationDashboardViewModel
             {
                 Organization = org,

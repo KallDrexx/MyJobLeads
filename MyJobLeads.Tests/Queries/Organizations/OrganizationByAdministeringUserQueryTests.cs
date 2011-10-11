@@ -48,7 +48,7 @@ namespace MyJobLeads.Tests.Queries.Organizations
                 new OrganizationByAdministeringUserQuery(_serviceFactory.Object).Execute(new OrganizationByAdministeringUserQueryParams { AdministeringUserId = user1.Id });
 
             // Verify
-            Assert.IsNull(result.Organization, "Query did not return a null organization");
+            Assert.IsNull(result, "Query did not return a null organization");
         }
 
         [TestMethod]
