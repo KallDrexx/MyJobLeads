@@ -991,6 +991,12 @@
       <LastGenOutput>Index.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Areas\Organization\Views\_ViewStart.cshtml" />
+    <Content Include="Content\Documents\Student Tutorial and Hints.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Documents\Welcome Package - Start here.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="T4MVC.tt.settings.t4" />
     <Content Include="Views\Home\Test.cshtml">
       <Generator>RazorGenerator</Generator>
