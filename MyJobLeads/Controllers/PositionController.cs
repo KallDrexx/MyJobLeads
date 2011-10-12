@@ -19,6 +19,7 @@ using MyJobLeads.DomainModel.Exceptions;
 namespace MyJobLeads.Controllers
 {
     [MJLAuthorize]
+    [RequiresActiveJobSearch]
     public partial class PositionController : MyJobLeadsBaseController
     {
         protected IProcess<CreatePositionParams, PositionDisplayViewModel> _createProcess;

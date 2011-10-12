@@ -300,6 +300,7 @@
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Attributes\RequiresActiveJobSearchAttribute.cs" />
     <Compile Include="Infrastructure\Filters\ElmahHandledErrorLoggerFilter.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\DateHtmlHelpers.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\NumericDisplayHelpers.cs" />

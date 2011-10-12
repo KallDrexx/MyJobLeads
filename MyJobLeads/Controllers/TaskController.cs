@@ -22,6 +22,7 @@ using MyJobLeads.ViewModels.Companies;
 namespace MyJobLeads.Controllers
 {
     [MJLAuthorize]
+    [RequiresActiveJobSearch]
     public partial class TaskController : MyJobLeadsBaseController
     {
         protected ISearchProvider _searchProvider;

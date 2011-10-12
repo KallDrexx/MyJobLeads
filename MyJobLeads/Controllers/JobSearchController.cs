@@ -125,6 +125,7 @@ namespace MyJobLeads.Controllers
             return View(new JobSearchDetailsViewModel { JobSearch = search, OpenTasks = openTasks });
         }
 
+        [RequiresActiveJobSearch]
         public virtual ActionResult Search(string query)
         {
             var user = _userByIdQuery.WithUserId(CurrentUserId).Execute();
@@ -134,6 +135,7 @@ namespace MyJobLeads.Controllers
             return View(new PerformedSearchViewModel { SearchQuery = query, Results = results, JobSearchId = (int)user.LastVisitedJobSearchId });
         }
 
+        [RequiresActiveJobSearch]
         public virtual ActionResult StartNextMilestone()
         {
             var user = _userByIdQuery.WithUserId(CurrentUserId).Execute();
@@ -141,6 +143,7 @@ namespace MyJobLeads.Controllers
             return RedirectToAction(MVC.Home.Index());
         }
 
+        [RequiresActiveJobSearch]
         public virtual ActionResult Export()
         {
             JobsearchExportViewModel export;
