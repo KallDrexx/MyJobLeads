@@ -182,12 +182,12 @@ WriteLiteral("</h3> \r\n                </div> \r\n");
             #line hidden
 WriteLiteral("                <div class=\"grid3 marginBottom_10 marginAuto floatLeft\">\r\n       " +
 "             <div class=\"floatLeft\">\r\n                        <p>\r\n             " +
-"               As a member of the ");
+"               As a student of ");
 
 
             
             #line 31 "..\..\Views\Account\RegisterWithOrganization.cshtml"
-                                          Write(Model.OrganizationName);
+                                       Write(Model.OrganizationName);
 
             
             #line default
