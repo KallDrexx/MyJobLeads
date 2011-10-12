@@ -8,6 +8,7 @@ using MyJobLeads.DomainModel.Entities.EF;
 using System.Data.Entity;
 using System.Configuration;
 using MyJobLeads.Infrastructure.ModelBinders;
+using MyJobLeads.Infrastructure.Filters;
 
 namespace MyJobLeads
 {
@@ -18,6 +19,7 @@ namespace MyJobLeads
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            filters.Add(new ElmahHandledErrorLoggerFilter());
             filters.Add(new HandleErrorAttribute());
         }
 

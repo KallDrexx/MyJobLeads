@@ -300,6 +300,7 @@
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Filters\ElmahHandledErrorLoggerFilter.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\DateHtmlHelpers.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\NumericDisplayHelpers.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\StringHtmlHelpers.cs" />
@@ -800,7 +801,9 @@
     <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.treeview.min.js" />
     <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.upload.min.js" />
     <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.window.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
