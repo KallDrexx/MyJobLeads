@@ -551,3 +551,10 @@ a.viewContact{
     font-weight: bold;
     color: Red;
 }
+
+.decoratedList
+{
+    margin-left: 20px;
+    list-style-type: circle;
+    list-style-position: inside;
+}

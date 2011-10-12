@@ -8,6 +8,8 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Utilities;
 using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.ViewModels.Users;
+using MyJobLeads.DomainModel.ViewModels.Organizations;
+using MyJobLeads.DomainModel.ProcessParams.Users;
 
 namespace MyJobLeads.Controllers
 {
@@ -15,14 +17,18 @@ namespace MyJobLeads.Controllers
 
     public partial class HomeController : MyJobLeadsBaseController
     {
-        public HomeController(UserByIdQuery userByIdQuery, IServiceFactory factory)
+        protected UserByIdQuery _userByIdQuery;
+        protected IProcess<ByUserIdParams, VisibleOrgOfficialDocListForUserViewModel> _userVisibleDocsProcess;
+
+        public HomeController(UserByIdQuery userByIdQuery, 
+                              IServiceFactory factory,
+                              IProcess<ByUserIdParams, VisibleOrgOfficialDocListForUserViewModel> userVisibleDocProcess)
         {
             _userByIdQuery = userByIdQuery;
             _serviceFactory = factory;
             _unitOfWork = factory.GetService<IUnitOfWork>();
+            _userVisibleDocsProcess = userVisibleDocProcess;
         }
-
-        private UserByIdQuery _userByIdQuery;
 
         public virtual ActionResult Index()
         {
@@ -42,7 +48,8 @@ namespace MyJobLeads.Controllers
 
         public virtual ActionResult About()
         {
-            return View();
+            var model = _userVisibleDocsProcess.Execute(new ByUserIdParams { UserId = CurrentUserId });
+            return View(model);
         }
 
         [HttpPost]

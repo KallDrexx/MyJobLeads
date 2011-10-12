@@ -41,7 +41,7 @@ namespace MyJobLeads.Tests.Controllers
             // Setup
             var userByIdMock = new Mock<UserByIdQuery>(null);
             userByIdMock.Setup(x => x.Execute()).Returns((User)null);
-            HomeController controller = new HomeController(userByIdMock.Object, _serviceFactory.Object);
+            HomeController controller = new HomeController(userByIdMock.Object, _serviceFactory.Object, null);
 
             // Act
             ActionResult result = controller.Index();
@@ -57,7 +57,7 @@ namespace MyJobLeads.Tests.Controllers
             User user = new User { Id = 20, JobSearches = new List<JobSearch>() };
             var userByIdMock = new Mock<UserByIdQuery>(null);
             userByIdMock.Setup(x => x.Execute()).Returns(user);
-            HomeController controller = new HomeController(userByIdMock.Object, _serviceFactory.Object);
+            HomeController controller = new HomeController(userByIdMock.Object, _serviceFactory.Object, null);
             controller.CurrentUserId = 20;
 
             // Act

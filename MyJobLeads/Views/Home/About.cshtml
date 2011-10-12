@@ -1,4 +1,6 @@
-﻿@{
+﻿@model MyJobLeads.DomainModel.ViewModels.Organizations.VisibleOrgOfficialDocListForUserViewModel
+
+@{
     ViewBag.Title = "About Us";
 }
 
@@ -7,23 +9,42 @@
 }
 
 <div class="grid1 floatLeft"> 
-    <div class="lineSeperater"> 
-        <div class="pageInfoBox"> 
-            <div class="grid3 marginBottom_10 marginAuto floatLeft">
-                <h3>About MyLeads</h3>
-            </div>
-
-            <div class="grid3 marginBottom_10 marginAuto floatLeft">
-                <p>
-                    MyLeads version 3.0. Property of <a class="inlineBlue" href="http://interviewtools.net">InterviewTools</a>.
-                </p>
-
-                <p>
-                    Please contact us at <a class="inlineBlue" href="mailto:support@interviewtools.net">support@interviewtools.net</a>
-                </p>
-            </div>
-            
-            <div class="clear"></div>
+    <div class="pageInfoBox"> 
+        <div class="grid3 marginBottom_10 marginAuto floatLeft">
+            <h3>About MyLeads</h3>
         </div>
+
+        <div class="grid3 marginBottom_10 marginAuto floatLeft">
+            <p>
+                MyLeads is your key to a successful job search by giving you the tools to efficiently organize your job leads.
+            </p>
+            <p>
+                MyLeads allows you to: 
+                <ul class="decoratedList">
+                    <li>Store companies and contacts - keep up to date notes about the progress of your job search in an organized fashion</li>
+                    <li>Schedule follow-ups - to remind you when you need to contact a manager or human resources</li>
+                    <li>Track your application - record which firms you've applied to and who you have contacted afterwards</li>
+                </ul>
+            </p>
+
+            @if (Model.UserVisibleDocuments.Count > 0)
+            {
+                <p>
+                    The following document(s) are available to help guide you through using MyLeads:
+                    <ul class="decoratedList">
+                        @foreach (var doc in Model.UserVisibleDocuments.OrderBy(x => x.Name))
+                        {
+                            <li><a href="@doc.DownloadUrl" class="inlineBlue">@doc.Name</a></li>
+                        }
+                    </ul>
+                </p>
+            }
+
+            <p>
+                For questions or information, please contact us at <a class="inlineBlue" href="mailto:support@interviewtools.net">support@interviewtools.net</a>
+            </p>
+        </div>
+            
+        <div class="clear"></div>
     </div>
 </div>

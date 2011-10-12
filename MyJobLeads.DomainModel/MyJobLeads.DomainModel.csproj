@@ -162,6 +162,7 @@
     <Compile Include="ProcessParams\Security\ContactAutorizationParams.cs" />
     <Compile Include="ProcessParams\Security\PositionAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\TaskAuthorizationParams.cs" />
+    <Compile Include="ProcessParams\Users\ByUserIdParams.cs" />
     <Compile Include="ProcessParams\Users\EditUserDetailsParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\DataDirectory\IDataDirectoryProvider.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="ViewModels\GeneralSuccessResultViewModel.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgress.cs" />
     <Compile Include="ViewModels\Organizations\OrganizationDashboardViewModel.cs" />
+    <Compile Include="ViewModels\Organizations\VisibleOrgOfficialDocListForUserViewModel.cs" />
     <Compile Include="ViewModels\Positions\EditPositionViewModel.cs" />
     <Compile Include="ViewModels\Positions\PositionDisplayViewModel.cs" />
     <Compile Include="ViewModels\Positions\PositionListViewModel.cs" />
