@@ -22,8 +22,18 @@
         </div> 
 
         <div class="grid3 marginBottom_10 floatLeft"> 
-            <div class="floatLeft"><p class="greyHighlight">Number of Students with an Account in MyLeads:</p>
-                <div class="infoSpan">@Model.Organization.Members.Count</div>
+            <div class="floatLeft"><p class="greyHighlight">Student Usage Summary:</p>
+                <div class="infoSpan">
+                    Number of registered students: <span class="bold">@Model.NumMembers</span> <br />
+                    Number of entered companies: <span class="bold">@Model.NumCompanies</span> <br />
+                    Number of entered contacts: <span class="bold">@Model.NumContacts</span> <br />
+                    Number of positions students have applied to: <span class="bold">@Model.NumAppliedPositions</span> <br />
+                    Number of positions students have not applied to: <span class="bold">@Model.NumNotAppliedPositions</span> <br />
+                    Number of scheduled phone interviews: <span class="bold">@Model.NumOpenPhoneTasks</span> <br />
+                    Number of completed phone interviews: <span class="bold">@Model.NumClosedPhoneTasks</span> <br />
+                    Number of scheduled in-person interviews: <span class="bold">@Model.NumOpenInterviewTasks</span> <br />
+                    Number of completed in-person interviews: <span class="bold">@Model.NumClosedInterviewTasks</span> <br />
+                </div>
             </div> 
         </div> 
 

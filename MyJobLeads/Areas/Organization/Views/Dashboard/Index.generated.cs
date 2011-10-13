@@ -91,20 +91,113 @@ WriteLiteral("\r\n        </div> \r\n                \r\n        <div class=\"gr
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n            </div> \r\n        </div> \r\n\r\n        <div class=\"grid3 marginB" +
-"ottom_10 floatLeft\"> \r\n            <div class=\"floatLeft\"><p class=\"greyHighligh" +
-"t\">Number of Students with an Account in MyLeads:</p>\r\n                <div clas" +
-"s=\"infoSpan\">");
+WriteLiteral(@"</div>
+            </div> 
+        </div> 
+
+        <div class=""grid3 marginBottom_10 floatLeft""> 
+            <div class=""floatLeft""><p class=""greyHighlight"">Student Usage Summary:</p>
+                <div class=""infoSpan"">
+                    Number of registered students: <span class=""bold"">");
 
 
             
-            #line 26 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
-                                 Write(Model.Organization.Members.Count);
+            #line 27 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                                                                 Write(Model.NumMembers);
 
             
             #line default
             #line hidden
-WriteLiteral(@"</div>
+WriteLiteral("</span> <br />\r\n                    Number of entered companies: <span class=\"bol" +
+"d\">");
+
+
+            
+            #line 28 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                                                               Write(Model.NumCompanies);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span> <br />\r\n                    Number of entered contacts: <span class=\"bold" +
+"\">");
+
+
+            
+            #line 29 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                                                              Write(Model.NumContacts);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span> <br />\r\n                    Number of positions students have applied to:" +
+" <span class=\"bold\">");
+
+
+            
+            #line 30 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                                                                                Write(Model.NumAppliedPositions);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span> <br />\r\n                    Number of positions students have not applied" +
+" to: <span class=\"bold\">");
+
+
+            
+            #line 31 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                                                                                    Write(Model.NumNotAppliedPositions);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span> <br />\r\n                    Number of scheduled phone interviews: <span c" +
+"lass=\"bold\">");
+
+
+            
+            #line 32 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                                                                        Write(Model.NumOpenPhoneTasks);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span> <br />\r\n                    Number of completed phone interviews: <span c" +
+"lass=\"bold\">");
+
+
+            
+            #line 33 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                                                                        Write(Model.NumClosedPhoneTasks);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span> <br />\r\n                    Number of scheduled in-person interviews: <sp" +
+"an class=\"bold\">");
+
+
+            
+            #line 34 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                                                                            Write(Model.NumOpenInterviewTasks);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span> <br />\r\n                    Number of completed in-person interviews: <sp" +
+"an class=\"bold\">");
+
+
+            
+            #line 35 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+                                                                            Write(Model.NumClosedInterviewTasks);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"</span> <br />
+                </div>
             </div> 
         </div> 
 
@@ -115,7 +208,7 @@ WriteLiteral(@"</div>
 
 
             
-            #line 33 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 43 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                Write(Html.ActionLink(Url.Action("RegisterWithOrganization", "Account", new { area = "", registrationToke = Model.Organization.RegistrationToken }),
                         MVC.Account.RegisterWithOrganization(Model.Organization.RegistrationToken), new { @class = "inlineBlue" }));
 
@@ -126,7 +219,7 @@ WriteLiteral("\r\n                </div>\r\n            </div> \r\n        </div
 
 
             
-            #line 39 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 49 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
          if (Model.Organization.IsEmailDomainRestricted)
         {
 
@@ -142,7 +235,7 @@ WriteLiteral("@");
 
 
             
-            #line 43 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 53 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                                                                                                                     Write(Model.Organization.EmailDomains.First().Domain);
 
             
@@ -152,7 +245,7 @@ WriteLiteral("</span> domain</p>\r\n                </div> \r\n            </div
 
 
             
-            #line 46 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 56 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
         }
 
         else
@@ -170,7 +263,7 @@ WriteLiteral(@"            <div class=""grid3 marginBottom_10 floatLeft"">
 
 
             
-            #line 55 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 65 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
         }
 
             
@@ -180,7 +273,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 57 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 67 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
          if (Model.NonMemberOfficialDocuments.Count > 0)
         {
 
@@ -196,7 +289,7 @@ WriteLiteral(@"            <div class=""grid3 marginBottom_10 floatLeft"">
 
 
             
-            #line 64 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 74 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                              foreach (var doc in Model.NonMemberOfficialDocuments)
                             {
 
@@ -207,7 +300,7 @@ WriteLiteral("                                <li><a href=\"");
 
 
             
-            #line 66 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 76 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                                         Write(doc.DownloadUrl);
 
             
@@ -217,7 +310,7 @@ WriteLiteral("\" class=\"inlineBlue\">");
 
 
             
-            #line 66 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 76 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                                                                              Write(doc.Name);
 
             
@@ -227,7 +320,7 @@ WriteLiteral("</a></li>\r\n");
 
 
             
-            #line 67 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 77 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                             }
 
             
@@ -238,7 +331,7 @@ WriteLiteral("                        </ul>\r\n                    </div>\r\n   
 
 
             
-            #line 72 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 82 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
         }
 
             
@@ -251,7 +344,7 @@ WriteLiteral("        \r\n        <div class=\"grid3 marginBottom_10 floatLeft\"
 
 
             
-            #line 80 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 90 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                          if (Model.Organization.MemberOfficialDocuments.Count > 0)
                         {
                             foreach (var doc in Model.Organization.MemberOfficialDocuments)
@@ -265,7 +358,7 @@ WriteLiteral("                                <li>\r\n                          
 
 
             
-            #line 85 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 95 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                                         Write(doc.DownloadUrl);
 
             
@@ -275,7 +368,7 @@ WriteLiteral("\" class=\"inlineBlue\">");
 
 
             
-            #line 85 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 95 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                                                                              Write(doc.Name);
 
             
@@ -285,7 +378,7 @@ WriteLiteral("</a> - \r\n                                    [ ");
 
 
             
-            #line 86 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 96 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                                  Write(Html.ActionLink("Hide From Students", MVC.Organization.Dashboard.HideDocumentFromMembers(doc.Id), new { @class = "inlineBlue" }));
 
             
@@ -295,7 +388,7 @@ WriteLiteral(" ]\r\n                                </li>\r\n");
 
 
             
-            #line 88 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 98 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                             }
                         }
 
@@ -310,7 +403,7 @@ WriteLiteral("                            <li>No documentation has been selected
 
 
             
-            #line 94 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 104 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                         }
 
             
@@ -332,7 +425,7 @@ WriteLiteral(@"
 
 
             
-            #line 107 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 117 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                          if (Model.HiddenMemberDocuments.Count > 0)
                         {
                             foreach (var doc in Model.HiddenMemberDocuments)
@@ -346,7 +439,7 @@ WriteLiteral("                                <li>\r\n                          
 
 
             
-            #line 112 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 122 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                                         Write(doc.DownloadUrl);
 
             
@@ -356,7 +449,7 @@ WriteLiteral("\" class=\"inlineBlue\">");
 
 
             
-            #line 112 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 122 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                                                                              Write(doc.Name);
 
             
@@ -366,7 +459,7 @@ WriteLiteral("</a> - \r\n                                    [ ");
 
 
             
-            #line 113 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 123 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                                  Write(Html.ActionLink("Show To Students", MVC.Organization.Dashboard.ShowDocumentToMembers(doc.Id), new { @class = "inlineBlue" }));
 
             
@@ -376,7 +469,7 @@ WriteLiteral(" ]\r\n                                </li>\r\n");
 
 
             
-            #line 115 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 125 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                             }
                         }
 
@@ -390,7 +483,7 @@ WriteLiteral("                            <li>All documentation is visible to st
 
 
             
-            #line 121 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 131 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                         }
 
             

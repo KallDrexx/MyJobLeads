@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.Entity;
 using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.ViewModels.Organizations;
+using MyJobLeads.DomainModel.Entities.EF;
 
 namespace MyJobLeads.DomainModel.Queries.Organizations
 {
@@ -16,22 +18,20 @@ namespace MyJobLeads.DomainModel.Queries.Organizations
 
     public class OrganizationByAdministeringUserQuery
     {
-        protected IServiceFactory _serviceFactory;
+        protected MyJobLeadsDbContext _context;
 
-        public OrganizationByAdministeringUserQuery (IServiceFactory factory)
+        public OrganizationByAdministeringUserQuery (MyJobLeadsDbContext context)
         {
-            _serviceFactory = factory;
+            _context = context;
         }
 
         public OrganizationDashboardViewModel Execute(OrganizationByAdministeringUserQueryParams queryParams)
         {
-            var unitofwork = _serviceFactory.GetService<IUnitOfWork>();
-            var org = unitofwork.Users
-                             .Fetch()
-                             .Where(x => x.Id == queryParams.AdministeringUserId)
-                             .Where(x => x.IsOrganizationAdmin)
-                             .Select(x => x.Organization)
-                             .FirstOrDefault();
+            var org = _context.Users
+                              .Where(x => x.Id == queryParams.AdministeringUserId)
+                              .Where(x => x.IsOrganizationAdmin)
+                              .Select(x => x.Organization)
+                              .FirstOrDefault();
 
             if (org == null)
                 return null;
@@ -39,16 +39,21 @@ namespace MyJobLeads.DomainModel.Queries.Organizations
             return new OrganizationDashboardViewModel
             {
                 Organization = org,
-
-                NonMemberOfficialDocuments = unitofwork.OfficialDocuments
-                                                       .Fetch()
-                                                       .Where(x => !x.MeantForMembers)
-                                                       .ToList(),
-
-                HiddenMemberDocuments = unitofwork.OfficialDocuments
-                                                  .Fetch()
-                                                  .Where(x => x.MeantForMembers && !x.Organizations.Any(y =>y.Id == org.Id))
-                                                  .ToList()
+                NonMemberOfficialDocuments = _context.OfficialDocuments.Where(x => !x.MeantForMembers).ToList(),
+                HiddenMemberDocuments = _context.OfficialDocuments.Where(x => x.MeantForMembers && !x.Organizations.Any(y =>y.Id == org.Id)).ToList(),
+                NumMembers = org.Members.Count,
+                NumCompanies = _context.Companies.Where(x => x.JobSearch.User.Organization.Id == org.Id).Count(),
+                NumContacts = _context.Contacts.Where(x => x.Company.JobSearch.User.Organization.Id == org.Id).Count(),
+                NumOpenPhoneTasks = _context.Tasks.Where(x => x.Category == MJLConstants.PhoneInterviewTaskCategory && x.CompletionDate == null
+                                                            && x.Company.JobSearch.User.Organization.Id == org.Id).Count(),
+                NumClosedPhoneTasks = _context.Tasks.Where(x => x.Category == MJLConstants.PhoneInterviewTaskCategory && x.CompletionDate != null
+                                                            && x.Company.JobSearch.User.Organization.Id == org.Id).Count(),
+                NumOpenInterviewTasks = _context.Tasks.Where(x => x.Category == MJLConstants.InPersonInterviewTaskCategory && x.CompletionDate == null
+                                                            && x.Company.JobSearch.User.Organization.Id == org.Id).Count(),
+                NumClosedInterviewTasks = _context.Tasks.Where(x => x.Category == MJLConstants.InPersonInterviewTaskCategory && x.CompletionDate != null
+                                                            && x.Company.JobSearch.User.Organization.Id == org.Id).Count(),
+                NumAppliedPositions = _context.Positions.Where(x => x.HasApplied && x.Company.JobSearch.User.Organization.Id == org.Id).Count(),
+                NumNotAppliedPositions = _context.Positions.Where(x => !x.HasApplied && x.Company.JobSearch.User.Organization.Id == org.Id).Count()
             };
         }
     }
