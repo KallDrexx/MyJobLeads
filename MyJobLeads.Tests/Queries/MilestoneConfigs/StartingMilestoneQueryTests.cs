@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyJobLeads.DomainModel.Entities.Configuration;
 using MyJobLeads.DomainModel.Queries.MilestoneConfigs;
 using MyJobLeads.DomainModel.Data;
+using MyJobLeads.DomainModel.Entities;
 
 namespace MyJobLeads.Tests.Queries.MilestoneConfigs
 {
@@ -24,13 +25,53 @@ namespace MyJobLeads.Tests.Queries.MilestoneConfigs
             _unitOfWork.MilestoneConfigs.Add(config3);
             _unitOfWork.Commit();
 
-            _serviceFactory.Setup(x => x.GetService<IUnitOfWork>()).Returns(_unitOfWork);
-
             // Act
-            MilestoneConfig result = new StartingMilestoneQuery(_serviceFactory.Object).Execute();
+            MilestoneConfig result = new StartingMilestoneQuery(_context).Execute(new StartingMilestoneQueryParams());
 
             // Verify
             Assert.AreEqual(config2, result, "The returned milestone configuration was incorrect");
+        }
+
+        [TestMethod]
+        public void Does_Not_Return_Starting_Milestone_For_Organization_If_None_Requested()
+        {
+            // Setup
+            var org = new Organization();
+            var config1 = new MilestoneConfig { IsStartingMilestone = true, Organization = org };
+            var config2 = new MilestoneConfig { IsStartingMilestone = true };
+            var config3 = new MilestoneConfig { IsStartingMilestone = true, Organization = org };
+
+            _context.MilestoneConfigs.Add(config1);
+            _context.MilestoneConfigs.Add(config2);
+            _context.MilestoneConfigs.Add(config3);
+            _context.SaveChanges();
+
+            // Act
+            MilestoneConfig result = new StartingMilestoneQuery(_context).Execute(new StartingMilestoneQueryParams());
+
+            // Verify
+            Assert.AreEqual(config2, result, "The returned milestone was incorrect");
+        }
+
+        [TestMethod]
+        public void Returns_Organizations_Starting_Milestone_If_OrganizationId_Is_Given()
+        {
+            // Setup
+            var org = new Organization();
+            var config1 = new MilestoneConfig { IsStartingMilestone = true };
+            var config2 = new MilestoneConfig { IsStartingMilestone = true, Organization = org };
+            var config3 = new MilestoneConfig { IsStartingMilestone = true };
+
+            _context.MilestoneConfigs.Add(config1);
+            _context.MilestoneConfigs.Add(config2);
+            _context.MilestoneConfigs.Add(config3);
+            _context.SaveChanges();
+
+            // Act
+            MilestoneConfig result = new StartingMilestoneQuery(_context).Execute(new StartingMilestoneQueryParams { OrganizationId = org.Id });
+
+            // Verify
+            Assert.AreEqual(config2, result, "The returned milestone was incorrect");
         }
     }
 }

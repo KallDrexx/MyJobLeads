@@ -20,17 +20,19 @@ namespace MyJobLeads.Tests.Commands.JobSearches
     public class CreateJobSearchForUserCommandTests : EFTestBase
     {
         private User _user;
+        private Organization _org;
         private Mock<StartingMilestoneQuery> _startingMilestoneQuery;
         private Mock<IValidator<JobSearch>> _validator;
 
         public void InitializeTestEntities()
         {
-            _user = new User { JobSearches = new List<JobSearch>() };
+            _org = new Organization();
+            _user = new User { JobSearches = new List<JobSearch>(), Organization = _org };
             _unitOfWork.Users.Add(_user);
             _unitOfWork.Commit();
 
             // Mocks
-            _startingMilestoneQuery = new Mock<StartingMilestoneQuery>(_serviceFactory.Object);
+            _startingMilestoneQuery = new Mock<StartingMilestoneQuery>(_context);
             _serviceFactory.Setup(x => x.GetService<StartingMilestoneQuery>()).Returns(_startingMilestoneQuery.Object);
 
             _validator = new Mock<IValidator<JobSearch>>();
@@ -151,7 +153,7 @@ namespace MyJobLeads.Tests.Commands.JobSearches
             _unitOfWork.MilestoneConfigs.Add(config);
             _unitOfWork.Commit();
 
-            _startingMilestoneQuery.Setup(x => x.Execute()).Returns(config);
+            _startingMilestoneQuery.Setup(x => x.Execute(It.IsAny<StartingMilestoneQueryParams>())).Returns(config);
 
             // Act
             new CreateJobSearchForUserCommand(_serviceFactory.Object).ForUserId(_user.Id).Execute();
@@ -196,6 +198,25 @@ namespace MyJobLeads.Tests.Commands.JobSearches
                 Assert.AreEqual("testp", ex.Errors.First().PropertyName, "The validation property name was incorrect");
                 Assert.AreEqual("teste", ex.Errors.First().ErrorMessage, "The validation error message was incorrect");
             }
+        }
+
+        [TestMethod]
+        public void New_JobSearch_Queries_For_Organizations_Starting_MilestoneConfig_When_User_In_Organization()
+        {
+            // Setup
+            InitializeTestEntities();
+            MilestoneConfig config = new MilestoneConfig();
+            _unitOfWork.MilestoneConfigs.Add(config);
+            _unitOfWork.Commit();
+
+            _startingMilestoneQuery.Setup(x => x.Execute(It.Is<StartingMilestoneQueryParams>(y => y.OrganizationId == _org.Id))).Returns(config);
+
+            // Act
+            new CreateJobSearchForUserCommand(_serviceFactory.Object).ForUserId(_user.Id).Execute();
+
+            // Verify
+            JobSearch result = _unitOfWork.JobSearches.Fetch().Single();
+            Assert.AreEqual(config, result.CurrentMilestone, "Job Search's current milestone was incorrect");
         }
     }
 }

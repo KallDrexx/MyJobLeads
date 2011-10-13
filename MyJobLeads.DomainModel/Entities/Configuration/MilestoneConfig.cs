@@ -27,6 +27,9 @@ namespace MyJobLeads.DomainModel.Entities.Configuration
         public virtual MilestoneConfig NextMilestone { get; set; }
         public virtual int? NextMilestoneId { get; set; }
 
+        public virtual Organization Organization { get; set; }
+        public virtual int? OrganizationId { get; set; }
+
         // Milestone Completion Values
         public JobSearchMetrics JobSearchMetrics { get; set; }
     }
