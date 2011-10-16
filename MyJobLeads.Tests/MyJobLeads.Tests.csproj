@@ -147,6 +147,7 @@
     <Compile Include="Processes\Authorization\PositionAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\TaskAuthorizationsTests.cs" />
     <Compile Include="Processes\Export\JobSearchExportProcessTests.cs" />
+    <Compile Include="Processes\Milestones\MilestoneQueryProcessTests.cs" />
     <Compile Include="Processes\Organizations\OrganizationDocumentProcessTests.cs" />
     <Compile Include="Processes\Organizations\VisibleOrgOfficialDocListForUserTests.cs" />
     <Compile Include="Processes\Positions\CreatePositionTests.cs" />

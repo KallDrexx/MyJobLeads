@@ -13,6 +13,7 @@ namespace MyJobLeads.DomainModel.Entities
             Members = new List<User>();
             EmailDomains = new List<OrganizationEmailDomain>();
             MemberOfficialDocuments = new List<OfficialDocument>();
+            MilestoneConfigurations = new List<MilestoneConfig>();
         }
 
         public int Id { get; set; }
@@ -23,5 +24,6 @@ namespace MyJobLeads.DomainModel.Entities
         public virtual ICollection<User> Members { get; set; }
         public virtual ICollection<OrganizationEmailDomain> EmailDomains { get; set; }
         public virtual ICollection<OfficialDocument> MemberOfficialDocuments { get; set; }
+        public virtual ICollection<MilestoneConfig> MilestoneConfigurations { get; set; }
     }
 }

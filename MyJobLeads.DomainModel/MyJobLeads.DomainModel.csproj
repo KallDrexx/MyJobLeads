@@ -134,6 +134,7 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="EntityMapping\EntityMapLoader.cs" />
     <Compile Include="EntityMapping\Mappings\CompanyMappings.cs" />
+    <Compile Include="EntityMapping\Mappings\MilestoneConfigMappings.cs" />
     <Compile Include="EntityMapping\Mappings\PositionMappings.cs" />
     <Compile Include="EntityMapping\Mappings\UserMappings.cs" />
     <Compile Include="Exceptions\InvalidEmailDomainForOrganizationException.cs" />
@@ -150,10 +151,12 @@
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
     <Compile Include="Processes\Exports\JobSearchExportProcess.cs" />
+    <Compile Include="Processes\Milestones\MilestoneQueryProcesses.cs" />
     <Compile Include="Processes\Organizations\OrganizationDocumentProcesses.cs" />
     <Compile Include="Processes\Positions\PositionProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
     <Compile Include="ProcessParams\JobSearches\ByJobSearchParams.cs" />
+    <Compile Include="ProcessParams\Organizations\ByOrganizationIdParams.cs" />
     <Compile Include="ProcessParams\Organizations\OrgMemberDocVisibilityByOrgAdminParams.cs" />
     <Compile Include="ProcessParams\Positions\CreatePositionParams.cs" />
     <Compile Include="ProcessParams\Positions\EditPositionParams.cs" />
@@ -191,6 +194,7 @@
     <Compile Include="ViewModels\Exports\JobsearchExportViewModel.cs" />
     <Compile Include="ViewModels\GeneralSuccessResultViewModel.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgress.cs" />
+    <Compile Include="ViewModels\Milestones\MilestoneDisplayListViewModel.cs" />
     <Compile Include="ViewModels\Organizations\OrganizationDashboardViewModel.cs" />
     <Compile Include="ViewModels\Organizations\VisibleOrgOfficialDocListForUserViewModel.cs" />
     <Compile Include="ViewModels\Positions\EditPositionViewModel.cs" />
