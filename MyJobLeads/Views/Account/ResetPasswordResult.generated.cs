@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyJobLeads.Views.Home
+namespace MyJobLeads.Views.Account
 {
     using System;
     using System.Collections.Generic;
@@ -30,19 +30,19 @@ namespace MyJobLeads.Views.Home
     using Telerik.Web.Mvc.UI;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/Index.cshtml")]
-    public class Index : System.Web.Mvc.WebViewPage<dynamic>
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Account/ResetPasswordResult.cshtml")]
+    public class ResetPasswordResult : System.Web.Mvc.WebViewPage<dynamic>
     {
-        public Index()
+        public ResetPasswordResult()
         {
         }
         public override void Execute()
         {
 
             
-            #line 1 "..\..\Views\Home\Index.cshtml"
+            #line 1 "..\..\Views\Account\ResetPasswordResult.cshtml"
   
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Password Reset";
 
 
             
@@ -52,21 +52,21 @@ WriteLiteral(@"
 <div class=""grid1 floatLeft""> 
     <div class=""pageInfoBox""> 
         <div class=""grid3 marginBottom_10 marginAuto floatLeft"">
-            <h3>Welcome To MyLeads</h3>
+            <h3>Password Reset</h3>
         </div>
 
         <div class=""grid3 marginBottom_10 marginAuto floatLeft"">
             <p>
-                MyLeads is your key to a successful job search by giving you the tools to efficiently organize your job leads.
+                We have successfully generated a new password for you and sent it to your email address.  You should receive the email shortly.
             </p>
-            <p>
-                Log in to access your account.  If you do not have an account yet, check with your university for access.
-            </p>
-
         </div>
+            
         <div class=""clear""></div>
     </div>
 </div>
+
+
+
 ");
 
 

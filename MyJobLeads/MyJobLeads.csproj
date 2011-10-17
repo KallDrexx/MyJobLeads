@@ -389,12 +389,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RegisterWithOrganization.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Account\ResetPassword.cs">
+    <Compile Include="Views\Account\ResetPassword.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ResetPassword.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Account\ResetPasswordResult.cs">
+    <Compile Include="Views\Account\ResetPasswordResult.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ResetPasswordResult.cshtml</DependentUpon>
@@ -933,11 +933,11 @@
     </Content>
     <Content Include="Views\Account\ResetPassword.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>ResetPassword.cs</LastGenOutput>
+      <LastGenOutput>ResetPassword.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Account\ResetPasswordResult.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>ResetPasswordResult.cs</LastGenOutput>
+      <LastGenOutput>ResetPasswordResult.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Task\Edit.cshtml">
       <Generator>RazorGenerator</Generator>

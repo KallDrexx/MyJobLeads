@@ -231,10 +231,14 @@ namespace MyJobLeads.Controllers
         {
             var user = Membership.GetUser(userEmail);
             if (user == null)
-                return View(false); // user wasn't found
+            {
+                ModelState.AddModelError("userEmail", string.Format("The email {0} is not an email for a current MyLeads account", userEmail));
+                ViewBag.LastEmail = userEmail;
+                return View(MVC.Account.Views.ResetPassword); // user wasn't found
+            }
 
             user.ResetPassword();
-            return View(true);
+            return View();
         }
 
         public virtual ActionResult Edit()
