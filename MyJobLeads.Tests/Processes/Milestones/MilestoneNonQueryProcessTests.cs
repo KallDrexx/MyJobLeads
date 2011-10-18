@@ -186,5 +186,155 @@ namespace MyJobLeads.Tests.Processes.Milestones
                 Assert.AreEqual(org.Id, ex.IdValue, "Exception's entity id value was incorrect");
             }
         }
+
+        [TestMethod]
+        public void Specifying_Previous_Milestone_Of_Zero_Makes_It_The_Only_Starting_Milestone_For_Organization_When_Creating_Milestone()
+        {
+            // Setup
+            var org = new Organization();
+            var user = new User { Organization = org, IsOrganizationAdmin = true };
+            var ms3 = new MilestoneConfig { IsStartingMilestone = true, Organization = new Organization() };
+            var ms2 = new MilestoneConfig();
+            var ms1 = new MilestoneConfig { NextMilestone = ms2, IsStartingMilestone = true };
+            
+            org.MilestoneConfigurations.Add(ms1);
+            org.MilestoneConfigurations.Add(ms2);
+            _context.Users.Add(user);
+            _context.MilestoneConfigs.Add(ms3);
+            _context.SaveChanges();
+
+            var param = new SaveMilestoneParams
+            {
+                RequestingUserId = user.Id,
+                OrganizationId = org.Id,
+                PreviousMilestoneId = 0
+            };
+
+            IProcess<SaveMilestoneParams, MilestoneIdViewModel> process = new MilestoneNonQueryProcesses(_context);
+
+            // Act
+            var result = process.Execute(param);
+
+            // Verify
+            var newMs = _context.MilestoneConfigs.Where(x => x.Id != ms1.Id && x.Id != ms2.Id && x.Id != ms3.Id).Single();
+            Assert.IsTrue(newMs.IsStartingMilestone, "New milestone was not set at the starting milestone");
+            Assert.AreEqual(ms1, newMs.NextMilestone, "New milestone's next milestone was incorrect");
+            Assert.IsFalse(ms1.IsStartingMilestone, "The previous starting milestone is still set as the starting milestone");
+            Assert.AreEqual(ms2, ms1.NextMilestone, "Ms1's next milestone was incorrect");
+            Assert.IsTrue(ms3.IsStartingMilestone, "Other organization's milestone was incorrectly set as non-starting");
+        }
+
+        [TestMethod]
+        public void Specifying_Previous_Milestone_Of_Zero_Makes_It_The_Only_Starting_Milestone_For_Organization_When_Editing_Milestone()
+        {
+            // Setup
+            var org = new Organization();
+            var user = new User { Organization = org, IsOrganizationAdmin = true };
+            var ms3 = new MilestoneConfig { IsStartingMilestone = true, Organization = new Organization() };
+            var ms2 = new MilestoneConfig();
+            var ms1 = new MilestoneConfig { NextMilestone = ms2, IsStartingMilestone = true };
+
+            org.MilestoneConfigurations.Add(ms1);
+            org.MilestoneConfigurations.Add(ms2);
+            _context.Users.Add(user);
+            _context.MilestoneConfigs.Add(ms3);
+            _context.SaveChanges();
+
+            var param = new SaveMilestoneParams
+            {
+                RequestingUserId = user.Id,
+                Id = ms2.Id,
+                PreviousMilestoneId = 0
+            };
+
+            IProcess<SaveMilestoneParams, MilestoneIdViewModel> process = new MilestoneNonQueryProcesses(_context);
+
+            // Act
+            var result = process.Execute(param);
+
+            // Verify
+            Assert.IsTrue(ms2.IsStartingMilestone, "ms2 was not set at the starting milestone");
+            Assert.AreEqual(ms1, ms2.NextMilestone, "ms2's next milestone was incorrect");
+            Assert.IsFalse(ms1.IsStartingMilestone, "The previous starting milestone is still set as the starting milestone");
+            Assert.AreEqual(null, ms1.NextMilestone, "ms1's next milestone was incorrect");
+            Assert.IsTrue(ms3.IsStartingMilestone, "Other organization's milestone was incorrectly set as non-starting");
+        }
+
+        [TestMethod]
+        public void Specifying_Previous_Milestone_Places_New_Milestone_In_Between_Other_Milestones_In_Organization()
+        {
+            // Setup
+            var org = new Organization();
+            var user = new User { Organization = org, IsOrganizationAdmin = true };
+            var ms3 = new MilestoneConfig { IsStartingMilestone = true, Organization = new Organization() };
+            var ms2 = new MilestoneConfig ();
+            var ms1 = new MilestoneConfig { NextMilestone = ms2, IsStartingMilestone = true };
+
+            org.MilestoneConfigurations.Add(ms1);
+            org.MilestoneConfigurations.Add(ms2);
+
+            _context.Users.Add(user);
+            _context.MilestoneConfigs.Add(ms3);
+            _context.SaveChanges();
+
+            var param = new SaveMilestoneParams
+            {
+                RequestingUserId = user.Id,
+                OrganizationId = org.Id,
+                PreviousMilestoneId = ms1.Id
+            };
+
+            IProcess<SaveMilestoneParams, MilestoneIdViewModel> process = new MilestoneNonQueryProcesses(_context);
+
+            // Act
+            var result = process.Execute(param);
+
+            // Verify
+            var newMs = _context.MilestoneConfigs.Where(x => x.Id != ms1.Id && x.Id != ms2.Id && x.Id != ms3.Id).Single();
+            Assert.IsFalse(newMs.IsStartingMilestone, "New milestone was incorrect set as the starting milestone");
+            Assert.AreEqual(ms2, newMs.NextMilestone, "New milestone's next milestone was incorrect");
+            Assert.IsTrue(ms1.IsStartingMilestone, "The previous starting milestone is no longer set as the starting milestone");
+            Assert.AreEqual(newMs, ms1.NextMilestone, "Ms1's next milestone was incorrect");
+            Assert.IsTrue(ms3.IsStartingMilestone, "Other organization's milestone was incorrectly set as non-starting");
+        }
+
+        [TestMethod]
+        public void Specifying_Previous_Milestone_Moves_Milestone_In_Between_Other_Milestones_In_Organization()
+        {
+            // Setup
+            var org = new Organization();
+            var user = new User { Organization = org, IsOrganizationAdmin = true };
+            var ms4 = new MilestoneConfig { IsStartingMilestone = true, Organization = new Organization() };
+            var ms3 = new MilestoneConfig();
+            var ms2 = new MilestoneConfig { NextMilestone = ms3 };
+            var ms1 = new MilestoneConfig { NextMilestone = ms2, IsStartingMilestone = true };
+
+            org.MilestoneConfigurations.Add(ms1);
+            org.MilestoneConfigurations.Add(ms2);
+            org.MilestoneConfigurations.Add(ms3);
+
+            _context.Users.Add(user);
+            _context.MilestoneConfigs.Add(ms3);
+            _context.SaveChanges();
+
+            var param = new SaveMilestoneParams
+            {
+                RequestingUserId = user.Id,
+                Id = ms3.Id,
+                PreviousMilestoneId = ms1.Id
+            };
+
+            IProcess<SaveMilestoneParams, MilestoneIdViewModel> process = new MilestoneNonQueryProcesses(_context);
+
+            // Act
+            var result = process.Execute(param);
+
+            // Verify
+            Assert.IsFalse(ms3.IsStartingMilestone, "Milestone 3 was incorrectly set as the starting milestone");
+            Assert.AreEqual(ms2, ms3.NextMilestone, "Milestone 3's next milestone was incorrect");
+            Assert.IsTrue(ms1.IsStartingMilestone, "The previous starting milestone is no longer set as the starting milestone");
+            Assert.AreEqual(ms3, ms1.NextMilestone, "Ms1's next milestone was incorrect");
+            Assert.IsTrue(ms4.IsStartingMilestone, "Other organization's milestone was incorrectly set as non-starting");
+        }
     }
 }

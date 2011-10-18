@@ -55,6 +55,42 @@ namespace MyJobLeads.DomainModel.Processes.Milestones
 
                 milestone = Mapper.Map<SaveMilestoneParams, MilestoneConfig>(procParams, milestone);
             }
+
+            // Place the milestone in it's specified spot
+            var startingMilestone = milestone.Organization.MilestoneConfigurations.Where(x => x.IsStartingMilestone).FirstOrDefault();
+            if (startingMilestone == null)
+            {
+                // There should be no milestones since none is starting
+                milestone.IsStartingMilestone = true;
+            }
+
+            else
+            {
+                // If the previous milestone id is zero, set it as the starting milestone
+                if (procParams.PreviousMilestoneId == 0)
+                {
+                    milestone.IsStartingMilestone = true;
+                    milestone.NextMilestone = startingMilestone;
+                    startingMilestone.IsStartingMilestone = false;
+                }
+
+                // Loop until we find the previous milestone and place the created / edited milestone in its correct place
+                var currentMilestone = startingMilestone;
+                while (currentMilestone != null)
+                {
+                    if (currentMilestone.Id == procParams.PreviousMilestoneId)
+                    {
+                        milestone.NextMilestone = currentMilestone.NextMilestone;
+                        currentMilestone.NextMilestone = milestone;
+                    }
+
+                    // If this milestone currently points to the created / edited milestone, remove the created/edited milestone from the sequence
+                    if (currentMilestone.NextMilestone == milestone)
+                        currentMilestone.NextMilestone = milestone.NextMilestone;
+
+                    currentMilestone = currentMilestone.NextMilestone;
+                }
+            }
                 
             _context.SaveChanges();
             return new MilestoneIdViewModel { Id = milestone.Id };
