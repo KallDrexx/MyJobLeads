@@ -66,6 +66,19 @@ namespace MyJobLeads.DomainModel.Processes.Milestones
 
             else
             {
+                // First loop through all the milestones and unlink the current milestone
+                MilestoneConfig currentMilestone = startingMilestone;
+                while (currentMilestone != null)
+                {
+                    if (currentMilestone.NextMilestone == milestone)
+                    {
+                        currentMilestone.NextMilestone = milestone.NextMilestone;
+                        break;
+                    }
+
+                    currentMilestone = currentMilestone.NextMilestone;
+                }
+
                 // If the previous milestone id is zero, set it as the starting milestone
                 if (procParams.PreviousMilestoneId == 0)
                 {
@@ -74,21 +87,21 @@ namespace MyJobLeads.DomainModel.Processes.Milestones
                     startingMilestone.IsStartingMilestone = false;
                 }
 
-                // Loop until we find the previous milestone and place the created / edited milestone in its correct place
-                var currentMilestone = startingMilestone;
-                while (currentMilestone != null)
+                else
                 {
-                    if (currentMilestone.Id == procParams.PreviousMilestoneId)
+                    // Do a second loop to add the milestone back into it's correct position
+                    currentMilestone = startingMilestone;
+                    while (currentMilestone != null)
                     {
-                        milestone.NextMilestone = currentMilestone.NextMilestone;
-                        currentMilestone.NextMilestone = milestone;
+                        if (currentMilestone.Id == procParams.PreviousMilestoneId)
+                        {
+                            milestone.NextMilestone = currentMilestone.NextMilestone;
+                            currentMilestone.NextMilestone = milestone;
+                            break;
+                        }
+
+                        currentMilestone = currentMilestone.NextMilestone;
                     }
-
-                    // If this milestone currently points to the created / edited milestone, remove the created/edited milestone from the sequence
-                    if (currentMilestone.NextMilestone == milestone)
-                        currentMilestone.NextMilestone = milestone.NextMilestone;
-
-                    currentMilestone = currentMilestone.NextMilestone;
                 }
             }
                 
