@@ -157,6 +157,7 @@
     <Compile Include="Processes\Positions\PositionProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
     <Compile Include="ProcessParams\JobSearches\ByJobSearchParams.cs" />
+    <Compile Include="ProcessParams\Milestones\MilestoneIdParams.cs" />
     <Compile Include="ProcessParams\Organizations\ByOrganizationIdParams.cs" />
     <Compile Include="ProcessParams\Milestones\SaveMilestoneParams.cs" />
     <Compile Include="ProcessParams\Organizations\OrgMemberDocVisibilityByOrgAdminParams.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="ViewModels\GeneralSuccessResultViewModel.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgress.cs" />
     <Compile Include="ViewModels\Milestones\MilestoneDisplayListViewModel.cs" />
+    <Compile Include="ViewModels\Milestones\MilestoneDisplayViewModel.cs" />
     <Compile Include="ViewModels\Milestones\MilestoneIdViewModel.cs" />
     <Compile Include="ViewModels\Organizations\OrganizationDashboardViewModel.cs" />
     <Compile Include="ViewModels\Organizations\VisibleOrgOfficialDocListForUserViewModel.cs" />

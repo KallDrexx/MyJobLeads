@@ -10,10 +10,12 @@ using AutoMapper;
 using MyJobLeads.DomainModel.Entities.Configuration;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.ProcessParams.Milestones;
 
 namespace MyJobLeads.DomainModel.Processes.Milestones
 {
-    public class MilestoneQueryProcesses : IProcess<ByOrganizationIdParams, MilestoneDisplayListViewModel>
+    public class MilestoneQueryProcesses : IProcess<ByOrganizationIdParams, MilestoneDisplayListViewModel>,
+                                           IProcess<MilestoneIdParams, MilestoneDisplayViewModel>
     {
         protected MyJobLeadsDbContext _context;
 
@@ -42,6 +44,36 @@ namespace MyJobLeads.DomainModel.Processes.Milestones
                 model.Milestones.Add(Mapper.Map<MilestoneConfig, MilestoneDisplayListViewModel.MilestoneDisplayViewModel>(milestone));
 
             return model;
+        }
+
+        /// <summary>
+        /// Retrives the data for a specific params
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        public MilestoneDisplayViewModel Execute(MilestoneIdParams procParams)
+        {
+            var milestone = _context.MilestoneConfigs.Where(x => x.Id == procParams.MilestoneId).SingleOrDefault();
+            if (milestone == null)
+                throw new MJLEntityNotFoundException(typeof(MilestoneConfig), procParams.MilestoneId);
+
+            var user = _context.Users.Where(x => x.Id == procParams.RequestingUserId).SingleOrDefault();
+            if (user == null)
+                throw new MJLEntityNotFoundException(typeof(User), procParams.RequestingUserId);
+
+            if (!user.IsOrganizationAdmin || user.Organization != milestone.Organization)
+                throw new UserNotAuthorizedForEntityException(typeof(MilestoneConfig), procParams.MilestoneId, procParams.RequestingUserId);
+            
+            // Form the view model
+            var viewModel = Mapper.Map<MilestoneConfig, MilestoneDisplayViewModel>(milestone);
+            if (!milestone.IsStartingMilestone)
+            {
+                var prevMilestone = _context.MilestoneConfigs.Where(x => x.NextMilestone.Id == milestone.Id).Single();
+                viewModel.PreviousMilestoneId = prevMilestone.Id;
+                viewModel.PreviousMilestoneName = prevMilestone.Title;
+            }
+
+            return viewModel;
         }
     }
 }

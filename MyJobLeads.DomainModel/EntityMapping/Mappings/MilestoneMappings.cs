@@ -26,6 +26,11 @@ namespace MyJobLeads.DomainModel.EntityMapping.Mappings
             Mapper.CreateMap<MilestoneConfig, MilestoneDisplayListViewModel.MilestoneDisplayViewModel>()
                   .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                   .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Title));
+
+            Mapper.CreateMap<MilestoneConfig, MilestoneDisplayViewModel>()
+                .ForMember(dest => dest.PreviousMilestoneId, opt => opt.Ignore())
+                .ForMember(dest => dest.PreviousMilestoneName, opt => opt.Ignore());
+
         }
     }
 }
