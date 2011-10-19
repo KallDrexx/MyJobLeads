@@ -269,6 +269,7 @@
     <Compile Include="App_Start\PrecompiledMvcViewEngineStart.cs" />
     <Compile Include="Areas\Organization\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Organization\Controllers\EditOrganizationController.cs" />
+    <Compile Include="Areas\Organization\Controllers\MilestoneController.cs" />
     <Compile Include="Areas\Organization\OrganizationAreaRegistration.cs" />
     <Compile Include="Areas\Organization\Views\Dashboard\Index.generated.cs">
       <AutoGen>True</AutoGen>
@@ -323,6 +324,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Organization.EditOrganizationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Organization.MilestoneController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Organization.SharedController.generated.cs">
@@ -1001,6 +1005,7 @@
     <Content Include="Content\Documents\Welcome Package - Start here.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\Organization\Views\Milestone\List.cshtml" />
     <None Include="T4MVC.tt.settings.t4" />
     <Content Include="Views\Home\Test.cshtml">
       <Generator>RazorGenerator</Generator>

@@ -42,6 +42,7 @@ namespace T4MVC {
         public readonly string Name = "Organization";
         public MyJobLeads.Areas.Organization.Controllers.DashboardController Dashboard = new MyJobLeads.Areas.Organization.Controllers.T4MVC_DashboardController();
         public MyJobLeads.Areas.Organization.Controllers.EditOrganizationController EditOrganization = new MyJobLeads.Areas.Organization.Controllers.T4MVC_EditOrganizationController();
+        public MyJobLeads.Areas.Organization.Controllers.MilestoneController Milestone = new MyJobLeads.Areas.Organization.Controllers.T4MVC_MilestoneController();
         public T4MVC.Organization.SharedController Shared = new T4MVC.Organization.SharedController();
     }
 }
@@ -706,6 +707,15 @@ namespace Links {
                 public static readonly string sprite_png = Url("sprite.png");
             }
         
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class Documents {
+            private const string URLPATH = "~/Content/Documents";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string Student_Tutorial_and_Hints_pdf = Url("Student Tutorial and Hints.pdf");
+            public static readonly string Welcome_Package___Start_here_pdf = Url("Welcome Package - Start here.pdf");
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

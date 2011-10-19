@@ -13,6 +13,7 @@
         <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
             <h3 class="floatLeft">University Dashboard</h3> 
             @Html.ActionLink("Edit University Options", MVC.Organization.EditOrganization.Index(Model.Organization.Id), new { @class = "floatRight blueLinks", title = "Edit University Options" })
+            @Html.ActionLink("View Milestones", MVC.Organization.Milestone.List(), new { @class = "floatRight blueLinks", title = "View Milestones" })
         </div> 
                 
         <div class="grid3 marginBottom_10 floatLeft"> 
