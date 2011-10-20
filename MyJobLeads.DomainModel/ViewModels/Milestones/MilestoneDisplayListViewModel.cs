@@ -9,12 +9,12 @@ namespace MyJobLeads.DomainModel.ViewModels.Milestones
     {
         public MilestoneDisplayListViewModel()
         {
-            Milestones = new List<MilestoneDisplayViewModel>();
+            Milestones = new List<MilestoneSummaryViewModel>();
         }
 
-        public IList<MilestoneDisplayViewModel> Milestones { get; set; }
+        public IList<MilestoneSummaryViewModel> Milestones { get; set; }
 
-        public class MilestoneDisplayViewModel
+        public class MilestoneSummaryViewModel
         {
             public int Id { get; set; }
             public string Name { get; set; }

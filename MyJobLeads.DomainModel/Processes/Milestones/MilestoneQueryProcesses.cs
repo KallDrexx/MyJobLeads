@@ -41,7 +41,7 @@ namespace MyJobLeads.DomainModel.Processes.Milestones
 
             var model = new MilestoneDisplayListViewModel();
             foreach (var milestone in milestones)
-                model.Milestones.Add(Mapper.Map<MilestoneConfig, MilestoneDisplayListViewModel.MilestoneDisplayViewModel>(milestone));
+                model.Milestones.Add(Mapper.Map<MilestoneConfig, MilestoneDisplayListViewModel.MilestoneSummaryViewModel>(milestone));
 
             return model;
         }

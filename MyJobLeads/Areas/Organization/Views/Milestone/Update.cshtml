@@ -1,0 +1,94 @@
+﻿@model MyJobLeads.ViewModels.Milestones.EditMilestoneViewModel
+
+@{
+    string title = Model.Id == 0 ? "Create Milestone" : "Edit Milestone";
+    ViewBag.Title = title;
+}
+
+<div class="grid1 floatLeft"> 
+    <div class="pageInfoBox"> 
+        @using (Html.BeginForm(MVC.Organization.Milestone.Update())) 
+        {
+            @Html.HiddenFor(x => x.Id)
+                
+            <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                <h3 class="floatLeft">@title</h3> 
+            </div> 
+                
+            <div class="grid3 marginBottom_10 marginAuto floatleft">
+                <div class="floatLeft infoSpan">
+                    @Html.ValidationSummary()
+                </div>
+            </div>
+                
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Title:</p>
+                    <div class="infoSpan">@Html.TextBoxFor(x => x.Title, new { @class = "info" })</div>
+                </div> 
+
+                <div class="floatLeft pageInfoSecondColumn"><p class="greyHighlight">Previous Milestone:</p>
+                    <div class="infoSpan">@Html.DropDownListFor(x => x.PreviousMilestoneId, Model.AvailableMilestoneList)</div>
+                </div>
+            </div> 
+
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Number of Companies:</p>
+                    <div class="infoSpan">@Html.TextBoxFor(x => x.JobSearchMetrics.NumCompaniesCreated, new { @class = "info" })</div>
+                </div> 
+
+                <div class="floatLeft pageInfoSecondColumn"><p class="greyHighlight">Number of Contacts:</p>
+                    <div class="infoSpan">@Html.TextBoxFor(x => x.JobSearchMetrics.NumContactsCreated, new { @class = "info" })</div>
+                </div> 
+            </div> 
+            
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Number of Apply To Firm Tasks Created:</p>
+                    <div class="infoSpan">@Html.TextBoxFor(x => x.JobSearchMetrics.NumApplyTasksCreated, new { @class = "info" })</div>
+                </div> 
+
+                <div class="floatLeft pageInfoSecondColumn"><p class="greyHighlight">Number of Apply To Firm Tasks Completed:</p>
+                    <div class="infoSpan">@Html.TextBoxFor(x => x.JobSearchMetrics.NumApplyTasksCompleted, new { @class = "info" })</div>
+                </div> 
+            </div> 
+            
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Number of Phone Interview Tasks Created:</p>
+                    <div class="infoSpan">@Html.TextBoxFor(x => x.JobSearchMetrics.NumPhoneInterviewTasksCreated, new { @class = "info" })</div>
+                </div> 
+
+                <div class="floatLeft pageInfoSecondColumn"><p class="greyHighlight">Number of In-Person Interview Tasks Created:</p>
+                    <div class="infoSpan">@Html.TextBoxFor(x => x.JobSearchMetrics.NumInPersonInterviewTasksCreated, new { @class = "info" })</div>
+                </div> 
+            </div> 
+            
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Instructional Text For Milestone:</p>
+                    <div class="infoSpan">@Html.TextAreaFor(x => x.Instructions, new { @class = "textAreaInfo" })</div>
+                </div> 
+            </div> 
+            
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Text Displayed When Milestone Completed:</p>
+                    <div class="infoSpan">@Html.TextAreaFor(x => x.CompletionDisplay, new { @class = "textAreaInfo" })</div>
+                </div> 
+            </div>
+
+            <div class="grid3 marginBottom_20 floatLeft"> 
+                <div class="submitBTN ">
+                    <input type="submit" value="Save" /> &nbsp; &nbsp;
+                    @if (Model.Id == 0)
+                    {
+                        @Html.ActionLink("Cancel", MVC.Organization.Milestone.List())
+                    }
+
+                    else
+                    {
+                        @Html.ActionLink("Cancel", MVC.Organization.Milestone.Details(Model.Id))
+                    }
+                </div> 
+            </div> 
+        }
+
+        <div class="clear"></div> 
+    </div> 
+</div> 

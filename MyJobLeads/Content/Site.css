@@ -99,6 +99,12 @@ ul{
 .marginBottom_20{
 	margin:0 0 20px 0;
 }
+.pageInfoSecondColumn
+{
+    position: absolute;
+    left: 300px;
+}
+
 .floatLeft{
 	float:left;
 	}

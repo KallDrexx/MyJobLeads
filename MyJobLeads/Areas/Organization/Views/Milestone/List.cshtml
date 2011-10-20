@@ -30,14 +30,16 @@
                     @foreach (var ms in Model.Milestones)
                     {
                         <li>
-                            <a href="#" class="inlineBlue">@ms.Name</a>
+                            @Html.ActionLink(ms.Name, MVC.Organization.Milestone.Details(ms.Id), new { @class = "inlineBlue" })
                         </li>
                     }
+                </ul>
 
+                <br />
+                <ul>
                     <li>
-                        <a href="#" class="inlineBlue">Add Milestone</a>
+                        @Html.ActionLink("Add Milestone", MVC.Organization.Milestone.Create(), new { @class = "inlineBlue" })
                     </li>
-
                 </ul>
             </div> 
         </div> 

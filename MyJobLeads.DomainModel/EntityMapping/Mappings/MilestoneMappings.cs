@@ -23,7 +23,7 @@ namespace MyJobLeads.DomainModel.EntityMapping.Mappings
                 .ForMember(dest => dest.OrganizationId, opt => opt.Ignore())
                 .ForMember(dest => dest.Organization, opt => opt.Ignore());
 
-            Mapper.CreateMap<MilestoneConfig, MilestoneDisplayListViewModel.MilestoneDisplayViewModel>()
+            Mapper.CreateMap<MilestoneConfig, MilestoneDisplayListViewModel.MilestoneSummaryViewModel>()
                   .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                   .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Title));
 

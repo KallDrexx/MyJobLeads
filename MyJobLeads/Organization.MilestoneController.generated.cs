@@ -31,6 +31,16 @@ namespace MyJobLeads.Areas.Organization.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Details() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Details);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Update() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Update);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public MilestoneController Actions { get { return MVC.Organization.Milestone; } }
@@ -45,6 +55,9 @@ namespace MyJobLeads.Areas.Organization.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string List = "List";
+            public readonly string Details = "Details";
+            public readonly string Create = "Create";
+            public readonly string Update = "Update";
         }
 
 
@@ -54,6 +67,7 @@ namespace MyJobLeads.Areas.Organization.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string List = "~/Areas/Organization/Views/Milestone/List.cshtml";
+            public readonly string Update = "~/Areas/Organization/Views/Milestone/Update.cshtml";
         }
     }
 
@@ -63,6 +77,29 @@ namespace MyJobLeads.Areas.Organization.Controllers {
 
         public override System.Web.Mvc.ActionResult List() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.List);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Details(int id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Create() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Create);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Update(int id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Update);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Update(MyJobLeads.ViewModels.Milestones.EditMilestoneViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Update);
+            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 

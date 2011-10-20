@@ -1,0 +1,52 @@
+﻿@model MyJobLeads.DomainModel.ViewModels.Milestones.MilestoneDisplayViewModel
+
+@{
+    ViewBag.Title = "Milestone Details";
+}
+
+<div class="grid1 floatLeft"> 
+    <div class="pageInfoBox">         
+        <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+            <h3 class="floatLeft">Milestone Details</h3> 
+            @Html.ActionLink("Edit Milestone", MVC.Organization.Milestone.Update(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Milestone" })
+            @Html.ActionLink("Back To Milestone List", MVC.Organization.Milestone.List(), new { @class = "floatRight blueLinks", title = "Back To Milestone List" })
+        </div>
+                
+        <div class="grid3 marginBottom_10 floatLeft"> 
+            <div class="grid4 floatLeft">
+                <p class="greyHighlight">Title: <span class="setTask">@Model.Title</span></p>
+                <p class="greyHighlight">Number of Companies: <span class="setTask">@Model.JobSearchMetrics.NumCompaniesCreated</span></p>
+                <p class="greyHighlight">Number of Apply To Firm Tasks Created: <span class="setTask">@Model.JobSearchMetrics.NumApplyTasksCreated</span></p>
+                <p class="greyHighlight">Number of Phone Interview Tasks Created: <span class="setTask">@Model.JobSearchMetrics.NumPhoneInterviewTasksCreated</span></p>
+            </div> 
+
+            <div class="grid4 floatLeft">
+                <p class="greyHighlight">Previous Milestone: 
+                    @Html.ActionLink(Model.PreviousMilestoneName, MVC.Organization.Milestone.Details(Model.PreviousMilestoneId), new { @class = "inlineBlue" })
+                </p>
+                <p class="greyHighlight">Number of Contacts: <span class="setTask">@Model.JobSearchMetrics.NumContactsCreated</span></p>
+                <p class="greyHighlight">Number of Apply To Firm Tasks Completed: <span class="setTask">@Model.JobSearchMetrics.NumApplyTasksCompleted</span></p>
+                <p class="greyHighlight">Number of In-Person Interview Tasks Created: <span class="setTask">@Model.JobSearchMetrics.NumInPersonInterviewTasksCreated</span></p>
+            </div> 
+        </div>
+        
+        <div class="grid3 marginBottom_10 floatLeft"> 
+            <div class="floatLeft">
+                <p class="greyHighlight">Instructional Text: 
+                    <span class="setTask">@Html.Raw(Html.Encode(Model.Instructions).Replace(Environment.NewLine, "<br />"))</span>
+                </p>
+            </div> 
+        </div> 
+
+        <div class="grid3 marginBottom_10 floatLeft"> 
+            <div class="floatLeft">
+                <p class="greyHighlight">Text Displayed Upon Milestone Completion: 
+                    <span class="setTask">@Html.Raw(Html.Encode(Model.CompletionDisplay).Replace(Environment.NewLine, "<br />"))</span>
+                </p>
+            </div> 
+        </div> 
+        
+        <div class="clear"></div> 
+    </div> 
+</div> 
+
