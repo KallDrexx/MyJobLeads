@@ -89,7 +89,7 @@ WriteLiteral("                    <p>Your university does not have any milestone
             
             #line default
             #line hidden
-WriteLiteral("\r\n                <ul class=\"decoratedList\">\r\n");
+WriteLiteral("\r\n                <ol>\r\n");
 
 
             
@@ -120,7 +120,7 @@ WriteLiteral("\r\n                        </li>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("                </ul>\r\n\r\n                <br />\r\n                <ul>\r\n          " +
+WriteLiteral("                </ol>\r\n\r\n                <br />\r\n                <ul>\r\n          " +
 "          <li>\r\n                        ");
 
 

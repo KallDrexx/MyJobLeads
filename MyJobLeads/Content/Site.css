@@ -565,4 +565,9 @@ a.viewContact{
     list-style-position: inside;
 }
 
+ol
+{
+    margin-left: 38px;
+}
+
 .bold { font-weight: bolder; }
