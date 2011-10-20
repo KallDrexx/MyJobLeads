@@ -27,7 +27,7 @@ namespace MyJobLeads.Tests.Processes.Milestones
             var user = new User { Organization = org1, IsOrganizationAdmin = true };
             var m1 = new MilestoneConfig();
             var m2 = new MilestoneConfig();
-            var m3 = new MilestoneConfig();
+            var m3 = new MilestoneConfig { IsStartingMilestone = true, NextMilestone = m1 };
             org1.MilestoneConfigurations.Add(m1);
             org2.MilestoneConfigurations.Add(m2);
             org1.MilestoneConfigurations.Add(m3);
@@ -79,6 +79,39 @@ namespace MyJobLeads.Tests.Processes.Milestones
                 Assert.AreEqual(typeof(Organization), ex.EntityType, "Exception's entity type was incorrect");
                 Assert.AreEqual(user.Id, ex.UserId, "Exception's user id value was incorrect");
             }
+        }
+
+        [TestMethod]
+        public void Milestone_List_Is_Ordered_In_Milestone_Order()
+        {
+            // Setup
+            var org1 = new Organization();
+            var user = new User { Organization = org1, IsOrganizationAdmin = true };
+            var m1 = new MilestoneConfig();
+            var m2 = new MilestoneConfig();
+            var m3 = new MilestoneConfig();
+            org1.MilestoneConfigurations.Add(m1);
+            org1.MilestoneConfigurations.Add(m2);
+            org1.MilestoneConfigurations.Add(m3);
+
+            m2.IsStartingMilestone = true;
+            m2.NextMilestone = m1;
+            m1.NextMilestone = m3;
+
+            _context.Organizations.Add(org1);
+            _context.Users.Add(user);
+            _context.SaveChanges();
+
+            IProcess<ByOrganizationIdParams, MilestoneDisplayListViewModel> process = new MilestoneQueryProcesses(_context);
+
+            // Act
+            var result = process.Execute(new ByOrganizationIdParams { RequestingUserId = user.Id, OrganizationId = org1.Id });
+
+            // Verify
+            Assert.AreEqual(3, result.Milestones.Count, "Milestone count was incorrect");
+            Assert.AreEqual(m2.Id, result.Milestones[0].Id, "First milestone was incorrect");
+            Assert.AreEqual(m1.Id, result.Milestones[1].Id, "Second milestone was incorrect");
+            Assert.AreEqual(m3.Id, result.Milestones[2].Id, "Third milestone was incorrect");
         }
 
         [TestMethod]

@@ -40,8 +40,14 @@ namespace MyJobLeads.DomainModel.Processes.Milestones
                                      .ToList();
 
             var model = new MilestoneDisplayListViewModel();
-            foreach (var milestone in milestones)
-                model.Milestones.Add(Mapper.Map<MilestoneConfig, MilestoneDisplayListViewModel.MilestoneSummaryViewModel>(milestone));
+
+            // Order the milestones in the same order that they are chained together with
+            var currentMilestone = milestones.Where(x => x.IsStartingMilestone).FirstOrDefault();
+            while (currentMilestone != null)
+            {
+                model.Milestones.Add(Mapper.Map<MilestoneConfig, MilestoneDisplayListViewModel.MilestoneSummaryViewModel>(currentMilestone));
+                currentMilestone = currentMilestone.NextMilestone;
+            }
 
             return model;
         }
