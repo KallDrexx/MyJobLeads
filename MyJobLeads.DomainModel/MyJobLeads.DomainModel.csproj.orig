@@ -134,7 +134,11 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="EntityMapping\EntityMapLoader.cs" />
     <Compile Include="EntityMapping\Mappings\CompanyMappings.cs" />
+<<<<<<< HEAD
+    <Compile Include="EntityMapping\Mappings\MilestoneConfigMappings.cs" />
+=======
     <Compile Include="EntityMapping\Mappings\MilestoneMappings.cs" />
+>>>>>>> 2e2be99... Added functionality to create and edit milestones
     <Compile Include="EntityMapping\Mappings\PositionMappings.cs" />
     <Compile Include="EntityMapping\Mappings\UserMappings.cs" />
     <Compile Include="Exceptions\InvalidEmailDomainForOrganizationException.cs" />
@@ -151,15 +155,20 @@
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
     <Compile Include="Processes\Exports\JobSearchExportProcess.cs" />
+<<<<<<< HEAD
     <Compile Include="Processes\Milestones\MilestoneQueryProcesses.cs" />
+=======
     <Compile Include="Processes\Milestones\MilestoneNonQueryProcesses.cs" />
+>>>>>>> 2e2be99... Added functionality to create and edit milestones
     <Compile Include="Processes\Organizations\OrganizationDocumentProcesses.cs" />
     <Compile Include="Processes\Positions\PositionProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
     <Compile Include="ProcessParams\JobSearches\ByJobSearchParams.cs" />
-    <Compile Include="ProcessParams\Milestones\MilestoneIdParams.cs" />
+<<<<<<< HEAD
     <Compile Include="ProcessParams\Organizations\ByOrganizationIdParams.cs" />
+=======
     <Compile Include="ProcessParams\Milestones\SaveMilestoneParams.cs" />
+>>>>>>> 2e2be99... Added functionality to create and edit milestones
     <Compile Include="ProcessParams\Organizations\OrgMemberDocVisibilityByOrgAdminParams.cs" />
     <Compile Include="ProcessParams\Positions\CreatePositionParams.cs" />
     <Compile Include="ProcessParams\Positions\EditPositionParams.cs" />
@@ -197,9 +206,11 @@
     <Compile Include="ViewModels\Exports\JobsearchExportViewModel.cs" />
     <Compile Include="ViewModels\GeneralSuccessResultViewModel.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgress.cs" />
+<<<<<<< HEAD
     <Compile Include="ViewModels\Milestones\MilestoneDisplayListViewModel.cs" />
-    <Compile Include="ViewModels\Milestones\MilestoneDisplayViewModel.cs" />
+=======
     <Compile Include="ViewModels\Milestones\MilestoneIdViewModel.cs" />
+>>>>>>> 2e2be99... Added functionality to create and edit milestones
     <Compile Include="ViewModels\Organizations\OrganizationDashboardViewModel.cs" />
     <Compile Include="ViewModels\Organizations\VisibleOrgOfficialDocListForUserViewModel.cs" />
     <Compile Include="ViewModels\Positions\EditPositionViewModel.cs" />

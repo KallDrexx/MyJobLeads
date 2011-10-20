@@ -75,7 +75,8 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
                 throw new MJLEntityNotFoundException(typeof(User), _userId);
 
             // Retrieve the milestone this job search should start with
-            var milestone = _serviceFactory.GetService<StartingMilestoneQuery>().Execute();
+            var milestone = _serviceFactory.GetService<StartingMilestoneQuery>()
+                                           .Execute(new StartingMilestoneQueryParams { OrganizationId = user.OrganizationId });
 
             // Create the job search
             var search = new JobSearch

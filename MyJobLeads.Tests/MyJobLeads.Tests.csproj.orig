@@ -147,8 +147,11 @@
     <Compile Include="Processes\Authorization\PositionAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\TaskAuthorizationsTests.cs" />
     <Compile Include="Processes\Export\JobSearchExportProcessTests.cs" />
+<<<<<<< HEAD
     <Compile Include="Processes\Milestones\MilestoneQueryProcessTests.cs" />
+=======
     <Compile Include="Processes\Milestones\MilestoneNonQueryProcessTests.cs" />
+>>>>>>> 2e2be99... Added functionality to create and edit milestones
     <Compile Include="Processes\Organizations\OrganizationDocumentProcessTests.cs" />
     <Compile Include="Processes\Organizations\VisibleOrgOfficialDocListForUserTests.cs" />
     <Compile Include="Processes\Positions\CreatePositionTests.cs" />

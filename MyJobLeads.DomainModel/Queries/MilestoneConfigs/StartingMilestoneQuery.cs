@@ -5,26 +5,34 @@ using System.Text;
 using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.DomainModel.Entities.Configuration;
 using MyJobLeads.DomainModel.Data;
+using MyJobLeads.DomainModel.Entities.EF;
 
 namespace MyJobLeads.DomainModel.Queries.MilestoneConfigs
 {
+    public struct StartingMilestoneQueryParams
+    {
+        public int? OrganizationId { get; set; }
+    }
+
     public class StartingMilestoneQuery
     {
-        protected IServiceFactory _serviceFactory;
+        protected MyJobLeadsDbContext _context;
 
-        public StartingMilestoneQuery(IServiceFactory serviceFactory)
+        public StartingMilestoneQuery(MyJobLeadsDbContext context)
         {
-            _serviceFactory = serviceFactory;
+            _context = context;
         }
 
         /// <summary>
         /// Executes the query
         /// </summary>
         /// <returns></returns>
-        public virtual MilestoneConfig Execute()
+        public virtual MilestoneConfig Execute(StartingMilestoneQueryParams cmdParams)
         {
-            var unitOfWork = _serviceFactory.GetService<IUnitOfWork>();
-            return unitOfWork.MilestoneConfigs.Fetch().FirstOrDefault(x => x.IsStartingMilestone);
+            if (cmdParams.OrganizationId == null)
+                return _context.MilestoneConfigs.FirstOrDefault(x => x.IsStartingMilestone);
+
+            return _context.MilestoneConfigs.FirstOrDefault(x => x.IsStartingMilestone && x.Organization.Id == cmdParams.OrganizationId);
         }
     }
 }
