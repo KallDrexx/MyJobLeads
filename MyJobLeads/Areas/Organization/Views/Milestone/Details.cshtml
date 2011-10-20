@@ -22,7 +22,14 @@
 
             <div class="grid4 floatLeft">
                 <p class="greyHighlight">Previous Milestone: 
-                    @Html.ActionLink(Model.PreviousMilestoneName, MVC.Organization.Milestone.Details(Model.PreviousMilestoneId), new { @class = "inlineBlue" })
+                    @if (Model.PreviousMilestoneId == 0)
+                    {
+                        <span class="setTask">First Milestone In Chain</span>
+                    }
+                    else
+                    {
+                        @Html.ActionLink(Model.PreviousMilestoneName, MVC.Organization.Milestone.Details(Model.PreviousMilestoneId), new { @class = "inlineBlue" })
+                    }
                 </p>
                 <p class="greyHighlight">Number of Contacts: <span class="setTask">@Model.JobSearchMetrics.NumContactsCreated</span></p>
                 <p class="greyHighlight">Number of Apply To Firm Tasks Completed: <span class="setTask">@Model.JobSearchMetrics.NumApplyTasksCompleted</span></p>

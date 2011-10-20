@@ -117,23 +117,50 @@ WriteLiteral("</span></p>\r\n                <p class=\"greyHighlight\">Number o
             #line default
             #line hidden
 WriteLiteral("</span></p>\r\n            </div> \r\n\r\n            <div class=\"grid4 floatLeft\">\r\n  " +
-"              <p class=\"greyHighlight\">Previous Milestone: \r\n                   " +
-" ");
+"              <p class=\"greyHighlight\">Previous Milestone: \r\n");
 
 
             
             #line 25 "..\..\Areas\Organization\Views\Milestone\Details.cshtml"
-               Write(Html.ActionLink(Model.PreviousMilestoneName, MVC.Organization.Milestone.Details(Model.PreviousMilestoneId), new { @class = "inlineBlue" }));
+                     if (Model.PreviousMilestoneId == 0)
+                    {
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </p>\r\n                <p class=\"greyHighlight\">Number of Contac" +
-"ts: <span class=\"setTask\">");
+WriteLiteral("                        <span class=\"setTask\">First Milestone In Chain</span>\r\n");
 
 
             
-            #line 27 "..\..\Areas\Organization\Views\Milestone\Details.cshtml"
+            #line 28 "..\..\Areas\Organization\Views\Milestone\Details.cshtml"
+                    }
+                    else
+                    {
+                        
+            
+            #line default
+            #line hidden
+            
+            #line 31 "..\..\Areas\Organization\Views\Milestone\Details.cshtml"
+                   Write(Html.ActionLink(Model.PreviousMilestoneName, MVC.Organization.Milestone.Details(Model.PreviousMilestoneId), new { @class = "inlineBlue" }));
+
+            
+            #line default
+            #line hidden
+            
+            #line 31 "..\..\Areas\Organization\Views\Milestone\Details.cshtml"
+                                                                                                                                                                   
+                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                </p>\r\n                <p class=\"greyHighlight\">Number of Contacts" +
+": <span class=\"setTask\">");
+
+
+            
+            #line 34 "..\..\Areas\Organization\Views\Milestone\Details.cshtml"
                                                                               Write(Model.JobSearchMetrics.NumContactsCreated);
 
             
@@ -144,7 +171,7 @@ WriteLiteral("</span></p>\r\n                <p class=\"greyHighlight\">Number o
 
 
             
-            #line 28 "..\..\Areas\Organization\Views\Milestone\Details.cshtml"
+            #line 35 "..\..\Areas\Organization\Views\Milestone\Details.cshtml"
                                                                                                    Write(Model.JobSearchMetrics.NumApplyTasksCompleted);
 
             
@@ -155,7 +182,7 @@ WriteLiteral("</span></p>\r\n                <p class=\"greyHighlight\">Number o
 
 
             
-            #line 29 "..\..\Areas\Organization\Views\Milestone\Details.cshtml"
+            #line 36 "..\..\Areas\Organization\Views\Milestone\Details.cshtml"
                                                                                                        Write(Model.JobSearchMetrics.NumInPersonInterviewTasksCreated);
 
             
@@ -172,7 +199,7 @@ WriteLiteral(@"</span></p>
 
 
             
-            #line 36 "..\..\Areas\Organization\Views\Milestone\Details.cshtml"
+            #line 43 "..\..\Areas\Organization\Views\Milestone\Details.cshtml"
                                      Write(Html.Raw(Html.Encode(Model.Instructions).Replace(Environment.NewLine, "<br />")));
 
             
@@ -190,7 +217,7 @@ WriteLiteral(@"</span>
 
 
             
-            #line 44 "..\..\Areas\Organization\Views\Milestone\Details.cshtml"
+            #line 51 "..\..\Areas\Organization\Views\Milestone\Details.cshtml"
                                      Write(Html.Raw(Html.Encode(Model.CompletionDisplay).Replace(Environment.NewLine, "<br />")));
 
             
