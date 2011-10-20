@@ -5,6 +5,7 @@ using System.Web;
 using MyJobLeads.DomainModel.Entities.Metrics;
 using System.Web.Mvc;
 using MyJobLeads.DomainModel.ViewModels.Milestones;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyJobLeads.ViewModels.Milestones
 {
@@ -16,6 +17,9 @@ namespace MyJobLeads.ViewModels.Milestones
         }
 
         public int Id { get; set; }
+
+        [Required(ErrorMessage="A title is required")]
+        [MinLength(10, ErrorMessage="The title must have a minimum of 10 characters")]
         public string Title { get; set; }
         public string Instructions { get; set; }
         public string CompletionDisplay { get; set; }
