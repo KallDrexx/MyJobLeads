@@ -18,6 +18,10 @@ using FluentValidation;
 using MyJobLeads.DomainModel.Queries.Users;
 using MyJobLeads.ViewModels.Contacts;
 using MyJobLeads.ViewModels.Companies;
+using MyJobLeads.DomainModel.ProcessParams.JobSearches;
+using MyJobLeads.DomainModel.ViewModels;
+using MyJobLeads.DomainModel.ViewModels.JobSearches;
+using MyJobLeads.DomainModel.Queries.JobSearches;
 
 namespace MyJobLeads.Controllers
 {
@@ -26,20 +30,36 @@ namespace MyJobLeads.Controllers
     public partial class TaskController : MyJobLeadsBaseController
     {
         protected ISearchProvider _searchProvider;
+        protected IProcess<JobSearchMilestonePropogationParams, JobSearchMilestoneChangedResultViewModel> _jobsearchPropogationProcess;
 
-        public TaskController(IServiceFactory factory)
+        public TaskController(IServiceFactory factory,
+                                IProcess<JobSearchMilestonePropogationParams, JobSearchMilestoneChangedResultViewModel> jobsearchPropogationProcess)
         {
             _serviceFactory = factory;
+            _jobsearchPropogationProcess = jobsearchPropogationProcess;
         }
 
         #region Actions 
 
         public virtual ActionResult Index()
         {
+            // NOTE: The user.JobSearch property must NOT be called until after the propogation process,
+            //   otherwise the job search entity won't have the propogated milestone
+            JobSearch search;
+
             // Make sure the user has a created job search
             var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(CurrentUserId).Execute();
-            if (user.LastVisitedJobSearch == null)
+            if (user.LastVisitedJobSearchId == null)
                 return RedirectToAction(MVC.JobSearch.Add());
+
+            // Update the job search's current milestone if required
+            var result = _jobsearchPropogationProcess.Execute(new JobSearchMilestonePropogationParams { JobSearchId = (int)user.LastVisitedJobSearchId });
+
+            // If the job search's current milestone was updated, we need to reload the job search
+            if (result.JobSearchMilestoneChanged)
+                search = _serviceFactory.GetService<JobSearchByIdQuery>().WithJobSearchId((int)user.LastVisitedJobSearchId).Execute();
+            else
+                search = user.LastVisitedJobSearch;
 
             var model = new TaskDashboardViewModel(user);
 

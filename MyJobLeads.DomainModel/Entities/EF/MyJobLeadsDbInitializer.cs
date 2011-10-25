@@ -38,18 +38,6 @@ namespace MyJobLeads.DomainModel.Entities.EF
                 }
             });
 
-            context.MilestoneConfigs.Add(new MilestoneConfig
-            {
-                Title = "Test Milestone",
-                IsStartingMilestone = true,
-                Instructions = "Add 3 companies",
-                CompletionDisplay = "Congrats on completing the test milestone",
-                JobSearchMetrics = new JobSearchMetrics
-                {
-                    NumCompaniesCreated = 3
-                }
-            });
-
             context.OfficialDocuments.Add(new OfficialDocument
             {
                 MeantForMembers = false,

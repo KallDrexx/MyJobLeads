@@ -198,6 +198,7 @@
     <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
     <Compile Include="ViewModels\Exports\JobsearchExportViewModel.cs" />
     <Compile Include="ViewModels\GeneralSuccessResultViewModel.cs" />
+    <Compile Include="ViewModels\JobSearches\JobSearchMilestoneChangedResultViewModel.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgress.cs" />
     <Compile Include="ViewModels\Milestones\MilestoneDisplayListViewModel.cs" />
     <Compile Include="ViewModels\Milestones\MilestoneDisplayViewModel.cs" />

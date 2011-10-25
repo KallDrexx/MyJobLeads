@@ -10,6 +10,7 @@ using MyJobLeads.DomainModel.ViewModels;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Processes.JobSearches;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.ViewModels.JobSearches;
 
 namespace MyJobLeads.Tests.Processes.JobSearches
 {
@@ -28,13 +29,13 @@ namespace MyJobLeads.Tests.Processes.JobSearches
             _context.JobSearches.Add(search);
             _context.SaveChanges();
 
-            IProcess<JobSearchMilestonePropogationParams, GeneralSuccessResultViewModel> process = new JobSearchMilestonePropogationProcesses(_context);
+            IProcess<JobSearchMilestonePropogationParams, JobSearchMilestoneChangedResultViewModel> process = new JobSearchMilestonePropogationProcesses(_context);
 
             // Verify
             var result = process.Execute(new JobSearchMilestonePropogationParams { JobSearchId = search.Id });
 
             // Act
-            Assert.IsTrue(result.WasSuccessful, "Process did not return a successful result status");
+            Assert.IsTrue(result.JobSearchMilestoneChanged, "Process did not return status that current milestone changed");
             Assert.AreEqual(ms, search.CurrentMilestone, "Job search's current milestone is incorrect");
         }
 
@@ -52,13 +53,13 @@ namespace MyJobLeads.Tests.Processes.JobSearches
             _context.JobSearches.Add(search);
             _context.SaveChanges();
 
-            IProcess<JobSearchMilestonePropogationParams, GeneralSuccessResultViewModel> process = new JobSearchMilestonePropogationProcesses(_context);
+            IProcess<JobSearchMilestonePropogationParams, JobSearchMilestoneChangedResultViewModel> process = new JobSearchMilestonePropogationProcesses(_context);
 
             // Verify
             var result = process.Execute(new JobSearchMilestonePropogationParams { JobSearchId = search.Id });
 
             // Act
-            Assert.IsTrue(result.WasSuccessful, "Process did not return a successful result status");
+            Assert.IsFalse(result.JobSearchMilestoneChanged, "Process did not return the correct status");
             Assert.AreEqual(ms2, search.CurrentMilestone, "Job search's current milestone is incorrect");
         }
 
@@ -74,13 +75,13 @@ namespace MyJobLeads.Tests.Processes.JobSearches
             _context.JobSearches.Add(search);
             _context.SaveChanges();
 
-            IProcess<JobSearchMilestonePropogationParams, GeneralSuccessResultViewModel> process = new JobSearchMilestonePropogationProcesses(_context);
+            IProcess<JobSearchMilestonePropogationParams, JobSearchMilestoneChangedResultViewModel> process = new JobSearchMilestonePropogationProcesses(_context);
 
             // Verify
             var result = process.Execute(new JobSearchMilestonePropogationParams { JobSearchId = search.Id });
 
             // Act
-            Assert.IsTrue(result.WasSuccessful, "Process did not return a successful result status");
+            Assert.IsFalse(result.JobSearchMilestoneChanged, "Process did not return the correct milestone changed status");
             Assert.IsNull(search.CurrentMilestone, "Job search's current milestone was not null");
         }
 
@@ -89,7 +90,7 @@ namespace MyJobLeads.Tests.Processes.JobSearches
         {
             // Setup
             int id = 105;
-            IProcess<JobSearchMilestonePropogationParams, GeneralSuccessResultViewModel> process = new JobSearchMilestonePropogationProcesses(_context);
+            IProcess<JobSearchMilestonePropogationParams, JobSearchMilestoneChangedResultViewModel> process = new JobSearchMilestonePropogationProcesses(_context);
 
             // Act
             try

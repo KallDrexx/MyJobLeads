@@ -9,10 +9,11 @@ using MyJobLeads.DomainModel.ViewModels;
 using MyJobLeads.DomainModel.ProcessParams.JobSearches;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.ViewModels.JobSearches;
 
 namespace MyJobLeads.DomainModel.Processes.JobSearches
 {
-    public class JobSearchMilestonePropogationProcesses : IProcess<JobSearchMilestonePropogationParams, GeneralSuccessResultViewModel>
+    public class JobSearchMilestonePropogationProcesses : IProcess<JobSearchMilestonePropogationParams, JobSearchMilestoneChangedResultViewModel>
     {
         protected MyJobLeadsDbContext _context;
 
@@ -26,7 +27,7 @@ namespace MyJobLeads.DomainModel.Processes.JobSearches
         /// </summary>
         /// <param name="procParams"></param>
         /// <returns></returns>
-        public GeneralSuccessResultViewModel Execute(JobSearchMilestonePropogationParams procParams)
+        public JobSearchMilestoneChangedResultViewModel Execute(JobSearchMilestonePropogationParams procParams)
         {
             var search = _context.JobSearches
                                  .Where(x => x.Id == procParams.JobSearchId)
@@ -41,9 +42,11 @@ namespace MyJobLeads.DomainModel.Processes.JobSearches
                 var startingMilestone = search.User.Organization.MilestoneConfigurations.Where(x => x.IsStartingMilestone).SingleOrDefault();
                 search.CurrentMilestone = startingMilestone;
                 _context.SaveChanges();
+
+                return new JobSearchMilestoneChangedResultViewModel { JobSearchMilestoneChanged = true };
             }
 
-            return new GeneralSuccessResultViewModel { WasSuccessful = true };
+            return new JobSearchMilestoneChangedResultViewModel { JobSearchMilestoneChanged = false };
         }
     }
 }
