@@ -89,5 +89,29 @@ namespace MyJobLeads.Tests.Commands.JobSearches
                 Assert.AreEqual(1.ToString(), ex.IdValue, "MJLEntityNotFoundException's IdValue value was incorrect");
             }
         }
+
+        [TestMethod]
+        public void Jobsearch_Marked_As_Milestones_Completed_When_Last_Milestone_Is_Completed()
+        {
+            // Setup
+            var ms = new MilestoneConfig { JobSearchMetrics = new JobSearchMetrics() };
+            var search = new JobSearch { Metrics = new JobSearchMetrics(), CurrentMilestone = ms };
+
+            _context.MilestoneConfigs.Add(ms);
+            _context.JobSearches.Add(search);
+            _context.SaveChanges();
+
+            Mock<JobSearchByIdQuery> jobSearchQuery = new Mock<JobSearchByIdQuery>(_unitOfWork);
+            jobSearchQuery.Setup(x => x.WithJobSearchId(It.IsAny<int>())).Returns(jobSearchQuery.Object);
+            jobSearchQuery.Setup(x => x.Execute()).Returns(search);
+            _serviceFactory.Setup(x => x.GetService<JobSearchByIdQuery>()).Returns(jobSearchQuery.Object);
+
+            // Act
+            new StartNextJobSearchMilestoneCommand(_serviceFactory.Object)
+                .Execute(new StartNextJobSearchMilestoneCommandParams { JobSearchId = search.Id });
+
+            // Verify
+            Assert.IsTrue(search.MilestonesCompleted, "Job search is not marked as completing all milestones");
+        }
     }
 }

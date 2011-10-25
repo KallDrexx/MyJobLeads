@@ -48,6 +48,9 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
             if (progress.TotalProgress == 1)
             {
                 search.CurrentMilestone = search.CurrentMilestone.NextMilestone;
+                if (search.CurrentMilestone == null)
+                    search.MilestonesCompleted = true;
+
                 _serviceFactory.GetService<IUnitOfWork>().Commit();
             }
         }

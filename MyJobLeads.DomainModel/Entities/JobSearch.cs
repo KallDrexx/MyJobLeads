@@ -22,6 +22,7 @@ namespace MyJobLeads.DomainModel.Entities
         public string Description { get; set; }
         public JobSearchMetrics Metrics { get; set; }
         public string HiddenCompanyStatuses { get; set; } // semi-colon delimeted string
+        public bool MilestonesCompleted { get; set; }
 
         public virtual User User { get; set; }
         public virtual int? UserId { get; set; }
