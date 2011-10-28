@@ -172,6 +172,7 @@
     <Compile Include="ProcessParams\Positions\GetPositionListForUserParams.cs" />
     <Compile Include="ProcessParams\Security\CompanyQueryAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\ContactAutorizationParams.cs" />
+    <Compile Include="ProcessParams\Security\OrganizationAdminAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\PositionAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\TaskAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Users\ByUserIdParams.cs" />

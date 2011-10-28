@@ -13,7 +13,8 @@ namespace MyJobLeads.DomainModel.Processes.Authorization
         : IProcess<CompanyQueryAuthorizationParams, AuthorizationResultViewModel>,
           IProcess<ContactAutorizationParams, AuthorizationResultViewModel>,
           IProcess<TaskAuthorizationParams, AuthorizationResultViewModel>,
-          IProcess<PositionAuthorizationParams, AuthorizationResultViewModel>
+          IProcess<PositionAuthorizationParams, AuthorizationResultViewModel>,
+          IProcess<OrganizationAdminAuthorizationParams, AuthorizationResultViewModel>
     {
         public AuthorizationProcesses(MyJobLeadsDbContext context)
         {
@@ -72,6 +73,19 @@ namespace MyJobLeads.DomainModel.Processes.Authorization
             {
                 UserAuthorized = _context.Positions
                                          .Any(x => x.Id == procParams.PositionId && x.Company.JobSearch.User.Id == procParams.RequestingUserId)
+            };
+        }
+
+        /// <summary>
+        /// Determines if the user is authorized as an administrator for the specified organization
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        public AuthorizationResultViewModel Execute(OrganizationAdminAuthorizationParams procParams)
+        {
+            return new AuthorizationResultViewModel
+            {
+                UserAuthorized = _context.Users.Any(x => x.Id == procParams.UserId && x.Organization.Id == procParams.OrganizationId && x.IsOrganizationAdmin)
             };
         }
 

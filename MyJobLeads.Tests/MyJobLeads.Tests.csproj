@@ -143,6 +143,7 @@
     <Compile Include="Controllers\TaskControllerTests.cs" />
     <Compile Include="Processes\Authorization\CompanyAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\ContactAuthorizationTests.cs" />
+    <Compile Include="Processes\Authorization\OrganizationAdminAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\PositionAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\TaskAuthorizationsTests.cs" />
     <Compile Include="Processes\Export\JobSearchExportProcessTests.cs" />
