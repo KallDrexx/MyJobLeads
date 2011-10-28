@@ -97,5 +97,28 @@ namespace MyJobLeads.Tests.Processes.Organizations
             Assert.AreEqual(metrics2.NumInPersonInterviewTasksCreated, secondUser.Metrics.NumInPersonInterviewTasksCreated, "First user's number in person interview tasks was incorrect");
             Assert.AreEqual(metrics2.NumPhoneInterviewTasksCreated, secondUser.Metrics.NumPhoneInterviewTasksCreated, "First user's number of phone interview tasks was incorrect");
         }
+
+        [TestMethod]
+        public void Does_Not_Retrieve_Members_Of_Different_Organization()
+        {
+            // Setup 
+            var org1 = new Organization();
+            var org2 = new Organization();
+            var user = new User { Organization = org2 };
+
+            _context.Users.Add(user);
+            _context.Organizations.Add(org1);
+            _context.SaveChanges();
+
+            IProcess<OrganizationMemberStatisticsParams, OrganizationMemberStatisticsViewModel> process = new OrganizationMetricQueryProcesses(_context);
+
+            // Act
+            var result = process.Execute(new OrganizationMemberStatisticsParams { OrganizationId = org1.Id });
+
+            // Verify
+            Assert.IsNotNull(result, "Process returned a null result");
+            Assert.IsNotNull(result.MemberStats, "Process retured a null member list");
+            Assert.AreEqual(0, result.MemberStats.Count, "Member list had an incorrect number of elements");
+        }
     }
 }
