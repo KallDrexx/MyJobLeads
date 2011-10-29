@@ -9,6 +9,10 @@ using MyJobLeads.DomainModel.ViewModels.Organizations;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities.Metrics;
 using MyJobLeads.DomainModel.Processes.Organizations;
+using MyJobLeads.DomainModel.ProcessParams.Security;
+using MyJobLeads.DomainModel.ViewModels.Authorizations;
+using Moq;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.Tests.Processes.Organizations
 {
@@ -62,7 +66,10 @@ namespace MyJobLeads.Tests.Processes.Organizations
             _context.Users.Add(user2);
             _context.SaveChanges();
 
-            IProcess<OrganizationMemberStatisticsParams, OrganizationMemberStatisticsViewModel> process = new OrganizationMetricQueryProcesses(_context);
+            var authMock = new Mock<IProcess<OrganizationAdminAuthorizationParams, AuthorizationResultViewModel>>();
+            authMock.Setup(x => x.Execute(It.IsAny<OrganizationAdminAuthorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = true });
+
+            IProcess<OrganizationMemberStatisticsParams, OrganizationMemberStatisticsViewModel> process = new OrganizationMetricQueryProcesses(_context, authMock.Object);
 
             // Act
             var result = process.Execute(new OrganizationMemberStatisticsParams { OrganizationId = org.Id });
@@ -110,7 +117,10 @@ namespace MyJobLeads.Tests.Processes.Organizations
             _context.Organizations.Add(org1);
             _context.SaveChanges();
 
-            IProcess<OrganizationMemberStatisticsParams, OrganizationMemberStatisticsViewModel> process = new OrganizationMetricQueryProcesses(_context);
+            var authMock = new Mock<IProcess<OrganizationAdminAuthorizationParams, AuthorizationResultViewModel>>();
+            authMock.Setup(x => x.Execute(It.IsAny<OrganizationAdminAuthorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = true });
+
+            IProcess<OrganizationMemberStatisticsParams, OrganizationMemberStatisticsViewModel> process = new OrganizationMetricQueryProcesses(_context, authMock.Object);
 
             // Act
             var result = process.Execute(new OrganizationMemberStatisticsParams { OrganizationId = org1.Id });
@@ -119,6 +129,50 @@ namespace MyJobLeads.Tests.Processes.Organizations
             Assert.IsNotNull(result, "Process returned a null result");
             Assert.IsNotNull(result.MemberStats, "Process retured a null member list");
             Assert.AreEqual(0, result.MemberStats.Count, "Member list had an incorrect number of elements");
+        }
+
+        [TestMethod]
+        public void Throws_UserNotAuthorizedForEntityException_If_Not_Organization_Admin()
+        {
+            // Setup
+            var org = new Organization();
+            var user = new User { Organization = org };
+            _context.Users.Add(user);
+            _context.SaveChanges();
+
+            var authMock = new Mock<IProcess<OrganizationAdminAuthorizationParams, AuthorizationResultViewModel>>();
+            authMock.Setup(x => x.Execute(It.IsAny<OrganizationAdminAuthorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = false });
+            IProcess<OrganizationMemberStatisticsParams, OrganizationMemberStatisticsViewModel> process = new OrganizationMetricQueryProcesses(_context, authMock.Object);
+
+            // Act
+            try
+            {
+                process.Execute(new OrganizationMemberStatisticsParams { OrganizationId = org.Id, RequestingUserId = user.Id });
+                Assert.Fail("No exception was thrown");
+            }
+
+            // Verify
+            catch (UserNotAuthorizedForEntityException ex)
+            {
+                Assert.AreEqual(typeof(Organization), ex.EntityType, "Exception's entity type was incorrect");
+                Assert.AreEqual(org.Id, ex.IdValue, "Exception's id value was incorrect");
+                Assert.AreEqual(user.Id, ex.UserId, "Exception's user id value was incorrect");
+            }
+        }
+
+        [TestMethod]
+        public void Calls_Auth_Process_With_Correct_OrgId_and_UserId()
+        {
+            // Setup
+            var authMock = new Mock<IProcess<OrganizationAdminAuthorizationParams, AuthorizationResultViewModel>>();
+            authMock.Setup(x => x.Execute(It.IsAny<OrganizationAdminAuthorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = true });
+            IProcess<OrganizationMemberStatisticsParams, OrganizationMemberStatisticsViewModel> process = new OrganizationMetricQueryProcesses(_context, authMock.Object);
+
+            // Act
+            process.Execute(new OrganizationMemberStatisticsParams { OrganizationId = 12, RequestingUserId = 13 });
+
+            // Verify
+            authMock.Verify(x => x.Execute(It.Is<OrganizationAdminAuthorizationParams>(y => y.UserId == 13 && y.OrganizationId == 12)), Times.Once());
         }
     }
 }

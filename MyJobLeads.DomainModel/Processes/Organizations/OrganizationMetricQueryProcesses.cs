@@ -9,16 +9,21 @@ using MyJobLeads.DomainModel.ProcessParams.Organizations;
 using MyJobLeads.DomainModel.Entities.EF;
 using AutoMapper;
 using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.ProcessParams.Security;
+using MyJobLeads.DomainModel.ViewModels.Authorizations;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.DomainModel.Processes.Organizations
 {
     public class OrganizationMetricQueryProcesses : IProcess<OrganizationMemberStatisticsParams, OrganizationMemberStatisticsViewModel>
     {
         protected MyJobLeadsDbContext _context;
+        protected IProcess<OrganizationAdminAuthorizationParams, AuthorizationResultViewModel> _orgAdminAuthProcess;
 
-        public OrganizationMetricQueryProcesses(MyJobLeadsDbContext context)
+        public OrganizationMetricQueryProcesses(MyJobLeadsDbContext context, IProcess<OrganizationAdminAuthorizationParams, AuthorizationResultViewModel> orgAdminAuthProc)
         {
             _context = context;
+            _orgAdminAuthProcess = orgAdminAuthProc;
         }
 
         /// <summary>
@@ -28,6 +33,14 @@ namespace MyJobLeads.DomainModel.Processes.Organizations
         /// <returns></returns>
         public OrganizationMemberStatisticsViewModel Execute(OrganizationMemberStatisticsParams procParams)
         {
+            var authResult = _orgAdminAuthProcess.Execute(new OrganizationAdminAuthorizationParams
+            {
+                OrganizationId = procParams.OrganizationId,
+                UserId = procParams.RequestingUserId
+            });
+            if (!authResult.UserAuthorized)
+                throw new UserNotAuthorizedForEntityException(typeof(Organization), procParams.OrganizationId, procParams.RequestingUserId);
+
             var members = _context.Users
                                   .Where(x => x.Organization.Id == procParams.OrganizationId)
                                   .Include(x => x.LastVisitedJobSearch)

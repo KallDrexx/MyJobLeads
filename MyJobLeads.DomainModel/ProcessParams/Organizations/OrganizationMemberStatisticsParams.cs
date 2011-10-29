@@ -8,5 +8,6 @@ namespace MyJobLeads.DomainModel.ProcessParams.Organizations
     public class OrganizationMemberStatisticsParams
     {
         public int OrganizationId { get; set; }
+        public int RequestingUserId { get; set; }
     }
 }
