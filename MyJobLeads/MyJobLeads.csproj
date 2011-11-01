@@ -269,6 +269,7 @@
     <Compile Include="App_Start\PrecompiledMvcViewEngineStart.cs" />
     <Compile Include="Areas\Organization\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Organization\Controllers\EditOrganizationController.cs" />
+    <Compile Include="Areas\Organization\Controllers\MemberStatsController.cs" />
     <Compile Include="Areas\Organization\Controllers\MilestoneController.cs" />
     <Compile Include="Areas\Organization\OrganizationAreaRegistration.cs" />
     <Compile Include="Areas\Organization\Views\Dashboard\Index.generated.cs">
@@ -340,6 +341,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Organization.EditOrganizationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Organization.MemberStatsController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Organization.MilestoneController.generated.cs">
@@ -1034,6 +1038,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Details.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Areas\Organization\Views\MemberStats\Index.cshtml" />
     <None Include="T4MVC.tt.settings.t4" />
     <Content Include="Views\Home\Test.cshtml">
       <Generator>RazorGenerator</Generator>

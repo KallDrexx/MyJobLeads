@@ -66,6 +66,7 @@ namespace MyJobLeads.Areas.Organization.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string Details = "~/Areas/Organization/Views/Milestone/Details.cshtml";
             public readonly string List = "~/Areas/Organization/Views/Milestone/List.cshtml";
             public readonly string Update = "~/Areas/Organization/Views/Milestone/Update.cshtml";
         }

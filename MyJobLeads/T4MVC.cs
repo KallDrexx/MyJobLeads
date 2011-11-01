@@ -42,6 +42,7 @@ namespace T4MVC {
         public readonly string Name = "Organization";
         public MyJobLeads.Areas.Organization.Controllers.DashboardController Dashboard = new MyJobLeads.Areas.Organization.Controllers.T4MVC_DashboardController();
         public MyJobLeads.Areas.Organization.Controllers.EditOrganizationController EditOrganization = new MyJobLeads.Areas.Organization.Controllers.T4MVC_EditOrganizationController();
+        public MyJobLeads.Areas.Organization.Controllers.MemberStatsController MemberStats = new MyJobLeads.Areas.Organization.Controllers.T4MVC_MemberStatsController();
         public MyJobLeads.Areas.Organization.Controllers.MilestoneController Milestone = new MyJobLeads.Areas.Organization.Controllers.T4MVC_MilestoneController();
         public T4MVC.Organization.SharedController Shared = new T4MVC.Organization.SharedController();
     }

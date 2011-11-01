@@ -571,3 +571,15 @@ ol
 }
 
 .bold { font-weight: bolder; }
+
+#MemberStatisticGrid { margin-left:20px; margin-right: 10px; }
+
+.resetCss table, .resetCss caption, .resetCss tbody, .resetCss tfoot, .resetCss thead, .resetCss tr, .resetCss th, .resetCss td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}

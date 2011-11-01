@@ -1,0 +1,101 @@
+﻿@model int
+@using MyJobLeads.DomainModel.ViewModels.Organizations;
+@using MyJobLeads.Areas.Organization.Controllers;
+
+@{
+    ViewBag.Title = "Student Statistics";
+}
+
+@{Html.Telerik().ScriptRegistrar().OnDocumentReady(
+@<text>
+    $('#SelectedMetricList').change(function() {
+        ShowColumn($('#SelectedMetricList').val());
+    });
+</text>
+);}
+
+<script language="javascript">
+    function ShowColumn(columnNum) {
+
+        $('#SelectedMetricList option').each(function (index) {
+            var val = $(this).attr('value');
+            $('#MemberStatisticGrid th:eq(' + val + ')').hide();
+            $('#MemberStatisticGrid tr td:eq(' + val + ')').hide();
+        });
+
+        $('#MemberStatisticGrid th:eq(' + columnNum + ')').show();
+        $('#MemberStatisticGrid tr td:eq(' + columnNum + ')').show();
+    }
+</script>
+
+<div class="grid1 floatLeft"> 
+    <div class="pageInfoBox">         
+        <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+            <h3 class="floatLeft">Student Statistics</h3> 
+            @Html.ActionLink("Back To University Details", MVC.Organization.Dashboard.Index(), new { @class = "floatRight blueLinks", title = "Back To University Details" })
+        </div>
+                
+        <div class="grid3 marginBottom_10 marginAuto floatLeft">
+            <p>
+                This page allows you to view usage statistics for your students.
+            </p>
+        </div>
+
+        <div class="grid3 marginBottom_10 marginAuto floatLeft">
+            <p>
+                Select the type of statistic to display in the grid: <br />
+                <select id="SelectedMetricList">
+                    <option value="3">Number Of Companies</option>
+                    <option value="4">Number Of Contacts</option>
+                    <option value="5">Number Of Apply To Firm Tasks Created</option>
+                    <option value="6">Number Of Apply To Firm Tasks Completed</option>
+                    <option value="8">Number Of Phone Interview Tasks Created</option>
+                    <option value="7">Number Of In-Person Interview Tasks Created</option>
+                </select>
+            </p>
+            <p>
+                @(Html.Telerik().Grid<OrganizationMemberStatisticsViewModel.MemberStatistic>()
+                      .Name("MemberStatisticGrid")
+                      .Columns(columns =>
+                      {
+                          columns.Bound(x => x.FullName);
+                          columns.Bound(x => x.Email);
+                          columns.Bound(x => x.Metrics.NumCompaniesCreated).Title("Companies");
+                          columns.Bound(x => x.Metrics.NumContactsCreated).Title("Contacts").Hidden(true);
+                          columns.Bound(x => x.Metrics.NumApplyTasksCreated).Title("Apply Tasks Created").Hidden(true);
+                          columns.Bound(x => x.Metrics.NumApplyTasksCompleted).Title("Apply Tasks Completed").Hidden(true);
+                          columns.Bound(x => x.Metrics.NumInPersonInterviewTasksCreated).Title("In Person Interview Tasks Created").Hidden(true);
+                          columns.Bound(x => x.Metrics.NumPhoneInterviewTasksCreated).Title("Phone Interview Tasks Created").Hidden(true);
+                      })
+                      .DataKeys(key => key.Add(x => x.Id))
+                      .DataBinding(db => db.Ajax().OperationMode(GridOperationMode.Client).Select<MemberStatsController>(x => x.GetMemberStats(Model)))
+                      .DetailView(details => details.ClientTemplate(
+                          Html.Telerik().TabStrip()
+                              .Name("MemberStats_<#= Id #>")
+                              .SelectedIndex(0)
+                              .Items(items => 
+                              {
+                                  items.Add().Text("Statistics").Content(
+                                      @<text>
+                                        Number of companies entered: <b><#= Metrics.NumCompaniesCreated #></b><br />
+                                        Number of contacts entered: <b><#= Metrics.NumContactsCreated #></b><br />
+                                        Number of tasks created to apply to firms: <b><#= Metrics.NumApplyTasksCreated #></b><br />
+                                        Number of tasks completed to apply to firms: <b><#= Metrics.NumApplyTasksCompleted #></b><br />
+                                        Number of phone interview tasks created: <b><#= Metrics.NumPhoneInterviewTasksCreated #></b><br />
+                                        Number of in-person interview tasks created: <b><#= Metrics.NumPhoneInterviewTasksCreated #></b><br />
+                                      </text>
+                                  );
+
+                              }).ToHtmlString()))
+                      .Sortable()
+                      .Filterable()
+                      .Pageable(page => page.PageSize(10))
+                )
+            </p>
+        </div>
+        
+        <div class="clear"></div> 
+    </div> 
+</div> 
+
+
