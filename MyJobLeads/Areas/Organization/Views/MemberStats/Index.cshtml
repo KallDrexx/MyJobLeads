@@ -43,7 +43,12 @@
         var table = $('#MemberStatisticGrid').dataTable();
         var data = table.fnGetData(rowNum);
 
-        return 'Number Of Companies: ' + data[3];
+        return 'Number Of Companies: ' + data[3] + '<br />' +
+                'Number of Contacts: ' + data[4] + '<br />' +
+                'Number Of Apply To Firm Tasks Created: ' + data[5] + '<br />' +
+                'Number Of Apply To Firm Tasks Completed: ' + data[6] + '<br />' +
+                'Number Of Phone Interview Tasks Created: ' + data[7] + '<br />' +
+                'Number Of In-Person Interview Tasks Created: ' + data[8] + '<br />';
     }
 
     function setDetailOpenCloseEvent(settings) {
