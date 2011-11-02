@@ -572,7 +572,15 @@ ol
 
 .bold { font-weight: bolder; }
 
-#MemberStatisticGrid { margin-left:20px; margin-right: 10px; }
+/*#MemberStatisticGrid { margin-left:20px; margin-right: 10px; }*/
+
+.pageInfoTable
+{
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 95%;
+}
 
 .resetCss table, .resetCss caption, .resetCss tbody, .resetCss tfoot, .resetCss thead, .resetCss tr, .resetCss th, .resetCss td {
     margin: 0;
