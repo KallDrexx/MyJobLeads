@@ -14,7 +14,7 @@
         aoColumnDefs: [
             { bSortable: false, aTargets: [ 0 ] }
         ],
-        fnDrawCallback: setDetailOpenCloseEvent,
+        fnInitComplete: setDetailOpenCloseEvent,
         bFilter: false
     });
 
@@ -48,13 +48,16 @@
 
     function setDetailOpenCloseEvent(settings) {
         var table = $('#MemberStatisticGrid').dataTable();
-        $('td img', table.fnGetNodes()).click(function () {
+
+        // Rebind the click events on the open/close buttons
+        var selector = "td img";
+        $(selector, table.fnGetNodes()).unbind('click');
+        $(selector, table.fnGetNodes()).click(function () {
             var row = this.parentNode.parentNode;
             if (this.src.match('details_close')) {
                 /* This row is already open - close it */
                 this.src = '@Url.Content("~/Content/Images/details_open.png")';
-                var nRemove = $(row).next()[0];
-                nRemove.parentNode.removeChild(nRemove);
+                table.fnClose(row);
             }
             else {
                 /* Open this row */
