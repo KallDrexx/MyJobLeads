@@ -5,6 +5,14 @@
 @{
     ViewBag.Title = "Student Statistics";
     Html.Telerik().ScriptRegistrar().Scripts(script => script.Add("~/Scripts/plugins/DataTables/js/jquery.dataTables.min.js"));
+    
+    // Column constants
+    const int COMPANIES_COLUMN = 3;
+    const int CONTACTS_COLUMN = 4;
+    const int APPLY_CREATED_COLUMN = 5;
+    const int APPLY_COMPLETED_COLUMN = 6;
+    const int PHONE_INTERVIEW_COLUMN = 7;
+    const int INPERSON_INTERVIEW_COLUMN = 8;
 }
 
 @{Html.Telerik().ScriptRegistrar().OnDocumentReady(
@@ -15,14 +23,16 @@
             { bSortable: false, aTargets: [ 0 ] }
         ],
         fnInitComplete: setDetailOpenCloseEvent,
-        bFilter: false
+        bFilter: false,
+        bProcessing: true,
+        sAjaxSource: '@Url.Action(MVC.Organization.MemberStats.GetMemberStats(Model))'
     });
 
     $('#SelectedMetricList').change(function() {
         ShowColumn($('#SelectedMetricList').val());
     });
 
-    ShowColumn(3);
+    ShowColumn(@COMPANIES_COLUMN);
 
 </text>
 );}
@@ -43,19 +53,19 @@
         var table = $('#MemberStatisticGrid').dataTable();
         var data = table.fnGetData(rowNum);
 
-        return 'Number Of Companies: ' + data[3] + '<br />' +
-                'Number of Contacts: ' + data[4] + '<br />' +
-                'Number Of Apply To Firm Tasks Created: ' + data[5] + '<br />' +
-                'Number Of Apply To Firm Tasks Completed: ' + data[6] + '<br />' +
-                'Number Of Phone Interview Tasks Created: ' + data[7] + '<br />' +
-                'Number Of In-Person Interview Tasks Created: ' + data[8] + '<br />';
+        return 'Number Of Companies: ' + data[@COMPANIES_COLUMN] + '<br />' +
+                'Number of Contacts: ' + data[@CONTACTS_COLUMN] + '<br />' +
+                'Number Of Apply To Firm Tasks Created: ' + data[@APPLY_CREATED_COLUMN] + '<br />' +
+                'Number Of Apply To Firm Tasks Completed: ' + data[@APPLY_COMPLETED_COLUMN] + '<br />' +
+                'Number Of Phone Interview Tasks Created: ' + data[@PHONE_INTERVIEW_COLUMN] + '<br />' +
+                'Number Of In-Person Interview Tasks Created: ' + data[@INPERSON_INTERVIEW_COLUMN] + '<br />';
     }
 
     function setDetailOpenCloseEvent(settings) {
         var table = $('#MemberStatisticGrid').dataTable();
 
         // Rebind the click events on the open/close buttons
-        var selector = "td img";
+        var selector = ".btnDetails";
         $(selector, table.fnGetNodes()).unbind('click');
         $(selector, table.fnGetNodes()).click(function () {
             var row = this.parentNode.parentNode;
@@ -90,12 +100,12 @@
             <p>
                 Select the statistic to display in the grid: <br />
                 <select id="SelectedMetricList">
-                    <option value="3">Number Of Companies</option>
-                    <option value="4">Number Of Contacts</option>
-                    <option value="5">Number Of Apply To Firm Tasks Created</option>
-                    <option value="6">Number Of Apply To Firm Tasks Completed</option>
-                    <option value="7">Number Of Phone Interview Tasks Created</option>
-                    <option value="8">Number Of In-Person Interview Tasks Created</option>
+                    <option value="@COMPANIES_COLUMN">Number Of Companies</option>
+                    <option value="@CONTACTS_COLUMN">Number Of Contacts</option>
+                    <option value="@APPLY_CREATED_COLUMN">Number Of Apply To Firm Tasks Created</option>
+                    <option value="@APPLY_COMPLETED_COLUMN">Number Of Apply To Firm Tasks Completed</option>
+                    <option value="@PHONE_INTERVIEW_COLUMN">Number Of Phone Interview Tasks Created</option>
+                    <option value="@INPERSON_INTERVIEW_COLUMN">Number Of In-Person Interview Tasks Created</option>
                 </select>
             </p>
 
@@ -116,138 +126,6 @@
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td><img src="@Url.Content("~/Content/Images/details_open.png")" /></td>
-                            <td>Matthew Shapiro</td>
-                            <td>Blah@blah.com</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td><img src="@Url.Content("~/Content/Images/details_open.png")" /></td>
-                            <td>Matthew Shapiro</td>
-                            <td>Blah@blah.com</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td><img src="@Url.Content("~/Content/Images/details_open.png")" /></td>
-                            <td>Matthew Shapiro</td>
-                            <td>Blah@blah.com</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td><img src="@Url.Content("~/Content/Images/details_open.png")" /></td>
-                            <td>Matthew Shapiro</td>
-                            <td>Blah@blah.com</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td><img src="@Url.Content("~/Content/Images/details_open.png")" /></td>
-                            <td>Matthew Shapiro</td>
-                            <td>Blah@blah.com</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td><img src="@Url.Content("~/Content/Images/details_open.png")" /></td>
-                            <td>Matthew Shapiro</td>
-                            <td>Blah@blah.com</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td><img src="@Url.Content("~/Content/Images/details_open.png")" /></td>
-                            <td>Matthew Shapiro</td>
-                            <td>Blah@blah.com</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td><img src="@Url.Content("~/Content/Images/details_open.png")" /></td>
-                            <td>Matthew Shapiro</td>
-                            <td>Blah@blah.com</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td><img src="@Url.Content("~/Content/Images/details_open.png")" /></td>
-                            <td>Matthew Shapiro</td>
-                            <td>Blah@blah.com</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td><img src="@Url.Content("~/Content/Images/details_open.png")" /></td>
-                            <td>Matthew Shapiro</td>
-                            <td>Blah@blah.com</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td><img src="@Url.Content("~/Content/Images/details_open.png")" /></td>
-                            <td>Matthew Shapiro</td>
-                            <td>Blah@blah.com</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td><img src="@Url.Content("~/Content/Images/details_open.png")" /></td>
-                            <td>Matthew Shapiro</td>
-                            <td>Blah@blah.com</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>5</td>
-                        </tr>
                     </tbody>
                 </table>
 

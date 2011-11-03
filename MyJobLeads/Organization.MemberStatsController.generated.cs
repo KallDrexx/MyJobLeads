@@ -36,6 +36,11 @@ namespace MyJobLeads.Areas.Organization.Controllers {
         public System.Web.Mvc.ActionResult Index() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Index);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult GetMemberStats() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.GetMemberStats);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public MemberStatsController Actions { get { return MVC.Organization.MemberStats; } }
@@ -50,6 +55,7 @@ namespace MyJobLeads.Areas.Organization.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string Index = "Index";
+            public readonly string GetMemberStats = "GetMemberStats";
         }
 
 
@@ -58,6 +64,7 @@ namespace MyJobLeads.Areas.Organization.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string Index = "~/Areas/Organization/Views/MemberStats/Index.cshtml";
         }
     }
 
@@ -67,6 +74,12 @@ namespace MyJobLeads.Areas.Organization.Controllers {
 
         public override System.Web.Mvc.ActionResult Index(int organizationId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            callInfo.RouteValueDictionary.Add("organizationId", organizationId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult GetMemberStats(int organizationId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.GetMemberStats);
             callInfo.RouteValueDictionary.Add("organizationId", organizationId);
             return callInfo;
         }

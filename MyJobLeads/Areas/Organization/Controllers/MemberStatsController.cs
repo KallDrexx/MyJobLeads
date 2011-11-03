@@ -35,7 +35,6 @@ namespace MyJobLeads.Areas.Organization.Controllers
             return View(organizationId);
         }
 
-        [GridAction]
         public virtual ActionResult GetMemberStats(int organizationId)
         {
             var stats = _memberStatsProcess.Execute(new OrganizationMemberStatisticsParams 
@@ -44,7 +43,23 @@ namespace MyJobLeads.Areas.Organization.Controllers
                 RequestingUserId = CurrentUserId 
             });
 
-            return View(new GridModel(stats.MemberStats));
+            return Json(new
+            {
+                aaData = stats.MemberStats
+                              .Select(x => new object[]
+                              {
+                                  "<img class=\"btnDetails\" src=\"" + Url.Content("~/Content/Images/details_open.png") +"\" />",
+                                  Server.HtmlEncode(x.FullName),
+                                  Server.HtmlEncode(x.Email),
+                                  x.Metrics.NumCompaniesCreated,
+                                  x.Metrics.NumContactsCreated,
+                                  x.Metrics.NumApplyTasksCreated,
+                                  x.Metrics.NumApplyTasksCompleted,
+                                  x.Metrics.NumPhoneInterviewTasksCreated,
+                                  x.Metrics.NumInPersonInterviewTasksCreated
+                              })
+                              .ToArray()
+            }, JsonRequestBehavior.AllowGet);
         }
     }
 }
