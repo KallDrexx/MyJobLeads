@@ -14,6 +14,8 @@
             <h3 class="floatLeft">University Dashboard</h3> 
             @Html.ActionLink("Edit University Options", MVC.Organization.EditOrganization.Index(Model.Organization.Id), new { @class = "floatRight blueLinks", title = "Edit University Options" })
             @Html.ActionLink("View Milestones", MVC.Organization.Milestone.List(), new { @class = "floatRight blueLinks", title = "View Milestones" })
+            @Html.ActionLink("View Student Statistics", MVC.Organization.MemberStats.Index(Model.Organization.Id),
+                                                 new { @class = "floatRight blueLinks", title = "Detailed Student Statistics" })
         </div> 
                 
         <div class="grid3 marginBottom_10 floatLeft"> 
@@ -25,8 +27,6 @@
         <div class="grid3 marginBottom_10 floatLeft"> 
             <div class="floatLeft"><p class="greyHighlight">Student Usage Summary:</p>
                 <div class="infoSpan">
-                    @Html.ActionLink("Detailed Student Statistics", MVC.Organization.MemberStats.Index(Model.Organization.Id), 
-                                        new { @class = "inlineBlue", title = "Detailed Student Statistics" }) <br />
                     Number of registered students: <span class="bold">@Model.NumMembers</span> <br />
                     Number of entered companies: <span class="bold">@Model.NumCompanies</span> <br />
                     Number of entered contacts: <span class="bold">@Model.NumContacts</span> <br />

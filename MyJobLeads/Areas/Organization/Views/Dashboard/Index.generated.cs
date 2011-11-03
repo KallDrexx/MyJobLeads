@@ -90,33 +90,37 @@ WriteLiteral("\r\n            ");
             
             #line default
             #line hidden
+WriteLiteral("\r\n            ");
+
+
+            
+            #line 17 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+       Write(Html.ActionLink("View Student Statistics", MVC.Organization.MemberStats.Index(Model.Organization.Id),
+                                                 new { @class = "floatRight blueLinks", title = "Detailed Student Statistics" }));
+
+            
+            #line default
+            #line hidden
 WriteLiteral("\r\n        </div> \r\n                \r\n        <div class=\"grid3 marginBottom_10 fl" +
 "oatLeft\"> \r\n            <div class=\"floatLeft\"><p class=\"greyHighlight\">Universi" +
 "ty Name:</p>\r\n                <div class=\"infoSpan\">");
 
 
             
-            #line 21 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
+            #line 23 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
                                  Write(Model.Organization.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n            </div> \r\n        </div> \r\n\r\n        <div class=\"grid3 marginB" +
-"ottom_10 floatLeft\"> \r\n            <div class=\"floatLeft\"><p class=\"greyHighligh" +
-"t\">Student Usage Summary:</p>\r\n                <div class=\"infoSpan\">\r\n         " +
-"           ");
+WriteLiteral(@"</div>
+            </div> 
+        </div> 
 
-
-            
-            #line 28 "..\..\Areas\Organization\Views\Dashboard\Index.cshtml"
-               Write(Html.ActionLink("Detailed Student Statistics", MVC.Organization.MemberStats.Index(Model.Organization.Id), 
-                                        new { @class = "inlineBlue", title = "Detailed Student Statistics" }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" <br />\r\n                    Number of registered students: <span class=\"bold\">");
+        <div class=""grid3 marginBottom_10 floatLeft""> 
+            <div class=""floatLeft""><p class=""greyHighlight"">Student Usage Summary:</p>
+                <div class=""infoSpan"">
+                    Number of registered students: <span class=""bold"">");
 
 
             
