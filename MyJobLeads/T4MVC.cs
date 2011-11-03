@@ -42,6 +42,7 @@ namespace T4MVC {
         public readonly string Name = "Organization";
         public MyJobLeads.Areas.Organization.Controllers.DashboardController Dashboard = new MyJobLeads.Areas.Organization.Controllers.T4MVC_DashboardController();
         public MyJobLeads.Areas.Organization.Controllers.EditOrganizationController EditOrganization = new MyJobLeads.Areas.Organization.Controllers.T4MVC_EditOrganizationController();
+        public MyJobLeads.Areas.Organization.Controllers.MemberStatsController MemberStats = new MyJobLeads.Areas.Organization.Controllers.T4MVC_MemberStatsController();
         public MyJobLeads.Areas.Organization.Controllers.MilestoneController Milestone = new MyJobLeads.Areas.Organization.Controllers.T4MVC_MilestoneController();
         public T4MVC.Organization.SharedController Shared = new T4MVC.Organization.SharedController();
     }
@@ -375,6 +376,61 @@ namespace Links {
                       
         public static readonly string MicrosoftMvcValidation_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/MicrosoftMvcValidation.min.js") ? Url("MicrosoftMvcValidation.min.js") : Url("MicrosoftMvcValidation.js");
                       
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class plugins {
+            private const string URLPATH = "~/Scripts/plugins";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class DataTables {
+                private const string URLPATH = "~/Scripts/plugins/DataTables";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class css {
+                    private const string URLPATH = "~/Scripts/plugins/DataTables/css";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string demo_page_css = Url("demo_page.css");
+                    public static readonly string demo_table_css = Url("demo_table.css");
+                    public static readonly string demo_table_jui_css = Url("demo_table_jui.css");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class images {
+                    private const string URLPATH = "~/Scripts/plugins/DataTables/images";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string back_disabled_jpg = Url("back_disabled.jpg");
+                    public static readonly string back_enabled_jpg = Url("back_enabled.jpg");
+                    public static readonly string favicon_ico = Url("favicon.ico");
+                    public static readonly string forward_disabled_jpg = Url("forward_disabled.jpg");
+                    public static readonly string forward_enabled_jpg = Url("forward_enabled.jpg");
+                    public static readonly string sort_asc_png = Url("sort_asc.png");
+                    public static readonly string sort_asc_disabled_png = Url("sort_asc_disabled.png");
+                    public static readonly string sort_both_png = Url("sort_both.png");
+                    public static readonly string sort_desc_png = Url("sort_desc.png");
+                    public static readonly string sort_desc_disabled_png = Url("sort_desc_disabled.png");
+                    public static readonly string Sorting_icons_psd = Url("Sorting icons.psd");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class js {
+                    private const string URLPATH = "~/Scripts/plugins/DataTables/js";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string jquery_dataTables_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.dataTables.min.js") ? Url("jquery.dataTables.min.js") : Url("jquery.dataTables.js");
+                                  
+                    public static readonly string jquery_dataTables_min_js = Url("jquery.dataTables.min.js");
+                    public static readonly string jquery_dataTables_min_js_gz = Url("jquery.dataTables.min.js.gz");
+                    public static readonly string jquery_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.min.js") ? Url("jquery.min.js") : Url("jquery.js");
+                                  
+                }
+            
+            }
+        
+        }
+    
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -723,6 +779,8 @@ namespace Links {
             private const string URLPATH = "~/Content/images";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string details_close_png = Url("details_close.png");
+            public static readonly string details_open_png = Url("details_open.png");
             public static readonly string footbg_gif = Url("footbg.gif");
             public static readonly string rss_png = Url("rss.png");
             public static readonly string topbg_gif = Url("topbg.gif");

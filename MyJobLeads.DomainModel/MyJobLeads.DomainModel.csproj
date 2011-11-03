@@ -134,7 +134,9 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="EntityMapping\EntityMapLoader.cs" />
     <Compile Include="EntityMapping\Mappings\CompanyMappings.cs" />
+    <Compile Include="EntityMapping\Mappings\CustomConverters\OrganizationMemberStatisticsViewModelConverter.cs" />
     <Compile Include="EntityMapping\Mappings\MilestoneMappings.cs" />
+    <Compile Include="EntityMapping\Mappings\OrganizationMappings.cs" />
     <Compile Include="EntityMapping\Mappings\PositionMappings.cs" />
     <Compile Include="EntityMapping\Mappings\UserMappings.cs" />
     <Compile Include="Exceptions\InvalidEmailDomainForOrganizationException.cs" />
@@ -155,6 +157,7 @@
     <Compile Include="Processes\Milestones\MilestoneQueryProcesses.cs" />
     <Compile Include="Processes\Milestones\MilestoneNonQueryProcesses.cs" />
     <Compile Include="Processes\Organizations\OrganizationDocumentProcesses.cs" />
+    <Compile Include="Processes\Organizations\OrganizationMetricQueryProcesses.cs" />
     <Compile Include="Processes\Positions\PositionProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
     <Compile Include="ProcessParams\JobSearches\ByJobSearchParams.cs" />
@@ -162,12 +165,14 @@
     <Compile Include="ProcessParams\Milestones\MilestoneIdParams.cs" />
     <Compile Include="ProcessParams\Organizations\ByOrganizationIdParams.cs" />
     <Compile Include="ProcessParams\Milestones\SaveMilestoneParams.cs" />
+    <Compile Include="ProcessParams\Organizations\OrganizationMemberStatisticsParams.cs" />
     <Compile Include="ProcessParams\Organizations\OrgMemberDocVisibilityByOrgAdminParams.cs" />
     <Compile Include="ProcessParams\Positions\CreatePositionParams.cs" />
     <Compile Include="ProcessParams\Positions\EditPositionParams.cs" />
     <Compile Include="ProcessParams\Positions\GetPositionListForUserParams.cs" />
     <Compile Include="ProcessParams\Security\CompanyQueryAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\ContactAutorizationParams.cs" />
+    <Compile Include="ProcessParams\Security\OrganizationAdminAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\PositionAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\TaskAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Users\ByUserIdParams.cs" />
@@ -204,6 +209,7 @@
     <Compile Include="ViewModels\Milestones\MilestoneDisplayViewModel.cs" />
     <Compile Include="ViewModels\Milestones\MilestoneIdViewModel.cs" />
     <Compile Include="ViewModels\Organizations\OrganizationDashboardViewModel.cs" />
+    <Compile Include="ViewModels\Organizations\OrganizationMemberStatisticsViewModel.cs" />
     <Compile Include="ViewModels\Organizations\VisibleOrgOfficialDocListForUserViewModel.cs" />
     <Compile Include="ViewModels\Positions\EditPositionViewModel.cs" />
     <Compile Include="ViewModels\Positions\PositionDisplayViewModel.cs" />
