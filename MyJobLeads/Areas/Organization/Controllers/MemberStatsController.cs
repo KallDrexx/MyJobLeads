@@ -10,6 +10,7 @@ using MyJobLeads.Infrastructure.Attributes;
 using MyJobLeads.DomainModel.ViewModels.Authorizations;
 using MyJobLeads.DomainModel.ProcessParams.Security;
 using Telerik.Web.Mvc;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.Areas.Organization.Controllers
 {
@@ -30,17 +31,17 @@ namespace MyJobLeads.Areas.Organization.Controllers
         {
             var authResult = _orgAdminAuthProcess.Execute(new OrganizationAdminAuthorizationParams { OrganizationId = organizationId, UserId = CurrentUserId });
             if (!authResult.UserAuthorized)
-                RedirectToAction(MVC.Home.Index());
+                return RedirectToAction(MVC.Home.Index());
 
             return View(organizationId);
         }
 
         public virtual ActionResult GetMemberStats(int organizationId)
         {
-            var stats = _memberStatsProcess.Execute(new OrganizationMemberStatisticsParams 
-            { 
-                OrganizationId = organizationId, 
-                RequestingUserId = CurrentUserId 
+            var stats = _memberStatsProcess.Execute(new OrganizationMemberStatisticsParams
+            {
+                OrganizationId = organizationId,
+                RequestingUserId = CurrentUserId
             });
 
             return Json(new
