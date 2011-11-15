@@ -45,6 +45,9 @@
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.1.1.0.118\lib\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="BCrypt.Net">
+      <HintPath>..\packages\BCrypt-Official.0.1.107\lib\BCrypt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="ClosedXML">
       <HintPath>..\packages\ClosedXML_NET_4.0.59.0\lib\ClosedXML.dll</HintPath>
     </Reference>
@@ -159,6 +162,7 @@
     <Compile Include="Processes\Organizations\OrganizationDocumentProcesses.cs" />
     <Compile Include="Processes\Organizations\OrganizationMetricQueryProcesses.cs" />
     <Compile Include="Processes\Positions\PositionProcesses.cs" />
+    <Compile Include="Processes\Users\UserPasswordProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
     <Compile Include="ProcessParams\JobSearches\ByJobSearchParams.cs" />
     <Compile Include="ProcessParams\JobSearches\JobSearchMilestonePropogationParams.cs" />
@@ -172,6 +176,7 @@
     <Compile Include="ProcessParams\Positions\GetPositionListForUserParams.cs" />
     <Compile Include="ProcessParams\Security\CompanyQueryAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\ContactAutorizationParams.cs" />
+    <Compile Include="ProcessParams\Users\GenerateUserPasswordHashParams.cs" />
     <Compile Include="ProcessParams\Security\OrganizationAdminAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\PositionAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\TaskAuthorizationParams.cs" />
@@ -231,11 +236,14 @@
     <Compile Include="Utilities\EmailUtils.cs" />
     <Compile Include="Utilities\PasswordUtils.cs" />
     <Compile Include="ViewModels\SearchResultEntities.cs" />
+    <Compile Include="ViewModels\Users\GeneratedPasswordHashViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="LICENSE.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
