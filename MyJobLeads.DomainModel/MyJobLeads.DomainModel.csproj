@@ -182,6 +182,7 @@
     <Compile Include="ProcessParams\Security\TaskAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Users\ByUserIdParams.cs" />
     <Compile Include="ProcessParams\Users\EditUserDetailsParams.cs" />
+    <Compile Include="ProcessParams\Users\VerifyUserPasswordHashParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\DataDirectory\IDataDirectoryProvider.cs" />
     <Compile Include="Providers\Search\ISearchProvider.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="Utilities\PasswordUtils.cs" />
     <Compile Include="ViewModels\SearchResultEntities.cs" />
     <Compile Include="ViewModels\Users\GeneratedPasswordHashViewModel.cs" />
+    <Compile Include="ViewModels\Users\UserPasswordVerificationResultViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
