@@ -21,7 +21,7 @@ namespace MyJobLeads.DomainModel.Processes.Users
         {
             return new GeneratedPasswordHashViewModel
             {
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(SaltPassword(procParams.Email,procParams.PlainTextPassword), 20)
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(SaltPassword(procParams.Email,procParams.PlainTextPassword), 15)
             };
         }
 
@@ -41,7 +41,7 @@ namespace MyJobLeads.DomainModel.Processes.Users
 
         protected string SaltPassword(string email, string plainTextPassword)
         {
-            return email + plainTextPassword;
+            return email.ToLower().Trim() + plainTextPassword;
         }
     }
 }

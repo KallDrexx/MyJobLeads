@@ -79,5 +79,38 @@ namespace MyJobLeads.Tests.Processes.Users
             Assert.IsNotNull(result, "Process returned a null result");
             Assert.IsFalse(result.PasswordVerified, "Password was incorrectly verified as matching");
         }
+
+        [TestMethod]
+        public void Password_Generated_Using_Trimmed_And_Lowercased_Email()
+        {
+            // Setup
+            IProcess<GenerateUserPasswordHashParams, GeneratedPasswordHashViewModel> process = new UserPasswordProcesses();
+            string email = " EMAIL ", password = " PASSWORD ";
+            string saltedPassword = email.ToLower().Trim() + password;
+
+            // Act
+            var result = process.Execute(new GenerateUserPasswordHashParams { Email = email, PlainTextPassword = password });
+
+            // Verify
+            Assert.IsNotNull(result, "Process returned a null result");
+            Assert.IsTrue(BCrypt.Net.BCrypt.Verify(saltedPassword, result.PasswordHash), "Password has was not correct");
+        }
+
+        [TestMethod]
+        public void Verify_Passes_For_BCrypt_Password_Hash_When_Email_Is_Capitalized_And_Requires_Trimming()
+        {
+            // Setup
+            IProcess<VerifyUserPasswordHashParams, UserPasswordVerificationResultViewModel> process = new UserPasswordProcesses();
+            string email = " EMAIL ", password = "password";
+            string saltedPassword = email.ToLower().Trim() + password;
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(saltedPassword);
+
+            // Act
+            var result = process.Execute(new VerifyUserPasswordHashParams { Email = email, PlainTextPassword = password, HashedPassword = hashedPassword });
+
+            // Verify
+            Assert.IsNotNull(result, "Process returned a null result");
+            Assert.IsTrue(result.PasswordVerified, "Password was not verified as matching");
+        }
     }
 }
