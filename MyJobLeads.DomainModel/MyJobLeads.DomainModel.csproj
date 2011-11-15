@@ -154,6 +154,7 @@
     <Compile Include="EntityMapping\IEntityMapConfiguration.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForEntityException.cs" />
     <Compile Include="MJLConstants.cs" />
+    <Compile Include="Processes\Admin\OrganizationAdminProcesses.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
     <Compile Include="Processes\Exports\JobSearchExportProcess.cs" />
     <Compile Include="Processes\JobSearches\JobSearchMilestonePropogationProcesses.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="ProcessParams\Positions\GetPositionListForUserParams.cs" />
     <Compile Include="ProcessParams\Security\CompanyQueryAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\ContactAutorizationParams.cs" />
+    <Compile Include="ProcessParams\Admin\CreateOrgWithAdminUserParams.cs" />
     <Compile Include="ProcessParams\Users\GenerateUserPasswordHashParams.cs" />
     <Compile Include="ProcessParams\Security\OrganizationAdminAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\PositionAuthorizationParams.cs" />
@@ -246,6 +248,7 @@
   <ItemGroup>
     <Content Include="LICENSE.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

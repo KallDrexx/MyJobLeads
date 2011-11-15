@@ -144,6 +144,7 @@
     <Compile Include="Commands\Organizations\EditOrganizationCommandTests.cs" />
     <Compile Include="Controllers\PositionControllerTests.cs" />
     <Compile Include="Controllers\TaskControllerTests.cs" />
+    <Compile Include="Processes\Admin\CreateOrgWithAdminUserTests.cs" />
     <Compile Include="Processes\Authorization\CompanyAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\ContactAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\OrganizationAdminAuthorizationTests.cs" />
