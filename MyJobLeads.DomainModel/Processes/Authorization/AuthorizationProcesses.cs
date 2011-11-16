@@ -14,7 +14,8 @@ namespace MyJobLeads.DomainModel.Processes.Authorization
           IProcess<ContactAutorizationParams, AuthorizationResultViewModel>,
           IProcess<TaskAuthorizationParams, AuthorizationResultViewModel>,
           IProcess<PositionAuthorizationParams, AuthorizationResultViewModel>,
-          IProcess<OrganizationAdminAuthorizationParams, AuthorizationResultViewModel>
+          IProcess<OrganizationAdminAuthorizationParams, AuthorizationResultViewModel>,
+          IProcess<SiteAdminAuthorizationParams, AuthorizationResultViewModel>
     {
         public AuthorizationProcesses(MyJobLeadsDbContext context)
         {
@@ -86,6 +87,19 @@ namespace MyJobLeads.DomainModel.Processes.Authorization
             return new AuthorizationResultViewModel
             {
                 UserAuthorized = _context.Users.Any(x => x.Id == procParams.UserId && x.Organization.Id == procParams.OrganizationId && x.IsOrganizationAdmin)
+            };
+        }
+
+        /// <summary>
+        /// Determines if the user is authorized as a site administrator
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        public AuthorizationResultViewModel Execute(SiteAdminAuthorizationParams procParams)
+        {
+            return new AuthorizationResultViewModel
+            {
+                UserAuthorized = _context.Users.Any(x => x.Id == procParams.UserId && x.IsSiteAdmin)
             };
         }
 

@@ -149,6 +149,7 @@
     <Compile Include="Processes\Authorization\ContactAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\OrganizationAdminAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\PositionAuthorizationTests.cs" />
+    <Compile Include="Processes\Authorization\SiteAdminAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\TaskAuthorizationsTests.cs" />
     <Compile Include="Processes\Export\JobSearchExportProcessTests.cs" />
     <Compile Include="Processes\JobSearches\PropogateMilestoneToJobSearchTests.cs" />

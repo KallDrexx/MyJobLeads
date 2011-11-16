@@ -178,6 +178,7 @@
     <Compile Include="ProcessParams\Security\CompanyQueryAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\ContactAutorizationParams.cs" />
     <Compile Include="ProcessParams\Admin\CreateOrgWithAdminUserParams.cs" />
+    <Compile Include="ProcessParams\Security\SiteAdminAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Users\GenerateUserPasswordHashParams.cs" />
     <Compile Include="ProcessParams\Security\OrganizationAdminAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\PositionAuthorizationParams.cs" />
