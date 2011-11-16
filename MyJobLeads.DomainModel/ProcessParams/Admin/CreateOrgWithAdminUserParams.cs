@@ -11,5 +11,6 @@ namespace MyJobLeads.DomainModel.ProcessParams.Admin
         public string AdminEmail { get; set; }
         public string AdminName { get; set; }
         public string AdminPlainTextPassword { get; set; }
+        public int RequestingUserId { get; set; }
     }
 }
