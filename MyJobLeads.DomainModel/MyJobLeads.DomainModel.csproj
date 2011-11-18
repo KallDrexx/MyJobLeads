@@ -45,6 +45,9 @@
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.1.1.0.118\lib\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="BCrypt.Net">
+      <HintPath>..\packages\BCrypt-Official.0.1.107\lib\BCrypt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="ClosedXML">
       <HintPath>..\packages\ClosedXML_NET_4.0.59.0\lib\ClosedXML.dll</HintPath>
     </Reference>
@@ -150,7 +153,9 @@
     <Compile Include="Exceptions\MJLValidatorNotFoundException.cs" />
     <Compile Include="EntityMapping\IEntityMapConfiguration.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForEntityException.cs" />
+    <Compile Include="Exceptions\UserNotAuthorizedForProcessException.cs" />
     <Compile Include="MJLConstants.cs" />
+    <Compile Include="Processes\Admin\OrganizationAdminProcesses.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
     <Compile Include="Processes\Exports\JobSearchExportProcess.cs" />
     <Compile Include="Processes\JobSearches\JobSearchMilestonePropogationProcesses.cs" />
@@ -159,6 +164,7 @@
     <Compile Include="Processes\Organizations\OrganizationDocumentProcesses.cs" />
     <Compile Include="Processes\Organizations\OrganizationMetricQueryProcesses.cs" />
     <Compile Include="Processes\Positions\PositionProcesses.cs" />
+    <Compile Include="Processes\Users\UserPasswordProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
     <Compile Include="ProcessParams\JobSearches\ByJobSearchParams.cs" />
     <Compile Include="ProcessParams\JobSearches\JobSearchMilestonePropogationParams.cs" />
@@ -172,11 +178,15 @@
     <Compile Include="ProcessParams\Positions\GetPositionListForUserParams.cs" />
     <Compile Include="ProcessParams\Security\CompanyQueryAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\ContactAutorizationParams.cs" />
+    <Compile Include="ProcessParams\Admin\CreateOrgWithAdminUserParams.cs" />
+    <Compile Include="ProcessParams\Security\SiteAdminAuthorizationParams.cs" />
+    <Compile Include="ProcessParams\Users\GenerateUserPasswordHashParams.cs" />
     <Compile Include="ProcessParams\Security\OrganizationAdminAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\PositionAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Security\TaskAuthorizationParams.cs" />
     <Compile Include="ProcessParams\Users\ByUserIdParams.cs" />
     <Compile Include="ProcessParams\Users\EditUserDetailsParams.cs" />
+    <Compile Include="ProcessParams\Users\VerifyUserPasswordHashParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\DataDirectory\IDataDirectoryProvider.cs" />
     <Compile Include="Providers\Search\ISearchProvider.cs" />
@@ -231,9 +241,14 @@
     <Compile Include="Utilities\EmailUtils.cs" />
     <Compile Include="Utilities\PasswordUtils.cs" />
     <Compile Include="ViewModels\SearchResultEntities.cs" />
+    <Compile Include="ViewModels\Users\GeneratedPasswordHashViewModel.cs" />
+    <Compile Include="ViewModels\Users\UserPasswordVerificationResultViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LICENSE.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,0 +1,52 @@
+﻿@model MyJobLeads.Areas.Admin.Models.CreateOrganizationWithAdminViewModel
+
+@{
+    ViewBag.Title = "Create Organization";
+}
+
+<div class="grid1 floatLeft"> 
+    <div class="pageInfoBox"> 
+        @using (Html.BeginForm()) 
+        {               
+            <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                <h3 class="floatLeft">Create Organization</h3> 
+            </div> 
+                
+            <div class="grid3 marginBottom_10 marginAuto floatleft">
+                <div class="floatLeft infoSpan">
+                    @Html.ValidationSummary()
+                </div>
+            </div>
+                
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Organization's Name:</p>
+                    <div class="infoSpan">@Html.TextBoxFor(x => x.OrganizationName, new { @class = "info" })</div>
+                </div> 
+            </div> 
+
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Administrator's Full Name:</p>
+                    <div class="infoSpan">@Html.TextBoxFor(x => x.AdminName, new { @class = "info" })</div>
+                </div> 
+            </div> 
+            
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Administrator's Email:</p>
+                    <div class="infoSpan">@Html.TextBoxFor(x => x.AdminEmail, new { @class = "info" })</div>
+                </div> 
+            </div> 
+            
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Administrator's Password:</p>
+                    <div class="infoSpan">@Html.PasswordFor(x => x.AdminPlainTextPassword, new { @class = "info" })</div>
+                </div> 
+            </div> 
+
+            <div class="grid3 marginBottom_20 floatLeft"> 
+                <div class="submitBTN "><input type="submit" value="Save" /></div>                    
+            </div> 
+        }
+
+        <div class="clear"></div> 
+    </div> 
+</div> 

@@ -23,6 +23,8 @@ using T4MVC;
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static class MVC {
+    static readonly AdminClass s_Admin = new AdminClass();
+    public static AdminClass Admin { get { return s_Admin; } }
     static readonly OrganizationClass s_Organization = new OrganizationClass();
     public static OrganizationClass Organization { get { return s_Organization; } }
     public static MyJobLeads.Controllers.AccountController Account = new MyJobLeads.Controllers.T4MVC_AccountController();
@@ -37,6 +39,13 @@ public static class MVC {
 }
 
 namespace T4MVC {
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public class AdminClass {
+        public readonly string Name = "Admin";
+        public MyJobLeads.Areas.Admin.Controllers.DashboardController Dashboard = new MyJobLeads.Areas.Admin.Controllers.T4MVC_DashboardController();
+        public MyJobLeads.Areas.Admin.Controllers.EditOrganizationController EditOrganization = new MyJobLeads.Areas.Admin.Controllers.T4MVC_EditOrganizationController();
+        public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
+    }
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class OrganizationClass {
         public readonly string Name = "Organization";

@@ -12,6 +12,7 @@ namespace MyJobLeads.DomainModel.Entities
         public string Password { get; set; }
         public string FullName { get; set; }
         public bool IsOrganizationAdmin { get; set; }
+        public bool IsSiteAdmin { get; set; }
 
         public int? OrganizationId { get; set; }
         public virtual Organization Organization { get; set; }

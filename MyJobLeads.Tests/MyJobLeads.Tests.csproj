@@ -45,6 +45,9 @@
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.1.1.0.118\lib\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="BCrypt.Net">
+      <HintPath>..\packages\BCrypt-Official.0.1.107\lib\BCrypt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL" />
     <Reference Include="Castle.Windsor, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL" />
     <Reference Include="ClosedXML, Version=0.59.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
@@ -141,10 +144,12 @@
     <Compile Include="Commands\Organizations\EditOrganizationCommandTests.cs" />
     <Compile Include="Controllers\PositionControllerTests.cs" />
     <Compile Include="Controllers\TaskControllerTests.cs" />
+    <Compile Include="Processes\Admin\CreateOrgWithAdminUserTests.cs" />
     <Compile Include="Processes\Authorization\CompanyAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\ContactAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\OrganizationAdminAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\PositionAuthorizationTests.cs" />
+    <Compile Include="Processes\Authorization\SiteAdminAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\TaskAuthorizationsTests.cs" />
     <Compile Include="Processes\Export\JobSearchExportProcessTests.cs" />
     <Compile Include="Processes\JobSearches\PropogateMilestoneToJobSearchTests.cs" />
@@ -156,6 +161,7 @@
     <Compile Include="Processes\Positions\CreatePositionTests.cs" />
     <Compile Include="Processes\Positions\EditPositionTests.cs" />
     <Compile Include="Processes\Positions\GetPositionListTests.cs" />
+    <Compile Include="Processes\Users\UserPasswordProcessTests.cs" />
     <Compile Include="Providers\Validators\CompanyValidatorTests.cs" />
     <Compile Include="Providers\Validators\ContactValidatorTests.cs" />
     <Compile Include="Providers\Validators\JobSearchValidatorTests.cs" />
@@ -213,6 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
+    <Content Include="LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyJobLeads.DomainModel\MyJobLeads.DomainModel.csproj">
