@@ -62,6 +62,7 @@ namespace MyJobLeads.Tests.Processes.Admin
             Assert.AreEqual(email, user.Email, "User's email was incorrect");
             Assert.AreEqual(adminName, user.FullName, "User's full name was incorrect");
             Assert.AreEqual(_hashedPassword, user.Password, "User's password was incorrect");
+            Assert.IsTrue(user.IsOrganizationAdmin, "User was not set as an organization admin");
         }
 
         [TestMethod]

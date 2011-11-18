@@ -38,6 +38,21 @@ namespace MyJobLeads.DomainModel.Entities.EF
                 }
             });
 
+            context.Users.Add(new User
+            {
+                Email = "admin@123.com",
+                Password = PasswordUtils.CreatePasswordHash("admin@123.com", "test"),
+                LastVisitedJobSearchId = null,
+                IsOrganizationAdmin = true,
+                FullName = "Site Admin",
+                IsSiteAdmin = true,
+                Organization = new Organization
+                {
+                    RegistrationToken = Guid.NewGuid(),
+                    Name = "Seed Organization"
+                }
+            });
+
             context.OfficialDocuments.Add(new OfficialDocument
             {
                 MeantForMembers = false,

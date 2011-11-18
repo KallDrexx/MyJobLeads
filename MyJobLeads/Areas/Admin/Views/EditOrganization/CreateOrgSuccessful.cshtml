@@ -1,0 +1,25 @@
+﻿@model MyJobLeads.Areas.Admin.Models.CreateOrganizationWithAdminViewModel
+
+@{
+    ViewBag.Title = "Organization Created Successful";
+}
+
+<div class="grid1 floatLeft"> 
+    <div class="pageInfoBox"> 
+        <div class="grid3 marginBottom_10 marginAuto floatLeft">
+            <h3>Organization Created Successfully</h3>
+            @Html.ActionLink("Back To Dashboard", MVC.Admin.Dashboard.Index(), new { @class = "floatRight blueLinks", title = "Back To Dashboard" })
+        </div>
+
+        <div class="grid3 marginBottom_10 marginAuto floatLeft">
+            <ul class="decoratedList">
+                <li>Organization Name: @Model.OrganizationName</li>    
+                <li>Administrator: @Model.AdminName</li>
+                <li>Admin Email: @Model.AdminEmail</li>
+                <li>Admin Password: @Model.AdminPlainTextPassword</li>
+            </ul>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+</div>

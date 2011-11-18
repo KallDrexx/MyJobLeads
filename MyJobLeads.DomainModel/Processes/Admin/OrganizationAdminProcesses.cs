@@ -50,7 +50,8 @@ namespace MyJobLeads.DomainModel.Processes.Admin
             {
                 Email = procParams.AdminEmail,
                 Password = hashedPassword,
-                FullName = procParams.AdminName
+                FullName = procParams.AdminName,
+                IsOrganizationAdmin = true
             });
 
             _context.Organizations.Add(org);
