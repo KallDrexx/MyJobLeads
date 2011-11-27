@@ -327,6 +327,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobSearchController.cs" />
+    <Compile Include="Controllers\PoliciesController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
@@ -370,6 +371,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Organization.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PoliciesController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="PositionController.generated.cs">
@@ -519,6 +523,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_JsMilestoneDisplay.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Policies\Privacy.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Privacy.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Policies\Security.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Security.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Search\RefreshSearchIndex.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -533,6 +547,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Error.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\_Layout.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Layout.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Shared\_LogOnPartial.cs">
       <AutoGen>True</AutoGen>
@@ -941,7 +960,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_LogOnPartial.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Layout.generated.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1118,6 +1140,14 @@
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Account\ClosedRegistrationView.cshtml" />
     <Content Include="Views\Account\InvalidOrgRegistrationTokenView.cshtml" />
+    <Content Include="Views\Policies\Privacy.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Privacy.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Policies\Security.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Security.generated.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">
