@@ -785,6 +785,7 @@
     <Content Include="Content\images\rss.png" />
     <Content Include="Content\images\topbg.gif" />
     <Content Include="Content\images\wrapbg.gif" />
+    <Content Include="crossdomain.xml" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="robots.txt" />
