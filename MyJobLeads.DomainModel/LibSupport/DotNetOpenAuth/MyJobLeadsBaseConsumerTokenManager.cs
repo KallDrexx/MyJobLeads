@@ -18,6 +18,26 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
         protected MyJobLeadsDbContext _context;
         protected TokenProvider _tokenProvider;
 
+        public MyJobLeadsBaseConsumerTokenManager(MyJobLeadsDbContext context, TokenProvider tokenProvider, string consumerKeyAppSetting, string consumerSecretAppSetting)
+        {
+            if (context == null)
+                throw new ArgumentNullException("context");
+
+            if (tokenProvider == null)
+                throw new ArgumentNullException("tokenProvider");
+
+            if (string.IsNullOrWhiteSpace(consumerKeyAppSetting))
+                throw new ArgumentNullException("consumerKeyAppSetting");
+
+            if (string.IsNullOrWhiteSpace(consumerSecretAppSetting))
+                throw new ArgumentNullException("consumerSecretAppSetting");
+
+            _context = context;
+            _tokenProvider = tokenProvider;
+            _consumerKeyAppSettingName = consumerKeyAppSetting;
+            _consumerSecretAppSettingName = consumerSecretAppSetting;
+        }
+
         public string ConsumerKey
         {
             get { return ConfigurationManager.AppSettings[_consumerKeyAppSettingName]; }
