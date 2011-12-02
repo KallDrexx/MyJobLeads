@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DotNetOpenAuth.OAuth.ChannelElements;
+using MyJobLeads.DomainModel.Enums;
 
 namespace MyJobLeads.DomainModel.Entities
 {
@@ -12,11 +13,18 @@ namespace MyJobLeads.DomainModel.Entities
         public string Token { get; set; }
         public string Secret { get; set; }
         public int TokenTypeValue { get; set; }
+        public int TokenProviderValue { get; set; }
 
         public TokenType TokenType
         {
             get { return (TokenType)TokenTypeValue; }
             set { TokenTypeValue = (int)value; }
+        }
+
+        public TokenProvider TokenProvider
+        {
+            get { return (TokenProvider)TokenProviderValue; }
+            set { TokenProviderValue = (int)value; }
         }
     }
 }

@@ -7,6 +7,7 @@ using MyJobLeads.DomainModel.Entities.EF;
 using DotNetOpenAuth.OAuth.Messages;
 using MyJobLeads.DomainModel.Entities;
 using System.Configuration;
+using MyJobLeads.DomainModel.Enums;
 
 namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
 {
@@ -15,6 +16,7 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
         protected string _consumerKeyAppSettingName;
         protected string _consumerSecretAppSettingName;
         protected MyJobLeadsDbContext _context;
+        protected TokenProvider _tokenProvider;
 
         public string ConsumerKey
         {
@@ -41,7 +43,11 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
                 throw new ArgumentNullException("accessTokenSecret");
 
             // Remove the request token
-            var oldData = _context.OAuthData.Where(x => x.Token == requestToken && x.TokenTypeValue == (int)TokenType.RequestToken).Single();
+            var oldData = _context.OAuthData.Where(x => x.Token == requestToken)
+                                  .Where(x => x.TokenTypeValue == (int)TokenType.RequestToken)
+                                  .Where(x => x.TokenProviderValue == (int)_tokenProvider)
+                                  .Single();
+
             _context.OAuthData.Remove(oldData);
 
             // Create the access token
@@ -49,7 +55,8 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
             {
                 Token = accessToken,
                 Secret = accessTokenSecret,
-                TokenType = TokenType.AccessToken
+                TokenType = TokenType.AccessToken,
+                TokenProvider = _tokenProvider
             });
 
             _context.SaveChanges();
@@ -60,7 +67,7 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
             if (string.IsNullOrWhiteSpace(token))
                 throw new ArgumentException("token is null or empty");
 
-            var data = _context.OAuthData.Where(x => x.Token == token).SingleOrDefault();
+            var data = _context.OAuthData.Where(x => x.Token == token && x.TokenProviderValue == (int)_tokenProvider).SingleOrDefault();
             if (data == null)
                 throw new ArgumentException("No secret found for the given token");
 
@@ -72,7 +79,9 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
             if (string.IsNullOrWhiteSpace(token))
                 throw new ArgumentException("token is null or empty");
 
-            var data = _context.OAuthData.Where(x => x.Token == token).SingleOrDefault();
+            var data = _context.OAuthData.Where(x => x.Token == token)
+                                         .Where(x => x.TokenProviderValue == (int)_tokenProvider)
+                                         .SingleOrDefault();
             if (data == null)
                 throw new ArgumentException("No secret found for the given token");
 
@@ -91,7 +100,8 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
             {
                 Token = response.Token,
                 Secret = response.TokenSecret,
-                TokenType = TokenType.RequestToken
+                TokenType = TokenType.RequestToken,
+                TokenProvider = _tokenProvider
             };
 
             _context.OAuthData.Add(data);
