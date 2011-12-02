@@ -57,6 +57,9 @@
     <Reference Include="DocumentFormat.OpenXml">
       <HintPath>..\packages\DocumentFormat.OpenXml.1.0\lib\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetOpenAuth">
+      <HintPath>..\packages\DotNetOpenAuth.3.4.7.11121\lib\DotNetOpenAuth.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
@@ -78,6 +81,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Transactions" />
@@ -117,6 +121,7 @@
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Configuration\MilestoneConfig.cs" />
     <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\OAuthData.cs" />
     <Compile Include="Entities\OfficialDocument.cs" />
     <Compile Include="Entities\Extensions\EntityExtensions.cs" />
     <Compile Include="Entities\History\CompanyHistory.cs" />
@@ -154,6 +159,7 @@
     <Compile Include="EntityMapping\IEntityMapConfiguration.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForEntityException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForProcessException.cs" />
+    <Compile Include="LibSupport\DotNetOpenAuth\MyJobLeadsBaseConsumerTokenManager.cs" />
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Processes\Admin\OrganizationAdminProcesses.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
