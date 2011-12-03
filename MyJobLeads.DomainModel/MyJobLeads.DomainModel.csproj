@@ -160,6 +160,7 @@
     <Compile Include="EntityMapping\IEntityMapConfiguration.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForEntityException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForProcessException.cs" />
+    <Compile Include="LibSupport\DotNetOpenAuth\LinkedInTokenManager.cs" />
     <Compile Include="LibSupport\DotNetOpenAuth\MyJobLeadsBaseConsumerTokenManager.cs" />
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Processes\Admin\OrganizationAdminProcesses.cs" />

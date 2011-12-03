@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Text;
 using DotNetOpenAuth.OAuth.ChannelElements;
 using MyJobLeads.DomainModel.Entities.EF;
@@ -13,10 +14,10 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
 {
     public abstract class MyJobLeadsBaseConsumerTokenManager : IConsumerTokenManager
     {
-        protected string _consumerKeyAppSettingName;
-        protected string _consumerSecretAppSettingName;
-        protected MyJobLeadsDbContext _context;
-        protected TokenProvider _tokenProvider;
+        private string _consumerKeyAppSettingName;
+        private string _consumerSecretAppSettingName;
+        private MyJobLeadsDbContext _context;
+        private TokenProvider _tokenProvider;
 
         public MyJobLeadsBaseConsumerTokenManager(MyJobLeadsDbContext context, TokenProvider tokenProvider, string consumerKeyAppSetting, string consumerSecretAppSetting)
         {
@@ -46,6 +47,27 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
         public string ConsumerSecret
         {
             get { return ConfigurationManager.AppSettings[_consumerSecretAppSettingName]; }
+        }
+
+        public void DeleteAccessToken(string accessToken)
+        {
+            var data = _context.OAuthData
+                                .Where(x => x.Token == accessToken && x.TokenProviderValue == (int)_tokenProvider)
+                                .Include(x => x.LinkedInUser)
+                                .SingleOrDefault();
+
+            if (data == null)
+                return;
+
+            // Make sure the user is no longer associated with the token
+            if (_tokenProvider == TokenProvider.LinkedIn)
+            {
+                var user = data.LinkedInUser;
+                user.LinkedInOAuthData = null;
+            }
+
+            _context.OAuthData.Remove(data);
+            _context.SaveChanges();
         }
 
         public void ExpireRequestTokenAndStoreNewAccessToken(string consumerKey, string requestToken, string accessToken, string accessTokenSecret)

@@ -15,6 +15,8 @@ namespace MyJobLeads.DomainModel.Entities
         public int TokenTypeValue { get; set; }
         public int TokenProviderValue { get; set; }
 
+        public virtual User LinkedInUser { get; set; }
+
         public TokenType TokenType
         {
             get { return (TokenType)TokenTypeValue; }

@@ -21,5 +21,8 @@ namespace MyJobLeads.DomainModel.Entities
         
         public int? LastVisitedJobSearchId { get; set; }
         public virtual JobSearch LastVisitedJobSearch { get; set; }
+
+        public int? LinkedInOAuthDataId { get; set; }
+        public virtual OAuthData LinkedInOAuthData { get; set; }
     }
 }
