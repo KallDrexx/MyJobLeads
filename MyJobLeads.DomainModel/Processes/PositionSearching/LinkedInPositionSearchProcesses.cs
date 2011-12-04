@@ -12,10 +12,17 @@ using DotNetOpenAuth.Messaging;
 using DotNetOpenAuth.OAuth.ChannelElements;
 using MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth;
 using System.Net;
+using MyJobLeads.DomainModel.ViewModels;
+using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.Enums;
 
 namespace MyJobLeads.DomainModel.Processes.PositionSearching
 {
-    public class LinkedInPositionSearchProcesses : IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel>
+    public class LinkedInPositionSearchProcesses 
+        : IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel>,
+          IProcess<StartLinkedInUserAuthParams, GeneralSuccessResultViewModel>,
+          IProcess<ProcessLinkedInAuthProcessParams, GeneralSuccessResultViewModel>
     {
         protected MyJobLeadsDbContext _context;
 
@@ -35,6 +42,55 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             {
                 AccessTokenValid = UserHasValidAccessToken(procParams.UserId)
             };
+        }
+
+        /// <summary>
+        /// Begins the Linked In OAuth process
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        public GeneralSuccessResultViewModel Execute(StartLinkedInUserAuthParams procParams)
+        {
+            var consumer = new WebConsumer(GetLiDescription(), new LinkedInTokenManager(_context));
+            consumer.Channel.Send(consumer.PrepareRequestUserAuthorization(procParams.ReturnUrl, null, null));
+            return new GeneralSuccessResultViewModel();
+        }
+
+        /// <summary>
+        /// Processes the LinkedIn Authorization process
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        public GeneralSuccessResultViewModel Execute(ProcessLinkedInAuthProcessParams procParams)
+        {
+            // Get the user for authentication
+            var user = _context.Users.Where(x => x.Id == procParams.UserId).Include(x => x.LinkedInOAuthData).SingleOrDefault();
+            if (user == null)
+                throw new MJLEntityNotFoundException(typeof(User), procParams.UserId);
+
+            // Process the completed Linked In Auth
+            var consumer = new WebConsumer(GetLiDescription(), new LinkedInTokenManager(_context));
+            var accessTokenResponse = consumer.ProcessUserAuthorization();
+
+            if (accessTokenResponse == null)
+                throw new OAuthResponseNotAvailableException("Linked In access token response was not provided");
+
+            // Get the access token and associate the OAuthData record with the user
+            string accessToken = accessTokenResponse.AccessToken;
+            var oAuthRecord = _context.OAuthData
+                                      .Where(x => x.Token == accessToken && x.TokenTypeValue == (int)TokenType.AccessToken && x.TokenProviderValue == (int)TokenProvider.LinkedIn)
+                                      .SingleOrDefault();
+            if (oAuthRecord == null)
+                throw new MJLEntityNotFoundException(typeof(OAuthData), accessToken);
+
+            // If the user is already associated with an OAuthData record, delete that recor
+            if (user.LinkedInOAuthData != null)
+                _context.OAuthData.Remove(user.LinkedInOAuthData);
+
+            user.LinkedInOAuthData = oAuthRecord;
+            _context.SaveChanges();
+
+            return new GeneralSuccessResultViewModel { WasSuccessful = true };
         }
 
         protected bool UserHasValidAccessToken(int userId)

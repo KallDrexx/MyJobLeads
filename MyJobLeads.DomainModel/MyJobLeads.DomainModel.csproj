@@ -158,6 +158,7 @@
     <Compile Include="Exceptions\MJLUserNotFoundException.cs" />
     <Compile Include="Exceptions\MJLValidatorNotFoundException.cs" />
     <Compile Include="EntityMapping\IEntityMapConfiguration.cs" />
+    <Compile Include="Exceptions\OAuthResponseNotAvailableException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForEntityException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForProcessException.cs" />
     <Compile Include="LibSupport\DotNetOpenAuth\LinkedInTokenManager.cs" />
@@ -182,6 +183,8 @@
     <Compile Include="ProcessParams\Milestones\SaveMilestoneParams.cs" />
     <Compile Include="ProcessParams\Organizations\OrganizationMemberStatisticsParams.cs" />
     <Compile Include="ProcessParams\Organizations\OrgMemberDocVisibilityByOrgAdminParams.cs" />
+    <Compile Include="ProcessParams\PositionSearching\LinkedIn\ProcessLinkedInAuthProcessParams.cs" />
+    <Compile Include="ProcessParams\PositionSearching\LinkedIn\StartLinkedInUserAuthParams.cs" />
     <Compile Include="ProcessParams\PositionSearching\LinkedIn\VerifyUserLinkedInAccessTokenParams.cs" />
     <Compile Include="ProcessParams\Positions\CreatePositionParams.cs" />
     <Compile Include="ProcessParams\Positions\EditPositionParams.cs" />
