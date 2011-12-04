@@ -36,7 +36,8 @@ namespace MyJobLeads.DomainModel.Entities.EF
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-
+            // Set up the 1:1 connection between users and oauthdata
+            modelBuilder.Entity<OAuthData>().HasOptional(x => x.LinkedInUser).WithOptionalDependent(x => x.LinkedInOAuthData);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DotNetOpenAuth.OAuth.ChannelElements;
 using MyJobLeads.DomainModel.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyJobLeads.DomainModel.Entities
 {
