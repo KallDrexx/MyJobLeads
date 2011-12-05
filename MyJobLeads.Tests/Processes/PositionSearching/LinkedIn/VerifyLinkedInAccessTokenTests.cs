@@ -22,7 +22,7 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
         [TestInitialize]
         public void Initialize()
         {
-            _process = new LinkedInPositionSearchProcesses(_context);
+            _process = new LinkedInPositionSearchProcesses(_context, null);
 
             _user = new User();
             _context.Users.Add(_user);

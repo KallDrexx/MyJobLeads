@@ -12,23 +12,31 @@ using DotNetOpenAuth.Messaging;
 using DotNetOpenAuth.OAuth.ChannelElements;
 using MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth;
 using System.Net;
+using System.Web;
 using MyJobLeads.DomainModel.ViewModels;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Enums;
+using System.Xml;
+using System.Xml.Linq;
+using MyJobLeads.DomainModel.Exceptions.OAuth;
 
 namespace MyJobLeads.DomainModel.Processes.PositionSearching
 {
     public class LinkedInPositionSearchProcesses 
         : IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel>,
           IProcess<StartLinkedInUserAuthParams, GeneralSuccessResultViewModel>,
-          IProcess<ProcessLinkedInAuthProcessParams, GeneralSuccessResultViewModel>
+          IProcess<ProcessLinkedInAuthProcessParams, GeneralSuccessResultViewModel>,
+          IProcess<LinkedInPositionSearchParams, PositionSearchResultsViewModel>
     {
         protected MyJobLeadsDbContext _context;
+        protected IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel> _verifyLiTokenProcess;
 
-        public LinkedInPositionSearchProcesses(MyJobLeadsDbContext context)
+        public LinkedInPositionSearchProcesses(MyJobLeadsDbContext context, 
+                            IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel> verifyLiTokenProcess )
         {
             _context = context;
+            _verifyLiTokenProcess = verifyLiTokenProcess;
         }
 
         /// <summary>
@@ -38,10 +46,30 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
         /// <returns></returns>
         public UserAccessTokenResultViewModel Execute(VerifyUserLinkedInAccessTokenParams procParams)
         {
-            return new UserAccessTokenResultViewModel
+            var user = _context.Users
+                               .Where(x => x.Id == procParams.UserId)
+                               .Include(x => x.LinkedInOAuthData)
+                               .SingleOrDefault();
+            if (user == null)
+                return new UserAccessTokenResultViewModel { AccessTokenValid = false };
+
+            if (user.LinkedInOAuthData == null)
+                return new UserAccessTokenResultViewModel { AccessTokenValid = false };
+
+            // Attempt to query for the current user's profile to determine if the profile is valid
+            var consumer = new WebConsumer(GetLiDescription(), new LinkedInTokenManager(_context));
+            var endpoint = new MessageReceivingEndpoint("http://api.linkedin.com/v1/people/~", HttpDeliveryMethods.GetRequest);
+            var request = consumer.PrepareAuthorizedRequest(endpoint, user.LinkedInOAuthData.Token);
+            try { var response = request.GetResponse(); }
+            catch (WebException ex)
             {
-                AccessTokenValid = UserHasValidAccessToken(procParams.UserId)
-            };
+                if (((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.Unauthorized)
+                    return new UserAccessTokenResultViewModel { AccessTokenValid = false };
+
+                throw;
+            }
+
+            return new UserAccessTokenResultViewModel { AccessTokenValid = true };
         }
 
         /// <summary>
@@ -93,32 +121,63 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             return new GeneralSuccessResultViewModel { WasSuccessful = true };
         }
 
-        protected bool UserHasValidAccessToken(int userId)
+        /// <summary>
+        /// Executes the linked in position search for the user 
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        public PositionSearchResultsViewModel Execute(LinkedInPositionSearchParams procParams)
         {
+            const int resultsPageSize = 10;
+
+            // Get the user's access token
             var user = _context.Users
-                               .Where(x => x.Id == userId)
+                               .Where(x => x.Id == procParams.RequestingUserId)
                                .Include(x => x.LinkedInOAuthData)
                                .SingleOrDefault();
+
             if (user == null)
-                return false;
+                throw new MJLEntityNotFoundException(typeof(User), procParams.RequestingUserId);
 
-            if (user.LinkedInOAuthData == null)
-                return false;
+            if (!_verifyLiTokenProcess.Execute(new VerifyUserLinkedInAccessTokenParams { UserId = user.Id }).AccessTokenValid)
+                throw new UserHasNoValidOAuthAccessTokenException(user.Id, TokenProvider.LinkedIn);
 
-            // Attempt to query for the current user's profile to determine if the profile is valid
+            // Form the API Url based on the criteria
+            string apiUrl = string.Format("http://api.linkedin.com/v1/job-search?country-code={0}&Keywords={1}&start={2}&count={3}", 
+                                HttpUtility.UrlEncode(procParams.CountryCode), 
+                                HttpUtility.UrlEncode(procParams.Keywords), 
+                                procParams.ResultsPageNum,
+                                resultsPageSize);
+
+            if (!string.IsNullOrWhiteSpace(procParams.ZipCode))
+                apiUrl += "&postal-code=" + procParams.ZipCode;
+
+            // Perform the search
             var consumer = new WebConsumer(GetLiDescription(), new LinkedInTokenManager(_context));
-            var endpoint = new MessageReceivingEndpoint("http://api.linkedin.com/v1/people/~", HttpDeliveryMethods.GetRequest);
+            var endpoint = new MessageReceivingEndpoint(apiUrl, HttpDeliveryMethods.GetRequest);
             var request = consumer.PrepareAuthorizedRequest(endpoint, user.LinkedInOAuthData.Token);
-            try { var response = request.GetResponse(); }
-            catch (WebException ex)
-            {
-                if (((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.Unauthorized)
-                    return false;
+            var response = request.GetResponse();
 
-                throw;
-            }
+            // Get the results from the respones
+            var resultsVm = new PositionSearchResultsViewModel { ResultsPageNum = procParams.ResultsPageNum };
+            var xmlResponse = XDocument.Load(response.GetResponseStream());
 
-            return true;
+            resultsVm.Results = (from job in xmlResponse.Descendants("job")
+                                 select new PositionSearchResultsViewModel.PositionSearchResultViewModel
+                                 {
+                                     JobId = Convert.ToInt32(job.Element("id").Value),
+                                     Headline = job.Element("job-poster").Element("headline").Value,
+                                     Company = job.Element("company").Element("name").Value,
+                                     Location = job.Element("location-description").Value,
+                                     Description = job.Element("description-snippet").Value
+                                 }).ToList();
+
+            var searchStats = xmlResponse.Descendants("jobs").First();
+            resultsVm.TotalCount = Convert.ToInt32(searchStats.Attribute("total").Value);
+            resultsVm.ResultsPageNum = Convert.ToInt32(searchStats.Attribute("start").Value);
+            
+            //resultsVm.Results = xmlResponse.wh
+            return resultsVm;
         }
 
         protected ServiceProviderDescription GetLiDescription()

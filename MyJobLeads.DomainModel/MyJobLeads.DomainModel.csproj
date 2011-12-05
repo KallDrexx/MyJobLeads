@@ -158,7 +158,8 @@
     <Compile Include="Exceptions\MJLUserNotFoundException.cs" />
     <Compile Include="Exceptions\MJLValidatorNotFoundException.cs" />
     <Compile Include="EntityMapping\IEntityMapConfiguration.cs" />
-    <Compile Include="Exceptions\OAuthResponseNotAvailableException.cs" />
+    <Compile Include="Exceptions\OAuth\OAuthResponseNotAvailableException.cs" />
+    <Compile Include="Exceptions\OAuth\UserHasNoValidOAuthAccessTokenException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForEntityException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForProcessException.cs" />
     <Compile Include="LibSupport\DotNetOpenAuth\LinkedInTokenManager.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="ProcessParams\Milestones\SaveMilestoneParams.cs" />
     <Compile Include="ProcessParams\Organizations\OrganizationMemberStatisticsParams.cs" />
     <Compile Include="ProcessParams\Organizations\OrgMemberDocVisibilityByOrgAdminParams.cs" />
+    <Compile Include="ProcessParams\PositionSearching\LinkedIn\LinkedInPositionSearchParams.cs" />
     <Compile Include="ProcessParams\PositionSearching\LinkedIn\ProcessLinkedInAuthProcessParams.cs" />
     <Compile Include="ProcessParams\PositionSearching\LinkedIn\StartLinkedInUserAuthParams.cs" />
     <Compile Include="ProcessParams\PositionSearching\LinkedIn\VerifyUserLinkedInAccessTokenParams.cs" />
@@ -234,6 +236,7 @@
     <Compile Include="ViewModels\Organizations\OrganizationDashboardViewModel.cs" />
     <Compile Include="ViewModels\Organizations\OrganizationMemberStatisticsViewModel.cs" />
     <Compile Include="ViewModels\Organizations\VisibleOrgOfficialDocListForUserViewModel.cs" />
+    <Compile Include="ViewModels\PositionSearching\PositionSearchResultsViewModel.cs" />
     <Compile Include="ViewModels\PositionSearching\UserAccessTokenResultViewModel.cs" />
     <Compile Include="ViewModels\Positions\EditPositionViewModel.cs" />
     <Compile Include="ViewModels\Positions\PositionDisplayViewModel.cs" />
