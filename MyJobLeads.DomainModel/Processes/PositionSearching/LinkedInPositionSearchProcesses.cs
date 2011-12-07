@@ -159,7 +159,7 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             var response = request.GetResponse();
 
             // Get the results from the respones
-            var resultsVm = new PositionSearchResultsViewModel { ResultsPageNum = procParams.ResultsPageNum };
+            var resultsVm = new PositionSearchResultsViewModel { ResultsPageNum = procParams.ResultsPageNum, DataSource = ExternalDataSource.LinkedIn };
             var xmlResponse = XDocument.Load(response.GetResponseStream());
 
             resultsVm.Results = (from job in xmlResponse.Descendants("job")

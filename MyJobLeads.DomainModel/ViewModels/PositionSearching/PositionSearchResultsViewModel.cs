@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MyJobLeads.DomainModel.Enums;
 
 namespace MyJobLeads.DomainModel.ViewModels.PositionSearching
 {
@@ -16,6 +17,7 @@ namespace MyJobLeads.DomainModel.ViewModels.PositionSearching
 
         public int TotalCount { get; set; }
         public int ResultsPageNum { get; set; }
+        public ExternalDataSource DataSource { get; set; }
 
         public class PositionSearchResultViewModel
         {

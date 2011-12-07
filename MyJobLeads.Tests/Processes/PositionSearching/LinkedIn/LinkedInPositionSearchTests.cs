@@ -66,6 +66,7 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
             Assert.AreEqual(2, result.ResultsPageNum, "The view model's page number was incorrect");
             Assert.IsNotNull(result.Results, "The result list was null");
             Assert.AreEqual(10, result.Results.Count, "Result list had an incorrect number of results");
+            Assert.AreEqual(ExternalDataSource.LinkedIn, result.DataSource, "Result had an incorrect position data source value");
         }
 
         [TestMethod]

@@ -147,6 +147,7 @@
     <Compile Include="EntityMapping\Mappings\OrganizationMappings.cs" />
     <Compile Include="EntityMapping\Mappings\PositionMappings.cs" />
     <Compile Include="EntityMapping\Mappings\UserMappings.cs" />
+    <Compile Include="Enums\ExternalDataSource.cs" />
     <Compile Include="Enums\TokenProvider.cs" />
     <Compile Include="Exceptions\InvalidEmailDomainForOrganizationException.cs" />
     <Compile Include="Exceptions\InvalidOrganizationRegistrationTokenException.cs" />
