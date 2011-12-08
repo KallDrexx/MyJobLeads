@@ -185,6 +185,7 @@
     <Compile Include="ProcessParams\Milestones\SaveMilestoneParams.cs" />
     <Compile Include="ProcessParams\Organizations\OrganizationMemberStatisticsParams.cs" />
     <Compile Include="ProcessParams\Organizations\OrgMemberDocVisibilityByOrgAdminParams.cs" />
+    <Compile Include="ProcessParams\PositionSearching\LinkedIn\LinkedInPositionDetailsParams.cs" />
     <Compile Include="ProcessParams\PositionSearching\LinkedIn\LinkedInPositionSearchParams.cs" />
     <Compile Include="ProcessParams\PositionSearching\LinkedIn\ProcessLinkedInAuthProcessParams.cs" />
     <Compile Include="ProcessParams\PositionSearching\LinkedIn\StartLinkedInUserAuthParams.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="ViewModels\Organizations\OrganizationDashboardViewModel.cs" />
     <Compile Include="ViewModels\Organizations\OrganizationMemberStatisticsViewModel.cs" />
     <Compile Include="ViewModels\Organizations\VisibleOrgOfficialDocListForUserViewModel.cs" />
+    <Compile Include="ViewModels\PositionSearching\ExternalPositionDetailsViewModel.cs" />
     <Compile Include="ViewModels\PositionSearching\PositionSearchResultsViewModel.cs" />
     <Compile Include="ViewModels\PositionSearching\UserAccessTokenResultViewModel.cs" />
     <Compile Include="ViewModels\Positions\EditPositionViewModel.cs" />

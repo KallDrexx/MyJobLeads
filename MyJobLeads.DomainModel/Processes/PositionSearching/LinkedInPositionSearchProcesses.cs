@@ -27,7 +27,8 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
         : IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel>,
           IProcess<StartLinkedInUserAuthParams, GeneralSuccessResultViewModel>,
           IProcess<ProcessLinkedInAuthProcessParams, GeneralSuccessResultViewModel>,
-          IProcess<LinkedInPositionSearchParams, PositionSearchResultsViewModel>
+          IProcess<LinkedInPositionSearchParams, PositionSearchResultsViewModel>,
+          IProcess<LinkedInPositionDetailsParams, ExternalPositionDetailsViewModel>
     {
         protected MyJobLeadsDbContext _context;
         protected IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel> _verifyLiTokenProcess;
@@ -178,6 +179,54 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             
             //resultsVm.Results = xmlResponse.wh
             return resultsVm;
+        }
+
+        /// <summary>
+        /// Retrieves the detail of the specified position from Linked In
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        public ExternalPositionDetailsViewModel Execute(LinkedInPositionDetailsParams procParams)
+        {
+            // Get the user's access token
+            var user = _context.Users
+                               .Where(x => x.Id == procParams.RequestingUserId)
+                               .Include(x => x.LinkedInOAuthData)
+                               .SingleOrDefault();
+
+            // Form the API Url based on the criteria
+            string apiUrl =
+                string.Format(
+                    "http://api.linkedin.com/v1/jobs/{0}:(id,company:(id,name),position:({1}),description,posting-date,expiration-date,active)",
+                    procParams.PositionId,
+                    "title,location,job-functions,industries,job-type,experience-level");
+
+            // Perform the search
+            var consumer = new WebConsumer(GetLiDescription(), new LinkedInTokenManager(_context));
+            var endpoint = new MessageReceivingEndpoint(apiUrl, HttpDeliveryMethods.GetRequest);
+            var request = consumer.PrepareAuthorizedRequest(endpoint, user.LinkedInOAuthData.Token);
+            var response = request.GetResponse();
+
+            // Get the results
+            var result = new ExternalPositionDetailsViewModel { DataSource = ExternalDataSource.LinkedIn };
+            var xmlResponse = XDocument.Load(response.GetResponseStream());
+            var job = xmlResponse.Descendants("job").First();
+            var position = job.Element("position");
+
+            result.Id = job.Element("id").Value;
+            result.CompanyId = job.Element("company").Element("id").Value;
+            result.CompanyName = job.Element("company").Element("name").Value;
+            result.Description = job.Element("description").Value;
+            result.ExperienceLevel = position.Element("experience-level").Value;
+            //result.ExpirationDate = 
+            result.Industries = position.Element("industries").Value;
+            result.JobFunctions = position.Element("job-functions").Value;
+            result.JobType = position.Element("job-type").Value;
+            result.Location = position.Element("location").Value;
+            //result.PostedDate = 
+            result.Title = position.Element("title").Value;
+
+            return result;
         }
 
         protected ServiceProviderDescription GetLiDescription()
