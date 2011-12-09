@@ -27,6 +27,8 @@ public static class MVC {
     public static AdminClass Admin { get { return s_Admin; } }
     static readonly OrganizationClass s_Organization = new OrganizationClass();
     public static OrganizationClass Organization { get { return s_Organization; } }
+    static readonly PositionSearchClass s_PositionSearch = new PositionSearchClass();
+    public static PositionSearchClass PositionSearch { get { return s_PositionSearch; } }
     public static MyJobLeads.Controllers.AccountController Account = new MyJobLeads.Controllers.T4MVC_AccountController();
     public static MyJobLeads.Controllers.CompanyController Company = new MyJobLeads.Controllers.T4MVC_CompanyController();
     public static MyJobLeads.Controllers.ContactController Contact = new MyJobLeads.Controllers.T4MVC_ContactController();
@@ -55,6 +57,12 @@ namespace T4MVC {
         public MyJobLeads.Areas.Organization.Controllers.MemberStatsController MemberStats = new MyJobLeads.Areas.Organization.Controllers.T4MVC_MemberStatsController();
         public MyJobLeads.Areas.Organization.Controllers.MilestoneController Milestone = new MyJobLeads.Areas.Organization.Controllers.T4MVC_MilestoneController();
         public T4MVC.Organization.SharedController Shared = new T4MVC.Organization.SharedController();
+    }
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public class PositionSearchClass {
+        public readonly string Name = "PositionSearch";
+        public MyJobLeads.Areas.PositionSearch.Controllers.LinkedInController LinkedIn = new MyJobLeads.Areas.PositionSearch.Controllers.T4MVC_LinkedInController();
+        public T4MVC.PositionSearch.SharedController Shared = new T4MVC.PositionSearch.SharedController();
     }
 }
 

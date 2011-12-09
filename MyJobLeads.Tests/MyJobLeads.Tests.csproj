@@ -146,6 +146,7 @@
     <Compile Include="Commands\JobSearches\UpdateJobSearchMetricsCommandTests.cs" />
     <Compile Include="Commands\Organizations\EditOrganizationCommandTests.cs" />
     <Compile Include="Controllers\PositionControllerTests.cs" />
+    <Compile Include="Controllers\PositionSearch\LinkedInControllerTests.cs" />
     <Compile Include="Controllers\TaskControllerTests.cs" />
     <Compile Include="Processes\Admin\CreateOrgWithAdminUserTests.cs" />
     <Compile Include="Processes\Authorization\CompanyAuthorizationTests.cs" />
@@ -164,7 +165,7 @@
     <Compile Include="Processes\PositionSearching\LinkedIn\AddLinkedInPositionTests.cs" />
     <Compile Include="Processes\PositionSearching\LinkedIn\LinkedInPositionDetailsTests.cs" />
     <Compile Include="Processes\PositionSearching\LinkedIn\LinkedInPositionSearchTests.cs" />
-    <Compile Include="Processes\PositionSearching\LinkedIn\VerifyLinkedInAccessTokenTests.cs" />
+    <Compile Include="Processes\OAuth\VerifyLinkedInAccessTokenTests.cs" />
     <Compile Include="Processes\Positions\CreatePositionTests.cs" />
     <Compile Include="Processes\Positions\EditPositionTests.cs" />
     <Compile Include="Processes\Positions\GetPositionListTests.cs" />

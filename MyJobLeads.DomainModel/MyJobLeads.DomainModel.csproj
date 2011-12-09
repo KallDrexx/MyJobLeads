@@ -172,6 +172,7 @@
     <Compile Include="Processes\JobSearches\JobSearchMilestonePropogationProcesses.cs" />
     <Compile Include="Processes\Milestones\MilestoneQueryProcesses.cs" />
     <Compile Include="Processes\Milestones\MilestoneNonQueryProcesses.cs" />
+    <Compile Include="Processes\OAuth\LinkedInOAuthProcesses.cs" />
     <Compile Include="Processes\Organizations\OrganizationDocumentProcesses.cs" />
     <Compile Include="Processes\Organizations\OrganizationMetricQueryProcesses.cs" />
     <Compile Include="Processes\PositionSearching\LinkedInPositionSearchProcesses.cs" />

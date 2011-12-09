@@ -10,6 +10,7 @@ using MyJobLeads.DomainModel.Processes.PositionSearching;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Enums;
 using DotNetOpenAuth.OAuth.ChannelElements;
+using MyJobLeads.DomainModel.Processes.OAuth;
 
 namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
 {
@@ -22,7 +23,7 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
         [TestInitialize]
         public void Initialize()
         {
-            _process = new LinkedInPositionSearchProcesses(_context, null);
+            _process = new LinkedInOAuthProcesses(_context);
 
             _user = new User();
             _context.Users.Add(_user);
