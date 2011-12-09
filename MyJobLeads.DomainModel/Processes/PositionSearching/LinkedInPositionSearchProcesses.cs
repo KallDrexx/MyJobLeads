@@ -122,7 +122,17 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             var consumer = new WebConsumer(LinkedInOAuthProcesses.GetLiDescription(), new LinkedInTokenManager(_context));
             var endpoint = new MessageReceivingEndpoint(apiUrl, HttpDeliveryMethods.GetRequest);
             var request = consumer.PrepareAuthorizedRequest(endpoint, user.LinkedInOAuthData.Token);
-            var response = request.GetResponse();
+
+            WebResponse response;
+            try { response = request.GetResponse(); }
+            catch (WebException ex)
+            {
+                // If the response is a bad request, that means no id exists for the specified job id
+                if (((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.BadRequest)
+                    return null;
+
+                throw;
+            }
 
             // Get the results
             var result = new ExternalPositionDetailsViewModel { DataSource = ExternalDataSource.LinkedIn };

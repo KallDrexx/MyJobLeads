@@ -81,5 +81,18 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
             Assert.IsFalse(result.IsActive, "Position was incorrect set as active");
             Assert.AreEqual(ExternalDataSource.LinkedIn, result.DataSource, "Position's data source was incorrect");
         }
+
+        [TestMethod]
+        public void Returns_Null_When_Invalid_Id()
+        {
+            // Setup
+            string positionId = "217456999999999";
+
+            // Act
+            var result = _process.Execute(new LinkedInPositionDetailsParams { RequestingUserId = _user.Id, PositionId = positionId });
+
+            // Verify
+            Assert.IsNull(result, "Process did not return a null result");
+        }
     }
 }
