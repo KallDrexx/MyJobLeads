@@ -114,7 +114,7 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             // Form the API Url based on the criteria
             string apiUrl =
                 string.Format(
-                    "http://api.linkedin.com/v1/jobs/{0}:(id,company:(id,name),position:({1}),description,posting-date,expiration-date,active)",
+                    "http://api.linkedin.com/v1/jobs/{0}:(id,company:(id,name),position:({1}),description,posting-date,active)",
                     procParams.PositionId,
                     "title,location,job-functions,industries,job-type,experience-level");
 
@@ -131,18 +131,28 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             var position = job.Element("position");
 
             result.Id = job.Element("id").Value;
-            result.CompanyId = job.Element("company").Element("id").Value;
+            //result.CompanyId = job.Element("company").Element("id").Value;
             result.CompanyName = job.Element("company").Element("name").Value;
             result.Description = job.Element("description").Value;
-            result.ExperienceLevel = position.Element("experience-level").Value;
-            //result.ExpirationDate = 
-            result.Industries = position.Element("industries").Value;
-            result.JobFunctions = position.Element("job-functions").Value;
-            result.JobType = position.Element("job-type").Value;
-            result.Location = position.Element("location").Value;
-            //result.PostedDate = 
+            result.ExperienceLevel = position.Element("experience-level").Element("name").Value;
+            result.JobType = position.Element("job-type").Element("name").Value;
+            result.Location = position.Element("location").Element("name").Value;
             result.Title = position.Element("title").Value;
 
+            result.Industries = position.Descendants("industries")
+                                        .Select(x => x.Element("industry").Element("name").Value)
+                                        .Aggregate((cur, next) => cur + ", " + next);
+
+            result.JobFunctions = position.Descendants("job-functions")
+                                          .Select(x => x.Element("job-function").Element("name").Value)
+                                          .Aggregate((current, next) => current + ", " + next);
+
+            var postingDate = job.Element("posting-date");
+            int year = Convert.ToInt32(postingDate.Element("year").Value);
+            int month = Convert.ToInt32(postingDate.Element("month").Value);
+            int day = Convert.ToInt32(postingDate.Element("day").Value);
+            result.PostedDate = new DateTime(year, month, day);
+                    
             return result;
         }
 

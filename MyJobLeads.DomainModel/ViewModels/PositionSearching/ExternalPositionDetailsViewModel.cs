@@ -9,12 +9,12 @@ namespace MyJobLeads.DomainModel.ViewModels.PositionSearching
     public class ExternalPositionDetailsViewModel
     {
         public string Id { get; set; }
+        public bool IsActive { get; set; }
         public string Title { get; set; }
         public string Location { get; set; }
         public string CompanyName { get; set; }
         public string CompanyId { get; set; }
         public DateTime PostedDate { get; set; }
-        public DateTime ExpirationDate { get; set; }
         public string ExperienceLevel { get; set; }
         public string JobType { get; set; }
         public string JobFunctions { get; set; }
