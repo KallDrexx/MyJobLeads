@@ -28,7 +28,8 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
           IProcess<StartLinkedInUserAuthParams, GeneralSuccessResultViewModel>,
           IProcess<ProcessLinkedInAuthProcessParams, GeneralSuccessResultViewModel>,
           IProcess<LinkedInPositionSearchParams, PositionSearchResultsViewModel>,
-          IProcess<LinkedInPositionDetailsParams, ExternalPositionDetailsViewModel>
+          IProcess<LinkedInPositionDetailsParams, ExternalPositionDetailsViewModel>,
+          IProcess<AddLinkedInPositionParams, ExternalPositionAddedResultViewModel>
     {
         protected MyJobLeadsDbContext _context;
         protected IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel> _verifyLiTokenProcess;
@@ -227,6 +228,28 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             result.Title = position.Element("title").Value;
 
             return result;
+        }
+
+        /// <summary>
+        /// Adds the specified Linked In position (and associated company) to the user's current job search
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        public ExternalPositionAddedResultViewModel Execute(AddLinkedInPositionParams procParams)
+        {
+            var user = _context.Users
+                               .Where(x => x.Id == procParams.RequestingUserId)
+                               .Include(x => x.LinkedInOAuthData)
+                               .SingleOrDefault();
+
+            if (user == null)
+                throw new MJLEntityNotFoundException(typeof(User), procParams.RequestingUserId);
+
+            // Make sure we have a valid oauth token for the user
+            if (!_verifyLiTokenProcess.Execute(new VerifyUserLinkedInAccessTokenParams { UserId = user.Id }).AccessTokenValid)
+                throw new UserHasNoValidOAuthAccessTokenException(user.Id, TokenProvider.LinkedIn);
+
+            return null;
         }
 
         protected ServiceProviderDescription GetLiDescription()
