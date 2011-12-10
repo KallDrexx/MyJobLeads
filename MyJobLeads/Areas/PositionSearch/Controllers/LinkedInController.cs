@@ -9,6 +9,7 @@ using MyJobLeads.DomainModel.ViewModels.PositionSearching;
 using MyJobLeads.DomainModel.ProcessParams.PositionSearching.LinkedIn;
 using MyJobLeads.Infrastructure.Attributes;
 using MyJobLeads.DomainModel.ViewModels;
+using MyJobLeads.Areas.PositionSearch.Models;
 
 namespace MyJobLeads.Areas.PositionSearch.Controllers
 {
@@ -18,17 +19,19 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers
         protected IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel> _verifyTokenProcess;
         protected IProcess<StartLinkedInUserAuthParams, GeneralSuccessResultViewModel> _startLiAuthProcess;
         protected IProcess<ProcessLinkedInAuthProcessParams, GeneralSuccessResultViewModel> _finishLiAuthProcess;
-        
+        protected IProcess<LinkedInPositionSearchParams, PositionSearchResultsViewModel> _searchProcess;
 
         public LinkedInController(MyJobLeadsDbContext context,
                                     IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel> verifyTokenProcess,
                                     IProcess<StartLinkedInUserAuthParams, GeneralSuccessResultViewModel> startLiAuthProcess,
-                                    IProcess<ProcessLinkedInAuthProcessParams, GeneralSuccessResultViewModel> finishLiAuthProcess)
+                                    IProcess<ProcessLinkedInAuthProcessParams, GeneralSuccessResultViewModel> finishLiAuthProcess,
+                                    IProcess<LinkedInPositionSearchParams, PositionSearchResultsViewModel> searchProcess)
         {
             _context = context;
             _verifyTokenProcess = verifyTokenProcess;
             _startLiAuthProcess = startLiAuthProcess;
             _finishLiAuthProcess = finishLiAuthProcess;
+            _searchProcess = searchProcess;
         }
 
         public virtual ActionResult Index()
@@ -38,6 +41,29 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers
                 return RedirectToAction(MVC.PositionSearch.LinkedIn.AuthorizationAlert());
 
             return View();
+        }
+
+        public virtual ActionResult PerformSearch(PositionSearchQueryViewModel searchParams, int pageNum = 0)
+        {
+            if (!ModelState.IsValid)
+                return View(new PerformedSearchViewModel { SearchQuery = searchParams });
+
+            var results = _searchProcess.Execute(new LinkedInPositionSearchParams
+            {
+                RequestingUserId = CurrentUserId,
+                Keywords = searchParams.Keywords,
+                CountryCode = searchParams.SelectedCountryCode,
+                ZipCode = searchParams.PostalCode,
+                ResultsPageNum = pageNum
+            });
+
+            var model = new PerformedSearchViewModel
+            {
+                SearchQuery = searchParams,
+                Results = results
+            };
+
+            return View(model);
         }
 
         public virtual ActionResult AuthorizationAlert()

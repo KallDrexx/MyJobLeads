@@ -1,0 +1,53 @@
+﻿@model MyJobLeads.Areas.PositionSearch.Models.PerformedSearchViewModel
+
+@{
+    ViewBag.Title = "LinkedIn Job Search";
+}
+
+@{Html.RenderPartial(MVC.PositionSearch.LinkedIn.Views._SearchForm, Model.SearchQuery);}
+
+@if (Model.Results != null)
+{
+    string urlParams = string.Format("Keywords={0}&SelectedCountry={1}&PostalCode={2}",
+                                        Url.Encode(Model.SearchQuery.Keywords),
+                                        Url.Encode(Model.SearchQuery.SelectedCountryCode),
+                                        Url.Encode(Model.SearchQuery.PostalCode));
+    
+    <div class="grid3 floatLeft">
+        <div class="positionResultsHeader">
+            <h3>Results (Showing @Model.Results.Results.Count out of @Model.Results.TotalCount)</h3>
+            <ul class="positionSearchNotification">
+                <li>Page @(Model.Results.ResultsPageNum + 1) of X</li>
+
+                @if (Model.Results.ResultsPageNum > 0)
+                {
+                    <li>
+                        <a href="@Url.Action(MVC.PositionSearch.LinkedIn.PerformSearch())?@urlParams&pageNum=@(Model.Results.ResultsPageNum - 1)">
+                            Previous Page
+                        </a>
+                    </li>
+                }
+                <li>
+                    <a href="@Url.Action(MVC.PositionSearch.LinkedIn.PerformSearch())?@urlParams&pageNum=@(Model.Results.ResultsPageNum + 1)">
+                        Next Page
+                    </a>
+                </li>               
+            </ul>       
+        </div>
+
+        <div id="positionRole">
+            <ul>
+                @foreach (var position in Model.Results.Results)
+                {
+                    <li>
+                        <a href="@Url.Action(MVC.Task.Details())">
+                            <div class="taskName">@position.Headline</div>
+                            <div class="positionCompany">@position.Company</div>
+                            <div class="taskDescription">@position.Description...</div>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}
