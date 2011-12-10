@@ -16,13 +16,15 @@ namespace MyJobLeads.DomainModel.ViewModels.PositionSearching
         public IList<PositionSearchResultViewModel> Results { get; set; }
 
         public int TotalCount { get; set; }
-        public int ResultsPageNum { get; set; }
+        public int PageSize { get; set; }
+        public int PageNum { get; set; }
+
         public ExternalDataSource DataSource { get; set; }
 
         public class PositionSearchResultViewModel
         {
             public int JobId { get; set; }
-            public string Headline { get; set; }
+            public string Title { get; set; }
             public string Company { get; set; }
             public string Location { get; set; }
             public string Description { get; set; }

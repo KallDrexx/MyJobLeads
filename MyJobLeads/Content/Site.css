@@ -627,7 +627,7 @@ ol
 #positionRole ul .date{
 	float:right;
 	}
-.positionCompany, .positionCompany a:visited{
+.positionSubHeading, .positionSubHeading a:visited{
 	color: Black;
 	font-weight:800;
 	}

@@ -12,26 +12,36 @@
                                         Url.Encode(Model.SearchQuery.Keywords),
                                         Url.Encode(Model.SearchQuery.SelectedCountryCode),
                                         Url.Encode(Model.SearchQuery.PostalCode));
+
+    int firstResultCount = Model.Results.PageNum * Model.Results.PageSize + 1;
+    int lastResultCount = firstResultCount + Model.Results.Results.Count - 1;
+    
+    int totalPages = Model.Results.TotalCount / Model.Results.PageSize;
+    if (Model.Results.TotalCount % Model.Results.PageSize != 0) { totalPages++; }
     
     <div class="grid3 floatLeft">
         <div class="positionResultsHeader">
-            <h3>Results (Showing @Model.Results.Results.Count out of @Model.Results.TotalCount)</h3>
+            <h3>Found Positions (displaying  @firstResultCount - @lastResultCount out of @Model.Results.TotalCount)</h3>
             <ul class="positionSearchNotification">
-                <li>Page @(Model.Results.ResultsPageNum + 1) of X</li>
+                <li>Page @(Model.Results.PageNum + 1) of @totalPages</li>
 
-                @if (Model.Results.ResultsPageNum > 0)
+                @if (Model.Results.PageNum > 0)
                 {
                     <li>
-                        <a href="@Url.Action(MVC.PositionSearch.LinkedIn.PerformSearch())?@urlParams&pageNum=@(Model.Results.ResultsPageNum - 1)">
+                        <a href="@Url.Action(MVC.PositionSearch.LinkedIn.PerformSearch())?@urlParams&pageNum=@(Model.Results.PageNum - 1)">
                             Previous Page
                         </a>
                     </li>
                 }
-                <li>
-                    <a href="@Url.Action(MVC.PositionSearch.LinkedIn.PerformSearch())?@urlParams&pageNum=@(Model.Results.ResultsPageNum + 1)">
-                        Next Page
-                    </a>
-                </li>               
+                
+                @if (Model.Results.PageNum < totalPages - 1)
+                {
+                    <li>
+                        <a href="@Url.Action(MVC.PositionSearch.LinkedIn.PerformSearch())?@urlParams&pageNum=@(Model.Results.PageNum + 1)">
+                            Next Page
+                        </a>
+                    </li>               
+                }
             </ul>       
         </div>
 
@@ -40,9 +50,9 @@
                 @foreach (var position in Model.Results.Results)
                 {
                     <li>
-                        <a href="@Url.Action(MVC.Task.Details())">
-                            <div class="taskName">@position.Headline</div>
-                            <div class="positionCompany">@position.Company</div>
+                        <a href="@Url.Action(MVC.Task.Details())" title="View Position Details">
+                            <div class="taskName">@position.Company</div>
+                            <div class="positionSubHeading">@position.Location</div>
                             <div class="taskDescription">@position.Description...</div>
                         </a>
                     </li>

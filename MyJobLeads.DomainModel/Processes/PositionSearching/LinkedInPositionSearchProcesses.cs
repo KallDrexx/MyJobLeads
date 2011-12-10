@@ -61,10 +61,10 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
                 throw new UserHasNoValidOAuthAccessTokenException(user.Id, TokenProvider.LinkedIn);
 
             // Form the API Url based on the criteria
-            string apiUrl = string.Format("http://api.linkedin.com/v1/job-search?country-code={0}&Keywords={1}&start={2}&count={3}", 
+            string apiUrl = string.Format("http://api.linkedin.com/v1/job-search?country-code={0}&keywords={1}&start={2}&count={3}", 
                                 HttpUtility.UrlEncode(procParams.CountryCode), 
                                 HttpUtility.UrlEncode(procParams.Keywords), 
-                                procParams.ResultsPageNum,
+                                procParams.ResultsPageNum * resultsPageSize,
                                 resultsPageSize);
 
             if (!string.IsNullOrWhiteSpace(procParams.ZipCode))
@@ -77,14 +77,18 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             var response = request.GetResponse();
 
             // Get the results from the respones
-            var resultsVm = new PositionSearchResultsViewModel { ResultsPageNum = procParams.ResultsPageNum, DataSource = ExternalDataSource.LinkedIn };
             var xmlResponse = XDocument.Load(response.GetResponseStream());
+            var resultsVm = new PositionSearchResultsViewModel 
+            { 
+                PageNum = procParams.ResultsPageNum, 
+                DataSource = ExternalDataSource.LinkedIn,
+                PageSize = resultsPageSize
+            };
 
             resultsVm.Results = (from job in xmlResponse.Descendants("job")
                                  select new PositionSearchResultsViewModel.PositionSearchResultViewModel
                                  {
                                      JobId = Convert.ToInt32(job.Element("id").Value),
-                                     Headline = job.Element("job-poster").Element("headline").Value,
                                      Company = job.Element("company").Element("name").Value,
                                      Location = job.Element("location-description").Value,
                                      Description = job.Element("description-snippet").Value
@@ -92,7 +96,11 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
 
             var searchStats = xmlResponse.Descendants("jobs").First();
             resultsVm.TotalCount = Convert.ToInt32(searchStats.Attribute("total").Value);
-            resultsVm.ResultsPageNum = Convert.ToInt32(searchStats.Attribute("start").Value);
+
+            if (searchStats.Attribute("start") != null)
+                resultsVm.PageNum = Convert.ToInt32(searchStats.Attribute("start").Value) / resultsPageSize;
+            else
+                resultsVm.PageNum = 0;
             
             //resultsVm.Results = xmlResponse.wh
             return resultsVm;
