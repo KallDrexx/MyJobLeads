@@ -45,7 +45,9 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string Index = "Index";
+            public readonly string AuthorizationAlert = "AuthorizationAlert";
             public readonly string BeginAuthorization = "BeginAuthorization";
+            public readonly string ProcessAuthorization = "ProcessAuthorization";
         }
 
 
@@ -54,6 +56,7 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string AuthorizationAlert = "~/Areas/PositionSearch/Views/LinkedIn/AuthorizationAlert.cshtml";
         }
     }
 
@@ -66,8 +69,18 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers {
             return callInfo;
         }
 
+        public override System.Web.Mvc.ActionResult AuthorizationAlert() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AuthorizationAlert);
+            return callInfo;
+        }
+
         public override System.Web.Mvc.ActionResult BeginAuthorization() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.BeginAuthorization);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ProcessAuthorization() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ProcessAuthorization);
             return callInfo;
         }
 

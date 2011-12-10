@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Authorization Alert";
+}
+
+<div class="grid1 floatLeft"> 
+    <div class="pageInfoBox"> 
+        <div class="grid3 marginBottom_10 marginAuto floatLeft">
+            <h3>LinkedIn Authorization</h3>
+        </div>
+
+        <div class="grid3 marginBottom_10 marginAuto floatLeft">
+            <p>
+               In order to perform a job search MyLeads needs your authorization with Linked In to perform job searches on your account. <br /><br />
+
+               We promise to never take any actions on your Linked In account without your explicit approval at every steps. <br /><br />
+
+               @Html.ActionLink("Authorize Your Linked In Account", MVC.PositionSearch.LinkedIn.BeginAuthorization());
+            </p>
+        </div>
+            
+        <div class="clear"></div>
+    </div>
+</div>
