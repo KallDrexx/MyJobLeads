@@ -595,12 +595,22 @@ ol
 .positionResultsHeader{
 	height:20px;
 	width:740px;
-	margin:30px 0 20px 20px;
+	margin:15px 0 20px 20px;
 	border-bottom:#666 1px solid;
 	}
 .positionResultsHeader h3{
 	float:left;
 	}
+.lowerPositionResultsHeader{
+	height:20px;
+	width:740px;
+	margin:0px 0 20px 20px;
+	border-top:#666 1px solid;
+	}
+.lowerPositionResultsHeader h3{
+	float:left;
+	}
+
 .positionSearchNotification {
 	float:right
 	}

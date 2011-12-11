@@ -59,5 +59,30 @@
                 }
             </ul>
         </div>
+
+        <div class="lowerPositionResultsHeader">
+            <h3>Found Positions (displaying  @firstResultCount - @lastResultCount out of @Model.Results.TotalCount)</h3>
+            <ul class="positionSearchNotification">
+                <li>Page @(Model.Results.PageNum + 1) of @totalPages</li>
+
+                @if (Model.Results.PageNum > 0)
+                {
+                    <li>
+                        <a href="@Url.Action(MVC.PositionSearch.LinkedIn.PerformSearch())?@urlParams&pageNum=@(Model.Results.PageNum - 1)">
+                            Previous Page
+                        </a>
+                    </li>
+                }
+                
+                @if (Model.Results.PageNum < totalPages - 1)
+                {
+                    <li>
+                        <a href="@Url.Action(MVC.PositionSearch.LinkedIn.PerformSearch())?@urlParams&pageNum=@(Model.Results.PageNum + 1)">
+                            Next Page
+                        </a>
+                    </li>               
+                }
+            </ul>       
+        </div>
     </div>
 }
