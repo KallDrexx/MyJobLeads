@@ -88,6 +88,18 @@ namespace MyJobLeads.DomainModel.Processes.Positions
             position.HasApplied = procParams.HasApplied;
             position.Notes = procParams.Notes;
 
+            position.History.Add(new PositionHistory
+            {
+                Title = procParams.Title,
+                HasApplied = procParams.HasApplied,
+                Notes = procParams.Notes,
+                LinkedInId = position.LinkedInId,
+
+                AuthoringUserId = procParams.RequestingUserId,
+                DateModified = DateTime.Now,
+                HistoryAction = MJLConstants.HistoryUpdate
+            });
+
             _context.SaveChanges();
 
             return Mapper.Map<Position, PositionDisplayViewModel>(position);

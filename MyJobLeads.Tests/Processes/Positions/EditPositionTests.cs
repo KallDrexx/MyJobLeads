@@ -12,6 +12,7 @@ using MyJobLeads.DomainModel.Exceptions;
 using Moq;
 using MyJobLeads.DomainModel.ViewModels.Authorizations;
 using MyJobLeads.DomainModel.ProcessParams.Security;
+using MyJobLeads.DomainModel;
 
 namespace MyJobLeads.Tests.Processes.Positions
 {
@@ -33,8 +34,12 @@ namespace MyJobLeads.Tests.Processes.Positions
             {
                 HasApplied = true,
                 Title = "start title",
-                Notes = "start note"
+                Notes = "start note",
+                LinkedInId = "LiId"
             };
+
+            User user = new User();
+            _context.Users.Add(user);
             _context.Positions.Add(position);
             _context.SaveChanges();
 
@@ -44,7 +49,8 @@ namespace MyJobLeads.Tests.Processes.Positions
                 Id = position.Id,
                 Title = "title",
                 HasApplied = false,
-                Notes = "notes"
+                Notes = "notes",
+                RequestingUserId = user.Id
             });
 
             // Verify
@@ -52,6 +58,7 @@ namespace MyJobLeads.Tests.Processes.Positions
             Assert.AreEqual("title", result.Title, "Position's title was incorrect");
             Assert.AreEqual("notes", result.Notes, "Position's note was incorrect");
             Assert.IsFalse(result.HasApplied, "Position's has applied value was incorrect");
+            Assert.AreEqual("LiId", result.LinkedInId, "Position's linked in id was incorrect");
         }
 
         [TestMethod]
@@ -71,6 +78,9 @@ namespace MyJobLeads.Tests.Processes.Positions
                 Title = "start title",
                 Notes = "start note"
             };
+
+            User user = new User();
+            _context.Users.Add(user);
             _context.Positions.Add(position);
             _context.SaveChanges();
 
@@ -80,13 +90,63 @@ namespace MyJobLeads.Tests.Processes.Positions
                 Id = position.Id,
                 Title = "title",
                 HasApplied = false,
-                Notes = "notes"
+                Notes = "notes",
+                RequestingUserId = user.Id
             });
 
             // Verify
             Assert.AreEqual("title", result.Title, "Position's title was incorrect");
             Assert.AreEqual("notes", result.Notes, "Position's note was incorrect");
             Assert.IsFalse(result.HasApplied, "Position's has applied value was incorrect");
+        }
+
+        [TestMethod]
+        public void Editing_Position_Creates_History_Record()
+        {
+            // Setup
+            var posAuthMock = new Mock<IProcess<PositionAuthorizationParams, AuthorizationResultViewModel>>();
+            posAuthMock.Setup(x => x.Execute(It.IsAny<PositionAuthorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = true });
+
+            var companyAuthMock = new Mock<IProcess<CompanyQueryAuthorizationParams, AuthorizationResultViewModel>>();
+            companyAuthMock.Setup(x => x.Execute(It.IsAny<CompanyQueryAuthorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = true });
+
+            IProcess<EditPositionParams, PositionDisplayViewModel> process = new PositionProcesses(_context, posAuthMock.Object, companyAuthMock.Object);
+            Position position = new Position
+            {
+                HasApplied = true,
+                Title = "start title",
+                Notes = "start note",
+                LinkedInId = "MyLinkedIn"
+            };
+
+            User user = new User();
+            _context.Users.Add(user);
+            _context.Positions.Add(position);
+            _context.SaveChanges();
+
+            // Act
+            DateTime start = DateTime.Now;
+            process.Execute(new EditPositionParams
+            {
+                Id = position.Id,
+                Title = "title",
+                HasApplied = true,
+                Notes = "notes",
+                RequestingUserId = user.Id
+            });
+            DateTime end = DateTime.Now;
+
+            // Verify
+            var result = _context.Positions.Single().History.SingleOrDefault();
+            Assert.IsNotNull(result, "No history record was created");
+            Assert.AreEqual("title", result.Title, "History record's title was incorrect");
+            Assert.AreEqual(true, result.HasApplied, "History record's has applied value was incorrect");
+            Assert.AreEqual("notes", result.Notes, "History record's notes were incorrect");
+            Assert.AreEqual("MyLinkedIn", result.LinkedInId, "History record's linked in value was incorrect");
+
+            Assert.AreEqual(MJLConstants.HistoryUpdate, result.HistoryAction, "History record's action value was incorrect");
+            Assert.AreEqual(user.Id, result.AuthoringUserId, "History record's author id value was incorrect");
+            Assert.IsTrue(result.DateModified >= start && result.DateModified <= end, "History record's date modified was incorrect");
         }
 
         [TestMethod]
