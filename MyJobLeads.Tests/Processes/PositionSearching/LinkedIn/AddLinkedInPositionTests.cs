@@ -127,6 +127,35 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
         }
 
         [TestMethod]
+        public void Throws_EntityNotFoundException_When_Existing_Company_Doesnt_Exist()
+        {
+            // Setup
+            _companyQueryMock.Setup(x => x.Execute()).Returns((Company)null);
+            int id = 9;
+
+            // Act
+            try
+            {
+                _process.Execute(new AddLinkedInPositionParams 
+                { 
+                    PositionId = POSITION_ID, 
+                    ExistingCompanyId = id,
+                    RequestingUserId = _user.Id
+                });
+                Assert.Fail("No exception was thrown");
+            }
+
+            // Verify
+            catch (MJLEntityNotFoundException ex)
+            {
+                Assert.AreEqual(typeof(Company), ex.EntityType, "Exception's entity type value was incorrect");
+                Assert.AreEqual(id.ToString(), ex.IdValue, "Exception's id value was incorrect");
+            }
+
+            
+        }
+
+        [TestMethod]
         public void Throws_UserHasNoValidOAuthAccessTokenException_When_User_OAuth_Invalid()
         {
             // Setup

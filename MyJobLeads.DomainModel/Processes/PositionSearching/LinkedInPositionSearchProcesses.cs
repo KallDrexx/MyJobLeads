@@ -179,6 +179,8 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
                     company = _companyQuery.WithCompanyId(procParams.ExistingCompanyId)
                                            .RequestedByUserId(user.Id)
                                            .Execute();
+                    if (company == null)
+                        throw new MJLEntityNotFoundException(typeof(Company), procParams.ExistingCompanyId);
                 }
 
                 // Create the position
