@@ -13,6 +13,7 @@ using System.Diagnostics.Contracts;
 using System.Data.Entity;
 using MyJobLeads.DomainModel.ProcessParams.Security;
 using MyJobLeads.DomainModel.ViewModels.Authorizations;
+using MyJobLeads.DomainModel.Entities.History;
 
 namespace MyJobLeads.DomainModel.Processes.Positions
 {
@@ -53,6 +54,18 @@ namespace MyJobLeads.DomainModel.Processes.Positions
                 Company = company,
                 LinkedInId = procParams.LinkedInId
             };
+
+            position.History.Add(new PositionHistory
+            {
+                Title = procParams.Title,
+                Notes = procParams.Notes,
+                HasApplied = procParams.HasApplied,
+                LinkedInId = procParams.LinkedInId,
+                
+                AuthoringUserId = procParams.RequestingUserId,
+                DateModified = DateTime.Now,
+                HistoryAction = MJLConstants.HistoryInsert
+            });
 
             _context.Positions.Add(position);
             _context.SaveChanges();

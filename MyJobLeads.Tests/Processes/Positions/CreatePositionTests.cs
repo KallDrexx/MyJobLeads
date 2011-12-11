@@ -13,6 +13,7 @@ using MyJobLeads.DomainModel.ProcessParams.Security;
 using MyJobLeads.DomainModel.ViewModels.Authorizations;
 using Moq;
 using MyJobLeads.DomainModel.Queries.Positions;
+using MyJobLeads.DomainModel;
 
 namespace MyJobLeads.Tests.Processes.Positions
 {
@@ -30,7 +31,10 @@ namespace MyJobLeads.Tests.Processes.Positions
             companyAuthMock.Setup(x => x.Execute(It.IsAny<CompanyQueryAuthorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = true });
 
             IProcess<CreatePositionParams, PositionDisplayViewModel> process = new PositionProcesses(_context, positionAuthMock.Object, companyAuthMock.Object);
+
+            User user = new User();
             Company company = new Company();
+            _context.Users.Add(user);
             _context.Companies.Add(company);
             _context.SaveChanges();
 
@@ -41,7 +45,8 @@ namespace MyJobLeads.Tests.Processes.Positions
                 Title = "title",
                 HasApplied = true,
                 Notes = "Notes",
-                LinkedInId = "ABC123"
+                LinkedInId = "ABC123",
+                RequestingUserId = user.Id
             });
 
             // Verify
@@ -63,7 +68,10 @@ namespace MyJobLeads.Tests.Processes.Positions
             companyAuthMock.Setup(x => x.Execute(It.IsAny<CompanyQueryAuthorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = true });
 
             IProcess<CreatePositionParams, PositionDisplayViewModel> process = new PositionProcesses(_context, positionAuthMock.Object, companyAuthMock.Object);
+
+            User user = new User();
             Company company = new Company();
+            _context.Users.Add(user);
             _context.Companies.Add(company);
             _context.SaveChanges();
 
@@ -74,7 +82,8 @@ namespace MyJobLeads.Tests.Processes.Positions
                 Title = "title",
                 HasApplied = true,
                 Notes = "Notes",
-                LinkedInId = "ABC123"
+                LinkedInId = "ABC123",
+                RequestingUserId = user.Id
             });
 
             // Verify
@@ -82,6 +91,52 @@ namespace MyJobLeads.Tests.Processes.Positions
             Assert.IsTrue(result.HasApplied, "Position had an incorrect HasApplied value");
             Assert.AreEqual("Notes", result.Notes, "Position had an incorrect note");
             Assert.AreEqual("ABC123", result.LinkedInId, "Position had an incorrect LinkedIn id");
+        }
+
+        [TestMethod]
+        public void Position_Gets_Created_With_History_Record()
+        {
+            // Setup
+            var positionAuthMock = new Mock<IProcess<PositionAuthorizationParams, AuthorizationResultViewModel>>();
+            positionAuthMock.Setup(x => x.Execute(It.IsAny<PositionAuthorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = true });
+
+            var companyAuthMock = new Mock<IProcess<CompanyQueryAuthorizationParams, AuthorizationResultViewModel>>();
+            companyAuthMock.Setup(x => x.Execute(It.IsAny<CompanyQueryAuthorizationParams>())).Returns(new AuthorizationResultViewModel { UserAuthorized = true });
+
+            IProcess<CreatePositionParams, PositionDisplayViewModel> process = new PositionProcesses(_context, positionAuthMock.Object, companyAuthMock.Object);
+
+            User user = new User();
+            Company company = new Company();
+            _context.Users.Add(user);
+            _context.Companies.Add(company);
+            _context.SaveChanges();
+
+            DateTime start, end;
+
+            // Act
+            start = DateTime.Now;
+            process.Execute(new CreatePositionParams
+            {
+                CompanyId = company.Id,
+                Title = "title",
+                HasApplied = true,
+                Notes = "Notes",
+                LinkedInId = "ABC123",
+                RequestingUserId = user.Id
+            });
+            end = DateTime.Now;
+
+            // Verify
+            var result = _context.Positions.Single().History.SingleOrDefault();
+            Assert.IsNotNull(result, "No history record was created");
+            Assert.AreEqual("title", result.Title, "History record's title was incorrect");
+            Assert.AreEqual(true, result.HasApplied, "History record's applied value was incorrect");
+            Assert.AreEqual("Notes", result.Notes, "History record's notes value was incorrect");
+            Assert.AreEqual("ABC123", result.LinkedInId, "History record's linkedin id was incorrect");
+
+            Assert.AreEqual(MJLConstants.HistoryInsert, result.HistoryAction, "History action was incorrect");
+            Assert.AreEqual(user.Id, result.AuthoringUserId, "History record's authoring user id was incorrect");
+            Assert.IsTrue(result.DateModified >= start && result.DateModified <= end, "History's date was incorrect");
         }
 
         [TestMethod]

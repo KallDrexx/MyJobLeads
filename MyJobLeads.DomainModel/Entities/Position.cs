@@ -8,6 +8,11 @@ namespace MyJobLeads.DomainModel.Entities
 {
     public class Position
     {
+        public Position()
+        {
+            History = new List<PositionHistory>();
+        }
+
         public int Id { get; set; }
         public string Title { get; set; }
         public bool HasApplied { get; set; }

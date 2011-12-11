@@ -10,6 +10,7 @@ namespace MyJobLeads.DomainModel.Entities.History
         public string Title { get; set; }
         public bool HasApplied { get; set; }
         public string Notes { get; set; }
+        public string LinkedInId { get; set; }
 
         public int? PositionId { get; set; }
         public virtual Position Position { get; set; }
