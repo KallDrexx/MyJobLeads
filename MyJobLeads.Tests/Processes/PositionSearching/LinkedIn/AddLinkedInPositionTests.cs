@@ -13,6 +13,9 @@ using MyJobLeads.DomainModel.Enums;
 using DotNetOpenAuth.OAuth.ChannelElements;
 using MyJobLeads.DomainModel.Exceptions.OAuth;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.ViewModels.Positions;
+using MyJobLeads.DomainModel.ProcessParams.Positions;
+using MyJobLeads.DomainModel.Commands.Companies;
 
 namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
 {
@@ -20,18 +23,27 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
     public class AddLinkedInPositionTests : EFTestBase
     {
         protected const string POSITION_ID = "217456";
+        protected const int COMPANY_ID = 55;
 
         protected IProcess<AddLinkedInPositionParams, ExternalPositionAddedResultViewModel> _process;
         protected Mock<IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel>> _verifyTokenMock;
         protected User _user;
+        protected Mock<IProcess<CreatePositionParams, PositionDisplayViewModel>> _createPositionMock;
+        protected Mock<CreateCompanyCommand> _createCompanyCmdMock;
 
         [TestInitialize]
         public void Init()
         {
+            _createPositionMock = new Mock<IProcess<CreatePositionParams, PositionDisplayViewModel>>();
+            _createPositionMock.Setup(x => x.Execute(It.IsAny<CreatePositionParams>())).Returns(new PositionDisplayViewModel());
+
             _verifyTokenMock = new Mock<IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel>>();
             _verifyTokenMock.Setup(x => x.Execute(It.IsAny<VerifyUserLinkedInAccessTokenParams>())).Returns(new UserAccessTokenResultViewModel { AccessTokenValid = true });
+            
+            _createCompanyCmdMock = new Mock<CreateCompanyCommand>(_serviceFactory.Object);
+            _createCompanyCmdMock.Setup(x => x.Execute()).Returns(new Company { Id = COMPANY_ID });
 
-            _process = new LinkedInPositionSearchProcesses(_context, _verifyTokenMock.Object);
+            _process = new LinkedInPositionSearchProcesses(_context, _verifyTokenMock.Object, _createCompanyCmdMock.Object, _createPositionMock.Object);
 
             // Initialize user with test (but valid) access token data
             _user = new User { LastVisitedJobSearch = new JobSearch() };
@@ -51,22 +63,45 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
         }
 
         [TestMethod]
-        public void Can_Add_Position_And_Company_To_Users_Jobsearch()
+        public void Can_Add_Position()
         {
+            // Setup
+            string expTitle = "Research Manager supporting Forbes.com worldwide online ad sales team";
+
             // Act
-            var result = _process.Execute(new AddLinkedInPositionParams { RequestingUserId = _user.Id, PositionId = POSITION_ID });
+            var result = _process.Execute(new AddLinkedInPositionParams
+            {
+                RequestingUserId = _user.Id,
+                PositionId = POSITION_ID,
+                CreateNewCompany = true
+            });
 
             // Verify
             Assert.IsNotNull(result, "Process returned a null result");
-            Assert.IsTrue(result.AddedSuccessfully, "Process' result was not marked as successful");
+            _createPositionMock.Verify(x => x.Execute(It.Is<CreatePositionParams>(y => y.Title == expTitle)));
+            _createPositionMock.Verify(x => x.Execute(It.Is<CreatePositionParams>(y => y.RequestingUserId == _user.Id)));
+            _createPositionMock.Verify(x => x.Execute(It.Is<CreatePositionParams>(y => y.CompanyId == COMPANY_ID)));
+        }
+
+        [TestMethod]
+        public void Can_Add_Company_To_Users_Jobsearch()
+        {
+            // Act
+            var result = _process.Execute(new AddLinkedInPositionParams 
+            { 
+                RequestingUserId = _user.Id, 
+                PositionId = POSITION_ID,
+                CreateNewCompany = true
+            });
+
+            // Verify
+            Assert.IsNotNull(result, "Process returned a null result");
 
             var company = _user.LastVisitedJobSearch.Companies.FirstOrDefault();
             Assert.IsNotNull(company, "No company was added for the user");
             Assert.AreEqual(result.CompanyId, company.Id, "Returned company ID did not match the company in the database");
-
-            var position = company.Positions.FirstOrDefault();
-            Assert.IsNotNull(position, "No position was added for the company");
-            Assert.AreEqual(result.PositionId, position.Id, "Returned position id did not match the position in the database");
+            Assert.AreEqual("Forbes.com Inc.", company.Name, "Created company did not have the correct name");
+            Assert.AreEqual(company.Name, result.CompanyName, "Returned company name was incorrect");
         }
 
         [TestMethod]

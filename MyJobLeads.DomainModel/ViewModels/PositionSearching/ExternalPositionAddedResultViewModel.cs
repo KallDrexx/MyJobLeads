@@ -8,7 +8,8 @@ namespace MyJobLeads.DomainModel.ViewModels.PositionSearching
     public class ExternalPositionAddedResultViewModel
     {
         public int CompanyId { get; set; }
+        public string CompanyName { get; set; }
         public int PositionId { get; set; }
-        public bool AddedSuccessfully { get; set; }
+        public string PositionTitle { get; set; }
     }
 }

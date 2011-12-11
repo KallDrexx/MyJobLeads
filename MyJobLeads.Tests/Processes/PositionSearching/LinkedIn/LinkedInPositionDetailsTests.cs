@@ -11,6 +11,9 @@ using Moq;
 using MyJobLeads.DomainModel.Entities;
 using DotNetOpenAuth.OAuth.ChannelElements;
 using MyJobLeads.DomainModel.Enums;
+using MyJobLeads.DomainModel.ViewModels.Positions;
+using MyJobLeads.DomainModel.ProcessParams.Positions;
+using MyJobLeads.DomainModel.Commands.Companies;
 
 namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
 {
@@ -20,6 +23,7 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
         protected IProcess<LinkedInPositionDetailsParams, ExternalPositionDetailsViewModel> _process;
         protected Mock<IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel>> _verifyTokenMock;
         protected User _user;
+        protected Mock<IProcess<CreatePositionParams, PositionDisplayViewModel>> _createPositionMock;
 
         [TestInitialize]
         public void Init()
@@ -27,7 +31,10 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
             _verifyTokenMock = new Mock<IProcess<VerifyUserLinkedInAccessTokenParams,UserAccessTokenResultViewModel>>();
             _verifyTokenMock.Setup(x => x.Execute(It.IsAny<VerifyUserLinkedInAccessTokenParams>())).Returns(new UserAccessTokenResultViewModel { AccessTokenValid = true });
 
-            _process = new LinkedInPositionSearchProcesses(_context, _verifyTokenMock.Object);
+            _createPositionMock = new Mock<IProcess<CreatePositionParams, PositionDisplayViewModel>>();
+            var createCompanyCmd = new CreateCompanyCommand(_serviceFactory.Object);
+
+            _process = new LinkedInPositionSearchProcesses(_context, _verifyTokenMock.Object, createCompanyCmd, _createPositionMock.Object);
 
             // Initialize user with test (but valid) access token data
             _user = new User();

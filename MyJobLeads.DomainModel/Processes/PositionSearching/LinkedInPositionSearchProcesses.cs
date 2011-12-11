@@ -21,6 +21,10 @@ using System.Xml;
 using System.Xml.Linq;
 using MyJobLeads.DomainModel.Exceptions.OAuth;
 using MyJobLeads.DomainModel.Processes.OAuth;
+using MyJobLeads.DomainModel.Commands.Companies;
+using System.Transactions;
+using MyJobLeads.DomainModel.ViewModels.Positions;
+using MyJobLeads.DomainModel.ProcessParams.Positions;
 
 namespace MyJobLeads.DomainModel.Processes.PositionSearching
 {
@@ -31,12 +35,18 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
     {
         protected MyJobLeadsDbContext _context;
         protected IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel> _verifyLiTokenProcess;
+        protected CreateCompanyCommand _createCompanyCmd;
+        protected IProcess<CreatePositionParams, PositionDisplayViewModel> _createPositionProcess;
 
         public LinkedInPositionSearchProcesses(MyJobLeadsDbContext context, 
-                            IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel> verifyLiTokenProcess )
+                            IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel> verifyLiTokenProcess,
+                            CreateCompanyCommand createCompanyCmd,
+                            IProcess<CreatePositionParams, PositionDisplayViewModel> createPositionProcess)
         {
             _context = context;
             _verifyLiTokenProcess = verifyLiTokenProcess;
+            _createCompanyCmd = createCompanyCmd;
+            _createPositionProcess = createPositionProcess;
         }
 
         /// <summary>
@@ -119,17 +129,77 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
                                .Include(x => x.LinkedInOAuthData)
                                .SingleOrDefault();
 
+            return GetPositionDetails(procParams.PositionId.ToString(), user.LinkedInOAuthData.Token);
+        }
+
+        /// <summary>
+        /// Adds the specified Linked In position (and associated company) to the user's current job search
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        public ExternalPositionAddedResultViewModel Execute(AddLinkedInPositionParams procParams)
+        {
+            Company company;
+            PositionDisplayViewModel position;
+
+            var user = _context.Users
+                               .Where(x => x.Id == procParams.RequestingUserId)
+                               .Include(x => x.LinkedInOAuthData)
+                               .SingleOrDefault();
+
+            if (user == null)
+                throw new MJLEntityNotFoundException(typeof(User), procParams.RequestingUserId);
+
+            // Make sure we have a valid oauth token for the user
+            if (!_verifyLiTokenProcess.Execute(new VerifyUserLinkedInAccessTokenParams { UserId = user.Id }).AccessTokenValid)
+                throw new UserHasNoValidOAuthAccessTokenException(user.Id, TokenProvider.LinkedIn);
+
+            // Retrieve the position details
+            var positionDetails = GetPositionDetails(procParams.PositionId, user.LinkedInOAuthData.Token);
+            if (positionDetails == null)
+                throw new MJLEntityNotFoundException(typeof(ExternalPositionDetailsViewModel), procParams.PositionId);
+
+            // Start a transaction to make sure all operations can be rolled back
+            using (var transaction = new TransactionScope())
+            {
+                // Create the new company
+                company = _createCompanyCmd.SetName(positionDetails.CompanyName)
+                                           .CalledByUserId(procParams.RequestingUserId)
+                                           .Execute();
+
+                // Create the position
+                position = _createPositionProcess.Execute(new CreatePositionParams
+                {
+                    RequestingUserId = procParams.RequestingUserId,
+                    CompanyId = company.Id,
+                    Title = positionDetails.Title
+                });
+
+                transaction.Complete();
+
+                return new ExternalPositionAddedResultViewModel
+                {
+                    PositionId = position.Id,
+                    PositionTitle = position.Title,
+                    CompanyId = company.Id,
+                    CompanyName = company.Name
+                };
+            }   
+        }
+
+        protected ExternalPositionDetailsViewModel GetPositionDetails(string positionId, string userOAuthToken)
+        {
             // Form the API Url based on the criteria
             string apiUrl =
                 string.Format(
                     "http://api.linkedin.com/v1/jobs/{0}:(id,company:(id,name),position:({1}),description,posting-date,active,job-poster:(id,first-name,last-name,headline))",
-                    procParams.PositionId,
+                    positionId,
                     "title,location,job-functions,industries,job-type,experience-level");
 
             // Perform the search
             var consumer = new WebConsumer(LinkedInOAuthProcesses.GetLiDescription(), new LinkedInTokenManager(_context));
             var endpoint = new MessageReceivingEndpoint(apiUrl, HttpDeliveryMethods.GetRequest);
-            var request = consumer.PrepareAuthorizedRequest(endpoint, user.LinkedInOAuthData.Token);
+            var request = consumer.PrepareAuthorizedRequest(endpoint, userOAuthToken);
 
             WebResponse response;
             try { response = request.GetResponse(); }
@@ -176,30 +246,8 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             result.JobPosterId = poster.Element("id").Value;
             result.JobPosterName = string.Format("{0} {1}", poster.Element("first-name").Value, poster.Element("last-name").Value);
             result.JobPosterHeadline = poster.Element("headline").Value;
-                    
+
             return result;
-        }
-
-        /// <summary>
-        /// Adds the specified Linked In position (and associated company) to the user's current job search
-        /// </summary>
-        /// <param name="procParams"></param>
-        /// <returns></returns>
-        public ExternalPositionAddedResultViewModel Execute(AddLinkedInPositionParams procParams)
-        {
-            var user = _context.Users
-                               .Where(x => x.Id == procParams.RequestingUserId)
-                               .Include(x => x.LinkedInOAuthData)
-                               .SingleOrDefault();
-
-            if (user == null)
-                throw new MJLEntityNotFoundException(typeof(User), procParams.RequestingUserId);
-
-            // Make sure we have a valid oauth token for the user
-            if (!_verifyLiTokenProcess.Execute(new VerifyUserLinkedInAccessTokenParams { UserId = user.Id }).AccessTokenValid)
-                throw new UserHasNoValidOAuthAccessTokenException(user.Id, TokenProvider.LinkedIn);
-
-            return null;
         }
     }
 }
