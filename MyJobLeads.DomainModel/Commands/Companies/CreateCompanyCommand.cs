@@ -34,7 +34,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         /// </summary>
         /// <param name="jobSearchId"></param>
         /// <returns></returns>
-        public CreateCompanyCommand WithJobSearch(int jobSearchId)
+        public virtual CreateCompanyCommand WithJobSearch(int jobSearchId)
         {
             _searchId = jobSearchId;
             return this;
@@ -45,7 +45,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public CreateCompanyCommand SetName(string name)
+        public virtual CreateCompanyCommand SetName(string name)
         {
             _name = name;
             return this;
@@ -56,7 +56,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         /// </summary>
         /// <param name="phone"></param>
         /// <returns></returns>
-        public CreateCompanyCommand SetPhone(string phone)
+        public virtual CreateCompanyCommand SetPhone(string phone)
         {
             _phone = phone;
             return this;
@@ -67,7 +67,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         /// </summary>
         /// <param name="city"></param>
         /// <returns></returns>
-        public CreateCompanyCommand SetCity(string city)
+        public virtual CreateCompanyCommand SetCity(string city)
         {
             _city = city;
             return this;
@@ -78,7 +78,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         /// </summary>
         /// <param name="state"></param>
         /// <returns></returns>
-        public CreateCompanyCommand SetState(string state)
+        public virtual CreateCompanyCommand SetState(string state)
         {
             _state = state;
             return this;
@@ -89,7 +89,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         /// </summary>
         /// <param name="zip"></param>
         /// <returns></returns>
-        public CreateCompanyCommand SetZip(string zip)
+        public virtual CreateCompanyCommand SetZip(string zip)
         {
             _zip = zip;
             return this;
@@ -100,7 +100,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         /// </summary>
         /// <param name="metroArea"></param>
         /// <returns></returns>
-        public CreateCompanyCommand SetMetroArea(string metroArea)
+        public virtual CreateCompanyCommand SetMetroArea(string metroArea)
         {
             _metro = metroArea;
             return this;
@@ -111,7 +111,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         /// </summary>
         /// <param name="industry"></param>
         /// <returns></returns>
-        public CreateCompanyCommand SetIndustry(string industry)
+        public virtual CreateCompanyCommand SetIndustry(string industry)
         {
             _industry = industry;
             return this;
@@ -122,7 +122,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         /// </summary>
         /// <param name="notes"></param>
         /// <returns></returns>
-        public CreateCompanyCommand SetNotes(string notes)
+        public virtual CreateCompanyCommand SetNotes(string notes)
         {
             _notes = notes;
             return this;
@@ -133,7 +133,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public CreateCompanyCommand CalledByUserId(int userId)
+        public virtual CreateCompanyCommand CalledByUserId(int userId)
         {
             _callingUserId = userId;
             return this;

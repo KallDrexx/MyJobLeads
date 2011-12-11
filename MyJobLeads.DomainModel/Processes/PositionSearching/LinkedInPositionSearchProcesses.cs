@@ -164,6 +164,7 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             {
                 // Create the new company
                 company = _createCompanyCmd.SetName(positionDetails.CompanyName)
+                                           .WithJobSearch(Convert.ToInt32(user.LastVisitedJobSearchId))
                                            .CalledByUserId(procParams.RequestingUserId)
                                            .Execute();
 

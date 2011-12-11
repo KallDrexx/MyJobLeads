@@ -16,6 +16,7 @@ using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.ViewModels.Positions;
 using MyJobLeads.DomainModel.ProcessParams.Positions;
 using MyJobLeads.DomainModel.Commands.Companies;
+using MyJobLeads.Tests.Commands;
 
 namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
 {
@@ -39,8 +40,8 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
 
             _verifyTokenMock = new Mock<IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel>>();
             _verifyTokenMock.Setup(x => x.Execute(It.IsAny<VerifyUserLinkedInAccessTokenParams>())).Returns(new UserAccessTokenResultViewModel { AccessTokenValid = true });
-            
-            _createCompanyCmdMock = new Mock<CreateCompanyCommand>(_serviceFactory.Object);
+
+            _createCompanyCmdMock = CommandTestUtils.GenerateCreateCompanyCommandMock();
             _createCompanyCmdMock.Setup(x => x.Execute()).Returns(new Company { Id = COMPANY_ID });
 
             _process = new LinkedInPositionSearchProcesses(_context, _verifyTokenMock.Object, _createCompanyCmdMock.Object, _createPositionMock.Object);
@@ -96,12 +97,8 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
 
             // Verify
             Assert.IsNotNull(result, "Process returned a null result");
-
-            var company = _user.LastVisitedJobSearch.Companies.FirstOrDefault();
-            Assert.IsNotNull(company, "No company was added for the user");
-            Assert.AreEqual(result.CompanyId, company.Id, "Returned company ID did not match the company in the database");
-            Assert.AreEqual("Forbes.com Inc.", company.Name, "Created company did not have the correct name");
-            Assert.AreEqual(company.Name, result.CompanyName, "Returned company name was incorrect");
+            _createCompanyCmdMock.Verify(x => x.SetName("Forbes.com Inc."));
+            _createCompanyCmdMock.Verify(x => x.WithJobSearch(_user.LastVisitedJobSearch.Id));
         }
 
         [TestMethod]
