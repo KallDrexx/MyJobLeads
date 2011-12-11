@@ -96,11 +96,11 @@ WriteLiteral("</li>\r\n        <li>");
             
             #line default
             #line hidden
-WriteLiteral("</li>\r\n        <li>");
+WriteLiteral("</li>\r\n\r\n        <li>&nbsp;</li>\r\n\r\n        <li>");
 
 
             
-            #line 12 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
+            #line 15 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
        Write(Html.ActionLink("Find Open Positions", MVC.PositionSearch.LinkedIn.Index(), new { @class = Model.ActiveLink == ActiveSidebarLink.PositionSearch? "active" : "" }));
 
             
@@ -110,7 +110,7 @@ WriteLiteral("</li>\r\n\r\n");
 
 
             
-            #line 14 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
+            #line 17 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
          if (Model.HasCurrentJobSearchId)
         {
 
@@ -121,7 +121,7 @@ WriteLiteral("            <li>");
 
 
             
-            #line 16 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
+            #line 19 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
            Write(Html.ActionLink("Download My Data", MVC.JobSearch.Export()));
 
             
@@ -131,7 +131,7 @@ WriteLiteral("</li>\r\n");
 
 
             
-            #line 17 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
+            #line 20 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
         }
 
             
@@ -141,7 +141,7 @@ WriteLiteral("        \r\n        <li>");
 
 
             
-            #line 19 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
+            #line 22 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
        Write(Html.ActionLink("About", MVC.Home.About(), new { @class = Model.ActiveLink == ActiveSidebarLink.About? "active" : "" }));
 
             
@@ -151,7 +151,7 @@ WriteLiteral("</li>\r\n\r\n        <li>&nbsp;</li>\r\n\r\n");
 
 
             
-            #line 23 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
+            #line 26 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
          if (Model.UserType == MyJobLeads.ViewModels.Users.UserSidebarViewModel.AccountType.OrganizationAdmin)
         {
 
@@ -162,7 +162,7 @@ WriteLiteral("            <li>");
 
 
             
-            #line 25 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
+            #line 28 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
            Write(Html.ActionLink("University Dashboard", MVC.Organization.Dashboard.Index(), new { @class = Model.ActiveLink == ActiveSidebarLink.OrgAdmin ? "active" : "" }));
 
             
@@ -172,7 +172,7 @@ WriteLiteral("</li>\r\n");
 
 
             
-            #line 26 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
+            #line 29 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
         }
 
             
