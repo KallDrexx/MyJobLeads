@@ -36,6 +36,11 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers {
         public System.Web.Mvc.ActionResult PerformSearch() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.PerformSearch);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult PositionDetails() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.PositionDetails);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public LinkedInController Actions { get { return MVC.PositionSearch.LinkedIn; } }
@@ -51,6 +56,7 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers {
         public class ActionNamesClass {
             public readonly string Index = "Index";
             public readonly string PerformSearch = "PerformSearch";
+            public readonly string PositionDetails = "PositionDetails";
             public readonly string AuthorizationAlert = "AuthorizationAlert";
             public readonly string BeginAuthorization = "BeginAuthorization";
             public readonly string ProcessAuthorization = "ProcessAuthorization";
@@ -66,6 +72,7 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers {
             public readonly string AuthorizationAlert = "~/Areas/PositionSearch/Views/LinkedIn/AuthorizationAlert.cshtml";
             public readonly string Index = "~/Areas/PositionSearch/Views/LinkedIn/Index.cshtml";
             public readonly string PerformSearch = "~/Areas/PositionSearch/Views/LinkedIn/PerformSearch.cshtml";
+            public readonly string PositionDetails = "~/Areas/PositionSearch/Views/LinkedIn/PositionDetails.cshtml";
         }
     }
 
@@ -82,6 +89,12 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PerformSearch);
             callInfo.RouteValueDictionary.Add("searchParams", searchParams);
             callInfo.RouteValueDictionary.Add("pageNum", pageNum);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult PositionDetails(string id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PositionDetails);
+            callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 

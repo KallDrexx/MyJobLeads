@@ -20,18 +20,21 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers
         protected IProcess<StartLinkedInUserAuthParams, GeneralSuccessResultViewModel> _startLiAuthProcess;
         protected IProcess<ProcessLinkedInAuthProcessParams, GeneralSuccessResultViewModel> _finishLiAuthProcess;
         protected IProcess<LinkedInPositionSearchParams, PositionSearchResultsViewModel> _searchProcess;
+        protected IProcess<LinkedInPositionDetailsParams, ExternalPositionDetailsViewModel> _positionDetailsProcess;
 
         public LinkedInController(MyJobLeadsDbContext context,
                                     IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel> verifyTokenProcess,
                                     IProcess<StartLinkedInUserAuthParams, GeneralSuccessResultViewModel> startLiAuthProcess,
                                     IProcess<ProcessLinkedInAuthProcessParams, GeneralSuccessResultViewModel> finishLiAuthProcess,
-                                    IProcess<LinkedInPositionSearchParams, PositionSearchResultsViewModel> searchProcess)
+                                    IProcess<LinkedInPositionSearchParams, PositionSearchResultsViewModel> searchProcess,
+                                    IProcess<LinkedInPositionDetailsParams, ExternalPositionDetailsViewModel> positionDetailsProcess)
         {
             _context = context;
             _verifyTokenProcess = verifyTokenProcess;
             _startLiAuthProcess = startLiAuthProcess;
             _finishLiAuthProcess = finishLiAuthProcess;
             _searchProcess = searchProcess;
+            _positionDetailsProcess = positionDetailsProcess;
         }
 
         public virtual ActionResult Index()
@@ -45,6 +48,9 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers
 
         public virtual ActionResult PerformSearch(PositionSearchQueryViewModel searchParams, int pageNum = 0)
         {
+            if (!_verifyTokenProcess.Execute(new VerifyUserLinkedInAccessTokenParams { UserId = CurrentUserId }).AccessTokenValid)
+                return RedirectToAction(MVC.PositionSearch.LinkedIn.AuthorizationAlert());
+
             if (!ModelState.IsValid)
                 return View(new PerformedSearchViewModel { SearchQuery = searchParams });
 
@@ -64,6 +70,20 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers
             };
 
             return View(model);
+        }
+
+        public virtual ActionResult PositionDetails(string id)
+        {
+            if (!_verifyTokenProcess.Execute(new VerifyUserLinkedInAccessTokenParams { UserId = CurrentUserId }).AccessTokenValid)
+                return RedirectToAction(MVC.PositionSearch.LinkedIn.AuthorizationAlert());
+
+            var position = _positionDetailsProcess.Execute(new LinkedInPositionDetailsParams
+            {
+                RequestingUserId = CurrentUserId,
+                PositionId = id
+            });
+
+            return View(position);
         }
 
         public virtual ActionResult AuthorizationAlert()

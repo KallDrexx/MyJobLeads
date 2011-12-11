@@ -23,7 +23,7 @@ namespace MyJobLeads.DomainModel.ViewModels.PositionSearching
 
         public class PositionSearchResultViewModel
         {
-            public int JobId { get; set; }
+            public string JobId { get; set; }
             public string Title { get; set; }
             public string Company { get; set; }
             public string Location { get; set; }

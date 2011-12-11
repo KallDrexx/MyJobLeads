@@ -88,7 +88,7 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             resultsVm.Results = (from job in xmlResponse.Descendants("job")
                                  select new PositionSearchResultsViewModel.PositionSearchResultViewModel
                                  {
-                                     JobId = Convert.ToInt32(job.Element("id").Value),
+                                     JobId = job.Element("id").Value,
                                      Company = job.Element("company").Element("name").Value,
                                      Location = job.Element("location-description").Value,
                                      Description = job.Element("description-snippet").Value
@@ -156,6 +156,7 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             result.JobType = position.Element("job-type").Element("name").Value;
             result.Location = position.Element("location").Element("name").Value;
             result.Title = position.Element("title").Value;
+            result.IsActive = Convert.ToBoolean(job.Element("active").Value);
 
             result.Industries = position.Descendants("industries")
                                         .Select(x => x.Element("industry").Element("name").Value)

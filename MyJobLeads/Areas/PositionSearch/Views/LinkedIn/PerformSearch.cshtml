@@ -50,7 +50,7 @@
                 @foreach (var position in Model.Results.Results)
                 {
                     <li>
-                        <a href="@Url.Action(MVC.Task.Details())" title="View Position Details">
+                        <a href="@Url.Action(MVC.PositionSearch.LinkedIn.PositionDetails(position.JobId))" title="View Position Details">
                             <div class="taskName">@position.Company</div>
                             <div class="positionSubHeading">@position.Location</div>
                             <div class="taskDescription">@position.Description...</div>
