@@ -25,9 +25,17 @@
     
     <div class="grid3 floatLeft">
         <div class="positionResultsHeader">
-            <h3>Found Positions (displaying  @firstResultCount - @lastResultCount out of @Model.Results.TotalCount)</h3>
+            @if (Model.Results.TotalCount == 0)
+            {
+                <h3>No Positions Found Matching Your Criteria</h3>
+            }
+            else
+            {
+                <h3>Found Positions (displaying @firstResultCount - @lastResultCount out of @Model.Results.TotalCount)</h3>
+            }
+
             <ul class="positionSearchNotification">
-                <li>Page @(Model.Results.PageNum + 1) of @totalPages</li>
+                <li>Page @(Model.Results.TotalCount > 0 ? Model.Results.PageNum + 1 : 0) of @totalPages</li>
 
                 @if (Model.Results.PageNum > 0)
                 {
@@ -65,9 +73,17 @@
         </div>
 
         <div class="lowerPositionResultsHeader">
-            <h3>Found Positions (displaying  @firstResultCount - @lastResultCount out of @Model.Results.TotalCount)</h3>
+            @if (Model.Results.TotalCount == 0)
+            {
+                <h3>No Positions Found Matching Your Criteria</h3>
+            }
+            else
+            {
+                <h3>Found Positions (displaying @firstResultCount - @lastResultCount out of @Model.Results.TotalCount)</h3>
+            }
+
             <ul class="positionSearchNotification">
-                <li>Page @(Model.Results.PageNum + 1) of @totalPages</li>
+                <li>Page @(Model.Results.TotalCount > 0 ? Model.Results.PageNum + 1 : 0) of @totalPages</li>
 
                 @if (Model.Results.PageNum > 0)
                 {
