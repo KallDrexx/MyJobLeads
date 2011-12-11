@@ -71,7 +71,7 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
             Assert.AreEqual(expTitle, result.Title, "Position's title was incorrect");
             Assert.AreEqual(expLocation, result.Location, "Position's location was incorrect");
             Assert.AreEqual(expCompanyName, result.CompanyName, "Position's company name was incorrect");
-            Assert.AreEqual(expCompanyId, result.CompanyId, "Position's company id was incorrect");
+            //Assert.AreEqual(expCompanyId, result.CompanyId, "Position's company id was incorrect");
             Assert.AreEqual(expPostDate, result.PostedDate, "Position's posted date was incorrect");
             Assert.AreEqual(expExperience, result.ExperienceLevel, "Position's experience level was incorrect");
             Assert.AreEqual(expJobType, result.JobType, "Position's job type was incorrect");
@@ -79,6 +79,11 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
             Assert.AreEqual(expIndustries, result.Industries, "Position's industries was incorrect");
             Assert.AreEqual(expDescription, result.Description, "Position's description was incorrect");
             Assert.IsFalse(result.IsActive, "Position was incorrect set as active");
+
+            Assert.AreEqual("CNaU-cXF34", result.JobPosterId, "Job poster id was incorrect");
+            Assert.AreEqual("Bruce R.", result.JobPosterName, "Job poster name was incorrect");
+            Assert.AreEqual("Chief Insights Officer at Forbes", result.JobPosterHeadline, "Job poster's headline was incorrect");
+
             Assert.AreEqual(ExternalDataSource.LinkedIn, result.DataSource, "Position's data source was incorrect");
         }
 

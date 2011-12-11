@@ -26,6 +26,7 @@
             <div class="grid3 marginBottom_10 floatLeft"> 
                 <div class="grid4 floatLeft"> 
                     <p class="greyHighlight">Company: <span class="setTask">@Model.CompanyName</span></p> 
+                    <p class="greyHighlight">Location: <span class="setTask">@Model.Location</span></p>
                     <p class="greyHighlight">Posted On: <span class="setTask">@Model.PostedDate.ToLongDateString()</span></p>
                     <p class="greyHighlight">Active Posting?: <span class="setTask">@(Model.IsActive ? "Yes" : "No")</span></p>
                     <p class="greyHighlight">Job Type: <span class="setTask">@Model.JobType</span></p> 
@@ -33,8 +34,10 @@
                     <p class="greyHighlight">Job Functions: <span class="setTask">@Model.JobFunctions</span></p>
                     <p class="greyHighlight">Industries: <span class="setTask">@Model.Industries</span></p>
                 </div> 
-                <div class="grid4 floatRight"> 
-                    <p class="greyHighlight">Location: <span class="setTask">@Model.Location</span></p> 
+
+                <div class="grid4 floatRight">  
+                    <p class="greyHighlight">Job Poster: <span class="setTask">@Model.JobPosterName</span></p>
+                    <p class="greyHighlight">Headline: <span class="setTask">@Model.JobPosterHeadline</span></p>
                 </div> 
             </div> 
                                 
@@ -45,8 +48,8 @@
                     </p>
                 </div> 
             </div> 
-
-            <div class="clear"></div>
         }
+
+        <div class="clear"></div>
     </div> 
 </div>

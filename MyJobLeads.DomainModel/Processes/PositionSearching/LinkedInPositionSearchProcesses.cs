@@ -122,7 +122,7 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             // Form the API Url based on the criteria
             string apiUrl =
                 string.Format(
-                    "http://api.linkedin.com/v1/jobs/{0}:(id,company:(id,name),position:({1}),description,posting-date,active)",
+                    "http://api.linkedin.com/v1/jobs/{0}:(id,company:(id,name),position:({1}),description,posting-date,active,job-poster:(id,first-name,last-name,headline))",
                     procParams.PositionId,
                     "title,location,job-functions,industries,job-type,experience-level");
 
@@ -171,6 +171,11 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             int month = Convert.ToInt32(postingDate.Element("month").Value);
             int day = Convert.ToInt32(postingDate.Element("day").Value);
             result.PostedDate = new DateTime(year, month, day);
+
+            var poster = job.Element("job-poster");
+            result.JobPosterId = poster.Element("id").Value;
+            result.JobPosterName = string.Format("{0} {1}", poster.Element("first-name").Value, poster.Element("last-name").Value);
+            result.JobPosterHeadline = poster.Element("headline").Value;
                     
             return result;
         }

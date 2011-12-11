@@ -21,6 +21,10 @@ namespace MyJobLeads.DomainModel.ViewModels.PositionSearching
         public string Industries { get; set; }
         public string Description { get; set; }
 
+        public string JobPosterId { get; set; }
+        public string JobPosterName { get; set; }
+        public string JobPosterHeadline { get; set; }
+
         public ExternalDataSource DataSource { get; set; }
     }
 }
