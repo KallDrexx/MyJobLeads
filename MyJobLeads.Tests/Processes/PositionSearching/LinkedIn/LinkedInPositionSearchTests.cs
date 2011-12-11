@@ -36,7 +36,7 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
             _createPositionMock = new Mock<IProcess<CreatePositionParams, PositionDisplayViewModel>>();
             var createCompanyCmd = new CreateCompanyCommand(_serviceFactory.Object);
 
-            _process = new LinkedInPositionSearchProcesses(_context, _verifyTokenProcMock.Object, createCompanyCmd, _createPositionMock.Object);
+            _process = new LinkedInPositionSearchProcesses(_context, _verifyTokenProcMock.Object, createCompanyCmd, _createPositionMock.Object, null);
 
             // Initialize user with test (but valid) access token data
             _user = new User();

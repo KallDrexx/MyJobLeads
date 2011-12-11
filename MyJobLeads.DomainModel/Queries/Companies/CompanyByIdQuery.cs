@@ -30,7 +30,7 @@ namespace MyJobLeads.DomainModel.Queries.Companies
         /// </summary>
         /// <param name="companyId"></param>
         /// <returns></returns>
-        public CompanyByIdQuery WithCompanyId(int companyId)
+        public virtual CompanyByIdQuery WithCompanyId(int companyId)
         {
             _companyId = companyId;
             return this;
@@ -41,7 +41,7 @@ namespace MyJobLeads.DomainModel.Queries.Companies
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public CompanyByIdQuery RequestedByUserId(int userId)
+        public virtual CompanyByIdQuery RequestedByUserId(int userId)
         {
             _reqUserId = userId;
             return this;

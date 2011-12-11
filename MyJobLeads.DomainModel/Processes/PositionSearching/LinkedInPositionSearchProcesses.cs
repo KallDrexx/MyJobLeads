@@ -25,6 +25,7 @@ using MyJobLeads.DomainModel.Commands.Companies;
 using System.Transactions;
 using MyJobLeads.DomainModel.ViewModels.Positions;
 using MyJobLeads.DomainModel.ProcessParams.Positions;
+using MyJobLeads.DomainModel.Queries.Companies;
 
 namespace MyJobLeads.DomainModel.Processes.PositionSearching
 {
@@ -37,16 +38,19 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
         protected IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel> _verifyLiTokenProcess;
         protected CreateCompanyCommand _createCompanyCmd;
         protected IProcess<CreatePositionParams, PositionDisplayViewModel> _createPositionProcess;
+        protected CompanyByIdQuery _companyQuery;
 
         public LinkedInPositionSearchProcesses(MyJobLeadsDbContext context, 
                             IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel> verifyLiTokenProcess,
                             CreateCompanyCommand createCompanyCmd,
-                            IProcess<CreatePositionParams, PositionDisplayViewModel> createPositionProcess)
+                            IProcess<CreatePositionParams, PositionDisplayViewModel> createPositionProcess,
+                            CompanyByIdQuery companyQuery)
         {
             _context = context;
             _verifyLiTokenProcess = verifyLiTokenProcess;
             _createCompanyCmd = createCompanyCmd;
             _createPositionProcess = createPositionProcess;
+            _companyQuery = companyQuery;
         }
 
         /// <summary>
@@ -162,11 +166,20 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             // Start a transaction to make sure all operations can be rolled back
             using (var transaction = new TransactionScope())
             {
-                // Create the new company
-                company = _createCompanyCmd.SetName(positionDetails.CompanyName)
-                                           .WithJobSearch(Convert.ToInt32(user.LastVisitedJobSearchId))
-                                           .CalledByUserId(procParams.RequestingUserId)
+                if (procParams.CreateNewCompany)
+                {
+                    // Create the new company
+                    company = _createCompanyCmd.SetName(positionDetails.CompanyName)
+                                               .WithJobSearch(Convert.ToInt32(user.LastVisitedJobSearchId))
+                                               .CalledByUserId(procParams.RequestingUserId)
+                                               .Execute();
+                }
+                else
+                {
+                    company = _companyQuery.WithCompanyId(procParams.ExistingCompanyId)
+                                           .RequestedByUserId(user.Id)
                                            .Execute();
+                }
 
                 // Create the position
                 position = _createPositionProcess.Execute(new CreatePositionParams

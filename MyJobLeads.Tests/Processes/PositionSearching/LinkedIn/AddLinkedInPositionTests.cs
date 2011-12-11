@@ -17,6 +17,8 @@ using MyJobLeads.DomainModel.ViewModels.Positions;
 using MyJobLeads.DomainModel.ProcessParams.Positions;
 using MyJobLeads.DomainModel.Commands.Companies;
 using MyJobLeads.Tests.Commands;
+using MyJobLeads.DomainModel.Queries.Companies;
+using MyJobLeads.Tests.Queries;
 
 namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
 {
@@ -24,13 +26,14 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
     public class AddLinkedInPositionTests : EFTestBase
     {
         protected const string POSITION_ID = "217456";
-        protected const int COMPANY_ID = 55;
+        protected const int NEW_COMPANY_ID = 55;
 
         protected IProcess<AddLinkedInPositionParams, ExternalPositionAddedResultViewModel> _process;
         protected Mock<IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel>> _verifyTokenMock;
         protected User _user;
         protected Mock<IProcess<CreatePositionParams, PositionDisplayViewModel>> _createPositionMock;
         protected Mock<CreateCompanyCommand> _createCompanyCmdMock;
+        protected Mock<CompanyByIdQuery> _companyQueryMock;
 
         [TestInitialize]
         public void Init()
@@ -42,9 +45,10 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
             _verifyTokenMock.Setup(x => x.Execute(It.IsAny<VerifyUserLinkedInAccessTokenParams>())).Returns(new UserAccessTokenResultViewModel { AccessTokenValid = true });
 
             _createCompanyCmdMock = CommandTestUtils.GenerateCreateCompanyCommandMock();
-            _createCompanyCmdMock.Setup(x => x.Execute()).Returns(new Company { Id = COMPANY_ID });
+            _createCompanyCmdMock.Setup(x => x.Execute()).Returns(new Company { Id = NEW_COMPANY_ID });
 
-            _process = new LinkedInPositionSearchProcesses(_context, _verifyTokenMock.Object, _createCompanyCmdMock.Object, _createPositionMock.Object);
+            _companyQueryMock = QueryTestUtils.GenerateCompanyByIdQueryMock();
+            _process = new LinkedInPositionSearchProcesses(_context, _verifyTokenMock.Object, _createCompanyCmdMock.Object, _createPositionMock.Object, _companyQueryMock.Object);
 
             // Initialize user with test (but valid) access token data
             _user = new User { LastVisitedJobSearch = new JobSearch() };
@@ -81,7 +85,7 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
             Assert.IsNotNull(result, "Process returned a null result");
             _createPositionMock.Verify(x => x.Execute(It.Is<CreatePositionParams>(y => y.Title == expTitle)));
             _createPositionMock.Verify(x => x.Execute(It.Is<CreatePositionParams>(y => y.RequestingUserId == _user.Id)));
-            _createPositionMock.Verify(x => x.Execute(It.Is<CreatePositionParams>(y => y.CompanyId == COMPANY_ID)));
+            _createPositionMock.Verify(x => x.Execute(It.Is<CreatePositionParams>(y => y.CompanyId == NEW_COMPANY_ID)));
         }
 
         [TestMethod]
@@ -99,6 +103,27 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
             Assert.IsNotNull(result, "Process returned a null result");
             _createCompanyCmdMock.Verify(x => x.SetName("Forbes.com Inc."));
             _createCompanyCmdMock.Verify(x => x.WithJobSearch(_user.LastVisitedJobSearch.Id));
+        }
+
+        [TestMethod]
+        public void Can_Add_Position_To_Existing_Company()
+        {
+            // Setup
+            _companyQueryMock.Setup(x => x.Execute()).Returns(new Company { Id = 12 });
+
+            // Act
+            var result = _process.Execute(new AddLinkedInPositionParams
+            {
+                PositionId = POSITION_ID,
+                RequestingUserId = _user.Id,
+                ExistingCompanyId = 23
+            });
+
+            // Verify
+            Assert.IsNotNull(result, "Process returned a null result");
+            _companyQueryMock.Verify(x => x.RequestedByUserId(_user.Id));
+            _companyQueryMock.Verify(x => x.WithCompanyId(23));
+            _createPositionMock.Verify(x => x.Execute(It.Is<CreatePositionParams>(y => y.CompanyId == 12)));
         }
 
         [TestMethod]
