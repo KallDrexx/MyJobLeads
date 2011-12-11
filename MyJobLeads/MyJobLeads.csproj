@@ -317,6 +317,7 @@
       <DependentUpon>Update.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Areas\PositionSearch\Controllers\LinkedInController.cs" />
+    <Compile Include="Areas\PositionSearch\Models\AddPositionViewModel.cs" />
     <Compile Include="Areas\PositionSearch\Models\PositionSearchQueryViewModel.cs" />
     <Compile Include="Areas\PositionSearch\Models\PerformedSearchViewModel.cs" />
     <Compile Include="Areas\PositionSearch\PositionSearchAreaRegistration.cs" />
@@ -1126,6 +1127,8 @@
     <Content Include="Areas\PositionSearch\Views\LinkedIn\Index.cshtml" />
     <Content Include="Areas\PositionSearch\Views\LinkedIn\PerformSearch.cshtml" />
     <Content Include="Areas\PositionSearch\Views\LinkedIn\PositionDetails.cshtml" />
+    <Content Include="Areas\PositionSearch\Views\LinkedIn\AddPosition.cshtml" />
+    <Content Include="Areas\PositionSearch\Views\LinkedIn\AddPositionSuccessful.cshtml" />
     <None Include="Scripts\plugins\DataTables\images\Sorting icons.psd" />
     <None Include="Scripts\plugins\DataTables\js\jquery.dataTables.min.js.gz" />
     <None Include="T4MVC.tt.settings.t4" />

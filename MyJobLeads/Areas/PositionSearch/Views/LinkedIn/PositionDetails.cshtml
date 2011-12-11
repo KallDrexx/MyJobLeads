@@ -21,6 +21,9 @@
         {
             <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
                 <h3 class="floatLeft">@Model.Title</h3> 
+                @Html.ActionLink("Add To Your Job Search", 
+                        MVC.PositionSearch.LinkedIn.AddPosition(Model.Id, Model.Title, Model.CompanyName),
+                        new { @class = "floatRight blueLinks", title = "Add Position To Your Job Search" })
             </div> 
 
             <div class="grid3 marginBottom_10 floatLeft"> 

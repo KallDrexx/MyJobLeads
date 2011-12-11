@@ -10,6 +10,7 @@ using MyJobLeads.DomainModel.ProcessParams.PositionSearching.LinkedIn;
 using MyJobLeads.Infrastructure.Attributes;
 using MyJobLeads.DomainModel.ViewModels;
 using MyJobLeads.Areas.PositionSearch.Models;
+using MyJobLeads.DomainModel.Queries.Companies;
 
 namespace MyJobLeads.Areas.PositionSearch.Controllers
 {
@@ -21,13 +22,17 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers
         protected IProcess<ProcessLinkedInAuthProcessParams, GeneralSuccessResultViewModel> _finishLiAuthProcess;
         protected IProcess<LinkedInPositionSearchParams, PositionSearchResultsViewModel> _searchProcess;
         protected IProcess<LinkedInPositionDetailsParams, ExternalPositionDetailsViewModel> _positionDetailsProcess;
+        protected IProcess<AddLinkedInPositionParams, ExternalPositionAddedResultViewModel> _addPositionProcess;
+        protected CompaniesByJobSearchIdQuery _companyByJobSearchQuery;
 
         public LinkedInController(MyJobLeadsDbContext context,
                                     IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel> verifyTokenProcess,
                                     IProcess<StartLinkedInUserAuthParams, GeneralSuccessResultViewModel> startLiAuthProcess,
                                     IProcess<ProcessLinkedInAuthProcessParams, GeneralSuccessResultViewModel> finishLiAuthProcess,
                                     IProcess<LinkedInPositionSearchParams, PositionSearchResultsViewModel> searchProcess,
-                                    IProcess<LinkedInPositionDetailsParams, ExternalPositionDetailsViewModel> positionDetailsProcess)
+                                    IProcess<LinkedInPositionDetailsParams, ExternalPositionDetailsViewModel> positionDetailsProcess,
+                                    IProcess<AddLinkedInPositionParams, ExternalPositionAddedResultViewModel> addPositionProcess,
+                                    CompaniesByJobSearchIdQuery companyByJSQuery)
         {
             _context = context;
             _verifyTokenProcess = verifyTokenProcess;
@@ -35,6 +40,8 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers
             _finishLiAuthProcess = finishLiAuthProcess;
             _searchProcess = searchProcess;
             _positionDetailsProcess = positionDetailsProcess;
+            _companyByJobSearchQuery = companyByJSQuery;
+            _addPositionProcess = addPositionProcess;
         }
 
         public virtual ActionResult Index()
@@ -84,6 +91,63 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers
             });
 
             return View(position);
+        }
+
+        public virtual ActionResult AddPosition(string positionId, string positionTitle, string companyName)
+        {
+            var user = _context.Users.Where(x => x.Id == CurrentUserId).Single();
+            var companies = _companyByJobSearchQuery.WithJobSearchId((int)user.LastVisitedJobSearchId).Execute();
+            var model = new AddPositionViewModel
+            {
+                CompanyName = companyName,
+                PositionId = positionId,
+                PositionTitle = positionTitle,
+                DataSource = DomainModel.Enums.ExternalDataSource.LinkedIn
+            };
+            model.SetCompanyList(companies);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public virtual ActionResult AddPosition(AddPositionViewModel model)
+        {
+            if (!_verifyTokenProcess.Execute(new VerifyUserLinkedInAccessTokenParams { UserId = CurrentUserId }).AccessTokenValid)
+                return RedirectToAction(MVC.PositionSearch.LinkedIn.AuthorizationAlert());
+
+            if (!model.CreateNewCompany && model.SelectedCompany <= 0)
+                ModelState.AddModelError("company", "You must either select to add a new company entry, or select an existing company to add the position to");
+
+            if (!ModelState.IsValid)
+            {
+                var user = _context.Users.Where(x => x.Id == CurrentUserId).Single();
+                var companies = _companyByJobSearchQuery.WithJobSearchId((int)user.LastVisitedJobSearchId).Execute();
+                model.SetCompanyList(companies);
+                return View(model);
+            }
+
+            var result = _addPositionProcess.Execute(new AddLinkedInPositionParams
+            {
+                RequestingUserId = CurrentUserId,
+                CreateNewCompany = model.CreateNewCompany,
+                PositionId = model.PositionId,
+                ExistingCompanyId = model.SelectedCompany
+            });
+
+            return RedirectToAction(MVC.PositionSearch.LinkedIn.AddPositionSuccessful(result.CompanyId, result.CompanyName, result.PositionId, result.PositionTitle));
+        }
+
+        public virtual ActionResult AddPositionSuccessful(int companyId, string companyName, int positionId, string positionTitle)
+        {
+            var model = new ExternalPositionAddedResultViewModel
+            {
+                CompanyId = companyId,
+                CompanyName = companyName,
+                PositionId = positionId,
+                PositionTitle = positionTitle
+            };
+
+            return View(model);
         }
 
         public virtual ActionResult AuthorizationAlert()

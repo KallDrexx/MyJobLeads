@@ -41,6 +41,16 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers {
         public System.Web.Mvc.ActionResult PositionDetails() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.PositionDetails);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult AddPosition() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.AddPosition);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult AddPositionSuccessful() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.AddPositionSuccessful);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public LinkedInController Actions { get { return MVC.PositionSearch.LinkedIn; } }
@@ -57,6 +67,8 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers {
             public readonly string Index = "Index";
             public readonly string PerformSearch = "PerformSearch";
             public readonly string PositionDetails = "PositionDetails";
+            public readonly string AddPosition = "AddPosition";
+            public readonly string AddPositionSuccessful = "AddPositionSuccessful";
             public readonly string AuthorizationAlert = "AuthorizationAlert";
             public readonly string BeginAuthorization = "BeginAuthorization";
             public readonly string ProcessAuthorization = "ProcessAuthorization";
@@ -69,6 +81,8 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string _SearchForm = "~/Areas/PositionSearch/Views/LinkedIn/_SearchForm.cshtml";
+            public readonly string AddPosition = "~/Areas/PositionSearch/Views/LinkedIn/AddPosition.cshtml";
+            public readonly string AddPositionSuccessful = "~/Areas/PositionSearch/Views/LinkedIn/AddPositionSuccessful.cshtml";
             public readonly string AuthorizationAlert = "~/Areas/PositionSearch/Views/LinkedIn/AuthorizationAlert.cshtml";
             public readonly string Index = "~/Areas/PositionSearch/Views/LinkedIn/Index.cshtml";
             public readonly string PerformSearch = "~/Areas/PositionSearch/Views/LinkedIn/PerformSearch.cshtml";
@@ -95,6 +109,29 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers {
         public override System.Web.Mvc.ActionResult PositionDetails(string id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PositionDetails);
             callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult AddPosition(string positionId, string positionTitle, string companyName) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddPosition);
+            callInfo.RouteValueDictionary.Add("positionId", positionId);
+            callInfo.RouteValueDictionary.Add("positionTitle", positionTitle);
+            callInfo.RouteValueDictionary.Add("companyName", companyName);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult AddPosition(MyJobLeads.Areas.PositionSearch.Models.AddPositionViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddPosition);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult AddPositionSuccessful(int companyId, string companyName, int positionId, string positionTitle) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddPositionSuccessful);
+            callInfo.RouteValueDictionary.Add("companyId", companyId);
+            callInfo.RouteValueDictionary.Add("companyName", companyName);
+            callInfo.RouteValueDictionary.Add("positionId", positionId);
+            callInfo.RouteValueDictionary.Add("positionTitle", positionTitle);
             return callInfo;
         }
 
