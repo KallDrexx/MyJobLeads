@@ -50,7 +50,8 @@ namespace MyJobLeads.DomainModel.Processes.Positions
                 Title = procParams.Title,
                 Notes = procParams.Notes,
                 HasApplied = procParams.HasApplied,
-                Company = company
+                Company = company,
+                LinkedInId = procParams.LinkedInId
             };
 
             _context.Positions.Add(position);

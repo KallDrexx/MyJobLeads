@@ -197,7 +197,8 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
                     RequestingUserId = procParams.RequestingUserId,
                     CompanyId = company.Id,
                     Title = positionDetails.Title,
-                    Notes = notes
+                    Notes = notes,
+                    LinkedInId = procParams.PositionId
                 });
 
                 transaction.Complete();

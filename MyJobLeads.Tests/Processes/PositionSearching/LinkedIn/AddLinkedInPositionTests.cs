@@ -88,7 +88,7 @@ Job Functions: Research
             {
                 RequestingUserId = _user.Id,
                 PositionId = POSITION_ID,
-                CreateNewCompany = true
+                CreateNewCompany = true,
             });
 
             // Verify
@@ -97,6 +97,7 @@ Job Functions: Research
             _createPositionMock.Verify(x => x.Execute(It.Is<CreatePositionParams>(y => y.RequestingUserId == _user.Id)));
             _createPositionMock.Verify(x => x.Execute(It.Is<CreatePositionParams>(y => y.CompanyId == NEW_COMPANY_ID)));
             _createPositionMock.Verify(x => x.Execute(It.Is<CreatePositionParams>(y => y.Notes == expDescription)));
+            _createPositionMock.Verify(x => x.Execute(It.Is<CreatePositionParams>(y => y.LinkedInId == POSITION_ID)));
         }
 
         [TestMethod]

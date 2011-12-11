@@ -119,7 +119,7 @@
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Entities\Company.cs" />
-    <Compile Include="Entities\Configuration\MilestoneConfig.cs" />
+    <Compile Include="Entities\EF\Configuration\MilestoneConfig.cs" />
     <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\OAuthData.cs" />
     <Compile Include="Entities\OfficialDocument.cs" />
@@ -135,7 +135,7 @@
     <Compile Include="Entities\EF\MyJobLeadsDbInitializer.cs" />
     <Compile Include="Entities\Metrics\JobSearchMetrics.cs" />
     <Compile Include="Entities\Organization.cs" />
-    <Compile Include="Entities\Configuration\OrganizationEmailDomain.cs" />
+    <Compile Include="Entities\EF\Configuration\OrganizationEmailDomain.cs" />
     <Compile Include="Entities\Position.cs" />
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\UnitTestEntity.cs" />

@@ -12,5 +12,6 @@ namespace MyJobLeads.DomainModel.ProcessParams.Positions
         public bool HasApplied { get; set; }
         public string Notes { get; set; }
         public int RequestingUserId { get; set; }
+        public string LinkedInId { get; set; }
     }
 }
