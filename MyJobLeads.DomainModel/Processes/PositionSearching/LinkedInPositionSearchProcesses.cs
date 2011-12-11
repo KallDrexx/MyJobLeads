@@ -183,12 +183,21 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
                         throw new MJLEntityNotFoundException(typeof(Company), procParams.ExistingCompanyId);
                 }
 
+                // Setup the notes field
+                string notes = string.Format("Location: {1}{0}Job Type: {2}{0}Experience Level: {3}{0}Job Functions: {4}{0}",
+                                    Environment.NewLine,
+                                    positionDetails.Location,
+                                    positionDetails.JobType,
+                                    positionDetails.ExperienceLevel,
+                                    positionDetails.JobFunctions);
+
                 // Create the position
                 position = _createPositionProcess.Execute(new CreatePositionParams
                 {
                     RequestingUserId = procParams.RequestingUserId,
                     CompanyId = company.Id,
-                    Title = positionDetails.Title
+                    Title = positionDetails.Title,
+                    Notes = notes
                 });
 
                 transaction.Complete();

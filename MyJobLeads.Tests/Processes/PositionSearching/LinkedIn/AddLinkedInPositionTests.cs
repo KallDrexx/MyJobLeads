@@ -73,6 +73,16 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
             // Setup
             string expTitle = "Research Manager supporting Forbes.com worldwide online ad sales team";
 
+            #region Expected Description
+
+            string expDescription = @"Location: Greater New York City Area
+Job Type: Full-time
+Experience Level: Mid-Senior level
+Job Functions: Research
+";
+
+            #endregion
+
             // Act
             var result = _process.Execute(new AddLinkedInPositionParams
             {
@@ -86,6 +96,7 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
             _createPositionMock.Verify(x => x.Execute(It.Is<CreatePositionParams>(y => y.Title == expTitle)));
             _createPositionMock.Verify(x => x.Execute(It.Is<CreatePositionParams>(y => y.RequestingUserId == _user.Id)));
             _createPositionMock.Verify(x => x.Execute(It.Is<CreatePositionParams>(y => y.CompanyId == NEW_COMPANY_ID)));
+            _createPositionMock.Verify(x => x.Execute(It.Is<CreatePositionParams>(y => y.Notes == expDescription)));
         }
 
         [TestMethod]
