@@ -57,6 +57,7 @@ namespace MyJobLeads.Tests.Processes.Admin
             Assert.IsNotNull(org, "No organization was created");
             Assert.AreEqual(orgName, org.Name, "Organization's name was incorrect");
             Assert.AreEqual(1, org.Members.Count, "Organization has a incorrect number of members");
+            Assert.AreNotEqual(new Guid(), org.RegistrationToken, "Organization's registration token was incorrectly blank");
 
             var user = org.Members.Single();
             Assert.AreEqual(email, user.Email, "User's email was incorrect");

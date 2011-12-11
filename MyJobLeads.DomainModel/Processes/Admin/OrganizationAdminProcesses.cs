@@ -45,7 +45,7 @@ namespace MyJobLeads.DomainModel.Processes.Admin
                 new GenerateUserPasswordHashParams { Email = procParams.AdminEmail, PlainTextPassword = procParams.AdminPlainTextPassword }).PasswordHash;
 
             // Create the organization and user structures
-            var org = new Organization { Name = procParams.OrganizationName };
+            var org = new Organization { Name = procParams.OrganizationName, RegistrationToken = Guid.NewGuid() };
             org.Members.Add(new User
             {
                 Email = procParams.AdminEmail,
