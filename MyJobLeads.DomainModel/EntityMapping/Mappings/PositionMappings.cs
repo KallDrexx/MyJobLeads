@@ -27,7 +27,8 @@ namespace MyJobLeads.DomainModel.EntityMapping.Mappings
 
             Mapper.CreateMap<EditPositionViewModel, CreatePositionParams>()
                 .ForMember(dest => dest.CompanyId, opt => opt.MapFrom(src => src.Company.Id))
-                .ForMember(dest => dest.RequestingUserId, opt => opt.MapFrom(src => src.RequestedUserId));
+                .ForMember(dest => dest.RequestingUserId, opt => opt.MapFrom(src => src.RequestedUserId))
+                .ForMember(dest => dest.LinkedInId, opt => opt.Ignore());
         }
     }
 }

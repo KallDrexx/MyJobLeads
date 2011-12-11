@@ -18,6 +18,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using MyJobLeads.DomainModel.ProcessParams.Security;
 using MyJobLeads.DomainModel.ViewModels.Authorizations;
+using MyJobLeads.Tests.Queries;
 
 namespace MyJobLeads.Tests.Commands.Companies
 {
@@ -65,7 +66,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             userQuery.Setup(x => x.Execute()).Returns(_user);
             _serviceFactory.Setup(x => x.GetService<UserByIdQuery>()).Returns(userQuery.Object);
 
-            Mock<CompanyByIdQuery> companyQuery = new Mock<CompanyByIdQuery>(_unitOfWork, _companyAuthMock.Object);
+            Mock<CompanyByIdQuery> companyQuery = QueryTestUtils.GenerateCompanyByIdQueryMock();
             companyQuery.Setup(x => x.Execute()).Returns(_company);
             _serviceFactory.Setup(x => x.GetService<CompanyByIdQuery>()).Returns(companyQuery.Object);
 
@@ -144,7 +145,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             InitializeTestEntities();
             int id = _company.Id + 1;
 
-            Mock<CompanyByIdQuery> query = new Mock<CompanyByIdQuery>(_unitOfWork, _companyAuthMock.Object);
+            Mock<CompanyByIdQuery> query = QueryTestUtils.GenerateCompanyByIdQueryMock();
             query.Setup(x => x.Execute()).Returns((Company)null);
             _serviceFactory.Setup(x => x.GetService<CompanyByIdQuery>()).Returns(query.Object);
 

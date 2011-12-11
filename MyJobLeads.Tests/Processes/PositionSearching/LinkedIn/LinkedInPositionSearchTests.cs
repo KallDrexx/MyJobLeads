@@ -64,7 +64,6 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
                 RequestingUserId = _user.Id,
                 Keywords = "Software Engineer",
                 CountryCode = "us",
-                ZipCode = "32804",
                 ResultsPageNum = 2
             });
 
