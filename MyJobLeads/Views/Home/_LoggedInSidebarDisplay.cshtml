@@ -7,8 +7,12 @@
 <div id="leftHandNav">
     <ul>
         <li>@Html.ActionLink("Your Tasks", MVC.Task.Index(), new { @class = Model.ActiveLink == ActiveSidebarLink.Tasks? "active" : "" })</li>
-        <li>@Html.ActionLink("Companies", MVC.Company.List(), new { @class = Model.ActiveLink == ActiveSidebarLink.Companies? "active" : "" })</li>
-        <li>@Html.ActionLink("Positions", MVC.Position.List(), new { @class = Model.ActiveLink == ActiveSidebarLink.Positions? "active" : "" })</li>
+        <li>@Html.ActionLink("Your Companies", MVC.Company.List(), new { @class = Model.ActiveLink == ActiveSidebarLink.Companies? "active" : "" })</li>
+        <li>@Html.ActionLink("Your Positions", MVC.Position.List(), new { @class = Model.ActiveLink == ActiveSidebarLink.Positions? "active" : "" })</li>
+
+        <li>&nbsp;</li>
+
+        <li>@Html.ActionLink("Find Open Positions", MVC.PositionSearch.LinkedIn.Index(), new { @class = Model.ActiveLink == ActiveSidebarLink.PositionSearch? "active" : "" })</li>
 
         @if (Model.HasCurrentJobSearchId)
         {

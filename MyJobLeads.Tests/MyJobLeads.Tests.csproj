@@ -56,6 +56,9 @@
     <Reference Include="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.1.0\lib\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetOpenAuth, Version=3.4.7.11121, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetOpenAuth.3.4.7.11121\lib\DotNetOpenAuth.dll</HintPath>
+    </Reference>
     <Reference Include="Elmah">
       <HintPath>..\packages\elmah.1.1\lib\Elmah.dll</HintPath>
     </Reference>
@@ -137,12 +140,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutomapperConfigurationTests.cs" />
+    <Compile Include="Commands\CommandTestUtils.cs" />
     <Compile Include="Commands\Companies\CreateCompanyCommandTests.cs" />
     <Compile Include="Commands\Companies\EditCompanyCommandTests.cs" />
     <Compile Include="Commands\JobSearches\StartNextJobSearchMilestoneCommandTests.cs" />
     <Compile Include="Commands\JobSearches\UpdateJobSearchMetricsCommandTests.cs" />
     <Compile Include="Commands\Organizations\EditOrganizationCommandTests.cs" />
     <Compile Include="Controllers\PositionControllerTests.cs" />
+    <Compile Include="Controllers\PositionSearch\LinkedInControllerTests.cs" />
     <Compile Include="Controllers\TaskControllerTests.cs" />
     <Compile Include="Processes\Admin\CreateOrgWithAdminUserTests.cs" />
     <Compile Include="Processes\Authorization\CompanyAuthorizationTests.cs" />
@@ -158,6 +163,10 @@
     <Compile Include="Processes\Organizations\OrganizationDocumentProcessTests.cs" />
     <Compile Include="Processes\Organizations\OrganizationMemberStatisticsTests.cs" />
     <Compile Include="Processes\Organizations\VisibleOrgOfficialDocListForUserTests.cs" />
+    <Compile Include="Processes\PositionSearching\LinkedIn\AddLinkedInPositionTests.cs" />
+    <Compile Include="Processes\PositionSearching\LinkedIn\LinkedInPositionDetailsTests.cs" />
+    <Compile Include="Processes\PositionSearching\LinkedIn\LinkedInPositionSearchTests.cs" />
+    <Compile Include="Processes\OAuth\VerifyLinkedInAccessTokenTests.cs" />
     <Compile Include="Processes\Positions\CreatePositionTests.cs" />
     <Compile Include="Processes\Positions\EditPositionTests.cs" />
     <Compile Include="Processes\Positions\GetPositionListTests.cs" />
@@ -202,6 +211,7 @@
     <Compile Include="Queries\Organizations\OrganizationByIdQueryTests.cs" />
     <Compile Include="Queries\Organizations\OrganizationByRegistrationTokenQueryTests.cs" />
     <Compile Include="Queries\Positions\PositionByIdQueryTests.cs" />
+    <Compile Include="Queries\QueryTestUtils.cs" />
     <Compile Include="Queries\Search\EntitySearchQueryTests.cs" />
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQueryTests.cs" />
     <Compile Include="Queries\Tasks\OpenTasksByJobSearchQueryTests.cs" />

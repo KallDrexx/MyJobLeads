@@ -1,0 +1,11 @@
+﻿@using MyJobLeads.Areas.PositionSearch.Models;
+
+@{
+    ViewBag.Title = "LinkedIn Job Search";
+}
+
+@section SideBar {
+    @{Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.PositionSearch));}
+}
+
+@{Html.RenderPartial(MVC.PositionSearch.LinkedIn.Views._SearchForm, new PositionSearchQueryViewModel());}

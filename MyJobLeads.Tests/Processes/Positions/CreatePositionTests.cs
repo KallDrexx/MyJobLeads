@@ -40,7 +40,8 @@ namespace MyJobLeads.Tests.Processes.Positions
                 CompanyId = company.Id,
                 Title = "title",
                 HasApplied = true,
-                Notes = "Notes"
+                Notes = "Notes",
+                LinkedInId = "ABC123"
             });
 
             // Verify
@@ -48,6 +49,7 @@ namespace MyJobLeads.Tests.Processes.Positions
             Assert.AreEqual("title", result.Title, "Position had an incorrect title");
             Assert.IsTrue(result.HasApplied, "Position had an incorrect HasApplied value");
             Assert.AreEqual("Notes", result.Notes, "Position had an incorrect note");
+            Assert.AreEqual("ABC123", result.LinkedInId, "Position had an incorrect linked in id value");
         }
 
         [TestMethod]
@@ -71,13 +73,15 @@ namespace MyJobLeads.Tests.Processes.Positions
                 CompanyId = company.Id,
                 Title = "title",
                 HasApplied = true,
-                Notes = "Notes"
+                Notes = "Notes",
+                LinkedInId = "ABC123"
             });
 
             // Verify
             Assert.AreEqual("title", result.Title, "Position had an incorrect title");
             Assert.IsTrue(result.HasApplied, "Position had an incorrect HasApplied value");
             Assert.AreEqual("Notes", result.Notes, "Position had an incorrect note");
+            Assert.AreEqual("ABC123", result.LinkedInId, "Position had an incorrect LinkedIn id");
         }
 
         [TestMethod]

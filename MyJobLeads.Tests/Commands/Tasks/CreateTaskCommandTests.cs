@@ -20,6 +20,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using MyJobLeads.DomainModel.ViewModels.Authorizations;
 using MyJobLeads.DomainModel.ProcessParams.Security;
+using MyJobLeads.Tests.Queries;
 
 namespace MyJobLeads.Tests.Commands.Tasks
 {
@@ -71,7 +72,7 @@ namespace MyJobLeads.Tests.Commands.Tasks
             _userQuery.Setup(x => x.Execute()).Returns(_user);
             _serviceFactory.Setup(x => x.GetService<UserByIdQuery>()).Returns(_userQuery.Object);
 
-            _companyQuery = new Mock<CompanyByIdQuery>(_unitOfWork, _companyAuthMock.Object);
+            _companyQuery = QueryTestUtils.GenerateCompanyByIdQueryMock();
             _companyQuery.Setup(x => x.Execute()).Returns(_company);
             _serviceFactory.Setup(x => x.GetService<CompanyByIdQuery>()).Returns(_companyQuery.Object);
 

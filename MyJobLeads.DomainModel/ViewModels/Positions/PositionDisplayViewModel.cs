@@ -12,6 +12,7 @@ namespace MyJobLeads.DomainModel.ViewModels.Positions
         public string Title { get; set; }
         public bool HasApplied { get; set; }
         public string Notes { get; set; }
+        public string LinkedInId { get; set; }
 
         public CompanySummaryViewModel Company { get; set; }
     }

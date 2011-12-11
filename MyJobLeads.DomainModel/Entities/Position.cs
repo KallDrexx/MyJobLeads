@@ -12,6 +12,7 @@ namespace MyJobLeads.DomainModel.Entities
         public string Title { get; set; }
         public bool HasApplied { get; set; }
         public string Notes { get; set; }
+        public string LinkedInId { get; set; }
 
         public int? CompanyId { get; set; }
         public virtual Company Company { get; set; }

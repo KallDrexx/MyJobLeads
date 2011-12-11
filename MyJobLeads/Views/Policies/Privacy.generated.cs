@@ -73,12 +73,20 @@ WriteLiteral("\r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"pageInfoB
 "ithout your permission. \r\n                        In addition, we do not allow o" +
 "thers to solicit you, through our system. Your email and all information \r\n     " +
 "                   provided during  registration remains private within MyLeads," +
-" and is used to help manage your account. \r\n                    </li>\r\n         " +
-"       </ul>\r\n            </p>\r\n\r\n            <p>\r\n                If you have a" +
-"ny questions about your data or security, please feel free to contact us at \r\n  " +
-"                  <a class=\"inlineBlue\" href=\"mailto:support@interviewtools.net\"" +
-">support@interviewtools.net</a>\r\n            </p>\r\n        </div>\r\n            \r" +
-"\n        <div class=\"clear\"></div>\r\n    </div>\r\n</div>\r\n");
+" and is used to help manage your account. \r\n                    </li>\r\n\r\n       " +
+"             <li>\r\n                        There are times that MyLeads will con" +
+"nect to 3rd\r\n                        party services on your behalf, for example " +
+"LinkedIn and \r\n                        Jigsaw. If you choose to take advantage o" +
+"f these services, you must provide your login credentials.\r\n                    " +
+"    MyLeads will never use this information for any purpose other than logging i" +
+"nto the systems, and we will \r\n                        never use your accounts o" +
+"n those services for any purpose other than what the system tells you.\r\n        " +
+"            </li>\r\n                </ul>\r\n            </p>\r\n\r\n            <p>\r\n " +
+"               If you have any questions about your data or security, please fee" +
+"l free to contact us at \r\n                    <a class=\"inlineBlue\" href=\"mailto" +
+":support@interviewtools.net\">support@interviewtools.net</a>\r\n            </p>\r\n " +
+"       </div>\r\n            \r\n        <div class=\"clear\"></div>\r\n    </div>\r\n</di" +
+"v>\r\n");
 
 
         }

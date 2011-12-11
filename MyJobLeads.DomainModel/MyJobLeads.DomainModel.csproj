@@ -57,6 +57,9 @@
     <Reference Include="DocumentFormat.OpenXml">
       <HintPath>..\packages\DocumentFormat.OpenXml.1.0\lib\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetOpenAuth">
+      <HintPath>..\packages\DotNetOpenAuth.3.4.7.11121\lib\DotNetOpenAuth.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
@@ -78,6 +81,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Transactions" />
@@ -115,8 +119,9 @@
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Entities\Company.cs" />
-    <Compile Include="Entities\Configuration\MilestoneConfig.cs" />
+    <Compile Include="Entities\EF\Configuration\MilestoneConfig.cs" />
     <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\OAuthData.cs" />
     <Compile Include="Entities\OfficialDocument.cs" />
     <Compile Include="Entities\Extensions\EntityExtensions.cs" />
     <Compile Include="Entities\History\CompanyHistory.cs" />
@@ -130,7 +135,7 @@
     <Compile Include="Entities\EF\MyJobLeadsDbInitializer.cs" />
     <Compile Include="Entities\Metrics\JobSearchMetrics.cs" />
     <Compile Include="Entities\Organization.cs" />
-    <Compile Include="Entities\Configuration\OrganizationEmailDomain.cs" />
+    <Compile Include="Entities\EF\Configuration\OrganizationEmailDomain.cs" />
     <Compile Include="Entities\Position.cs" />
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\UnitTestEntity.cs" />
@@ -142,6 +147,8 @@
     <Compile Include="EntityMapping\Mappings\OrganizationMappings.cs" />
     <Compile Include="EntityMapping\Mappings\PositionMappings.cs" />
     <Compile Include="EntityMapping\Mappings\UserMappings.cs" />
+    <Compile Include="Enums\ExternalDataSource.cs" />
+    <Compile Include="Enums\TokenProvider.cs" />
     <Compile Include="Exceptions\InvalidEmailDomainForOrganizationException.cs" />
     <Compile Include="Exceptions\InvalidOrganizationRegistrationTokenException.cs" />
     <Compile Include="Exceptions\MJLDuplicateEmailException.cs" />
@@ -152,8 +159,12 @@
     <Compile Include="Exceptions\MJLUserNotFoundException.cs" />
     <Compile Include="Exceptions\MJLValidatorNotFoundException.cs" />
     <Compile Include="EntityMapping\IEntityMapConfiguration.cs" />
+    <Compile Include="Exceptions\OAuth\OAuthResponseNotAvailableException.cs" />
+    <Compile Include="Exceptions\OAuth\UserHasNoValidOAuthAccessTokenException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForEntityException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForProcessException.cs" />
+    <Compile Include="LibSupport\DotNetOpenAuth\LinkedInTokenManager.cs" />
+    <Compile Include="LibSupport\DotNetOpenAuth\MyJobLeadsBaseConsumerTokenManager.cs" />
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Processes\Admin\OrganizationAdminProcesses.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
@@ -161,8 +172,10 @@
     <Compile Include="Processes\JobSearches\JobSearchMilestonePropogationProcesses.cs" />
     <Compile Include="Processes\Milestones\MilestoneQueryProcesses.cs" />
     <Compile Include="Processes\Milestones\MilestoneNonQueryProcesses.cs" />
+    <Compile Include="Processes\OAuth\LinkedInOAuthProcesses.cs" />
     <Compile Include="Processes\Organizations\OrganizationDocumentProcesses.cs" />
     <Compile Include="Processes\Organizations\OrganizationMetricQueryProcesses.cs" />
+    <Compile Include="Processes\PositionSearching\LinkedInPositionSearchProcesses.cs" />
     <Compile Include="Processes\Positions\PositionProcesses.cs" />
     <Compile Include="Processes\Users\UserPasswordProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
@@ -173,6 +186,12 @@
     <Compile Include="ProcessParams\Milestones\SaveMilestoneParams.cs" />
     <Compile Include="ProcessParams\Organizations\OrganizationMemberStatisticsParams.cs" />
     <Compile Include="ProcessParams\Organizations\OrgMemberDocVisibilityByOrgAdminParams.cs" />
+    <Compile Include="ProcessParams\PositionSearching\LinkedIn\AddLinkedInPositionParams.cs" />
+    <Compile Include="ProcessParams\PositionSearching\LinkedIn\LinkedInPositionDetailsParams.cs" />
+    <Compile Include="ProcessParams\PositionSearching\LinkedIn\LinkedInPositionSearchParams.cs" />
+    <Compile Include="ProcessParams\PositionSearching\LinkedIn\ProcessLinkedInAuthProcessParams.cs" />
+    <Compile Include="ProcessParams\PositionSearching\LinkedIn\StartLinkedInUserAuthParams.cs" />
+    <Compile Include="ProcessParams\PositionSearching\LinkedIn\VerifyUserLinkedInAccessTokenParams.cs" />
     <Compile Include="ProcessParams\Positions\CreatePositionParams.cs" />
     <Compile Include="ProcessParams\Positions\EditPositionParams.cs" />
     <Compile Include="ProcessParams\Positions\GetPositionListForUserParams.cs" />
@@ -221,6 +240,10 @@
     <Compile Include="ViewModels\Organizations\OrganizationDashboardViewModel.cs" />
     <Compile Include="ViewModels\Organizations\OrganizationMemberStatisticsViewModel.cs" />
     <Compile Include="ViewModels\Organizations\VisibleOrgOfficialDocListForUserViewModel.cs" />
+    <Compile Include="ViewModels\PositionSearching\ExternalPositionAddedResultViewModel.cs" />
+    <Compile Include="ViewModels\PositionSearching\ExternalPositionDetailsViewModel.cs" />
+    <Compile Include="ViewModels\PositionSearching\PositionSearchResultsViewModel.cs" />
+    <Compile Include="ViewModels\PositionSearching\UserAccessTokenResultViewModel.cs" />
     <Compile Include="ViewModels\Positions\EditPositionViewModel.cs" />
     <Compile Include="ViewModels\Positions\PositionDisplayViewModel.cs" />
     <Compile Include="ViewModels\Positions\PositionListViewModel.cs" />

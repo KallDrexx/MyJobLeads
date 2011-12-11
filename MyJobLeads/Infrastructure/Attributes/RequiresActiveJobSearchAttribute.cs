@@ -29,7 +29,7 @@ namespace MyJobLeads.Infrastructure.Attributes
             }
 
             // If no job search is active, redirect home
-            filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary{{"controller", "Home"}, {"action", "Index"}});
+            filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary{{"controller", "Home"}, {"action", "Index"}, {"area", "" }});
         }
     }
 }

@@ -19,6 +19,7 @@ namespace MyJobLeads.DomainModel.Entities.EF
         public DbSet<JobSearch> JobSearches { get; set; }
         public DbSet<JobSearchHistory> JobSearchHistory { get; set; }
         public DbSet<OfficialDocument> OfficialDocuments { get; set; }
+        public DbSet<OAuthData> OAuthData { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<Task> Tasks { get; set; }
@@ -35,7 +36,8 @@ namespace MyJobLeads.DomainModel.Entities.EF
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-
+            // Set up the 1:1 connection between users and oauthdata
+            modelBuilder.Entity<OAuthData>().HasOptional(x => x.LinkedInUser).WithOptionalDependent(x => x.LinkedInOAuthData);
         }
     }
 }

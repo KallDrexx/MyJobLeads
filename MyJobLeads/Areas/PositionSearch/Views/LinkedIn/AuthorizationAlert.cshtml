@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Authorization Alert";
+}
+
+@section SideBar {
+    @{Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.PositionSearch));}
+}
+
+<div class="grid1 floatLeft"> 
+    <div class="pageInfoBox"> 
+        <div class="grid3 marginBottom_10 marginAuto floatLeft">
+            <h3>LinkedIn Authorization</h3>
+        </div>
+
+        <div class="grid3 marginBottom_10 marginAuto floatLeft">
+            <p>
+               To conduct this search, MyLeads has to request information from LinkedIn on your behalf. To do this, please authorize your LinkedIn account.<br /><br />
+
+               MyLeads will never take any actions on your LinkedIn account without your approval, and we will not use your credentials for any purpose other 
+               than providing you access. For more information, please refer to our 
+               @Html.ActionLink("Privacy Policy", MVC.Policies.Privacy(), new { @class = "inlineBlue", title = "View Privacy Policy" }).<br /><br />
+
+               @Html.ActionLink("Proceed with authorization", MVC.PositionSearch.LinkedIn.BeginAuthorization(), new { @class = "inlineBlue", title = "Authorize With LinkedIn" })
+            </p>
+        </div>
+            
+        <div class="clear"></div>
+    </div>
+</div>

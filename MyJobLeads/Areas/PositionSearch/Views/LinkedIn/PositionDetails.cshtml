@@ -1,0 +1,58 @@
+﻿@model MyJobLeads.DomainModel.ViewModels.PositionSearching.ExternalPositionDetailsViewModel
+
+@{
+    ViewBag.Title = "LinkedIn Position Details";
+}
+
+<div class="grid1 floatLeft"> 
+    <div class="pageInfoBox">
+        @if (Model == null)
+        {
+            <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                <h3 class="floatLeft">Position Not Found</h3> 
+            </div> 
+            
+            <div class="grid3 marginBottom_10 marginAuto floatLeft">
+                <p>LinkedIn could not find the position specified</p>
+            </div>
+        }
+
+        else
+        {
+            <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                <h3 class="floatLeft">@Model.Title</h3> 
+                @Html.ActionLink("Add To Your Job Search", 
+                        MVC.PositionSearch.LinkedIn.AddPosition(Model.Id, Model.Title, Model.CompanyName),
+                        new { @class = "floatRight blueLinks", title = "Add Position To Your Job Search" })
+            </div> 
+
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="grid4 floatLeft"> 
+                    <p class="greyHighlight">Company: <span class="setTask">@Model.CompanyName</span></p> 
+                    <p class="greyHighlight">Location: <span class="setTask">@Model.Location</span></p>
+                    <p class="greyHighlight">Posted On: <span class="setTask">@Model.PostedDate.ToLongDateString()</span></p>
+                    <p class="greyHighlight">Active Posting?: <span class="setTask">@(Model.IsActive ? "Yes" : "No")</span></p>
+                    <p class="greyHighlight">Job Type: <span class="setTask">@Model.JobType</span></p> 
+                    <p class="greyHighlight">Experience: <span class="setTask">@Model.ExperienceLevel</span></p>
+                    <p class="greyHighlight">Job Functions: <span class="setTask">@Model.JobFunctions</span></p>
+                    <p class="greyHighlight">Industries: <span class="setTask">@Model.Industries</span></p>
+                </div> 
+
+                <div class="grid4 floatRight">  
+                    <p class="greyHighlight">Job Poster: <span class="setTask">@Model.JobPosterName</span></p>
+                    <p class="greyHighlight">Headline: <span class="setTask">@Model.JobPosterHeadline</span></p>
+                </div> 
+            </div> 
+                                
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft">
+                    <p class="greyHighlight">Description: 
+                        <span class="setTask">@Html.Raw(Model.Description)</span>
+                    </p>
+                </div> 
+            </div> 
+        }
+
+        <div class="clear"></div>
+    </div> 
+</div>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyJobLeads.DomainModel.Entities
 {
@@ -21,5 +22,8 @@ namespace MyJobLeads.DomainModel.Entities
         
         public int? LastVisitedJobSearchId { get; set; }
         public virtual JobSearch LastVisitedJobSearch { get; set; }
+
+        public int? LinkedInOAuthDataId { get; set; }
+        public virtual OAuthData LinkedInOAuthData { get; set; }
     }
 }

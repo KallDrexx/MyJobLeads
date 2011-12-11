@@ -1,0 +1,63 @@
+﻿@model MyJobLeads.Areas.PositionSearch.Models.AddPositionViewModel
+
+@{
+    ViewBag.Title = "Add Position From LinkedIn";
+}
+
+<div class="grid1 floatLeft"> 
+    <div class="pageInfoBox"> 
+        @using (Html.BeginForm()) 
+        {
+            @Html.HiddenFor(x => x.PositionId)
+            @Html.HiddenFor(x => x.PositionTitle)
+            @Html.HiddenFor(x => x.CompanyName)
+                
+            <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                <h3 class="floatLeft">Add LinkedIn Position To Your Job Search</h3> 
+            </div> 
+                
+            <div class="grid3 marginBottom_10 marginAuto floatLeft">
+                <div class="floatLeft">
+                    <p>
+                        Position: <span class="bold">@Model.PositionTitle</span><br />
+                        Company: <span class="bold">@Model.CompanyName</span><br />
+                        Source: <a href="http://www.linkedin.com/jobs?viewJob=&jobId=@Url.Encode(Model.PositionId)" class="inlineBlue">LinkedIn</a>
+                    </p>    
+                </div>
+            </div>
+                
+            <div class="grid3 marginBottom_10 marginAuto floatleft">
+                <div class="floatLeft infoSpan">
+                    @Html.ValidationSummary()
+                </div>
+            </div>
+                
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft">
+                    <p class="greyHighlight">@Html.LabelFor(x => x.CreateNewCompany, "Create Company Entry For " + Model.CompanyName)
+                        @Html.CheckBoxFor(x => x.CreateNewCompany)
+                    </p>
+                </div> 
+            </div> 
+
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft">
+                    <p class="greyHighlight"><span class="bold">OR</span></p>
+                    <p class="greyHighlight">Add Position To Existing Company:</p>
+                    <div class="infoSpan">
+                        @Html.DropDownListFor(x => x.SelectedCompany, Model.CompanyList)
+                    </div>
+                </div> 
+            </div> 
+
+            <div class="grid3 marginBottom_20 floatLeft"> 
+                <div class="submitBTN ">
+                    <input type="submit" value="Add Position" /> &nbsp;
+                    @Html.ActionLink("Cancel", MVC.PositionSearch.LinkedIn.PositionDetails(Model.PositionId))
+                </div>                    
+            </div> 
+        }
+
+        <div class="clear"></div> 
+    </div> 
+</div> 
