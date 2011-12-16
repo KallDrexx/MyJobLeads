@@ -168,6 +168,7 @@
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Processes\Admin\OrganizationAdminProcesses.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
+    <Compile Include="Processes\ContactSearching\LinkedInContactSearchProcesses.cs" />
     <Compile Include="Processes\Exports\JobSearchExportProcess.cs" />
     <Compile Include="Processes\JobSearches\JobSearchMilestonePropogationProcesses.cs" />
     <Compile Include="Processes\Milestones\MilestoneQueryProcesses.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Processes\Users\UserProcesses.cs" />
     <Compile Include="ProcessParams\JobSearches\ByJobSearchParams.cs" />
     <Compile Include="ProcessParams\JobSearches\JobSearchMilestonePropogationParams.cs" />
+    <Compile Include="ProcessParams\ContactSearching\LinkedInContactSearchParams.cs" />
     <Compile Include="ProcessParams\Milestones\MilestoneIdParams.cs" />
     <Compile Include="ProcessParams\Organizations\ByOrganizationIdParams.cs" />
     <Compile Include="ProcessParams\Milestones\SaveMilestoneParams.cs" />
@@ -230,6 +232,7 @@
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="ViewModels\Authorizations\AuthorizationResultViewModel.cs" />
     <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
+    <Compile Include="ViewModels\ContactSearching\ExternalContactSearchResultsViewModel.cs" />
     <Compile Include="ViewModels\Exports\JobsearchExportViewModel.cs" />
     <Compile Include="ViewModels\GeneralSuccessResultViewModel.cs" />
     <Compile Include="ViewModels\JobSearches\JobSearchMilestoneChangedResultViewModel.cs" />
