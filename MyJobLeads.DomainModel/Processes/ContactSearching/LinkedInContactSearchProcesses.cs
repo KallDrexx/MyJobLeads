@@ -53,7 +53,8 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
                 throw new UserHasNoValidOAuthAccessTokenException(user.Id, Enums.TokenProvider.LinkedIn);
 
             // Form the query URL
-            string apiUrl = string.Format("http://api.linkedin.com/v1/people-search?keywords={0}&first-name={1}&last-name={2}&company-name={3}&title={4}&school-name={5}&country-code={6}&postal-code={7}&start={8}&count={9}",
+            string apiUrl = string.Format("http://api.linkedin.com/v1/people-search:{0}?keywords={1}&first-name={2}&last-name={3}&company-name={4}&title={5}&school-name={6}&country-code={7}&postal-code={8}&start={9}&count={10}",
+                                "(people:(id,first-name,last-name,headline))",
                                 HttpUtility.UrlEncode(procParams.Keywords),
                                 HttpUtility.UrlEncode(procParams.FirstName),
                                 HttpUtility.UrlEncode(procParams.LastName),
@@ -95,7 +96,8 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
                                       {
                                           ContactId = x.Element("id").Value,
                                           FirstName = x.Element("first-name").Value,
-                                          LastName = x.Element("last-name").Value
+                                          LastName = x.Element("last-name").Value,
+                                          Headline = x.Element("headline") != null ? x.Element("headline").Value : string.Empty
                                       })
                                       .ToList();
 
