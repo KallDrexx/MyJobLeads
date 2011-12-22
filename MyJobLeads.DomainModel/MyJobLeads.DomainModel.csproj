@@ -180,6 +180,7 @@
     <Compile Include="Processes\Positions\PositionProcesses.cs" />
     <Compile Include="Processes\Users\UserPasswordProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
+    <Compile Include="ProcessParams\ContactSearching\LinkedInContactDetailsParams.cs" />
     <Compile Include="ProcessParams\JobSearches\ByJobSearchParams.cs" />
     <Compile Include="ProcessParams\JobSearches\JobSearchMilestonePropogationParams.cs" />
     <Compile Include="ProcessParams\ContactSearching\LinkedInContactSearchParams.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="ViewModels\Authorizations\AuthorizationResultViewModel.cs" />
     <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
+    <Compile Include="ViewModels\ContactSearching\ExternalContactDetailsViewModel.cs" />
     <Compile Include="ViewModels\ContactSearching\ExternalContactSearchResultsViewModel.cs" />
     <Compile Include="ViewModels\Exports\JobsearchExportViewModel.cs" />
     <Compile Include="ViewModels\GeneralSuccessResultViewModel.cs" />
