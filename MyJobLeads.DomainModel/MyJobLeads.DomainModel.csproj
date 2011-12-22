@@ -121,6 +121,7 @@
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\EF\Configuration\MilestoneConfig.cs" />
     <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\JigsawAccountDetails.cs" />
     <Compile Include="Entities\OAuthData.cs" />
     <Compile Include="Entities\OfficialDocument.cs" />
     <Compile Include="Entities\Extensions\EntityExtensions.cs" />
@@ -228,6 +229,7 @@
     <Compile Include="Queries\Search\EntitySearchQuery.cs" />
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQuery.cs" />
     <Compile Include="TypeExtensions.cs" />
+    <Compile Include="Utilities\EncryptionUtils.cs" />
     <Compile Include="ViewModels\Authorizations\AuthorizationResultViewModel.cs" />
     <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
     <Compile Include="ViewModels\Exports\JobsearchExportViewModel.cs" />
