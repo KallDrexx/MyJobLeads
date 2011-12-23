@@ -182,6 +182,7 @@
     <Compile Include="Processes\Users\UserPasswordProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\GetUserJigsawCredentialsParams.cs" />
+    <Compile Include="ProcessParams\ExternalAuth\Jigsaw\SaveJigsawUserCredentialsParams.cs" />
     <Compile Include="ProcessParams\JobSearches\ByJobSearchParams.cs" />
     <Compile Include="ProcessParams\JobSearches\JobSearchMilestonePropogationParams.cs" />
     <Compile Include="ProcessParams\Milestones\MilestoneIdParams.cs" />

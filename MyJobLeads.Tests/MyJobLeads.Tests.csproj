@@ -158,6 +158,7 @@
     <Compile Include="Processes\Authorization\TaskAuthorizationsTests.cs" />
     <Compile Include="Processes\Export\JobSearchExportProcessTests.cs" />
     <Compile Include="Processes\ExternalAuth\GetUserJigsawCredentialTests.cs" />
+    <Compile Include="Processes\ExternalAuth\SaveJigsawCredentialsTests.cs" />
     <Compile Include="Processes\JobSearches\PropogateMilestoneToJobSearchTests.cs" />
     <Compile Include="Processes\Milestones\MilestoneQueryProcessTests.cs" />
     <Compile Include="Processes\Milestones\MilestoneNonQueryProcessTests.cs" />
