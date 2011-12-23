@@ -16,6 +16,7 @@ namespace MyJobLeads.DomainModel.Entities.EF
         public DbSet<CompanyHistory> CompanyHistory { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ContactHistory> ContactHistory { get; set; }
+        public DbSet<JigsawAccountDetails> JigsawAccountDetails { get; set; }
         public DbSet<JobSearch> JobSearches { get; set; }
         public DbSet<JobSearchHistory> JobSearchHistory { get; set; }
         public DbSet<OfficialDocument> OfficialDocuments { get; set; }
@@ -36,8 +37,9 @@ namespace MyJobLeads.DomainModel.Entities.EF
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // Set up the 1:1 connection between users and oauthdata
+            // Set up the 1:1 connections that can't be automatically determined
             modelBuilder.Entity<OAuthData>().HasOptional(x => x.LinkedInUser).WithOptionalDependent(x => x.LinkedInOAuthData);
+            modelBuilder.Entity<User>().HasOptional(x => x.JigsawAccountDetails).WithRequired(x => x.AssociatedUser);
         }
     }
 }

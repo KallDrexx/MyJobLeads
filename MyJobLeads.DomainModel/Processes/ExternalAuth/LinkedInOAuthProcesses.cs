@@ -17,7 +17,7 @@ using DotNetOpenAuth.OAuth;
 using MyJobLeads.DomainModel.Enums;
 using System.Net;
 
-namespace MyJobLeads.DomainModel.Processes.OAuth
+namespace MyJobLeads.DomainModel.Processes.ExternalAuth
 {
     public class LinkedInOAuthProcesses : IProcess<VerifyUserLinkedInAccessTokenParams, UserAccessTokenResultViewModel>,
           IProcess<StartLinkedInUserAuthParams, GeneralSuccessResultViewModel>,

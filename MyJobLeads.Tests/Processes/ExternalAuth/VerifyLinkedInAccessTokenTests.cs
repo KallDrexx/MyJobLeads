@@ -10,7 +10,7 @@ using MyJobLeads.DomainModel.Processes.PositionSearching;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Enums;
 using DotNetOpenAuth.OAuth.ChannelElements;
-using MyJobLeads.DomainModel.Processes.OAuth;
+using MyJobLeads.DomainModel.Processes.ExternalAuth;
 
 namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
 {

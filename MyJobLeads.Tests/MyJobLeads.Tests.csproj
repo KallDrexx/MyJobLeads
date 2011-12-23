@@ -157,6 +157,7 @@
     <Compile Include="Processes\Authorization\SiteAdminAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\TaskAuthorizationsTests.cs" />
     <Compile Include="Processes\Export\JobSearchExportProcessTests.cs" />
+    <Compile Include="Processes\ExternalAuth\GetUserJigsawCredentialTests.cs" />
     <Compile Include="Processes\JobSearches\PropogateMilestoneToJobSearchTests.cs" />
     <Compile Include="Processes\Milestones\MilestoneQueryProcessTests.cs" />
     <Compile Include="Processes\Milestones\MilestoneNonQueryProcessTests.cs" />
@@ -166,7 +167,7 @@
     <Compile Include="Processes\PositionSearching\LinkedIn\AddLinkedInPositionTests.cs" />
     <Compile Include="Processes\PositionSearching\LinkedIn\LinkedInPositionDetailsTests.cs" />
     <Compile Include="Processes\PositionSearching\LinkedIn\LinkedInPositionSearchTests.cs" />
-    <Compile Include="Processes\OAuth\VerifyLinkedInAccessTokenTests.cs" />
+    <Compile Include="Processes\ExternalAuth\VerifyLinkedInAccessTokenTests.cs" />
     <Compile Include="Processes\Positions\CreatePositionTests.cs" />
     <Compile Include="Processes\Positions\EditPositionTests.cs" />
     <Compile Include="Processes\Positions\GetPositionListTests.cs" />
