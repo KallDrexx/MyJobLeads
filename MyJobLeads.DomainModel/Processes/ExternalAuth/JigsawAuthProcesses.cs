@@ -17,6 +17,9 @@ using MyJobLeads.DomainModel.ViewModels.JobSearches;
 using MyJobLeads.DomainModel.Exceptions.Jigsaw;
 using RestSharp;
 using System.Net;
+using MyJobLeads.DomainModel.Json.Jigsaw;
+using AutoMapper;
+using Newtonsoft.Json;
 
 namespace MyJobLeads.DomainModel.Processes.ExternalAuth
 {
@@ -114,7 +117,7 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
             request.AddParameter("username", credentials.JigsawUsername);
             request.AddParameter("password", credentials.JigsawPassword);
 
-            var response = client.Execute<JigsawUserPointsViewModel>(request);
+            var response = client.Execute(request);
 
             // If a forbidden response was given, determine if it was a bad API token or bad user credentials
             if (response.StatusCode == HttpStatusCode.Forbidden)
@@ -129,7 +132,7 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
                     throw new MJLException("Jigsaw request returned forbidden but was not due to a login or api token failure");
             }
 
-            return response.Data;
+            return JsonConvert.DeserializeObject<JigsawUserPointsViewModel>(response.Content);
         }
 
         /// <summary>
