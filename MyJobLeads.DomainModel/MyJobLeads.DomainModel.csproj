@@ -161,6 +161,8 @@
     <Compile Include="Exceptions\InvalidOrganizationRegistrationTokenException.cs" />
     <Compile Include="Exceptions\Jigsaw\InvalidJigsawApiTokenException.cs" />
     <Compile Include="Exceptions\Jigsaw\InvalidJigsawCredentialsException.cs" />
+    <Compile Include="Exceptions\Jigsaw\JigsawCompanyNotFoundException.cs" />
+    <Compile Include="Exceptions\Jigsaw\JigsawContactNotFoundException.cs" />
     <Compile Include="Exceptions\Jigsaw\JigsawContactNotOwnedException.cs" />
     <Compile Include="Exceptions\Jigsaw\JigsawCredentialsNotFoundException.cs" />
     <Compile Include="Exceptions\MJLDuplicateEmailException.cs" />
@@ -175,6 +177,8 @@
     <Compile Include="Exceptions\OAuth\UserHasNoValidOAuthAccessTokenException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForEntityException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForProcessException.cs" />
+    <Compile Include="Json\Jigsaw\CompanyDetailsResponseJson.cs" />
+    <Compile Include="Json\Jigsaw\ContactDetailsJson.cs" />
     <Compile Include="Json\Jigsaw\ContactDetailsResponseJson.cs" />
     <Compile Include="Json\Jigsaw\ContactSearchResponseJson.cs" />
     <Compile Include="LibSupport\DotNetOpenAuth\LinkedInTokenManager.cs" />
@@ -195,6 +199,7 @@
     <Compile Include="Processes\Positions\PositionProcesses.cs" />
     <Compile Include="Processes\Users\UserPasswordProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
+    <Compile Include="ProcessParams\ContactSearching\Jigsaw\AddJigsawContactToJobSearchParams.cs" />
     <Compile Include="ProcessParams\ContactSearching\Jigsaw\JigsawContactSearchParams.cs" />
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\GetJigsawUserPointsParams.cs" />
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\GetUserJigsawCredentialsParams.cs" />
@@ -251,6 +256,7 @@
     <Compile Include="Utilities\EncryptionUtils.cs" />
     <Compile Include="ViewModels\Authorizations\AuthorizationResultViewModel.cs" />
     <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
+    <Compile Include="ViewModels\ContactSearching\ExternalContactAddedResultViewModel.cs" />
     <Compile Include="ViewModels\ContactSearching\ExternalContactSearchResultsViewModel.cs" />
     <Compile Include="ViewModels\Exports\JobsearchExportViewModel.cs" />
     <Compile Include="ViewModels\ExternalAuth\JigsawCredentialsViewModel.cs" />
