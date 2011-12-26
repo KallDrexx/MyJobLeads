@@ -7,23 +7,17 @@ namespace MyJobLeads.DomainModel.Json.Jigsaw
 {
     public class ContactDetailsResponseJson
     {
-        public string Zip { get; set; }
-        public string Phone { get; set; }
-        public string AreaCode { get; set; }
-        public DateTime UpdatedDate { get; set; }
-        public string SeoContactUrl { get; set; }
-        public string State { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public string CompanyName { get; set; }
-        public string ContactUrl { get; set; }
-        public string Country { get; set; }
-        public bool Owned { get; set; }
-        public string City { get; set; }
-        public string Title { get; set; }
-        public string Email { get; set; }
-        public string Address { get; set; }
-        public string CompanyId { get; set; }
-        public string ContactId { get; set; }
+        public List<UnrecognizedContact> Unrecognized { get; set; }
+        public List<ContactDetailsJson> Contacts { get; set; }
+
+        public int PointsUsed { get; set; }
+        public int TotalHits { get; set; }
+        public int NumberOfContactsPurchased { get; set; }
+        public int PointBalance { get; set; }
+
+        public class UnrecognizedContact
+        {
+            public string ContactId { get; set; }
+        }
     }
 }

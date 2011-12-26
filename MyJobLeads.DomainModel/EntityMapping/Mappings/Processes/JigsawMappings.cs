@@ -5,6 +5,7 @@ using System.Text;
 using AutoMapper;
 using MyJobLeads.DomainModel.Json.Jigsaw;
 using MyJobLeads.DomainModel.ViewModels.ContactSearching;
+using MyJobLeads.DomainModel.Entities;
 
 namespace MyJobLeads.DomainModel.EntityMapping.Mappings.Processes
 {
@@ -18,7 +19,7 @@ namespace MyJobLeads.DomainModel.EntityMapping.Mappings.Processes
                 .ForMember(dest => dest.DisplayedPageNumber, opt => opt.Ignore())
                 .ForMember(dest => dest.PageSize, opt => opt.Ignore());
 
-            Mapper.CreateMap<ContactDetailsResponseJson, ExternalContactSearchResultsViewModel.ContactResultViewModel>()
+            Mapper.CreateMap<ContactDetailsJson, ExternalContactSearchResultsViewModel.ContactResultViewModel>()
                 .ForMember(dest => dest.ContactId, opt => opt.MapFrom(src => src.ContactId))
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
                 .ForMember(dest => dest.Headline, opt => opt.MapFrom(src => src.Title))
