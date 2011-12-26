@@ -20,6 +20,7 @@ namespace MyJobLeads.DomainModel.ViewModels.ContactSearching
             public string Headline { get; set; }
             public string PublicUrl { get; set; }
             public bool HasAccess { get; set; }
+            public DateTime LastUpdatedDate { get; set; }
         }
     }
 }

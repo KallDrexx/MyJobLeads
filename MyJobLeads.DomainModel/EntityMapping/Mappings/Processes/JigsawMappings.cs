@@ -25,6 +25,7 @@ namespace MyJobLeads.DomainModel.EntityMapping.Mappings.Processes
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
                 .ForMember(dest => dest.PublicUrl, opt => opt.MapFrom(src => src.ContactUrl))
                 .ForMember(dest => dest.HasAccess, opt => opt.MapFrom(src => src.Owned))
+                .ForMember(dest => dest.LastUpdatedDate, opt => opt.MapFrom(src => src.UpdatedDate))
                 .ForAllMembers(opt => opt.Ignore());
         }
     }
