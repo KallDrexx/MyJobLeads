@@ -121,16 +121,7 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
 
             // If a forbidden response was given, determine if it was a bad API token or bad user credentials
             if (response.StatusCode == HttpStatusCode.Forbidden)
-            {
-                if (response.Content.Contains("TOKEN_FAIL"))
-                    throw new InvalidJigsawApiTokenException(GetAuthToken());
-
-                if (response.Content.Contains("LOGIN_FAIL"))
-                    throw new InvalidJigsawCredentialsException(procParams.RequestingUserId);
-
-                else
-                    throw new MJLException("Jigsaw request returned forbidden but was not due to a login or api token failure");
-            }
+                ThrowForbiddenResponse(response.Content, procParams.RequestingUserId);
 
             return JsonConvert.DeserializeObject<JigsawUserPointsViewModel>(response.Content);
         }
@@ -142,6 +133,25 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
         public static string GetAuthToken()
         {
             return ConfigurationManager.AppSettings[TOKEN_APPSETTINGS];
+        }
+
+        /// <summary>
+        /// Processes a forbidden response from the jigsaw api
+        /// </summary>
+        /// <param name="content"></param>
+        public static void ThrowForbiddenResponse(string content, int requestingUserId, string contactId = "")
+        {
+            if (content.Contains("TOKEN_FAIL"))
+                throw new InvalidJigsawApiTokenException(GetAuthToken());
+
+            if (content.Contains("LOGIN_FAIL"))
+                throw new InvalidJigsawCredentialsException(requestingUserId);
+
+            if (content.Contains("CONTACT_NOT_OWNED"))
+                throw new JigsawContactNotOwnedException(contactId, requestingUserId);
+
+            else
+                throw new MJLException("Jigsaw request returned forbidden but was not due to a login or api token failure");
         }
     }
 }
