@@ -44,5 +44,6 @@ namespace MyJobLeads.DomainModel.Json.Jigsaw
             public string companyId { get; set; }
             public string stockExchange { get; set; }
             public string currentWiki { get; set; }
+        }
     }
 }

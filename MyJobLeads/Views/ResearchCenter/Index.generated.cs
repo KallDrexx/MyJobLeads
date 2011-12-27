@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyJobLeads.Areas.PositionSearch.Views.LinkedIn
+namespace MyJobLeads.Views.ResearchCenter
 {
     using System;
     using System.Collections.Generic;
@@ -26,15 +26,11 @@ namespace MyJobLeads.Areas.PositionSearch.Views.LinkedIn
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    
-    #line 1 "..\..\Areas\PositionSearch\Views\LinkedIn\Index.cshtml"
-    using MyJobLeads.Areas.PositionSearch.Models;
-    
-    #line default
-    #line hidden
+    using MyJobLeads.Infrastructure.HtmlHelpers;
+    using Telerik.Web.Mvc.UI;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/PositionSearch/Views/LinkedIn/Index.cshtml")]
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/ResearchCenter/Index.cshtml")]
     public class Index : System.Web.Mvc.WebViewPage<dynamic>
     {
         public Index()
@@ -43,13 +39,10 @@ namespace MyJobLeads.Areas.PositionSearch.Views.LinkedIn
         public override void Execute()
         {
 
-WriteLiteral("\r\n");
-
-
             
-            #line 3 "..\..\Areas\PositionSearch\Views\LinkedIn\Index.cshtml"
+            #line 1 "..\..\Views\ResearchCenter\Index.cshtml"
   
-    ViewBag.Title = "LinkedIn Job Search";
+    ViewBag.Title = "Research Center";
 
 
             
@@ -64,7 +57,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 8 "..\..\Areas\PositionSearch\Views\LinkedIn\Index.cshtml"
+            #line 6 "..\..\Views\ResearchCenter\Index.cshtml"
       Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.ResearchCenter));
 
             
@@ -73,16 +66,45 @@ WriteLiteral("\r\n");
 
 });
 
-WriteLiteral("\r\n\r\n");
+WriteLiteral(@"
+
+<div class=""grid1 floatLeft""> 
+    <div class=""pageInfoBox""> 
+        <div class=""grid3 marginBottom_10 marginAuto floatLeft"">
+            <h3>MyLeads Research Center</h3>
+        </div>
+
+        <div class=""grid3 marginBottom_10 marginAuto floatLeft"">
+            <p>
+                MyLeads provides resources to perform research to make your job search more successful
+            </p>
+
+            <p>
+                <ul class=""decoratedList"">
+                    <li>
+                        ");
 
 
             
-            #line 11 "..\..\Areas\PositionSearch\Views\LinkedIn\Index.cshtml"
-  Html.RenderPartial(MVC.PositionSearch.LinkedIn.Views._SearchForm, new PositionSearchQueryViewModel());
+            #line 23 "..\..\Views\ResearchCenter\Index.cshtml"
+                   Write(Html.ActionLink("Research Open Jobs", MVC.PositionSearch.LinkedIn.Index(), new { @class = "inlineBlue", title = "Find Open Jobs" }));
 
             
             #line default
             #line hidden
+WriteLiteral(@"
+                    </li>
+                    <li><a href=""#"" class=""inlineBlue"">Research Companies</a> <span class=""bold"">(Coming Soon)</span></li>
+                    <li><a href=""#"" class=""inlineBlue"">Research Contacts</a> <span class=""bold"">(Coming Soon)</span></li>
+                </ul>
+            </p>
+        </div>
+            
+        <div class=""clear""></div>
+    </div>
+</div>
+");
+
 
         }
     }

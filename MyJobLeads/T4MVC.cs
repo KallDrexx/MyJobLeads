@@ -36,6 +36,7 @@ public static class MVC {
     public static MyJobLeads.Controllers.JobSearchController JobSearch = new MyJobLeads.Controllers.T4MVC_JobSearchController();
     public static MyJobLeads.Controllers.PoliciesController Policies = new MyJobLeads.Controllers.T4MVC_PoliciesController();
     public static MyJobLeads.Controllers.PositionController Position = new MyJobLeads.Controllers.T4MVC_PositionController();
+    public static MyJobLeads.Controllers.ResearchCenterController ResearchCenter = new MyJobLeads.Controllers.T4MVC_ResearchCenterController();
     public static MyJobLeads.Controllers.SearchController Search = new MyJobLeads.Controllers.T4MVC_SearchController();
     public static MyJobLeads.Controllers.TaskController Task = new MyJobLeads.Controllers.T4MVC_TaskController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();

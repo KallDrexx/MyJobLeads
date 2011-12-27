@@ -369,6 +369,7 @@
     <Compile Include="Controllers\JobSearchController.cs" />
     <Compile Include="Controllers\PoliciesController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
+    <Compile Include="Controllers\ResearchCenterController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
@@ -423,6 +424,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="PositionSearch.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResearchCenterController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="SearchController.generated.cs">
@@ -593,6 +597,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>List.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ResearchCenter\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Search\RefreshSearchIndex.cs">
       <AutoGen>True</AutoGen>
@@ -1249,6 +1258,10 @@
     <Content Include="Views\Policies\Security.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Security.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\ResearchCenter\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

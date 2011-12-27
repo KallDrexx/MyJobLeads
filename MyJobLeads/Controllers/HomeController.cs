@@ -13,7 +13,7 @@ using MyJobLeads.DomainModel.ProcessParams.Users;
 
 namespace MyJobLeads.Controllers
 {
-    public enum ActiveSidebarLink { None, Logon, Register, Tasks, Companies, Positions, About, OrgAdmin, PositionSearch };
+    public enum ActiveSidebarLink { None, Logon, Register, Tasks, Companies, Positions, About, OrgAdmin, ResearchCenter };
 
     public partial class HomeController : MyJobLeadsBaseController
     {
