@@ -95,6 +95,9 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
             user.JigsawAccountDetails = jigsaw;
             _context.SaveChanges();
 
+            // Attempt to use the new credentials to make sure they are valid
+            Execute(new GetJigsawUserPointsParams { RequestingUserId = procParams.RequestingUserId });
+
             return new GeneralSuccessResultViewModel { WasSuccessful = true };
         }
 
@@ -132,7 +135,11 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
         /// <returns></returns>
         public static string GetAuthToken()
         {
-            return ConfigurationManager.AppSettings[TOKEN_APPSETTINGS];
+            string token = ConfigurationManager.AppSettings[TOKEN_APPSETTINGS];
+            if (string.IsNullOrWhiteSpace(token))
+                throw new InvalidOperationException("The Jigsaw API token was null");
+
+            return token;
         }
 
         /// <summary>
