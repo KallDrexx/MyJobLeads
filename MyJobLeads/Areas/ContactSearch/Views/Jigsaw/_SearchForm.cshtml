@@ -1,0 +1,62 @@
+﻿@model MyJobLeads.Areas.ContactSearch.Models.JigsawSearchParametersViewModel
+
+<div class="grid1 floatLeft"> 
+    <div class="pageInfoBox">
+        @using (Html.BeginForm(MVC.ContactSearch.Jigsaw.Index(), FormMethod.Get))
+        {
+            <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                <h3 class="floatLeft">Jigsaw Contact Search</h3> 
+            </div> 
+
+            <div class="grid3 marginBottom_10 marginAuto floatleft">
+                <div class="floatLeft infoSpan">
+                    @Html.ValidationSummary()
+                </div>
+            </div>
+
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">First Name:</p>
+                    <div class="infoSpan">@Html.TextBoxFor(x => x.FirstName, new { @class = "info" })</div>
+                </div> 
+
+                <div class="floatLeft"><p class="greyHighlight">Last Name:</p>
+                    <div class="infoSpan">@Html.TextBoxFor(x => x.LastName, new { @class = "info" })</div>
+                </div>                   
+            </div> 
+                                
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Title:</p>
+                    <div class="infoSpan">@Html.TextBoxFor(x => x.Title, new { @class = "info" })</div>
+                </div> 
+
+                <div class="floatLeft"><p class="greyHighlight">Company Name:</p>
+                    <div class="infoSpan">@Html.TextBoxFor(x => x.Company, new { @class = "info" })</div>
+                </div>                   
+            </div> 
+ 
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Department:</p>
+                    <div class="infoSpan">@Html.DropDownListFor(x => x.Departments, Model.DepartmentList, new { @class = "info" })</div>
+                </div> 
+
+                <div class="floatLeft"><p class="greyHighlight">Industry:</p>
+                    <div class="infoSpan">@Html.DropDownListFor(x => x.Industry, Model.IndustryList)</div>
+                </div>                   
+            </div> 
+            
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Level:</p>
+                    <div class="infoSpan">@Html.DropDownListFor(x => x.Levels, Model.LevelsList, new { @class = "info" })</div>
+                </div>                    
+            </div>
+                
+            <div class="grid3 marginBottom_20 floatLeft"> 
+                <div class="submitBTN ">
+                    <input type="submit" value="Search" />
+                </div>
+            </div>
+
+            <div class="clear"></div>
+        }
+    </div> 
+</div> 

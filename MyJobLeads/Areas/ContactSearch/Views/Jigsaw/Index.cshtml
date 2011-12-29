@@ -1,0 +1,8 @@
+﻿@using MyJobLeads.Areas.ContactSearch.Models;
+
+@{
+    ViewBag.Title = "Jigsaw Contact Search";
+}
+
+
+@{Html.RenderPartial(MVC.ContactSearch.Jigsaw.Views._SearchForm, new JigsawSearchParametersViewModel()); }

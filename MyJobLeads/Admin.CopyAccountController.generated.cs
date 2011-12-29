@@ -20,10 +20,10 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace MyJobLeads.Areas.ContactSearch.Controllers {
-    public partial class JigsawController {
+namespace MyJobLeads.Areas.Admin.Controllers {
+    public partial class CopyAccountController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected JigsawController(Dummy d) { }
+        protected CopyAccountController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result) {
@@ -33,11 +33,11 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
 
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public JigsawController Actions { get { return MVC.ContactSearch.Jigsaw; } }
+        public CopyAccountController Actions { get { return MVC.Admin.CopyAccount; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "ContactSearch";
+        public readonly string Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Jigsaw";
+        public readonly string Name = "CopyAccount";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -45,7 +45,6 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string Index = "Index";
-            public readonly string Authenticate = "Authenticate";
         }
 
 
@@ -54,29 +53,21 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string _SearchForm = "~/Areas/ContactSearch/Views/Jigsaw/_SearchForm.cshtml";
-            public readonly string Authenticate = "~/Areas/ContactSearch/Views/Jigsaw/Authenticate.cshtml";
-            public readonly string Index = "~/Areas/ContactSearch/Views/Jigsaw/Index.cshtml";
+            public readonly string CopyAccountSuccess = "~/Areas/Admin/Views/CopyAccount/CopyAccountSuccess.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_JigsawController: MyJobLeads.Areas.ContactSearch.Controllers.JigsawController {
-        public T4MVC_JigsawController() : base(Dummy.Instance) { }
+    public class T4MVC_CopyAccountController: MyJobLeads.Areas.Admin.Controllers.CopyAccountController {
+        public T4MVC_CopyAccountController() : base(Dummy.Instance) { }
 
         public override System.Web.Mvc.ActionResult Index() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Authenticate(bool loginFailed) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Authenticate);
-            callInfo.RouteValueDictionary.Add("loginFailed", loginFailed);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult Authenticate(MyJobLeads.Areas.ContactSearch.Models.JigsawAuthenticateViewModel model) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Authenticate);
+        public override System.Web.Mvc.ActionResult Index(MyJobLeads.Areas.Admin.Models.CopyAccountDataViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
