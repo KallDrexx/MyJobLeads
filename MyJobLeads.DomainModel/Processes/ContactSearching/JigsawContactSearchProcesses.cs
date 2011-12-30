@@ -23,6 +23,7 @@ using MyJobLeads.DomainModel.Commands.Companies;
 using System.Transactions;
 using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Commands.Contacts;
+using MyJobLeads.DomainModel.Json.Converters;
 
 namespace MyJobLeads.DomainModel.Processes.ContactSearching
 {
@@ -75,7 +76,7 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
             request.AddParameter("industry", procParams.Industry);
             request.AddParameter("departments", procParams.Departments);
             request.AddParameter("offset", procParams.RequestedPageNum * PAGE_SIZE);
-            request.AddParameter("pagesize", PAGE_SIZE);
+            request.AddParameter("pageSize", PAGE_SIZE);
             var response = client.Execute(request);
 
             // Check for a forbidden result
@@ -83,8 +84,12 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
                 JigsawAuthProcesses.ThrowForbiddenResponse(response.Content, procParams.RequestingUserId);
 
             // Get the returned json and convert it to the view model
-            var json = JsonConvert.DeserializeObject<ContactSearchResponseJson>(response.Content);
+            var json = JsonConvert.DeserializeObject<ContactSearchResponseJson>(response.Content, new JigsawDateTimeConverter());
             var model = Mapper.Map<ContactSearchResponseJson, ExternalContactSearchResultsViewModel>(json);
+            //model.Results = new List<ExternalContactSearchResultsViewModel.ContactResultViewModel>();
+            //foreach (var contact in json.Contacts)
+            //    model.Results.Add(Mapper.Map<ContactDetailsJson, ExternalContactSearchResultsViewModel.ContactResultViewModel>(contact));
+
             model.PageSize = PAGE_SIZE;
             model.DisplayedPageNumber = procParams.RequestedPageNum;
 

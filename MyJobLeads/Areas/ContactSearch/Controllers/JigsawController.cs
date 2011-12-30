@@ -13,6 +13,9 @@ using MyJobLeads.DomainModel.ProcessParams.ExternalAuth.Jigsaw;
 using MyJobLeads.DomainModel.Exceptions.Jigsaw;
 using MyJobLeads.DomainModel.ViewModels;
 using MyJobLeads.Infrastructure.Attributes;
+using MyJobLeads.DomainModel.ViewModels.ContactSearching;
+using MyJobLeads.DomainModel.ProcessParams.ContactSearching.Jigsaw;
+using AutoMapper;
 
 namespace MyJobLeads.Areas.ContactSearch.Controllers
 {
@@ -21,14 +24,17 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
     {
         protected IProcess<GetJigsawUserPointsParams, JigsawUserPointsViewModel> _getUserPointsProc;
         protected IProcess<SaveJigsawUserCredentialsParams, GeneralSuccessResultViewModel> _saveCredentialsProc;
+        protected IProcess<JigsawContactSearchParams, ExternalContactSearchResultsViewModel> _searchContacsProc;
 
         public JigsawController(MyJobLeadsDbContext context,
                                 IProcess<GetJigsawUserPointsParams, JigsawUserPointsViewModel> getUserPointsProc,
-                                IProcess<SaveJigsawUserCredentialsParams, GeneralSuccessResultViewModel> saveCredentialsProc)
+                                IProcess<SaveJigsawUserCredentialsParams, GeneralSuccessResultViewModel> saveCredentialsProc,
+                                IProcess<JigsawContactSearchParams, ExternalContactSearchResultsViewModel> searchContactsProc)
         {
             _context = context;
             _getUserPointsProc = getUserPointsProc;
             _saveCredentialsProc = saveCredentialsProc;
+            _searchContacsProc = searchContactsProc;
         }
 
         public virtual ActionResult Index()
@@ -72,6 +78,30 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
 
             // Authentication was successful
             return RedirectToAction(MVC.ContactSearch.Jigsaw.Index());
+        }
+
+        public virtual ActionResult PerformSearch(JigsawSearchParametersViewModel model)
+        {
+            ExternalContactSearchResultsViewModel results;
+            var parameters = Mapper.Map<JigsawSearchParametersViewModel, JigsawContactSearchParams>(model);
+            parameters.RequestingUserId = CurrentUserId;
+            
+            try { results = _searchContacsProc.Execute(parameters); }
+            catch (Exception ex)
+            {
+                if (ex is JigsawCredentialsNotFoundException || ex is InvalidJigsawCredentialsException)
+                    return RedirectToAction(MVC.ContactSearch.Jigsaw.Authenticate(true));
+
+                throw;
+            }
+
+            var resultsModel = new JigsawSearchResultsViewModel
+            {
+                Query = model,
+                Results = results
+            };
+
+            return View(resultsModel);
         }
     }
 }

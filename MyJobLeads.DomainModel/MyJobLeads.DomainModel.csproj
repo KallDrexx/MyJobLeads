@@ -177,10 +177,12 @@
     <Compile Include="Exceptions\OAuth\UserHasNoValidOAuthAccessTokenException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForEntityException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForProcessException.cs" />
+    <Compile Include="Json\Converters\JigsawDateTimeConverter.cs" />
     <Compile Include="Json\Jigsaw\CompanyDetailsResponseJson.cs" />
     <Compile Include="Json\Jigsaw\ContactDetailsJson.cs" />
     <Compile Include="Json\Jigsaw\ContactDetailsResponseJson.cs" />
     <Compile Include="Json\Jigsaw\ContactSearchResponseJson.cs" />
+    <Compile Include="Json\Mappings\JigsawJsonMappings.cs" />
     <Compile Include="LibSupport\DotNetOpenAuth\LinkedInTokenManager.cs" />
     <Compile Include="LibSupport\DotNetOpenAuth\MyJobLeadsBaseConsumerTokenManager.cs" />
     <Compile Include="MJLConstants.cs" />

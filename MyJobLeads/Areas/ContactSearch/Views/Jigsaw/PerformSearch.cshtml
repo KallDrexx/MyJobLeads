@@ -1,0 +1,110 @@
+﻿@model MyJobLeads.Areas.ContactSearch.Models.JigsawSearchResultsViewModel
+
+@{
+    ViewBag.Title = "Jigsaw Contact Search Results";
+}
+
+@section SideBar {
+    @{Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.ResearchCenter));}
+}
+
+@{ Html.RenderPartial(MVC.ContactSearch.Jigsaw.Views._SearchForm, Model.Query); }
+
+@if (Model.Results != null)
+{
+    string urlParams = string.Format("FirstName={0}&LastName={1}&Company={2}&Title={3}&Industry={4}&Levels={5}&Departments={6}",
+                                        Url.Encode(Model.Query.FirstName),
+                                        Url.Encode(Model.Query.LastName),
+                                        Url.Encode(Model.Query.Company),
+                                        Url.Encode(Model.Query.Title),
+                                        Url.Encode(Model.Query.Industry),
+                                        Url.Encode(Model.Query.Levels),
+                                        Url.Encode(Model.Query.Departments));
+
+    int firstResultCount = Model.Results.DisplayedPageNumber * Model.Results.PageSize + 1;
+    int lastResultCount = firstResultCount + Model.Results.Results.Count - 1;
+    
+    int totalPages = Model.Results.TotalResultsCount / Model.Results.PageSize;
+    if (Model.Results.TotalResultsCount % Model.Results.PageSize != 0) { totalPages++; }
+    
+    <div class="grid3 floatLeft">
+        <div class="positionResultsHeader">
+            @if (Model.Results.TotalResultsCount == 0)
+            {
+                <h3>No Contacts Were Found Matching Your Criteria</h3>
+            }
+            else
+            {
+                <h3>Found Contacts (displaying @firstResultCount - @lastResultCount out of @Model.Results.TotalResultsCount)</h3>
+            }
+
+            <ul class="positionSearchNotification">
+                <li>Page @(Model.Results.TotalResultsCount > 0 ? Model.Results.DisplayedPageNumber + 1 : 0) of @totalPages</li>
+
+                @if (Model.Results.DisplayedPageNumber > 0)
+                {
+                    <li>
+                        <a href="@Url.Action(MVC.ContactSearch.Jigsaw.PerformSearch())?@urlParams&Page=@(Model.Results.DisplayedPageNumber - 1)">
+                            Previous Page
+                        </a>
+                    </li>
+                }
+                
+                @if (Model.Results.DisplayedPageNumber < totalPages - 1)
+                {
+                    <li>
+                        <a href="@Url.Action(MVC.ContactSearch.Jigsaw.PerformSearch())?@urlParams&Page=@(Model.Results.DisplayedPageNumber + 1)">
+                            Next Page
+                        </a>
+                    </li>               
+                }
+            </ul>       
+        </div>
+
+        <div id="positionRole">
+            <ul>
+                @foreach (var contact in Model.Results.Results)
+                {
+                    <li>
+                        <div class="taskName">@contact.FirstName @contact.LastName</div>
+                        <div class="positionSubHeading">@contact.Headline</div>
+                        <div class="taskDescription">Last Updated @contact.LastUpdatedDate.ToString("MM/dd/yyyy")</div>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="positionResultsHeader">
+            @if (Model.Results.TotalResultsCount == 0)
+            {
+                <h3>No Contacts Were Found Matching Your Criteria</h3>
+            }
+            else
+            {
+                <h3>Found Contacts (displaying @firstResultCount - @lastResultCount out of @Model.Results.TotalResultsCount)</h3>
+            }
+
+            <ul class="positionSearchNotification">
+                <li>Page @(Model.Results.TotalResultsCount > 0 ? Model.Results.DisplayedPageNumber + 1 : 0) of @totalPages</li>
+
+                @if (Model.Results.DisplayedPageNumber > 0)
+                {
+                    <li>
+                        <a href="@Url.Action(MVC.ContactSearch.Jigsaw.PerformSearch())?@urlParams&Page=@(Model.Results.DisplayedPageNumber - 1)">
+                            Previous Page
+                        </a>
+                    </li>
+                }
+                
+                @if (Model.Results.DisplayedPageNumber < totalPages - 1)
+                {
+                    <li>
+                        <a href="@Url.Action(MVC.ContactSearch.Jigsaw.PerformSearch())?@urlParams&Page=@(Model.Results.DisplayedPageNumber + 1)">
+                            Next Page
+                        </a>
+                    </li>               
+                }
+            </ul>       
+        </div>
+    </div>
+}

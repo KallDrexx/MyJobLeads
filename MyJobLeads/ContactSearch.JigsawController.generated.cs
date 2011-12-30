@@ -31,6 +31,11 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult PerformSearch() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.PerformSearch);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public JigsawController Actions { get { return MVC.ContactSearch.Jigsaw; } }
@@ -46,6 +51,7 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
         public class ActionNamesClass {
             public readonly string Index = "Index";
             public readonly string Authenticate = "Authenticate";
+            public readonly string PerformSearch = "PerformSearch";
         }
 
 
@@ -57,6 +63,7 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
             public readonly string _SearchForm = "~/Areas/ContactSearch/Views/Jigsaw/_SearchForm.cshtml";
             public readonly string Authenticate = "~/Areas/ContactSearch/Views/Jigsaw/Authenticate.cshtml";
             public readonly string Index = "~/Areas/ContactSearch/Views/Jigsaw/Index.cshtml";
+            public readonly string PerformSearch = "~/Areas/ContactSearch/Views/Jigsaw/PerformSearch.cshtml";
         }
     }
 
@@ -77,6 +84,12 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
 
         public override System.Web.Mvc.ActionResult Authenticate(MyJobLeads.Areas.ContactSearch.Models.JigsawAuthenticateViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Authenticate);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult PerformSearch(MyJobLeads.Areas.ContactSearch.Models.JigsawSearchParametersViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PerformSearch);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
