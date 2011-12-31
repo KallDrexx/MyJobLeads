@@ -22,6 +22,8 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
     {
         protected IServiceFactory _serviceFactory;
         protected int _companyId, _userId;
+        protected int? _jigsawId;
+        protected bool _hasJigsawAccess;
         protected string _name, _directPhone, _mobilePhone, _ext, _email, _assistant, _referredBy, _notes, _title;
 
         public CreateContactCommand(IServiceFactory factory)
@@ -151,6 +153,28 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
         }
 
         /// <summary>
+        /// Specifies the jigsaw Id for the contact
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public CreateContactCommand SetJigsawId(int? id)
+        {
+            _jigsawId = id;
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies wheither the user has access to all properties of the contact on Jigsaw
+        /// </summary>
+        /// <param name="hasAccess"></param>
+        /// <returns></returns>
+        public CreateContactCommand SetHasJigsawAccess(bool hasAccess)
+        {
+            _hasJigsawAccess = hasAccess;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
@@ -182,6 +206,8 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
                 ReferredBy = _referredBy,
                 Notes = _notes,
                 Title = _title,
+                JigsawId = _jigsawId,
+                HasJigsawAccess = _hasJigsawAccess,
 
                 Tasks = new List<Task>(),
                 History = new List<ContactHistory>()
@@ -199,6 +225,8 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
                 ReferredBy = _referredBy,
                 Notes = _notes,
                 Title = _title,
+                JigsawId = _jigsawId,
+                HasJigsawAccess = _hasJigsawAccess,
 
                 DateModified = DateTime.Now,
                 AuthoringUser = user,

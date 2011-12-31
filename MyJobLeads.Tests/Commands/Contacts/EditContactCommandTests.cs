@@ -45,6 +45,8 @@ namespace MyJobLeads.Tests.Commands.Contacts
                 Assistant = "Starting Assistant",
                 ReferredBy = "Starting Referred",
                 Notes = "Starting Notes",
+                JigsawId = 1234,
+                HasJigsawAccess = true,
 
                 History = new List<ContactHistory>()
             };
@@ -490,6 +492,8 @@ namespace MyJobLeads.Tests.Commands.Contacts
             Assert.AreEqual("Referred By", history.ReferredBy, "The history record's referred by was incorrect");
             Assert.AreEqual("Notes", history.Notes, "The history record's notes was incorrect");
             Assert.AreEqual("New Title", history.Title, "The history record's title was incorrect");
+            Assert.AreEqual(1234, history.JigsawId, "Jigsaw Id was incorrect");
+            Assert.IsTrue(history.HasJigsawAccess, "Jigsaw access was incorrect");
 
             Assert.AreEqual(_user, history.AuthoringUser, "The history record's author was incorrect");
             Assert.AreEqual(MJLConstants.HistoryUpdate, history.HistoryAction, "The history record's action value was incorrect");
