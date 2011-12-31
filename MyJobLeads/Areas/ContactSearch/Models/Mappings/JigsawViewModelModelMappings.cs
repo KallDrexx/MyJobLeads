@@ -21,6 +21,17 @@ namespace MyJobLeads.Areas.ContactSearch.Models.Mappings
                 .ForMember(dest => dest.RequestedPageNum, opt => opt.MapFrom(src => src.Page))
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
                 .ForMember(dest => dest.RequestingUserId, opt => opt.Ignore());
+
+            Mapper.CreateMap<AddJigsawContactViewModel, AddJigsawContactToJobSearchParams>()
+                .ForMember(dest => dest.JigsawCompanyId, opt => opt.MapFrom(src => src.JigsawCompanyId))
+                .ForMember(dest => dest.JigsawContactId, opt => opt.MapFrom(src => src.JigsawContactId))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
+                .ForMember(dest => dest.CreateCompanyFromJigsaw, opt => opt.MapFrom(src => src.CreateNewCompany))
+                .ForMember(dest => dest.ExistingCompanyId, opt => opt.MapFrom(src => src.SelectedCompanyId))
+                .ForMember(dest => dest.Phone, opt => opt.Ignore())
+                .ForMember(dest => dest.Email, opt => opt.Ignore())
+                .ForMember(dest => dest.RequestingUserId, opt => opt.Ignore());
         }
     }
 }

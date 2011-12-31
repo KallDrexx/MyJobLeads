@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using MyJobLeads.DomainModel.Entities.EF;
@@ -16,6 +17,7 @@ using MyJobLeads.Infrastructure.Attributes;
 using MyJobLeads.DomainModel.ViewModels.ContactSearching;
 using MyJobLeads.DomainModel.ProcessParams.ContactSearching.Jigsaw;
 using AutoMapper;
+using MyJobLeads.DomainModel.Queries.Companies;
 
 namespace MyJobLeads.Areas.ContactSearch.Controllers
 {
@@ -25,16 +27,19 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
         protected IProcess<GetJigsawUserPointsParams, JigsawUserPointsViewModel> _getUserPointsProc;
         protected IProcess<SaveJigsawUserCredentialsParams, GeneralSuccessResultViewModel> _saveCredentialsProc;
         protected IProcess<JigsawContactSearchParams, ExternalContactSearchResultsViewModel> _searchContacsProc;
+        protected IProcess<AddJigsawContactToJobSearchParams, ExternalContactAddedResultViewModel> _addContactProc;
 
         public JigsawController(MyJobLeadsDbContext context,
                                 IProcess<GetJigsawUserPointsParams, JigsawUserPointsViewModel> getUserPointsProc,
                                 IProcess<SaveJigsawUserCredentialsParams, GeneralSuccessResultViewModel> saveCredentialsProc,
-                                IProcess<JigsawContactSearchParams, ExternalContactSearchResultsViewModel> searchContactsProc)
+                                IProcess<JigsawContactSearchParams, ExternalContactSearchResultsViewModel> searchContactsProc,
+                                IProcess<AddJigsawContactToJobSearchParams, ExternalContactAddedResultViewModel> addContactProc)
         {
             _context = context;
             _getUserPointsProc = getUserPointsProc;
             _saveCredentialsProc = saveCredentialsProc;
             _searchContacsProc = searchContactsProc;
+            _addContactProc = addContactProc;
         }
 
         public virtual ActionResult Index()
@@ -102,6 +107,63 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
             };
 
             return View(resultsModel);
+        }
+
+        public virtual ActionResult AddContact(string jsContactId, string jsCompanyId, string jsCompanyName, string name, string title)
+        {
+            var user = _context.Users
+                               .Where(x => x.Id == CurrentUserId)
+                               .Include(x => x.LastVisitedJobSearch.Companies)
+                               .Single();
+
+            var model = new AddJigsawContactViewModel
+            {
+                JigsawContactId = jsContactId,
+                JigsawCompanyId = jsCompanyId,
+                JigsawCompanyName = jsCompanyName,
+                Name = name,
+                Title = title
+            };
+            model.SetExistingCompanyList(user.LastVisitedJobSearch.Companies.ToList());
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public virtual ActionResult AddContact(AddJigsawContactViewModel model)
+        {
+            if (!model.CreateNewCompany && model.SelectedCompanyId == 0)
+                ModelState.AddModelError("CompanyName", "No existing company selected");
+
+            if (!ModelState.IsValid)
+            {
+                var user = _context.Users
+                               .Where(x => x.Id == CurrentUserId)
+                               .Include(x => x.LastVisitedJobSearch.Companies)
+                               .Single();
+
+                model.SetExistingCompanyList(user.LastVisitedJobSearch.Companies.ToList());
+                return View(model);
+            }
+
+            var parameters = Mapper.Map<AddJigsawContactViewModel, AddJigsawContactToJobSearchParams>(model);
+            parameters.RequestingUserId = CurrentUserId;
+            var result = _addContactProc.Execute(parameters);
+
+            return RedirectToAction(MVC.ContactSearch.Jigsaw.AddContactSuccessful(result.ContactId, result.ContactName, result.CompanyName, result.CompanyId));
+        }
+
+        public virtual ActionResult AddContactSuccessful(int contactId, string contactName, string companyName, int companyId)
+        {
+            var model = new ExternalContactAddedResultViewModel
+            {
+                ContactId = contactId,
+                ContactName = contactName,
+                CompanyId = companyId,
+                CompanyName = companyName
+            };
+
+            return View(model);
         }
     }
 }

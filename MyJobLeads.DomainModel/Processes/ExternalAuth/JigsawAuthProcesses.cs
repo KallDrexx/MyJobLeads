@@ -124,7 +124,7 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
 
             // If a forbidden response was given, determine if it was a bad API token or bad user credentials
             if (response.StatusCode == HttpStatusCode.Forbidden)
-                ThrowForbiddenResponse(response.Content, procParams.RequestingUserId);
+                ThrowInvalidResponse(response.Content, procParams.RequestingUserId);
 
             return JsonConvert.DeserializeObject<JigsawUserPointsViewModel>(response.Content);
         }
@@ -146,7 +146,7 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
         /// Processes a forbidden response from the jigsaw api
         /// </summary>
         /// <param name="content"></param>
-        public static void ThrowForbiddenResponse(string content, int requestingUserId, string contactId = "")
+        public static void ThrowInvalidResponse(string content, int requestingUserId, string contactId = "")
         {
             if (content.Contains("TOKEN_FAIL"))
                 throw new InvalidJigsawApiTokenException(GetAuthToken());

@@ -56,7 +56,7 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
         /// <returns></returns>
         public ExternalContactSearchResultsViewModel Execute(JigsawContactSearchParams procParams)
         {
-            const int PAGE_SIZE = 100;
+            const int PAGE_SIZE = 50;
 
             var credentials = _getJigsawCredentialsProc.Execute(new GetUserJigsawCredentialsParams { RequestingUserId = procParams.RequestingUserId });
             if (credentials == null)
@@ -81,7 +81,7 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
 
             // Check for a forbidden result
             if (response.StatusCode == HttpStatusCode.Forbidden)
-                JigsawAuthProcesses.ThrowForbiddenResponse(response.Content, procParams.RequestingUserId);
+                JigsawAuthProcesses.ThrowInvalidResponse(response.Content, procParams.RequestingUserId);
 
             // Get the returned json and convert it to the view model
             var json = JsonConvert.DeserializeObject<ContactSearchResponseJson>(response.Content, new JigsawDateTimeConverter());
@@ -133,8 +133,8 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
 
             try
             {
-                if (response.StatusCode == HttpStatusCode.Forbidden)
-                    JigsawAuthProcesses.ThrowForbiddenResponse(response.Content, procParams.RequestingUserId, procParams.JigsawContactId);
+                if (response.StatusCode != HttpStatusCode.OK)
+                    JigsawAuthProcesses.ThrowInvalidResponse(response.Content, procParams.RequestingUserId, procParams.JigsawContactId);
             }
             catch (JigsawContactNotOwnedException)
             {
@@ -174,7 +174,7 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
                     // Create the company
                     var jsComp = companyJson.companies[0];
                     company = _createCompanyCmd.CalledByUserId(procParams.RequestingUserId)
-                                               .WithJobSearch((int)user.LinkedInOAuthDataId)
+                                               .WithJobSearch((int)user.LastVisitedJobSearchId)
                                                .SetName(jsComp.name)
                                                .SetIndustry(jsComp.industry1)
                                                .SetCity(jsComp.city)
@@ -195,6 +195,7 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
 
                 // Create the contact
                 var contact = _createContactCmd.RequestedByUserId(procParams.RequestingUserId)
+                                               .WithCompanyId(company.Id)
                                                .SetName(procParams.Name)
                                                .SetTitle(procParams.Title)
                                                .SetDirectPhone(procParams.Phone)
