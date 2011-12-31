@@ -181,6 +181,7 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
                                                .SetState(jsComp.state)
                                                .SetZip(jsComp.zip)
                                                .SetPhone(jsComp.phone)
+                                               .SetJigsawId(Convert.ToInt32(jsComp.companyId))
                                                .Execute();
                 }
 
@@ -200,6 +201,8 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
                                                .SetTitle(procParams.Title)
                                                .SetDirectPhone(procParams.Phone)
                                                .SetEmail(procParams.Email)
+                                               .SetJigsawId(Convert.ToInt32(procParams.JigsawContactId))
+                                               .SetHasJigsawAccess(jigsawContactOwned)
                                                .Execute();
 
                 transaction.Complete();
