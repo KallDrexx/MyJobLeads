@@ -22,6 +22,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
     {
         protected IServiceFactory _serviceFactory;
         protected int _searchId, _callingUserId;
+        protected int? _jigsawId;
         protected string _name, _phone, _city, _state, _zip, _metro, _industry, _notes;
 
         public CreateCompanyCommand(IServiceFactory serviceFactory)
@@ -129,6 +130,17 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         }
 
         /// <summary>
+        /// Sets the company's jigsaw id to the specified value
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public virtual CreateCompanyCommand SetJigsawId(int id)
+        {
+            _jigsawId = id;
+            return this;
+        }
+
+        /// <summary>
         /// Specifies the id value of the user creating the company
         /// </summary>
         /// <param name="userId"></param>
@@ -169,6 +181,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
                 MetroArea = _metro,
                 Industry = _industry,
                 Notes = _notes,
+                JigsawId = _jigsawId,
                 LeadStatus = MJLConstants.ProspectiveEmployerCompanyStatus,
 
                 Tasks = new List<Task>(),
@@ -187,6 +200,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
                 MetroArea = _metro,
                 Industry = _industry,
                 Notes = _notes,
+                JigsawId = _jigsawId,
                 LeadStatus = MJLConstants.ProspectiveEmployerCompanyStatus,
 
                 AuthoringUser = user,
