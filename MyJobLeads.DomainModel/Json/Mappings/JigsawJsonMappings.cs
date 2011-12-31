@@ -15,6 +15,7 @@ namespace MyJobLeads.DomainModel.Json.Mappings
         {
             Mapper.CreateMap<ContactDetailsJson, ExternalContactSearchResultsViewModel.ContactResultViewModel>()
                 .ForMember(dest => dest.Company, opt => opt.MapFrom(src => src.CompanyName))
+                .ForMember(dest => dest.CompanyId, opt => opt.MapFrom(src => src.CompanyId))
                 .ForMember(dest => dest.ContactId, opt => opt.MapFrom(src => src.ContactId))
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))

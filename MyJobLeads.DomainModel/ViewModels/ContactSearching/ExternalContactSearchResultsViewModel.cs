@@ -15,6 +15,7 @@ namespace MyJobLeads.DomainModel.ViewModels.ContactSearching
         public class ContactResultViewModel
         {
             public string ContactId { get; set; }
+            public string CompanyId { get; set; }
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public string Headline { get; set; }

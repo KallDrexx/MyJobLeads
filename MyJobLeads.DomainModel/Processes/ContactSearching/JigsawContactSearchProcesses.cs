@@ -103,6 +103,8 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
         /// <returns></returns>
         public ExternalContactAddedResultViewModel Execute(AddJigsawContactToJobSearchParams procParams)
         {
+            bool jigsawContactOwned = true;
+
             var user = _context.Users
                                .Where(x => x.Id == procParams.RequestingUserId)
                                .Include(x => x.LastVisitedJobSearch)
@@ -119,23 +121,39 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
             if (credentials == null)
                 throw new JigsawCredentialsNotFoundException(procParams.RequestingUserId);
 
-            // Perform the API query
+            // Perform the API query to get the jigsaw contact only if the user has access to the contact
             var client = new RestClient("https://www.jigsaw.com/");
             string contactUrl = string.Format("rest/contacts/{0}.json", procParams.JigsawContactId);
             var request = new RestRequest(contactUrl, Method.GET);
             request.AddParameter("token", JigsawAuthProcesses.GetAuthToken());
             request.AddParameter("username", credentials.JigsawUsername);
             request.AddParameter("password", credentials.JigsawPassword);
-            request.AddParameter("purchaseFlag", procParams.PurchaseContact);
+            request.AddParameter("purchaseFlag", false);
             var response = client.Execute(request);
 
-            if (response.StatusCode == HttpStatusCode.Forbidden)
-                JigsawAuthProcesses.ThrowForbiddenResponse(response.Content, procParams.RequestingUserId, procParams.JigsawContactId);
+            try
+            {
+                if (response.StatusCode == HttpStatusCode.Forbidden)
+                    JigsawAuthProcesses.ThrowForbiddenResponse(response.Content, procParams.RequestingUserId, procParams.JigsawContactId);
+            }
+            catch (JigsawContactNotOwnedException)
+            {
+                jigsawContactOwned = false;
+            }
 
-            // Convert the json string into an object and evaluate it
-            var json = JsonConvert.DeserializeObject<ContactDetailsResponseJson>(response.Content);
-            if (json.Unrecognized.Count > 0)
-                throw new JigsawContactNotFoundException(procParams.JigsawContactId);
+            // If the user owns the contact, update the info from Jigsaw
+            if (jigsawContactOwned)
+            {
+                // Convert the json string into an object and evaluate it
+                var json = JsonConvert.DeserializeObject<ContactDetailsResponseJson>(response.Content);
+                if (json.Unrecognized.Count > 0)
+                    throw new JigsawContactNotFoundException(procParams.JigsawContactId);
+
+                procParams.Name = json.Contacts[0].FirstName + " " + json.Contacts[0].LastName;
+                procParams.Title = json.Contacts[0].Title;
+                procParams.Phone = json.Contacts[0].Phone;
+                procParams.Email = json.Contacts[0].Email;
+            }
 
             // Use a transaction to prevent creating a company without the contact
             using (var transaction = new TransactionScope())
@@ -144,14 +162,14 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
                 Company company;
                 if (procParams.CreateCompanyFromJigsaw)
                 {
-                    string companyUrl = string.Format("rest/companies/{0}.json", json.Contacts[0].CompanyId);
+                    string companyUrl = string.Format("rest/companies/{0}.json", procParams.JigsawCompanyId);
                     request = new RestRequest(companyUrl, Method.GET);
                     request.AddParameter("token", JigsawAuthProcesses.GetAuthToken());
                     response = client.Execute(request);
 
                     var companyJson = JsonConvert.DeserializeObject<CompanyDetailsResponseJson>(response.Content);
                     if (companyJson.companies.Count == 0)
-                        throw new JigsawCompanyNotFoundException(json.Contacts[0].CompanyId);
+                        throw new JigsawCompanyNotFoundException(procParams.JigsawCompanyId);
 
                     // Create the company
                     var jsComp = companyJson.companies[0];
@@ -176,12 +194,11 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
                 }
 
                 // Create the contact
-                var jsContact = json.Contacts[0];
                 var contact = _createContactCmd.RequestedByUserId(procParams.RequestingUserId)
-                                               .SetName(string.Concat(jsContact.FirstName, " ", jsContact.LastName))
-                                               .SetTitle(jsContact.Title)
-                                               .SetDirectPhone(jsContact.Phone)
-                                               .SetEmail(jsContact.Email)
+                                               .SetName(procParams.Name)
+                                               .SetTitle(procParams.Title)
+                                               .SetDirectPhone(procParams.Phone)
+                                               .SetEmail(procParams.Email)
                                                .Execute();
 
                 transaction.Complete();
