@@ -74,7 +74,10 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 marginAuto floatLef
 WriteLiteral(@"            <div class=""grid3 marginBottom_10 marginAuto floatLeft"">
                 <div class=""floatLeft"">
                     <p>
-                        In order to search for contacts in the Jigsaw database, we need to authenticate with your Jigsaw account.
+                        In order to search for contacts in the Jigsaw database, we need to authenticate with your Jigsaw account. <br /><br />
+
+                        If you do not have a Jigsaw account, you can get one free at 
+                        <a href=""https://www.jigsaw.com/Register.xhtml"" class=""inlineBlue"">Jigsaw.com</a>.
                     </p>    
                 </div>
             </div>
@@ -82,7 +85,7 @@ WriteLiteral(@"            <div class=""grid3 marginBottom_10 marginAuto floatLe
 
 
             
-            #line 22 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 25 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
                 
 
             
@@ -93,7 +96,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 marginAuto floatlef
 
 
             
-            #line 25 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 28 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
                Write(Html.ValidationSummary());
 
             
@@ -103,7 +106,7 @@ WriteLiteral("\r\n                </div>\r\n            </div>\r\n");
 
 
             
-            #line 28 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 31 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
                 
 
             
@@ -115,7 +118,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n  
 
 
             
-            #line 31 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 34 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
                                      Write(Html.TextBoxFor(x => x.Username, new { @class = "info" }));
 
             
@@ -125,7 +128,7 @@ WriteLiteral("</div>\r\n                </div> \r\n            </div> \r\n");
 
 
             
-            #line 34 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 37 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
 
 
             
@@ -137,7 +140,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n  
 
 
             
-            #line 37 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 40 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
                                      Write(Html.PasswordFor(x => x.Password, new { @class = "info" }));
 
             
@@ -147,7 +150,7 @@ WriteLiteral("</div>\r\n                </div> \r\n            </div> \r\n");
 
 
             
-            #line 40 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 43 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
 
 
             
@@ -159,7 +162,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_20 floatLeft\"> \r\n  
 
 
             
-            #line 44 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 47 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
         }
 
             
