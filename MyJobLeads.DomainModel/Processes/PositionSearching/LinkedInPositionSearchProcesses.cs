@@ -20,7 +20,7 @@ using MyJobLeads.DomainModel.Enums;
 using System.Xml;
 using System.Xml.Linq;
 using MyJobLeads.DomainModel.Exceptions.OAuth;
-using MyJobLeads.DomainModel.Processes.OAuth;
+using MyJobLeads.DomainModel.Processes.ExternalAuth;
 using MyJobLeads.DomainModel.Commands.Companies;
 using System.Transactions;
 using MyJobLeads.DomainModel.ViewModels.Positions;

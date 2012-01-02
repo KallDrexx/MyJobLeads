@@ -1,0 +1,48 @@
+﻿@model MyJobLeads.Areas.ContactSearch.Models.JigsawAuthenticateViewModel
+
+@{
+    ViewBag.Title = "Jigsaw Authentication";
+}
+
+<div class="grid1 floatLeft"> 
+    <div class="pageInfoBox"> 
+        @using (Html.BeginForm()) 
+        {                
+            <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                <h3 class="floatLeft">Jigsaw Authentication</h3> 
+            </div> 
+                
+            <div class="grid3 marginBottom_10 marginAuto floatLeft">
+                <div class="floatLeft">
+                    <p>
+                        In order to search for contacts in the Jigsaw database, we need to authenticate with your Jigsaw account.
+                    </p>    
+                </div>
+            </div>
+                
+            <div class="grid3 marginBottom_10 marginAuto floatleft">
+                <div class="floatLeft infoSpan">
+                    @Html.ValidationSummary()
+                </div>
+            </div>
+                
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Username:</p>
+                    <div class="infoSpan">@Html.TextBoxFor(x => x.Username, new { @class = "info" })</div>
+                </div> 
+            </div> 
+
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft"><p class="greyHighlight">Password:</p>
+                    <div class="infoSpan">@Html.PasswordFor(x => x.Password, new { @class = "info" })</div>
+                </div> 
+            </div> 
+
+            <div class="grid3 marginBottom_20 floatLeft"> 
+                <div class="submitBTN "><input type="submit" value="Autheticate" /></div>                    
+            </div> 
+        }
+
+        <div class="clear"></div> 
+    </div> 
+</div> 

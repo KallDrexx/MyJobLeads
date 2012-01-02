@@ -12,7 +12,7 @@
 
         <li>&nbsp;</li>
 
-        <li>@Html.ActionLink("Find Open Positions", MVC.PositionSearch.LinkedIn.Index(), new { @class = Model.ActiveLink == ActiveSidebarLink.PositionSearch? "active" : "" })</li>
+        <li>@Html.ActionLink("Research Center", MVC.ResearchCenter.Index(), new { @class = Model.ActiveLink == ActiveSidebarLink.ResearchCenter? "active" : "" })</li>
 
         @if (Model.HasCurrentJobSearchId)
         {

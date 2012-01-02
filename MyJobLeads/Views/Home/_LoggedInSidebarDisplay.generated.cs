@@ -101,7 +101,7 @@ WriteLiteral("</li>\r\n\r\n        <li>&nbsp;</li>\r\n\r\n        <li>");
 
             
             #line 15 "..\..\Views\Home\_LoggedInSidebarDisplay.cshtml"
-       Write(Html.ActionLink("Find Open Positions", MVC.PositionSearch.LinkedIn.Index(), new { @class = Model.ActiveLink == ActiveSidebarLink.PositionSearch? "active" : "" }));
+       Write(Html.ActionLink("Research Center", MVC.ResearchCenter.Index(), new { @class = Model.ActiveLink == ActiveSidebarLink.ResearchCenter? "active" : "" }));
 
             
             #line default

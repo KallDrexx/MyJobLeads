@@ -17,6 +17,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using MyJobLeads.DomainModel;
 using Castle.Windsor.Installer;
+using MyJobLeads.DomainModel.Utilities;
 
 namespace MyJobLeads.Infrastructure.Installers
 {
@@ -32,6 +33,7 @@ namespace MyJobLeads.Infrastructure.Installers
             container.Register(Component.For<ISearchProvider>().ImplementedBy<LuceneSearchProvider>().LifeStyle.PerWebRequest);
             container.Register(Component.For<IDataDirectoryProvider>().ImplementedBy<AppDataDirectoryProvider>().LifeStyle.Singleton);
             container.Register(Component.For<IValidatorFactory>().ImplementedBy<WindsorValidatorFactory>().LifeStyle.Singleton);
+            container.Register(Component.For<EncryptionUtils>().ImplementedBy<EncryptionUtils>().LifeStyle.Singleton);
 
             // Register the EF unit of work and db context
             container.Register(Component.For<IUnitOfWork>().ImplementedBy<EFUnitOfWork>().LifeStyle.PerWebRequest);

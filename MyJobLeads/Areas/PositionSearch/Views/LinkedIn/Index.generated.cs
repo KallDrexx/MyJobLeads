@@ -65,7 +65,7 @@ WriteLiteral("\r\n");
 
             
             #line 8 "..\..\Areas\PositionSearch\Views\LinkedIn\Index.cshtml"
-      Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.PositionSearch));
+      Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.ResearchCenter));
 
             
             #line default

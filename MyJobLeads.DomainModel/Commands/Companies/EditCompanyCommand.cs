@@ -189,6 +189,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
                 Industry = company.Industry,
                 Notes = company.Notes,
                 LeadStatus = company.LeadStatus,
+                JigsawId = company.JigsawId,
 
                 AuthoringUser = user,
                 HistoryAction = MJLConstants.HistoryUpdate,

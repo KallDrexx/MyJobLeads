@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Research Center";
+}
+
+@section SideBar {
+    @{Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.ResearchCenter));}
+}
+
+<div class="grid1 floatLeft"> 
+    <div class="pageInfoBox"> 
+        <div class="grid3 marginBottom_10 marginAuto floatLeft">
+            <h3>MyLeads Research Center</h3>
+        </div>
+
+        <div class="grid3 marginBottom_10 marginAuto floatLeft">
+            <p>
+                MyLeads provides resources to perform research to make your job search more successful
+            </p>
+
+            <p>
+                <ul class="decoratedList">
+                    <li>
+                        @Html.ActionLink("Research Open Jobs", MVC.PositionSearch.LinkedIn.Index(), new { @class = "inlineBlue", title = "Find Open Jobs" })
+                    </li>
+
+                    <li><a href="#" class="inlineBlue">Research Companies</a> <span class="bold">(Coming Soon)</span></li>
+
+                    <li>
+                        @Html.ActionLink("Research Contacts", MVC.ContactSearch.Jigsaw.Index(), new { @class = "inlineBlue", title = "Find Contacts" })
+                    </li>
+                </ul>
+            </p>
+        </div>
+            
+        <div class="clear"></div>
+    </div>
+</div>

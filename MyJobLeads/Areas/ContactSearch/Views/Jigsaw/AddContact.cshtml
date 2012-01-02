@@ -1,0 +1,64 @@
+﻿@model MyJobLeads.Areas.ContactSearch.Models.AddJigsawContactViewModel
+
+@{
+    ViewBag.Title = "Add Jigsaw Contact";
+}
+
+<div class="grid1 floatLeft"> 
+    <div class="pageInfoBox"> 
+        @using (Html.BeginForm()) 
+        {
+            @Html.HiddenFor(x => x.JigsawContactId)
+            @Html.HiddenFor(x => x.JigsawCompanyId)
+            @Html.HiddenFor(x => x.JigsawCompanyName)
+            @Html.HiddenFor(x => x.Name)
+            @Html.HiddenFor(x => x.Title)
+                
+            <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                <h3 class="floatLeft">Add Contact From Jigsaw To Your Job Search</h3> 
+            </div> 
+                
+            <div class="grid3 marginBottom_10 marginAuto floatLeft">
+                <div class="floatLeft">
+                    <p>
+                        Name: <span class="bold">@Model.Name</span><br />
+                        Company: <span class="bold">@Model.JigsawCompanyName</span><br />
+                        Source: <a href="http://www.jigsaw.com/BC.xhtml?contactId=@Url.Encode(Model.JigsawContactId)" class="inlineBlue">Jigsaw</a>
+                    </p>    
+                </div>
+            </div>
+                
+            <div class="grid3 marginBottom_10 marginAuto floatleft">
+                <div class="floatLeft infoSpan">
+                    @Html.ValidationSummary()
+                </div>
+            </div>
+                
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft">
+                    <p class="greyHighlight">@Html.LabelFor(x => x.CreateNewCompany, "Create Company Entry For " + Model.JigsawCompanyName)
+                        @Html.CheckBoxFor(x => x.CreateNewCompany)
+                    </p>
+                </div> 
+            </div> 
+
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft">
+                    <p class="greyHighlight"><span class="bold">OR</span></p>
+                    <p class="greyHighlight">Add Position To Existing Company:</p>
+                    <div class="infoSpan">
+                        @Html.DropDownListFor(x => x.SelectedCompanyId, Model.ExistingCompanyList)
+                    </div>
+                </div> 
+            </div> 
+
+            <div class="grid3 marginBottom_20 floatLeft"> 
+                <div class="submitBTN ">
+                    <input type="submit" value="Add Contact" />
+                </div>                    
+            </div> 
+        }
+
+        <div class="clear"></div> 
+    </div> 
+</div> 

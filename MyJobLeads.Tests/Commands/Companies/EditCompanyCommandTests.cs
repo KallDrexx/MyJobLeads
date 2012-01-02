@@ -44,6 +44,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                 MetroArea = "Starting Metro",
                 Industry = "Starting Industry",
                 Notes = "Starting Notes", 
+                JigsawId = 1234,
 
                 History = new List<CompanyHistory>()
             };
@@ -491,6 +492,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             Assert.AreEqual("Metro", history.MetroArea, "The history record's metro area was incorrect");
             Assert.AreEqual("Notes", history.Notes, "The history record's notes were incorrect");
             Assert.AreEqual("Industry", history.Industry, "The history record's industry was incorrect");
+            Assert.AreEqual(1234, history.JigsawId, "The jigsaw id was incorrect");
 
             Assert.AreEqual(_user, history.AuthoringUser, "The history record's author was incorrect");
             Assert.AreEqual(MJLConstants.HistoryUpdate, history.HistoryAction, "The history record's action value was incorrect");

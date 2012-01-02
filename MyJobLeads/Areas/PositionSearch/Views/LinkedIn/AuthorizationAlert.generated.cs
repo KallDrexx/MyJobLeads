@@ -56,7 +56,7 @@ WriteLiteral("\r\n");
 
             
             #line 6 "..\..\Areas\PositionSearch\Views\LinkedIn\AuthorizationAlert.cshtml"
-      Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.PositionSearch));
+      Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.ResearchCenter));
 
             
             #line default

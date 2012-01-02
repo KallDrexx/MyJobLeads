@@ -42,8 +42,9 @@
     <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper">
-      <HintPath>..\packages\AutoMapper.1.1.0.118\lib\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=2.0.0.232, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.2.0.0\lib\net40-client\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="BCrypt.Net">
       <HintPath>..\packages\BCrypt-Official.0.1.107\lib\BCrypt.Net.dll</HintPath>
@@ -157,6 +158,8 @@
     <Compile Include="Processes\Authorization\SiteAdminAuthorizationTests.cs" />
     <Compile Include="Processes\Authorization\TaskAuthorizationsTests.cs" />
     <Compile Include="Processes\Export\JobSearchExportProcessTests.cs" />
+    <Compile Include="Processes\ExternalAuth\GetUserJigsawCredentialTests.cs" />
+    <Compile Include="Processes\ExternalAuth\SaveJigsawCredentialsTests.cs" />
     <Compile Include="Processes\JobSearches\PropogateMilestoneToJobSearchTests.cs" />
     <Compile Include="Processes\Milestones\MilestoneQueryProcessTests.cs" />
     <Compile Include="Processes\Milestones\MilestoneNonQueryProcessTests.cs" />
@@ -166,7 +169,7 @@
     <Compile Include="Processes\PositionSearching\LinkedIn\AddLinkedInPositionTests.cs" />
     <Compile Include="Processes\PositionSearching\LinkedIn\LinkedInPositionDetailsTests.cs" />
     <Compile Include="Processes\PositionSearching\LinkedIn\LinkedInPositionSearchTests.cs" />
-    <Compile Include="Processes\OAuth\VerifyLinkedInAccessTokenTests.cs" />
+    <Compile Include="Processes\ExternalAuth\VerifyLinkedInAccessTokenTests.cs" />
     <Compile Include="Processes\Positions\CreatePositionTests.cs" />
     <Compile Include="Processes\Positions\EditPositionTests.cs" />
     <Compile Include="Processes\Positions\GetPositionListTests.cs" />
@@ -223,6 +226,7 @@
     <Compile Include="Queries\Users\UserByIdQueryTests.cs" />
     <Compile Include="SingletonLifestyleEqualizer.cs" />
     <Compile Include="Utilities\EmailUtilsTest.cs" />
+    <Compile Include="Utilities\EncryptionUtilsTests.cs" />
     <Compile Include="Utilities\PasswordUtilsTests.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgressTests.cs" />
     <Compile Include="WebInfrastructure\WindsorTests.cs" />

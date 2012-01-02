@@ -25,6 +25,8 @@ using T4MVC;
 public static class MVC {
     static readonly AdminClass s_Admin = new AdminClass();
     public static AdminClass Admin { get { return s_Admin; } }
+    static readonly ContactSearchClass s_ContactSearch = new ContactSearchClass();
+    public static ContactSearchClass ContactSearch { get { return s_ContactSearch; } }
     static readonly OrganizationClass s_Organization = new OrganizationClass();
     public static OrganizationClass Organization { get { return s_Organization; } }
     static readonly PositionSearchClass s_PositionSearch = new PositionSearchClass();
@@ -36,6 +38,7 @@ public static class MVC {
     public static MyJobLeads.Controllers.JobSearchController JobSearch = new MyJobLeads.Controllers.T4MVC_JobSearchController();
     public static MyJobLeads.Controllers.PoliciesController Policies = new MyJobLeads.Controllers.T4MVC_PoliciesController();
     public static MyJobLeads.Controllers.PositionController Position = new MyJobLeads.Controllers.T4MVC_PositionController();
+    public static MyJobLeads.Controllers.ResearchCenterController ResearchCenter = new MyJobLeads.Controllers.T4MVC_ResearchCenterController();
     public static MyJobLeads.Controllers.SearchController Search = new MyJobLeads.Controllers.T4MVC_SearchController();
     public static MyJobLeads.Controllers.TaskController Task = new MyJobLeads.Controllers.T4MVC_TaskController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
@@ -48,6 +51,12 @@ namespace T4MVC {
         public MyJobLeads.Areas.Admin.Controllers.DashboardController Dashboard = new MyJobLeads.Areas.Admin.Controllers.T4MVC_DashboardController();
         public MyJobLeads.Areas.Admin.Controllers.EditOrganizationController EditOrganization = new MyJobLeads.Areas.Admin.Controllers.T4MVC_EditOrganizationController();
         public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
+    }
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public class ContactSearchClass {
+        public readonly string Name = "ContactSearch";
+        public MyJobLeads.Areas.ContactSearch.Controllers.JigsawController Jigsaw = new MyJobLeads.Areas.ContactSearch.Controllers.T4MVC_JigsawController();
+        public T4MVC.ContactSearch.SharedController Shared = new T4MVC.ContactSearch.SharedController();
     }
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class OrganizationClass {

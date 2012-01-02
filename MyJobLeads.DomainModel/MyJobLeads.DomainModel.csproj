@@ -42,8 +42,9 @@
     <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper">
-      <HintPath>..\packages\AutoMapper.1.1.0.118\lib\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=2.0.0.232, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.2.0.0\lib\net40-client\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="BCrypt.Net">
       <HintPath>..\packages\BCrypt-Official.0.1.107\lib\BCrypt.Net.dll</HintPath>
@@ -78,6 +79,12 @@
     </Reference>
     <Reference Include="Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\Libs\Microsoft.SqlServer.Smo.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.102.5\lib\net35\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -121,6 +128,7 @@
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\EF\Configuration\MilestoneConfig.cs" />
     <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\JigsawAccountDetails.cs" />
     <Compile Include="Entities\OAuthData.cs" />
     <Compile Include="Entities\OfficialDocument.cs" />
     <Compile Include="Entities\Extensions\EntityExtensions.cs" />
@@ -146,11 +154,18 @@
     <Compile Include="EntityMapping\Mappings\MilestoneMappings.cs" />
     <Compile Include="EntityMapping\Mappings\OrganizationMappings.cs" />
     <Compile Include="EntityMapping\Mappings\PositionMappings.cs" />
+    <Compile Include="EntityMapping\Mappings\Processes\JigsawMappings.cs" />
     <Compile Include="EntityMapping\Mappings\UserMappings.cs" />
     <Compile Include="Enums\ExternalDataSource.cs" />
     <Compile Include="Enums\TokenProvider.cs" />
     <Compile Include="Exceptions\InvalidEmailDomainForOrganizationException.cs" />
     <Compile Include="Exceptions\InvalidOrganizationRegistrationTokenException.cs" />
+    <Compile Include="Exceptions\Jigsaw\InvalidJigsawApiTokenException.cs" />
+    <Compile Include="Exceptions\Jigsaw\InvalidJigsawCredentialsException.cs" />
+    <Compile Include="Exceptions\Jigsaw\JigsawCompanyNotFoundException.cs" />
+    <Compile Include="Exceptions\Jigsaw\JigsawContactNotFoundException.cs" />
+    <Compile Include="Exceptions\Jigsaw\JigsawContactNotOwnedException.cs" />
+    <Compile Include="Exceptions\Jigsaw\JigsawCredentialsNotFoundException.cs" />
     <Compile Include="Exceptions\MJLDuplicateEmailException.cs" />
     <Compile Include="Exceptions\MJLEntityNotFoundException.cs" />
     <Compile Include="Exceptions\MJLException.cs" />
@@ -163,22 +178,35 @@
     <Compile Include="Exceptions\OAuth\UserHasNoValidOAuthAccessTokenException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForEntityException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForProcessException.cs" />
+    <Compile Include="Json\Converters\JigsawDateTimeConverter.cs" />
+    <Compile Include="Json\Jigsaw\CompanyDetailsResponseJson.cs" />
+    <Compile Include="Json\Jigsaw\ContactDetailsJson.cs" />
+    <Compile Include="Json\Jigsaw\ContactDetailsResponseJson.cs" />
+    <Compile Include="Json\Jigsaw\ContactSearchResponseJson.cs" />
+    <Compile Include="Json\Mappings\JigsawJsonMappings.cs" />
     <Compile Include="LibSupport\DotNetOpenAuth\LinkedInTokenManager.cs" />
     <Compile Include="LibSupport\DotNetOpenAuth\MyJobLeadsBaseConsumerTokenManager.cs" />
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Processes\Admin\OrganizationAdminProcesses.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
+    <Compile Include="Processes\ContactSearching\JigsawContactSearchProcesses.cs" />
     <Compile Include="Processes\Exports\JobSearchExportProcess.cs" />
+    <Compile Include="Processes\ExternalAuth\JigsawAuthProcesses.cs" />
     <Compile Include="Processes\JobSearches\JobSearchMilestonePropogationProcesses.cs" />
     <Compile Include="Processes\Milestones\MilestoneQueryProcesses.cs" />
     <Compile Include="Processes\Milestones\MilestoneNonQueryProcesses.cs" />
-    <Compile Include="Processes\OAuth\LinkedInOAuthProcesses.cs" />
+    <Compile Include="Processes\ExternalAuth\LinkedInOAuthProcesses.cs" />
     <Compile Include="Processes\Organizations\OrganizationDocumentProcesses.cs" />
     <Compile Include="Processes\Organizations\OrganizationMetricQueryProcesses.cs" />
     <Compile Include="Processes\PositionSearching\LinkedInPositionSearchProcesses.cs" />
     <Compile Include="Processes\Positions\PositionProcesses.cs" />
     <Compile Include="Processes\Users\UserPasswordProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
+    <Compile Include="ProcessParams\ContactSearching\Jigsaw\AddJigsawContactToJobSearchParams.cs" />
+    <Compile Include="ProcessParams\ContactSearching\Jigsaw\JigsawContactSearchParams.cs" />
+    <Compile Include="ProcessParams\ExternalAuth\Jigsaw\GetJigsawUserPointsParams.cs" />
+    <Compile Include="ProcessParams\ExternalAuth\Jigsaw\GetUserJigsawCredentialsParams.cs" />
+    <Compile Include="ProcessParams\ExternalAuth\Jigsaw\SaveJigsawUserCredentialsParams.cs" />
     <Compile Include="ProcessParams\JobSearches\ByJobSearchParams.cs" />
     <Compile Include="ProcessParams\JobSearches\JobSearchMilestonePropogationParams.cs" />
     <Compile Include="ProcessParams\Milestones\MilestoneIdParams.cs" />
@@ -228,10 +256,15 @@
     <Compile Include="Queries\Search\EntitySearchQuery.cs" />
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQuery.cs" />
     <Compile Include="TypeExtensions.cs" />
+    <Compile Include="Utilities\EncryptionUtils.cs" />
     <Compile Include="ViewModels\Authorizations\AuthorizationResultViewModel.cs" />
     <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
+    <Compile Include="ViewModels\ContactSearching\ExternalContactAddedResultViewModel.cs" />
+    <Compile Include="ViewModels\ContactSearching\ExternalContactSearchResultsViewModel.cs" />
     <Compile Include="ViewModels\Exports\JobsearchExportViewModel.cs" />
+    <Compile Include="ViewModels\ExternalAuth\JigsawCredentialsViewModel.cs" />
     <Compile Include="ViewModels\GeneralSuccessResultViewModel.cs" />
+    <Compile Include="ViewModels\JobSearches\JigsawUserPointsViewModel.cs" />
     <Compile Include="ViewModels\JobSearches\JobSearchMilestoneChangedResultViewModel.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgress.cs" />
     <Compile Include="ViewModels\Milestones\MilestoneDisplayListViewModel.cs" />

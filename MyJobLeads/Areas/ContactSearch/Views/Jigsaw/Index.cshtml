@@ -1,0 +1,11 @@
+﻿@using MyJobLeads.Areas.ContactSearch.Models;
+
+@{
+    ViewBag.Title = "Jigsaw Contact Search";
+}
+
+@section SideBar {
+    @{Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.ResearchCenter));}
+}
+
+@{Html.RenderPartial(MVC.ContactSearch.Jigsaw.Views._SearchForm, new JigsawSearchParametersViewModel()); }

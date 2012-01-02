@@ -6,6 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyJobLeads.DomainModel.EntityMapping;
 using AutoMapper;
 using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.Json.Jigsaw;
+using MyJobLeads.DomainModel.ViewModels.ContactSearching;
 
 namespace MyJobLeads.Tests
 {
@@ -51,6 +53,38 @@ namespace MyJobLeads.Tests
 
             // Validate
             Mapper.AssertConfigurationIsValid();
+        }
+
+        [TestMethod]
+        public void Automapper_Contact_Details_Json_Can_Be_Mapped()
+        {
+            // Setup
+            EntityMapLoader.LoadEntityMappings();
+            DateTime testDate = DateTime.Now;
+
+            var json = new ContactDetailsJson
+            {
+                CompanyName = "company",
+                ContactId = "12345",
+                FirstName = "first",
+                LastName = "last",
+                Owned = true,
+                Title = "title",
+                UpdatedDate = testDate
+            };
+
+            // Act
+            var result = Mapper.Map<ContactDetailsJson, ExternalContactSearchResultsViewModel.ContactResultViewModel>(json);
+
+            // Verify
+            Assert.IsNotNull(result, "result was null");
+            Assert.AreEqual("company", result.Company);
+            Assert.AreEqual("12345", result.ContactId);
+            Assert.AreEqual("first", result.FirstName);
+            Assert.AreEqual("last", result.LastName);
+            Assert.AreEqual(true, result.HasAccess);
+            Assert.AreEqual("title", result.Headline);
+            Assert.AreEqual(testDate, result.LastUpdatedDate);
         }
     }
 }
