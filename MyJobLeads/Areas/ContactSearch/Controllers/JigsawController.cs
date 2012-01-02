@@ -44,17 +44,6 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
 
         public virtual ActionResult Index()
         {
-            JigsawUserPointsViewModel points;
-
-            try { points = _getUserPointsProc.Execute(new GetJigsawUserPointsParams { RequestingUserId = CurrentUserId }); }
-            catch (Exception ex)
-            {
-                if (ex is JigsawCredentialsNotFoundException || ex is InvalidJigsawCredentialsException)
-                    return RedirectToAction(MVC.ContactSearch.Jigsaw.Authenticate(true));
-
-                throw;
-            }
-
             return View();
         }
 
@@ -90,15 +79,7 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
             ExternalContactSearchResultsViewModel results;
             var parameters = Mapper.Map<JigsawSearchParametersViewModel, JigsawContactSearchParams>(model);
             parameters.RequestingUserId = CurrentUserId;
-            
-            try { results = _searchContacsProc.Execute(parameters); }
-            catch (Exception ex)
-            {
-                if (ex is JigsawCredentialsNotFoundException || ex is InvalidJigsawCredentialsException)
-                    return RedirectToAction(MVC.ContactSearch.Jigsaw.Authenticate(true));
-
-                throw;
-            }
+            results = _searchContacsProc.Execute(parameters);
 
             var resultsModel = new JigsawSearchResultsViewModel
             {

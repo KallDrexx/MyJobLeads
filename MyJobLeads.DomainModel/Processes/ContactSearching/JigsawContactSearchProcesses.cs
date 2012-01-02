@@ -57,10 +57,7 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
         public ExternalContactSearchResultsViewModel Execute(JigsawContactSearchParams procParams)
         {
             const int PAGE_SIZE = 50;
-
-            var credentials = _getJigsawCredentialsProc.Execute(new GetUserJigsawCredentialsParams { RequestingUserId = procParams.RequestingUserId });
-            if (credentials == null)
-                throw new JigsawCredentialsNotFoundException(procParams.RequestingUserId);
+            var credentials = JigsawAuthProcesses.GetMyLeadsAccountCredentials();
 
             // Perform the API query
             var client = new RestClient("https://www.jigsaw.com/");
@@ -104,6 +101,7 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
         public ExternalContactAddedResultViewModel Execute(AddJigsawContactToJobSearchParams procParams)
         {
             bool jigsawContactOwned = true;
+            var credentials = JigsawAuthProcesses.GetMyLeadsAccountCredentials();
 
             var user = _context.Users
                                .Where(x => x.Id == procParams.RequestingUserId)
@@ -116,10 +114,6 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
             if (!procParams.CreateCompanyFromJigsaw)
                 if (!_context.Companies.Any(x => x.Id == procParams.ExistingCompanyId && x.JobSearch.Id == user.LastVisitedJobSearchId))
                     throw new MJLEntityNotFoundException(typeof(Company), procParams.ExistingCompanyId);
-
-            var credentials = _getJigsawCredentialsProc.Execute(new GetUserJigsawCredentialsParams { RequestingUserId = procParams.RequestingUserId });
-            if (credentials == null)
-                throw new JigsawCredentialsNotFoundException(procParams.RequestingUserId);
 
             // Perform the API query to get the jigsaw contact only if the user has access to the contact
             var client = new RestClient("https://www.jigsaw.com/");

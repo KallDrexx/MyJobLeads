@@ -143,6 +143,19 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
         }
 
         /// <summary>
+        /// Retrieves the credentials to the MyLeads jigsaw account
+        /// </summary>
+        /// <returns></returns>
+        public static JigsawCredentialsViewModel GetMyLeadsAccountCredentials()
+        {
+            return new JigsawCredentialsViewModel
+            {
+                JigsawUsername = @"mshapiro@interviewtools.net",
+                JigsawPassword = @"px06&UzKG&9ZuoiC"
+            };
+        }
+
+        /// <summary>
         /// Processes a forbidden response from the jigsaw api
         /// </summary>
         /// <param name="content"></param>
