@@ -18,6 +18,7 @@ using MyJobLeads.DomainModel.ViewModels.ContactSearching;
 using MyJobLeads.DomainModel.ProcessParams.ContactSearching.Jigsaw;
 using AutoMapper;
 using MyJobLeads.DomainModel.Queries.Companies;
+using MyJobLeads.Areas.ContactSearch.Models.Jigsaw;
 
 namespace MyJobLeads.Areas.ContactSearch.Controllers
 {
@@ -88,6 +89,52 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
             };
 
             return View(resultsModel);
+        }
+
+        public virtual ActionResult ImportContact(string jsContactId, string jsCompanyId, string jsCompanyName, string name, string title)
+        {
+            // Get all contacts for the user
+            var contacts = _context.Contacts
+                                   .Where(x => x.Company.JobSearch.User.Id == CurrentUserId)
+                                   .Include(x => x.Company)
+                                   .ToList();
+
+            var model = new ImportContactViewModel
+            {
+                CompanyName = jsCompanyName,
+                JigsawCompanyId = jsCompanyId,
+                ContactName = name,
+                ContactTitle = title,
+                JigsawContactId = jsContactId
+            };
+            model.SetExistingContactList(contacts);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public virtual ActionResult ImportContact(ImportContactViewModel model)
+        {
+            if (model.ExistingContactId <= 0 && !model.CreateNewContact)
+                ModelState.AddModelError("", "An existing contact must be selected to merge, or you must mark this as a new contact");
+
+            if (!ModelState.IsValid)
+            {
+                // Get all contacts for the user
+                var contacts = _context.Contacts
+                                       .Where(x => x.Company.JobSearch.User.Id == CurrentUserId)
+                                       .Include(x => x.Company)
+                                       .OrderBy(x => x.Name)
+                                       .ToList();
+                model.SetExistingContactList(contacts);
+
+                return View(model);
+            }
+
+            if (model.CreateNewContact)
+                return RedirectToAction(MVC.ContactSearch.Jigsaw.AddContact(model.JigsawContactId, model.JigsawCompanyId, model.CompanyName, model.ContactName, model.ContactTitle));
+
+            throw new NotSupportedException("Merging not supported yet");
         }
 
         public virtual ActionResult AddContact(string jsContactId, string jsCompanyId, string jsCompanyName, string name, string title)

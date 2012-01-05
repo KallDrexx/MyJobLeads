@@ -797,6 +797,8 @@ namespace Links {
             private const string URLPATH = "~/Content/Documents";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string Is_Your_Data_Secure_pdf = Url("Is Your Data Secure.pdf");
+            public static readonly string MyLeads_for_Career_Services___Brochure_pdf = Url("MyLeads for Career Services - Brochure.pdf");
             public static readonly string Student_Tutorial_and_Hints_pdf = Url("Student Tutorial and Hints.pdf");
             public static readonly string Welcome_Package___Start_here_pdf = Url("Welcome Package - Start here.pdf");
         }

@@ -1,0 +1,71 @@
+﻿@model MyJobLeads.Areas.ContactSearch.Models.Jigsaw.ImportContactViewModel
+
+@{
+    ViewBag.Title = "Import Jigsaw Contact";
+}
+
+<div class="grid1 floatLeft"> 
+    <div class="pageInfoBox"> 
+        @using (Html.BeginForm()) 
+        {
+            @Html.HiddenFor(x => x.JigsawContactId)
+            @Html.HiddenFor(x => x.JigsawCompanyId)
+            @Html.HiddenFor(x => x.CompanyName)
+            @Html.HiddenFor(x => x.ContactName)
+            @Html.HiddenFor(x => x.ContactTitle)
+                
+            <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+                <h3 class="floatLeft">Import Contact</h3> 
+            </div> 
+            
+            <div class="grid3 marginBottom_10 marginAuto floatLeft">
+                <p>
+                    Please review this contact's information, and choose whether to add it as a new contact or merge with an existing contact.
+                </p>
+            </div>
+                
+            <div class="grid3 marginBottom_10 marginAuto floatLeft">
+                <div class="floatLeft">
+                    <p>
+                        Name: <span class="bold">@Model.ContactName</span><br />
+                        Title: <span class="bold">@Model.ContactTitle</span><br />
+                        Company: <span class="bold">@Model.CompanyName</span><br />
+                        Source: <a href="http://www.jigsaw.com/BC.xhtml?contactId=@Url.Encode(Model.JigsawContactId)" class="inlineBlue">Jigsaw</a>
+                    </p>    
+                </div>
+            </div>
+                
+            <div class="grid3 marginBottom_10 marginAuto floatleft">
+                <div class="floatLeft infoSpan">
+                    @Html.ValidationSummary()
+                </div>
+            </div>
+                
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft">
+                    <p class="greyHighlight">@Html.LabelFor(x => x.CreateNewContact, "Create New Contact Entry For " + Model.ContactName)
+                        @Html.CheckBoxFor(x => x.CreateNewContact)
+                    </p>
+                </div> 
+            </div> 
+
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <div class="floatLeft">
+                    <p class="greyHighlight"><span class="bold">OR</span></p>
+                    <p class="greyHighlight">Merge with existing contact:</p>
+                    <div class="infoSpan">
+                        @Html.DropDownListFor(x => x.ExistingContactId, Model.ExistingContactList)
+                    </div>
+                </div> 
+            </div> 
+
+            <div class="grid3 marginBottom_20 floatLeft"> 
+                <div class="submitBTN ">
+                    <input type="submit" value="Add Contact" />
+                </div>                    
+            </div> 
+        }
+
+        <div class="clear"></div> 
+    </div> 
+</div>
