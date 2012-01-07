@@ -1258,7 +1258,7 @@
             <summary>
             Returns the collection of cells that have a value.
             </summary>
-            <param name="includeStyles">if set to <c>true</c> will return all cells with a value or a style different than the default.</param>
+            <param name="includeFormats">if set to <c>true</c> will return all cells with a value or a style different than the default.</param>
         </member>
         <member name="M:ClosedXML.Excel.IXLTableRows.Clear(ClosedXML.Excel.XLClearOptions)">
             <summary>
@@ -1452,12 +1452,6 @@
             </summary>
             <param name="occurrence">The occurrence.</param>
         </member>
-        <member name="M:ClosedXML.Excel.IXLHFItem.AddText(System.String)">
-            <summary>
-            Adds the given text to this header/footer item.
-            </summary>
-            <param name="text">The text to add to this header/footer item.</param>
-        </member>
         <member name="M:ClosedXML.Excel.IXLHFItem.AddText(ClosedXML.Excel.XLHFPredefinedText)">
             <summary>
             Adds the given predefined text to this header/footer item.
@@ -1502,7 +1496,7 @@
             <summary>
             Returns the collection of cells that have a value.
             </summary>
-            <param name="includeStyles">if set to <c>true</c> will return all cells with a value or a style different than the default.</param>
+            <param name="includeFormats">if set to <c>true</c> will return all cells with a value or a style different than the default.</param>
         </member>
         <member name="M:ClosedXML.Excel.IXLRangeColumns.Delete">
             <summary>
@@ -2099,7 +2093,7 @@
             <summary>
             Returns the collection of cells that have a value.
             </summary>
-            <param name="includeStyles">if set to <c>true</c> will return all cells with a value or a style different than the default.</param>
+            <param name="includeFormats">if set to <c>true</c> will return all cells with a value or a style different than the default.</param>
         </member>
         <member name="M:ClosedXML.Excel.IXLBaseCollection`2.Clear(ClosedXML.Excel.XLClearOptions)">
             <summary>
@@ -2388,7 +2382,7 @@
             <summary>
             Returns the collection of cells that have a value.
             </summary>
-            <param name="includeStyles">if set to <c>true</c> will return all cells with a value or a style different than the default.</param>
+            <param name="includeFormats">if set to <c>true</c> will return all cells with a value or a style different than the default.</param>
         </member>
         <member name="M:ClosedXML.Excel.IXLRangeRows.Delete">
             <summary>
@@ -2495,7 +2489,7 @@
             <summary>
             Returns the collection of cells that have a value.
             </summary>
-            <param name="includeStyles">if set to <c>true</c> will return all cells with a value or a style different than the default.</param>
+            <param name="includeFormats">if set to <c>true</c> will return all cells with a value or a style different than the default.</param>
         </member>
         <member name="M:ClosedXML.Excel.IXLRows.AddHorizontalPageBreaks">
             <summary>
@@ -2704,6 +2698,22 @@
             <param name="firstCellAddress">The first cell address.</param>
             <param name="lastCellAddress"> The last cell address.</param>
         </member>
+        <member name="M:ClosedXML.Excel.IXLComment.SetAuthor(System.String)">
+            <summary>
+            Sets the name of the comment's author
+            </summary>
+            <param name="value">Author's name</param>
+        </member>
+        <member name="M:ClosedXML.Excel.IXLComment.AddSignature">
+            <summary>
+            Adds a bolded line with the author's name
+            </summary>
+        </member>
+        <member name="P:ClosedXML.Excel.IXLComment.Author">
+            <summary>
+            Gets or sets this comment's author's name
+            </summary>
+        </member>
         <member name="M:ClosedXML.Excel.IXLRanges.Add(ClosedXML.Excel.IXLRangeBase)">
             <summary>
             Adds the specified range to this group.
@@ -2755,7 +2765,7 @@
             <summary>
             Returns the collection of cells that have a value.
             </summary>
-            <param name="includeStyles">if set to <c>true</c> will return all cells with a value or a style different than the default.</param>
+            <param name="includeFormats">if set to <c>true</c> will return all cells with a value or a style different than the default.</param>
         </member>
         <member name="M:ClosedXML.Excel.IXLRanges.Clear(ClosedXML.Excel.XLClearOptions)">
             <summary>
@@ -2863,7 +2873,7 @@
             <summary>
             Returns the collection of cells that have a value.
             </summary>
-            <param name="includeStyles">if set to <c>true</c> will return all cells with a value or a style different than the default.</param>
+            <param name="includeFormats">if set to <c>true</c> will return all cells with a value or a style different than the default.</param>
         </member>
         <member name="M:ClosedXML.Excel.IXLColumns.AddVerticalPageBreaks">
             <summary>

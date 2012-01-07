@@ -19,7 +19,7 @@ namespace MyJobLeads.ViewModels.Milestones
         public int Id { get; set; }
 
         [Required(ErrorMessage="A title is required")]
-        [MinLength(10, ErrorMessage="The title must have a minimum of 10 characters")]
+        [StringLength(100, MinimumLength=10, ErrorMessage="The title must have a minimum of 10 characters")]
         public string Title { get; set; }
         public string Instructions { get; set; }
         public string CompletionDisplay { get; set; }
