@@ -19,6 +19,7 @@ namespace MyJobLeads.Infrastructure.Attributes
 
             // Make sure Forms authentication shows the user as authenticated
             if (httpContext.User.Identity.IsAuthenticated == false) return false;
+            if (Membership.GetUser() == null) return false;
 
             // Retrieve a unit of work from Windsor, and determine if the user actually exists in the database
             var container = new WindsorContainer();
