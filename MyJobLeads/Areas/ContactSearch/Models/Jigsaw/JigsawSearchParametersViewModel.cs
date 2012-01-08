@@ -16,6 +16,7 @@ namespace MyJobLeads.Areas.ContactSearch.Models
         public string Industry { get; set; }
         public string Levels { get; set; }
         public string Departments { get; set; }
+        public int MergedContactId { get; set; }
 
         public IList<SelectListItem> LevelsList { get; set; }
         public IList<SelectListItem> IndustryList { get; set; }
@@ -71,6 +72,19 @@ namespace MyJobLeads.Areas.ContactSearch.Models
                 new SelectListItem { Text = "Consumer Services", Value = "1230000" },
                 new SelectListItem { Text = "Other", Value = "1240000" }
             };
+        }
+
+        public string GetSearchUrl()
+        {
+            return string.Format("FirstName={0}&LastName={1}&Company={2}&Title={3}&Industry={4}&Levels={5}&Departments={6}&MergedContactId={7}",
+                                    HttpUtility.UrlEncode(FirstName),
+                                    HttpUtility.UrlEncode(LastName),
+                                    HttpUtility.UrlEncode(Company),
+                                    HttpUtility.UrlEncode(Title),
+                                    HttpUtility.UrlEncode(Industry),
+                                    HttpUtility.UrlEncode(Levels),
+                                    HttpUtility.UrlEncode(Departments),
+                                    MergedContactId);
         }
     }
 }

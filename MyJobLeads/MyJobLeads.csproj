@@ -563,7 +563,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>List.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Contact\Details.cs">
+    <Compile Include="Views\Contact\Details.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Details.cshtml</DependentUpon>
@@ -1134,7 +1134,7 @@
     </Content>
     <Content Include="Views\Contact\Details.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Details.cs</LastGenOutput>
+      <LastGenOutput>Details.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Task\Details.cshtml">
       <Generator>RazorGenerator</Generator>

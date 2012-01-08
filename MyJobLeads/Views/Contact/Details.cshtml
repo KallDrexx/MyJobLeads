@@ -1,4 +1,5 @@
 ﻿@model MyJobLeads.ViewModels.Contacts.ContactDisplayViewModel
+@using MyJobLeads.Areas.ContactSearch.Models;
 
 @{
     ViewBag.Title = "Contact: " + Model.Name;
@@ -11,6 +12,27 @@
                 <h3 class="floatLeft">Contact: @Model.Name</h3> 
                 @Html.ActionLink("Edit Details", MVC.Contact.Edit(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" })
                 @Html.ActionLink("Add Task", MVC.Task.Add(Model.Company.Id, Model.Id), new { @class = "floatRight blueLinks", title = "Add task" })
+
+                @{
+                    string[] names = Model.Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    string firstname = names[0];
+                    string lastname = string.Empty;
+                    
+                    if (names.Length > 1)
+                    {
+                        lastname = names[names.Length - 1];
+                    }
+
+                    string searchUrl = new JigsawSearchParametersViewModel
+                    {
+                        FirstName = firstname,
+                        LastName = lastname,
+                        Company = Model.Company.Name,
+                        MergedContactId = Model.Id
+                    }.GetSearchUrl();
+                }
+
+                <a href="@Url.Action(MVC.ContactSearch.Jigsaw.PerformSearch())?@searchUrl" class="floatRight blueLinks">Update From Internet</a>
             </div> 
 
             <div class="grid3 marginBottom_10 floatLeft"> 

@@ -85,14 +85,7 @@ WriteLiteral("\r\n");
             #line 13 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
  if (Model.Results != null)
 {
-    string urlParams = string.Format("FirstName={0}&LastName={1}&Company={2}&Title={3}&Industry={4}&Levels={5}&Departments={6}",
-                                        Url.Encode(Model.Query.FirstName),
-                                        Url.Encode(Model.Query.LastName),
-                                        Url.Encode(Model.Query.Company),
-                                        Url.Encode(Model.Query.Title),
-                                        Url.Encode(Model.Query.Industry),
-                                        Url.Encode(Model.Query.Levels),
-                                        Url.Encode(Model.Query.Departments));
+    string urlParams = Model.Query.GetSearchUrl();
 
     int firstResultCount = Model.Results.DisplayedPageNumber * Model.Results.PageSize + 1;
     int lastResultCount = firstResultCount + Model.Results.Results.Count - 1;
@@ -108,7 +101,7 @@ WriteLiteral("    <div class=\"grid3 floatLeft\">\r\n        <div class=\"positi
 
 
             
-            #line 32 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 25 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
              if (Model.Results.TotalResultsCount == 0)
             {
 
@@ -119,7 +112,7 @@ WriteLiteral("                <h3>No Contacts Were Found Matching Your Criteria<
 
 
             
-            #line 35 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 28 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
             }
             else
             {
@@ -131,7 +124,7 @@ WriteLiteral("                <h3>Found Contacts (displaying ");
 
 
             
-            #line 38 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 31 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                           Write(firstResultCount);
 
             
@@ -141,7 +134,7 @@ WriteLiteral(" - ");
 
 
             
-            #line 38 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 31 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                               Write(lastResultCount);
 
             
@@ -151,7 +144,7 @@ WriteLiteral(" out of ");
 
 
             
-            #line 38 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 31 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                                                       Write(Model.Results.TotalResultsCount);
 
             
@@ -161,7 +154,7 @@ WriteLiteral(")</h3>\r\n");
 
 
             
-            #line 39 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 32 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
             }
 
             
@@ -171,7 +164,7 @@ WriteLiteral("\r\n            <ul class=\"positionSearchNotification\">\r\n     
 
 
             
-            #line 42 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 35 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                      Write(Model.Results.TotalResultsCount > 0 ? Model.Results.DisplayedPageNumber + 1 : 0);
 
             
@@ -181,7 +174,7 @@ WriteLiteral(" of ");
 
 
             
-            #line 42 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 35 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                                                                           Write(totalPages);
 
             
@@ -191,7 +184,7 @@ WriteLiteral("</li>\r\n\r\n");
 
 
             
-            #line 44 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 37 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                  if (Model.Results.DisplayedPageNumber > 0)
                 {
 
@@ -202,7 +195,7 @@ WriteLiteral("                    <li>\r\n                        <a href=\"");
 
 
             
-            #line 47 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 40 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                             Write(Url.Action(MVC.ContactSearch.Jigsaw.PerformSearch()));
 
             
@@ -212,7 +205,7 @@ WriteLiteral("?");
 
 
             
-            #line 47 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 40 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                                                   Write(urlParams);
 
             
@@ -222,7 +215,7 @@ WriteLiteral("&Page=");
 
 
             
-            #line 47 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 40 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                                                                    Write(Model.Results.DisplayedPageNumber - 1);
 
             
@@ -233,7 +226,7 @@ WriteLiteral("\">\r\n                            Previous Page\r\n              
 
 
             
-            #line 51 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 44 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                 }
 
             
@@ -243,7 +236,7 @@ WriteLiteral("                \r\n");
 
 
             
-            #line 53 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 46 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                  if (Model.Results.DisplayedPageNumber < totalPages - 1)
                 {
 
@@ -254,7 +247,7 @@ WriteLiteral("                    <li>\r\n                        <a href=\"");
 
 
             
-            #line 56 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 49 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                             Write(Url.Action(MVC.ContactSearch.Jigsaw.PerformSearch()));
 
             
@@ -264,7 +257,7 @@ WriteLiteral("?");
 
 
             
-            #line 56 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 49 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                                                   Write(urlParams);
 
             
@@ -274,7 +267,7 @@ WriteLiteral("&Page=");
 
 
             
-            #line 56 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 49 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                                                                    Write(Model.Results.DisplayedPageNumber + 1);
 
             
@@ -285,7 +278,7 @@ WriteLiteral("\">\r\n                            Next Page\r\n                  
 
 
             
-            #line 60 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 53 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                 }
 
             
@@ -296,7 +289,7 @@ WriteLiteral("            </ul>       \r\n        </div>\r\n\r\n        <div id=
 
 
             
-            #line 66 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 59 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                  foreach (var contact in Model.Results.Results)
                 {
 
@@ -307,7 +300,7 @@ WriteLiteral("                    <li>\r\n                        <div class=\"t
 
 
             
-            #line 69 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 62 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                          Write(contact.FirstName);
 
             
@@ -317,7 +310,7 @@ WriteLiteral(" ");
 
 
             
-            #line 69 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 62 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                             Write(contact.LastName);
 
             
@@ -327,7 +320,7 @@ WriteLiteral("</div>\r\n                        <div class=\"positionSubHeading\
 
 
             
-            #line 70 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 63 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                    Write(contact.Headline);
 
             
@@ -337,7 +330,7 @@ WriteLiteral(" at ");
 
 
             
-            #line 70 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 63 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                                         Write(contact.Company);
 
             
@@ -347,29 +340,65 @@ WriteLiteral("</div>\r\n                        <div class=\"taskDescription\">L
 
 
             
-            #line 71 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 64 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                              Write(contact.LastUpdatedDate.ToString("MM/dd/yyyy"));
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n                        ");
+WriteLiteral("</div>\r\n\r\n");
 
 
             
-            #line 72 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
-                   Write(Html.ActionLink("Add To MyLeads", 
-                            MVC.ContactSearch.Jigsaw.ImportContact(Convert.ToInt32(contact.ContactId), contact.CompanyId, contact.Company, string.Concat(contact.FirstName, " ", contact.LastName), contact.Headline, contact.LastUpdatedDate),
-                            new { @class = "inlineBlue", title = string.Concat("Add ", contact.FirstName, " ", contact.LastName, " to your job search") }));
+            #line 66 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+                         if (Model.Query.MergedContactId <= 0)
+                        {
+                            
+            
+            #line default
+            #line hidden
+            
+            #line 68 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+                       Write(Html.ActionLink("Add To MyLeads",
+                                MVC.ContactSearch.Jigsaw.ImportContact(Convert.ToInt32(contact.ContactId), contact.CompanyId, contact.Company, string.Concat(contact.FirstName, " ", contact.LastName), contact.Headline, contact.LastUpdatedDate),
+                                new { @class = "inlineBlue", title = string.Concat("Add ", contact.FirstName, " ", contact.LastName, " to your job search") }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                    </li>\r\n");
+            
+            #line 70 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+                                                                                                                                                              
+                        }
+
+                        else
+                        {
+                            
+            
+            #line default
+            #line hidden
+            
+            #line 75 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+                       Write(Html.ActionLink("Sync With MyLeads",
+                                MVC.ContactSearch.Sync.Jigsaw(Model.Query.MergedContactId, Convert.ToInt32(contact.ContactId), string.Concat(contact.FirstName, " ", contact.LastName), contact.Headline, contact.LastUpdatedDate),
+                                new { @class = "inlineBlue", title = "Sync With MyLeads" }));
+
+            
+            #line default
+            #line hidden
+            
+            #line 77 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+                                                                                           
+                        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    </li>\r\n");
 
 
             
-            #line 76 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 80 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                 }
 
             
@@ -380,7 +409,7 @@ WriteLiteral("            </ul>\r\n        </div>\r\n\r\n        <div class=\"po
 
 
             
-            #line 81 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 85 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
              if (Model.Results.TotalResultsCount == 0)
             {
 
@@ -391,7 +420,7 @@ WriteLiteral("                <h3>No Contacts Were Found Matching Your Criteria<
 
 
             
-            #line 84 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 88 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
             }
             else
             {
@@ -403,7 +432,7 @@ WriteLiteral("                <h3>Found Contacts (displaying ");
 
 
             
-            #line 87 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 91 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                           Write(firstResultCount);
 
             
@@ -413,7 +442,7 @@ WriteLiteral(" - ");
 
 
             
-            #line 87 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 91 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                               Write(lastResultCount);
 
             
@@ -423,7 +452,7 @@ WriteLiteral(" out of ");
 
 
             
-            #line 87 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 91 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                                                       Write(Model.Results.TotalResultsCount);
 
             
@@ -433,7 +462,7 @@ WriteLiteral(")</h3>\r\n");
 
 
             
-            #line 88 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 92 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
             }
 
             
@@ -443,7 +472,7 @@ WriteLiteral("\r\n            <ul class=\"positionSearchNotification\">\r\n     
 
 
             
-            #line 91 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 95 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                      Write(Model.Results.TotalResultsCount > 0 ? Model.Results.DisplayedPageNumber + 1 : 0);
 
             
@@ -453,7 +482,7 @@ WriteLiteral(" of ");
 
 
             
-            #line 91 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 95 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                                                                           Write(totalPages);
 
             
@@ -463,7 +492,7 @@ WriteLiteral("</li>\r\n\r\n");
 
 
             
-            #line 93 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 97 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                  if (Model.Results.DisplayedPageNumber > 0)
                 {
 
@@ -474,7 +503,7 @@ WriteLiteral("                    <li>\r\n                        <a href=\"");
 
 
             
-            #line 96 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 100 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                             Write(Url.Action(MVC.ContactSearch.Jigsaw.PerformSearch()));
 
             
@@ -484,7 +513,7 @@ WriteLiteral("?");
 
 
             
-            #line 96 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 100 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                                                   Write(urlParams);
 
             
@@ -494,7 +523,7 @@ WriteLiteral("&Page=");
 
 
             
-            #line 96 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 100 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                                                                    Write(Model.Results.DisplayedPageNumber - 1);
 
             
@@ -505,7 +534,7 @@ WriteLiteral("\">\r\n                            Previous Page\r\n              
 
 
             
-            #line 100 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 104 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                 }
 
             
@@ -515,7 +544,7 @@ WriteLiteral("                \r\n");
 
 
             
-            #line 102 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 106 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                  if (Model.Results.DisplayedPageNumber < totalPages - 1)
                 {
 
@@ -526,7 +555,7 @@ WriteLiteral("                    <li>\r\n                        <a href=\"");
 
 
             
-            #line 105 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 109 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                             Write(Url.Action(MVC.ContactSearch.Jigsaw.PerformSearch()));
 
             
@@ -536,7 +565,7 @@ WriteLiteral("?");
 
 
             
-            #line 105 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 109 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                                                   Write(urlParams);
 
             
@@ -546,7 +575,7 @@ WriteLiteral("&Page=");
 
 
             
-            #line 105 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 109 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                                                                                                    Write(Model.Results.DisplayedPageNumber + 1);
 
             
@@ -557,7 +586,7 @@ WriteLiteral("\">\r\n                            Next Page\r\n                  
 
 
             
-            #line 109 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 113 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                 }
 
             
@@ -567,7 +596,7 @@ WriteLiteral("            </ul>       \r\n        </div>\r\n    </div>\r\n");
 
 
             
-            #line 113 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
+            #line 117 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
 }
             
             #line default
