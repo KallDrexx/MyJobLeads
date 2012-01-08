@@ -380,7 +380,7 @@ WriteLiteral("</div>\r\n\r\n");
             
             #line 75 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                        Write(Html.ActionLink("Sync With MyLeads",
-                                MVC.ContactSearch.Sync.Jigsaw(Model.Query.MergedContactId, Convert.ToInt32(contact.ContactId), string.Concat(contact.FirstName, " ", contact.LastName), contact.Headline, contact.LastUpdatedDate),
+                                MVC.ContactSearch.Sync.Jigsaw(Model.Query.MergedContactId, Convert.ToInt32(contact.ContactId), string.Concat(contact.FirstName, " ", contact.LastName), contact.Headline, contact.LastUpdatedDate, contact.Email, contact.Phone),
                                 new { @class = "inlineBlue", title = "Sync With MyLeads" }));
 
             

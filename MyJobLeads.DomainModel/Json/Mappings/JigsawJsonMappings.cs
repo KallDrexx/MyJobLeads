@@ -22,6 +22,8 @@ namespace MyJobLeads.DomainModel.Json.Mappings
                 .ForMember(dest => dest.HasAccess, opt => opt.MapFrom(src => src.Owned))
                 .ForMember(dest => dest.Headline, opt => opt.MapFrom(src => src.Title))
                 .ForMember(dest => dest.LastUpdatedDate, opt => opt.MapFrom(src => src.UpdatedDate))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+                .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.Phone))
                 .ForMember(dest => dest.PublicUrl, opt => opt.Ignore());
 
             Mapper.CreateMap<ContactSearchResponseJson, ExternalContactSearchResultsViewModel>()
