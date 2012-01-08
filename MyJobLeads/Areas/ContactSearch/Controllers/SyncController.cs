@@ -27,7 +27,7 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
             _editContactCmd = editContactCmd;
         }
 
-        public virtual ActionResult Jigsaw(int contactId, string jigsawId, string externalName, string externalTitle, DateTime lastUpdated, string externalEmail = "", string externalPhone = "")
+        public virtual ActionResult Jigsaw(int contactId, int jigsawId, string externalName, string externalTitle, DateTime lastUpdated, string externalEmail = "", string externalPhone = "")
         {
             var contact = _contactByIdQuery.RequestedByUserId(CurrentUserId).WithContactId(contactId).Execute();
             if (contact == null)
@@ -84,6 +84,7 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
             if (model.ImportPhone)
                 _editContactCmd.SetDirectPhone(model.JigsawPhone);
 
+            _editContactCmd.SetJigsawId(model.JigsawId);
             _editContactCmd.Execute();
 
             return RedirectToAction(MVC.Contact.Details(model.ContactId));

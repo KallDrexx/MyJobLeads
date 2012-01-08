@@ -66,7 +66,7 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
     public class T4MVC_SyncController: MyJobLeads.Areas.ContactSearch.Controllers.SyncController {
         public T4MVC_SyncController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult Jigsaw(int contactId, string jigsawId, string externalName, string externalTitle, System.DateTime lastUpdated, string externalEmail, string externalPhone) {
+        public override System.Web.Mvc.ActionResult Jigsaw(int contactId, int jigsawId, string externalName, string externalTitle, System.DateTime lastUpdated, string externalEmail, string externalPhone) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Jigsaw);
             callInfo.RouteValueDictionary.Add("contactId", contactId);
             callInfo.RouteValueDictionary.Add("jigsawId", jigsawId);
@@ -75,6 +75,12 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
             callInfo.RouteValueDictionary.Add("lastUpdated", lastUpdated);
             callInfo.RouteValueDictionary.Add("externalEmail", externalEmail);
             callInfo.RouteValueDictionary.Add("externalPhone", externalPhone);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Jigsaw(MyJobLeads.Areas.ContactSearch.Models.Sync.JigsawSyncViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Jigsaw);
+            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 

@@ -91,7 +91,7 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
             return View(resultsModel);
         }
 
-        public virtual ActionResult ImportContact(string jsContactId, string jsCompanyId, string jsCompanyName, string name, string title, DateTime lastUpdated)
+        public virtual ActionResult ImportContact(int jsContactId, string jsCompanyId, string jsCompanyName, string name, string title, DateTime lastUpdated)
         {
             // Get all contacts for the user
             var contacts = _context.Contacts
@@ -139,7 +139,7 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
             return RedirectToAction(MVC.ContactSearch.Sync.Jigsaw(model.ExistingContactId, model.JigsawContactId, model.ContactName, model.ContactTitle, model.JigsawUpdatedDate));
         }
 
-        public virtual ActionResult AddContact(string jsContactId, string jsCompanyId, string jsCompanyName, string name, string title)
+        public virtual ActionResult AddContact(int jsContactId, string jsCompanyId, string jsCompanyName, string name, string title)
         {
             var user = _context.Users
                                .Where(x => x.Id == CurrentUserId)

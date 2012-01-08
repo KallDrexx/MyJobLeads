@@ -26,6 +26,7 @@ namespace MyJobLeads.Areas.ContactSearch.Views.Jigsaw
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using Telerik.Web.Mvc.UI;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/ContactSearch/Views/Jigsaw/PerformSearch.cshtml")]
@@ -358,7 +359,7 @@ WriteLiteral("</div>\r\n                        ");
             
             #line 72 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                    Write(Html.ActionLink("Add To MyLeads", 
-                            MVC.ContactSearch.Jigsaw.ImportContact(contact.ContactId, contact.CompanyId, contact.Company, string.Concat(contact.FirstName, " ", contact.LastName), contact.Headline, contact.LastUpdatedDate),
+                            MVC.ContactSearch.Jigsaw.ImportContact(Convert.ToInt32(contact.ContactId), contact.CompanyId, contact.Company, string.Concat(contact.FirstName, " ", contact.LastName), contact.Headline, contact.LastUpdatedDate),
                             new { @class = "inlineBlue", title = string.Concat("Add ", contact.FirstName, " ", contact.LastName, " to your job search") }));
 
             

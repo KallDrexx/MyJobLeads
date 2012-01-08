@@ -115,7 +115,7 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult ImportContact(string jsContactId, string jsCompanyId, string jsCompanyName, string name, string title, System.DateTime lastUpdated) {
+        public override System.Web.Mvc.ActionResult ImportContact(int jsContactId, string jsCompanyId, string jsCompanyName, string name, string title, System.DateTime lastUpdated) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ImportContact);
             callInfo.RouteValueDictionary.Add("jsContactId", jsContactId);
             callInfo.RouteValueDictionary.Add("jsCompanyId", jsCompanyId);
@@ -132,7 +132,7 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult AddContact(string jsContactId, string jsCompanyId, string jsCompanyName, string name, string title) {
+        public override System.Web.Mvc.ActionResult AddContact(int jsContactId, string jsCompanyId, string jsCompanyName, string name, string title) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddContact);
             callInfo.RouteValueDictionary.Add("jsContactId", jsContactId);
             callInfo.RouteValueDictionary.Add("jsCompanyId", jsCompanyId);

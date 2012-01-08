@@ -70,7 +70,7 @@
                         <div class="positionSubHeading">@contact.Headline at @contact.Company</div>
                         <div class="taskDescription">Last Updated @contact.LastUpdatedDate.ToString("MM/dd/yyyy")</div>
                         @Html.ActionLink("Add To MyLeads", 
-                            MVC.ContactSearch.Jigsaw.ImportContact(contact.ContactId, contact.CompanyId, contact.Company, string.Concat(contact.FirstName, " ", contact.LastName), contact.Headline, contact.LastUpdatedDate),
+                            MVC.ContactSearch.Jigsaw.ImportContact(Convert.ToInt32(contact.ContactId), contact.CompanyId, contact.Company, string.Concat(contact.FirstName, " ", contact.LastName), contact.Headline, contact.LastUpdatedDate),
                             new { @class = "inlineBlue", title = string.Concat("Add ", contact.FirstName, " ", contact.LastName, " to your job search") })
                     </li>
                 }

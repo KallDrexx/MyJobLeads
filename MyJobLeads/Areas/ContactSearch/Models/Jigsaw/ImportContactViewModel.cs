@@ -11,7 +11,7 @@ namespace MyJobLeads.Areas.ContactSearch.Models.Jigsaw
     {
         public bool CreateNewContact { get; set; }
         public int ExistingContactId { get; set; }
-        public string JigsawContactId { get; set; }
+        public int JigsawContactId { get; set; }
         public string ContactName { get; set; }
         public string ContactTitle { get; set; }
         public string JigsawCompanyId { get; set; }

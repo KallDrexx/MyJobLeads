@@ -8,7 +8,7 @@ namespace MyJobLeads.Areas.ContactSearch.Models.Sync
     public class JigsawSyncViewModel
     {
         public int ContactId { get; set; }
-        public string JigsawId { get; set; }
+        public int JigsawId { get; set; }
         public DateTime LastUpdatedOnJigsaw { get; set; }
 
         public string InternalName { get; set; }
