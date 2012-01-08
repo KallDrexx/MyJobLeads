@@ -358,7 +358,7 @@ WriteLiteral("</div>\r\n                        ");
             
             #line 72 "..\..\Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml"
                    Write(Html.ActionLink("Add To MyLeads", 
-                            MVC.ContactSearch.Jigsaw.ImportContact(contact.ContactId, contact.CompanyId, contact.Company, string.Concat(contact.FirstName, " ", contact.LastName), contact.Headline),
+                            MVC.ContactSearch.Jigsaw.ImportContact(contact.ContactId, contact.CompanyId, contact.Company, string.Concat(contact.FirstName, " ", contact.LastName), contact.Headline, contact.LastUpdatedDate),
                             new { @class = "inlineBlue", title = string.Concat("Add ", contact.FirstName, " ", contact.LastName, " to your job search") }));
 
             

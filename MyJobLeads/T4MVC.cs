@@ -56,6 +56,7 @@ namespace T4MVC {
     public class ContactSearchClass {
         public readonly string Name = "ContactSearch";
         public MyJobLeads.Areas.ContactSearch.Controllers.JigsawController Jigsaw = new MyJobLeads.Areas.ContactSearch.Controllers.T4MVC_JigsawController();
+        public MyJobLeads.Areas.ContactSearch.Controllers.SyncController Sync = new MyJobLeads.Areas.ContactSearch.Controllers.T4MVC_SyncController();
         public T4MVC.ContactSearch.SharedController Shared = new T4MVC.ContactSearch.SharedController();
     }
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

@@ -91,7 +91,7 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
             return View(resultsModel);
         }
 
-        public virtual ActionResult ImportContact(string jsContactId, string jsCompanyId, string jsCompanyName, string name, string title)
+        public virtual ActionResult ImportContact(string jsContactId, string jsCompanyId, string jsCompanyName, string name, string title, DateTime lastUpdated)
         {
             // Get all contacts for the user
             var contacts = _context.Contacts
@@ -105,7 +105,8 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
                 JigsawCompanyId = jsCompanyId,
                 ContactName = name,
                 ContactTitle = title,
-                JigsawContactId = jsContactId
+                JigsawContactId = jsContactId,
+                JigsawUpdatedDate = lastUpdated
             };
             model.SetExistingContactList(contacts);
 
@@ -134,7 +135,8 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
             if (model.CreateNewContact)
                 return RedirectToAction(MVC.ContactSearch.Jigsaw.AddContact(model.JigsawContactId, model.JigsawCompanyId, model.CompanyName, model.ContactName, model.ContactTitle));
 
-            throw new NotSupportedException("Merging not supported yet");
+            // Otherwie merge
+            return RedirectToAction(MVC.ContactSearch.Sync.Jigsaw(model.ExistingContactId, model.JigsawContactId, model.ContactName, model.ContactTitle, model.JigsawUpdatedDate));
         }
 
         public virtual ActionResult AddContact(string jsContactId, string jsCompanyId, string jsCompanyName, string name, string title)

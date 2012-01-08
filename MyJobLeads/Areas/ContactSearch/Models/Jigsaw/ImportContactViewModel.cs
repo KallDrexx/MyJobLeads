@@ -16,6 +16,7 @@ namespace MyJobLeads.Areas.ContactSearch.Models.Jigsaw
         public string ContactTitle { get; set; }
         public string JigsawCompanyId { get; set; }
         public string CompanyName { get; set; }
+        public DateTime JigsawUpdatedDate { get; set; }
 
         public IList<SelectListItem> ExistingContactList { get; set; }
 

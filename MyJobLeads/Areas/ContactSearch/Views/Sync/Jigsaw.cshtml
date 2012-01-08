@@ -1,0 +1,83 @@
+﻿@model MyJobLeads.Areas.ContactSearch.Models.Sync.JigsawSyncViewModel
+
+@{
+    ViewBag.Title = "Contact Sync w/ Jigsaw";
+}
+
+<div class="grid1 floatLeft"> 
+    <div class="pageInfoBox">
+        <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+            <h3 class="floatLeft">Sync Contact With Imported Data</h3> 
+        </div>
+
+        <div class="grid3 marginBottom_10 marginAuto floatLeft">
+            <p>
+                This page allows you to select what data you wish to import from the internet for this particular contact. <br />
+                This contact's data was last updated in Jigsaw's database on @Model.LastUpdatedOnJigsaw.ToString("MM/dd/yyyy")
+            </p>
+        </div>
+        
+        @using (Html.BeginForm())
+        { 
+            @Html.HiddenFor(x => x.ContactId)
+            @Html.HiddenFor(x => x.JigsawId)
+            @Html.HiddenFor(x => x.JigsawEmail)
+            @Html.HiddenFor(x => x.JigsawName)
+            @Html.HiddenFor(x => x.JigsawPhone)
+            @Html.HiddenFor(x => x.JigsawTitle)
+            @Html.HiddenFor(x => x.LastUpdatedOnJigsaw)
+            
+            <div class="grid3 marginBottom_10 floatLeft">
+                <p>@Html.ValidationSummary()</p>
+            </div>
+
+            <div class="grid3 marginBottom_10 floatLeft"> 
+                <table id="SyncDataTable" class="display">
+                    <thead>
+                        <th></th>
+                        <th>Import?</th>
+                        <th>MyLeads Data</th>
+                        <th>Jigsaw Data</th>
+                    </thead>
+
+                    <tr>
+                        <td>Name:</td>
+                        <td>@Html.CheckBoxFor(x => x.ImportName)</td>
+                        <td>@Model.InternalName</td>
+                        <td>@Model.JigsawName</td>
+                    </tr>
+
+                    <tr>
+                        <td>Title:</td>
+                        <td>@Html.CheckBoxFor(x => x.ImportTitle)</td>
+                        <td>@Model.InternalTitle</td>
+                        <td>@Model.JigsawTitle</td>
+                    </tr>
+
+                    <tr>
+                        <td>Email:</td>
+                        <td>@Html.CheckBoxFor(x => x.ImportEmail)</td>
+                        <td>@Model.InternalEmail</td>
+                        <td>@Model.JigsawEmail</td>
+                    </tr>
+
+                    <tr>
+                        <td>Phone:</td>
+                        <td>@Html.CheckBoxFor(x => x.ImportPhone)</td>
+                        <td>@Model.InternalPhone</td>
+                        <td>@Model.JigsawPhone</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="grid3 marginBottom_20 floatLeft"> 
+                <br />
+                <div class="submitBTN ">
+                    <input type="submit" value="Import Selected Data" />
+                </div>
+            </div> 
+
+            <div class="clear"></div>
+        }
+    </div>
+</div>
