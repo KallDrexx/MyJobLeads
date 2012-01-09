@@ -28,7 +28,8 @@ using MyJobLeads.DomainModel.Json.Converters;
 namespace MyJobLeads.DomainModel.Processes.ContactSearching
 {
     public class JigsawContactSearchProcesses : IProcess<JigsawContactSearchParams, ExternalContactSearchResultsViewModel>,
-                                                IProcess<AddJigsawContactToJobSearchParams, ExternalContactAddedResultViewModel>
+                                                IProcess<AddJigsawContactToJobSearchParams, ExternalContactAddedResultViewModel>,
+                                                IProcess<GetJigsawContactDetailsParams, ExternalContactSearchResultsViewModel.ContactResultViewModel>
     {
         protected MyJobLeadsDbContext _context;
         protected IProcess<GetUserJigsawCredentialsParams, JigsawCredentialsViewModel> _getJigsawCredentialsProc;
@@ -209,6 +210,38 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
                     ContactName = contact.Name
                 };
             }
+        }
+
+        /// <summary>
+        /// Retrieves the details for the specified Jigsaw contact
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        public ExternalContactSearchResultsViewModel.ContactResultViewModel Execute(GetJigsawContactDetailsParams procParams)
+        {
+            var credentials = _getJigsawCredentialsProc.Execute(new GetUserJigsawCredentialsParams { RequestingUserId = procParams.RequestingUserId });
+            if (credentials == null)
+                throw new JigsawCredentialsNotFoundException(procParams.RequestingUserId);
+
+            // Perform the API query to get the jigsaw contact only if the user has access to the contact
+            var client = new RestClient("https://www.jigsaw.com/");
+            string contactUrl = string.Format("rest/contacts/{0}.json", procParams.JigsawContactId);
+            var request = new RestRequest(contactUrl, Method.GET);
+            request.AddParameter("token", JigsawAuthProcesses.GetAuthToken());
+            request.AddParameter("username", credentials.JigsawUsername);
+            request.AddParameter("password", credentials.JigsawPassword);
+            request.AddParameter("purchaseFlag", procParams.PurchaseContact);
+            var response = client.Execute(request);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+                JigsawAuthProcesses.ThrowInvalidResponse(response.Content, procParams.RequestingUserId, procParams.JigsawContactId.ToString());
+
+            // Convert the json string into an object and evaluate it
+            var json = JsonConvert.DeserializeObject<ContactDetailsResponseJson>(response.Content);
+            if (json.Unrecognized.Count > 0)
+                throw new JigsawContactNotFoundException(procParams.JigsawContactId);
+
+            return Mapper.Map<ContactDetailsJson, ExternalContactSearchResultsViewModel.ContactResultViewModel>(json.Contacts[0]);
         }
     }
 }

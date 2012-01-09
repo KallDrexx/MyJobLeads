@@ -58,14 +58,28 @@
                         <td>Email:</td>
                         <td>@Html.CheckBoxFor(x => x.ImportEmail)</td>
                         <td>@Model.InternalEmail</td>
-                        <td>@Model.JigsawEmail</td>
+                        <td>
+                            @if (string.IsNullOrWhiteSpace(Model.JigsawEmail))
+                            {
+                                @:Jigsaw Contact Purchase Required
+                            }
+                            
+                            else { @Model.JigsawEmail }
+                        </td>
                     </tr>
 
                     <tr>
                         <td>Phone:</td>
                         <td>@Html.CheckBoxFor(x => x.ImportPhone)</td>
                         <td>@Model.InternalPhone</td>
-                        <td>@Model.JigsawPhone</td>
+                        <td>
+                            @if (string.IsNullOrWhiteSpace(Model.JigsawPhone))
+                            {
+                                @:Jigsaw Contact Purchase Required
+                            }
+                            
+                            else { @Model.JigsawPhone }
+                        </td>
                     </tr>
                 </table>
             </div>

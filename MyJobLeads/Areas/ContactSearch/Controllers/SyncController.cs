@@ -10,6 +10,10 @@ using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.Areas.ContactSearch.Models.Sync;
 using MyJobLeads.DomainModel.Commands.Contacts;
+using MyJobLeads.DomainModel.Data;
+using MyJobLeads.DomainModel.ViewModels.ContactSearching;
+using MyJobLeads.DomainModel.ProcessParams.ContactSearching.Jigsaw;
+using MyJobLeads.DomainModel.Exceptions.Jigsaw;
 
 namespace MyJobLeads.Areas.ContactSearch.Controllers
 {
@@ -19,12 +23,17 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
     {
         protected ContactByIdQuery _contactByIdQuery;
         protected EditContactCommand _editContactCmd;
+        protected IProcess<GetJigsawContactDetailsParams, ExternalContactSearchResultsViewModel.ContactResultViewModel> _getJsContactProc;
 
-        public SyncController(MyJobLeadsDbContext context, ContactByIdQuery contactByIdQuery, EditContactCommand editContactCmd)
+        public SyncController(MyJobLeadsDbContext context, 
+                                ContactByIdQuery contactByIdQuery, 
+                                EditContactCommand editContactCmd,
+                                IProcess<GetJigsawContactDetailsParams, ExternalContactSearchResultsViewModel.ContactResultViewModel> getJsContactProc)
         {
             _context = context;
             _contactByIdQuery = contactByIdQuery;
             _editContactCmd = editContactCmd;
+            _getJsContactProc = getJsContactProc;
         }
 
         public virtual ActionResult Jigsaw(int contactId, int jigsawId, string externalName, string externalTitle, DateTime lastUpdated, string externalEmail = "", string externalPhone = "")
@@ -47,6 +56,27 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
                 JigsawPhone = externalPhone,
                 JigsawTitle = externalTitle
             };
+
+            // If the contact is marked as having access to the contact on jigsaw, retrieve the email and phone from jigsaw
+            if (contact.JigsawId == jigsawId && contact.HasJigsawAccess)
+            {
+                try
+                {
+                    var jsContact = _getJsContactProc.Execute(new GetJigsawContactDetailsParams
+                    {
+                        RequestingUserId = CurrentUserId,
+                        PurchaseContact = false,
+                        JigsawContactId = jigsawId
+                    });
+
+                    model.JigsawName = jsContact.FirstName + " " + jsContact.LastName;
+                    model.JigsawTitle = jsContact.Headline;
+                    model.JigsawEmail = jsContact.Email;
+                    model.JigsawPhone = jsContact.Phone;
+                }
+
+                catch (JigsawException) { }
+            }
 
             return View(model);
         }
