@@ -215,6 +215,9 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
                 return RedirectToAction(MVC.ContactSearch.Jigsaw.Authenticate(Request.RawUrl));
             }
 
+            if (points == null)
+                throw new JigsawException("User Jigsaw Points structure was null");
+
             var model = new JigsawContactPurchaseViewModel
             {
                 Points = points.Points,

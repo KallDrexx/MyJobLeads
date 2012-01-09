@@ -174,7 +174,7 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
                 throw new InsufficientJigsawPointsException(requestingUserId);
 
             else
-                throw new MJLException("Jigsaw request returned forbidden but was not due to a login or api token failure");
+                throw new JigsawException("Jigsaw request returned forbidden but was not due to a login or api token failure");
         }
     }
 }
