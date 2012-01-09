@@ -26,6 +26,7 @@ namespace MyJobLeads.Areas.ContactSearch.Views.Jigsaw
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using Telerik.Web.Mvc.UI;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/ContactSearch/Views/Jigsaw/Authenticate.cshtml")]
@@ -56,6 +57,21 @@ WriteLiteral("\r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"pageInfoB
             #line 9 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
          using (Html.BeginForm()) 
         {                
+            
+            
+            #line default
+            #line hidden
+            
+            #line 11 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+       Write(Html.HiddenFor(x => x.ReturnUrl));
+
+            
+            #line default
+            #line hidden
+            
+            #line 11 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+                                             
+            
 
             
             #line default
@@ -65,7 +81,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 marginAuto floatLef
 
 
             
-            #line 14 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 16 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
                 
 
             
@@ -85,7 +101,7 @@ WriteLiteral(@"            <div class=""grid3 marginBottom_10 marginAuto floatLe
 
 
             
-            #line 25 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 27 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
                 
 
             
@@ -96,7 +112,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 marginAuto floatlef
 
 
             
-            #line 28 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 30 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
                Write(Html.ValidationSummary());
 
             
@@ -106,7 +122,7 @@ WriteLiteral("\r\n                </div>\r\n            </div>\r\n");
 
 
             
-            #line 31 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 33 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
                 
 
             
@@ -118,7 +134,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n  
 
 
             
-            #line 34 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 36 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
                                      Write(Html.TextBoxFor(x => x.Username, new { @class = "info" }));
 
             
@@ -128,7 +144,7 @@ WriteLiteral("</div>\r\n                </div> \r\n            </div> \r\n");
 
 
             
-            #line 37 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 39 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
 
 
             
@@ -140,7 +156,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n  
 
 
             
-            #line 40 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 42 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
                                      Write(Html.PasswordFor(x => x.Password, new { @class = "info" }));
 
             
@@ -150,7 +166,7 @@ WriteLiteral("</div>\r\n                </div> \r\n            </div> \r\n");
 
 
             
-            #line 43 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 45 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
 
 
             
@@ -162,7 +178,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_20 floatLeft\"> \r\n  
 
 
             
-            #line 47 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
+            #line 49 "..\..\Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml"
         }
 
             

@@ -61,7 +61,8 @@
                         <td>
                             @if (string.IsNullOrWhiteSpace(Model.JigsawEmail))
                             {
-                                @:Jigsaw Contact Purchase Required
+                                @Html.ActionLink("Jigsaw Contact Purchase Required", MVC.ContactSearch.Jigsaw.PurchaseContact(Model.JigsawId, Model.JigsawName, Request.Url.PathAndQuery),
+                                    new { @class = "inlineBlue", title = "Purchase contact from Jigsaw" })
                             }
                             
                             else { @Model.JigsawEmail }
@@ -75,10 +76,12 @@
                         <td>
                             @if (string.IsNullOrWhiteSpace(Model.JigsawPhone))
                             {
-                                @:Jigsaw Contact Purchase Required
+                                @Html.ActionLink("Jigsaw Contact Purchase Required", MVC.ContactSearch.Jigsaw.PurchaseContact(Model.JigsawId, Model.JigsawName, Request.Url.PathAndQuery),
+                                    new { @class = "inlineBlue", title = "Purchase contact from Jigsaw" })
                             }
-                            
-                            else { @Model.JigsawPhone }
+
+                            else
+                            { @Model.JigsawPhone }
                         </td>
                     </tr>
                 </table>

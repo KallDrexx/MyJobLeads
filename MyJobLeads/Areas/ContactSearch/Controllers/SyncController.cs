@@ -57,26 +57,23 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
                 JigsawTitle = externalTitle
             };
 
-            // If the contact is marked as having access to the contact on jigsaw, retrieve the email and phone from jigsaw
-            if (contact.JigsawId == jigsawId && contact.HasJigsawAccess)
+            try
             {
-                try
+                var jsContact = _getJsContactProc.Execute(new GetJigsawContactDetailsParams
                 {
-                    var jsContact = _getJsContactProc.Execute(new GetJigsawContactDetailsParams
-                    {
-                        RequestingUserId = CurrentUserId,
-                        PurchaseContact = false,
-                        JigsawContactId = jigsawId
-                    });
+                    RequestingUserId = CurrentUserId,
+                    PurchaseContact = false,
+                    JigsawContactId = jigsawId
+                });
 
-                    model.JigsawName = jsContact.FirstName + " " + jsContact.LastName;
-                    model.JigsawTitle = jsContact.Headline;
-                    model.JigsawEmail = jsContact.Email;
-                    model.JigsawPhone = jsContact.Phone;
-                }
-
-                catch (JigsawException) { }
+                model.JigsawName = jsContact.FirstName + " " + jsContact.LastName;
+                model.JigsawTitle = jsContact.Headline;
+                model.JigsawEmail = jsContact.Email;
+                model.JigsawPhone = jsContact.Phone;
             }
+
+            // Ignore any jigsaw exceptions
+            catch (JigsawException) { }
 
             return View(model);
         }
@@ -91,6 +88,7 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
             if (!ModelState.IsValid)
             {
                 model.InternalEmail = contact.Email;
+
                 model.InternalName = contact.Name;
                 model.InternalPhone = contact.DirectPhone;
                 model.InternalTitle = contact.Title;

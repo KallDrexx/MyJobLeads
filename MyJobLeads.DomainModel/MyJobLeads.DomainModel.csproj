@@ -160,6 +160,7 @@
     <Compile Include="Enums\TokenProvider.cs" />
     <Compile Include="Exceptions\InvalidEmailDomainForOrganizationException.cs" />
     <Compile Include="Exceptions\InvalidOrganizationRegistrationTokenException.cs" />
+    <Compile Include="Exceptions\Jigsaw\InsufficientJigsawPointsException.cs" />
     <Compile Include="Exceptions\Jigsaw\InvalidJigsawApiTokenException.cs" />
     <Compile Include="Exceptions\Jigsaw\InvalidJigsawCredentialsException.cs" />
     <Compile Include="Exceptions\Jigsaw\JigsawCompanyNotFoundException.cs" />

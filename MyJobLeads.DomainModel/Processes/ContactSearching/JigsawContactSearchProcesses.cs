@@ -141,7 +141,7 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
             {
                 // Convert the json string into an object and evaluate it
                 var json = JsonConvert.DeserializeObject<ContactDetailsResponseJson>(response.Content);
-                if (json.Unrecognized.Count > 0)
+                if (json.Unrecognized.ContactId.Count > 0)
                     throw new JigsawContactNotFoundException(procParams.JigsawContactId);
 
                 procParams.Name = json.Contacts[0].FirstName + " " + json.Contacts[0].LastName;
@@ -162,7 +162,7 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
                     request.AddParameter("token", JigsawAuthProcesses.GetAuthToken());
                     response = client.Execute(request);
 
-                    var companyJson = JsonConvert.DeserializeObject<CompanyDetailsResponseJson>(response.Content);
+                    var companyJson = JsonConvert.DeserializeObject<CompanyDetailsResponseJson>(response.Content, new JigsawDateTimeConverter());
                     if (companyJson.companies.Count == 0)
                         throw new JigsawCompanyNotFoundException(procParams.JigsawCompanyId);
 
@@ -237,8 +237,8 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
                 JigsawAuthProcesses.ThrowInvalidResponse(response.Content, procParams.RequestingUserId, procParams.JigsawContactId.ToString());
 
             // Convert the json string into an object and evaluate it
-            var json = JsonConvert.DeserializeObject<ContactDetailsResponseJson>(response.Content);
-            if (json.Unrecognized.Count > 0)
+            var json = JsonConvert.DeserializeObject<ContactDetailsResponseJson>(response.Content, new JigsawDateTimeConverter());
+            if (json.Unrecognized.ContactId.Count > 0)
                 throw new JigsawContactNotFoundException(procParams.JigsawContactId);
 
             return Mapper.Map<ContactDetailsJson, ExternalContactSearchResultsViewModel.ContactResultViewModel>(json.Contacts[0]);
