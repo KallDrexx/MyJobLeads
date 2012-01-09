@@ -18,6 +18,7 @@ using MyJobLeads.DomainModel.ViewModels.ContactSearching;
 using MyJobLeads.DomainModel.ProcessParams.ContactSearching.Jigsaw;
 using AutoMapper;
 using MyJobLeads.DomainModel.Queries.Companies;
+using MyJobLeads.Areas.ContactSearch.Models.Jigsaw;
 
 namespace MyJobLeads.Areas.ContactSearch.Controllers
 {
@@ -28,18 +29,21 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
         protected IProcess<SaveJigsawUserCredentialsParams, GeneralSuccessResultViewModel> _saveCredentialsProc;
         protected IProcess<JigsawContactSearchParams, ExternalContactSearchResultsViewModel> _searchContacsProc;
         protected IProcess<AddJigsawContactToJobSearchParams, ExternalContactAddedResultViewModel> _addContactProc;
+        protected IProcess<GetJigsawContactDetailsParams, ExternalContactSearchResultsViewModel.ContactResultViewModel> _getContactProc;
 
         public JigsawController(MyJobLeadsDbContext context,
                                 IProcess<GetJigsawUserPointsParams, JigsawUserPointsViewModel> getUserPointsProc,
                                 IProcess<SaveJigsawUserCredentialsParams, GeneralSuccessResultViewModel> saveCredentialsProc,
                                 IProcess<JigsawContactSearchParams, ExternalContactSearchResultsViewModel> searchContactsProc,
-                                IProcess<AddJigsawContactToJobSearchParams, ExternalContactAddedResultViewModel> addContactProc)
+                                IProcess<AddJigsawContactToJobSearchParams, ExternalContactAddedResultViewModel> addContactProc,
+                                IProcess<GetJigsawContactDetailsParams, ExternalContactSearchResultsViewModel.ContactResultViewModel> getContactProc)
         {
             _context = context;
             _getUserPointsProc = getUserPointsProc;
             _saveCredentialsProc = saveCredentialsProc;
             _searchContacsProc = searchContactsProc;
             _addContactProc = addContactProc;
+            _getContactProc = getContactProc;
         }
 
         public virtual ActionResult Index()
@@ -47,9 +51,9 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
             return View();
         }
 
-        public virtual ActionResult Authenticate(bool loginFailed = false)
+        public virtual ActionResult Authenticate(string returnUrl = "")
         {
-            return View(new JigsawAuthenticateViewModel());
+            return View(new JigsawAuthenticateViewModel { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
@@ -70,7 +74,10 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
                 return View(model);
             }
 
-            // Authentication was successful
+            // Authentication was successful, go to the return url if one specified
+            if (!string.IsNullOrWhiteSpace(model.ReturnUrl))
+                return Redirect(model.ReturnUrl);
+            
             return RedirectToAction(MVC.ContactSearch.Jigsaw.Index());
         }
 
@@ -90,7 +97,55 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
             return View(resultsModel);
         }
 
-        public virtual ActionResult AddContact(string jsContactId, string jsCompanyId, string jsCompanyName, string name, string title)
+        public virtual ActionResult ImportContact(int jsContactId, string jsCompanyId, string jsCompanyName, string name, string title, DateTime lastUpdated)
+        {
+            // Get all contacts for the user
+            var contacts = _context.Contacts
+                                   .Where(x => x.Company.JobSearch.User.Id == CurrentUserId)
+                                   .Include(x => x.Company)
+                                   .ToList();
+
+            var model = new ImportContactViewModel
+            {
+                CompanyName = jsCompanyName,
+                JigsawCompanyId = jsCompanyId,
+                ContactName = name,
+                ContactTitle = title,
+                JigsawContactId = jsContactId,
+                JigsawUpdatedDate = lastUpdated
+            };
+            model.SetExistingContactList(contacts);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public virtual ActionResult ImportContact(ImportContactViewModel model)
+        {
+            if (model.ExistingContactId <= 0 && !model.CreateNewContact)
+                ModelState.AddModelError("", "An existing contact must be selected to merge, or you must mark this as a new contact");
+
+            if (!ModelState.IsValid)
+            {
+                // Get all contacts for the user
+                var contacts = _context.Contacts
+                                       .Where(x => x.Company.JobSearch.User.Id == CurrentUserId)
+                                       .Include(x => x.Company)
+                                       .OrderBy(x => x.Name)
+                                       .ToList();
+                model.SetExistingContactList(contacts);
+
+                return View(model);
+            }
+
+            if (model.CreateNewContact)
+                return RedirectToAction(MVC.ContactSearch.Jigsaw.AddContact(model.JigsawContactId, model.JigsawCompanyId, model.CompanyName, model.ContactName, model.ContactTitle));
+
+            // Otherwie merge
+            return RedirectToAction(MVC.ContactSearch.Sync.Jigsaw(model.ExistingContactId, model.JigsawContactId, model.ContactName, model.ContactTitle, model.JigsawUpdatedDate));
+        }
+
+        public virtual ActionResult AddContact(int jsContactId, string jsCompanyId, string jsCompanyName, string name, string title)
         {
             var user = _context.Users
                                .Where(x => x.Id == CurrentUserId)
@@ -145,6 +200,74 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
             };
 
             return View(model);
+        }
+
+        public virtual ActionResult PurchaseContact(int jigsawId, string contactName, string prevUrl)
+        {
+            JigsawUserPointsViewModel points;
+
+            try { points = _getUserPointsProc.Execute(new GetJigsawUserPointsParams { RequestingUserId = CurrentUserId }); }
+            catch (JigsawException ex)
+            {
+                if (!(ex is JigsawCredentialsNotFoundException) && !(ex is InvalidJigsawCredentialsException))
+                    throw;
+
+                return RedirectToAction(MVC.ContactSearch.Jigsaw.Authenticate(Request.RawUrl));
+            }
+
+            if (points == null)
+                throw new JigsawException("User Jigsaw Points structure was null");
+
+            var model = new JigsawContactPurchaseViewModel
+            {
+                Points = points.Points,
+                PurchasePointsUrl = points.PurchasePointsUrl,
+                JigsawContactId = jigsawId,
+                JigsawContactName = contactName,
+                ReturnUrl = prevUrl
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public virtual ActionResult PurchaseContact(JigsawContactPurchaseViewModel model)
+        {
+            if (!model.PurchaseContact)
+                ModelState.AddModelError("", "You must confirm your purchase request");
+
+            if (!ModelState.IsValid)
+            {
+                // Refresh points information
+                var points = _getUserPointsProc.Execute(new GetJigsawUserPointsParams { RequestingUserId = CurrentUserId });
+                model.Points = points.Points;
+                model.PurchasePointsUrl = points.PurchasePointsUrl;
+                return View(model);
+            }
+
+            try
+            {
+                _getContactProc.Execute(new GetJigsawContactDetailsParams
+                {
+                    RequestingUserId = CurrentUserId,
+                    JigsawContactId = model.JigsawContactId,
+                    PurchaseContact = true
+                });
+            }
+
+            catch (InsufficientJigsawPointsException)
+            {
+                ModelState.AddModelError("", "Your Jigsaw account does not have enough points to make this purchase.");
+                var points = _getUserPointsProc.Execute(new GetJigsawUserPointsParams { RequestingUserId = CurrentUserId });
+                model.Points = points.Points;
+                model.PurchasePointsUrl = points.PurchasePointsUrl;
+                return View(model);
+            }
+
+            if (!string.IsNullOrWhiteSpace(model.ReturnUrl))
+                return Redirect(model.ReturnUrl);
+
+            return RedirectToAction(MVC.ContactSearch.Jigsaw.Index());
         }
     }
 }

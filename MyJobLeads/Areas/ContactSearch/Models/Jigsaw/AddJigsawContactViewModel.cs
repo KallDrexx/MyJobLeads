@@ -13,7 +13,7 @@ namespace MyJobLeads.Areas.ContactSearch.Models
         public int SelectedCompanyId { get; set; }
         public IList<SelectListItem> ExistingCompanyList { get; set; }
 
-        public string JigsawContactId { get; set; }
+        public int JigsawContactId { get; set; }
         public string JigsawCompanyId { get; set; }
         public string JigsawCompanyName { get; set; }
         public string Name { get; set; }

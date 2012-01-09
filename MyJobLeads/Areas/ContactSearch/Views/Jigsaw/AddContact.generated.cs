@@ -26,6 +26,7 @@ namespace MyJobLeads.Areas.ContactSearch.Views.Jigsaw
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using Telerik.Web.Mvc.UI;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/ContactSearch/Views/Jigsaw/AddContact.cshtml")]
@@ -171,7 +172,7 @@ WriteLiteral("</span><br />\r\n                        Source: <a href=\"http://
 
             
             #line 26 "..\..\Areas\ContactSearch\Views\Jigsaw\AddContact.cshtml"
-                                                                             Write(Url.Encode(Model.JigsawContactId));
+                                                                             Write(Model.JigsawContactId);
 
             
             #line default

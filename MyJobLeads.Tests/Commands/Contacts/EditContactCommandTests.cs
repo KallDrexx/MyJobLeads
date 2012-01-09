@@ -95,6 +95,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
                                                  .SetReferredBy("Referred By")
                                                  .SetNotes("Notes")
                                                  .SetTitle("New Title")
+                                                 .SetJigsawId(1234)
                                                  .RequestedByUserId(_user.Id)
                                                  .Execute();
 
@@ -110,6 +111,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             Assert.AreEqual("Referred By", result.ReferredBy, "The contact's referred by was incorrect");
             Assert.AreEqual("New Title", result.Title, "The contact's title was incorrect");
             Assert.AreEqual("Notes", result.Notes, "The contact's notes was incorrect");
+            Assert.AreEqual(1234, result.JigsawId, "Jigsaw id was incorrect");
         }
 
         [TestMethod]
@@ -475,6 +477,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
                                                  .SetReferredBy("Referred By")
                                                  .SetNotes("Notes")
                                                  .SetTitle("New Title")
+                                                 .SetJigsawId(1235)
                                                  .RequestedByUserId(_user.Id)
                                                  .Execute();
             DateTime end = DateTime.Now;
@@ -492,7 +495,7 @@ namespace MyJobLeads.Tests.Commands.Contacts
             Assert.AreEqual("Referred By", history.ReferredBy, "The history record's referred by was incorrect");
             Assert.AreEqual("Notes", history.Notes, "The history record's notes was incorrect");
             Assert.AreEqual("New Title", history.Title, "The history record's title was incorrect");
-            Assert.AreEqual(1234, history.JigsawId, "Jigsaw Id was incorrect");
+            Assert.AreEqual(1235, history.JigsawId, "Jigsaw Id was incorrect");
             Assert.IsTrue(history.HasJigsawAccess, "Jigsaw access was incorrect");
 
             Assert.AreEqual(_user, history.AuthoringUser, "The history record's author was incorrect");

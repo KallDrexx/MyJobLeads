@@ -8,6 +8,8 @@
     <div class="pageInfoBox"> 
         @using (Html.BeginForm()) 
         {                
+            @Html.HiddenFor(x => x.ReturnUrl)
+            
             <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
                 <h3 class="floatLeft">Jigsaw Authentication</h3> 
             </div> 

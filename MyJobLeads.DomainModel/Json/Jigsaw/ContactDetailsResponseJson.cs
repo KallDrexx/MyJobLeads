@@ -7,7 +7,7 @@ namespace MyJobLeads.DomainModel.Json.Jigsaw
 {
     public class ContactDetailsResponseJson
     {
-        public List<UnrecognizedContact> Unrecognized { get; set; }
+        public UnrecognizedContact Unrecognized { get; set; }
         public List<ContactDetailsJson> Contacts { get; set; }
 
         public int PointsUsed { get; set; }
@@ -17,7 +17,7 @@ namespace MyJobLeads.DomainModel.Json.Jigsaw
 
         public class UnrecognizedContact
         {
-            public string ContactId { get; set; }
+            public IList<string> ContactId { get; set; }
         }
     }
 }

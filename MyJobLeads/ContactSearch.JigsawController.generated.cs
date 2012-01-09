@@ -38,6 +38,11 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ImportContact() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ImportContact);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult AddContact() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.AddContact);
         }
@@ -45,6 +50,11 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult AddContactSuccessful() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.AddContactSuccessful);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult PurchaseContact() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.PurchaseContact);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -62,8 +72,10 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
             public readonly string Index = "Index";
             public readonly string Authenticate = "Authenticate";
             public readonly string PerformSearch = "PerformSearch";
+            public readonly string ImportContact = "ImportContact";
             public readonly string AddContact = "AddContact";
             public readonly string AddContactSuccessful = "AddContactSuccessful";
+            public readonly string PurchaseContact = "PurchaseContact";
         }
 
 
@@ -76,8 +88,10 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
             public readonly string AddContact = "~/Areas/ContactSearch/Views/Jigsaw/AddContact.cshtml";
             public readonly string AddContactSuccessful = "~/Areas/ContactSearch/Views/Jigsaw/AddContactSuccessful.cshtml";
             public readonly string Authenticate = "~/Areas/ContactSearch/Views/Jigsaw/Authenticate.cshtml";
+            public readonly string ImportContact = "~/Areas/ContactSearch/Views/Jigsaw/ImportContact.cshtml";
             public readonly string Index = "~/Areas/ContactSearch/Views/Jigsaw/Index.cshtml";
             public readonly string PerformSearch = "~/Areas/ContactSearch/Views/Jigsaw/PerformSearch.cshtml";
+            public readonly string PurchaseContact = "~/Areas/ContactSearch/Views/Jigsaw/PurchaseContact.cshtml";
         }
     }
 
@@ -90,9 +104,9 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Authenticate(bool loginFailed) {
+        public override System.Web.Mvc.ActionResult Authenticate(string returnUrl) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Authenticate);
-            callInfo.RouteValueDictionary.Add("loginFailed", loginFailed);
+            callInfo.RouteValueDictionary.Add("returnUrl", returnUrl);
             return callInfo;
         }
 
@@ -108,7 +122,24 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult AddContact(string jsContactId, string jsCompanyId, string jsCompanyName, string name, string title) {
+        public override System.Web.Mvc.ActionResult ImportContact(int jsContactId, string jsCompanyId, string jsCompanyName, string name, string title, System.DateTime lastUpdated) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ImportContact);
+            callInfo.RouteValueDictionary.Add("jsContactId", jsContactId);
+            callInfo.RouteValueDictionary.Add("jsCompanyId", jsCompanyId);
+            callInfo.RouteValueDictionary.Add("jsCompanyName", jsCompanyName);
+            callInfo.RouteValueDictionary.Add("name", name);
+            callInfo.RouteValueDictionary.Add("title", title);
+            callInfo.RouteValueDictionary.Add("lastUpdated", lastUpdated);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ImportContact(MyJobLeads.Areas.ContactSearch.Models.Jigsaw.ImportContactViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ImportContact);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult AddContact(int jsContactId, string jsCompanyId, string jsCompanyName, string name, string title) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddContact);
             callInfo.RouteValueDictionary.Add("jsContactId", jsContactId);
             callInfo.RouteValueDictionary.Add("jsCompanyId", jsCompanyId);
@@ -130,6 +161,20 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
             callInfo.RouteValueDictionary.Add("contactName", contactName);
             callInfo.RouteValueDictionary.Add("companyName", companyName);
             callInfo.RouteValueDictionary.Add("companyId", companyId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult PurchaseContact(int jigsawId, string contactName, string prevUrl) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PurchaseContact);
+            callInfo.RouteValueDictionary.Add("jigsawId", jigsawId);
+            callInfo.RouteValueDictionary.Add("contactName", contactName);
+            callInfo.RouteValueDictionary.Add("prevUrl", prevUrl);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult PurchaseContact(MyJobLeads.Areas.ContactSearch.Models.Jigsaw.JigsawContactPurchaseViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PurchaseContact);
+            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 

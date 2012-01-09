@@ -26,7 +26,6 @@ namespace MyJobLeads.DomainModel.Entities
         public int? LinkedInOAuthDataId { get; set; }
         public virtual OAuthData LinkedInOAuthData { get; set; }
 
-        public int? JigsawAccountDetailsId { get; set; }
         public virtual JigsawAccountDetails JigsawAccountDetails { get; set; }
     }
 }

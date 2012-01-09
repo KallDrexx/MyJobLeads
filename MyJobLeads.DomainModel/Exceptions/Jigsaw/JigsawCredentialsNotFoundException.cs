@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MyJobLeads.DomainModel.Exceptions.Jigsaw
 {
-    public class JigsawCredentialsNotFoundException : MJLException
+    public class JigsawCredentialsNotFoundException : JigsawException
     {
         public JigsawCredentialsNotFoundException(int userId)
             : base(string.Format("No JigSaw credentials were found for user {0}", userId))

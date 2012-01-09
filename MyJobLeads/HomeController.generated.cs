@@ -75,6 +75,7 @@ namespace MyJobLeads.Controllers {
             public readonly string Error = "~/Views/Home/Error.cshtml";
             public readonly string FixBlankTitles = "~/Views/Home/FixBlankTitles.cshtml";
             public readonly string Index = "~/Views/Home/Index.cshtml";
+            public readonly string JigsawError = "~/Views/Home/JigsawError.cshtml";
             public readonly string SubmitFeedback = "~/Views/Home/SubmitFeedback.cshtml";
             public readonly string Test = "~/Views/Home/Test.cshtml";
         }

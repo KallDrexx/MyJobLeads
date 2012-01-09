@@ -26,6 +26,7 @@ namespace MyJobLeads.Areas.ContactSearch.Views.Jigsaw
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using Telerik.Web.Mvc.UI;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/ContactSearch/Views/Jigsaw/_SearchForm.cshtml")]
@@ -44,6 +45,21 @@ WriteLiteral("\r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"pageInfoB
             #line 5 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
          using (Html.BeginForm(MVC.ContactSearch.Jigsaw.PerformSearch(), FormMethod.Get))
         {
+            
+            
+            #line default
+            #line hidden
+            
+            #line 7 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+       Write(Html.HiddenFor(x => x.MergedContactId));
+
+            
+            #line default
+            #line hidden
+            
+            #line 7 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+                                                   
+            
 
             
             #line default
@@ -53,7 +69,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 marginAuto floatLef
 
 
             
-            #line 10 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+            #line 12 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
 
 
             
@@ -64,7 +80,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 marginAuto floatlef
 
 
             
-            #line 13 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+            #line 15 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
                Write(Html.ValidationSummary());
 
             
@@ -74,7 +90,7 @@ WriteLiteral("\r\n                </div>\r\n            </div>\r\n");
 
 
             
-            #line 16 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+            #line 18 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
 
 
             
@@ -86,7 +102,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n  
 
 
             
-            #line 19 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+            #line 21 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
                                      Write(Html.TextBoxFor(x => x.FirstName, new { @class = "info" }));
 
             
@@ -97,7 +113,7 @@ WriteLiteral("</div>\r\n                </div> \r\n\r\n                <div clas
 
 
             
-            #line 23 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+            #line 25 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
                                      Write(Html.TextBoxFor(x => x.LastName, new { @class = "info" }));
 
             
@@ -107,7 +123,7 @@ WriteLiteral("</div>\r\n                </div>                   \r\n           
 
 
             
-            #line 26 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+            #line 28 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
                                 
 
             
@@ -119,7 +135,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n  
 
 
             
-            #line 29 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+            #line 31 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
                                      Write(Html.TextBoxFor(x => x.Title, new { @class = "info" }));
 
             
@@ -130,7 +146,7 @@ WriteLiteral("</div>\r\n                </div> \r\n\r\n                <div clas
 
 
             
-            #line 33 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+            #line 35 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
                                      Write(Html.TextBoxFor(x => x.Company, new { @class = "info" }));
 
             
@@ -140,7 +156,7 @@ WriteLiteral("</div>\r\n                </div>                   \r\n           
 
 
             
-            #line 36 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+            #line 38 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
  
 
             
@@ -152,7 +168,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n  
 
 
             
-            #line 39 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+            #line 41 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
                                      Write(Html.DropDownListFor(x => x.Departments, Model.DepartmentList, new { @class = "info" }));
 
             
@@ -163,7 +179,7 @@ WriteLiteral("</div>\r\n                </div> \r\n\r\n                <div clas
 
 
             
-            #line 43 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+            #line 45 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
                                      Write(Html.DropDownListFor(x => x.Industry, Model.IndustryList));
 
             
@@ -173,7 +189,7 @@ WriteLiteral("</div>\r\n                </div>                   \r\n           
 
 
             
-            #line 46 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+            #line 48 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
             
 
             
@@ -185,7 +201,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n  
 
 
             
-            #line 49 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+            #line 51 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
                                      Write(Html.DropDownListFor(x => x.Levels, Model.LevelsList, new { @class = "info" }));
 
             
@@ -195,7 +211,7 @@ WriteLiteral("</div>\r\n                </div>                    \r\n          
 
 
             
-            #line 52 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+            #line 54 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
                 
 
             
@@ -207,7 +223,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_20 floatLeft\"> \r\n  
 
 
             
-            #line 58 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+            #line 60 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
 
 
             
@@ -217,7 +233,7 @@ WriteLiteral("            <div class=\"clear\"></div>\r\n");
 
 
             
-            #line 60 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
+            #line 62 "..\..\Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml"
         }
 
             

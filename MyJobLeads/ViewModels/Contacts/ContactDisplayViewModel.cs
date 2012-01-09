@@ -24,6 +24,8 @@ namespace MyJobLeads.ViewModels.Contacts
             Assistant = contact.Assistant;
             ReferredBy = contact.ReferredBy;
             Notes = contact.Notes;
+            JigsawId = contact.JigsawId;
+            HasJigsawAccess = contact.HasJigsawAccess;
             Company = new CompanySummaryViewModel(contact.Company);
 
             DirectPhoneWithExtension = string.IsNullOrWhiteSpace(contact.Extension)
@@ -40,6 +42,8 @@ namespace MyJobLeads.ViewModels.Contacts
         public string Assistant { get; set; }
         public string ReferredBy { get; set; }
         public string Notes { get; set; }
+        public int? JigsawId { get; set; }
+        public bool HasJigsawAccess { get; set; }
 
         public CompanySummaryViewModel Company { get; set; }
     }

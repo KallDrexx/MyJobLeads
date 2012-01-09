@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MyJobLeads.DomainModel.Exceptions.Jigsaw
 {
-    public class InvalidJigsawCredentialsException : MJLException
+    public class InvalidJigsawCredentialsException : JigsawException
     {
         public InvalidJigsawCredentialsException(int userId)
             : base(string.Format("The jigsaw credentials for user {0} are invalid", userId))

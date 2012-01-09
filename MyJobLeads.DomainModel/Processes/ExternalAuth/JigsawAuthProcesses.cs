@@ -170,8 +170,11 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
             if (content.Contains("CONTACT_NOT_OWNED"))
                 throw new JigsawContactNotOwnedException(contactId, requestingUserId);
 
+            if (content.Contains("PURCHASE_LOW_POINTS"))
+                throw new InsufficientJigsawPointsException(requestingUserId);
+
             else
-                throw new MJLException("Jigsaw request returned forbidden but was not due to a login or api token failure");
+                throw new JigsawException("Jigsaw request returned forbidden but was not due to a login or api token failure");
         }
     }
 }

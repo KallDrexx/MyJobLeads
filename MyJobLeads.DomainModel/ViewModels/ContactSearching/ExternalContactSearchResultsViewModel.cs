@@ -18,6 +18,8 @@ namespace MyJobLeads.DomainModel.ViewModels.ContactSearching
             public string CompanyId { get; set; }
             public string FirstName { get; set; }
             public string LastName { get; set; }
+            public string Email { get; set; }
+            public string Phone { get; set; }
             public string Headline { get; set; }
             public string Company { get; set; }
             public string PublicUrl { get; set; }

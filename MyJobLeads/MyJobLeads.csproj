@@ -292,11 +292,15 @@
     <Compile Include="Areas\Admin\Models\Mappings\OrganizationMappings.cs" />
     <Compile Include="Areas\ContactSearch\ContactSearchAreaRegistration.cs" />
     <Compile Include="Areas\ContactSearch\Controllers\JigsawController.cs" />
-    <Compile Include="Areas\ContactSearch\Models\AddJigsawContactViewModel.cs" />
-    <Compile Include="Areas\ContactSearch\Models\JigsawAuthenticateViewModel.cs" />
-    <Compile Include="Areas\ContactSearch\Models\JigsawSearchParametersViewModel.cs" />
+    <Compile Include="Areas\ContactSearch\Controllers\SyncController.cs" />
+    <Compile Include="Areas\ContactSearch\Models\Jigsaw\AddJigsawContactViewModel.cs" />
+    <Compile Include="Areas\ContactSearch\Models\Jigsaw\ImportContactViewModel.cs" />
+    <Compile Include="Areas\ContactSearch\Models\Jigsaw\JigsawAuthenticateViewModel.cs" />
+    <Compile Include="Areas\ContactSearch\Models\Jigsaw\JigsawContactPurchaseViewModel.cs" />
+    <Compile Include="Areas\ContactSearch\Models\Jigsaw\JigsawSearchParametersViewModel.cs" />
     <Compile Include="Areas\ContactSearch\Models\Mappings\JigsawViewModelModelMappings.cs" />
-    <Compile Include="Areas\ContactSearch\Models\JigsawSearchResultsViewModel.cs" />
+    <Compile Include="Areas\ContactSearch\Models\Jigsaw\JigsawSearchResultsViewModel.cs" />
+    <Compile Include="Areas\ContactSearch\Models\Sync\JigsawSyncViewModel.cs" />
     <Compile Include="Areas\ContactSearch\Views\Jigsaw\AddContact.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -412,6 +416,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ContactSearch.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContactSearch.SyncController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
@@ -565,7 +572,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>List.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Contact\Details.cs">
+    <Compile Include="Views\Contact\Details.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Details.cshtml</DependentUpon>
@@ -1136,7 +1143,7 @@
     </Content>
     <Content Include="Views\Contact\Details.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Details.cs</LastGenOutput>
+      <LastGenOutput>Details.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Task\Details.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -1295,6 +1302,9 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>AddContactSuccessful.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml" />
+    <Content Include="Areas\ContactSearch\Views\Sync\Jigsaw.cshtml" />
+    <Content Include="Areas\ContactSearch\Views\Jigsaw\PurchaseContact.cshtml" />
     <None Include="Scripts\plugins\DataTables\images\Sorting icons.psd" />
     <None Include="Scripts\plugins\DataTables\js\jquery.dataTables.min.js.gz" />
     <None Include="T4MVC.tt.settings.t4" />
@@ -1348,6 +1358,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Home\JigsawError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

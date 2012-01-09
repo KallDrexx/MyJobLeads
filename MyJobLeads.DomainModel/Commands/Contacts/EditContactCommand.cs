@@ -21,6 +21,7 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
     {
         protected IServiceFactory _serviceFactory;
         protected int _contactId, _userid;
+        protected int? _jigsawId;
         protected string _name, _directPhone, _mobilePhone, _ext, _email, _assistant, _referredBy, _notes, _title;
 
         public EditContactCommand(IServiceFactory factory)
@@ -150,6 +151,17 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
         }
 
         /// <summary>
+        /// Specifies the jigsaw id for the contact
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public EditContactCommand SetJigsawId(int id)
+        {
+            _jigsawId = id;
+            return this;
+        }
+
+        /// <summary>
         /// Executes the command
         /// </summary>
         /// <returns></returns>
@@ -178,6 +190,7 @@ namespace MyJobLeads.DomainModel.Commands.Contacts
             if (_referredBy != null) { contact.ReferredBy = _referredBy; }
             if (_notes != null) { contact.Notes = _notes; }
             if (_title != null) { contact.Title = _title; }
+            if (_jigsawId != null) { contact.JigsawId = (int)_jigsawId; }
 
             // Create a history record
             contact.History.Add(new ContactHistory

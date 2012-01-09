@@ -1,7 +1,7 @@
-﻿@model MyJobLeads.Areas.ContactSearch.Models.AddJigsawContactViewModel
+﻿@model MyJobLeads.Areas.ContactSearch.Models.Jigsaw.ImportContactViewModel
 
 @{
-    ViewBag.Title = "Add Jigsaw Contact";
+    ViewBag.Title = "Import Jigsaw Contact";
 }
 
 <div class="grid1 floatLeft"> 
@@ -10,19 +10,27 @@
         {
             @Html.HiddenFor(x => x.JigsawContactId)
             @Html.HiddenFor(x => x.JigsawCompanyId)
-            @Html.HiddenFor(x => x.JigsawCompanyName)
-            @Html.HiddenFor(x => x.Name)
-            @Html.HiddenFor(x => x.Title)
+            @Html.HiddenFor(x => x.CompanyName)
+            @Html.HiddenFor(x => x.ContactName)
+            @Html.HiddenFor(x => x.ContactTitle)
+            @Html.HiddenFor(x => x.JigsawUpdatedDate)
                 
             <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
-                <h3 class="floatLeft">Add Contact From Jigsaw To Your Job Search</h3> 
+                <h3 class="floatLeft">Import Contact</h3> 
             </div> 
+            
+            <div class="grid3 marginBottom_10 marginAuto floatLeft">
+                <p>
+                    Please review this contact's information, and choose whether to add it as a new contact or merge with an existing contact.
+                </p>
+            </div>
                 
             <div class="grid3 marginBottom_10 marginAuto floatLeft">
                 <div class="floatLeft">
                     <p>
-                        Name: <span class="bold">@Model.Name</span><br />
-                        Company: <span class="bold">@Model.JigsawCompanyName</span><br />
+                        Name: <span class="bold">@Model.ContactName</span><br />
+                        Title: <span class="bold">@Model.ContactTitle</span><br />
+                        Company: <span class="bold">@Model.CompanyName</span><br />
                         Source: <a href="http://www.jigsaw.com/BC.xhtml?contactId=@Model.JigsawContactId" class="inlineBlue">Jigsaw</a>
                     </p>    
                 </div>
@@ -36,8 +44,8 @@
                 
             <div class="grid3 marginBottom_10 floatLeft"> 
                 <div class="floatLeft">
-                    <p class="greyHighlight">@Html.LabelFor(x => x.CreateNewCompany, "Create Company Entry For " + Model.JigsawCompanyName)
-                        @Html.CheckBoxFor(x => x.CreateNewCompany)
+                    <p class="greyHighlight">@Html.LabelFor(x => x.CreateNewContact, "Create New Contact Entry For " + Model.ContactName)
+                        @Html.CheckBoxFor(x => x.CreateNewContact)
                     </p>
                 </div> 
             </div> 
@@ -45,9 +53,9 @@
             <div class="grid3 marginBottom_10 floatLeft"> 
                 <div class="floatLeft">
                     <p class="greyHighlight"><span class="bold">OR</span></p>
-                    <p class="greyHighlight">Add Position To Existing Company:</p>
+                    <p class="greyHighlight">Merge with existing contact:</p>
                     <div class="infoSpan">
-                        @Html.DropDownListFor(x => x.SelectedCompanyId, Model.ExistingCompanyList)
+                        @Html.DropDownListFor(x => x.ExistingContactId, Model.ExistingContactList)
                     </div>
                 </div> 
             </div> 
@@ -61,4 +69,4 @@
 
         <div class="clear"></div> 
     </div> 
-</div> 
+</div>
