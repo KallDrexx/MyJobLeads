@@ -9,9 +9,11 @@ using MyJobLeads.ViewModels.Accounts;
 using System.Web.Routing;
 using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.DomainModel.Entities.EF;
+using MyJobLeads.DomainModel.Exceptions.Jigsaw;
 
 namespace MyJobLeads
 {
+    [HandleError(ExceptionType = typeof(JigsawException), View = "JigsawError")]
     public class MyJobLeadsBaseController : Controller
     {
         public MyJobLeadsBaseController()
