@@ -166,6 +166,7 @@
     <Compile Include="Exceptions\Jigsaw\JigsawContactNotFoundException.cs" />
     <Compile Include="Exceptions\Jigsaw\JigsawContactNotOwnedException.cs" />
     <Compile Include="Exceptions\Jigsaw\JigsawCredentialsNotFoundException.cs" />
+    <Compile Include="Exceptions\Jigsaw\JigsawException.cs" />
     <Compile Include="Exceptions\MJLDuplicateEmailException.cs" />
     <Compile Include="Exceptions\MJLEntityNotFoundException.cs" />
     <Compile Include="Exceptions\MJLException.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Processes\Users\UserPasswordProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
     <Compile Include="ProcessParams\ContactSearching\Jigsaw\AddJigsawContactToJobSearchParams.cs" />
+    <Compile Include="ProcessParams\ContactSearching\Jigsaw\GetJigsawContactDetailsParams.cs" />
     <Compile Include="ProcessParams\ContactSearching\Jigsaw\JigsawContactSearchParams.cs" />
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\GetJigsawUserPointsParams.cs" />
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\GetUserJigsawCredentialsParams.cs" />

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MyJobLeads.DomainModel.Exceptions.Jigsaw
 {
-    public class InvalidJigsawApiTokenException : MJLException
+    public class InvalidJigsawApiTokenException : JigsawException
     {
         public InvalidJigsawApiTokenException(string apiToken)
             : base(string.Format("The Jigsaw API token '{0}' is invalid", apiToken))
