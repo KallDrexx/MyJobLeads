@@ -133,8 +133,8 @@ WriteLiteral("\r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"pageInfoB
             #line default
             #line hidden
 WriteLiteral("            <div class=\"grid3 marginBottom_10 marginAuto floatLeft\"> \r\n          " +
-"      <h3 class=\"floatLeft\">Add Contact From Jigsaw To Your Job Search</h3> \r\n  " +
-"          </div> \r\n");
+"      <h3 class=\"floatLeft\">What Company Do You Wish To Add This Contact To?</h3" +
+"> \r\n            </div> \r\n");
 
 
             
@@ -215,7 +215,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n  
 
             
             #line 39 "..\..\Areas\ContactSearch\Views\Jigsaw\AddContact.cshtml"
-                                        Write(Html.LabelFor(x => x.CreateNewCompany, "Create Company Entry For " + Model.JigsawCompanyName));
+                                        Write(Html.LabelFor(x => x.CreateNewCompany, "Create New Company Entry For " + Model.JigsawCompanyName));
 
             
             #line default
