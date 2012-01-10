@@ -316,6 +316,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Authenticate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ContactSearch\Views\Jigsaw\ImportContact.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImportContact.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Areas\ContactSearch\Views\Jigsaw\Index.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -326,10 +331,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PerformSearch.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ContactSearch\Views\Jigsaw\PurchaseContact.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PurchaseContact.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Areas\ContactSearch\Views\Jigsaw\_SearchForm.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_SearchForm.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ContactSearch\Views\Sync\Jigsaw.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Jigsaw.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Areas\Organization\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Organization\Controllers\EditOrganizationController.cs" />
@@ -1302,9 +1317,18 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>AddContactSuccessful.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml" />
-    <Content Include="Areas\ContactSearch\Views\Sync\Jigsaw.cshtml" />
-    <Content Include="Areas\ContactSearch\Views\Jigsaw\PurchaseContact.cshtml" />
+    <Content Include="Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ImportContact.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\ContactSearch\Views\Sync\Jigsaw.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Jigsaw.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\ContactSearch\Views\Jigsaw\PurchaseContact.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PurchaseContact.generated.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\plugins\DataTables\images\Sorting icons.psd" />
     <None Include="Scripts\plugins\DataTables\js\jquery.dataTables.min.js.gz" />
     <None Include="T4MVC.tt.settings.t4" />
