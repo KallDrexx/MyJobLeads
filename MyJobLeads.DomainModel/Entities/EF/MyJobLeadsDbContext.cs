@@ -16,6 +16,7 @@ namespace MyJobLeads.DomainModel.Entities.EF
         public DbSet<CompanyHistory> CompanyHistory { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ContactHistory> ContactHistory { get; set; }
+        public DbSet<FpJobApplyBasicStat> FpJobApplyBasicStats { get; set; }
         public DbSet<JigsawAccountDetails> JigsawAccountDetails { get; set; }
         public DbSet<JobSearch> JobSearches { get; set; }
         public DbSet<JobSearchHistory> JobSearchHistory { get; set; }

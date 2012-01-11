@@ -130,6 +130,7 @@
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\EF\Configuration\MilestoneConfig.cs" />
     <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\FpJobApplyBasicStat.cs" />
     <Compile Include="Entities\JigsawAccountDetails.cs" />
     <Compile Include="Entities\OAuthData.cs" />
     <Compile Include="Entities\OfficialDocument.cs" />
