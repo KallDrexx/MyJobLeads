@@ -227,7 +227,7 @@ namespace MyJobLeads.Controllers
         }
 
         [HttpPost]
-        public virtual ActionResult ResetPasswordResult(string userEmail)
+        public virtual ActionResult ResetPassword(string userEmail)
         {
             var user = Membership.GetUser(userEmail);
             if (user == null)
@@ -238,6 +238,11 @@ namespace MyJobLeads.Controllers
             }
 
             user.ResetPassword();
+            return RedirectToAction(MVC.Account.ResetPasswordResult());
+        }
+
+        public virtual ActionResult ResetPasswordResult()
+        {
             return View();
         }
 

@@ -53,7 +53,7 @@ WriteLiteral("\r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"pageInfoB
 
             
             #line 7 "..\..\Views\Account\ResetPassword.cshtml"
-         using (Html.BeginForm(MVC.Account.ResetPasswordResult())) 
+         using (Html.BeginForm()) 
         {
             
 

@@ -36,11 +36,6 @@ namespace MyJobLeads.Controllers {
         public System.Web.Mvc.ActionResult RegisterWithOrganization() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.RegisterWithOrganization);
         }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult ResetPasswordResult() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.ResetPasswordResult);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public AccountController Actions { get { return MVC.Account; } }
@@ -149,8 +144,13 @@ namespace MyJobLeads.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult ResetPasswordResult(string userEmail) {
+        public override System.Web.Mvc.ActionResult ResetPasswordResult() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ResetPasswordResult);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ResetPassword(string userEmail) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ResetPassword);
             callInfo.RouteValueDictionary.Add("userEmail", userEmail);
             return callInfo;
         }
