@@ -43,11 +43,6 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult AddContact() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.AddContact);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult AddContactSuccessful() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.AddContactSuccessful);
         }
@@ -73,7 +68,6 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
             public readonly string Authenticate = "Authenticate";
             public readonly string PerformSearch = "PerformSearch";
             public readonly string ImportContact = "ImportContact";
-            public readonly string AddContact = "AddContact";
             public readonly string AddContactSuccessful = "AddContactSuccessful";
             public readonly string PurchaseContact = "PurchaseContact";
         }
@@ -85,7 +79,6 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string _SearchForm = "~/Areas/ContactSearch/Views/Jigsaw/_SearchForm.cshtml";
-            public readonly string AddContact = "~/Areas/ContactSearch/Views/Jigsaw/AddContact.cshtml";
             public readonly string AddContactSuccessful = "~/Areas/ContactSearch/Views/Jigsaw/AddContactSuccessful.cshtml";
             public readonly string Authenticate = "~/Areas/ContactSearch/Views/Jigsaw/Authenticate.cshtml";
             public readonly string ImportContact = "~/Areas/ContactSearch/Views/Jigsaw/ImportContact.cshtml";
@@ -135,22 +128,6 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers {
 
         public override System.Web.Mvc.ActionResult ImportContact(MyJobLeads.Areas.ContactSearch.Models.Jigsaw.ImportContactViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ImportContact);
-            callInfo.RouteValueDictionary.Add("model", model);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult AddContact(int jsContactId, string jsCompanyId, string jsCompanyName, string name, string title) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddContact);
-            callInfo.RouteValueDictionary.Add("jsContactId", jsContactId);
-            callInfo.RouteValueDictionary.Add("jsCompanyId", jsCompanyId);
-            callInfo.RouteValueDictionary.Add("jsCompanyName", jsCompanyName);
-            callInfo.RouteValueDictionary.Add("name", name);
-            callInfo.RouteValueDictionary.Add("title", title);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult AddContact(MyJobLeads.Areas.ContactSearch.Models.AddJigsawContactViewModel model) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddContact);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }

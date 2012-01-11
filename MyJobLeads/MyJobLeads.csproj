@@ -293,7 +293,6 @@
     <Compile Include="Areas\ContactSearch\ContactSearchAreaRegistration.cs" />
     <Compile Include="Areas\ContactSearch\Controllers\JigsawController.cs" />
     <Compile Include="Areas\ContactSearch\Controllers\SyncController.cs" />
-    <Compile Include="Areas\ContactSearch\Models\Jigsaw\AddJigsawContactViewModel.cs" />
     <Compile Include="Areas\ContactSearch\Models\Jigsaw\ImportContactViewModel.cs" />
     <Compile Include="Areas\ContactSearch\Models\Jigsaw\JigsawAuthenticateViewModel.cs" />
     <Compile Include="Areas\ContactSearch\Models\Jigsaw\JigsawContactPurchaseViewModel.cs" />
@@ -301,11 +300,6 @@
     <Compile Include="Areas\ContactSearch\Models\Mappings\JigsawViewModelModelMappings.cs" />
     <Compile Include="Areas\ContactSearch\Models\Jigsaw\JigsawSearchResultsViewModel.cs" />
     <Compile Include="Areas\ContactSearch\Models\Sync\JigsawSyncViewModel.cs" />
-    <Compile Include="Areas\ContactSearch\Views\Jigsaw\AddContact.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AddContact.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Areas\ContactSearch\Views\Jigsaw\AddContactSuccessful.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1308,10 +1302,6 @@
     <Content Include="Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>PerformSearch.generated.cs</LastGenOutput>
-    </Content>
-    <Content Include="Areas\ContactSearch\Views\Jigsaw\AddContact.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>AddContact.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Areas\ContactSearch\Views\Jigsaw\AddContactSuccessful.cshtml">
       <Generator>RazorGenerator</Generator>

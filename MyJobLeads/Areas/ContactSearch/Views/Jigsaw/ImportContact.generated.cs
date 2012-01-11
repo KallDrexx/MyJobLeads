@@ -45,16 +45,49 @@ WriteLiteral("\r\n");
             #line 3 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
   
     ViewBag.Title = "Import Jigsaw Contact";
+    Html.Telerik().ScriptRegistrar().OnDocumentReady(@"
+        // Set defaults
+        hideNewContact();
+
+        $('#CreateNewContact').change(function() {
+            if ($(this).is(':checked')) { showNewContact(); }
+            else { hideNewContact(); }
+        });
+
+        if ($('#CreateNewContact').is(':checked')) { showNewContact(); }
+        "
+    );
 
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"pageInfoBox\"> \r\n");
+WriteLiteral(@"
+<script type=""text/javascript"">
+    var newCompanyDiv = '#newCompanyDiv';
+    var existingCompanyDiv = '#existingCompanyDiv';
+    var existingContactDiv = '#existingContactDiv';
+
+    function showNewContact() {
+        $(existingContactDiv).hide();
+        $(newCompanyDiv).show();
+        $(existingCompanyDiv).show();
+    }
+
+    function hideNewContact() {
+        $(existingContactDiv).show();
+        $(newCompanyDiv).hide();
+        $(existingCompanyDiv).hide();
+    }
+</script>
+
+<div class=""grid1 floatLeft""> 
+    <div class=""pageInfoBox""> 
+");
 
 
             
-            #line 9 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 39 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
          using (Html.BeginForm()) 
         {
             
@@ -62,84 +95,84 @@ WriteLiteral("\r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"pageInfoB
             #line default
             #line hidden
             
-            #line 11 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 41 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
        Write(Html.HiddenFor(x => x.JigsawContactId));
 
             
             #line default
             #line hidden
             
-            #line 11 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 41 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
                                                    
             
             
             #line default
             #line hidden
             
-            #line 12 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 42 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
        Write(Html.HiddenFor(x => x.JigsawCompanyId));
 
             
             #line default
             #line hidden
             
-            #line 12 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 42 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
                                                    
             
             
             #line default
             #line hidden
             
-            #line 13 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 43 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
        Write(Html.HiddenFor(x => x.CompanyName));
 
             
             #line default
             #line hidden
             
-            #line 13 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 43 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
                                                
             
             
             #line default
             #line hidden
             
-            #line 14 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 44 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
        Write(Html.HiddenFor(x => x.ContactName));
 
             
             #line default
             #line hidden
             
-            #line 14 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 44 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
                                                
             
             
             #line default
             #line hidden
             
-            #line 15 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 45 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
        Write(Html.HiddenFor(x => x.ContactTitle));
 
             
             #line default
             #line hidden
             
-            #line 15 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 45 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
                                                 
             
             
             #line default
             #line hidden
             
-            #line 16 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 46 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
        Write(Html.HiddenFor(x => x.JigsawUpdatedDate));
 
             
             #line default
             #line hidden
             
-            #line 16 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 46 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
                                                      
                 
 
@@ -147,12 +180,11 @@ WriteLiteral("\r\n<div class=\"grid1 floatLeft\"> \r\n    <div class=\"pageInfoB
             #line default
             #line hidden
 WriteLiteral("            <div class=\"grid3 marginBottom_10 marginAuto floatLeft\"> \r\n          " +
-"      <h3 class=\"floatLeft\">Do You Want To Create This Contact Or Update An Exis" +
-"ting Contact?</h3> \r\n            </div> \r\n");
+"      <h3 class=\"floatLeft\">Import Contact</h3> \r\n            </div> \r\n");
 
 
             
-            #line 21 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 51 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
             
 
             
@@ -167,7 +199,7 @@ WriteLiteral(@"            <div class=""grid3 marginBottom_10 marginAuto floatLe
 
 
             
-            #line 27 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 57 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
                 
 
             
@@ -179,7 +211,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 marginAuto floatLef
 
 
             
-            #line 31 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 61 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
                                             Write(Model.ContactName);
 
             
@@ -189,7 +221,7 @@ WriteLiteral("</span><br />\r\n                        Title: <span class=\"bold
 
 
             
-            #line 32 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 62 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
                                              Write(Model.ContactTitle);
 
             
@@ -199,7 +231,7 @@ WriteLiteral("</span><br />\r\n                        Company: <span class=\"bo
 
 
             
-            #line 33 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 63 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
                                                Write(Model.CompanyName);
 
             
@@ -210,7 +242,7 @@ WriteLiteral("</span><br />\r\n                        Source: <a href=\"http://
 
 
             
-            #line 34 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 64 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
                                                                              Write(Model.JigsawContactId);
 
             
@@ -221,7 +253,7 @@ WriteLiteral("\" class=\"inlineBlue\">Jigsaw</a>\r\n                    </p>    
 
 
             
-            #line 38 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 68 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
                 
 
             
@@ -232,7 +264,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 marginAuto floatlef
 
 
             
-            #line 41 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 71 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
                Write(Html.ValidationSummary());
 
             
@@ -242,7 +274,7 @@ WriteLiteral("\r\n                </div>\r\n            </div>\r\n");
 
 
             
-            #line 44 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 74 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
                 
 
             
@@ -253,7 +285,7 @@ WriteLiteral("            <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n  
 
 
             
-            #line 47 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 77 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
                                         Write(Html.LabelFor(x => x.CreateNewContact, "Create New Contact Entry For " + Model.ContactName));
 
             
@@ -263,7 +295,7 @@ WriteLiteral("\r\n                        ");
 
 
             
-            #line 48 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 78 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
                    Write(Html.CheckBoxFor(x => x.CreateNewContact));
 
             
@@ -273,13 +305,13 @@ WriteLiteral("\r\n                    </p>\r\n                </div> \r\n       
 
 
             
-            #line 52 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 82 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
 
 
             
             #line default
             #line hidden
-WriteLiteral(@"            <div class=""grid3 marginBottom_10 floatLeft""> 
+WriteLiteral(@"            <div class=""grid3 marginBottom_10 floatLeft"" id=""existingContactDiv""> 
                 <div class=""floatLeft"">
                     <p class=""greyHighlight""><span class=""bold"">OR</span></p>
                     <p class=""greyHighlight"">Merge with existing contact:</p>
@@ -288,8 +320,8 @@ WriteLiteral(@"            <div class=""grid3 marginBottom_10 floatLeft"">
 
 
             
-            #line 58 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
-                   Write(Html.DropDownListFor(x => x.ExistingContactId, Model.ExistingContactList));
+            #line 88 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+                   Write(Html.DropDownListFor(x => x.SelectedContactId, Model.ExistingContactList));
 
             
             #line default
@@ -298,19 +330,76 @@ WriteLiteral("\r\n                    </div>\r\n                </div> \r\n     
 
 
             
-            #line 62 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 92 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <div class=\"grid3 marginBottom_10 floatLeft\" id=\"newCompanyDiv\"> \r\n  " +
+"              <div class=\"floatLeft\">\r\n                    <p class=\"greyHighlig" +
+"ht\">");
+
+
+            
+            #line 95 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+                                        Write(Html.LabelFor(x => x.CreateNewCompany, "Create New Company Entry For " + Model.CompanyName));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                        ");
+
+
+            
+            #line 96 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+                   Write(Html.CheckBoxFor(x => x.CreateNewCompany));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                    </p>\r\n                </div> \r\n            </div>\r\n");
+
+
+            
+            #line 100 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"            <div class=""grid3 marginBottom_10 floatLeft"" id=""existingCompanyDiv""> 
+                <div class=""floatLeft"">
+                    <p class=""greyHighlight""><span class=""bold"">OR</span></p>
+                    <p class=""greyHighlight"">Merge with an existing company:</p>
+                    <div class=""infoSpan"">
+                        ");
+
+
+            
+            #line 106 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+                   Write(Html.DropDownListFor(x => x.SelectedCompanyId, Model.ExistingCompanyList));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                    </div>\r\n                </div> \r\n            </div> \r\n");
+
+
+            
+            #line 110 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
 
 
             
             #line default
             #line hidden
 WriteLiteral("            <div class=\"grid3 marginBottom_20 floatLeft\"> \r\n                <div " +
-"class=\"submitBTN \">\r\n                    <input type=\"submit\" value=\"Add Contact" +
-"\" />\r\n                </div>                    \r\n            </div> \r\n");
+"class=\"submitBTN \">\r\n                    <input type=\"submit\" value=\"Import Cont" +
+"act\" />\r\n                </div>                    \r\n            </div> \r\n");
 
 
             
-            #line 68 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
+            #line 116 "..\..\Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml"
         }
 
             

@@ -2,7 +2,37 @@
 
 @{
     ViewBag.Title = "Import Jigsaw Contact";
+    Html.Telerik().ScriptRegistrar().OnDocumentReady(@"
+        // Set defaults
+        hideNewContact();
+
+        $('#CreateNewContact').change(function() {
+            if ($(this).is(':checked')) { showNewContact(); }
+            else { hideNewContact(); }
+        });
+
+        if ($('#CreateNewContact').is(':checked')) { showNewContact(); }
+        "
+    );
 }
+
+<script type="text/javascript">
+    var newCompanyDiv = '#newCompanyDiv';
+    var existingCompanyDiv = '#existingCompanyDiv';
+    var existingContactDiv = '#existingContactDiv';
+
+    function showNewContact() {
+        $(existingContactDiv).hide();
+        $(newCompanyDiv).show();
+        $(existingCompanyDiv).show();
+    }
+
+    function hideNewContact() {
+        $(existingContactDiv).show();
+        $(newCompanyDiv).hide();
+        $(existingCompanyDiv).hide();
+    }
+</script>
 
 <div class="grid1 floatLeft"> 
     <div class="pageInfoBox"> 
@@ -16,7 +46,7 @@
             @Html.HiddenFor(x => x.JigsawUpdatedDate)
                 
             <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
-                <h3 class="floatLeft">Do You Want To Create This Contact Or Update An Existing Contact?</h3> 
+                <h3 class="floatLeft">Import Contact</h3> 
             </div> 
             
             <div class="grid3 marginBottom_10 marginAuto floatLeft">
@@ -50,19 +80,37 @@
                 </div> 
             </div> 
 
-            <div class="grid3 marginBottom_10 floatLeft"> 
+            <div class="grid3 marginBottom_10 floatLeft" id="existingContactDiv"> 
                 <div class="floatLeft">
                     <p class="greyHighlight"><span class="bold">OR</span></p>
                     <p class="greyHighlight">Merge with existing contact:</p>
                     <div class="infoSpan">
-                        @Html.DropDownListFor(x => x.ExistingContactId, Model.ExistingContactList)
+                        @Html.DropDownListFor(x => x.SelectedContactId, Model.ExistingContactList)
+                    </div>
+                </div> 
+            </div> 
+            
+            <div class="grid3 marginBottom_10 floatLeft" id="newCompanyDiv"> 
+                <div class="floatLeft">
+                    <p class="greyHighlight">@Html.LabelFor(x => x.CreateNewCompany, "Create New Company Entry For " + Model.CompanyName)
+                        @Html.CheckBoxFor(x => x.CreateNewCompany)
+                    </p>
+                </div> 
+            </div>
+            
+            <div class="grid3 marginBottom_10 floatLeft" id="existingCompanyDiv"> 
+                <div class="floatLeft">
+                    <p class="greyHighlight"><span class="bold">OR</span></p>
+                    <p class="greyHighlight">Merge with an existing company:</p>
+                    <div class="infoSpan">
+                        @Html.DropDownListFor(x => x.SelectedCompanyId, Model.ExistingCompanyList)
                     </div>
                 </div> 
             </div> 
 
             <div class="grid3 marginBottom_20 floatLeft"> 
                 <div class="submitBTN ">
-                    <input type="submit" value="Add Contact" />
+                    <input type="submit" value="Import Contact" />
                 </div>                    
             </div> 
         }

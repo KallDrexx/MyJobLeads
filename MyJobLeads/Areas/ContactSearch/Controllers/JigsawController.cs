@@ -99,7 +99,7 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
 
         public virtual ActionResult ImportContact(int jsContactId, string jsCompanyId, string jsCompanyName, string name, string title, DateTime lastUpdated)
         {
-            // Get all contacts for the user
+            // Get all contacts and contacts for the user
             var contacts = _context.Contacts
                                    .Where(x => x.Company.JobSearch.User.Id == CurrentUserId)
                                    .Include(x => x.Company)
@@ -114,7 +114,8 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
                 JigsawContactId = jsContactId,
                 JigsawUpdatedDate = lastUpdated
             };
-            model.SetExistingContactList(contacts);
+
+            model.SetDropdownListValues(contacts, contacts.Select(x => x.Company).Distinct().ToList());
 
             return View(model);
         }
@@ -122,8 +123,11 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
         [HttpPost]
         public virtual ActionResult ImportContact(ImportContactViewModel model)
         {
-            if (model.ExistingContactId <= 0 && !model.CreateNewContact)
+            if (!model.CreateNewContact && model.SelectedContactId <= 0)
                 ModelState.AddModelError("", "An existing contact must be selected to merge, or you must mark this as a new contact");
+
+            else if (model.CreateNewContact && !model.CreateNewCompany && model.SelectedCompanyId <= 0)
+                ModelState.AddModelError("", "An existing company must be selected to add the contact to an existing company");
 
             if (!ModelState.IsValid)
             {
@@ -133,56 +137,18 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
                                        .Include(x => x.Company)
                                        .OrderBy(x => x.Name)
                                        .ToList();
-                model.SetExistingContactList(contacts);
+
+                model.SetDropdownListValues(contacts, contacts.Select(x => x.Company).Distinct().ToList());
 
                 return View(model);
             }
 
-            if (model.CreateNewContact)
-                return RedirectToAction(MVC.ContactSearch.Jigsaw.AddContact(model.JigsawContactId, model.JigsawCompanyId, model.CompanyName, model.ContactName, model.ContactTitle));
+            // Pass to the merge screen if we are not creating a new contact
+            if (!model.CreateNewContact)
+                return RedirectToAction(MVC.ContactSearch.Sync.Jigsaw(model.SelectedContactId, model.JigsawContactId, model.ContactName, model.ContactTitle, model.JigsawUpdatedDate));
 
-            // Otherwie merge
-            return RedirectToAction(MVC.ContactSearch.Sync.Jigsaw(model.ExistingContactId, model.JigsawContactId, model.ContactName, model.ContactTitle, model.JigsawUpdatedDate));
-        }
-
-        public virtual ActionResult AddContact(int jsContactId, string jsCompanyId, string jsCompanyName, string name, string title)
-        {
-            var user = _context.Users
-                               .Where(x => x.Id == CurrentUserId)
-                               .Include(x => x.LastVisitedJobSearch.Companies)
-                               .Single();
-
-            var model = new AddJigsawContactViewModel
-            {
-                JigsawContactId = jsContactId,
-                JigsawCompanyId = jsCompanyId,
-                JigsawCompanyName = jsCompanyName,
-                Name = name,
-                Title = title
-            };
-            model.SetExistingCompanyList(user.LastVisitedJobSearch.Companies.ToList());
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public virtual ActionResult AddContact(AddJigsawContactViewModel model)
-        {
-            if (!model.CreateNewCompany && model.SelectedCompanyId == 0)
-                ModelState.AddModelError("CompanyName", "No existing company selected");
-
-            if (!ModelState.IsValid)
-            {
-                var user = _context.Users
-                               .Where(x => x.Id == CurrentUserId)
-                               .Include(x => x.LastVisitedJobSearch.Companies)
-                               .Single();
-
-                model.SetExistingCompanyList(user.LastVisitedJobSearch.Companies.ToList());
-                return View(model);
-            }
-
-            var parameters = Mapper.Map<AddJigsawContactViewModel, AddJigsawContactToJobSearchParams>(model);
+            // Otherwise create the new contact
+            var parameters = Mapper.Map<ImportContactViewModel, AddJigsawContactToJobSearchParams>(model);
             parameters.RequestingUserId = CurrentUserId;
             var result = _addContactProc.Execute(parameters);
 
