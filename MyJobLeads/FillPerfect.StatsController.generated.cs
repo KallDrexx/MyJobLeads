@@ -20,10 +20,10 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace MyJobLeads.Areas.Admin.Controllers {
-    public partial class CopyAccountController {
+namespace MyJobLeads.Areas.FillPerfect.Controllers {
+    public partial class StatsController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected CopyAccountController(Dummy d) { }
+        protected StatsController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result) {
@@ -31,21 +31,25 @@ namespace MyJobLeads.Areas.Admin.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult JobsApplied() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.JobsApplied);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public CopyAccountController Actions { get { return MVC.Admin.CopyAccount; } }
+        public StatsController Actions { get { return MVC.FillPerfect.Stats; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "Admin";
+        public readonly string Area = "FillPerfect";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "CopyAccount";
+        public readonly string Name = "Stats";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string Index = "Index";
-            public readonly string CopyAccountSuccess = "CopyAccountSuccess";
+            public readonly string JobsApplied = "JobsApplied";
         }
 
 
@@ -58,22 +62,13 @@ namespace MyJobLeads.Areas.Admin.Controllers {
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_CopyAccountController: MyJobLeads.Areas.Admin.Controllers.CopyAccountController {
-        public T4MVC_CopyAccountController() : base(Dummy.Instance) { }
+    public class T4MVC_StatsController: MyJobLeads.Areas.FillPerfect.Controllers.StatsController {
+        public T4MVC_StatsController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult Index() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult Index(MyJobLeads.Areas.Admin.Models.CopyAccountDataViewModel model) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
-            callInfo.RouteValueDictionary.Add("model", model);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult CopyAccountSuccess() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CopyAccountSuccess);
+        public override System.Web.Mvc.JsonResult JobsApplied(string userId, int applyCount) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.JobsApplied);
+            callInfo.RouteValueDictionary.Add("userId", userId);
+            callInfo.RouteValueDictionary.Add("applyCount", applyCount);
             return callInfo;
         }
 

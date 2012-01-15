@@ -62,7 +62,12 @@ namespace MyJobLeads.Areas.Admin.Controllers
 
             }
 
-            return View(MVC.Admin.CopyAccount.Views.CopyAccountSuccess);
+            return RedirectToAction(MVC.Admin.CopyAccount.CopyAccountSuccess());
+        }
+
+        public virtual ActionResult CopyAccountSuccess()
+        {
+            return View();
         }
     }
 }
