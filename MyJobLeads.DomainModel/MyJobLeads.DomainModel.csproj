@@ -195,6 +195,7 @@
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Processes\Admin\OrganizationAdminProcesses.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
+    <Compile Include="Processes\CompanySearching\JigsawCompanySearchProcesses.cs" />
     <Compile Include="Processes\ContactSearching\JigsawContactSearchProcesses.cs" />
     <Compile Include="Processes\Exports\JobSearchExportProcess.cs" />
     <Compile Include="Processes\ExternalAuth\JigsawAuthProcesses.cs" />
