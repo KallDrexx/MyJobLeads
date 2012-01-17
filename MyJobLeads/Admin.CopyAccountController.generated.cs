@@ -31,6 +31,11 @@ namespace MyJobLeads.Areas.Admin.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult CopyAccountSuccess() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.CopyAccountSuccess);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public CopyAccountController Actions { get { return MVC.Admin.CopyAccount; } }
@@ -54,6 +59,7 @@ namespace MyJobLeads.Areas.Admin.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string Index = "~/Areas/Admin/Views/CopyAccount/Index.cshtml";
         }
     }
 
@@ -72,8 +78,10 @@ namespace MyJobLeads.Areas.Admin.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CopyAccountSuccess() {
+        public override System.Web.Mvc.ActionResult CopyAccountSuccess(string newUserName, string password) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CopyAccountSuccess);
+            callInfo.RouteValueDictionary.Add("newUserName", newUserName);
+            callInfo.RouteValueDictionary.Add("password", password);
             return callInfo;
         }
 

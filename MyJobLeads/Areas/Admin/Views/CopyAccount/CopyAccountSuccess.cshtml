@@ -1,13 +1,21 @@
-﻿@{
-    ViewBag.Title = "CopyAccountSuccess";
+﻿@model MyJobLeads.Areas.Admin.Models.CopyAccountSuccessfulViewModel
+
+@{
+    ViewBag.Title = "Copy Account Success";
 }
+
 
 <div class="grid1 floatLeft"> 
     <div class="pageInfoBox"> 
         <div class="grid3 marginBottom_10 marginAuto floatLeft">
-            <h3>Copy Account Successful!</h3>
+            <h3>CLoned Account Created</h3>
         </div>
-            
+
+        <div class="grid3 marginBottom_10 marginAuto floatLeft">
+            <ul class="decoratedList">
+                <li>Successfully created the @Model.UserName with the password of '@Model.Password'.</li>
+            </ul>
+        </div>
         <div class="clear"></div>
     </div>
 </div>
