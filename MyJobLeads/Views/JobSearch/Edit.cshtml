@@ -5,53 +5,48 @@
     bool isNewJobSearch = Model.Id == 0;
 }
 
-<div class="grid1 floatLeft"> 
-    <div class="lineSeperater"> 
-        <div class="pageInfoBox"> 
-            @using (Html.BeginForm(MVC.JobSearch.Edit())) 
-            {
-                @Html.HiddenFor(x => x.Id)
+@using (Html.PageInfoBox(false))
+{
+    using (Html.BeginForm(MVC.JobSearch.Edit())) 
+    {
+        @Html.HiddenFor(x => x.Id)
                 
-                <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
-                    <h3 class="floatLeft">@(isNewJobSearch ? "Start Job Search" : "Edit Job Search")</h3> 
-                </div> 
-                
-                <div class="grid3 marginBottom_10 marginAuto floatLeft">
-                    <div class="floatLeft">
-                        <p>
-                            Your first step is to setup a job search. <br /><br />
-                            
-                            Interview Tools allows you to organize multiple job searches. Some uses of this are to
-                            prganize your job search by year, such as "2011 Full Time Position", "2012 Internship Hunt", or "May 2012 Need Part-Time Job"
-                            and to organize job search by function, such as "Sales and Marketing Opportunities" or "Engineering Job Search"
-                        </p>    
-                    </div>
-                </div>
-                
-                <div class="grid3 marginBottom_10 marginAuto floatleft">
-                    <div class="floatLeft infoSpan">
-                        @Html.ValidationSummary()
-                    </div>
-                </div>
-                
-                <div class="grid3 marginBottom_10 floatLeft"> 
-                    <div class="floatLeft"><p class="greyHighlight">Title:</p>
-                        <div class="infoSpan">@Html.TextBoxFor(x => x.Name, new { @class = "info" })</div>
-                    </div> 
-                </div> 
-
-                <div class="grid3 marginBottom_10 floatLeft"> 
-                    <div class="floatLeft"><p class="greyHighlight">Description:</p>
-                        <div class="infoSpan">@Html.TextAreaFor(x => x.Description, new { @class = "textAreaInfo" })</div>
-                    </div> 
-                </div> 
-
-                <div class="grid3 marginBottom_20 floatLeft"> 
-                    <div class="submitBTN "><input type="submit" value="Save" /></div>                    
-                </div> 
-            }
-
-            <div class="clear"></div> 
+        <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+            <h3 class="floatLeft">@(isNewJobSearch ? "Start Job Search" : "Edit Job Search")</h3> 
         </div> 
-    </div> 
-</div> 
+                
+        <div class="grid3 marginBottom_10 marginAuto floatLeft">
+            <div class="floatLeft">
+                <p>
+                    Your first step is to setup a job search. <br /><br />
+                            
+                    Interview Tools allows you to organize multiple job searches. Some uses of this are to
+                    prganize your job search by year, such as "2011 Full Time Position", "2012 Internship Hunt", or "May 2012 Need Part-Time Job"
+                    and to organize job search by function, such as "Sales and Marketing Opportunities" or "Engineering Job Search"
+                </p>    
+            </div>
+        </div>
+                
+        <div class="grid3 marginBottom_10 marginAuto floatleft">
+            <div class="floatLeft infoSpan">
+                @Html.ValidationSummary()
+            </div>
+        </div>
+                
+        <div class="grid3 marginBottom_10 floatLeft"> 
+            <div class="floatLeft"><p class="greyHighlight">Title:</p>
+                <div class="infoSpan">@Html.TextBoxFor(x => x.Name, new { @class = "info" })</div>
+            </div> 
+        </div> 
+
+        <div class="grid3 marginBottom_10 floatLeft"> 
+            <div class="floatLeft"><p class="greyHighlight">Description:</p>
+                <div class="infoSpan">@Html.TextAreaFor(x => x.Description, new { @class = "textAreaInfo" })</div>
+            </div> 
+        </div> 
+
+        <div class="grid3 marginBottom_20 floatLeft"> 
+            <div class="submitBTN "><input type="submit" value="Save" /></div>                    
+        </div> 
+    }
+}
