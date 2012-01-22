@@ -33,5 +33,10 @@ namespace MyJobLeads.Infrastructure.HtmlHelpers
         {
             return new FormButtonAreaWriter(html.ViewContext);
         }
+
+        public static ContentAreaWriter ContentArea(this HtmlHelper html)
+        {
+            return new ContentAreaWriter(html.ViewContext);
+        }
     }
 }

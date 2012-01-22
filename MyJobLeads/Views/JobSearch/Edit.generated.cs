@@ -101,24 +101,25 @@ WriteLiteral("</h3> \r\n");
 
         using (Html.OuterRow())
         {
+            using (Html.ContentArea())
+            {
 
             
             #line default
             #line hidden
-WriteLiteral(@"            <div class=""floatLeft"">
-                <p>
+WriteLiteral(@"                <p>
                     Your first step is to setup a job search. <br /><br />
                             
                     Interview Tools allows you to organize multiple job searches. Some uses of this are to
                     prganize your job search by year, such as ""2011 Full Time Position"", ""2012 Internship Hunt"", or ""May 2012 Need Part-Time Job""
                     and to organize job search by function, such as ""Sales and Marketing Opportunities"" or ""Engineering Job Search""
                 </p>    
-            </div>
 ");
 
 
             
             #line 30 "..\..\Views\JobSearch\Edit.cshtml"
+            }
         }
 
         using (Html.OuterRow())
@@ -131,7 +132,7 @@ WriteLiteral("            <div class=\"floatLeft infoSpan\">\r\n                
 
 
             
-            #line 35 "..\..\Views\JobSearch\Edit.cshtml"
+            #line 36 "..\..\Views\JobSearch\Edit.cshtml"
            Write(Html.ValidationSummary());
 
             
@@ -141,7 +142,7 @@ WriteLiteral("\r\n            </div>\r\n");
 
 
             
-            #line 37 "..\..\Views\JobSearch\Edit.cshtml"
+            #line 38 "..\..\Views\JobSearch\Edit.cshtml"
         }
 
         using (Html.OuterRow())
@@ -166,7 +167,7 @@ WriteLiteral("                <input type=\"submit\" value=\"Save\" />\r\n");
 
 
             
-            #line 54 "..\..\Views\JobSearch\Edit.cshtml"
+            #line 55 "..\..\Views\JobSearch\Edit.cshtml"
             }
         }
     }

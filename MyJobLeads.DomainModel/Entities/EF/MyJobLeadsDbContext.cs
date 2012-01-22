@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Entities.Configuration;
+using MyJobLeads.DomainModel.Entities.Surveys;
 
 namespace MyJobLeads.DomainModel.Entities.EF
 {
@@ -17,6 +18,7 @@ namespace MyJobLeads.DomainModel.Entities.EF
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ContactHistory> ContactHistory { get; set; }
         public DbSet<FpJobApplyBasicStat> FpJobApplyBasicStats { get; set; }
+        public DbSet<FpSurveyResponse> FpSurveyResponses { get; set; }
         public DbSet<JigsawAccountDetails> JigsawAccountDetails { get; set; }
         public DbSet<JobSearch> JobSearches { get; set; }
         public DbSet<JobSearchHistory> JobSearchHistory { get; set; }
