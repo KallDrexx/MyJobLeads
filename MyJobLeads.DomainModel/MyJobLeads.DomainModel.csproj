@@ -184,7 +184,7 @@
     <Compile Include="Exceptions\UserNotAuthorizedForEntityException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForProcessException.cs" />
     <Compile Include="Json\Converters\JigsawDateTimeConverter.cs" />
-    <Compile Include="Json\Jigsaw\CompaniesDetailJson.cs" />
+    <Compile Include="Json\Jigsaw\CompanyDetailJson.cs" />
     <Compile Include="Json\Jigsaw\CompanyDetailsResponseJson.cs" />
     <Compile Include="Json\Jigsaw\ContactDetailsJson.cs" />
     <Compile Include="Json\Jigsaw\ContactDetailsResponseJson.cs" />
@@ -209,6 +209,7 @@
     <Compile Include="Processes\Positions\PositionProcesses.cs" />
     <Compile Include="Processes\Users\UserPasswordProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
+    <Compile Include="ProcessParams\CompanySearching\Jigsaw\JigsawCompanyDetailsParams.cs" />
     <Compile Include="ProcessParams\CompanySearching\Jigsaw\JigsawCompanySearchParams.cs" />
     <Compile Include="ProcessParams\ContactSearching\Jigsaw\AddJigsawContactToJobSearchParams.cs" />
     <Compile Include="ProcessParams\ContactSearching\Jigsaw\GetJigsawContactDetailsParams.cs" />
@@ -268,6 +269,7 @@
     <Compile Include="Utilities\EncryptionUtils.cs" />
     <Compile Include="ViewModels\Authorizations\AuthorizationResultViewModel.cs" />
     <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
+    <Compile Include="ViewModels\CompanySearching\ExternalCompanyDetailsViewModel.cs" />
     <Compile Include="ViewModels\CompanySearching\ExternalCompanySearchResultViewModel.cs" />
     <Compile Include="ViewModels\ContactSearching\ExternalContactAddedResultViewModel.cs" />
     <Compile Include="ViewModels\ContactSearching\ExternalContactSearchResultsViewModel.cs" />
