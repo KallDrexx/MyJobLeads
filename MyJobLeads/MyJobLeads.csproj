@@ -453,6 +453,9 @@
     <Compile Include="Infrastructure\Filters\ElmahHandledErrorLoggerFilter.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\DateHtmlHelpers.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\LayoutHelpers.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\FormButtonAreaWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\FormFieldWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\OuterRowWriter.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\NumericDisplayHelpers.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\StringHtmlHelpers.cs" />
     <Compile Include="Infrastructure\Installers\ValidatorInstaller.cs" />

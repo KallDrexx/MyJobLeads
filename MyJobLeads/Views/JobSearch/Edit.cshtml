@@ -10,12 +10,14 @@
     using (Html.BeginForm(MVC.JobSearch.Edit())) 
     {
         @Html.HiddenFor(x => x.Id)
-                
-        <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
+
+        using (Html.OuterRow())
+        {
             <h3 class="floatLeft">@(isNewJobSearch ? "Start Job Search" : "Edit Job Search")</h3> 
-        </div> 
-                
-        <div class="grid3 marginBottom_10 marginAuto floatLeft">
+        }
+
+        using (Html.OuterRow())
+        {
             <div class="floatLeft">
                 <p>
                     Your first step is to setup a job search. <br /><br />
@@ -25,28 +27,31 @@
                     and to organize job search by function, such as "Sales and Marketing Opportunities" or "Engineering Job Search"
                 </p>    
             </div>
-        </div>
-                
-        <div class="grid3 marginBottom_10 marginAuto floatleft">
+        }
+
+        using (Html.OuterRow())
+        {
             <div class="floatLeft infoSpan">
                 @Html.ValidationSummary()
             </div>
-        </div>
-                
-        <div class="grid3 marginBottom_10 floatLeft"> 
-            <div class="floatLeft"><p class="greyHighlight">Title:</p>
-                <div class="infoSpan">@Html.TextBoxFor(x => x.Name, new { @class = "info" })</div>
-            </div> 
-        </div> 
+        }
 
-        <div class="grid3 marginBottom_10 floatLeft"> 
-            <div class="floatLeft"><p class="greyHighlight">Description:</p>
-                <div class="infoSpan">@Html.TextAreaFor(x => x.Description, new { @class = "textAreaInfo" })</div>
-            </div> 
-        </div> 
+        using (Html.OuterRow())
+        {
+            Html.FormField("Title:", Html.TextBoxFor(x => x.Name, new { @class = "info" }));
+        }
 
-        <div class="grid3 marginBottom_20 floatLeft"> 
-            <div class="submitBTN "><input type="submit" value="Save" /></div>                    
-        </div> 
+        using (Html.OuterRow())
+        {
+            Html.FormField("Description:", @Html.TextAreaFor(x => x.Description, new { @class = "textAreaInfo" }));
+        }
+
+        using (Html.OuterRow())
+        {
+            using(Html.FormButtonArea())
+            {
+                <input type="submit" value="Save" />
+            }
+        }
     }
 }

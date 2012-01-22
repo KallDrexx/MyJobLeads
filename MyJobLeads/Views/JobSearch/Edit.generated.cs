@@ -75,34 +75,37 @@ WriteLiteral("\r\n");
             
             #line 12 "..\..\Views\JobSearch\Edit.cshtml"
                                   
-                
+
+        using (Html.OuterRow())
+        {
 
             
             #line default
             #line hidden
-WriteLiteral("        <div class=\"grid3 marginBottom_10 marginAuto floatLeft\"> \r\n            <h" +
-"3 class=\"floatLeft\">");
+WriteLiteral("            <h3 class=\"floatLeft\">");
 
 
             
-            #line 15 "..\..\Views\JobSearch\Edit.cshtml"
+            #line 16 "..\..\Views\JobSearch\Edit.cshtml"
                               Write(isNewJobSearch ? "Start Job Search" : "Edit Job Search");
 
             
             #line default
             #line hidden
-WriteLiteral("</h3> \r\n        </div> \r\n");
+WriteLiteral("</h3> \r\n");
 
 
             
             #line 17 "..\..\Views\JobSearch\Edit.cshtml"
-                
+        }
+
+        using (Html.OuterRow())
+        {
 
             
             #line default
             #line hidden
-WriteLiteral(@"        <div class=""grid3 marginBottom_10 marginAuto floatLeft"">
-            <div class=""floatLeft"">
+WriteLiteral(@"            <div class=""floatLeft"">
                 <p>
                     Your first step is to setup a job search. <br /><br />
                             
@@ -111,92 +114,63 @@ WriteLiteral(@"        <div class=""grid3 marginBottom_10 marginAuto floatLeft""
                     and to organize job search by function, such as ""Sales and Marketing Opportunities"" or ""Engineering Job Search""
                 </p>    
             </div>
-        </div>
 ");
 
 
             
-            #line 29 "..\..\Views\JobSearch\Edit.cshtml"
-                
+            #line 30 "..\..\Views\JobSearch\Edit.cshtml"
+        }
+
+        using (Html.OuterRow())
+        {
 
             
             #line default
             #line hidden
-WriteLiteral("        <div class=\"grid3 marginBottom_10 marginAuto floatleft\">\r\n            <di" +
-"v class=\"floatLeft infoSpan\">\r\n                ");
+WriteLiteral("            <div class=\"floatLeft infoSpan\">\r\n                ");
 
 
             
-            #line 32 "..\..\Views\JobSearch\Edit.cshtml"
+            #line 35 "..\..\Views\JobSearch\Edit.cshtml"
            Write(Html.ValidationSummary());
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n        </div>\r\n");
+WriteLiteral("\r\n            </div>\r\n");
 
 
             
-            #line 35 "..\..\Views\JobSearch\Edit.cshtml"
-                
+            #line 37 "..\..\Views\JobSearch\Edit.cshtml"
+        }
 
-            
-            #line default
-            #line hidden
-WriteLiteral("        <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n            <div class=\"f" +
-"loatLeft\"><p class=\"greyHighlight\">Title:</p>\r\n                <div class=\"infoS" +
-"pan\">");
+        using (Html.OuterRow())
+        {
+            Html.FormField("Title:", Html.TextBoxFor(x => x.Name, new { @class = "info" }));
+        }
 
+        using (Html.OuterRow())
+        {
+            Html.FormField("Description:", @Html.TextAreaFor(x => x.Description, new { @class = "textAreaInfo" }));
+        }
 
-            
-            #line 38 "..\..\Views\JobSearch\Edit.cshtml"
-                                 Write(Html.TextBoxFor(x => x.Name, new { @class = "info" }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</div>\r\n            </div> \r\n        </div> \r\n");
-
-
-            
-            #line 41 "..\..\Views\JobSearch\Edit.cshtml"
-
+        using (Html.OuterRow())
+        {
+            using(Html.FormButtonArea())
+            {
 
             
             #line default
             #line hidden
-WriteLiteral("        <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n            <div class=\"f" +
-"loatLeft\"><p class=\"greyHighlight\">Description:</p>\r\n                <div class=" +
-"\"infoSpan\">");
+WriteLiteral("                <input type=\"submit\" value=\"Save\" />\r\n");
 
 
             
-            #line 44 "..\..\Views\JobSearch\Edit.cshtml"
-                                 Write(Html.TextAreaFor(x => x.Description, new { @class = "textAreaInfo" }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</div>\r\n            </div> \r\n        </div> \r\n");
-
-
-            
-            #line 47 "..\..\Views\JobSearch\Edit.cshtml"
-
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        <div class=\"grid3 marginBottom_20 floatLeft\"> \r\n            <div class=\"s" +
-"ubmitBTN \"><input type=\"submit\" value=\"Save\" /></div>                    \r\n     " +
-"   </div> \r\n");
-
-
-            
-            #line 51 "..\..\Views\JobSearch\Edit.cshtml"
+            #line 54 "..\..\Views\JobSearch\Edit.cshtml"
+            }
+        }
     }
 }
-
             
             #line default
             #line hidden
