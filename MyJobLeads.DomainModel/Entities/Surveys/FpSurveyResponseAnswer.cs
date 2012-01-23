@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MyJobLeads.DomainModel.Entities.Surveys
 {
-    public class FpSurveyResponseAnswers
+    public class FpSurveyResponseAnswer
     {
         public int Id { get; set; }
         public short Order { get; set; }

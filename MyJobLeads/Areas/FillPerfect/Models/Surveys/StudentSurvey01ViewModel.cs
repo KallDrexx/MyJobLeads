@@ -30,16 +30,16 @@ namespace MyJobLeads.Areas.FillPerfect.Models.Surveys
                     Date = DateTime.Now,
                     FpUserId = FpUserId,
                     SurveyId = QuestionId,
-                    Answers = new List<FpSurveyResponseAnswers>
+                    Answers = new List<FpSurveyResponseAnswer>
                     {
-                        new FpSurveyResponseAnswers
+                        new FpSurveyResponseAnswer
                         {
                             Question = Question,
                             Answer = Answer.ToString(),
                             Order = 0
                         },
 
-                        new FpSurveyResponseAnswers
+                        new FpSurveyResponseAnswer
                         {
                             Question = "Comments",
                             Answer = Comments,

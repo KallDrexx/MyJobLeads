@@ -12,11 +12,11 @@ namespace MyJobLeads.DomainModel.Entities.Surveys
         public string SurveyId { get; set; }
         public DateTime Date { get; set; }
 
-        public IList<FpSurveyResponseAnswers> Answers { get; set; }
+        public IList<FpSurveyResponseAnswer> Answers { get; set; }
 
         public FpSurveyResponse()
         {
-            Answers = new List<FpSurveyResponseAnswers>();
+            Answers = new List<FpSurveyResponseAnswer>();
         }
     }
 }

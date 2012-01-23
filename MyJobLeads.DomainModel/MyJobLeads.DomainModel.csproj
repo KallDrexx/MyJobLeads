@@ -149,7 +149,7 @@
     <Compile Include="Entities\EF\Configuration\OrganizationEmailDomain.cs" />
     <Compile Include="Entities\Position.cs" />
     <Compile Include="Entities\Surveys\FpSurveyResponse.cs" />
-    <Compile Include="Entities\Surveys\FpSurveyResponseAnswers.cs" />
+    <Compile Include="Entities\Surveys\FpSurveyResponseAnswer.cs" />
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\UnitTestEntity.cs" />
     <Compile Include="Entities\User.cs" />
