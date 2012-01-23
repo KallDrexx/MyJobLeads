@@ -7,16 +7,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyJobLeads.Areas.FillPerfect.Models.Surveys
 {
-    public class StudentSurvey01ViewModel
+    public class StudentSurveyPost5ViewModel
     {
         public string FpUserId { get; set; }
-        public string QuestionId { get { return "Student01"; } }
+        public string QuestionId { get { return "Studet5Apps"; } }
 
         [Range(1, 10, ErrorMessage="You must select a valid response")]
         public int Answer { get; set; }
         public string Question
         {
-            get { return "On a scale from 1-10, how would you rate your overall impression of the tool?"; }
+            get { return "Congratulations on completing at least 5 applications with InterviewTools FillPerfect.  Before continuing, please rate your overall impression of the tool."; }
         }
 
         public string Comments { get; set; }

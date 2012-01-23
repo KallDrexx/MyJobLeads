@@ -20,20 +20,17 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
             return View(new SurveyCompletedViewModel { SurveyPreviouslyCompleted = previouslyCompleted });
         }
 
-        public virtual ActionResult Student01(string fpUserId)
+        public virtual ActionResult Student02(string fpUserId)
         {
-            if (string.IsNullOrWhiteSpace(fpUserId))
-                return RedirectToAction(MVC.FillPerfect.Feedback.SurveyCompleted(true));
-
-            var model = new StudentSurvey01ViewModel { FpUserId = fpUserId };
-            if (_context.FpSurveyResponses.Any(x => x.FpUserId == fpUserId && x.SurveyId == model.QuestionId))
+            var model = new StudentSurveyPost5ViewModel { FpUserId = fpUserId };
+            if (string.IsNullOrWhiteSpace(fpUserId) || _context.FpSurveyResponses.Any(x => x.FpUserId == fpUserId && x.SurveyId == model.QuestionId))
                 return RedirectToAction(MVC.FillPerfect.Feedback.SurveyCompleted(true));
 
             return View(model);
         }
 
         [HttpPost]
-        public virtual ActionResult Student01(StudentSurvey01ViewModel model)
+        public virtual ActionResult Student02(StudentSurveyPost5ViewModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
