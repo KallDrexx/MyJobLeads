@@ -18,8 +18,10 @@ namespace MyJobLeads.Infrastructure.HtmlHelpers.Layouts
             _viewContext = context;
             
             // Form html
-            var html = string.Format("<div class=\"floatLeft\"><p class=\"greyHighlight\">{0}</p><div class=\"infoSpan\">{1}</div></div>", fieldName, fieldEditor);
-            _viewContext.Writer.Write(html);
+            using (new FormFieldAreaWriter(_viewContext, fieldName))
+            {
+                _viewContext.Writer.Write(fieldEditor);
+            }
         }
     }
 }

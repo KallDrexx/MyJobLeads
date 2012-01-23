@@ -8,23 +8,40 @@ using MyJobLeads.Areas.FillPerfect.Models.Surveys;
 
 namespace MyJobLeads.Areas.FillPerfect.Controllers
 {
-    public class FeedbackController : MyJobLeadsBaseController
+    public partial class FeedbackController : MyJobLeadsBaseController
     {
         public FeedbackController(MyJobLeadsDbContext context)
         {
             _context = context;
         }
 
-        public ActionResult SurveyCompleted(bool previouslyCompleted = false)
+        public virtual ActionResult SurveyCompleted(bool previouslyCompleted = false)
         {
             return View(new SurveyCompletedViewModel { SurveyPreviouslyCompleted = previouslyCompleted });
         }
 
-        public ActionResult Student01(string fpUserId)
+        public virtual ActionResult Student01(string fpUserId)
         {
-            var model = new StudentSurvey01ViewModel { FpUserId = fpUserId };
+            if (string.IsNullOrWhiteSpace(fpUserId))
+                return RedirectToAction(MVC.FillPerfect.Feedback.SurveyCompleted(true));
 
-            return View();
+            var model = new StudentSurvey01ViewModel { FpUserId = fpUserId };
+            if (_context.FpSurveyResponses.Any(x => x.FpUserId == fpUserId && x.SurveyId == model.QuestionId))
+                return RedirectToAction(MVC.FillPerfect.Feedback.SurveyCompleted(true));
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public virtual ActionResult Student01(StudentSurvey01ViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            _context.FpSurveyResponses.Add(model.GetSurveyResponse);
+            _context.SaveChanges();
+
+            return RedirectToAction(MVC.FillPerfect.Feedback.SurveyCompleted());
         }
     }
 }

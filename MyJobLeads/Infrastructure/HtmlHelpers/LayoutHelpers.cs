@@ -38,5 +38,15 @@ namespace MyJobLeads.Infrastructure.HtmlHelpers
         {
             return new ContentAreaWriter(html.ViewContext);
         }
+
+        public static ContentAreaWriter ValidationArea(this HtmlHelper html)
+        {
+            return new ContentAreaWriter(html.ViewContext, true);
+        }
+
+        public static FormFieldAreaWriter FormFieldArea(this HtmlHelper html, HtmlString field)
+        {
+            return new FormFieldAreaWriter(html.ViewContext, field);
+        }
     }
 }

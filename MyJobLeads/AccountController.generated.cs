@@ -144,14 +144,14 @@ namespace MyJobLeads.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult ResetPasswordResult() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ResetPasswordResult);
-            return callInfo;
-        }
-
         public override System.Web.Mvc.ActionResult ResetPassword(string userEmail) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ResetPassword);
             callInfo.RouteValueDictionary.Add("userEmail", userEmail);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ResetPasswordResult() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ResetPasswordResult);
             return callInfo;
         }
 
