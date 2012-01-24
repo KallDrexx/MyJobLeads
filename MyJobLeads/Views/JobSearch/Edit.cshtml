@@ -18,7 +18,8 @@
 
         using (Html.OuterRow())
         {
-            <div class="floatLeft">
+            using (Html.ContentArea())
+            {
                 <p>
                     Your first step is to setup a job search. <br /><br />
                             
@@ -26,7 +27,7 @@
                     prganize your job search by year, such as "2011 Full Time Position", "2012 Internship Hunt", or "May 2012 Need Part-Time Job"
                     and to organize job search by function, such as "Sales and Marketing Opportunities" or "Engineering Job Search"
                 </p>    
-            </div>
+            }
         }
 
         using (Html.OuterRow())

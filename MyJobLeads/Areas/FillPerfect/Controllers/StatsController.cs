@@ -8,14 +8,14 @@ using MyJobLeads.DomainModel.Entities;
 
 namespace MyJobLeads.Areas.FillPerfect.Controllers
 {
-    public class StatsController : MyJobLeadsBaseController
+    public partial class StatsController : MyJobLeadsBaseController
     {
         public StatsController(MyJobLeadsDbContext context)
         {
             _context = context;
         }
 
-        public JsonResult JobsApplied(string userId, int applyCount)
+        public virtual JsonResult JobsApplied(string userId, int applyCount)
         {
             _context.FpJobApplyBasicStats.Add(new FpJobApplyBasicStat
             {

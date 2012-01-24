@@ -1,0 +1,54 @@
+﻿@model MyJobLeads.Areas.FillPerfect.Models.Surveys.StudentSurveyPost10ViewModel
+
+@{
+    ViewBag.Title = "Student Survey";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.BeginForm())
+    {
+        @Html.HiddenFor(x => x.FpUserId)
+        
+        using (Html.OuterRow())
+        {
+            <h3>Student Survey</h3>
+        }
+       
+        using (Html.OuterRow())
+        {
+            using (Html.ContentArea())
+            {
+                <p>
+                    @Model.Question
+                </p>
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.ValidationArea())
+            {
+                @Html.ValidationSummary()
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            string label = "Some topics you may want to discuss are:<br><ul class=\"decoratedList\">" +
+                "<li>Has it made you more productive?</li><li>Has FillPerfect helped you become more accurate?</li>" +
+                "<li>Does FillPerfect recognize and complete enough fields for you on applications?</li>" +
+                "<li>Would other students benefit from this tool?</li></ul>";
+                
+            Html.FormField(label, Html.TextAreaFor(x => x.Comments, new { @class = "textAreaInfo" }));
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.FormButtonArea())
+            {
+                <input type="submit" value="Submit" />
+            }
+        }
+    }
+}

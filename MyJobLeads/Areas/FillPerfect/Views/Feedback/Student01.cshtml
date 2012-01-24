@@ -1,0 +1,77 @@
+﻿@model MyJobLeads.Areas.FillPerfect.Models.Surveys.StudentSurveyPost3ViewModel
+
+@{
+    ViewBag.Title = "Student Survey";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.BeginForm())
+    {
+        @Html.HiddenFor(x => x.FpUserId)
+        
+        using (Html.OuterRow())
+        {
+            <h3>Student Survey</h3>
+        }
+       
+        using (Html.OuterRow())
+        {
+            using (Html.ContentArea())
+            {
+                <p>
+                    @Model.Question
+                </p>
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.ValidationArea())
+            {
+                @Html.ValidationSummary()
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.FormFieldArea(new HtmlString("")))
+            {
+                <table>
+                    <tr>
+                        <td align="left">&nbsp; 1</td>
+                        <td align="right">5&nbsp;</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3">
+                            @Html.RadioButtonFor(x => x.Answer, 1)
+                            @Html.RadioButtonFor(x => x.Answer, 2)
+                            @Html.RadioButtonFor(x => x.Answer, 3)
+                            @Html.RadioButtonFor(x => x.Answer, 4)
+                            @Html.RadioButtonFor(x => x.Answer, 5)
+                        </td>
+                    </tr>
+                </table>
+    
+                <text>
+                    &nbsp; 1 means that you do <span class="bold">not</span> think this tool will be useful <br />
+                    &nbsp; 5 means that you think this tool will be useful <br />
+                </text>
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            Html.FormField("Additional Comments", Html.TextAreaFor(x => x.Comments, new { @class = "textAreaInfo" }));
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.FormButtonArea())
+            {
+                <input type="submit" value="Submit" />
+            }
+        }
+    }
+}

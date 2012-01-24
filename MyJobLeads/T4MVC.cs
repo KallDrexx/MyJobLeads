@@ -27,6 +27,8 @@ public static class MVC {
     public static AdminClass Admin { get { return s_Admin; } }
     static readonly ContactSearchClass s_ContactSearch = new ContactSearchClass();
     public static ContactSearchClass ContactSearch { get { return s_ContactSearch; } }
+    static readonly FillPerfectClass s_FillPerfect = new FillPerfectClass();
+    public static FillPerfectClass FillPerfect { get { return s_FillPerfect; } }
     static readonly OrganizationClass s_Organization = new OrganizationClass();
     public static OrganizationClass Organization { get { return s_Organization; } }
     static readonly PositionSearchClass s_PositionSearch = new PositionSearchClass();
@@ -58,6 +60,13 @@ namespace T4MVC {
         public MyJobLeads.Areas.ContactSearch.Controllers.JigsawController Jigsaw = new MyJobLeads.Areas.ContactSearch.Controllers.T4MVC_JigsawController();
         public MyJobLeads.Areas.ContactSearch.Controllers.SyncController Sync = new MyJobLeads.Areas.ContactSearch.Controllers.T4MVC_SyncController();
         public T4MVC.ContactSearch.SharedController Shared = new T4MVC.ContactSearch.SharedController();
+    }
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public class FillPerfectClass {
+        public readonly string Name = "FillPerfect";
+        public MyJobLeads.Areas.FillPerfect.Controllers.FeedbackController Feedback = new MyJobLeads.Areas.FillPerfect.Controllers.T4MVC_FeedbackController();
+        public MyJobLeads.Areas.FillPerfect.Controllers.StatsController Stats = new MyJobLeads.Areas.FillPerfect.Controllers.T4MVC_StatsController();
+        public T4MVC.FillPerfect.SharedController Shared = new T4MVC.FillPerfect.SharedController();
     }
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class OrganizationClass {
@@ -314,6 +323,16 @@ public class T4MVC_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResul
     }
      
     public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+public class T4MVC_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult {
+    public T4MVC_JsonResult(string area, string controller, string action): base()  {
+        this.InitMVCT4Result(area, controller, action);
+    }
     
     public string Controller { get; set; }
     public string Action { get; set; }
