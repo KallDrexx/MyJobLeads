@@ -61,5 +61,26 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
 
             return RedirectToAction(MVC.FillPerfect.Feedback.SurveyCompleted());
         }
+
+        public virtual ActionResult Student03(string fpUserId)
+        {
+            var model = new StudentSurveyPost10ViewModel { FpUserId = fpUserId };
+            if (string.IsNullOrWhiteSpace(fpUserId) || _context.FpSurveyResponses.Any(x => x.FpUserId == fpUserId && x.SurveyId == model.QuestionId))
+                return RedirectToAction(MVC.FillPerfect.Feedback.SurveyCompleted(true));
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public virtual ActionResult Student03(StudentSurveyPost10ViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            _context.FpSurveyResponses.Add(model.CreateSurveyResponse);
+            _context.SaveChanges();
+
+            return RedirectToAction(MVC.FillPerfect.Feedback.SurveyCompleted());
+        }
     }
 }
