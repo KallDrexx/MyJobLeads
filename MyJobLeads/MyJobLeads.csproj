@@ -343,7 +343,8 @@
     <Compile Include="Areas\FillPerfect\Controllers\FeedbackController.cs" />
     <Compile Include="Areas\FillPerfect\Controllers\StatsController.cs" />
     <Compile Include="Areas\FillPerfect\FillPerfectAreaRegistration.cs" />
-    <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurvey01ViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurveyPost3ViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurveyPost5ViewModel.cs" />
     <Compile Include="Areas\FillPerfect\Models\Surveys\SurveyCompletedViewModel.cs" />
     <Compile Include="Areas\Organization\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Organization\Controllers\EditOrganizationController.cs" />
@@ -1345,6 +1346,7 @@
     <Content Include="Areas\FillPerfect\Views\Feedback\SurveyCompleted.cshtml" />
     <Content Include="Areas\FillPerfect\Views\_ViewStart.cshtml" />
     <Content Include="Areas\FillPerfect\Views\Feedback\Student02.cshtml" />
+    <Content Include="Areas\FillPerfect\Views\Feedback\Student01.cshtml" />
     <None Include="Scripts\plugins\DataTables\images\Sorting icons.psd" />
     <None Include="Scripts\plugins\DataTables\js\jquery.dataTables.min.js.gz" />
     <None Include="T4MVC.tt.settings.t4" />

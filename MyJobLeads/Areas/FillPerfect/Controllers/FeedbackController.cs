@@ -20,6 +20,27 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
             return View(new SurveyCompletedViewModel { SurveyPreviouslyCompleted = previouslyCompleted });
         }
 
+        public virtual ActionResult Student01(string fpUserId)
+        {
+            var model = new StudentSurveyPost3ViewModel { FpUserId = fpUserId };
+            if (string.IsNullOrWhiteSpace(fpUserId) || _context.FpSurveyResponses.Any(x => x.FpUserId == fpUserId && x.SurveyId == model.QuestionId))
+                return RedirectToAction(MVC.FillPerfect.Feedback.SurveyCompleted(true));
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public virtual ActionResult Student01(StudentSurveyPost3ViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            _context.FpSurveyResponses.Add(model.CreateSurveyResponse);
+            _context.SaveChanges();
+
+            return RedirectToAction(MVC.FillPerfect.Feedback.SurveyCompleted());
+        }
+
         public virtual ActionResult Student02(string fpUserId)
         {
             var model = new StudentSurveyPost5ViewModel { FpUserId = fpUserId };
