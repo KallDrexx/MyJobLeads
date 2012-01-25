@@ -13,10 +13,14 @@ using System.Net;
 using Newtonsoft.Json;
 using MyJobLeads.DomainModel.Json.Jigsaw;
 using AutoMapper;
+using MyJobLeads.DomainModel.Exceptions.Jigsaw;
+using MyJobLeads.DomainModel.Json.Converters;
 
 namespace MyJobLeads.DomainModel.Processes.CompanySearching
 {
-    public class JigsawCompanySearchProcesses : IProcess<JigsawCompanySearchParams, SearchResultsViewModel<ExternalCompanySearchResultViewModel>>
+    public class JigsawCompanySearchProcesses 
+        : IProcess<JigsawCompanySearchParams, SearchResultsViewModel<ExternalCompanySearchResultViewModel>>,
+          IProcess<JigsawCompanyDetailsParams, ExternalCompanyDetailsViewModel>
     {
         protected MyJobLeadsDbContext _context;
 
@@ -63,6 +67,32 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
             model.DisplayedPageNumber = procParams.RequestedPageNum;
 
             return model;
+        }
+
+        /// <summary>
+        /// Retrieves the detail of the specified company
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        public ExternalCompanyDetailsViewModel Execute(JigsawCompanyDetailsParams procParams)
+        {
+            var json = GetJigsawCompany(procParams.JigsawId);
+            return Mapper.Map<CompanyDetailsJson, ExternalCompanyDetailsViewModel>(json);
+        }
+
+        public static CompanyDetailsJson GetJigsawCompany(int id)
+        {
+            string companyUrl = string.Format("rest/companies/{0}.json", id);
+            var client = new RestClient("https://www.jigsaw.com/");
+            var request = new RestRequest(companyUrl, Method.GET);
+            request.AddParameter("token", JigsawAuthProcesses.GetAuthToken());
+            var response = client.Execute(request);
+
+            var companyJson = JsonConvert.DeserializeObject<CompanyDetailsResponseJson>(response.Content, new JigsawDateTimeConverter());
+            if (companyJson.companies.Count == 0)
+                throw new JigsawCompanyNotFoundException(id.ToString());
+
+            return companyJson.companies[0];
         }
     }
 }
