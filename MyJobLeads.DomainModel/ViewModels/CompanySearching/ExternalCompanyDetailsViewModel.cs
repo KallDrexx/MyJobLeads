@@ -8,10 +8,10 @@ namespace MyJobLeads.DomainModel.ViewModels.CompanySearching
     public class ExternalCompanyDetailsViewModel
     {
         public string CompanyId { get; set; }
-        public string CompanName { get; set; }
+        public string CompanyName { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
-        public string State { get; set }
+        public string State { get; set; }
         public string Zip { get; set; }
         public string Overview { get; set; }
         public long Revenue { get; set; }
