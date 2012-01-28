@@ -16,6 +16,5 @@ namespace MyJobLeads.DomainModel.ProcessParams.CompanySearching.Jigsaw
         public string Employees { get; set; }
         public string Revenue { get; set; }
         public string Ownership { get; set; }
-        public string FortuneRank { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace MyJobLeads.Infrastructure.SelectLists
 {
     public class JigsawSelectLists
     {
-        public static List<SelectListItem> GetIndustryList()
+        public static IList<SelectListItem> GetIndustryList()
         {
             return new List<SelectListItem> 
             {
@@ -36,7 +36,7 @@ namespace MyJobLeads.Infrastructure.SelectLists
             };
         }
 
-        public static List<SelectListItem> GetDepartmentList()
+        public static IList<SelectListItem> GetDepartmentList()
         {
             return new List<SelectListItem>
             {
@@ -53,7 +53,7 @@ namespace MyJobLeads.Infrastructure.SelectLists
             };
         }
 
-        public static List<SelectListItem> GetContactLevelsList()
+        public static IList<SelectListItem> GetContactLevelsList()
         {
             return new List<SelectListItem>
             {
@@ -63,6 +63,100 @@ namespace MyJobLeads.Infrastructure.SelectLists
                 new SelectListItem { Text = "Director", Value = "Director" },
                 new SelectListItem { Text = "Manager", Value = "Manager" },
                 new SelectListItem { Text = "Staff", Value = "Staff" }
+            };
+        }
+
+        public static IList<SelectListItem> GetMetroAreas()
+        {
+            return new List<SelectListItem>
+            {
+                new SelectListItem { Text = "<None Specified>", Value = string.Empty },
+                new SelectListItem { Text = "Atlanta" },
+                new SelectListItem { Text = "Baltimore" },
+                new SelectListItem { Text = "Washington" },
+                new SelectListItem { Text = "Boston" },
+                new SelectListItem { Text = "Chicago" },
+                new SelectListItem { Text = "Cleveland" },
+                new SelectListItem { Text = "Dallas" },
+                new SelectListItem { Text = "Denver" },
+                new SelectListItem { Text = "Detroit" },
+                new SelectListItem { Text = "Houston" },
+                new SelectListItem { Text = "Los Angeles" },
+                new SelectListItem { Text = "Miami" },
+                new SelectListItem { Text = "Minneapolis" },
+                new SelectListItem { Text = "St. Paul" },
+                new SelectListItem { Text = "New York" },
+                new SelectListItem { Text = "Philadelphia" },
+                new SelectListItem { Text = "Phoenix" },
+                new SelectListItem { Text = "Portland" },
+                new SelectListItem { Text = "Saint Louis" },
+                new SelectListItem { Text = "Salt Lake City" },
+                new SelectListItem { Text = "San Diego" },
+                new SelectListItem { Text = "San Francisco" },
+                new SelectListItem { Text = "Seattle" },
+                new SelectListItem { Text = "Calgary" },
+                new SelectListItem { Text = "Edmonton" },
+                new SelectListItem { Text = "Montreal" },
+                new SelectListItem { Text = "Ottawa" },
+                new SelectListItem { Text = "Quebec" },
+                new SelectListItem { Text = "Toronto" },
+                new SelectListItem { Text = "Vancouver" },
+                new SelectListItem { Text = "Victoria" },
+                new SelectListItem { Text = "Winnipeg" }
+            };
+        }
+
+        public static IList<SelectListItem> GetEmployeeList()
+        {
+            return new List<SelectListItem>
+            {
+                new SelectListItem { Text = "<None Specified>", Value = string.Empty },
+                new SelectListItem { Text = "0-25" },
+                new SelectListItem { Text = "25-100" },
+                new SelectListItem { Text = "100-250" },
+                new SelectListItem { Text = "250-1k" },
+                new SelectListItem { Text = "1k-10k" },
+                new SelectListItem { Text = "10k-50k" },
+                new SelectListItem { Text = "50k-100k" },
+                new SelectListItem { Text = "100k+", Value="100k" }
+            };
+        }
+
+        public static IList<SelectListItem> GetRevenues()
+        {
+            return new List<SelectListItem>
+            {
+                new SelectListItem { Text = "<None Specified>", Value = string.Empty },
+                new SelectListItem { Text = "0-1m" },
+                new SelectListItem { Text = "1m-10m" },
+                new SelectListItem { Text = "10m-50m" },
+                new SelectListItem { Text = "50m-100m" },
+                new SelectListItem { Text = "100m-250m" },
+                new SelectListItem { Text = "250m-500m" },
+                new SelectListItem { Text = "500m-1b" },
+                new SelectListItem { Text = "1b+", Value = "1b" }
+            };
+        }
+
+        public static IList<SelectListItem> GetOwnershipTypes()
+        {
+            return new List<SelectListItem>
+            {
+                new SelectListItem { Text = "<None Specified>", Value = string.Empty },
+                new SelectListItem { Text = "public" },
+                new SelectListItem { Text = "private" },
+                new SelectListItem { Text = "government" },
+                new SelectListItem { Text = "other" }
+            };
+        }
+
+        public static IList<SelectListItem> GetFortuneRanks()
+        {
+            return new List<SelectListItem>
+            {
+                new SelectListItem { Text = "<None Specified>", Value = string.Empty },
+                new SelectListItem { Text = "500" },
+                new SelectListItem { Text = "1000" }
             };
         }
     }

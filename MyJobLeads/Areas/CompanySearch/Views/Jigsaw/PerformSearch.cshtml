@@ -1,0 +1,102 @@
+﻿@model MyJobLeads.Areas.CompanySearch.Models.Jigsaw.SearchResultsViewModel
+
+@{
+    ViewBag.Title = "Jigsaw Company Search";
+}
+
+@section SideBar {
+    @{Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.ResearchCenter));}
+}
+
+@{ Html.RenderPartial(MVC.CompanySearch.Jigsaw.Views._SearchForm, Model.Query); }
+
+@if (Model.Results != null)
+{
+    string urlParams = Model.Query.GetSearchUrl();
+
+    int firstResultCount = Model.Results.DisplayedPageNumber * Model.Results.PageSize + 1;
+    int lastResultCount = firstResultCount + Model.Results.Results.Count - 1;
+    
+    int totalPages = Model.Results.TotalResultsCount / Model.Results.PageSize;
+    if (Model.Results.TotalResultsCount % Model.Results.PageSize != 0) { totalPages++; }
+    
+    <div class="grid3 floatLeft">
+        <div class="positionResultsHeader">
+            @if (Model.Results.TotalResultsCount == 0)
+            {
+                <h3>No Companies Were Found Matching Your Criteria</h3>
+            }
+            else
+            {
+                <h3>Found Companies (displaying @firstResultCount - @lastResultCount out of @Model.Results.TotalResultsCount)</h3>
+            }
+
+            <ul class="positionSearchNotification">
+                <li>Page @(Model.Results.TotalResultsCount > 0 ? Model.Results.DisplayedPageNumber + 1 : 0) of @totalPages</li>
+
+                @if (Model.Results.DisplayedPageNumber > 0)
+                {
+                    <li>
+                        <a href="@Url.Action(MVC.CompanySearch.Jigsaw.PerformSearch())?@urlParams&Page=@(Model.Results.DisplayedPageNumber - 1)">
+                            Previous Page
+                        </a>
+                    </li>
+                }
+                
+                @if (Model.Results.DisplayedPageNumber < totalPages - 1)
+                {
+                    <li>
+                        <a href="@Url.Action(MVC.CompanySearch.Jigsaw.PerformSearch())?@urlParams&Page=@(Model.Results.DisplayedPageNumber + 1)">
+                            Next Page
+                        </a>
+                    </li>               
+                }
+            </ul>       
+        </div>
+
+        <div id="positionRole">
+            <ul>
+                @foreach (var company in Model.Results.Results)
+                {
+                    <li>
+                        <div class="taskName">@company.Name</div>
+                        <div class="taskName">@company.City, @company.State</div>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="positionResultsHeader">
+            @if (Model.Results.TotalResultsCount == 0)
+            {
+                <h3>No Companies Were Found Matching Your Criteria</h3>
+            }
+            else
+            {
+                <h3>Found Companies (displaying @firstResultCount - @lastResultCount out of @Model.Results.TotalResultsCount)</h3>
+            }
+
+            <ul class="positionSearchNotification">
+                <li>Page @(Model.Results.TotalResultsCount > 0 ? Model.Results.DisplayedPageNumber + 1 : 0) of @totalPages</li>
+
+                @if (Model.Results.DisplayedPageNumber > 0)
+                {
+                    <li>
+                        <a href="@Url.Action(MVC.CompanySearch.Jigsaw.PerformSearch())?@urlParams&Page=@(Model.Results.DisplayedPageNumber - 1)">
+                            Previous Page
+                        </a>
+                    </li>
+                }
+                
+                @if (Model.Results.DisplayedPageNumber < totalPages - 1)
+                {
+                    <li>
+                        <a href="@Url.Action(MVC.CompanySearch.Jigsaw.PerformSearch())?@urlParams&Page=@(Model.Results.DisplayedPageNumber + 1)">
+                            Next Page
+                        </a>
+                    </li>               
+                }
+            </ul>       
+        </div>
+    </div>
+}

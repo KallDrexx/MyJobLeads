@@ -33,8 +33,23 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Student01() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Student01);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Student02() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Student02);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Student03() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Student03);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Student04() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Student04);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -50,7 +65,10 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string SurveyCompleted = "SurveyCompleted";
+            public readonly string Student01 = "Student01";
             public readonly string Student02 = "Student02";
+            public readonly string Student03 = "Student03";
+            public readonly string Student04 = "Student04";
         }
 
 
@@ -59,7 +77,10 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string Student01 = "~/Areas/FillPerfect/Views/Feedback/Student01.cshtml";
             public readonly string Student02 = "~/Areas/FillPerfect/Views/Feedback/Student02.cshtml";
+            public readonly string Student03 = "~/Areas/FillPerfect/Views/Feedback/Student03.cshtml";
+            public readonly string Student04 = "~/Areas/FillPerfect/Views/Feedback/Student04.cshtml";
             public readonly string SurveyCompleted = "~/Areas/FillPerfect/Views/Feedback/SurveyCompleted.cshtml";
         }
     }
@@ -74,6 +95,18 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
             return callInfo;
         }
 
+        public override System.Web.Mvc.ActionResult Student01(string fpUserId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Student01);
+            callInfo.RouteValueDictionary.Add("fpUserId", fpUserId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Student01(MyJobLeads.Areas.FillPerfect.Models.Surveys.StudentSurveyPost3ViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Student01);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
         public override System.Web.Mvc.ActionResult Student02(string fpUserId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Student02);
             callInfo.RouteValueDictionary.Add("fpUserId", fpUserId);
@@ -82,6 +115,30 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
 
         public override System.Web.Mvc.ActionResult Student02(MyJobLeads.Areas.FillPerfect.Models.Surveys.StudentSurveyPost5ViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Student02);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Student03(string fpUserId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Student03);
+            callInfo.RouteValueDictionary.Add("fpUserId", fpUserId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Student03(MyJobLeads.Areas.FillPerfect.Models.Surveys.StudentSurveyPost10ViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Student03);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Student04(string fpUserId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Student04);
+            callInfo.RouteValueDictionary.Add("fpUserId", fpUserId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Student04(MyJobLeads.Areas.FillPerfect.Models.Surveys.StudentSurveyPost2WeeksViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Student04);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }

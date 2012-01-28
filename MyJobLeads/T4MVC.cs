@@ -25,6 +25,8 @@ using T4MVC;
 public static class MVC {
     static readonly AdminClass s_Admin = new AdminClass();
     public static AdminClass Admin { get { return s_Admin; } }
+    static readonly CompanySearchClass s_CompanySearch = new CompanySearchClass();
+    public static CompanySearchClass CompanySearch { get { return s_CompanySearch; } }
     static readonly ContactSearchClass s_ContactSearch = new ContactSearchClass();
     public static ContactSearchClass ContactSearch { get { return s_ContactSearch; } }
     static readonly FillPerfectClass s_FillPerfect = new FillPerfectClass();
@@ -53,6 +55,12 @@ namespace T4MVC {
         public MyJobLeads.Areas.Admin.Controllers.DashboardController Dashboard = new MyJobLeads.Areas.Admin.Controllers.T4MVC_DashboardController();
         public MyJobLeads.Areas.Admin.Controllers.EditOrganizationController EditOrganization = new MyJobLeads.Areas.Admin.Controllers.T4MVC_EditOrganizationController();
         public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
+    }
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public class CompanySearchClass {
+        public readonly string Name = "CompanySearch";
+        public MyJobLeads.Areas.CompanySearch.Controllers.JigsawController Jigsaw = new MyJobLeads.Areas.CompanySearch.Controllers.T4MVC_JigsawController();
+        public T4MVC.CompanySearch.SharedController Shared = new T4MVC.CompanySearch.SharedController();
     }
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class ContactSearchClass {

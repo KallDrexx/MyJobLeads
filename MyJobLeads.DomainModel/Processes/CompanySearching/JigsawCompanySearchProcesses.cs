@@ -59,7 +59,6 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
             request.AddParameter("state", procParams.State);
             request.AddParameter("employees", procParams.Employees);
             request.AddParameter("ownership", procParams.Ownership);
-            request.AddParameter("fortuneRank", procParams.FortuneRank);
             request.AddParameter("order", "ASC");
             request.AddParameter("orderBy", "Company");
             request.AddParameter("offset", procParams.RequestedPageNum * PAGE_SIZE);

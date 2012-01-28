@@ -291,6 +291,10 @@
     <Compile Include="Areas\Admin\Models\CreateOrganizationWithAdminViewModel.cs" />
     <Compile Include="Areas\Admin\Models\Mappings\OrganizationMappings.cs" />
     <Compile Include="Areas\CompanySearch\CompanySearchAreaRegistration.cs" />
+    <Compile Include="Areas\CompanySearch\Controllers\JigsawController.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\CompanySearchQueryViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\SearchResultsViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Mappings\JigsawSearchMappings.cs" />
     <Compile Include="Areas\ContactSearch\ContactSearchAreaRegistration.cs" />
     <Compile Include="Areas\ContactSearch\Controllers\JigsawController.cs" />
     <Compile Include="Areas\ContactSearch\Controllers\SyncController.cs" />
@@ -452,6 +456,12 @@
     <Compile Include="CompanyController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="CompanySearch.JigsawController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompanySearch.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="ContactController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -512,6 +522,7 @@
     <Compile Include="Infrastructure\Installers\MyJobLeadsInstaller.cs" />
     <Compile Include="Infrastructure\Providers\WindsorServiceFactory.cs" />
     <Compile Include="Infrastructure\Providers\WindsorValidatorFactory.cs" />
+    <Compile Include="Infrastructure\SelectLists\GeographicSelectLists.cs" />
     <Compile Include="Infrastructure\SelectLists\JigsawSelectLists.cs" />
     <Compile Include="Infrastructure\ViewModelMappings\MilestoneMappings.cs" />
     <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
@@ -1158,8 +1169,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Areas\CompanySearch\Controllers\" />
-    <Folder Include="Areas\CompanySearch\Models\" />
     <Folder Include="Areas\CompanySearch\Views\Shared\" />
     <Folder Include="Areas\ContactSearch\Views\Shared\" />
     <Folder Include="Areas\FillPerfect\Views\Shared\" />
@@ -1398,6 +1407,9 @@
     </Content>
     <Content Include="Areas\CompanySearch\Views\Web.config" />
     <Content Include="Areas\CompanySearch\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\Index.cshtml" />
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\_SearchForm.cshtml" />
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\PerformSearch.cshtml" />
     <None Include="Scripts\plugins\DataTables\images\Sorting icons.psd" />
     <None Include="Scripts\plugins\DataTables\js\jquery.dataTables.min.js.gz" />
     <None Include="T4MVC.tt.settings.t4" />
