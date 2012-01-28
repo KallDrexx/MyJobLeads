@@ -10,9 +10,11 @@ using MyJobLeads.DomainModel.ViewModels.CompanySearching;
 using MyJobLeads.DomainModel.ViewModels;
 using MyJobLeads.DomainModel.ProcessParams.CompanySearching.Jigsaw;
 using AutoMapper;
+using MyJobLeads.Infrastructure.Attributes;
 
 namespace MyJobLeads.Areas.CompanySearch.Controllers
-{
+{   
+    [RequiresActiveJobSearch]
     public partial class JigsawController : MyJobLeadsBaseController
     {
         protected IProcess<JigsawCompanySearchParams, SearchResultsViewModel<ExternalCompanySearchResultViewModel>> _searchProcess;
