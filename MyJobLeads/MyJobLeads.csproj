@@ -512,6 +512,7 @@
     <Compile Include="Infrastructure\Installers\MyJobLeadsInstaller.cs" />
     <Compile Include="Infrastructure\Providers\WindsorServiceFactory.cs" />
     <Compile Include="Infrastructure\Providers\WindsorValidatorFactory.cs" />
+    <Compile Include="Infrastructure\SelectLists\JigsawSelectLists.cs" />
     <Compile Include="Infrastructure\ViewModelMappings\MilestoneMappings.cs" />
     <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
     <Compile Include="JobSearchController.generated.cs">
