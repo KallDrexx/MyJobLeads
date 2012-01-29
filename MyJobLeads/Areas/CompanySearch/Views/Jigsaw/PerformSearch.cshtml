@@ -58,11 +58,12 @@
             <ul>
                 @foreach (var company in Model.Results.Results)
                 {
-                    <li>
-                        <div class="taskName">@company.Name</div>
-                        <div class="taskName">@company.City, @company.State</div>
-                        @Html.ActionLink("View Details", MVC.CompanySearch.Jigsaw.Details(Convert.ToInt32(company.Id)), new { @class = "inlineBlue", title = "View company details" })
-                    </li>
+                    <a href="@Url.Action(MVC.CompanySearch.Jigsaw.Details(Convert.ToInt32(company.Id)))">
+                        <li>
+                            <div class="taskName">@company.Name</div>
+                            <div class="taskName">@company.City, @company.State</div>
+                        </li>
+                    </a>
                 }
             </ul>
         </div>

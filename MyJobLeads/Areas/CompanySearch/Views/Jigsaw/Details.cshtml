@@ -15,7 +15,7 @@
         using (Html.ContentArea())
         {
             <h3>@Model.CompanyName</h3>
-            <p>Last updated on Jigsaw on @Model.LastUpdated.ToString("D")</p>
+            <p>Last updated on <a href="http://@Model.SourceUrl" class="inlineBlue">Jigsaw</a> on @Model.LastUpdated.ToString("D")</p>
         }
     }
 

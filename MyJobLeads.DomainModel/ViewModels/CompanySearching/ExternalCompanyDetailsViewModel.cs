@@ -26,5 +26,6 @@ namespace MyJobLeads.DomainModel.ViewModels.CompanySearching
         public string Industry3 { get; set; }
         public string SubIndustry3 { get; set; }
         public DateTime LastUpdated { get; set; }
+        public string SourceUrl { get; set; }
     }
 }

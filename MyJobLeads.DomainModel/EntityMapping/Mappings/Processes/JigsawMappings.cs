@@ -47,7 +47,8 @@ namespace MyJobLeads.DomainModel.EntityMapping.Mappings.Processes
             Mapper.CreateMap<CompanyDetailsJson, ExternalCompanyDetailsViewModel>()
                 .ForMember(dest => dest.Overview, opt => opt.MapFrom(src => src.currentWiki))
                 .ForMember(dest => dest.LastUpdated, opt => opt.MapFrom(src => src.updatedDate))
-                .ForMember(dest => dest.CompanyName, opt => opt.MapFrom(src => src.name));
+                .ForMember(dest => dest.CompanyName, opt => opt.MapFrom(src => src.name))
+                .ForMember(dest => dest.SourceUrl, opt => opt.MapFrom(src => src.linkInJigsaw));
         }
     }
 }
