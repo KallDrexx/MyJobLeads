@@ -18,12 +18,15 @@ namespace MyJobLeads.Areas.CompanySearch.Controllers
     public partial class JigsawController : MyJobLeadsBaseController
     {
         protected IProcess<JigsawCompanySearchParams, SearchResultsViewModel<ExternalCompanySearchResultViewModel>> _searchProcess;
+        protected IProcess<JigsawCompanyDetailsParams, ExternalCompanyDetailsViewModel> _companyDetailsProcess;
 
         public JigsawController(MyJobLeadsDbContext context, 
-                                IProcess<JigsawCompanySearchParams, SearchResultsViewModel<ExternalCompanySearchResultViewModel>> searchProcess)
+                                IProcess<JigsawCompanySearchParams, SearchResultsViewModel<ExternalCompanySearchResultViewModel>> searchProcess,
+                                IProcess<JigsawCompanyDetailsParams, ExternalCompanyDetailsViewModel> companyDetailsProc)
         {
             _context = context;
             _searchProcess = searchProcess;
+            _companyDetailsProcess = companyDetailsProc;
         }
 
         public virtual ActionResult Index()
@@ -38,6 +41,12 @@ namespace MyJobLeads.Areas.CompanySearch.Controllers
 
             var result = _searchProcess.Execute(parameters);
             var model = new SearchResultsViewModel { Query = query, Results = result };
+            return View(model);
+        }
+
+        public virtual ActionResult Details(int jigsawId)
+        {
+            var model = _companyDetailsProcess.Execute(new JigsawCompanyDetailsParams { RequestingUserId = CurrentUserId, JigsawId = jigsawId });
             return View(model);
         }
     }

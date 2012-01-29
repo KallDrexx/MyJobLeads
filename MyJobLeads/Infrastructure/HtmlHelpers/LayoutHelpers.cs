@@ -48,5 +48,15 @@ namespace MyJobLeads.Infrastructure.HtmlHelpers
         {
             return new FormFieldAreaWriter(html.ViewContext, field);
         }
+
+        public static InnerColumnWriter InnerColumn(this HtmlHelper html, bool floatLeft)
+        {
+            return new InnerColumnWriter(html.ViewContext, floatLeft);
+        }
+
+        public static FieldValueDisplayWriter FieldValueDisplay(this HtmlHelper html, string label)
+        {
+            return new FieldValueDisplayWriter(html.ViewContext, new HtmlString(label));
+        }
     }
 }

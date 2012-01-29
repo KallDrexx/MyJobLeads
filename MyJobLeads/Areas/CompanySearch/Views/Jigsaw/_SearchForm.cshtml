@@ -20,6 +20,7 @@
         using (Html.OuterRow())
         {
             Html.FormField("Company Name", Html.TextBoxFor(x => x.CompanyName, new { @class = "info" }));
+            Html.FormField("Industry", Html.DropDownListFor(x => x.Industry, Model.IndustryList));
         }
 
         using (Html.OuterRow())
@@ -30,13 +31,7 @@
 
         using (Html.OuterRow())
         {
-            Html.FormField("Industry", Html.DropDownListFor(x => x.Industry, Model.IndustryList));
             Html.FormField("Ownership", Html.DropDownListFor(x => x.Ownership, Model.OwnershipTypes, new { @class = "info" }));
-        }
-
-        using (Html.OuterRow())
-        {
-            Html.FormField("Revenue", Html.DropDownListFor(x => x.Revenue, Model.RevenueList, new { @class = "info" }));
             Html.FormField("Number of Employees", Html.DropDownListFor(x => x.Employees, Model.EmployeeList, new { @class = "info" }));
         }
 

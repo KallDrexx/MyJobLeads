@@ -14,7 +14,7 @@ namespace MyJobLeads.DomainModel.ViewModels.CompanySearching
         public string State { get; set; }
         public string Zip { get; set; }
         public string Overview { get; set; }
-        public long Revenue { get; set; }
+        public decimal Revenue { get; set; }
         public string Ownership { get; set; }
         public int EmployeeCount { get; set; }
         public string Website { get; set; }

@@ -1,0 +1,63 @@
+﻿@model MyJobLeads.DomainModel.ViewModels.CompanySearching.ExternalCompanyDetailsViewModel
+
+@{
+    ViewBag.Title = "Jigsaw Company Details";
+}
+
+@section SideBar {
+    @{Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.ResearchCenter));}
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <h3>@Model.CompanyName</h3>
+            <p>Last updated on Jigsaw on @Model.LastUpdated.ToString("D")</p>
+        }
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.InnerColumn(true))
+        {
+            using (Html.FieldValueDisplay("Industries:"))
+            {
+                <br />
+                if (!string.IsNullOrWhiteSpace(Model.Industry1)) { <span>@Model.Industry1: @Model.SubIndustry1</span> <br /> }
+                if (!string.IsNullOrWhiteSpace(Model.Industry2)) { <span>@Model.Industry2: @Model.SubIndustry2</span> <br /> }
+                if (!string.IsNullOrWhiteSpace(Model.Industry3)) { <span>@Model.Industry3: @Model.SubIndustry3</span> <br /> }
+            }
+
+            using (Html.FieldValueDisplay("Revenue:"))
+            { @string.Format("{0:C}", Model.Revenue) }
+            using (Html.FieldValueDisplay("Employee Count:"))
+            { @string.Format("{0:n0}",Model.EmployeeCount) }
+            using (Html.FieldValueDisplay("Phone:"))
+            { @Model.Phone }
+        }
+
+        using (Html.InnerColumn(false))
+        {
+            using (Html.FieldValueDisplay("Address:"))
+            { 
+                <br />
+                @Model.Address <br />
+                @:@Model.City, @Model.State @Model.Zip
+            }
+
+            using (Html.FieldValueDisplay("Ownership:")) { @Model.Ownership }
+            using (Html.FieldValueDisplay("Website:")) { <a href="@Model.Website" class="inlineBlue">@Model.Website</a> }
+        }
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.FieldValueDisplay("Overview:"))
+        {
+            @Html.Raw(Model.Overview)
+        }
+    }
+}

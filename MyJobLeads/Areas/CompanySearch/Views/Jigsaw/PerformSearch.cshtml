@@ -61,6 +61,7 @@
                     <li>
                         <div class="taskName">@company.Name</div>
                         <div class="taskName">@company.City, @company.State</div>
+                        @Html.ActionLink("View Details", MVC.CompanySearch.Jigsaw.Details(Convert.ToInt32(company.Id)), new { @class = "inlineBlue", title = "View company details" })
                     </li>
                 }
             </ul>

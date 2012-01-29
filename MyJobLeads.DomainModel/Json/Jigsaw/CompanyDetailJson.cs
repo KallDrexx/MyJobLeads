@@ -28,11 +28,11 @@ namespace MyJobLeads.DomainModel.Json.Jigsaw
         public string zip { get; set; }
         public string error { get; set; }
         public string website { get; set; }
-        public string updatedDate { get; set; }
+        public DateTime updatedDate { get; set; }
         public string employeeCount { get; set; }
         public string sicCode { get; set; }
         public string country { get; set; }
-        public string createdOn { get; set; }
+        public DateTime createdOn { get; set; }
         public string ownership { get; set; }
         public string address { get; set; }
         public string activeContacts { get; set; }
