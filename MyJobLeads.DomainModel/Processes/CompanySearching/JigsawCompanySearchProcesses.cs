@@ -168,7 +168,7 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
 
             // Form the notes
             string notes = string.Format("Ownership: {1}{0}Revenue: {2}{0}Website: {3}{0}Employees: {4}",
-                Environment.NewLine, json.ownership, json.revenue, json.website, json.employeeCount);
+                Environment.NewLine, json.ownership, string.Format("${0:n0}", json.revenue), json.website, string.Format("{0:n0}", json.employeeCount));
 
             var company = _createCompanyCmd.CalledByUserId(procParams.RequestingUserId)
                                            .WithJobSearch((int)user.LastVisitedJobSearchId)

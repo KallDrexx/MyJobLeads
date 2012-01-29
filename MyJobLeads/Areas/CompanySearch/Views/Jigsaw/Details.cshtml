@@ -12,6 +12,9 @@
 {
     using (Html.OuterRow())
     {
+        @Html.ActionLink("Add To MyLeads", MVC.CompanySearch.Jigsaw.AddCompany(Convert.ToInt32(Model.CompanyId), Model.CompanyName),
+                        new { @class = "floatRight blueLinks", title = "Add company to myleads" })
+                         
         using (Html.ContentArea())
         {
             <h3>@Model.CompanyName</h3>
@@ -26,15 +29,18 @@
             using (Html.FieldValueDisplay("Industries:"))
             {
                 <br />
-                if (!string.IsNullOrWhiteSpace(Model.Industry1)) { <span>@Model.Industry1: @Model.SubIndustry1</span> <br /> }
-                if (!string.IsNullOrWhiteSpace(Model.Industry2)) { <span>@Model.Industry2: @Model.SubIndustry2</span> <br /> }
-                if (!string.IsNullOrWhiteSpace(Model.Industry3)) { <span>@Model.Industry3: @Model.SubIndustry3</span> <br /> }
+                if (!string.IsNullOrWhiteSpace(Model.Industry1))
+                { <span>@Model.Industry1: @Model.SubIndustry1</span> <br /> }
+                if (!string.IsNullOrWhiteSpace(Model.Industry2))
+                { <span>@Model.Industry2: @Model.SubIndustry2</span> <br /> }
+                if (!string.IsNullOrWhiteSpace(Model.Industry3))
+                { <span>@Model.Industry3: @Model.SubIndustry3</span> <br /> }
             }
 
             using (Html.FieldValueDisplay("Revenue:"))
             { @string.Format("{0:C}", Model.Revenue) }
             using (Html.FieldValueDisplay("Employee Count:"))
-            { @string.Format("{0:n0}",Model.EmployeeCount) }
+            { @string.Format("{0:n0}", Model.EmployeeCount) }
             using (Html.FieldValueDisplay("Phone:"))
             { @Model.Phone }
         }
@@ -48,8 +54,10 @@
                 @:@Model.City, @Model.State @Model.Zip
             }
 
-            using (Html.FieldValueDisplay("Ownership:")) { @Model.Ownership }
-            using (Html.FieldValueDisplay("Website:")) { <a href="@Model.Website" class="inlineBlue">@Model.Website</a> }
+            using (Html.FieldValueDisplay("Ownership:"))
+            { @Model.Ownership }
+            using (Html.FieldValueDisplay("Website:"))
+            { <a href="@Model.Website" class="inlineBlue">@Model.Website</a> }
         }
     }
 

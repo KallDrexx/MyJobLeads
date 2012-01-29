@@ -41,6 +41,16 @@ namespace MyJobLeads.Areas.CompanySearch.Controllers {
         public System.Web.Mvc.ActionResult Details() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Details);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult AddCompany() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.AddCompany);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult AddCompanySuccess() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.AddCompanySuccess);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public JigsawController Actions { get { return MVC.CompanySearch.Jigsaw; } }
@@ -57,6 +67,8 @@ namespace MyJobLeads.Areas.CompanySearch.Controllers {
             public readonly string Index = "Index";
             public readonly string PerformSearch = "PerformSearch";
             public readonly string Details = "Details";
+            public readonly string AddCompany = "AddCompany";
+            public readonly string AddCompanySuccess = "AddCompanySuccess";
         }
 
 
@@ -66,6 +78,8 @@ namespace MyJobLeads.Areas.CompanySearch.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string _SearchForm = "~/Areas/CompanySearch/Views/Jigsaw/_SearchForm.cshtml";
+            public readonly string AddCompany = "~/Areas/CompanySearch/Views/Jigsaw/AddCompany.cshtml";
+            public readonly string AddCompanySuccess = "~/Areas/CompanySearch/Views/Jigsaw/AddCompanySuccess.cshtml";
             public readonly string Details = "~/Areas/CompanySearch/Views/Jigsaw/Details.cshtml";
             public readonly string Index = "~/Areas/CompanySearch/Views/Jigsaw/Index.cshtml";
             public readonly string PerformSearch = "~/Areas/CompanySearch/Views/Jigsaw/PerformSearch.cshtml";
@@ -90,6 +104,26 @@ namespace MyJobLeads.Areas.CompanySearch.Controllers {
         public override System.Web.Mvc.ActionResult Details(int jigsawId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
             callInfo.RouteValueDictionary.Add("jigsawId", jigsawId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult AddCompany(int jigsawId, string companyName) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddCompany);
+            callInfo.RouteValueDictionary.Add("jigsawId", jigsawId);
+            callInfo.RouteValueDictionary.Add("companyName", companyName);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult AddCompany(MyJobLeads.Areas.CompanySearch.Models.Jigsaw.AddCompanyViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddCompany);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult AddCompanySuccess(int companyId, string companyName) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddCompanySuccess);
+            callInfo.RouteValueDictionary.Add("companyId", companyId);
+            callInfo.RouteValueDictionary.Add("companyName", companyName);
             return callInfo;
         }
 

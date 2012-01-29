@@ -24,12 +24,12 @@ namespace MyJobLeads.DomainModel.Json.Jigsaw
         public string name { get; set; }
         public string linkInJigsaw { get; set; }
         public string fortuneRank { get; set; }
-        public string revenue { get; set; }
+        public decimal revenue { get; set; }
         public string zip { get; set; }
         public string error { get; set; }
         public string website { get; set; }
         public DateTime updatedDate { get; set; }
-        public string employeeCount { get; set; }
+        public decimal employeeCount { get; set; }
         public string sicCode { get; set; }
         public string country { get; set; }
         public DateTime createdOn { get; set; }
