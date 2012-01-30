@@ -32,12 +32,17 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
         protected MyJobLeadsDbContext _context;
         protected CompanyByIdQuery _companyByIdQuery;
         protected CreateCompanyCommand _createCompanyCmd;
+        protected EditCompanyCommand _editCompanyCmd;
 
-        public JigsawCompanySearchProcesses(MyJobLeadsDbContext context, CompanyByIdQuery companyQuery, CreateCompanyCommand createCompanyCmd)
+        public JigsawCompanySearchProcesses(MyJobLeadsDbContext context, 
+                                            CompanyByIdQuery companyQuery, 
+                                            CreateCompanyCommand createCompanyCmd,
+                                            EditCompanyCommand editCompanyCmd)
         {
             _context = context;
             _companyByIdQuery = companyQuery;
             _createCompanyCmd = createCompanyCmd;
+            _editCompanyCmd = editCompanyCmd;
         }
 
         /// <summary>
@@ -86,7 +91,7 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
         /// <returns></returns>
         public ExternalCompanyDetailsViewModel Execute(JigsawCompanyDetailsParams procParams)
         {
-            var json = GetJigsawCompany(procParams.JigsawId);
+            var json = GetJigsawCompany(procParams.JigsawId, procParams.RequestingUserId);
             return Mapper.Map<CompanyDetailsJson, ExternalCompanyDetailsViewModel>(json);
         }
 
@@ -101,14 +106,17 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
             if (company == null)
                 throw new MJLEntityNotFoundException(typeof(Company), procParams.MyLeadsCompayId);
 
-            var json = GetJigsawCompany(procParams.JigsawCompanyId);
+            var json = GetJigsawCompany(procParams.JigsawCompanyId, procParams.RequestingUserId);
+
+            _editCompanyCmd.WithCompanyId(procParams.MyLeadsCompayId);
+            _editCompanyCmd.RequestedByUserId(procParams.RequestingUserId);
 
             // Update the requested data
             if (procParams.MergeAddress)
             {
-                company.City = json.city;
-                company.State = json.state;
-                company.Zip = json.zip;
+                _editCompanyCmd.SetCity(json.city);
+                _editCompanyCmd.SetState(json.state);
+                _editCompanyCmd.SetZip(json.zip);
             }
 
             if (procParams.MergeIndustry)
@@ -116,14 +124,14 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
                 // Concat all the industries together
                 string industries = string.Format("{0}: {1}, {2}: {3}, {4}: {5}",
                     json.industry1, json.subIndustry1, json.industry2, json.subIndustry2, json.industry3, json.subIndustry3);
-                company.Industry = industries;
+                _editCompanyCmd.SetIndustry(industries);
             }
 
             if (procParams.MergeName)
-                company.Name = json.name;
+                _editCompanyCmd.SetName(json.name);
 
             if (procParams.MergePhone)
-                company.Phone = json.phone;
+                _editCompanyCmd.SetPhone(json.phone);
 
             // The rest of the merge fields are prepended into the company notes
             string notes = string.Empty;
@@ -140,8 +148,10 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
             if (procParams.MergeEmployeeCount)
                 notes += string.Concat("Employees: ", json.employeeCount, Environment.NewLine);
 
+            _editCompanyCmd.SetNotes(notes + company.Notes);
+
             // Save the changes
-            _context.SaveChanges();
+            _editCompanyCmd.Execute();
             return new GeneralSuccessResultViewModel { WasSuccessful = true };
         }
 
@@ -160,7 +170,7 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
                 throw new MJLEntityNotFoundException(typeof(User), procParams.RequestingUserId);
 
             // Get the jigsaw details and create the company with those details
-            var json = GetJigsawCompany(procParams.JigsawId);
+            var json = GetJigsawCompany(procParams.JigsawId, procParams.RequestingUserId);
 
             // Concat all the industries together
             string industries = string.Format("{0}: {1}, {2}: {3}, {4}: {5}",
@@ -185,7 +195,7 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
             return new CompanyAddedViewResult { CompanyId = company.Id, CompanyName = company.Name };
         }
 
-        public static CompanyDetailsJson GetJigsawCompany(int id)
+        public static CompanyDetailsJson GetJigsawCompany(int id, int requestingUserId)
         {
             string companyUrl = string.Format("rest/companies/{0}.json", id);
             var client = new RestClient("https://www.jigsaw.com/");
@@ -193,8 +203,11 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
             request.AddParameter("token", JigsawAuthProcesses.GetAuthToken());
             var response = client.Execute(request);
 
+            if (response.StatusCode != HttpStatusCode.OK)
+                JigsawAuthProcesses.ThrowInvalidResponse(response.Content, requestingUserId);
+
             var companyJson = JsonConvert.DeserializeObject<CompanyDetailsResponseJson>(response.Content, new JigsawDateTimeConverter());
-            if (companyJson.companies.Count == 0)
+            if (companyJson.companies == null || companyJson.companies.Count == 0)
                 throw new JigsawCompanyNotFoundException(id.ToString());
 
             return companyJson.companies[0];

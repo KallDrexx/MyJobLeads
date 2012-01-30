@@ -11,6 +11,7 @@ using MyJobLeads.DomainModel.ViewModels;
 using MyJobLeads.DomainModel.ProcessParams.CompanySearching.Jigsaw;
 using AutoMapper;
 using MyJobLeads.Infrastructure.Attributes;
+using MyJobLeads.DomainModel.Queries.Companies;
 
 namespace MyJobLeads.Areas.CompanySearch.Controllers
 {   
@@ -20,16 +21,22 @@ namespace MyJobLeads.Areas.CompanySearch.Controllers
         protected IProcess<JigsawCompanySearchParams, SearchResultsViewModel<ExternalCompanySearchResultViewModel>> _searchProcess;
         protected IProcess<JigsawCompanyDetailsParams, ExternalCompanyDetailsViewModel> _companyDetailsProcess;
         protected IProcess<AddJigsawCompanyParams, CompanyAddedViewResult> _addCompanyProcess;
+        protected IProcess<MergeJigsawCompanyParams, GeneralSuccessResultViewModel> _mergeCompanyProcess;
+        protected CompanyByIdQuery _companyByIdQuery;
 
         public JigsawController(MyJobLeadsDbContext context, 
                                 IProcess<JigsawCompanySearchParams, SearchResultsViewModel<ExternalCompanySearchResultViewModel>> searchProcess,
                                 IProcess<JigsawCompanyDetailsParams, ExternalCompanyDetailsViewModel> companyDetailsProc,
-                                IProcess<AddJigsawCompanyParams, CompanyAddedViewResult> addCompProc)
+                                IProcess<AddJigsawCompanyParams, CompanyAddedViewResult> addCompProc,
+                                IProcess<MergeJigsawCompanyParams, GeneralSuccessResultViewModel> mergeCompProc,
+                                CompanyByIdQuery compByIdQuery)
         {
             _context = context;
             _searchProcess = searchProcess;
             _companyDetailsProcess = companyDetailsProc;
             _addCompanyProcess = addCompProc;
+            _companyByIdQuery = compByIdQuery;
+            _mergeCompanyProcess = mergeCompProc;
         }
 
         public virtual ActionResult Index()
@@ -80,13 +87,52 @@ namespace MyJobLeads.Areas.CompanySearch.Controllers
                 return RedirectToAction(MVC.CompanySearch.Jigsaw.AddCompanySuccess(result.CompanyId, result.CompanyName));
             }
 
-            return View();
+            // else
+            return RedirectToAction(MVC.CompanySearch.Jigsaw.Sync(model.ExistingCompanyId, model.JigsawId));
         }
 
         public virtual ActionResult AddCompanySuccess(int companyId, string companyName)
         {
             var model = new AddCompanySuccessViewModel { CompanyId = companyId, CompanyName = companyName };
             return View(model);
+        }
+
+        public virtual ActionResult Sync(int companyId, int jigsawId)
+        {
+            var jigsawData = _companyDetailsProcess.Execute(new JigsawCompanyDetailsParams { RequestingUserId = CurrentUserId, JigsawId = jigsawId });
+            var company = _companyByIdQuery.RequestedByUserId(CurrentUserId).WithCompanyId(companyId).Execute();
+
+            if (company == null)
+                throw new InvalidOperationException("Cannot sync jigsaw data with a null company");
+
+            var model = new SyncCompanyViewModel
+            {
+                CompanyId = companyId,
+                JigsawId = jigsawId,
+                LastUpdatedOnJigaw = jigsawData.LastUpdated,
+                InternalName = company.Name,
+                InternalAddress = string.Format("{0}, {1} {2}", company.City, company.State, company.Zip),
+                InternalIndustry = company.Industry,
+                InternalPhone = company.Phone,
+                JigsawName = jigsawData.CompanyName,
+                JigsawAddress = string.Format("{0}, {1} {2}", jigsawData.City, jigsawData.State, jigsawData.Zip),
+                JigsawPhone = jigsawData.Phone
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public virtual ActionResult Sync(SyncCompanyViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var mergeParams = Mapper.Map<SyncCompanyViewModel, MergeJigsawCompanyParams>(model);
+            mergeParams.RequestingUserId = CurrentUserId;
+            var result = _mergeCompanyProcess.Execute(mergeParams);
+
+            return RedirectToAction(MVC.Company.Details(model.CompanyId));
         }
     }
 }

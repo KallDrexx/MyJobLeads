@@ -51,6 +51,11 @@ namespace MyJobLeads.Areas.CompanySearch.Controllers {
         public System.Web.Mvc.ActionResult AddCompanySuccess() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.AddCompanySuccess);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Sync() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Sync);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public JigsawController Actions { get { return MVC.CompanySearch.Jigsaw; } }
@@ -69,6 +74,7 @@ namespace MyJobLeads.Areas.CompanySearch.Controllers {
             public readonly string Details = "Details";
             public readonly string AddCompany = "AddCompany";
             public readonly string AddCompanySuccess = "AddCompanySuccess";
+            public readonly string Sync = "Sync";
         }
 
 
@@ -83,6 +89,7 @@ namespace MyJobLeads.Areas.CompanySearch.Controllers {
             public readonly string Details = "~/Areas/CompanySearch/Views/Jigsaw/Details.cshtml";
             public readonly string Index = "~/Areas/CompanySearch/Views/Jigsaw/Index.cshtml";
             public readonly string PerformSearch = "~/Areas/CompanySearch/Views/Jigsaw/PerformSearch.cshtml";
+            public readonly string Sync = "~/Areas/CompanySearch/Views/Jigsaw/Sync.cshtml";
         }
     }
 
@@ -124,6 +131,13 @@ namespace MyJobLeads.Areas.CompanySearch.Controllers {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddCompanySuccess);
             callInfo.RouteValueDictionary.Add("companyId", companyId);
             callInfo.RouteValueDictionary.Add("companyName", companyName);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Sync(int companyId, int jigsawId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Sync);
+            callInfo.RouteValueDictionary.Add("companyId", companyId);
+            callInfo.RouteValueDictionary.Add("jigsawId", jigsawId);
             return callInfo;
         }
 

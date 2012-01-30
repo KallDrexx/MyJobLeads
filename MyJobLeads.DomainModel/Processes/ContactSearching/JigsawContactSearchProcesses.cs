@@ -159,7 +159,7 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
                 if (procParams.CreateCompanyFromJigsaw)
                 {
                     // Create the company
-                    var jsComp = JigsawCompanySearchProcesses.GetJigsawCompany(Convert.ToInt32(procParams.JigsawCompanyId));
+                    var jsComp = JigsawCompanySearchProcesses.GetJigsawCompany(Convert.ToInt32(procParams.JigsawCompanyId), procParams.RequestingUserId);
                     company = _createCompanyCmd.CalledByUserId(procParams.RequestingUserId)
                                                .WithJobSearch((int)user.LastVisitedJobSearchId)
                                                .SetName(jsComp.name)
