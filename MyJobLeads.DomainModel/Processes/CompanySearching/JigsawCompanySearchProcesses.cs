@@ -72,7 +72,7 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
 
             // Check the result
             if (response.StatusCode != HttpStatusCode.OK)
-                JigsawAuthProcesses.ThrowInvalidResponse(response.Content, procParams.RequestingUserId);
+                JigsawAuthProcesses.ThrowInvalidResponse(response.Content, procParams.RequestingUserId, response.ErrorMessage);
 
             // Convert the json to the view model
             var json = JsonConvert.DeserializeObject<CompanyDetailsResponseJson>(response.Content);
@@ -204,7 +204,7 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
             var response = client.Execute(request);
 
             if (response.StatusCode != HttpStatusCode.OK)
-                JigsawAuthProcesses.ThrowInvalidResponse(response.Content, requestingUserId);
+                JigsawAuthProcesses.ThrowInvalidResponse(response.Content, requestingUserId, response.ErrorMessage);
 
             var companyJson = JsonConvert.DeserializeObject<CompanyDetailsResponseJson>(response.Content, new JigsawDateTimeConverter());
             if (companyJson.companies == null || companyJson.companies.Count == 0)

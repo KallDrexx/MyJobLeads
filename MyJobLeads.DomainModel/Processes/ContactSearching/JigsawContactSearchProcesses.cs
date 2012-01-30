@@ -80,7 +80,7 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
 
             // Check for a forbidden result
             if (response.StatusCode == HttpStatusCode.Forbidden)
-                JigsawAuthProcesses.ThrowInvalidResponse(response.Content, procParams.RequestingUserId);
+                JigsawAuthProcesses.ThrowInvalidResponse(response.Content, procParams.RequestingUserId, response.ErrorMessage);
 
             // Get the returned json and convert it to the view model
             var json = JsonConvert.DeserializeObject<ContactSearchResponseJson>(response.Content, new JigsawDateTimeConverter());
