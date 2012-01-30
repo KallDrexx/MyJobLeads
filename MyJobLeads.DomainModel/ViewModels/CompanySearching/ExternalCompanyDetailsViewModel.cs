@@ -27,5 +27,41 @@ namespace MyJobLeads.DomainModel.ViewModels.CompanySearching
         public string SubIndustry3 { get; set; }
         public DateTime LastUpdated { get; set; }
         public string SourceUrl { get; set; }
+
+        public string SingleIndustry
+        {
+            get
+            {
+                string output = string.Empty;
+                if (!string.IsNullOrWhiteSpace(Industry1))
+                {
+                    output += Industry1;
+                    if (!string.IsNullOrWhiteSpace(SubIndustry1))
+                        output += ": " + SubIndustry1;
+                }
+
+                if (!string.IsNullOrWhiteSpace(Industry2))
+                {
+                    if (!string.IsNullOrWhiteSpace(output))
+                        output += ", ";
+
+                    output += Industry2;
+                    if (!string.IsNullOrWhiteSpace(SubIndustry2))
+                        output += ": " + SubIndustry2;
+                }
+
+                if (!string.IsNullOrWhiteSpace(Industry3))
+                {
+                    if (!string.IsNullOrWhiteSpace(output))
+                        output += ", ";
+
+                    output += Industry3;
+                    if (!string.IsNullOrWhiteSpace(SubIndustry3))
+                        output += ": " + SubIndustry3;
+                }
+
+                return output;
+            }
+        }
     }
 }

@@ -136,17 +136,20 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
             // The rest of the merge fields are prepended into the company notes
             string notes = string.Empty;
 
+            if (procParams.MergeWebsite)
+                notes += string.Concat("Website: ", json.website, Environment.NewLine);
+
             if (procParams.MergeOwnership)
                 notes += string.Concat("Ownership: ", json.ownership, Environment.NewLine);
 
             if (procParams.MergeRevenue)
-                notes += string.Concat("Revenue: ", json.revenue, Environment.NewLine);
-
-            if (procParams.MergeWebsite)
-                notes += string.Concat("Website: ", json.website, Environment.NewLine);
+                notes += string.Concat("Revenue: ", string.Format("${0:n0}", json.revenue), Environment.NewLine);
 
             if (procParams.MergeEmployeeCount)
-                notes += string.Concat("Employees: ", json.employeeCount, Environment.NewLine);
+                notes += string.Concat("Employees: ", string.Format("{0:n0}", json.employeeCount), Environment.NewLine);
+
+            if (!string.IsNullOrWhiteSpace(notes))
+                notes += Environment.NewLine;
 
             _editCompanyCmd.SetNotes(notes + company.Notes);
 

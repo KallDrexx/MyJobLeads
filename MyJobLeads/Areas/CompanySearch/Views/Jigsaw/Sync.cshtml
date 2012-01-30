@@ -22,6 +22,10 @@
         @Html.HiddenFor(x => x.JigsawIndustry)
         @Html.HiddenFor(x => x.JigsawName)
         @Html.HiddenFor(x => x.JigsawPhone)
+        @Html.HiddenFor(x => x.JigsawEmployeeCount)
+        @Html.HiddenFor(x => x.JigsawOwnership)
+        @Html.HiddenFor(x => x.JigsawRevenue)
+        @Html.HiddenFor(x => x.JigsawWebsite)
         @Html.HiddenFor(x => x.LastUpdatedOnJigaw)
         
         using (Html.OuterRow())
@@ -77,6 +81,41 @@
                     <td>@Html.CheckBoxFor(x => x.ImportPhone)</td>
                     <td>@Model.InternalPhone</td>
                     <td>@Model.JigsawPhone</td>
+                </tr>
+
+                <tr>
+                    <td>Industry:</td>
+                    <td>@Html.CheckBoxFor(x => x.ImportIndustry)</td>
+                    <td>@Model.InternalIndustry</td>
+                    <td>@Model.JigsawIndustry</td>
+                </tr>
+
+                <tr>
+                    <td>Add Revenue To Notes?</td>
+                    <td>@Html.CheckBoxFor(x => x.ImportRevenue)</td>
+                    <td></td>
+                    <td>@Model.JigsawRevenue</td>
+                </tr>
+
+                <tr>
+                    <td>Add Ownership Type To Notes?</td>
+                    <td>@Html.CheckBoxFor(x => x.ImportOwnership)</td>
+                    <td></td>
+                    <td>@Model.JigsawOwnership</td>
+                </tr>
+
+                <tr>
+                    <td>Add Employee Count To Notes?</td>
+                    <td>@Html.CheckBoxFor(x => x.ImportEmployeeCount)</td>
+                    <td></td>
+                    <td>@Model.JigsawEmployeeCount</td>
+                </tr>
+
+                <tr>
+                    <td>Add Website To Notes?</td>
+                    <td>@Html.CheckBoxFor(x => x.ImportWebsite)</td>
+                    <td></td>
+                    <td>@Model.JigsawWebsite</td>
                 </tr>
             </table>
         }

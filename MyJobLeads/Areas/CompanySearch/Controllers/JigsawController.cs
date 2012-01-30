@@ -12,6 +12,7 @@ using MyJobLeads.DomainModel.ProcessParams.CompanySearching.Jigsaw;
 using AutoMapper;
 using MyJobLeads.Infrastructure.Attributes;
 using MyJobLeads.DomainModel.Queries.Companies;
+using MyJobLeads.DomainModel.Entities;
 
 namespace MyJobLeads.Areas.CompanySearch.Controllers
 {   
@@ -105,20 +106,8 @@ namespace MyJobLeads.Areas.CompanySearch.Controllers
             if (company == null)
                 throw new InvalidOperationException("Cannot sync jigsaw data with a null company");
 
-            var model = new SyncCompanyViewModel
-            {
-                CompanyId = companyId,
-                JigsawId = jigsawId,
-                LastUpdatedOnJigaw = jigsawData.LastUpdated,
-                InternalName = company.Name,
-                InternalAddress = string.Format("{0}, {1} {2}", company.City, company.State, company.Zip),
-                InternalIndustry = company.Industry,
-                InternalPhone = company.Phone,
-                JigsawName = jigsawData.CompanyName,
-                JigsawAddress = string.Format("{0}, {1} {2}", jigsawData.City, jigsawData.State, jigsawData.Zip),
-                JigsawPhone = jigsawData.Phone
-            };
-
+            var model = Mapper.Map<Company, SyncCompanyViewModel>(company);
+            model = Mapper.Map<ExternalCompanyDetailsViewModel, SyncCompanyViewModel>(jigsawData, model);
             return View(model);
         }
 
