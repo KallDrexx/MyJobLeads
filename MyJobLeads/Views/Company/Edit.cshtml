@@ -37,6 +37,10 @@
                 </div> 
                                 
                 <div class="grid3 marginBottom_10 floatLeft"> 
+                    <div class="floatLeft"><p class="greyHighlight">Industry:</p>
+                        <div class="infoSpan">@Html.TextBoxFor(x => x.Industry, new { @class = "info "})</div>
+                    </div> 
+
                     <div class="floatLeft"><p class="greyHighlight">Status:</p>
                         <div class="infoSpan">@Html.DropDownListFor(x => x.LeadStatus, new SelectList(Model.AvailableLeadStatuses, Model.LeadStatus))</div>
                     </div>                            
