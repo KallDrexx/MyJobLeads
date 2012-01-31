@@ -18,6 +18,7 @@
         @Html.HiddenFor(x => x.InternalIndustry)
         @Html.HiddenFor(x => x.InternalName)
         @Html.HiddenFor(x => x.InternalPhone)
+        @Html.HiddenFor(x => x.InternalWebsite)
         @Html.HiddenFor(x => x.JigsawAddress)
         @Html.HiddenFor(x => x.JigsawIndustry)
         @Html.HiddenFor(x => x.JigsawName)
@@ -91,30 +92,9 @@
                 </tr>
 
                 <tr>
-                    <td>Add Revenue To Notes?</td>
-                    <td>@Html.CheckBoxFor(x => x.ImportRevenue)</td>
-                    <td></td>
-                    <td>@Model.JigsawRevenue</td>
-                </tr>
-
-                <tr>
-                    <td>Add Ownership Type To Notes?</td>
-                    <td>@Html.CheckBoxFor(x => x.ImportOwnership)</td>
-                    <td></td>
-                    <td>@Model.JigsawOwnership</td>
-                </tr>
-
-                <tr>
-                    <td>Add Employee Count To Notes?</td>
-                    <td>@Html.CheckBoxFor(x => x.ImportEmployeeCount)</td>
-                    <td></td>
-                    <td>@Model.JigsawEmployeeCount</td>
-                </tr>
-
-                <tr>
-                    <td>Add Website To Notes?</td>
+                    <td>Website:</td>
                     <td>@Html.CheckBoxFor(x => x.ImportWebsite)</td>
-                    <td></td>
+                    <td>@Model.InternalWebsite</td>
                     <td>@Model.JigsawWebsite</td>
                 </tr>
             </table>

@@ -137,7 +137,7 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
             string notes = string.Empty;
 
             if (procParams.MergeWebsite)
-                notes += string.Concat("Website: ", json.website, Environment.NewLine);
+                _editCompanyCmd.SetWebsite(json.website);
 
             if (procParams.MergeOwnership)
                 notes += string.Concat("Ownership: ", json.ownership, Environment.NewLine);
@@ -180,8 +180,8 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
                 json.industry1, json.subIndustry1, json.industry2, json.subIndustry2, json.industry3, json.subIndustry3);
 
             // Form the notes
-            string notes = string.Format("Ownership: {1}{0}Revenue: {2}{0}Website: {3}{0}Employees: {4}",
-                Environment.NewLine, json.ownership, string.Format("${0:n0}", json.revenue), json.website, string.Format("{0:n0}", json.employeeCount));
+            string notes = string.Format("Ownership: {1}{0}Revenue: {2}{0}Employees: {3}",
+                Environment.NewLine, json.ownership, string.Format("${0:n0}", json.revenue), string.Format("{0:n0}", json.employeeCount));
 
             var company = _createCompanyCmd.CalledByUserId(procParams.RequestingUserId)
                                            .WithJobSearch((int)user.LastVisitedJobSearchId)
@@ -192,6 +192,7 @@ namespace MyJobLeads.DomainModel.Processes.CompanySearching
                                            .SetZip(json.zip)
                                            .SetIndustry(industries)
                                            .SetNotes(notes)
+                                           .SetWebsite(json.website)
                                            .SetJigsawId(Convert.ToInt32(json.companyId))
                                            .Execute();
 

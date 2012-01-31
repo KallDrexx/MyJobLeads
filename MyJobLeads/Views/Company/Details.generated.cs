@@ -106,13 +106,33 @@ WriteLiteral("</span></p> \r\n                    <p class=\"greyHighlight\">Loc
             
             #line default
             #line hidden
-WriteLiteral("</span></p> \r\n                </div> \r\n                <div class=\"grid4 floatRig" +
-"ht\"> \r\n                    <p class=\"greyHighlight\">Status: <span class=\"setTask" +
-"\">");
+WriteLiteral("</span></p>\r\n                    <p class=\"greyHighlight\">Website: <a href=\"http:" +
+"//");
 
 
             
-            #line 22 "..\..\Views\Company\Details.cshtml"
+            #line 20 "..\..\Views\Company\Details.cshtml"
+                                                                 Write(Model.Website);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" class=\"inlineBlue\">");
+
+
+            
+            #line 20 "..\..\Views\Company\Details.cshtml"
+                                                                                                    Write(Model.Website);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</a></p>\r\n                </div> \r\n                <div class=\"grid4 floatRight\">" +
+" \r\n                    <p class=\"greyHighlight\">Status: <span class=\"setTask\">");
+
+
+            
+            #line 23 "..\..\Views\Company\Details.cshtml"
                                                                       Write(Model.LeadStatus);
 
             
@@ -123,7 +143,7 @@ WriteLiteral("</span></p> \r\n                    <p class=\"greyHighlight\">Ind
 
 
             
-            #line 23 "..\..\Views\Company\Details.cshtml"
+            #line 24 "..\..\Views\Company\Details.cshtml"
                                                                           Write(Model.Industry);
 
             
@@ -140,7 +160,7 @@ WriteLiteral(@"</span></p>
 
 
             
-            #line 30 "..\..\Views\Company\Details.cshtml"
+            #line 31 "..\..\Views\Company\Details.cshtml"
                                          Write(Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />")));
 
             
@@ -165,7 +185,7 @@ WriteLiteral(@"</span>
 
 
             
-            #line 45 "..\..\Views\Company\Details.cshtml"
+            #line 46 "..\..\Views\Company\Details.cshtml"
    Write(Html.ActionLink("Add New Task", MVC.Task.Add(Model.Id), new { @class = "add blueLinks" }));
 
             
@@ -175,7 +195,7 @@ WriteLiteral("\r\n\r\n");
 
 
             
-            #line 47 "..\..\Views\Company\Details.cshtml"
+            #line 48 "..\..\Views\Company\Details.cshtml"
          if (Model.OpenTasks.Count > 0)
         {
 
@@ -190,7 +210,7 @@ WriteLiteral("            <div id=\"taskRole\"> \r\n                <ul>\r\n");
 
 
             
-            #line 52 "..\..\Views\Company\Details.cshtml"
+            #line 53 "..\..\Views\Company\Details.cshtml"
                      foreach (var task in Model.OpenTasks.OrderBy(x => x.DueDate))
                     {
 
@@ -202,7 +222,7 @@ WriteLiteral("                        <li>\r\n                            <div c
 
 
             
-            #line 55 "..\..\Views\Company\Details.cshtml"
+            #line 56 "..\..\Views\Company\Details.cshtml"
                                                        Write(Html.GetDueDateString(task.DueDate));
 
             
@@ -212,7 +232,7 @@ WriteLiteral("</div>\r\n                            <div class=\"taskName\">");
 
 
             
-            #line 56 "..\..\Views\Company\Details.cshtml"
+            #line 57 "..\..\Views\Company\Details.cshtml"
                                              Write(Html.ActionLink(task.Name, MVC.Task.Details(task.Id)));
 
             
@@ -222,7 +242,7 @@ WriteLiteral("</div>\r\n                            <p class=\"taskDescription\"
 
 
             
-            #line 57 "..\..\Views\Company\Details.cshtml"
+            #line 58 "..\..\Views\Company\Details.cshtml"
                                                   Write(task.AssociatedWith);
 
             
@@ -232,7 +252,7 @@ WriteLiteral("</p>\r\n                            <p>");
 
 
             
-            #line 58 "..\..\Views\Company\Details.cshtml"
+            #line 59 "..\..\Views\Company\Details.cshtml"
                           Write(Html.ShortString(task.Notes, 110));
 
             
@@ -242,7 +262,7 @@ WriteLiteral("</p>\r\n                            ");
 
 
             
-            #line 59 "..\..\Views\Company\Details.cshtml"
+            #line 60 "..\..\Views\Company\Details.cshtml"
                        Write(Html.ActionLink("View Task", MVC.Task.Details(task.Id), new { @class = "blueLinks viewContact" }));
 
             
@@ -252,7 +272,7 @@ WriteLiteral("\r\n                        </li>\r\n");
 
 
             
-            #line 61 "..\..\Views\Company\Details.cshtml"
+            #line 62 "..\..\Views\Company\Details.cshtml"
                         
                         if (Model.OpenTasks.OrderBy(x => x.DueDate).Last() != task)
                         {
@@ -264,7 +284,7 @@ WriteLiteral("                            <li><hr /></li>\r\n");
 
 
             
-            #line 65 "..\..\Views\Company\Details.cshtml"
+            #line 66 "..\..\Views\Company\Details.cshtml"
                         }
                     }
 
@@ -275,7 +295,7 @@ WriteLiteral("                </ul> \r\n             </div>\t\r\n");
 
 
             
-            #line 69 "..\..\Views\Company\Details.cshtml"
+            #line 70 "..\..\Views\Company\Details.cshtml"
         }
 
             
@@ -285,7 +305,7 @@ WriteLiteral("                \r\n");
 
 
             
-            #line 71 "..\..\Views\Company\Details.cshtml"
+            #line 72 "..\..\Views\Company\Details.cshtml"
          if (Model.CompletedTasks.Count > 0)
         {           
 
@@ -300,7 +320,7 @@ WriteLiteral("            <div id=\"taskRole\"> \r\n                <ul>\r\n");
 
 
             
-            #line 76 "..\..\Views\Company\Details.cshtml"
+            #line 77 "..\..\Views\Company\Details.cshtml"
                      foreach (var task in Model.CompletedTasks.OrderBy(x => x.CompletionDate))
                     {
 
@@ -312,7 +332,7 @@ WriteLiteral("                        <li>\r\n                            <div c
 
 
             
-            #line 80 "..\..\Views\Company\Details.cshtml"
+            #line 81 "..\..\Views\Company\Details.cshtml"
                                              Write(Html.ActionLink(task.Name, MVC.Task.Details(task.Id)));
 
             
@@ -322,7 +342,7 @@ WriteLiteral("</div>\r\n                            <p class=\"taskDescription\"
 
 
             
-            #line 81 "..\..\Views\Company\Details.cshtml"
+            #line 82 "..\..\Views\Company\Details.cshtml"
                                                   Write(task.AssociatedWith);
 
             
@@ -332,7 +352,7 @@ WriteLiteral("</p>\r\n                            <p>");
 
 
             
-            #line 82 "..\..\Views\Company\Details.cshtml"
+            #line 83 "..\..\Views\Company\Details.cshtml"
                           Write(Html.ShortString(task.Notes, 110));
 
             
@@ -342,7 +362,7 @@ WriteLiteral("</p>\r\n                            ");
 
 
             
-            #line 83 "..\..\Views\Company\Details.cshtml"
+            #line 84 "..\..\Views\Company\Details.cshtml"
                        Write(Html.ActionLink("View Task", MVC.Task.Details(task.Id), new { @class = "blueLinks viewContact" }));
 
             
@@ -352,7 +372,7 @@ WriteLiteral("\r\n                        </li>\r\n");
 
 
             
-            #line 85 "..\..\Views\Company\Details.cshtml"
+            #line 86 "..\..\Views\Company\Details.cshtml"
                         
                         if (Model.CompletedTasks.OrderBy(x => x.CompletionDate).Last() != task)
                         {
@@ -364,7 +384,7 @@ WriteLiteral("                            <li><hr /></li>\r\n");
 
 
             
-            #line 89 "..\..\Views\Company\Details.cshtml"
+            #line 90 "..\..\Views\Company\Details.cshtml"
                         }
                     }
 
@@ -375,7 +395,7 @@ WriteLiteral("                </ul>  \r\n            </div>                     
 
 
             
-            #line 93 "..\..\Views\Company\Details.cshtml"
+            #line 94 "..\..\Views\Company\Details.cshtml"
         }
 
             
@@ -386,7 +406,7 @@ WriteLiteral("        \r\n    </div> \r\n                    \r\n    <div class=
 
 
             
-            #line 99 "..\..\Views\Company\Details.cshtml"
+            #line 100 "..\..\Views\Company\Details.cshtml"
               
                 string contactLinkString = string.Format("Contacts ({0})", Model.Contacts.Count);
                 string positionLinkString = string.Format("Positions ({0})", Model.Positions.Count);
@@ -399,7 +419,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 104 "..\..\Views\Company\Details.cshtml"
+            #line 105 "..\..\Views\Company\Details.cshtml"
              if (Model.showPositions)
             {
                 
@@ -407,14 +427,14 @@ WriteLiteral("\r\n");
             #line default
             #line hidden
             
-            #line 106 "..\..\Views\Company\Details.cshtml"
+            #line 107 "..\..\Views\Company\Details.cshtml"
            Write(Html.ActionLink(contactLinkString, MVC.Company.Details(Model.Id), new { title = "Show Relevant Contacts" }));
 
             
             #line default
             #line hidden
             
-            #line 106 "..\..\Views\Company\Details.cshtml"
+            #line 107 "..\..\Views\Company\Details.cshtml"
                                                                                                                             
 
             
@@ -430,7 +450,7 @@ WriteLiteral("                <span class=\"active\">");
 
 
             
-            #line 108 "..\..\Views\Company\Details.cshtml"
+            #line 109 "..\..\Views\Company\Details.cshtml"
                                 Write(positionLinkString);
 
             
@@ -440,7 +460,7 @@ WriteLiteral("</span>\r\n");
 
 
             
-            #line 109 "..\..\Views\Company\Details.cshtml"
+            #line 110 "..\..\Views\Company\Details.cshtml"
             }
             else
             {
@@ -452,7 +472,7 @@ WriteLiteral("                <span class=\"active\">");
 
 
             
-            #line 112 "..\..\Views\Company\Details.cshtml"
+            #line 113 "..\..\Views\Company\Details.cshtml"
                                 Write(contactLinkString);
 
             
@@ -468,20 +488,20 @@ WriteLiteral("|\r\n");
 
 
             
-            #line 114 "..\..\Views\Company\Details.cshtml"
+            #line 115 "..\..\Views\Company\Details.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 114 "..\..\Views\Company\Details.cshtml"
+            #line 115 "..\..\Views\Company\Details.cshtml"
            Write(Html.ActionLink(positionLinkString, MVC.Company.Details(Model.Id, true), new { title = "Show Relevant Positions" }));
 
             
             #line default
             #line hidden
             
-            #line 114 "..\..\Views\Company\Details.cshtml"
+            #line 115 "..\..\Views\Company\Details.cshtml"
                                                                                                                                     
             }
 
@@ -492,7 +512,7 @@ WriteLiteral("        </div>\r\n\r\n");
 
 
             
-            #line 118 "..\..\Views\Company\Details.cshtml"
+            #line 119 "..\..\Views\Company\Details.cshtml"
          if (Model.showPositions)
         {
             
@@ -500,14 +520,14 @@ WriteLiteral("        </div>\r\n\r\n");
             #line default
             #line hidden
             
-            #line 120 "..\..\Views\Company\Details.cshtml"
+            #line 121 "..\..\Views\Company\Details.cshtml"
        Write(Html.ActionLink("Add New Position", MVC.Position.Add(Model.Id), new { @class = "add blueLinks" }));
 
             
             #line default
             #line hidden
             
-            #line 120 "..\..\Views\Company\Details.cshtml"
+            #line 121 "..\..\Views\Company\Details.cshtml"
                                                                                                               
                             
 
@@ -518,7 +538,7 @@ WriteLiteral("            <div id=\"contactsList\"> \r\n                <ul> \r\
 
 
             
-            #line 124 "..\..\Views\Company\Details.cshtml"
+            #line 125 "..\..\Views\Company\Details.cshtml"
                        var lastPosition = Model.Positions.OrderBy(x => x.Title).LastOrDefault(); 
 
             
@@ -526,7 +546,7 @@ WriteLiteral("            <div id=\"contactsList\"> \r\n                <ul> \r\
             #line hidden
 
             
-            #line 125 "..\..\Views\Company\Details.cshtml"
+            #line 126 "..\..\Views\Company\Details.cshtml"
                      foreach (var position in Model.Positions.OrderBy(x => x.Title))
                     {
 
@@ -538,7 +558,7 @@ WriteLiteral("                        <ul> \r\n                            <li> 
 
 
             
-            #line 129 "..\..\Views\Company\Details.cshtml"
+            #line 130 "..\..\Views\Company\Details.cshtml"
                                                     Write(Html.ActionLink(position.Title, MVC.Position.Details(position.Id)));
 
             
@@ -548,7 +568,7 @@ WriteLiteral("</div> \r\n                                <p class=\"greyHighligh
 
 
             
-            #line 130 "..\..\Views\Company\Details.cshtml"
+            #line 131 "..\..\Views\Company\Details.cshtml"
                                                      Write(position.HasApplied ? "Applied" : "Not Yet Applied");
 
             
@@ -558,7 +578,7 @@ WriteLiteral("</p> \r\n                                <p>");
 
 
             
-            #line 131 "..\..\Views\Company\Details.cshtml"
+            #line 132 "..\..\Views\Company\Details.cshtml"
                               Write(Html.ShortString(position.Notes, 110));
 
             
@@ -568,7 +588,7 @@ WriteLiteral("</p> \r\n                                ");
 
 
             
-            #line 132 "..\..\Views\Company\Details.cshtml"
+            #line 133 "..\..\Views\Company\Details.cshtml"
                            Write(Html.ActionLink("View Position", MVC.Position.Details(position.Id), new { @class = "blueLinks viewContact" }));
 
             
@@ -578,7 +598,7 @@ WriteLiteral("\r\n                            </li>\r\n                         
 
 
             
-            #line 135 "..\..\Views\Company\Details.cshtml"
+            #line 136 "..\..\Views\Company\Details.cshtml"
                              if (position != lastPosition)
                             {
 
@@ -589,7 +609,7 @@ WriteLiteral("                                <li><hr /></li>\r\n");
 
 
             
-            #line 138 "..\..\Views\Company\Details.cshtml"
+            #line 139 "..\..\Views\Company\Details.cshtml"
                             }       
 
             
@@ -599,7 +619,7 @@ WriteLiteral("                        </ul>\r\n");
 
 
             
-            #line 140 "..\..\Views\Company\Details.cshtml"
+            #line 141 "..\..\Views\Company\Details.cshtml"
                     }             
 
             
@@ -609,7 +629,7 @@ WriteLiteral("                </ul> \r\n            </div> \r\n");
 
 
             
-            #line 143 "..\..\Views\Company\Details.cshtml"
+            #line 144 "..\..\Views\Company\Details.cshtml"
         }
 
         else
@@ -619,14 +639,14 @@ WriteLiteral("                </ul> \r\n            </div> \r\n");
             #line default
             #line hidden
             
-            #line 147 "..\..\Views\Company\Details.cshtml"
+            #line 148 "..\..\Views\Company\Details.cshtml"
        Write(Html.ActionLink("Add New Contact", MVC.Contact.Add(Model.Id), new { @class = "add blueLinks" }));
 
             
             #line default
             #line hidden
             
-            #line 147 "..\..\Views\Company\Details.cshtml"
+            #line 148 "..\..\Views\Company\Details.cshtml"
                                                                                                             
                             
 
@@ -637,7 +657,7 @@ WriteLiteral("            <div id=\"contactsList\"> \r\n                <ul> \r\
 
 
             
-            #line 151 "..\..\Views\Company\Details.cshtml"
+            #line 152 "..\..\Views\Company\Details.cshtml"
                        var lastContact = Model.Contacts.OrderBy(x => x.Name).LastOrDefault(); 
 
             
@@ -645,7 +665,7 @@ WriteLiteral("            <div id=\"contactsList\"> \r\n                <ul> \r\
             #line hidden
 
             
-            #line 152 "..\..\Views\Company\Details.cshtml"
+            #line 153 "..\..\Views\Company\Details.cshtml"
                      foreach (var contact in Model.Contacts.OrderBy(x => x.Name))
                     {
 
@@ -657,7 +677,7 @@ WriteLiteral("                        <li> \r\n                            <div 
 
 
             
-            #line 156 "..\..\Views\Company\Details.cshtml"
+            #line 157 "..\..\Views\Company\Details.cshtml"
                            Write(Html.ActionLink(contact.Name, MVC.Contact.Details(contact.Id)));
 
             
@@ -667,7 +687,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 157 "..\..\Views\Company\Details.cshtml"
+            #line 158 "..\..\Views\Company\Details.cshtml"
                                  if (!string.IsNullOrWhiteSpace(contact.Title))
                                 {
 
@@ -678,7 +698,7 @@ WriteLiteral("                                    <span>- ");
 
 
             
-            #line 159 "..\..\Views\Company\Details.cshtml"
+            #line 160 "..\..\Views\Company\Details.cshtml"
                                        Write(Html.ActionLink(contact.Title, MVC.Contact.Details(Model.Id)));
 
             
@@ -688,7 +708,7 @@ WriteLiteral("</span>\r\n");
 
 
             
-            #line 160 "..\..\Views\Company\Details.cshtml"
+            #line 161 "..\..\Views\Company\Details.cshtml"
                                 }
 
             
@@ -699,7 +719,7 @@ WriteLiteral("                            </div> \r\n                           
 
 
             
-            #line 162 "..\..\Views\Company\Details.cshtml"
+            #line 163 "..\..\Views\Company\Details.cshtml"
                                                                      Write(contact.DirectPhoneWithExtension);
 
             
@@ -709,7 +729,7 @@ WriteLiteral("</p>\r\n                            <p><span class=\"greyHighlight
 
 
             
-            #line 163 "..\..\Views\Company\Details.cshtml"
+            #line 164 "..\..\Views\Company\Details.cshtml"
                                                                      Write(contact.MobilePhone);
 
             
@@ -719,7 +739,7 @@ WriteLiteral("</p> \r\n                            <p>");
 
 
             
-            #line 164 "..\..\Views\Company\Details.cshtml"
+            #line 165 "..\..\Views\Company\Details.cshtml"
                           Write(Html.ShortString(contact.Notes, 110));
 
             
@@ -729,7 +749,7 @@ WriteLiteral("</p> \r\n                            ");
 
 
             
-            #line 165 "..\..\Views\Company\Details.cshtml"
+            #line 166 "..\..\Views\Company\Details.cshtml"
                        Write(Html.ActionLink("View Contact", MVC.Contact.Details(contact.Id), new { @class = "blueLinks viewContact" }));
 
             
@@ -739,7 +759,7 @@ WriteLiteral("\r\n                        </li> \r\n");
 
 
             
-            #line 167 "..\..\Views\Company\Details.cshtml"
+            #line 168 "..\..\Views\Company\Details.cshtml"
                         
                         if (contact != lastContact)
                         {
@@ -751,7 +771,7 @@ WriteLiteral("                            <li><hr /></li>\r\n");
 
 
             
-            #line 171 "..\..\Views\Company\Details.cshtml"
+            #line 172 "..\..\Views\Company\Details.cshtml"
                         }
                     }             
 
@@ -762,7 +782,7 @@ WriteLiteral("                </ul> \r\n            </div> \r\n");
 
 
             
-            #line 175 "..\..\Views\Company\Details.cshtml"
+            #line 176 "..\..\Views\Company\Details.cshtml"
         }
 
             

@@ -26,6 +26,7 @@ namespace MyJobLeads.ViewModels.Companies
             Positions = company.Positions.Select(x => new CompanyPositionViewModel(x)).ToList();
             Location = company.LocationString();
             Industry = company.Industry;
+            Website = company.Website;
 
             // Form the task list
             OpenTasks = company.Tasks.Where(x => x.CompletionDate == null)
@@ -46,6 +47,7 @@ namespace MyJobLeads.ViewModels.Companies
         public string Notes { get; set; }
         public string LeadStatus { get; set; }
         public string Industry { get; set; }
+        public string Website { get; set; }
         public bool showPositions { get; set; }
 
         public IList<CompanyTaskViewModel> OpenTasks { get; set; }

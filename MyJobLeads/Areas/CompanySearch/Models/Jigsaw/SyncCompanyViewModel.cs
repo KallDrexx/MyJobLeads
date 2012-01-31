@@ -15,6 +15,7 @@ namespace MyJobLeads.Areas.CompanySearch.Models.Jigsaw
         public string InternalAddress { get; set; }
         public string InternalIndustry { get; set; }
         public string InternalPhone { get; set; }
+        public string InternalWebsite { get; set; }
 
         public string JigsawName { get; set; }
         public string JigsawAddress { get; set; }
