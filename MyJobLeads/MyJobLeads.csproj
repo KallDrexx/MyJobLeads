@@ -683,6 +683,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>List.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Company\_CompanySummaryDisplay.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_CompanySummaryDisplay.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Contact\Details.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1526,7 +1531,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Future.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Company\_CompanySummaryDisplay.cshtml" />
+    <Content Include="Views\Company\_CompanySummaryDisplay.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_CompanySummaryDisplay.generated.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\Contact\_ContactSummaryDisplay.cshtml" />
     <Content Include="Views\Position\Edit.cshtml">
       <Generator>RazorGenerator</Generator>

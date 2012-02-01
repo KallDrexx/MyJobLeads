@@ -184,36 +184,57 @@ WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n                    </div> \r\n\r\n                    <div class=\"floatLeft\"" +
-"><p class=\"greyHighlight\">Status:</p>\r\n                        <div class=\"infoS" +
-"pan\">");
+WriteLiteral("</div>\r\n                    </div>                             \r\n\r\n              " +
+"      <div class=\"floatLeft\"><p class=\"greyHighlight\">Website:</p>\r\n            " +
+"            <div class=\"infoSpan\">");
 
 
             
             #line 45 "..\..\Views\Company\Edit.cshtml"
-                                         Write(Html.DropDownListFor(x => x.LeadStatus, new SelectList(Model.AvailableLeadStatuses, Model.LeadStatus)));
+                                         Write(Html.TextBoxFor(x => x.Website, new { @class = "info" }));
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n                    </div>                            \r\n                <" +
-"/div> \r\n");
+WriteLiteral("</div>\r\n                    </div>\r\n                </div> \r\n");
 
 
             
             #line 48 "..\..\Views\Company\Edit.cshtml"
- 
+                
 
             
             #line default
             #line hidden
-WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\"> \r\n                 " +
-"   <div class=\"floatLeft\"><p class=\"greyHighlight\">Notes:</p>\r\n                 " +
+WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\">\r\n                  " +
+"  <div class=\"floatLeft\"><p class=\"greyHighlight\">Status:</p>\r\n                 " +
 "       <div class=\"infoSpan\">");
 
 
             
             #line 51 "..\..\Views\Company\Edit.cshtml"
+                                         Write(Html.DropDownListFor(x => x.LeadStatus, new SelectList(Model.AvailableLeadStatuses, Model.LeadStatus)));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                    </div>\r\n                </div>\r\n");
+
+
+            
+            #line 54 "..\..\Views\Company\Edit.cshtml"
+ 
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                <div class=\"grid3 marginBottom_10 floatLeft\">\r\n                  " +
+"  <div class=\"floatLeft\"><p class=\"greyHighlight\">Notes:</p>\r\n                  " +
+"      <div class=\"infoSpan\">");
+
+
+            
+            #line 57 "..\..\Views\Company\Edit.cshtml"
                                          Write(Html.TextAreaFor(x => x.Notes, new { @class = "textAreaInfo" }));
 
             
@@ -223,7 +244,7 @@ WriteLiteral("</div>\r\n                    </div> \r\n                </div> \r
 
 
             
-            #line 54 "..\..\Views\Company\Edit.cshtml"
+            #line 60 "..\..\Views\Company\Edit.cshtml"
 
 
             
@@ -235,7 +256,7 @@ WriteLiteral("                <div class=\"grid3 marginBottom_20 floatLeft\"> \r
 
 
             
-            #line 58 "..\..\Views\Company\Edit.cshtml"
+            #line 64 "..\..\Views\Company\Edit.cshtml"
                          if (Model.Id != 0)
                         {
                             
@@ -243,14 +264,14 @@ WriteLiteral("                <div class=\"grid3 marginBottom_20 floatLeft\"> \r
             #line default
             #line hidden
             
-            #line 60 "..\..\Views\Company\Edit.cshtml"
+            #line 66 "..\..\Views\Company\Edit.cshtml"
                        Write(Html.ActionLink("Cancel", MVC.Company.Details(Model.Id)));
 
             
             #line default
             #line hidden
             
-            #line 60 "..\..\Views\Company\Edit.cshtml"
+            #line 66 "..\..\Views\Company\Edit.cshtml"
                                                                                      
                         }
 
@@ -261,14 +282,14 @@ WriteLiteral("                <div class=\"grid3 marginBottom_20 floatLeft\"> \r
             #line default
             #line hidden
             
-            #line 65 "..\..\Views\Company\Edit.cshtml"
+            #line 71 "..\..\Views\Company\Edit.cshtml"
                        Write(Html.ActionLink("Cancel", MVC.Company.List()));
 
             
             #line default
             #line hidden
             
-            #line 65 "..\..\Views\Company\Edit.cshtml"
+            #line 71 "..\..\Views\Company\Edit.cshtml"
                                                                           
                         }
 
@@ -279,7 +300,7 @@ WriteLiteral("                    </div>                    \r\n                
 
 
             
-            #line 69 "..\..\Views\Company\Edit.cshtml"
+            #line 75 "..\..\Views\Company\Edit.cshtml"
             }
 
             

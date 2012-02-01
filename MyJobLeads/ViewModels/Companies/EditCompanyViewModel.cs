@@ -29,6 +29,7 @@ namespace MyJobLeads.ViewModels.Companies
             Industry = company.Industry;
             LeadStatus = company.LeadStatus;
             Notes = company.Notes;
+            Website = company.Website;
 
             JobSearchId = Convert.ToInt32(company.JobSearchID);
         }
@@ -42,6 +43,7 @@ namespace MyJobLeads.ViewModels.Companies
         public string MetroArea { get; set; }
         public string Industry { get; set; }
         public string LeadStatus { get; set; }
+        public string Website { get; set; }
         public string Notes { get; set; }
 
         public int JobSearchId { get; set; }
