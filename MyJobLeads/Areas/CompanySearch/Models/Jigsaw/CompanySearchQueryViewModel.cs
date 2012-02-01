@@ -10,6 +10,7 @@ namespace MyJobLeads.Areas.CompanySearch.Models.Jigsaw
     public class CompanySearchQueryViewModel
     {
         public int Page { get; set; }
+        public int? MergeCompanyId { get; set; }
         public string CompanyName { get; set; }
         public string Industry { get; set; }
         public string MetroArea { get; set; }
@@ -37,14 +38,15 @@ namespace MyJobLeads.Areas.CompanySearch.Models.Jigsaw
 
         public string GetSearchUrl()
         {
-            return string.Format("CompanyName={0}&Industry={1}&MetroArea={2}&State={3}&Employees={4}&Revenue={5}&Ownership={6}",
+            return string.Format("CompanyName={0}&Industry={1}&MetroArea={2}&State={3}&Employees={4}&Revenue={5}&Ownership={6}&MergeCompanyId={7}",
                 HttpUtility.UrlEncode(CompanyName),
                 HttpUtility.UrlEncode(Industry),
                 HttpUtility.UrlEncode(MetroArea),
                 HttpUtility.UrlEncode(State),
                 HttpUtility.UrlEncode(Employees),
                 HttpUtility.UrlEncode(Revenue),
-                HttpUtility.UrlEncode(Ownership));
+                HttpUtility.UrlEncode(Ownership),
+                MergeCompanyId);
         }
     }
 }

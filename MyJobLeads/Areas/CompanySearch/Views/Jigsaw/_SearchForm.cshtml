@@ -4,6 +4,8 @@
 {
     using (Html.BeginForm(MVC.CompanySearch.Jigsaw.PerformSearch(), FormMethod.Get))
     {
+        @Html.HiddenFor(x => x.MergeCompanyId)
+        
         using (Html.OuterRow())
         {
             <h3>Jigsaw Company Search</h3>

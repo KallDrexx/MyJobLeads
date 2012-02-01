@@ -55,9 +55,10 @@ namespace MyJobLeads.Areas.CompanySearch.Controllers
             return View(model);
         }
 
-        public virtual ActionResult Details(int jigsawId)
+        public virtual ActionResult Details(int jigsawId, int? mergeCompanyId = null)
         {
             var model = _companyDetailsProcess.Execute(new JigsawCompanyDetailsParams { RequestingUserId = CurrentUserId, JigsawId = jigsawId });
+            ViewBag.MergeCompanyId = mergeCompanyId;
             return View(model);
         }
 

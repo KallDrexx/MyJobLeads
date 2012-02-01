@@ -108,9 +108,10 @@ namespace MyJobLeads.Areas.CompanySearch.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Details(int jigsawId) {
+        public override System.Web.Mvc.ActionResult Details(int jigsawId, int? mergeCompanyId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
             callInfo.RouteValueDictionary.Add("jigsawId", jigsawId);
+            callInfo.RouteValueDictionary.Add("mergeCompanyId", mergeCompanyId);
             return callInfo;
         }
 
@@ -138,6 +139,12 @@ namespace MyJobLeads.Areas.CompanySearch.Controllers {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Sync);
             callInfo.RouteValueDictionary.Add("companyId", companyId);
             callInfo.RouteValueDictionary.Add("jigsawId", jigsawId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Sync(MyJobLeads.Areas.CompanySearch.Models.Jigsaw.SyncCompanyViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Sync);
+            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 

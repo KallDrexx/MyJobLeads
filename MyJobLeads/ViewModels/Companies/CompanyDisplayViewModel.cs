@@ -48,6 +48,7 @@ namespace MyJobLeads.ViewModels.Companies
         public string LeadStatus { get; set; }
         public string Industry { get; set; }
         public string Website { get; set; }
+        public int JigsawId { get; set; }
         public bool showPositions { get; set; }
 
         public IList<CompanyTaskViewModel> OpenTasks { get; set; }

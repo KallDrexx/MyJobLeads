@@ -58,7 +58,7 @@
             <ul>
                 @foreach (var company in Model.Results.Results)
                 {
-                    <a href="@Url.Action(MVC.CompanySearch.Jigsaw.Details(Convert.ToInt32(company.Id)))">
+                    <a href="@Url.Action(MVC.CompanySearch.Jigsaw.Details(Convert.ToInt32(company.Id), Model.Query.MergeCompanyId))">
                         <li>
                             <div class="taskName">@company.Name</div>
                             <div class="taskName">@company.City, @company.State</div>
