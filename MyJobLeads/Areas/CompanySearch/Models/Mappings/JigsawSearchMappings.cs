@@ -37,7 +37,26 @@ namespace MyJobLeads.Areas.CompanySearch.Models.Mappings
                 .ForMember(dest => dest.InternalIndustry, opt => opt.MapFrom(src => src.Industry))
                 .ForMember(dest => dest.InternalName, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.InternalPhone, opt => opt.MapFrom(src => src.Phone))
-                .ForMember(dest => dest.InternalAddress, opt => opt.MapFrom(src => string.Format("{0}, {1} {2}", src.City, src.State, src.Zip)));
+                .ForMember(dest => dest.InternalAddress, opt => opt.MapFrom(src => string.Format("{0}, {1} {2}", src.City, src.State, src.Zip)))
+                .ForMember(dest => dest.InternalWebsite, opt => opt.MapFrom(src => src.Website))
+                .ForMember(dest => dest.JigsawId, opt => opt.Ignore())
+                .ForMember(dest => dest.JigsawAddress, opt => opt.Ignore())
+                .ForMember(dest => dest.JigsawEmployeeCount, opt => opt.Ignore())
+                .ForMember(dest => dest.JigsawName, opt => opt.Ignore())
+                .ForMember(dest => dest.JigsawOwnership, opt => opt.Ignore())
+                .ForMember(dest => dest.JigsawPhone, opt => opt.Ignore())
+                .ForMember(dest => dest.JigsawRevenue, opt => opt.Ignore())
+                .ForMember(dest => dest.JigsawWebsite, opt => opt.Ignore())
+                .ForMember(dest => dest.LastUpdatedOnJigaw, opt => opt.Ignore())
+                .ForMember(dest => dest.JigsawIndustry, opt => opt.Ignore())
+                .ForMember(dest => dest.ImportAddress, opt => opt.Ignore())
+                .ForMember(dest => dest.ImportEmployeeCount, opt => opt.Ignore())
+                .ForMember(dest => dest.ImportIndustry, opt => opt.Ignore())
+                .ForMember(dest => dest.ImportName, opt => opt.Ignore())
+                .ForMember(dest => dest.ImportOwnership, opt => opt.Ignore())
+                .ForMember(dest => dest.ImportPhone, opt => opt.Ignore())
+                .ForMember(dest => dest.ImportRevenue, opt => opt.Ignore())
+                .ForMember(dest => dest.ImportWebsite, opt => opt.Ignore());
 
             Mapper.CreateMap<ExternalCompanyDetailsViewModel, SyncCompanyViewModel>()
                 .ForMember(dest => dest.JigsawId, opt => opt.MapFrom(src => src.CompanyId))
@@ -49,7 +68,21 @@ namespace MyJobLeads.Areas.CompanySearch.Models.Mappings
                 .ForMember(dest => dest.JigsawRevenue, opt => opt.MapFrom(src => src.Revenue))
                 .ForMember(dest => dest.JigsawWebsite, opt => opt.MapFrom(src => src.Website))
                 .ForMember(dest => dest.LastUpdatedOnJigaw, opt => opt.MapFrom(src => src.LastUpdated))
-                .ForMember(dest => dest.JigsawIndustry, opt => opt.MapFrom(src => src.SingleIndustry));
+                .ForMember(dest => dest.JigsawIndustry, opt => opt.MapFrom(src => src.SingleIndustry))
+                .ForMember(dest => dest.CompanyId, opt => opt.Ignore())
+                .ForMember(dest => dest.InternalIndustry, opt => opt.Ignore())
+                .ForMember(dest => dest.InternalName, opt => opt.Ignore())
+                .ForMember(dest => dest.InternalPhone, opt => opt.Ignore())
+                .ForMember(dest => dest.InternalAddress, opt => opt.Ignore())
+                .ForMember(dest => dest.InternalWebsite, opt => opt.Ignore())
+                .ForMember(dest => dest.ImportAddress, opt => opt.Ignore())
+                .ForMember(dest => dest.ImportEmployeeCount, opt => opt.Ignore())
+                .ForMember(dest => dest.ImportIndustry, opt => opt.Ignore())
+                .ForMember(dest => dest.ImportName, opt => opt.Ignore())
+                .ForMember(dest => dest.ImportOwnership, opt => opt.Ignore())
+                .ForMember(dest => dest.ImportPhone, opt => opt.Ignore())
+                .ForMember(dest => dest.ImportRevenue, opt => opt.Ignore())
+                .ForMember(dest => dest.ImportWebsite, opt => opt.Ignore());
         }
     }
 }
