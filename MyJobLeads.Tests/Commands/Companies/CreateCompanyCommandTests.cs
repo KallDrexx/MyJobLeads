@@ -74,6 +74,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                  .SetIndustry("Industry")
                                                  .SetNotes("Notes")
                                                  .SetJigsawId(12345)
+                                                 .SetWebsite("website")
                                                  .CalledByUserId(_user.Id)
                                                  .Execute();
 
@@ -88,6 +89,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             Assert.AreEqual("Metro", result.MetroArea, "The created company's metro area was incorrect");
             Assert.AreEqual("Notes", result.Notes, "The created company's notes were incorrect");
             Assert.AreEqual(12345, result.JigsawId, "Jigsaw Id was incorrect");
+            Assert.AreEqual("website", result.Website, "Website was incorrect");
             Assert.AreEqual(_search, result.JobSearch, "The created company was associated with the incorrect job search");
         }
 
@@ -238,6 +240,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                  .SetMetroArea("Metro")
                                                  .SetIndustry("Industry")
                                                  .SetNotes("Notes")
+                                                 .SetWebsite("website")
                                                  .SetJigsawId(1234)
                                                  .CalledByUserId(_user.Id)
                                                  .Execute();
@@ -256,6 +259,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             Assert.AreEqual("Metro", result.MetroArea, "The created history record's metro area was incorrect");
             Assert.AreEqual("Notes", result.Notes, "The created history record's notes were incorrect");
             Assert.AreEqual(1234, result.JigsawId, "Jigsaw Id was incorrect");
+            Assert.AreEqual("website", result.Website, "Website was incorrect");
             Assert.AreEqual(_user, result.AuthoringUser, "The history record's author was incorrect");
             Assert.AreEqual(MJLConstants.HistoryInsert, result.HistoryAction, "The history record's history action was incorrect");
             Assert.IsTrue(result.DateModified >= start && result.DateModified <= end, "The history record's modification date was incorrect");

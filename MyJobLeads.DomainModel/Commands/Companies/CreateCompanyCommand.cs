@@ -23,7 +23,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         protected IServiceFactory _serviceFactory;
         protected int _searchId, _callingUserId;
         protected int? _jigsawId;
-        protected string _name, _phone, _city, _state, _zip, _metro, _industry, _notes;
+        protected string _name, _phone, _city, _state, _zip, _metro, _industry, _notes, _site;
 
         public CreateCompanyCommand(IServiceFactory serviceFactory)
         {
@@ -141,6 +141,17 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         }
 
         /// <summary>
+        /// Specifies the website for a company
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public virtual CreateCompanyCommand SetWebsite(string site)
+        {
+            _site = site;
+            return this;
+        }
+
+        /// <summary>
         /// Specifies the id value of the user creating the company
         /// </summary>
         /// <param name="userId"></param>
@@ -182,6 +193,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
                 Industry = _industry,
                 Notes = _notes,
                 JigsawId = _jigsawId,
+                Website = _site,
                 LeadStatus = MJLConstants.ProspectiveEmployerCompanyStatus,
 
                 Tasks = new List<Task>(),
@@ -201,6 +213,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
                 Industry = _industry,
                 Notes = _notes,
                 JigsawId = _jigsawId,
+                Website = _site,
                 LeadStatus = MJLConstants.ProspectiveEmployerCompanyStatus,
 
                 AuthoringUser = user,

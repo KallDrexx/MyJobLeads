@@ -186,6 +186,7 @@
     <Compile Include="Exceptions\UserNotAuthorizedForEntityException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForProcessException.cs" />
     <Compile Include="Json\Converters\JigsawDateTimeConverter.cs" />
+    <Compile Include="Json\Jigsaw\CompanyDetailJson.cs" />
     <Compile Include="Json\Jigsaw\CompanyDetailsResponseJson.cs" />
     <Compile Include="Json\Jigsaw\ContactDetailsJson.cs" />
     <Compile Include="Json\Jigsaw\ContactDetailsResponseJson.cs" />
@@ -196,6 +197,9 @@
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Processes\Admin\OrganizationAdminProcesses.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
+    <Compile Include="Processes\CompanySearching\JigsawCompanySearchProcesses.cs" />
+    <Compile Include="ProcessParams\CompanySearching\Jigsaw\AddJigsawCompanyParams.cs" />
+    <Compile Include="ProcessParams\CompanySearching\Jigsaw\MergeJigsawCompanyParams.cs" />
     <Compile Include="Processes\ContactSearching\JigsawContactSearchProcesses.cs" />
     <Compile Include="Processes\Exports\JobSearchExportProcess.cs" />
     <Compile Include="Processes\ExternalAuth\JigsawAuthProcesses.cs" />
@@ -209,6 +213,8 @@
     <Compile Include="Processes\Positions\PositionProcesses.cs" />
     <Compile Include="Processes\Users\UserPasswordProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
+    <Compile Include="ProcessParams\CompanySearching\Jigsaw\JigsawCompanyDetailsParams.cs" />
+    <Compile Include="ProcessParams\CompanySearching\Jigsaw\JigsawCompanySearchParams.cs" />
     <Compile Include="ProcessParams\ContactSearching\Jigsaw\AddJigsawContactToJobSearchParams.cs" />
     <Compile Include="ProcessParams\ContactSearching\Jigsaw\GetJigsawContactDetailsParams.cs" />
     <Compile Include="ProcessParams\ContactSearching\Jigsaw\JigsawContactSearchParams.cs" />
@@ -267,6 +273,9 @@
     <Compile Include="Utilities\EncryptionUtils.cs" />
     <Compile Include="ViewModels\Authorizations\AuthorizationResultViewModel.cs" />
     <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
+    <Compile Include="ViewModels\CompanySearching\CompanyAddedViewResult.cs" />
+    <Compile Include="ViewModels\CompanySearching\ExternalCompanyDetailsViewModel.cs" />
+    <Compile Include="ViewModels\CompanySearching\ExternalCompanySearchResultViewModel.cs" />
     <Compile Include="ViewModels\ContactSearching\ExternalContactAddedResultViewModel.cs" />
     <Compile Include="ViewModels\ContactSearching\ExternalContactSearchResultsViewModel.cs" />
     <Compile Include="ViewModels\Exports\JobsearchExportViewModel.cs" />
@@ -305,6 +314,7 @@
     <Compile Include="Utilities\EmailUtils.cs" />
     <Compile Include="Utilities\PasswordUtils.cs" />
     <Compile Include="ViewModels\SearchResultEntities.cs" />
+    <Compile Include="ViewModels\SearchResultsViewModel.cs" />
     <Compile Include="ViewModels\Users\GeneratedPasswordHashViewModel.cs" />
     <Compile Include="ViewModels\Users\UserPasswordVerificationResultViewModel.cs" />
   </ItemGroup>

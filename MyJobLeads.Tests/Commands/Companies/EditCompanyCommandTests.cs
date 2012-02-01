@@ -44,6 +44,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                 MetroArea = "Starting Metro",
                 Industry = "Starting Industry",
                 Notes = "Starting Notes", 
+                Website = "website",
                 JigsawId = 1234,
 
                 History = new List<CompanyHistory>()
@@ -92,6 +93,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                  .SetMetroArea("Metro")
                                                  .SetIndustry("Industry")
                                                  .SetNotes("Notes")
+                                                 .SetWebsite("site2")
                                                  .RequestedByUserId(_user.Id)
                                                  .Execute();
 
@@ -105,6 +107,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             Assert.AreEqual("01234", result.Zip, "The created company's zip was incorrect");
             Assert.AreEqual("Metro", result.MetroArea, "The created company's metro area was incorrect");
             Assert.AreEqual("Notes", result.Notes, "The created company's notes were incorrect");
+            Assert.AreEqual("site2", result.Website, "Website was incorrect");
             Assert.AreEqual("Industry", result.Industry, "The created company's industry was incorrect");
         }
 
@@ -476,6 +479,7 @@ namespace MyJobLeads.Tests.Commands.Companies
                                                  .SetMetroArea("Metro")
                                                  .SetIndustry("Industry")
                                                  .SetNotes("Notes")
+                                                 .SetWebsite("site2")
                                                  .RequestedByUserId(_user.Id)
                                                  .Execute();
             DateTime end = DateTime.Now;
@@ -492,6 +496,7 @@ namespace MyJobLeads.Tests.Commands.Companies
             Assert.AreEqual("Metro", history.MetroArea, "The history record's metro area was incorrect");
             Assert.AreEqual("Notes", history.Notes, "The history record's notes were incorrect");
             Assert.AreEqual("Industry", history.Industry, "The history record's industry was incorrect");
+            Assert.AreEqual("site2", history.Website, "History record's website was incorrect");
             Assert.AreEqual(1234, history.JigsawId, "The jigsaw id was incorrect");
 
             Assert.AreEqual(_user, history.AuthoringUser, "The history record's author was incorrect");

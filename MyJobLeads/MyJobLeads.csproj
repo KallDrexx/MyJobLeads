@@ -290,6 +290,14 @@
     <Compile Include="Areas\Admin\Controllers\EditOrganizationController.cs" />
     <Compile Include="Areas\Admin\Models\CreateOrganizationWithAdminViewModel.cs" />
     <Compile Include="Areas\Admin\Models\Mappings\OrganizationMappings.cs" />
+    <Compile Include="Areas\CompanySearch\CompanySearchAreaRegistration.cs" />
+    <Compile Include="Areas\CompanySearch\Controllers\JigsawController.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\AddCompanySuccessViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\AddCompanyViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\CompanySearchQueryViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\SearchResultsViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\SyncCompanyViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Mappings\JigsawSearchMappings.cs" />
     <Compile Include="Areas\ContactSearch\ContactSearchAreaRegistration.cs" />
     <Compile Include="Areas\ContactSearch\Controllers\JigsawController.cs" />
     <Compile Include="Areas\ContactSearch\Controllers\SyncController.cs" />
@@ -451,6 +459,12 @@
     <Compile Include="CompanyController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="CompanySearch.JigsawController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompanySearch.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="ContactController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -494,9 +508,11 @@
     <Compile Include="Infrastructure\HtmlHelpers\DateHtmlHelpers.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\LayoutHelpers.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\Layouts\ContentAreaWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\FieldValueDisplayWriter.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\Layouts\FormFieldAreaWriter.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\Layouts\FormButtonAreaWriter.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\Layouts\FormFieldWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\InnerColumnWriter.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\Layouts\OuterRowWriter.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\NumericDisplayHelpers.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\StringHtmlHelpers.cs" />
@@ -511,6 +527,8 @@
     <Compile Include="Infrastructure\Installers\MyJobLeadsInstaller.cs" />
     <Compile Include="Infrastructure\Providers\WindsorServiceFactory.cs" />
     <Compile Include="Infrastructure\Providers\WindsorValidatorFactory.cs" />
+    <Compile Include="Infrastructure\SelectLists\GeographicSelectLists.cs" />
+    <Compile Include="Infrastructure\SelectLists\JigsawSelectLists.cs" />
     <Compile Include="Infrastructure\ViewModelMappings\MilestoneMappings.cs" />
     <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
     <Compile Include="JobSearchController.generated.cs">
@@ -620,7 +638,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Details.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Company\Edit.cs">
+    <Compile Include="Views\Company\Edit.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Edit.cshtml</DependentUpon>
@@ -1156,6 +1174,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\CompanySearch\Views\Shared\" />
     <Folder Include="Areas\ContactSearch\Views\Shared\" />
     <Folder Include="Areas\FillPerfect\Views\Shared\" />
     <Folder Include="Areas\Organization\Models\" />
@@ -1190,7 +1209,7 @@
     <Content Include="app_offline.htm_" />
     <Content Include="Views\Company\Edit.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Edit.cs</LastGenOutput>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Company\Details.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -1391,6 +1410,15 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Student04.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Areas\CompanySearch\Views\Web.config" />
+    <Content Include="Areas\CompanySearch\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\Index.cshtml" />
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\_SearchForm.cshtml" />
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\PerformSearch.cshtml" />
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\Details.cshtml" />
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\AddCompany.cshtml" />
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\AddCompanySuccess.cshtml" />
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\Sync.cshtml" />
     <None Include="Scripts\plugins\DataTables\images\Sorting icons.psd" />
     <None Include="Scripts\plugins\DataTables\js\jquery.dataTables.min.js.gz" />
     <None Include="T4MVC.tt.settings.t4" />
