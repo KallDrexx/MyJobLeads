@@ -703,6 +703,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>About.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Home\Error.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Error.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Home\FixBlankTitles.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -712,6 +717,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\JigsawError.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JigsawError.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Home\SubmitFeedback.generated.cs">
       <AutoGen>True</AutoGen>
@@ -1553,7 +1563,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>EntityNotFound.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Home\Error.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Error.generated.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\Account\ClosedRegistrationView.cshtml" />
     <Content Include="Views\Account\InvalidOrgRegistrationTokenView.cshtml" />
     <Content Include="Views\Policies\Privacy.cshtml">
@@ -1568,7 +1581,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Home\JigsawError.cshtml" />
+    <Content Include="Views\Home\JigsawError.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>JigsawError.generated.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">
