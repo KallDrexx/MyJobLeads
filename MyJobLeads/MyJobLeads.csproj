@@ -773,6 +773,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Edit.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Task\Future.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Future.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\Overdue.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Overdue.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\TaskListControl.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TaskListControl.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\Today.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Today.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Task\_CompanyTaskDisplay.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1434,10 +1454,22 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_AnonymousUserSidebarDisplay.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Task\Overdue.cshtml" />
-    <Content Include="Views\Task\TaskListControl.cshtml" />
-    <Content Include="Views\Task\Today.cshtml" />
-    <Content Include="Views\Task\Future.cshtml" />
+    <Content Include="Views\Task\Overdue.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Overdue.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\TaskListControl.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>TaskListControl.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\Today.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Today.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\Future.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Future.generated.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\Company\_CompanySummaryDisplay.cshtml" />
     <Content Include="Views\Contact\_ContactSummaryDisplay.cshtml" />
     <Content Include="Views\Position\Edit.cshtml">
