@@ -1,0 +1,34 @@
+﻿@model MyJobLeads.Areas.FillPerfect.Models.Pilot.OrgDashboardViewModel
+
+@{
+    ViewBag.Title = "FillPerfect Pilot Control Screen";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        <h3>Welcome To Your FillPerfect Control Screen</h3>
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>Thanks for testing  InterviewTools FillPerfect.</p>
+
+            <p>
+                We’ve allotted your school free copies of FillPerfect (3-Month Licenses), to distribute to students as you see fit. 
+                In return for using this  unrestricted copy, students must agree to provide you feedback on their usage – 
+                number of applications they’ve used this tool for,  how users have rated the system, and any written comments they wish to give. 
+            </p>
+
+            <p>To send a copy to your students, use the Test Pilot Control Screen below.</p>
+
+            <p>For any questions, contact us using the form at the bottom of this page.</p>
+
+            <p>Read our Career Services FillPerfect Welcome Package for more details on this pilot program.</p>
+        }
+    }
+}
+

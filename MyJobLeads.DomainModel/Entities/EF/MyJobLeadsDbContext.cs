@@ -7,6 +7,7 @@ using System.Data.Entity.ModelConfiguration;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Entities.Configuration;
 using MyJobLeads.DomainModel.Entities.Surveys;
+using MyJobLeads.DomainModel.Entities.FillPerfect;
 
 namespace MyJobLeads.DomainModel.Entities.EF
 {
@@ -30,6 +31,9 @@ namespace MyJobLeads.DomainModel.Entities.EF
         public DbSet<TaskHistory> TaskHistory { get; set; }
         public DbSet<UnitTestEntity> UnitTestEntities { get; set; }
         public DbSet<User> Users { get; set; }
+
+        // FillPerfect Entities
+        public DbSet<FpOrgPilotUsedLicense> FpOrgPilotUsedLicenses { get; set; }
 
         // Configuration Tables
         public DbSet<MilestoneConfig> MilestoneConfigs { get; set; }
