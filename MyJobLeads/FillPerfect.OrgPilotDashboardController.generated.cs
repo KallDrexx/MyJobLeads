@@ -31,6 +31,11 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult SendPilotLicense() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.SendPilotLicense);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public OrgPilotDashboardController Actions { get { return MVC.FillPerfect.OrgPilotDashboard; } }
@@ -45,6 +50,7 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string Index = "Index";
+            public readonly string SendPilotLicense = "SendPilotLicense";
         }
 
 
@@ -53,6 +59,7 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string Index = "~/Areas/FillPerfect/Views/OrgPilotDashboard/Index.cshtml";
         }
     }
 
@@ -62,6 +69,13 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
 
         public override System.Web.Mvc.ActionResult Index() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SendPilotLicense(string name, string email) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SendPilotLicense);
+            callInfo.RouteValueDictionary.Add("name", name);
+            callInfo.RouteValueDictionary.Add("email", email);
             return callInfo;
         }
 
