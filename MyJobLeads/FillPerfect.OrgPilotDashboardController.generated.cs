@@ -36,6 +36,11 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
         public System.Web.Mvc.ActionResult SendPilotLicense() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.SendPilotLicense);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ResendLicense() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ResendLicense);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public OrgPilotDashboardController Actions { get { return MVC.FillPerfect.OrgPilotDashboard; } }
@@ -51,6 +56,7 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
         public class ActionNamesClass {
             public readonly string Index = "Index";
             public readonly string SendPilotLicense = "SendPilotLicense";
+            public readonly string ResendLicense = "ResendLicense";
         }
 
 
@@ -67,8 +73,9 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
     public class T4MVC_OrgPilotDashboardController: MyJobLeads.Areas.FillPerfect.Controllers.OrgPilotDashboardController {
         public T4MVC_OrgPilotDashboardController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult Index() {
+        public override System.Web.Mvc.ActionResult Index(bool licenseSent) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            callInfo.RouteValueDictionary.Add("licenseSent", licenseSent);
             return callInfo;
         }
 
@@ -76,6 +83,12 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SendPilotLicense);
             callInfo.RouteValueDictionary.Add("name", name);
             callInfo.RouteValueDictionary.Add("email", email);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ResendLicense(int licensedUserId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ResendLicense);
+            callInfo.RouteValueDictionary.Add("licensedUserId", licensedUserId);
             return callInfo;
         }
 

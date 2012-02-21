@@ -16,11 +16,9 @@ namespace MyJobLeads.Areas.FillPerfect.Models.Pilot
         public int RemainingLicenseCount { get; set; }
         public IList<PilotLicenseUser> LicensedUsers { get; set; }
 
-        public string StudentEmail { get; set; }
-        public string StudentName { get; set; }
-
         public class PilotLicenseUser
         {
+            public int Id { get; set; }
             public string Name { get; set; }
             public string Email { get; set; }
             public DateTime GrantedDate { get; set; }

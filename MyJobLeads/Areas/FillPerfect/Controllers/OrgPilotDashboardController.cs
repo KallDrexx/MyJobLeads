@@ -8,6 +8,8 @@ using MyJobLeads.DomainModel.Entities.EF;
 using MyJobLeads.Infrastructure.Attributes;
 using MyJobLeads.Areas.FillPerfect.Models.Pilot;
 using MyJobLeads.DomainModel;
+using MyJobLeads.DomainModel.Entities.FillPerfect;
+using MyJobLeads.DomainModel.Mail;
 
 namespace MyJobLeads.Areas.FillPerfect.Controllers
 {
@@ -19,7 +21,7 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
             _context = context;
         }
 
-        public virtual ActionResult Index()
+        public virtual ActionResult Index(bool licenseSent = false)
         {
             var org = _context.Users
                               .Where(x => x.Id == CurrentUserId)
@@ -29,6 +31,9 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
 
             if (string.IsNullOrWhiteSpace(org.FillPerfectPilotKey))
                 return RedirectToAction(MVC.Organization.Dashboard.Index());
+
+            if (licenseSent)
+                ModelState.AddModelError("", "The license was successfully sent to your student");
 
             return View(CreateDashboardViewModel(org));
         }
@@ -56,22 +61,36 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
             if (ModelState.IsValid)
             {
                 // Set them up in the database
-                org.FpUsedPilotLicenses.Add(new DomainModel.Entities.FillPerfect.FpOrgPilotUsedLicense
+                var license = new DomainModel.Entities.FillPerfect.FpOrgPilotUsedLicense
                 {
                     FullName = name.Trim(),
                     Email = email.Trim(),
                     LicenseGrantDate = DateTime.Now
-                });
+                };
 
+                license.Organization = org;
+                _context.FpOrgPilotUsedLicenses.Add(license);
                 _context.SaveChanges();
 
                 // Email the user
+                SendLicenseToUser(license);
             }
 
             if (!ModelState.IsValid)
                 return View(MVC.FillPerfect.OrgPilotDashboard.Views.Index, CreateDashboardViewModel(org));
             else
-                return RedirectToAction(MVC.FillPerfect.OrgPilotDashboard.Index());
+                return RedirectToAction(MVC.FillPerfect.OrgPilotDashboard.Index(true));
+        }
+
+        public virtual ActionResult ResendLicense(int licensedUserId)
+        {
+            var user = _context.FpOrgPilotUsedLicenses
+                               .Where(x => x.Id == licensedUserId)
+                               .Include(x => x.Organization)
+                               .FirstOrDefault();
+
+            SendLicenseToUser(user);
+            return RedirectToAction(MVC.FillPerfect.OrgPilotDashboard.Index(true));                   
         }
 
         protected OrgDashboardViewModel CreateDashboardViewModel(MyJobLeads.DomainModel.Entities.Organization org)
@@ -86,6 +105,7 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
             {
                 model.LicensedUsers.Add(new OrgDashboardViewModel.PilotLicenseUser
                 {
+                    Id = user.Id,
                     Name = user.FullName,
                     Email = user.Email,
                     GrantedDate = user.LicenseGrantDate
@@ -93,6 +113,11 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
             }
 
             return model;
+        }
+
+        protected void SendLicenseToUser(FpOrgPilotUsedLicense user)
+        {
+            new FillPerfectMailController().SendPilotStudentLicenseEmail(user);
         }
     }
 }

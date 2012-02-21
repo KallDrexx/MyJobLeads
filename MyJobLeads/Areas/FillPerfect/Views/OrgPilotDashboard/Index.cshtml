@@ -76,6 +76,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>License Sent On</th>
+                    <th></th>
                 </thead>
 
                 @foreach (var user in Model.LicensedUsers)
@@ -84,6 +85,9 @@
                         <td>@user.Name</td>
                         <td><a href="mailto:@user.Email" class="inlineBlue">@user.Email</a></td>
                         <td>@user.GrantedDate.ToString("D")</td>
+                        <td>
+                            @Html.ActionLink("Resend License Information", MVC.FillPerfect.OrgPilotDashboard.ResendLicense(user.Id), new { @class = "inlineBlue" })
+                        </td>
                     </tr>   
                 }
 

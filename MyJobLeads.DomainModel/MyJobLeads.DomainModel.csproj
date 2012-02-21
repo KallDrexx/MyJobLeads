@@ -85,6 +85,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RazorEngine, Version=3.0.8.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.0.8\lib\net40\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\packages\RestSharp.102.5\lib\net35\RestSharp.dll</HintPath>
     </Reference>
@@ -96,6 +99,10 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\RazorEngine.3.0.8\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -195,6 +202,7 @@
     <Compile Include="Json\Mappings\JigsawJsonMappings.cs" />
     <Compile Include="LibSupport\DotNetOpenAuth\LinkedInTokenManager.cs" />
     <Compile Include="LibSupport\DotNetOpenAuth\MyJobLeadsBaseConsumerTokenManager.cs" />
+    <Compile Include="Mail\FillPerfectMailController.cs" />
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Processes\Admin\OrganizationAdminProcesses.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
@@ -285,6 +293,8 @@
     <Compile Include="ViewModels\JobSearches\JigsawUserPointsViewModel.cs" />
     <Compile Include="ViewModels\JobSearches\JobSearchMilestoneChangedResultViewModel.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgress.cs" />
+    <Compile Include="ViewModels\Mail\FillPerfectPilotStudentLicenceEmailViewModel.cs" />
+    <Compile Include="ViewModels\Mail\Mappings\FillPerfectMailMappings.cs" />
     <Compile Include="ViewModels\Milestones\MilestoneDisplayListViewModel.cs" />
     <Compile Include="ViewModels\Milestones\MilestoneDisplayViewModel.cs" />
     <Compile Include="ViewModels\Milestones\MilestoneIdViewModel.cs" />
@@ -320,6 +330,9 @@
     <Compile Include="ViewModels\Users\UserPasswordVerificationResultViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Mail\Templates\PilotStudentLicenseEmail.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

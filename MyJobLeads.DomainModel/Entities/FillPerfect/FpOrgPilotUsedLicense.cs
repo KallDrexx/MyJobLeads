@@ -11,5 +11,7 @@ namespace MyJobLeads.DomainModel.Entities.FillPerfect
         public string Email { get; set; }
         public string FullName { get; set; }
         public DateTime LicenseGrantDate { get; set; }
+
+        public virtual Organization Organization { get; set; }
     }
 }
