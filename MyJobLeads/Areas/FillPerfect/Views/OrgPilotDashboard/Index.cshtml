@@ -1,0 +1,103 @@
+﻿@model MyJobLeads.Areas.FillPerfect.Models.Pilot.OrgDashboardViewModel
+
+@{
+    ViewBag.Title = "FillPerfect Pilot Control Screen";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        <h3>Welcome To Your FillPerfect Control Screen</h3>
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>Thanks for testing  InterviewTools FillPerfect.</p>
+
+            <p>
+                We’ve allotted your school free copies of FillPerfect (3-Month Licenses), to distribute to students as you see fit. 
+                In return for using this  unrestricted copy, students must agree to provide you feedback on their usage – 
+                number of applications they’ve used this tool for,  how users have rated the system, and any written comments they wish to give. 
+            </p>
+
+            <p>To send a copy to your students, use the Test Pilot Control Screen below.</p>
+
+            <p>For any questions, contact us using the form at the bottom of this page.</p>
+
+            <p>Read our Career Services FillPerfect Welcome Package for more details on this pilot program.</p>
+        }
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>
+                <span class="bold">Total Licenses Alotted:</span> @Model.AlottedLicenseCount <br />
+                <span class="bold">Free Licenses Remaining:</span> @Model.RemainingLicenseCount <br />
+            </p>
+    
+            using (Html.BeginForm(MVC.FillPerfect.OrgPilotDashboard.SendPilotLicense()))
+            {
+                using (Html.ValidationArea())
+                {
+                    <p>
+                        @Html.ValidationSummary()
+                    </p>
+                }
+
+                //using (Html.ContentArea())
+                //{
+                    <p>
+                        <br />
+                        <br />
+                        <span class="bold">Send License to:</span><br />
+                        Student Name: @Html.TextBox("name", "", new { @class = "info" }) &nbsp;
+                        Student Email: @Html.TextBox("email", "", new { @class = "info" })
+
+                        @using (Html.FormButtonArea())
+                        {
+                            <input type="submit" value="Send" />
+                        }
+                    </p>
+                //}
+            }
+        }
+    }
+
+    using (Html.OuterRow())
+    {
+            <h3>Used Licenses</h3>
+            <table class="display">
+                <thead>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>License Sent On</th>
+                    <th></th>
+                </thead>
+
+                @foreach (var user in Model.LicensedUsers)
+                {
+                    <tr>
+                        <td>@user.Name</td>
+                        <td><a href="mailto:@user.Email" class="inlineBlue">@user.Email</a></td>
+                        <td>@user.GrantedDate.ToString("D")</td>
+                        <td>
+                            @Html.ActionLink("Resend License Information", MVC.FillPerfect.OrgPilotDashboard.ResendLicense(user.Id), new { @class = "inlineBlue" })
+                        </td>
+                    </tr>   
+                }
+
+                @if (Model.LicensedUsers.Count == 0)
+                {
+                    <tr>
+                        <td>You have not sent any licenses out yet</td>
+                    </tr>   
+                }
+            </table>
+    }
+}
+
