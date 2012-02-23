@@ -16,6 +16,11 @@
             @Html.ActionLink("View Milestones", MVC.Organization.Milestone.List(), new { @class = "floatRight blueLinks", title = "View Milestones" })
             @Html.ActionLink("View Student Statistics", MVC.Organization.MemberStats.Index(Model.Organization.Id),
                                                  new { @class = "floatRight blueLinks", title = "Detailed Student Statistics" })
+            <br />
+            @if (Model.IsInFillPerfectPilot)
+            {
+                @Html.ActionLink("FillPerfect Pilot", MVC.FillPerfect.OrgPilotDashboard.Index(), new { @class = "floatRight blueLinks", title = "View FillPerfect Pilot Dashboard" })
+            }
         </div> 
                 
         <div class="grid3 marginBottom_10 floatLeft"> 
