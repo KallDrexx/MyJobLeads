@@ -156,6 +156,8 @@
     <Compile Include="Entities\Organization.cs" />
     <Compile Include="Entities\EF\Configuration\OrganizationEmailDomain.cs" />
     <Compile Include="Entities\Position.cs" />
+    <Compile Include="Entities\SiteReferral.cs" />
+    <Compile Include="Entities\SiteReferralCode.cs" />
     <Compile Include="Entities\Surveys\FpSurveyResponse.cs" />
     <Compile Include="Entities\Surveys\FpSurveyResponseAnswer.cs" />
     <Compile Include="Entities\Task.cs" />

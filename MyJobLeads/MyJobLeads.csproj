@@ -538,6 +538,7 @@
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\ResearchCenterController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SiteReferralsController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="FillPerfect.FeedbackController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>

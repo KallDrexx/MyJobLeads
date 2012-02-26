@@ -27,6 +27,8 @@ namespace MyJobLeads.DomainModel.Entities.EF
         public DbSet<OAuthData> OAuthData { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Position> Positions { get; set; }
+        public DbSet<SiteReferralCode> SiteReferralCodes { get; set; }
+        public DbSet<SiteReferral> SiteReferrals { get; set; }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<TaskHistory> TaskHistory { get; set; }
         public DbSet<UnitTestEntity> UnitTestEntities { get; set; }
