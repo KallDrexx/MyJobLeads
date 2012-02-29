@@ -7,7 +7,6 @@ using Castle.Windsor;
 using MyJobLeads.Infrastructure.Attributes;
 using Castle.Windsor.Installer;
 using MyJobLeads.DomainModel.Entities.EF;
-using Microsoft.Security.Application;
 
 namespace MyJobLeads.Infrastructure.HtmlHelpers
 {
@@ -29,7 +28,7 @@ namespace MyJobLeads.Infrastructure.HtmlHelpers
                 return new HtmlString(string.Empty);
 
             // Make sure the content is anti-xss safe.
-            return html.Raw(HtmlSanitizer.sanitize(content.Html));
+            return html.Raw(MerchantTribe.Web.HtmlSanitizer.MakeHtmlSafe(content.Html));
         }
     }
 }
