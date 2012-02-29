@@ -52,6 +52,9 @@
     <Reference Include="ActionMailer.Net.Standalone, Version=0.7.0.0, Culture=neutral, PublicKeyToken=e62db3114c02a1c2, processorArchitecture=MSIL">
       <HintPath>..\packages\ActionMailer.Standalone.0.7.0\lib\Net40\ActionMailer.Net.Standalone.dll</HintPath>
     </Reference>
+    <Reference Include="AntiXssLibrary">
+      <HintPath>..\packages\AntiXSS.4.2.1\lib\net40\AntiXssLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="AutoMapper, Version=2.0.0.232, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.2.0.0\lib\net40-client\AutoMapper.dll</HintPath>
@@ -79,6 +82,9 @@
     <Reference Include="FluentValidation, Version=3.0.0.1, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FluentValidation.3.0.0.1\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlSanitizationLibrary">
+      <HintPath>..\packages\AntiXSS.4.2.1\lib\net40\HtmlSanitizationLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -562,6 +568,7 @@
     <Compile Include="Infrastructure\Attributes\RequiresOrganizationAdminAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\RequiresSiteAdminAttribute.cs" />
     <Compile Include="Infrastructure\Filters\ElmahHandledErrorLoggerFilter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\CmsContentHtmlHelpers.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\DateHtmlHelpers.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\LayoutHelpers.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\Layouts\ContentAreaWriter.cs" />
@@ -584,6 +591,7 @@
     <Compile Include="Infrastructure\Installers\MyJobLeadsInstaller.cs" />
     <Compile Include="Infrastructure\Providers\WindsorServiceFactory.cs" />
     <Compile Include="Infrastructure\Providers\WindsorValidatorFactory.cs" />
+    <Compile Include="Infrastructure\HtmlSanitizer.cs" />
     <Compile Include="Infrastructure\SelectLists\GeographicSelectLists.cs" />
     <Compile Include="Infrastructure\SelectLists\JigsawSelectLists.cs" />
     <Compile Include="Infrastructure\ViewModelMappings\MilestoneMappings.cs" />

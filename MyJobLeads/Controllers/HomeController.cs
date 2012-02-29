@@ -10,6 +10,7 @@ using MyJobLeads.DomainModel.Providers;
 using MyJobLeads.ViewModels.Users;
 using MyJobLeads.DomainModel.ViewModels.Organizations;
 using MyJobLeads.DomainModel.ProcessParams.Users;
+using MyJobLeads.Infrastructure.Attributes;
 
 namespace MyJobLeads.Controllers
 {

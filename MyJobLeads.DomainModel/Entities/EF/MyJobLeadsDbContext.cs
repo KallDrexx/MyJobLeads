@@ -8,6 +8,7 @@ using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Entities.Configuration;
 using MyJobLeads.DomainModel.Entities.Surveys;
 using MyJobLeads.DomainModel.Entities.FillPerfect;
+using MyJobLeads.DomainModel.Entities.CMS;
 
 namespace MyJobLeads.DomainModel.Entities.EF
 {
@@ -39,6 +40,10 @@ namespace MyJobLeads.DomainModel.Entities.EF
 
         // Configuration Tables
         public DbSet<MilestoneConfig> MilestoneConfigs { get; set; }
+
+        // CMS Tables
+        public DbSet<CmsContent> CmsContent { get; set; }
+        public DbSet<CmsContentHistory> CmsContentHistory { get; set; }
 
         /// <summary>
         /// Contains the Entity Framework database configuration rules
