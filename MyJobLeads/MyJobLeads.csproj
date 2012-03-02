@@ -295,6 +295,7 @@
     <Compile Include="Areas\Admin\Models\CopyAccountDataViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CopyAccountSuccessfulViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CreateOrganizationWithAdminViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\DemoAccountCreation\DemoCreationValues.cs" />
     <Compile Include="Areas\Admin\Models\Mappings\OrganizationMappings.cs" />
     <Compile Include="Areas\ContactSearch\ContactSearchAreaRegistration.cs" />
     <Compile Include="Areas\ContactSearch\Controllers\JigsawController.cs" />

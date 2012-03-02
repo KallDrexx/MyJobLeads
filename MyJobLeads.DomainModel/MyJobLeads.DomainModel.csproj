@@ -152,7 +152,6 @@
     <Compile Include="Entities\UnitTestEntity.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="EntityMapping\EntityMapLoader.cs" />
-    <Compile Include="EntityMapping\Mappings\ClonedEntityMappings.cs" />
     <Compile Include="EntityMapping\Mappings\CompanyMappings.cs" />
     <Compile Include="EntityMapping\Mappings\CustomConverters\OrganizationMemberStatisticsViewModelConverter.cs" />
     <Compile Include="EntityMapping\Mappings\MilestoneMappings.cs" />
