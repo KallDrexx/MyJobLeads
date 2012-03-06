@@ -21,9 +21,9 @@ using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
 namespace MyJobLeads.Areas.Admin.Controllers {
-    public partial class CopyAccountController {
+    public partial class CreateDemoAccountController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected CopyAccountController(Dummy d) { }
+        protected CreateDemoAccountController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result) {
@@ -33,16 +33,16 @@ namespace MyJobLeads.Areas.Admin.Controllers {
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult CopyAccountSuccess() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.CopyAccountSuccess);
+        public System.Web.Mvc.ActionResult Success() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Success);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public CopyAccountController Actions { get { return MVC.Admin.CopyAccount; } }
+        public CreateDemoAccountController Actions { get { return MVC.Admin.CreateDemoAccount; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "CopyAccount";
+        public readonly string Name = "CreateDemoAccount";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -50,7 +50,7 @@ namespace MyJobLeads.Areas.Admin.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string Index = "Index";
-            public readonly string CopyAccountSuccess = "CopyAccountSuccess";
+            public readonly string Success = "Success";
         }
 
 
@@ -59,29 +59,28 @@ namespace MyJobLeads.Areas.Admin.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string CopyAccountSuccess = "~/Areas/Admin/Views/CopyAccount/CopyAccountSuccess.cshtml";
-            public readonly string Index = "~/Areas/Admin/Views/CopyAccount/Index.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_CopyAccountController: MyJobLeads.Areas.Admin.Controllers.CopyAccountController {
-        public T4MVC_CopyAccountController() : base(Dummy.Instance) { }
+    public class T4MVC_CreateDemoAccountController: MyJobLeads.Areas.Admin.Controllers.CreateDemoAccountController {
+        public T4MVC_CreateDemoAccountController() : base(Dummy.Instance) { }
 
         public override System.Web.Mvc.ActionResult Index() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Index(MyJobLeads.Areas.Admin.Models.CopyAccountDataViewModel model) {
+        public override System.Web.Mvc.ActionResult Index(MyJobLeads.Areas.Admin.Models.DemoAccountCreation.CreateDemoAccountViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CopyAccountSuccess(string newUserName, string password) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CopyAccountSuccess);
-            callInfo.RouteValueDictionary.Add("newUserName", newUserName);
+        public override System.Web.Mvc.ActionResult Success(string name, string email, string password) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Success);
+            callInfo.RouteValueDictionary.Add("name", name);
+            callInfo.RouteValueDictionary.Add("email", email);
             callInfo.RouteValueDictionary.Add("password", password);
             return callInfo;
         }

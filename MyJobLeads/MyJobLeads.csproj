@@ -152,6 +152,9 @@
     <Compile Include="Admin.CopyAccountController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Admin.CreateDemoAccountController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Admin.DashboardController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -291,10 +294,13 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CopyAccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CreateDemoAccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\EditOrganizationController.cs" />
     <Compile Include="Areas\Admin\Models\CopyAccountDataViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CopyAccountSuccessfulViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CreateOrganizationWithAdminViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\DemoAccountCreation\CreateDemoAccountSuccessViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\DemoAccountCreation\CreateDemoAccountViewModel.cs" />
     <Compile Include="Areas\Admin\Models\DemoAccountCreation\DemoCreationValues.cs" />
     <Compile Include="Areas\Admin\Models\Mappings\OrganizationMappings.cs" />
     <Compile Include="Areas\ContactSearch\ContactSearchAreaRegistration.cs" />

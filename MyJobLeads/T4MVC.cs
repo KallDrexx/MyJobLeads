@@ -51,6 +51,7 @@ namespace T4MVC {
     public class AdminClass {
         public readonly string Name = "Admin";
         public MyJobLeads.Areas.Admin.Controllers.CopyAccountController CopyAccount = new MyJobLeads.Areas.Admin.Controllers.T4MVC_CopyAccountController();
+        public MyJobLeads.Areas.Admin.Controllers.CreateDemoAccountController CreateDemoAccount = new MyJobLeads.Areas.Admin.Controllers.T4MVC_CreateDemoAccountController();
         public MyJobLeads.Areas.Admin.Controllers.DashboardController Dashboard = new MyJobLeads.Areas.Admin.Controllers.T4MVC_DashboardController();
         public MyJobLeads.Areas.Admin.Controllers.EditOrganizationController EditOrganization = new MyJobLeads.Areas.Admin.Controllers.T4MVC_EditOrganizationController();
         public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
