@@ -60,6 +60,7 @@ namespace MyJobLeads.Areas.Admin.Controllers
                 // Create a new jobsearch with random data
                 var jobsearch = new JobSearch();
                 var values = new DemoCreationValues();
+                int seed = new Random(DateTime.Now.Millisecond).Next(1000, 50000);
 
                 foreach (var companyData in values.Companies)
                 {
@@ -76,7 +77,7 @@ namespace MyJobLeads.Areas.Admin.Controllers
 
                     for (int x = 0; x < 3; x++)
                     {
-                        var contactData = values.Contacts[new Random().Next(0, values.Contacts.Count - 1)];
+                        var contactData = values.Contacts[new Random(seed++).Next(0, values.Contacts.Count - 1)];
                         var contact = new Contact
                         {
                             Name = contactData[0],
@@ -89,40 +90,17 @@ namespace MyJobLeads.Areas.Admin.Controllers
                             Notes = contactData[7]
                         };
 
-                        var hasTask = Convert.ToBoolean(new Random().Next(0, 1));
-                        if (hasTask)
-                        {
-                            var random = new Random();
-                            var task = new Task
-                            {
-                                Name = values.TaskNames[random.Next(0, values.TaskNames.Count - 1)],
-                                CompletionDate = random.Next(0, 1) == 1 ? DateTime.Now : (DateTime?)null,
-                                TaskDate = random.Next(0, 1) == 1
-                                    ? DateTime.Now.AddDays(random.Next(-7, 14))
-                                    : (DateTime?)null
-                            };
-
-                            contact.Tasks.Add(task);
-                        }
-
                         company.Contacts.Add(contact);
                     }
 
-                    var hasCompanyTask = Convert.ToBoolean(new Random().Next(0, 1));
-                    if (hasCompanyTask)
+                    var task = new Task
                     {
-                        var random = new Random();
-                        var task = new Task
-                        {
-                            Name = values.TaskNames[random.Next(0, values.TaskNames.Count - 1)],
-                            CompletionDate = random.Next(0, 1) == 1 ? DateTime.Now : (DateTime?)null,
-                            TaskDate = random.Next(0, 1) == 1
-                                ? DateTime.Now.AddDays(random.Next(-7, 14))
-                                : (DateTime?)null
-                        };
+                        Name = values.TaskNames[new Random(seed++).Next(0, values.TaskNames.Count - 1)],
+                        CompletionDate = new Random(seed++).Next(0, 1000) % 2 == 0 ? DateTime.Now : (DateTime?)null,
+                        TaskDate = DateTime.Now.AddDays(new Random(seed++).Next(-7, 30)).AddHours(new Random(seed++).Next(-24, 24))
+                    };
 
-                        company.Tasks.Add(task);
-                    }
+                    company.Tasks.Add(task);
 
                     jobsearch.Companies.Add(company);
                 }
