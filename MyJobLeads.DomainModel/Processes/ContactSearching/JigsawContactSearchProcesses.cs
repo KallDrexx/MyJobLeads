@@ -24,6 +24,7 @@ using System.Transactions;
 using MyJobLeads.DomainModel.Queries.Companies;
 using MyJobLeads.DomainModel.Commands.Contacts;
 using MyJobLeads.DomainModel.Json.Converters;
+using MyJobLeads.DomainModel.Processes.CompanySearching;
 
 namespace MyJobLeads.DomainModel.Processes.ContactSearching
 {
@@ -79,7 +80,7 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
 
             // Check for a forbidden result
             if (response.StatusCode == HttpStatusCode.Forbidden)
-                JigsawAuthProcesses.ThrowInvalidResponse(response.Content, procParams.RequestingUserId);
+                JigsawAuthProcesses.ThrowInvalidResponse(response.Content, procParams.RequestingUserId, response.ErrorMessage);
 
             // Get the returned json and convert it to the view model
             var json = JsonConvert.DeserializeObject<ContactSearchResponseJson>(response.Content, new JigsawDateTimeConverter());
@@ -153,21 +154,12 @@ namespace MyJobLeads.DomainModel.Processes.ContactSearching
             // Use a transaction to prevent creating a company without the contact
             using (var transaction = new TransactionScope())
             {
-                // Retrieve the company from the database, or get the informatio to create a company from Jigsaw
+                // Retrieve the company from the database, or get the information to create a company from Jigsaw
                 Company company;
                 if (procParams.CreateCompanyFromJigsaw)
                 {
-                    string companyUrl = string.Format("rest/companies/{0}.json", procParams.JigsawCompanyId);
-                    request = new RestRequest(companyUrl, Method.GET);
-                    request.AddParameter("token", JigsawAuthProcesses.GetAuthToken());
-                    response = client.Execute(request);
-
-                    var companyJson = JsonConvert.DeserializeObject<CompanyDetailsResponseJson>(response.Content, new JigsawDateTimeConverter());
-                    if (companyJson.companies.Count == 0)
-                        throw new JigsawCompanyNotFoundException(procParams.JigsawCompanyId);
-
                     // Create the company
-                    var jsComp = companyJson.companies[0];
+                    var jsComp = JigsawCompanySearchProcesses.GetJigsawCompany(Convert.ToInt32(procParams.JigsawCompanyId), procParams.RequestingUserId);
                     company = _createCompanyCmd.CalledByUserId(procParams.RequestingUserId)
                                                .WithJobSearch((int)user.LastVisitedJobSearchId)
                                                .SetName(jsComp.name)

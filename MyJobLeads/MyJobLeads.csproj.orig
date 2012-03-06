@@ -1,0 +1,1820 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{26817E97-9878-44C5-80A7-8570D850D79D}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyJobLeads</RootNamespace>
+    <AssemblyName>MyJobLeads</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <MvcBuildViews>true</MvcBuildViews>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MvcBuildViews>false</MvcBuildViews>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MvcBuildViews>true</MvcBuildViews>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Development|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEVELOPMENT</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ActionMailer.Net, Version=0.7.0.0, Culture=neutral, PublicKeyToken=e62db3114c02a1c2, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActionMailer.Standalone.0.7.0\lib\Net40\ActionMailer.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="ActionMailer.Net.Standalone, Version=0.7.0.0, Culture=neutral, PublicKeyToken=e62db3114c02a1c2, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActionMailer.Standalone.0.7.0\lib\Net40\ActionMailer.Net.Standalone.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=2.0.0.232, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.2.0.0\lib\net40-client\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.2.5.2\lib\NET35\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Windsor.2.5.3\lib\NET40\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.60.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ClosedXML_NET_4.0.61.0\lib\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.1.0\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah, Version=1.2.13605.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\elmah.corelibrary.1.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.4.2.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=3.0.0.1, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentValidation.3.0.0.1\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PrecompiledMvcViewEngine, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PrecompiledMvcViewEngine.1.1\lib\net40\PrecompiledMvcViewEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.0.8.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.0.8\lib\net40\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data, Version=0.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Simple.Data.Core.0.7.2\lib\net40\Simple.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data.Ado, Version=0.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Simple.Data.Ado.0.7.2\lib\net40\Simple.Data.Ado.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data.SqlCe40">
+      <HintPath>..\packages\Simple.Data.SqlCompact40.0.7.2\lib\net40\Simple.Data.SqlCe40.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\RazorEngine.3.0.8\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Telerik.Web.Mvc, Version=2011.2.712.340, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\TelerikMvcExtensions.2011.2.712\lib\net40\Telerik.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivator, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebActivator.1.4.1\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.CopyAccountController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.CreateDemoAccountController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.DashboardController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.EditOrganizationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\EditorLocalization.bg-BG.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditorLocalization.bg-BG.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\EditorLocalization.de-DE.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditorLocalization.de-DE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\EditorLocalization.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditorLocalization.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\EditorLocalization.en-US.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditorLocalization.en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\EditorLocalization.fr-FR.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditorLocalization.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\EditorLocalization.nl-NL.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditorLocalization.nl-NL.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\EditorLocalization.pl-PL.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditorLocalization.pl-PL.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\EditorLocalization.pt-BR.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditorLocalization.pt-BR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\EditorLocalization.ru-RU.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditorLocalization.ru-RU.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\EditorLocalization.uk-UA.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditorLocalization.uk-UA.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\GridLocalization.bg-BG.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GridLocalization.bg-BG.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\GridLocalization.de-DE.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GridLocalization.de-DE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\GridLocalization.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GridLocalization.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\GridLocalization.en-US.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GridLocalization.en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\GridLocalization.es-ES.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GridLocalization.es-ES.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\GridLocalization.fr-FR.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GridLocalization.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\GridLocalization.pl-PL.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GridLocalization.pl-PL.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\GridLocalization.pt-BR.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GridLocalization.pt-BR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\GridLocalization.pt-PT.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GridLocalization.pt-PT.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\GridLocalization.ru-RU.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GridLocalization.ru-RU.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\GridLocalization.uk-UA.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GridLocalization.uk-UA.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\UploadLocalization.bg-BG.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UploadLocalization.bg-BG.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\UploadLocalization.en-US.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UploadLocalization.en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\UploadLocalization.pl-PL.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UploadLocalization.pl-PL.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\UploadLocalization.ru-RU.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UploadLocalization.ru-RU.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\Bootstrapper.cs" />
+    <Compile Include="App_Start\PrecompiledMvcViewEngineStart.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CopyAccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CreateDemoAccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EditOrganizationController.cs" />
+    <Compile Include="Areas\Admin\Models\CopyAccountDataViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\CopyAccountSuccessfulViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\CreateOrganizationWithAdminViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\DemoAccountCreation\CreateDemoAccountSuccessViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\DemoAccountCreation\CreateDemoAccountViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\DemoAccountCreation\DemoCreationValues.cs" />
+    <Compile Include="Areas\Admin\Models\Mappings\OrganizationMappings.cs" />
+    <Compile Include="Areas\CompanySearch\CompanySearchAreaRegistration.cs" />
+    <Compile Include="Areas\CompanySearch\Controllers\JigsawController.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\AddCompanySuccessViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\AddCompanyViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\CompanySearchQueryViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\SearchResultsViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\SyncCompanyViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Mappings\JigsawSearchMappings.cs" />
+    <Compile Include="Areas\CompanySearch\Views\Jigsaw\AddCompany.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddCompany.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\CompanySearch\Views\Jigsaw\AddCompanySuccess.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddCompanySuccess.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\CompanySearch\Views\Jigsaw\Details.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Details.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\CompanySearch\Views\Jigsaw\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\CompanySearch\Views\Jigsaw\PerformSearch.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PerformSearch.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\CompanySearch\Views\Jigsaw\Sync.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sync.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\CompanySearch\Views\Jigsaw\_SearchForm.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_SearchForm.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ContactSearch\ContactSearchAreaRegistration.cs" />
+    <Compile Include="Areas\ContactSearch\Controllers\JigsawController.cs" />
+    <Compile Include="Areas\ContactSearch\Controllers\SyncController.cs" />
+    <Compile Include="Areas\ContactSearch\Models\Jigsaw\ImportContactViewModel.cs" />
+    <Compile Include="Areas\ContactSearch\Models\Jigsaw\JigsawAuthenticateViewModel.cs" />
+    <Compile Include="Areas\ContactSearch\Models\Jigsaw\JigsawContactPurchaseViewModel.cs" />
+    <Compile Include="Areas\ContactSearch\Models\Jigsaw\JigsawSearchParametersViewModel.cs" />
+    <Compile Include="Areas\ContactSearch\Models\Mappings\JigsawViewModelModelMappings.cs" />
+    <Compile Include="Areas\ContactSearch\Models\Jigsaw\JigsawSearchResultsViewModel.cs" />
+    <Compile Include="Areas\ContactSearch\Models\Sync\JigsawSyncViewModel.cs" />
+    <Compile Include="Areas\ContactSearch\Views\Jigsaw\AddContactSuccessful.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddContactSuccessful.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ContactSearch\Views\Jigsaw\Authenticate.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Authenticate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ContactSearch\Views\Jigsaw\ImportContact.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImportContact.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ContactSearch\Views\Jigsaw\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ContactSearch\Views\Jigsaw\PerformSearch.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PerformSearch.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ContactSearch\Views\Jigsaw\PurchaseContact.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PurchaseContact.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ContactSearch\Views\Jigsaw\_SearchForm.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_SearchForm.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ContactSearch\Views\Sync\Jigsaw.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Jigsaw.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\FillPerfect\Controllers\FeedbackController.cs" />
+    <Compile Include="Areas\FillPerfect\Controllers\OrgPilotDashboardController.cs" />
+    <Compile Include="Areas\FillPerfect\Controllers\StatsController.cs" />
+    <Compile Include="Areas\FillPerfect\FillPerfectAreaRegistration.cs" />
+    <Compile Include="Areas\FillPerfect\Models\Pilot\OrgDashboardViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurveyPost2WeeksViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurveyPost10ViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurveyPost3ViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurveyPost5ViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Models\Surveys\SurveyCompletedViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Views\Feedback\Student01.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Student01.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\FillPerfect\Views\Feedback\Student02.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Student02.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\FillPerfect\Views\Feedback\Student03.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Student03.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\FillPerfect\Views\Feedback\Student04.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Student04.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\FillPerfect\Views\Feedback\SurveyCompleted.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SurveyCompleted.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\FillPerfect\Views\OrgPilotDashboard\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Organization\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Organization\Controllers\EditOrganizationController.cs" />
+    <Compile Include="Areas\Organization\Controllers\MemberStatsController.cs" />
+    <Compile Include="Areas\Organization\Controllers\MilestoneController.cs" />
+    <Compile Include="Areas\Organization\OrganizationAreaRegistration.cs" />
+    <Compile Include="Areas\Organization\Views\Dashboard\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Organization\Views\EditOrganization\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Organization\Views\MemberStats\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Organization\Views\Milestone\Details.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Details.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Organization\Views\Milestone\List.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>List.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Organization\Views\Milestone\Update.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Update.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\PositionSearch\Controllers\LinkedInController.cs" />
+    <Compile Include="Areas\PositionSearch\Models\AddPositionViewModel.cs" />
+    <Compile Include="Areas\PositionSearch\Models\PositionSearchQueryViewModel.cs" />
+    <Compile Include="Areas\PositionSearch\Models\PerformedSearchViewModel.cs" />
+    <Compile Include="Areas\PositionSearch\PositionSearchAreaRegistration.cs" />
+    <Compile Include="Areas\PositionSearch\Views\LinkedIn\AddPosition.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddPosition.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\PositionSearch\Views\LinkedIn\AddPositionSuccessful.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddPositionSuccessful.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\PositionSearch\Views\LinkedIn\AuthorizationAlert.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuthorizationAlert.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\PositionSearch\Views\LinkedIn\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\PositionSearch\Views\LinkedIn\PerformSearch.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PerformSearch.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\PositionSearch\Views\LinkedIn\PositionDetails.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PositionDetails.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\PositionSearch\Views\LinkedIn\_SearchForm.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_SearchForm.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompanySearch.JigsawController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompanySearch.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContactController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContactSearch.JigsawController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContactSearch.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContactSearch.SyncController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobSearchController.cs" />
+    <Compile Include="Controllers\PoliciesController.cs" />
+    <Compile Include="Controllers\PositionController.cs" />
+    <Compile Include="Controllers\ResearchCenterController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SiteReferralsController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="FillPerfect.FeedbackController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FillPerfect.OrgPilotDashboardController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+>>>>>>> master
+    <Compile Include="FillPerfect.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FillPerfect.StatsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HomeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Attributes\RequiresActiveJobSearchAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\RequiresOrganizationAdminAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\RequiresSiteAdminAttribute.cs" />
+    <Compile Include="Infrastructure\Filters\ElmahHandledErrorLoggerFilter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\DateHtmlHelpers.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\LayoutHelpers.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\ContentAreaWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\FieldValueDisplayWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\FormFieldAreaWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\FormButtonAreaWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\FormFieldWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\InnerColumnWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\OuterRowWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\NumericDisplayHelpers.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\StringHtmlHelpers.cs" />
+    <Compile Include="Infrastructure\Installers\ValidatorInstaller.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\PageInfoBoxWriter.cs" />
+    <Compile Include="Infrastructure\Providers\AppDataDirectoryProvider.cs" />
+    <Compile Include="Infrastructure\Attributes\MJLAuthorizeAttribute.cs" />
+    <Compile Include="Infrastructure\ModelBinders\EmptyStringModelBaseBinder.cs" />
+    <Compile Include="Infrastructure\MyJobLeadsMembershipProvider.cs" />
+    <Compile Include="Infrastructure\MyJobLeadsMembershipUser.cs" />
+    <Compile Include="Infrastructure\Installers\ControllerInstaller.cs" />
+    <Compile Include="Infrastructure\Installers\MyJobLeadsInstaller.cs" />
+    <Compile Include="Infrastructure\Providers\WindsorServiceFactory.cs" />
+    <Compile Include="Infrastructure\Providers\WindsorValidatorFactory.cs" />
+    <Compile Include="Infrastructure\SelectLists\GeographicSelectLists.cs" />
+    <Compile Include="Infrastructure\SelectLists\JigsawSelectLists.cs" />
+    <Compile Include="Infrastructure\ViewModelMappings\MilestoneMappings.cs" />
+    <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
+    <Compile Include="JobSearchController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Organization.DashboardController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Organization.EditOrganizationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Organization.MemberStatsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Organization.MilestoneController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Organization.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PoliciesController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PositionController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PositionSearch.LinkedInController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PositionSearch.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResearchCenterController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SearchController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Accounts\AccountModels.cs" />
+    <Compile Include="ViewModels\Accounts\AccountMembershipService.cs" />
+    <Compile Include="ViewModels\Accounts\IMembershipService.cs" />
+    <Compile Include="ViewModels\Accounts\OrganizationRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\Companies\CompanyDisplayViewModel.cs" />
+    <Compile Include="ViewModels\Companies\EditCompanyViewModel.cs" />
+    <Compile Include="ViewModels\Companies\JobSearchCompanyListViewModel.cs" />
+    <Compile Include="ViewModels\Contacts\ContactDisplayViewModel.cs" />
+    <Compile Include="ViewModels\Contacts\ContactSummaryViewModel.cs" />
+    <Compile Include="ViewModels\Contacts\EditContactViewModel.cs" />
+    <Compile Include="ViewModels\JobSearches\JobSearchDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Milestones\EditMilestoneViewModel.cs" />
+    <Compile Include="ViewModels\Organizations\EditOrganizationViewModel.cs" />
+    <Compile Include="ViewModels\PerformedSearchViewModel.cs" />
+    <Compile Include="ViewModels\Tasks\EditTaskViewModel.cs" />
+    <Compile Include="MyJobLeadsBaseController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaskController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Tasks\TaskDashboardViewModel.cs" />
+    <Compile Include="ViewModels\Tasks\TaskDisplayViewModel.cs" />
+    <Compile Include="ViewModels\Users\UserSidebarViewModel.cs" />
+    <Compile Include="Views\Account\ChangePassword.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangePassword.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\ChangePasswordSuccess.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangePasswordSuccess.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\LogOn.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogOn.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\Register.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Register.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\RegisterWithOrganization.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegisterWithOrganization.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\ResetPassword.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResetPassword.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\ResetPasswordResult.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResetPasswordResult.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Company\Details.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Details.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Company\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Company\List.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>List.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Company\_CompanySummaryDisplay.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_CompanySummaryDisplay.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contact\Details.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Details.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contact\Edit.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\About.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>About.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\Error.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Error.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\FixBlankTitles.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FixBlankTitles.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\JigsawError.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JigsawError.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\SubmitFeedback.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SubmitFeedback.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\Test.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Test.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\_AnonymousUserSidebarDisplay.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_AnonymousUserSidebarDisplay.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\_LoggedInSidebarDisplay.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_LoggedInSidebarDisplay.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobSearch\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobSearch\Search.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Search.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobSearch\_JsMilestoneDisplay.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_JsMilestoneDisplay.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Policies\Privacy.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Privacy.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Policies\Security.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Security.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Position\Details.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Details.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Position\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Position\List.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>List.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ResearchCenter\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\RefreshSearchIndex.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RefreshSearchIndex.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EntityNotFound.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityNotFound.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Error.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Error.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\_Layout.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Layout.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\_LogOnPartial.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_LogOnPartial.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\Details.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Details.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\Future.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Future.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\Overdue.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Overdue.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\TaskListControl.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TaskListControl.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\Today.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Today.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\_CompanyTaskDisplay.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_CompanyTaskDisplay.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\_OpenTaskListItem.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_OpenTaskListItem.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\_OpenTaskSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_OpenTaskSummary.cshtml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\2011.2.712\Black\editor.png" />
+    <Content Include="Content\2011.2.712\Black\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Black\loading.gif" />
+    <Content Include="Content\2011.2.712\Black\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Black\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Black\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Black\sprite.png" />
+    <Content Include="Content\2011.2.712\Black\treeview-line.png" />
+    <Content Include="Content\2011.2.712\Black\treeview-nodes-rtl.png" />
+    <Content Include="Content\2011.2.712\Black\treeview-nodes.png" />
+    <Content Include="Content\2011.2.712\Default\editor.png" />
+    <Content Include="Content\2011.2.712\Default\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Default\loading.gif" />
+    <Content Include="Content\2011.2.712\Default\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Default\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Default\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Default\sprite.png" />
+    <Content Include="Content\2011.2.712\Default\treeview-line.png" />
+    <Content Include="Content\2011.2.712\Default\treeview-nodes-rtl.png" />
+    <Content Include="Content\2011.2.712\Default\treeview-nodes.png" />
+    <Content Include="Content\2011.2.712\Forest\editor.png" />
+    <Content Include="Content\2011.2.712\Forest\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Forest\loading.gif" />
+    <Content Include="Content\2011.2.712\Forest\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Forest\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Forest\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Forest\sprite.png" />
+    <Content Include="Content\2011.2.712\Forest\treeview-line.png" />
+    <Content Include="Content\2011.2.712\Forest\treeview-nodes-rtl.png" />
+    <Content Include="Content\2011.2.712\Forest\treeview-nodes.png" />
+    <Content Include="Content\2011.2.712\Hay\editor.png" />
+    <Content Include="Content\2011.2.712\Hay\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Hay\loading.gif" />
+    <Content Include="Content\2011.2.712\Hay\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Hay\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Hay\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Hay\sprite.png" />
+    <Content Include="Content\2011.2.712\Hay\treeview-line.png" />
+    <Content Include="Content\2011.2.712\Hay\treeview-nodes-rtl.png" />
+    <Content Include="Content\2011.2.712\Hay\treeview-nodes.png" />
+    <Content Include="Content\2011.2.712\Office2007\editor.png" />
+    <Content Include="Content\2011.2.712\Office2007\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Office2007\loading.gif" />
+    <Content Include="Content\2011.2.712\Office2007\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Office2007\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Office2007\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Office2007\sprite.png" />
+    <Content Include="Content\2011.2.712\Office2007\treeview-line.png" />
+    <Content Include="Content\2011.2.712\Office2007\treeview-nodes-rtl.png" />
+    <Content Include="Content\2011.2.712\Office2007\treeview-nodes.png" />
+    <Content Include="Content\2011.2.712\Office2010Black\editor.png" />
+    <Content Include="Content\2011.2.712\Office2010Black\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Office2010Black\loading.gif" />
+    <Content Include="Content\2011.2.712\Office2010Black\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Office2010Black\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Office2010Black\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Office2010Black\sprite.png" />
+    <Content Include="Content\2011.2.712\Office2010Black\treeview-line.png" />
+    <Content Include="Content\2011.2.712\Office2010Black\treeview-nodes-rtl.png" />
+    <Content Include="Content\2011.2.712\Office2010Black\treeview-nodes.png" />
+    <Content Include="Content\2011.2.712\Office2010Blue\editor.png" />
+    <Content Include="Content\2011.2.712\Office2010Blue\gradient.png" />
+    <Content Include="Content\2011.2.712\Office2010Blue\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Office2010Blue\loading.gif" />
+    <Content Include="Content\2011.2.712\Office2010Blue\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Office2010Blue\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Office2010Blue\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Office2010Blue\sprite.png" />
+    <Content Include="Content\2011.2.712\Office2010Silver\editor.png" />
+    <Content Include="Content\2011.2.712\Office2010Silver\gradient.png" />
+    <Content Include="Content\2011.2.712\Office2010Silver\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Office2010Silver\loading.gif" />
+    <Content Include="Content\2011.2.712\Office2010Silver\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Office2010Silver\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Office2010Silver\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Office2010Silver\sprite.png" />
+    <Content Include="Content\2011.2.712\Outlook\editor.png" />
+    <Content Include="Content\2011.2.712\Outlook\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Outlook\loading.gif" />
+    <Content Include="Content\2011.2.712\Outlook\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Outlook\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Outlook\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Outlook\sprite.png" />
+    <Content Include="Content\2011.2.712\Outlook\treeview-line.png" />
+    <Content Include="Content\2011.2.712\Outlook\treeview-nodes-rtl.png" />
+    <Content Include="Content\2011.2.712\Outlook\treeview-nodes.png" />
+    <Content Include="Content\2011.2.712\Simple\editor.png" />
+    <Content Include="Content\2011.2.712\Simple\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Simple\loading.gif" />
+    <Content Include="Content\2011.2.712\Simple\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Simple\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Simple\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Simple\sprite.png" />
+    <Content Include="Content\2011.2.712\Simple\treeview-line.png" />
+    <Content Include="Content\2011.2.712\Simple\treeview-nodes-rtl.png" />
+    <Content Include="Content\2011.2.712\Simple\treeview-nodes.png" />
+    <Content Include="Content\2011.2.712\Sitefinity\editor.png" />
+    <Content Include="Content\2011.2.712\Sitefinity\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Sitefinity\loading.gif" />
+    <Content Include="Content\2011.2.712\Sitefinity\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Sitefinity\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Sitefinity\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Sitefinity\sprite.png" />
+    <Content Include="Content\2011.2.712\Sitefinity\treeview-line.png" />
+    <Content Include="Content\2011.2.712\Sitefinity\treeview-nodes-rtl.png" />
+    <Content Include="Content\2011.2.712\Sitefinity\treeview-nodes.png" />
+    <Content Include="Content\2011.2.712\Sunset\editor.png" />
+    <Content Include="Content\2011.2.712\Sunset\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Sunset\loading.gif" />
+    <Content Include="Content\2011.2.712\Sunset\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Sunset\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Sunset\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Sunset\sprite.png" />
+    <Content Include="Content\2011.2.712\Sunset\treeview-line.png" />
+    <Content Include="Content\2011.2.712\Sunset\treeview-nodes-rtl.png" />
+    <Content Include="Content\2011.2.712\Sunset\treeview-nodes.png" />
+    <Content Include="Content\2011.2.712\telerik.black.min.css" />
+    <Content Include="Content\2011.2.712\telerik.common.min.css" />
+    <Content Include="Content\2011.2.712\telerik.default.min.css" />
+    <Content Include="Content\2011.2.712\telerik.forest.min.css" />
+    <Content Include="Content\2011.2.712\telerik.hay.min.css" />
+    <Content Include="Content\2011.2.712\telerik.office2007.min.css" />
+    <Content Include="Content\2011.2.712\telerik.office2010black.min.css" />
+    <Content Include="Content\2011.2.712\telerik.office2010blue.min.css" />
+    <Content Include="Content\2011.2.712\telerik.office2010silver.min.css" />
+    <Content Include="Content\2011.2.712\telerik.outlook.min.css" />
+    <Content Include="Content\2011.2.712\telerik.rtl.min.css" />
+    <Content Include="Content\2011.2.712\telerik.simple.min.css" />
+    <Content Include="Content\2011.2.712\telerik.sitefinity.min.css" />
+    <Content Include="Content\2011.2.712\telerik.sunset.min.css" />
+    <Content Include="Content\2011.2.712\telerik.telerik.min.css" />
+    <Content Include="Content\2011.2.712\telerik.transparent.min.css" />
+    <Content Include="Content\2011.2.712\telerik.vista.min.css" />
+    <Content Include="Content\2011.2.712\telerik.web20.min.css" />
+    <Content Include="Content\2011.2.712\telerik.webblue.min.css" />
+    <Content Include="Content\2011.2.712\telerik.windows7.min.css" />
+    <Content Include="Content\2011.2.712\Telerik\editor.png" />
+    <Content Include="Content\2011.2.712\Telerik\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Telerik\loading.gif" />
+    <Content Include="Content\2011.2.712\Telerik\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Telerik\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Telerik\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Telerik\sprite.png" />
+    <Content Include="Content\2011.2.712\Telerik\treeview-line.png" />
+    <Content Include="Content\2011.2.712\Telerik\treeview-nodes-rtl.png" />
+    <Content Include="Content\2011.2.712\Telerik\treeview-nodes.png" />
+    <Content Include="Content\2011.2.712\Transparent\active.png" />
+    <Content Include="Content\2011.2.712\Transparent\editor.png" />
+    <Content Include="Content\2011.2.712\Transparent\gradient.png" />
+    <Content Include="Content\2011.2.712\Transparent\group.png" />
+    <Content Include="Content\2011.2.712\Transparent\hover.png" />
+    <Content Include="Content\2011.2.712\Transparent\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Transparent\loading.gif" />
+    <Content Include="Content\2011.2.712\Transparent\selected.png" />
+    <Content Include="Content\2011.2.712\Transparent\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Transparent\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Transparent\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Transparent\sprite.png" />
+    <Content Include="Content\2011.2.712\Transparent\toolbar.png" />
+    <Content Include="Content\2011.2.712\Transparent\widget.png" />
+    <Content Include="Content\2011.2.712\Vista\editor.png" />
+    <Content Include="Content\2011.2.712\Vista\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Vista\loading.gif" />
+    <Content Include="Content\2011.2.712\Vista\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Vista\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Vista\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Vista\sprite.png" />
+    <Content Include="Content\2011.2.712\Web20\editor.png" />
+    <Content Include="Content\2011.2.712\Web20\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Web20\loading.gif" />
+    <Content Include="Content\2011.2.712\Web20\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Web20\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Web20\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Web20\sprite.png" />
+    <Content Include="Content\2011.2.712\Web20\treeview-line.png" />
+    <Content Include="Content\2011.2.712\Web20\treeview-nodes-rtl.png" />
+    <Content Include="Content\2011.2.712\Web20\treeview-nodes.png" />
+    <Content Include="Content\2011.2.712\WebBlue\editor.png" />
+    <Content Include="Content\2011.2.712\WebBlue\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\WebBlue\loading.gif" />
+    <Content Include="Content\2011.2.712\WebBlue\slider-h.gif" />
+    <Content Include="Content\2011.2.712\WebBlue\slider-v.gif" />
+    <Content Include="Content\2011.2.712\WebBlue\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\WebBlue\sprite.png" />
+    <Content Include="Content\2011.2.712\WebBlue\treeview-line.png" />
+    <Content Include="Content\2011.2.712\WebBlue\treeview-nodes-rtl.png" />
+    <Content Include="Content\2011.2.712\WebBlue\treeview-nodes.png" />
+    <Content Include="Content\2011.2.712\Windows7\editor.png" />
+    <Content Include="Content\2011.2.712\Windows7\imagebrowser.png" />
+    <Content Include="Content\2011.2.712\Windows7\loading.gif" />
+    <Content Include="Content\2011.2.712\Windows7\slider-h.gif" />
+    <Content Include="Content\2011.2.712\Windows7\slider-v.gif" />
+    <Content Include="Content\2011.2.712\Windows7\sprite-vertical.png" />
+    <Content Include="Content\2011.2.712\Windows7\sprite.png" />
+    <Content Include="Content\images\details_close.png" />
+    <Content Include="Content\images\details_open.png" />
+    <Content Include="Content\images\footbg.gif" />
+    <Content Include="Content\images\rss.png" />
+    <Content Include="Content\images\topbg.gif" />
+    <Content Include="Content\images\wrapbg.gif" />
+    <Content Include="crossdomain.xml" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="robots.txt" />
+    <Content Include="Scripts\2011.1.315\jquery-1.5.1.min.js" />
+    <Content Include="Scripts\2011.1.315\jquery.validate.min.js" />
+    <Content Include="Scripts\2011.2.712\jquery-1.5.1.min.js" />
+    <Content Include="Scripts\2011.2.712\jquery.validate.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.autocomplete.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.calendar.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.chart.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.combobox.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.common.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.datepicker.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.datetimepicker.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.draganddrop.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.editor.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.grid.editing.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.grid.filtering.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.grid.grouping.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.grid.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.grid.reordering.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.grid.resizing.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.imagebrowser.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.list.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.menu.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.panelbar.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.slider.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.splitter.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.tabstrip.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.textbox.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.timepicker.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.treeview.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.upload.min.js" />
+    <Content Include="Scripts\2011.2.712\telerik.window.min.js" />
+    <Content Include="Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.4.js" />
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\plugins\DataTables\css\demo_page.css" />
+    <Content Include="Scripts\plugins\DataTables\css\demo_table.css" />
+    <Content Include="Scripts\plugins\DataTables\css\demo_table_jui.css" />
+    <Content Include="Scripts\plugins\DataTables\images\back_disabled.jpg" />
+    <Content Include="Scripts\plugins\DataTables\images\back_enabled.jpg" />
+    <Content Include="Scripts\plugins\DataTables\images\favicon.ico" />
+    <Content Include="Scripts\plugins\DataTables\images\forward_disabled.jpg" />
+    <Content Include="Scripts\plugins\DataTables\images\forward_enabled.jpg" />
+    <Content Include="Scripts\plugins\DataTables\images\sort_asc.png" />
+    <Content Include="Scripts\plugins\DataTables\images\sort_asc_disabled.png" />
+    <Content Include="Scripts\plugins\DataTables\images\sort_both.png" />
+    <Content Include="Scripts\plugins\DataTables\images\sort_desc.png" />
+    <Content Include="Scripts\plugins\DataTables\images\sort_desc_disabled.png" />
+    <Content Include="Scripts\plugins\DataTables\js\jquery.dataTables.js" />
+    <Content Include="Scripts\plugins\DataTables\js\jquery.dataTables.min.js" />
+    <Content Include="Scripts\plugins\DataTables\js\jquery.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.1.315\jquery-1.5.1.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.1.315\jquery.validate.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\jquery-1.5.1.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\jquery.validate.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.autocomplete.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.calendar.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.chart.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.combobox.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.common.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.datepicker.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.datetimepicker.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.draganddrop.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.editor.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.grid.editing.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.grid.filtering.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.grid.grouping.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.grid.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.grid.reordering.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.grid.resizing.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.imagebrowser.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.list.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.menu.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.panelbar.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.slider.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.splitter.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.tabstrip.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.textbox.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.timepicker.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.treeview.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.upload.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\2011.2.712\telerik.window.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="ViewModels\Companies\Scripts\jquery-1.4.4.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery-1.4.4.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery.validate.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery.validate.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery-ui.js" />
+    <Content Include="ViewModels\Companies\Scripts\jquery-ui.min.js" />
+    <Content Include="ViewModels\Companies\Scripts\MicrosoftAjax.js" />
+    <Content Include="ViewModels\Companies\Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="ViewModels\Companies\Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="ViewModels\Companies\Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="ViewModels\Companies\Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="ViewModels\Companies\Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ChangePassword.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Account\ChangePasswordSuccess.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ChangePasswordSuccess.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Account\LogOn.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>LogOn.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Account\Register.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Register.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\About.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>About.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Error.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Error.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_LogOnPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_LogOnPartial.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_Layout.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Layout.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\CompanySearch\Views\Shared\" />
+    <Folder Include="Areas\ContactSearch\Views\Shared\" />
+    <Folder Include="Areas\FillPerfect\Views\Shared\" />
+    <Folder Include="Areas\Organization\Models\" />
+    <Folder Include="Areas\Organization\Views\Shared\" />
+    <Folder Include="Areas\PositionSearch\Views\Shared\" />
+    <Folder Include="ViewModels\Search\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyJobLeads.DomainModel\MyJobLeads.DomainModel.csproj">
+      <Project>{B8CE5C58-BADC-4504-93FB-CFA05F8DAC6F}</Project>
+      <Name>MyJobLeads.DomainModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\JobSearch\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="T4MVC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>T4MVC.cs</LastGenOutput>
+    </Content>
+    <Content Include="app_offline.htm_" />
+    <Content Include="Views\Company\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Company\Details.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Details.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Contact\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Contact\Details.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Details.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\Details.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Account\ResetPassword.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ResetPassword.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Account\ResetPasswordResult.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ResetPasswordResult.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\SubmitFeedback.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SubmitFeedback.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\_OpenTaskSummary.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_OpenTaskSummary.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\_OpenTaskListItem.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_OpenTaskListItem.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\_CompanyTaskDisplay.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_CompanyTaskDisplay.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Search\RefreshSearchIndex.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>RefreshSearchIndex.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\JobSearch\Search.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Search.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\JobSearch\_JsMilestoneDisplay.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_JsMilestoneDisplay.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\FixBlankTitles.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FixBlankTitles.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Account\RegisterWithOrganization.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>RegisterWithOrganization.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Company\List.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>List.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Organization\Views\Web.config" />
+    <Content Include="Areas\Organization\Views\Dashboard\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Organization\Views\EditOrganization\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Organization\Views\_ViewStart.cshtml" />
+    <Content Include="Content\Documents\Student Tutorial and Hints.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Documents\Welcome Package - Start here.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Organization\Views\Milestone\List.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>List.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Organization\Views\Milestone\Update.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Update.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Organization\Views\Milestone\Details.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Details.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Organization\Views\MemberStats\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\EditOrganization\CreateOrganization.cshtml" />
+    <Content Include="Areas\Admin\Views\EditOrganization\CreateOrgSuccessful.cshtml" />
+    <Content Include="Areas\PositionSearch\Views\Web.config" />
+    <Content Include="Areas\PositionSearch\Views\LinkedIn\AuthorizationAlert.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AuthorizationAlert.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\PositionSearch\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\PositionSearch\Views\LinkedIn\_SearchForm.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_SearchForm.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\PositionSearch\Views\LinkedIn\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\PositionSearch\Views\LinkedIn\PerformSearch.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PerformSearch.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\PositionSearch\Views\LinkedIn\PositionDetails.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PositionDetails.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\PositionSearch\Views\LinkedIn\AddPosition.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AddPosition.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\PositionSearch\Views\LinkedIn\AddPositionSuccessful.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AddPositionSuccessful.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Content\Documents\Is Your Data Secure.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Documents\MyLeads for Career Services - Brochure.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\ContactSearch\Views\Web.config" />
+    <Content Include="Areas\ContactSearch\Views\Jigsaw\Authenticate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Authenticate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\ContactSearch\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\ContactSearch\Views\Jigsaw\_SearchForm.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_SearchForm.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\ContactSearch\Views\Jigsaw\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\ContactSearch\Views\Jigsaw\PerformSearch.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PerformSearch.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\ContactSearch\Views\Jigsaw\AddContactSuccessful.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AddContactSuccessful.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\ContactSearch\Views\Jigsaw\ImportContact.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ImportContact.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\ContactSearch\Views\Sync\Jigsaw.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Jigsaw.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\ContactSearch\Views\Jigsaw\PurchaseContact.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PurchaseContact.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\FillPerfect\Views\Web.config" />
+<<<<<<< HEAD
+    <Content Include="Areas\Admin\Views\CopyAccount\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CopyAccount\CopyAccountSuccess.cshtml" />
+=======
+    <Content Include="Areas\FillPerfect\Views\Feedback\SurveyCompleted.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SurveyCompleted.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\FillPerfect\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\FillPerfect\Views\Feedback\Student02.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Student02.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\FillPerfect\Views\Feedback\Student01.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Student01.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\FillPerfect\Views\Feedback\Student03.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Student03.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\FillPerfect\Views\Feedback\Student04.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Student04.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\CompanySearch\Views\Web.config" />
+    <Content Include="Areas\CompanySearch\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\_SearchForm.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_SearchForm.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\PerformSearch.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PerformSearch.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\Details.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Details.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\AddCompany.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AddCompany.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\AddCompanySuccess.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AddCompanySuccess.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\Sync.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Sync.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\FillPerfect\Views\OrgPilotDashboard\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+>>>>>>> master
+    <None Include="Scripts\plugins\DataTables\images\Sorting icons.psd" />
+    <None Include="Scripts\plugins\DataTables\js\jquery.dataTables.min.js.gz" />
+    <None Include="T4MVC.tt.settings.t4" />
+    <Content Include="Views\Home\Test.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Test.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\_LoggedInSidebarDisplay.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_LoggedInSidebarDisplay.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\_AnonymousUserSidebarDisplay.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_AnonymousUserSidebarDisplay.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\Overdue.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Overdue.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\TaskListControl.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>TaskListControl.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\Today.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Today.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\Future.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Future.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Company\_CompanySummaryDisplay.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_CompanySummaryDisplay.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Contact\_ContactSummaryDisplay.cshtml" />
+    <Content Include="Views\Position\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Position\Details.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Details.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Position\List.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>List.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Shared\EntityNotFound.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EntityNotFound.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\Error.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Error.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Account\ClosedRegistrationView.cshtml" />
+    <Content Include="Views\Account\InvalidOrgRegistrationTokenView.cshtml" />
+    <Content Include="Views\Policies\Privacy.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Privacy.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Policies\Security.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Security.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\ResearchCenter\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\JigsawError.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>JigsawError.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>UploadLocalization.ru-RU.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\UploadLocalization.pl-PL.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>UploadLocalization.pl-PL.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\UploadLocalization.en-US.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>UploadLocalization.en-US.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\UploadLocalization.bg-BG.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>UploadLocalization.bg-BG.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\GridLocalization.uk-UA.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>GridLocalization.uk-UA.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\GridLocalization.ru-RU.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>GridLocalization.ru-RU.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\GridLocalization.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>GridLocalization.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\GridLocalization.pt-PT.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>GridLocalization.pt-PT.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\GridLocalization.pt-BR.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>GridLocalization.pt-BR.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\GridLocalization.pl-PL.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>GridLocalization.pl-PL.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\GridLocalization.fr-FR.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>GridLocalization.fr-FR.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\GridLocalization.es-ES.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>GridLocalization.es-ES.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\GridLocalization.en-US.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>GridLocalization.en-US.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\GridLocalization.de-DE.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>GridLocalization.de-DE.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\GridLocalization.bg-BG.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>GridLocalization.bg-BG.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\EditorLocalization.uk-UA.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>EditorLocalization.uk-UA.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\EditorLocalization.ru-RU.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>EditorLocalization.ru-RU.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\EditorLocalization.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>EditorLocalization.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\EditorLocalization.pt-BR.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>EditorLocalization.pt-BR.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\EditorLocalization.pl-PL.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>EditorLocalization.pl-PL.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\EditorLocalization.nl-NL.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>EditorLocalization.nl-NL.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\EditorLocalization.fr-FR.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>EditorLocalization.fr-FR.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\EditorLocalization.en-US.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>EditorLocalization.en-US.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\EditorLocalization.de-DE.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>EditorLocalization.de-DE.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\EditorLocalization.bg-BG.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>EditorLocalization.bg-BG.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="Build" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53744</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:53744/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

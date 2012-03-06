@@ -11,21 +11,32 @@
                 <h3 class="floatLeft">Company: @Model.Name</h3> 
                 @Html.ActionLink("Edit Details", MVC.Company.Edit(Model.Id), new { @class = "floatRight blueLinks", title = "Edit Details" })
                 @Html.ActionLink("Add Task", MVC.Task.Add(Model.Id), new { @class = "floatRight blueLinks", title = "Add Tasks" })
+
+                @{
+                    string searchUrl = new MyJobLeads.Areas.CompanySearch.Models.Jigsaw.CompanySearchQueryViewModel
+                    {
+                        CompanyName = Model.Name,
+                        MergeCompanyId = Model.Id
+                    }.GetSearchUrl();
+                }
+                <a href="@Url.Action(MVC.CompanySearch.Jigsaw.PerformSearch())?@searchUrl" class="floatRight blueLinks ">Update From Internet</a>
             </div> 
 
             <div class="grid3 marginBottom_10 floatLeft"> 
                 <div class="grid4 floatLeft"> 
                     <p class="greyHighlight">Phone: <span class="setTask">@Model.Phone</span></p> 
-                    <p class="greyHighlight">Location: <span class="setTask">@Model.Location</span></p> 
+                    <p class="greyHighlight">Location: <span class="setTask">@Model.Location</span></p>
+                    <p class="greyHighlight">Website: <a href="http://@Model.Website" class="inlineBlue">@Model.Website</a></p>
                 </div> 
                 <div class="grid4 floatRight"> 
                     <p class="greyHighlight">Status: <span class="setTask">@Model.LeadStatus</span></p> 
+                    <p class="greyHighlight">Industries: <span class="setTask">@Model.Industry</span></p>
                 </div> 
             </div> 
                                 
             <div class="grid3 marginBottom_10 floatLeft"> 
                 <div class="floatLeft">
-                    <p class="greyHighlight">Notes: 
+                    <p class="greyHighlight">Notes: <br />
                         <span class="setTask">@Html.Raw(Html.Encode(Model.Notes).Replace(Environment.NewLine, "<br />"))</span>
                     </p>
                 </div> 

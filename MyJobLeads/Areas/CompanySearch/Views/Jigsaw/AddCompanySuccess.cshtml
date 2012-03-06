@@ -1,0 +1,20 @@
+﻿@model MyJobLeads.Areas.CompanySearch.Models.Jigsaw.AddCompanySuccessViewModel
+
+@{
+    ViewBag.Title = "Jigsaw Company Added Successfully";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <h3>Company Successfully Added From Jigsaw</h3>
+            <p>
+                You have successfully created @Html.ActionLink(Model.CompanyName, MVC.Company.Details(Model.CompanyId), new { @class = "inlineBlue" })
+                from data in the Jigsaw database.
+            </p>
+        }
+    }
+}

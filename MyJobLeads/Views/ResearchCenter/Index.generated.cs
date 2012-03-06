@@ -92,13 +92,23 @@ WriteLiteral(@"
             
             #line default
             #line hidden
-WriteLiteral("\r\n                    </li>\r\n\r\n                    <li><a href=\"#\" class=\"inlineB" +
-"lue\">Research Companies</a> <span class=\"bold\">(Coming Soon)</span></li>\r\n\r\n    " +
-"                <li>\r\n                        ");
+WriteLiteral("\r\n                    </li>\r\n\r\n                    <li>\r\n                        " +
+"");
 
 
             
-            #line 29 "..\..\Views\ResearchCenter\Index.cshtml"
+            #line 27 "..\..\Views\ResearchCenter\Index.cshtml"
+                   Write(Html.ActionLink("Research Companies", MVC.CompanySearch.Jigsaw.Index(), new { @class = "inlineBlue", title = "Find Companies" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                    </li>\r\n\r\n                    <li>\r\n                        " +
+"");
+
+
+            
+            #line 31 "..\..\Views\ResearchCenter\Index.cshtml"
                    Write(Html.ActionLink("Research Contacts", MVC.ContactSearch.Jigsaw.Index(), new { @class = "inlineBlue", title = "Find Contacts" }));
 
             

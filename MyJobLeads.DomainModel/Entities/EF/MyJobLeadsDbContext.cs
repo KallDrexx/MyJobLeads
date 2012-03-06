@@ -6,6 +6,8 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Entities.Configuration;
+using MyJobLeads.DomainModel.Entities.Surveys;
+using MyJobLeads.DomainModel.Entities.FillPerfect;
 
 namespace MyJobLeads.DomainModel.Entities.EF
 {
@@ -17,6 +19,7 @@ namespace MyJobLeads.DomainModel.Entities.EF
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ContactHistory> ContactHistory { get; set; }
         public DbSet<FpJobApplyBasicStat> FpJobApplyBasicStats { get; set; }
+        public DbSet<FpSurveyResponse> FpSurveyResponses { get; set; }
         public DbSet<JigsawAccountDetails> JigsawAccountDetails { get; set; }
         public DbSet<JobSearch> JobSearches { get; set; }
         public DbSet<JobSearchHistory> JobSearchHistory { get; set; }
@@ -24,10 +27,15 @@ namespace MyJobLeads.DomainModel.Entities.EF
         public DbSet<OAuthData> OAuthData { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Position> Positions { get; set; }
+        public DbSet<SiteReferralCode> SiteReferralCodes { get; set; }
+        public DbSet<SiteReferral> SiteReferrals { get; set; }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<TaskHistory> TaskHistory { get; set; }
         public DbSet<UnitTestEntity> UnitTestEntities { get; set; }
         public DbSet<User> Users { get; set; }
+
+        // FillPerfect Entities
+        public DbSet<FpOrgPilotUsedLicense> FpOrgPilotUsedLicenses { get; set; }
 
         // Configuration Tables
         public DbSet<MilestoneConfig> MilestoneConfigs { get; set; }

@@ -1,0 +1,68 @@
+﻿@model MyJobLeads.Areas.CompanySearch.Models.Jigsaw.AddCompanyViewModel
+
+@{
+    ViewBag.Title = "Add Jigsaw Company";
+}
+
+@section SideBar {
+    @{Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.ResearchCenter));}
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.BeginForm())
+    {
+        @Html.HiddenFor(x => x.JigsawCompanyName)
+        @Html.HiddenFor(x => x.JigsawId)
+
+        using (Html.OuterRow())
+        {
+            <h3>Add @Model.JigsawCompanyName To MyLeads</h3>
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.ValidationArea())
+            {
+                @Html.ValidationSummary()
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.ContentArea())
+            {
+                <p>
+                    @Html.LabelFor(x => x.CreateNewCompany, "Create new company in MyLeads for " + Model.JigsawCompanyName + ":")
+                    @Html.CheckBoxFor(x => x.CreateNewCompany)
+                </p>
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.ContentArea())
+            {
+                <p><span class="bold">OR</span></p>
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.ContentArea())
+            {
+                <p>
+                    Sync with existing company: @Html.DropDownListFor(x => x.ExistingCompanyId, Model.ExistingCompanyList)
+                </p>
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.FormButtonArea())
+            {
+                <input type="submit" value="Save" />
+            }
+        }
+    }
+}

@@ -46,6 +46,12 @@
     <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ActionMailer.Net, Version=0.7.0.0, Culture=neutral, PublicKeyToken=e62db3114c02a1c2, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActionMailer.Standalone.0.7.0\lib\Net40\ActionMailer.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="ActionMailer.Net.Standalone, Version=0.7.0.0, Culture=neutral, PublicKeyToken=e62db3114c02a1c2, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActionMailer.Standalone.0.7.0\lib\Net40\ActionMailer.Net.Standalone.dll</HintPath>
+    </Reference>
     <Reference Include="AutoMapper, Version=2.0.0.232, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.2.0.0\lib\net40-client\AutoMapper.dll</HintPath>
@@ -82,6 +88,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PrecompiledMvcViewEngine.1.1\lib\net40\PrecompiledMvcViewEngine.dll</HintPath>
     </Reference>
+    <Reference Include="RazorEngine, Version=3.0.8.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.0.8\lib\net40\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="Simple.Data, Version=0.7.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Simple.Data.Core.0.7.2\lib\net40\Simple.Data.dll</HintPath>
@@ -101,6 +110,7 @@
     </Reference>
     <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
+      <HintPath>..\packages\RazorEngine.3.0.8\lib\net40\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages">
       <Private>True</Private>
@@ -303,6 +313,49 @@
     <Compile Include="Areas\Admin\Models\DemoAccountCreation\CreateDemoAccountViewModel.cs" />
     <Compile Include="Areas\Admin\Models\DemoAccountCreation\DemoCreationValues.cs" />
     <Compile Include="Areas\Admin\Models\Mappings\OrganizationMappings.cs" />
+    <Compile Include="Areas\CompanySearch\CompanySearchAreaRegistration.cs" />
+    <Compile Include="Areas\CompanySearch\Controllers\JigsawController.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\AddCompanySuccessViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\AddCompanyViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\CompanySearchQueryViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\SearchResultsViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Jigsaw\SyncCompanyViewModel.cs" />
+    <Compile Include="Areas\CompanySearch\Models\Mappings\JigsawSearchMappings.cs" />
+    <Compile Include="Areas\CompanySearch\Views\Jigsaw\AddCompany.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddCompany.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\CompanySearch\Views\Jigsaw\AddCompanySuccess.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddCompanySuccess.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\CompanySearch\Views\Jigsaw\Details.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Details.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\CompanySearch\Views\Jigsaw\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\CompanySearch\Views\Jigsaw\PerformSearch.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PerformSearch.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\CompanySearch\Views\Jigsaw\Sync.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sync.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\CompanySearch\Views\Jigsaw\_SearchForm.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_SearchForm.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Areas\ContactSearch\ContactSearchAreaRegistration.cs" />
     <Compile Include="Areas\ContactSearch\Controllers\JigsawController.cs" />
     <Compile Include="Areas\ContactSearch\Controllers\SyncController.cs" />
@@ -353,8 +406,46 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Jigsaw.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Areas\FillPerfect\Controllers\FeedbackController.cs" />
+    <Compile Include="Areas\FillPerfect\Controllers\OrgPilotDashboardController.cs" />
     <Compile Include="Areas\FillPerfect\Controllers\StatsController.cs" />
     <Compile Include="Areas\FillPerfect\FillPerfectAreaRegistration.cs" />
+    <Compile Include="Areas\FillPerfect\Models\Pilot\OrgDashboardViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurveyPost2WeeksViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurveyPost10ViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurveyPost3ViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurveyPost5ViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Models\Surveys\SurveyCompletedViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Views\Feedback\Student01.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Student01.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\FillPerfect\Views\Feedback\Student02.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Student02.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\FillPerfect\Views\Feedback\Student03.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Student03.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\FillPerfect\Views\Feedback\Student04.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Student04.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\FillPerfect\Views\Feedback\SurveyCompleted.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SurveyCompleted.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\FillPerfect\Views\OrgPilotDashboard\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Organization\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Organization\Controllers\EditOrganizationController.cs" />
     <Compile Include="Areas\Organization\Controllers\MemberStatsController.cs" />
@@ -433,6 +524,12 @@
     <Compile Include="CompanyController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="CompanySearch.JigsawController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompanySearch.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="ContactController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -454,7 +551,14 @@
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\ResearchCenterController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SiteReferralsController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="FillPerfect.FeedbackController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FillPerfect.OrgPilotDashboardController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="FillPerfect.SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -468,12 +572,22 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Attributes\RequiresActiveJobSearchAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\RequiresOrganizationAdminAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\RequiresSiteAdminAttribute.cs" />
     <Compile Include="Infrastructure\Filters\ElmahHandledErrorLoggerFilter.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\DateHtmlHelpers.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\LayoutHelpers.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\ContentAreaWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\FieldValueDisplayWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\FormFieldAreaWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\FormButtonAreaWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\FormFieldWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\InnerColumnWriter.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\OuterRowWriter.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\NumericDisplayHelpers.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\StringHtmlHelpers.cs" />
     <Compile Include="Infrastructure\Installers\ValidatorInstaller.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\Layouts\PageInfoBoxWriter.cs" />
     <Compile Include="Infrastructure\Providers\AppDataDirectoryProvider.cs" />
     <Compile Include="Infrastructure\Attributes\MJLAuthorizeAttribute.cs" />
     <Compile Include="Infrastructure\ModelBinders\EmptyStringModelBaseBinder.cs" />
@@ -483,6 +597,8 @@
     <Compile Include="Infrastructure\Installers\MyJobLeadsInstaller.cs" />
     <Compile Include="Infrastructure\Providers\WindsorServiceFactory.cs" />
     <Compile Include="Infrastructure\Providers\WindsorValidatorFactory.cs" />
+    <Compile Include="Infrastructure\SelectLists\GeographicSelectLists.cs" />
+    <Compile Include="Infrastructure\SelectLists\JigsawSelectLists.cs" />
     <Compile Include="Infrastructure\ViewModelMappings\MilestoneMappings.cs" />
     <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
     <Compile Include="JobSearchController.generated.cs">
@@ -521,6 +637,20 @@
     <Compile Include="SearchController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SiteReferralsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaskController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Accounts\AccountModels.cs" />
     <Compile Include="ViewModels\Accounts\AccountMembershipService.cs" />
     <Compile Include="ViewModels\Accounts\IMembershipService.cs" />
@@ -538,17 +668,6 @@
     <Compile Include="ViewModels\Tasks\EditTaskViewModel.cs" />
     <Compile Include="MyJobLeadsBaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SharedController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T4MVC.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TaskController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\Tasks\TaskDashboardViewModel.cs" />
     <Compile Include="ViewModels\Tasks\TaskDisplayViewModel.cs" />
     <Compile Include="ViewModels\Users\UserSidebarViewModel.cs" />
@@ -592,7 +711,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Details.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Company\Edit.cs">
+    <Compile Include="Views\Company\Edit.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Edit.cshtml</DependentUpon>
@@ -601,6 +720,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>List.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Company\_CompanySummaryDisplay.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_CompanySummaryDisplay.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Contact\Details.generated.cs">
       <AutoGen>True</AutoGen>
@@ -617,6 +741,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>About.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Home\Error.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Error.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Home\FixBlankTitles.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -626,6 +755,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\JigsawError.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JigsawError.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Home\SubmitFeedback.generated.cs">
       <AutoGen>True</AutoGen>
@@ -726,6 +860,26 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\Future.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Future.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\Overdue.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Overdue.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\TaskListControl.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TaskListControl.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Task\Today.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Today.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Task\_CompanyTaskDisplay.cs">
       <AutoGen>True</AutoGen>
@@ -1049,6 +1203,7 @@
     </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1128,8 +1283,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\CompanySearch\Views\Shared\" />
     <Folder Include="Areas\ContactSearch\Views\Shared\" />
-    <Folder Include="Areas\FillPerfect\Models\" />
     <Folder Include="Areas\FillPerfect\Views\Shared\" />
     <Folder Include="Areas\Organization\Models\" />
     <Folder Include="Areas\Organization\Views\Shared\" />
@@ -1163,7 +1318,7 @@
     <Content Include="app_offline.htm_" />
     <Content Include="Views\Company\Edit.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Edit.cs</LastGenOutput>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Company\Details.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -1345,6 +1500,61 @@
     <Content Include="Areas\FillPerfect\Views\Web.config" />
     <Content Include="Areas\Admin\Views\CopyAccount\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CopyAccount\CopyAccountSuccess.cshtml" />
+    <Content Include="Areas\FillPerfect\Views\Feedback\SurveyCompleted.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SurveyCompleted.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\FillPerfect\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\FillPerfect\Views\Feedback\Student02.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Student02.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\FillPerfect\Views\Feedback\Student01.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Student01.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\FillPerfect\Views\Feedback\Student03.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Student03.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\FillPerfect\Views\Feedback\Student04.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Student04.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\CompanySearch\Views\Web.config" />
+    <Content Include="Areas\CompanySearch\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\_SearchForm.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_SearchForm.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\PerformSearch.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PerformSearch.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\Details.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Details.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\AddCompany.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AddCompany.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\AddCompanySuccess.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AddCompanySuccess.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\CompanySearch\Views\Jigsaw\Sync.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Sync.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\FillPerfect\Views\OrgPilotDashboard\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\plugins\DataTables\images\Sorting icons.psd" />
     <None Include="Scripts\plugins\DataTables\js\jquery.dataTables.min.js.gz" />
     <None Include="T4MVC.tt.settings.t4" />
@@ -1360,11 +1570,26 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_AnonymousUserSidebarDisplay.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Task\Overdue.cshtml" />
-    <Content Include="Views\Task\TaskListControl.cshtml" />
-    <Content Include="Views\Task\Today.cshtml" />
-    <Content Include="Views\Task\Future.cshtml" />
-    <Content Include="Views\Company\_CompanySummaryDisplay.cshtml" />
+    <Content Include="Views\Task\Overdue.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Overdue.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\TaskListControl.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>TaskListControl.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\Today.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Today.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Task\Future.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Future.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Company\_CompanySummaryDisplay.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_CompanySummaryDisplay.generated.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\Contact\_ContactSummaryDisplay.cshtml" />
     <Content Include="Views\Position\Edit.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -1383,7 +1608,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>EntityNotFound.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Home\Error.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Error.generated.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\Account\ClosedRegistrationView.cshtml" />
     <Content Include="Views\Account\InvalidOrgRegistrationTokenView.cshtml" />
     <Content Include="Views\Policies\Privacy.cshtml">
@@ -1398,7 +1626,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Home\JigsawError.cshtml" />
+    <Content Include="Views\Home\JigsawError.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>JigsawError.generated.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

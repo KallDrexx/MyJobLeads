@@ -21,5 +21,6 @@ namespace MyJobLeads.DomainModel.ViewModels.Organizations
         public int NumClosedInterviewTasks { get; set; }
         public int NumNotAppliedPositions { get; set; }
         public int NumAppliedPositions { get; set; }
+        public bool IsInFillPerfectPilot { get; set; }
     }
 }

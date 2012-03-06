@@ -1,0 +1,28 @@
+﻿@model MyJobLeads.Areas.FillPerfect.Models.Surveys.SurveyCompletedViewModel
+
+@{
+    ViewBag.Title = "Survey Completed";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        <h3>Survey Completed</h3>
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>
+                @if (Model.SurveyPreviouslyCompleted)
+                {
+                    @:You have already completed this survey.
+                }
+
+                Thank you for your feedback!
+            </p>
+        }
+    }
+}

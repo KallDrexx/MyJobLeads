@@ -23,7 +23,9 @@
                         @Html.ActionLink("Research Open Jobs", MVC.PositionSearch.LinkedIn.Index(), new { @class = "inlineBlue", title = "Find Open Jobs" })
                     </li>
 
-                    <li><a href="#" class="inlineBlue">Research Companies</a> <span class="bold">(Coming Soon)</span></li>
+                    <li>
+                        @Html.ActionLink("Research Companies", MVC.CompanySearch.Jigsaw.Index(), new { @class = "inlineBlue", title = "Find Companies" })
+                    </li>
 
                     <li>
                         @Html.ActionLink("Research Contacts", MVC.ContactSearch.Jigsaw.Index(), new { @class = "inlineBlue", title = "Find Contacts" })

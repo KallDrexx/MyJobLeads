@@ -85,6 +85,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RazorEngine, Version=3.0.8.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.0.8\lib\net40\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\packages\RestSharp.102.5\lib\net35\RestSharp.dll</HintPath>
     </Reference>
@@ -96,6 +99,10 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\RazorEngine.3.0.8\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -130,6 +137,7 @@
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\EF\Configuration\MilestoneConfig.cs" />
     <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\FillPerfect\FpOrgPilotUsedLicense.cs" />
     <Compile Include="Entities\FpJobApplyBasicStat.cs" />
     <Compile Include="Entities\JigsawAccountDetails.cs" />
     <Compile Include="Entities\OAuthData.cs" />
@@ -148,6 +156,10 @@
     <Compile Include="Entities\Organization.cs" />
     <Compile Include="Entities\EF\Configuration\OrganizationEmailDomain.cs" />
     <Compile Include="Entities\Position.cs" />
+    <Compile Include="Entities\SiteReferral.cs" />
+    <Compile Include="Entities\SiteReferralCode.cs" />
+    <Compile Include="Entities\Surveys\FpSurveyResponse.cs" />
+    <Compile Include="Entities\Surveys\FpSurveyResponseAnswer.cs" />
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\UnitTestEntity.cs" />
     <Compile Include="Entities\User.cs" />
@@ -184,6 +196,7 @@
     <Compile Include="Exceptions\UserNotAuthorizedForEntityException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForProcessException.cs" />
     <Compile Include="Json\Converters\JigsawDateTimeConverter.cs" />
+    <Compile Include="Json\Jigsaw\CompanyDetailJson.cs" />
     <Compile Include="Json\Jigsaw\CompanyDetailsResponseJson.cs" />
     <Compile Include="Json\Jigsaw\ContactDetailsJson.cs" />
     <Compile Include="Json\Jigsaw\ContactDetailsResponseJson.cs" />
@@ -191,9 +204,13 @@
     <Compile Include="Json\Mappings\JigsawJsonMappings.cs" />
     <Compile Include="LibSupport\DotNetOpenAuth\LinkedInTokenManager.cs" />
     <Compile Include="LibSupport\DotNetOpenAuth\MyJobLeadsBaseConsumerTokenManager.cs" />
+    <Compile Include="Mail\FillPerfectMailController.cs" />
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Processes\Admin\OrganizationAdminProcesses.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
+    <Compile Include="Processes\CompanySearching\JigsawCompanySearchProcesses.cs" />
+    <Compile Include="ProcessParams\CompanySearching\Jigsaw\AddJigsawCompanyParams.cs" />
+    <Compile Include="ProcessParams\CompanySearching\Jigsaw\MergeJigsawCompanyParams.cs" />
     <Compile Include="Processes\ContactSearching\JigsawContactSearchProcesses.cs" />
     <Compile Include="Processes\Exports\JobSearchExportProcess.cs" />
     <Compile Include="Processes\ExternalAuth\JigsawAuthProcesses.cs" />
@@ -207,6 +224,8 @@
     <Compile Include="Processes\Positions\PositionProcesses.cs" />
     <Compile Include="Processes\Users\UserPasswordProcesses.cs" />
     <Compile Include="Processes\Users\UserProcesses.cs" />
+    <Compile Include="ProcessParams\CompanySearching\Jigsaw\JigsawCompanyDetailsParams.cs" />
+    <Compile Include="ProcessParams\CompanySearching\Jigsaw\JigsawCompanySearchParams.cs" />
     <Compile Include="ProcessParams\ContactSearching\Jigsaw\AddJigsawContactToJobSearchParams.cs" />
     <Compile Include="ProcessParams\ContactSearching\Jigsaw\GetJigsawContactDetailsParams.cs" />
     <Compile Include="ProcessParams\ContactSearching\Jigsaw\JigsawContactSearchParams.cs" />
@@ -265,6 +284,9 @@
     <Compile Include="Utilities\EncryptionUtils.cs" />
     <Compile Include="ViewModels\Authorizations\AuthorizationResultViewModel.cs" />
     <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
+    <Compile Include="ViewModels\CompanySearching\CompanyAddedViewResult.cs" />
+    <Compile Include="ViewModels\CompanySearching\ExternalCompanyDetailsViewModel.cs" />
+    <Compile Include="ViewModels\CompanySearching\ExternalCompanySearchResultViewModel.cs" />
     <Compile Include="ViewModels\ContactSearching\ExternalContactAddedResultViewModel.cs" />
     <Compile Include="ViewModels\ContactSearching\ExternalContactSearchResultsViewModel.cs" />
     <Compile Include="ViewModels\Exports\JobsearchExportViewModel.cs" />
@@ -273,6 +295,8 @@
     <Compile Include="ViewModels\JobSearches\JigsawUserPointsViewModel.cs" />
     <Compile Include="ViewModels\JobSearches\JobSearchMilestoneChangedResultViewModel.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgress.cs" />
+    <Compile Include="ViewModels\Mail\FillPerfectPilotStudentLicenceEmailViewModel.cs" />
+    <Compile Include="ViewModels\Mail\Mappings\FillPerfectMailMappings.cs" />
     <Compile Include="ViewModels\Milestones\MilestoneDisplayListViewModel.cs" />
     <Compile Include="ViewModels\Milestones\MilestoneDisplayViewModel.cs" />
     <Compile Include="ViewModels\Milestones\MilestoneIdViewModel.cs" />
@@ -303,10 +327,14 @@
     <Compile Include="Utilities\EmailUtils.cs" />
     <Compile Include="Utilities\PasswordUtils.cs" />
     <Compile Include="ViewModels\SearchResultEntities.cs" />
+    <Compile Include="ViewModels\SearchResultsViewModel.cs" />
     <Compile Include="ViewModels\Users\GeneratedPasswordHashViewModel.cs" />
     <Compile Include="ViewModels\Users\UserPasswordVerificationResultViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Mail\Templates\PilotStudentLicenseEmail.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

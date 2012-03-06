@@ -25,6 +25,8 @@ using T4MVC;
 public static class MVC {
     static readonly AdminClass s_Admin = new AdminClass();
     public static AdminClass Admin { get { return s_Admin; } }
+    static readonly CompanySearchClass s_CompanySearch = new CompanySearchClass();
+    public static CompanySearchClass CompanySearch { get { return s_CompanySearch; } }
     static readonly ContactSearchClass s_ContactSearch = new ContactSearchClass();
     public static ContactSearchClass ContactSearch { get { return s_ContactSearch; } }
     static readonly FillPerfectClass s_FillPerfect = new FillPerfectClass();
@@ -42,6 +44,7 @@ public static class MVC {
     public static MyJobLeads.Controllers.PositionController Position = new MyJobLeads.Controllers.T4MVC_PositionController();
     public static MyJobLeads.Controllers.ResearchCenterController ResearchCenter = new MyJobLeads.Controllers.T4MVC_ResearchCenterController();
     public static MyJobLeads.Controllers.SearchController Search = new MyJobLeads.Controllers.T4MVC_SearchController();
+    public static MyJobLeads.Controllers.SiteReferralsController SiteReferrals = new MyJobLeads.Controllers.T4MVC_SiteReferralsController();
     public static MyJobLeads.Controllers.TaskController Task = new MyJobLeads.Controllers.T4MVC_TaskController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
@@ -57,6 +60,12 @@ namespace T4MVC {
         public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
     }
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public class CompanySearchClass {
+        public readonly string Name = "CompanySearch";
+        public MyJobLeads.Areas.CompanySearch.Controllers.JigsawController Jigsaw = new MyJobLeads.Areas.CompanySearch.Controllers.T4MVC_JigsawController();
+        public T4MVC.CompanySearch.SharedController Shared = new T4MVC.CompanySearch.SharedController();
+    }
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class ContactSearchClass {
         public readonly string Name = "ContactSearch";
         public MyJobLeads.Areas.ContactSearch.Controllers.JigsawController Jigsaw = new MyJobLeads.Areas.ContactSearch.Controllers.T4MVC_JigsawController();
@@ -66,6 +75,8 @@ namespace T4MVC {
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class FillPerfectClass {
         public readonly string Name = "FillPerfect";
+        public MyJobLeads.Areas.FillPerfect.Controllers.FeedbackController Feedback = new MyJobLeads.Areas.FillPerfect.Controllers.T4MVC_FeedbackController();
+        public MyJobLeads.Areas.FillPerfect.Controllers.OrgPilotDashboardController OrgPilotDashboard = new MyJobLeads.Areas.FillPerfect.Controllers.T4MVC_OrgPilotDashboardController();
         public MyJobLeads.Areas.FillPerfect.Controllers.StatsController Stats = new MyJobLeads.Areas.FillPerfect.Controllers.T4MVC_StatsController();
         public T4MVC.FillPerfect.SharedController Shared = new T4MVC.FillPerfect.SharedController();
     }

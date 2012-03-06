@@ -6,6 +6,8 @@ using MyJobLeads.DomainModel.EntityMapping;
 using AutoMapper;
 using MyJobLeads.DomainModel.ViewModels.ContactSearching;
 using MyJobLeads.DomainModel.Json.Jigsaw;
+using MyJobLeads.DomainModel.ViewModels;
+using MyJobLeads.DomainModel.ViewModels.CompanySearching;
 
 namespace MyJobLeads.DomainModel.Json.Mappings
 {
@@ -31,6 +33,18 @@ namespace MyJobLeads.DomainModel.Json.Mappings
                 .ForMember(dest => dest.Results, opt => opt.MapFrom(src => src.Contacts))
                 .ForMember(dest => dest.PageSize, opt => opt.Ignore())
                 .ForMember(dest => dest.DisplayedPageNumber, opt => opt.Ignore());
+
+            Mapper.CreateMap<CompanyDetailsResponseJson, SearchResultsViewModel<ExternalCompanySearchResultViewModel>>()
+                .ForMember(dest => dest.TotalResultsCount, opt => opt.MapFrom(src => src.totalHits))
+                .ForMember(dest => dest.Results, opt => opt.MapFrom(src => src.companies))
+                .ForMember(dest => dest.DisplayedPageNumber, opt => opt.Ignore())
+                .ForMember(dest => dest.PageSize, opt => opt.Ignore());
+
+            Mapper.CreateMap<CompanyDetailsJson, ExternalCompanySearchResultViewModel>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.name))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.companyId))
+                .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.city))
+                .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.state));
         }
     }
 }

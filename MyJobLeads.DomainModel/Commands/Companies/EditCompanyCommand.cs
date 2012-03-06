@@ -19,7 +19,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         protected IServiceFactory _factory;
         protected int _companyId, _userId;
         protected string _name, _phone, _city, _state, _zip, _metro, _industry, _notes;
-        protected string _status;
+        protected string _status, _site;
 
         public EditCompanyCommand(IServiceFactory factory)
         {
@@ -126,6 +126,17 @@ namespace MyJobLeads.DomainModel.Commands.Companies
         }
 
         /// <summary>
+        /// Specifies the website for the company
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public EditCompanyCommand SetWebsite(string site)
+        {
+            _site = site;
+            return this;
+        }
+
+        /// <summary>
         /// Specifies the id value of the user editing the company
         /// </summary>
         /// <param name="userId"></param>
@@ -176,6 +187,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
             if (_industry != null) { company.Industry = _industry; }
             if (_notes != null) { company.Notes = _notes; }
             if (_status != null) { company.LeadStatus = _status; }
+            if (_site != null) { company.Website = _site; }
 
             // Create the history record
             company.History.Add(new CompanyHistory
@@ -190,6 +202,7 @@ namespace MyJobLeads.DomainModel.Commands.Companies
                 Notes = company.Notes,
                 LeadStatus = company.LeadStatus,
                 JigsawId = company.JigsawId,
+                Website = company.Website,
 
                 AuthoringUser = user,
                 HistoryAction = MJLConstants.HistoryUpdate,

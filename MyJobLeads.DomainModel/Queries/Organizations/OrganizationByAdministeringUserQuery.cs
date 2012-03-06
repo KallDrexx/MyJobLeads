@@ -53,7 +53,8 @@ namespace MyJobLeads.DomainModel.Queries.Organizations
                 NumClosedInterviewTasks = _context.Tasks.Where(x => x.Category == MJLConstants.InPersonInterviewTaskCategory && x.CompletionDate != null
                                                             && x.Company.JobSearch.User.Organization.Id == org.Id).Count(),
                 NumAppliedPositions = _context.Positions.Where(x => x.HasApplied && x.Company.JobSearch.User.Organization.Id == org.Id).Count(),
-                NumNotAppliedPositions = _context.Positions.Where(x => !x.HasApplied && x.Company.JobSearch.User.Organization.Id == org.Id).Count()
+                NumNotAppliedPositions = _context.Positions.Where(x => !x.HasApplied && x.Company.JobSearch.User.Organization.Id == org.Id).Count(),
+                IsInFillPerfectPilot = !string.IsNullOrWhiteSpace(org.FillPerfectPilotKey)
             };
         }
     }

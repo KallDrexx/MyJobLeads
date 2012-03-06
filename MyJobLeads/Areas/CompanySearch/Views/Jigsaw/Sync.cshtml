@@ -1,0 +1,111 @@
+﻿@model MyJobLeads.Areas.CompanySearch.Models.Jigsaw.SyncCompanyViewModel
+
+@{
+    ViewBag.Title = "Sync Company With Jigsaw";
+}
+
+@section SideBar {
+    @{Html.RenderAction(MVC.Home.SidebarDisplay(MyJobLeads.Controllers.ActiveSidebarLink.ResearchCenter));}
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.BeginForm())
+    {
+        @Html.HiddenFor(x => x.CompanyId)
+        @Html.HiddenFor(x => x.JigsawId)
+        @Html.HiddenFor(x => x.InternalAddress)
+        @Html.HiddenFor(x => x.InternalIndustry)
+        @Html.HiddenFor(x => x.InternalName)
+        @Html.HiddenFor(x => x.InternalPhone)
+        @Html.HiddenFor(x => x.InternalWebsite)
+        @Html.HiddenFor(x => x.JigsawAddress)
+        @Html.HiddenFor(x => x.JigsawIndustry)
+        @Html.HiddenFor(x => x.JigsawName)
+        @Html.HiddenFor(x => x.JigsawPhone)
+        @Html.HiddenFor(x => x.JigsawEmployeeCount)
+        @Html.HiddenFor(x => x.JigsawOwnership)
+        @Html.HiddenFor(x => x.JigsawRevenue)
+        @Html.HiddenFor(x => x.JigsawWebsite)
+        @Html.HiddenFor(x => x.LastUpdatedOnJigaw)
+        
+        using (Html.OuterRow())
+        {
+            <h3>Sync Company With Data From Jigsaw</h3>
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.ContentArea())
+            {
+                <p>
+                    This page allows you to select what data you wish to import from the internet for this particular company. <br />
+                    This company's data was last updated in Jigsaw's database on @Model.LastUpdatedOnJigaw.ToString("D").
+                </p>
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.ValidationArea())
+            {
+                @Html.ValidationSummary()
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            <table id="SyncDataTable" class="display">
+                <thead>
+                    <th></th>
+                    <th>Import?</th>
+                    <th>MyLeads Data</th>
+                    <th>Jigsaw Data</th>
+                </thead>
+
+                <tr>
+                    <td>Company Name:</td>
+                    <td>@Html.CheckBoxFor(x => x.ImportName)</td>
+                    <td>@Model.InternalName</td>
+                    <td>@Model.JigsawName</td>
+                </tr>
+
+                <tr>
+                    <td>Address:</td>
+                    <td>@Html.CheckBoxFor(x => x.ImportAddress)</td>
+                    <td>@Model.InternalAddress</td>
+                    <td>@Model.JigsawAddress</td>
+                </tr>
+
+                <tr>
+                    <td>Phone:</td>
+                    <td>@Html.CheckBoxFor(x => x.ImportPhone)</td>
+                    <td>@Model.InternalPhone</td>
+                    <td>@Model.JigsawPhone</td>
+                </tr>
+
+                <tr>
+                    <td>Industry:</td>
+                    <td>@Html.CheckBoxFor(x => x.ImportIndustry)</td>
+                    <td>@Model.InternalIndustry</td>
+                    <td>@Model.JigsawIndustry</td>
+                </tr>
+
+                <tr>
+                    <td>Website:</td>
+                    <td>@Html.CheckBoxFor(x => x.ImportWebsite)</td>
+                    <td>@Model.InternalWebsite</td>
+                    <td>@Model.JigsawWebsite</td>
+                </tr>
+            </table>
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.FormButtonArea())
+            {
+                <input type="submit" value="Perform Sync" />
+            }
+        }
+    }
+}
