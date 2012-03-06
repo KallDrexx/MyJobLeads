@@ -1,0 +1,25 @@
+﻿@model MyJobLeads.Areas.Admin.Models.DemoAccountCreation.CreateDemoAccountSuccessViewModel
+
+@{
+    ViewBag.Title = "/create Demo Account Successful";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        <h3>Demo Account Created</h3>
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>
+                <span class="bold">Name:</span> @Model.Name <br />
+                <span class="bold">Email:</span> @Model.Email <br />
+                <span class="bold">Password: </span> @Model.Password <br />
+            </p>
+        }
+    }
+}

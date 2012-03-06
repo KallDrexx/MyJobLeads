@@ -8,14 +8,14 @@ using MyJobLeads.DomainModel.Entities;
 
 namespace MyJobLeads.Controllers
 {
-    public class SiteReferralsController : MyJobLeadsBaseController
+    public partial class SiteReferralsController : MyJobLeadsBaseController
     {
         public SiteReferralsController(MyJobLeadsDbContext context)
         {
             _context = context;
         }
 
-        public ActionResult Log(string code, string url) 
+        public virtual ActionResult Log(string code, string url) 
         {
             _context.SiteReferrals.Add(new SiteReferral
             {
@@ -29,7 +29,7 @@ namespace MyJobLeads.Controllers
             return new EmptyResult();
         }
 
-        public ActionResult AddCode(string code, string desc)
+        public virtual ActionResult AddCode(string code, string desc)
         {
             _context.SiteReferralCodes.Add(new SiteReferralCode
             {
