@@ -4,4 +4,41 @@
     ViewBag.Title = "Create Demo Account";
 }
 
+@using (Html.PageInfoBox(false))
+{
+    using (Html.BeginForm())
+    {
+        using (Html.OuterRow())
+        {
+            using (Html.ContentArea())
+            {
+            <h3>Create Demo Account</h3>
+            }
+        }
 
+        using (Html.OuterRow())
+        {
+            using (Html.ValidationArea())
+            {
+            @Html.ValidationSummary()
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            Html.FormField(new HtmlString("Name"), Html.TextBoxFor(x => x.Name, new { @class = "info" }));
+            Html.FormField(new HtmlString("Email"), Html.TextBoxFor(x => x.Email, new { @class = "info" }));
+            Html.FormField(new HtmlString("Organization Name"), Html.TextBoxFor(x => x.OrganizationName, new { @class = "info" }));
+            Html.FormField(new HtmlString("Password"), Html.PasswordFor(x => x.Password, new { @class = "info" }));
+            Html.FormField(new HtmlString("Confirm Password"), Html.PasswordFor(x => x.ConfirmPassword, new { @class = "info" }));
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.FormButtonArea())
+            {
+            <input type="submit" value="Create" />
+            }
+        }
+    }
+}

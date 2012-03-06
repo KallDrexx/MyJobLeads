@@ -15,6 +15,7 @@ namespace MyJobLeads.DomainModel.Entities
         { 
             Metrics = new JobSearchMetrics();
             Companies = new List<Company>();
+            LastVisitedUsers = new List<User>();
         }
 
         public int Id { get; set; }
@@ -26,6 +27,8 @@ namespace MyJobLeads.DomainModel.Entities
 
         public virtual User User { get; set; }
         public virtual int? UserId { get; set; }
+
+        public virtual IList<User> LastVisitedUsers { get; set; }
 
         public virtual ICollection<Company> Companies { get; set; }
         public virtual ICollection<JobSearchHistory> History { get; set; }

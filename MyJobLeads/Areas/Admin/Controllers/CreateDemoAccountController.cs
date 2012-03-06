@@ -8,9 +8,11 @@ using System.Transactions;
 using MyJobLeads.DomainModel.Commands.Users;
 using MyJobLeads.DomainModel.Entities.EF;
 using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.Infrastructure.Attributes;
 
 namespace MyJobLeads.Areas.Admin.Controllers
 {
+    [RequiresSiteAdmin]
     public partial class CreateDemoAccountController : MyJobLeadsBaseController
     {
         protected CreateUserCommand _createUserCmd;
@@ -41,7 +43,8 @@ namespace MyJobLeads.Areas.Admin.Controllers
                     FullName = model.Name
                 });
 
-                _context.Users.Attach(user);
+                //_context.Users.Attach(user);
+                user = _context.Users.Find(user.Id);
 
                 // Create the organization
                 var org = new MyJobLeads.DomainModel.Entities.Organization
@@ -124,10 +127,13 @@ namespace MyJobLeads.Areas.Admin.Controllers
                     jobsearch.Companies.Add(company);
                 }
 
-                jobsearch.User = user;
-                user.LastVisitedJobSearch = jobsearch;
-
+                user.JobSearches.Add(jobsearch);
                 _context.SaveChanges();
+
+                // This has to be done once we have an id
+                user.LastVisitedJobSearchId = jobsearch.Id;
+                _context.SaveChanges();
+
                 transaction.Complete();
 
                 return RedirectToAction(MVC.Admin.CreateDemoAccount.Success(model.Name, model.Email, model.Password));
