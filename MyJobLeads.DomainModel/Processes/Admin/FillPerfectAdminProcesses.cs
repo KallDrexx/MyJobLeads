@@ -9,20 +9,27 @@ using MyJobLeads.DomainModel.Entities.EF;
 using OpenPop.Pop3;
 using MyJobLeads.DomainModel.Entities.Admin;
 using OpenPop.Pop3.Exceptions;
+using MyJobLeads.DomainModel.ProcessParams.FillPerfect;
+using MyJobLeads.DomainModel.ViewModels.Authorizations;
+using MyJobLeads.DomainModel.ProcessParams.Security;
+using MyJobLeads.DomainModel.Exceptions;
 
 namespace MyJobLeads.DomainModel.Processes.Admin
 {
-    public class FillPerfectAdminProcesses : IProcess<FetchFpContactResponseEmailsParams, GeneralSuccessResultViewModel>
+    public class FillPerfectAdminProcesses : IProcess<FetchFpContactResponseEmailsParams, GeneralSuccessResultViewModel>,
+                                             IProcess<GetFpContactResponsesParams, SearchResultsViewModel<FillPerfectContactResponse>>
     {
         protected MyJobLeadsDbContext _context;
+        protected IProcess<SiteAdminAuthorizationParams, AuthorizationResultViewModel> _adminAuthProc;
 
-        public FillPerfectAdminProcesses(MyJobLeadsDbContext context)
+        public FillPerfectAdminProcesses(MyJobLeadsDbContext context, IProcess<SiteAdminAuthorizationParams, AuthorizationResultViewModel> adminAuthProc)
         {
             _context = context;
+            _adminAuthProc = adminAuthProc;
         }
 
         /// <summary>
-        /// Retrieves emailed FillPerfect contact us form response emails
+        /// Retrieves emailed FillPerfect contact us form response emails and puts them in the database
         /// </summary>
         /// <param name="procParams"></param>
         /// <returns></returns>
@@ -82,6 +89,32 @@ namespace MyJobLeads.DomainModel.Processes.Admin
             }
 
             return new GeneralSuccessResultViewModel { WasSuccessful = true };
+        }
+
+        /// <summary>
+        /// Retrieves the FP contact us responses stored in the database
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        SearchResultsViewModel<FillPerfectContactResponse> IProcess<GetFpContactResponsesParams, SearchResultsViewModel<FillPerfectContactResponse>>.Execute(GetFpContactResponsesParams procParams)
+        {
+            const int PAGE_SIZE = 20;
+
+            // Make sure the user is a site administrator
+            if (!_adminAuthProc.Execute(new SiteAdminAuthorizationParams { UserId = procParams.RequestingUserId }).UserAuthorized)
+                throw new UserNotAuthorizedForProcessException(procParams.RequestingUserId, typeof(GetFpContactResponsesParams), typeof(SearchResultsViewModel<FillPerfectContactResponse>));
+
+            var query = _context.FillPerfectContactResponses
+                                .Where(x => (x.RepliedDate == null) == procParams.GetNewResponses);
+
+            return new SearchResultsViewModel<FillPerfectContactResponse>
+            {
+                PageSize = PAGE_SIZE,
+                TotalResultsCount = query.Count(),
+                Results = query.OrderByDescending(x => x.RepliedDate)
+                               .ThenBy(x => x.ReceivedDate)
+                               .ToList()
+            };
         }
     }
 }

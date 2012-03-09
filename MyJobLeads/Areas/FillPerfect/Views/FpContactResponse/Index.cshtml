@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Fillperfect Contact Responses";
+    Html.Telerik().ScriptRegistrar().Scripts(script => script.Add("~/Scripts/plugins/DataTables/js/jquery.dataTables.min.js"));
+}
+
+@{Html.Telerik().ScriptRegistrar().OnDocumentReady(
+@<text>
+    $('#fpResponseTable').dataTable({
+        sDom: '<>rt<flpi><"clear">',
+        aoColumnDefs: [
+            { bSortable: false, aTargets: [ 0 ] }
+        ],
+        bFilter: false,
+        bProcessing: true,
+        sAjaxSource: '@Url.Action(MVC.FillPerfect.FpContactResponse.GetNewFpContactResponses())'
+    });
+</text>
+);}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        <h3 class="floatLeft">FillPerfect Responses</h3>
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>
+                This page shows you all entries to the FillPerfect Contact Us form
+            </p>
+        }
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <div class="pageInfoTable">
+                <table id="fpResponseTable" class="display">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>School</th>
+                            <th>Program</th>
+                            <th>Date Received</th>
+                            <th>Date Replied</th>
+                        </tr>
+                    </thead>
+
+                    <tbody></tbody>
+                </table>
+            </div>
+        }
+    }
+}

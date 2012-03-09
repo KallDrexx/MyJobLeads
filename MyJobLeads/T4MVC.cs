@@ -75,6 +75,7 @@ namespace T4MVC {
     public class FillPerfectClass {
         public readonly string Name = "FillPerfect";
         public MyJobLeads.Areas.FillPerfect.Controllers.FeedbackController Feedback = new MyJobLeads.Areas.FillPerfect.Controllers.T4MVC_FeedbackController();
+        public MyJobLeads.Areas.FillPerfect.Controllers.FpContactResponseController FpContactResponse = new MyJobLeads.Areas.FillPerfect.Controllers.T4MVC_FpContactResponseController();
         public MyJobLeads.Areas.FillPerfect.Controllers.OrgPilotDashboardController OrgPilotDashboard = new MyJobLeads.Areas.FillPerfect.Controllers.T4MVC_OrgPilotDashboardController();
         public MyJobLeads.Areas.FillPerfect.Controllers.StatsController Stats = new MyJobLeads.Areas.FillPerfect.Controllers.T4MVC_StatsController();
         public T4MVC.FillPerfect.SharedController Shared = new T4MVC.FillPerfect.SharedController();
