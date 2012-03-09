@@ -210,7 +210,7 @@
     <Compile Include="LibSupport\DotNetOpenAuth\MyJobLeadsBaseConsumerTokenManager.cs" />
     <Compile Include="Mail\FillPerfectMailController.cs" />
     <Compile Include="MJLConstants.cs" />
-    <Compile Include="Processes\Admin\MyConsoleProcesses.cs" />
+    <Compile Include="Processes\Admin\FillPerfectAdminProcesses.cs" />
     <Compile Include="Processes\Admin\OrganizationAdminProcesses.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
     <Compile Include="Processes\CompanySearching\JigsawCompanySearchProcesses.cs" />

@@ -2,25 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MyJobLeads.DomainModel.Entities.EF;
+using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.ViewModels;
 using MyJobLeads.DomainModel.ProcessParams.Admin;
-using MyJobLeads.DomainModel.Data;
+using MyJobLeads.DomainModel.Entities.EF;
 using OpenPop.Pop3;
 using MyJobLeads.DomainModel.Entities.Admin;
 using OpenPop.Pop3.Exceptions;
 
 namespace MyJobLeads.DomainModel.Processes.Admin
 {
-    public class MyConsoleProcesses : IProcess<FetchFpContactResponseEmailsParams, GeneralSuccessResultViewModel>
+    public class FillPerfectAdminProcesses : IProcess<FetchFpContactResponseEmailsParams, GeneralSuccessResultViewModel>
     {
         protected MyJobLeadsDbContext _context;
 
-        public MyConsoleProcesses(MyJobLeadsDbContext context)
+        public FillPerfectAdminProcesses(MyJobLeadsDbContext context)
         {
             _context = context;
         }
-        
+
         /// <summary>
         /// Retrieves emailed FillPerfect contact us form response emails
         /// </summary>
@@ -41,7 +41,7 @@ namespace MyJobLeads.DomainModel.Processes.Admin
                 {
                     client.Connect(POP_HOST, POP_PORT, USE_SSL);
                     client.Authenticate(FORMS_EMAIL, FORMS_PASS);
-                
+
                     int messageCount = client.GetMessageCount();
 
                     for (int x = messageCount; x > 0; x--)

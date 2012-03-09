@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MyJobLeads.DomainModel.Entities.EF;
-using MyJobLeads.DomainModel.Data;
-using MyJobLeads.DomainModel.ViewModels;
 using MyJobLeads.DomainModel.ProcessParams.Admin;
-using MyJobLeads.Infrastructure.Attributes;
+using MyJobLeads.DomainModel.ViewModels;
+using MyJobLeads.DomainModel.Data;
+using MyJobLeads.DomainModel.Entities.EF;
 
-namespace MyJobLeads.Areas.MyConsole.Controllers
+namespace MyJobLeads.Areas.FillPerfect.Controllers
 {
-    [RequiresSiteAdmin]
-    public class FpContactResponsesController : MyJobLeadsBaseController
+    public class FpContactResponseController : MyJobLeadsBaseController
     {
         protected IProcess<FetchFpContactResponseEmailsParams, GeneralSuccessResultViewModel> _fetchResponseProc;
 
-        public FpContactResponsesController(MyJobLeadsDbContext context, IProcess<FetchFpContactResponseEmailsParams, GeneralSuccessResultViewModel> fetchResponseProc)
+        public FpContactResponseController(MyJobLeadsDbContext context, IProcess<FetchFpContactResponseEmailsParams, GeneralSuccessResultViewModel> fetchResponseProc)
         {
             _context = context;
             _fetchResponseProc = fetchResponseProc;
@@ -27,6 +25,5 @@ namespace MyJobLeads.Areas.MyConsole.Controllers
             _fetchResponseProc.Execute(new FetchFpContactResponseEmailsParams());
             return View();
         }
-
     }
 }
