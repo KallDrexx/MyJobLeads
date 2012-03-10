@@ -417,6 +417,7 @@
     <Compile Include="Areas\FillPerfect\Controllers\StatsController.cs" />
     <Compile Include="Areas\FillPerfect\FillPerfectAreaRegistration.cs" />
     <Compile Include="Areas\FillPerfect\Models\ContactUsResponses\ContactUsCreateAccountViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Models\ContactUsResponses\ContactUsSendReplyViewModel.cs" />
     <Compile Include="Areas\FillPerfect\Models\Pilot\OrgDashboardViewModel.cs" />
     <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurveyPost2WeeksViewModel.cs" />
     <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurveyPost10ViewModel.cs" />

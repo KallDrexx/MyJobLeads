@@ -12,6 +12,7 @@ using MyJobLeads.DomainModel.ProcessParams.FillPerfect;
 using MyJobLeads.Infrastructure.Attributes;
 using System.Configuration;
 using MyJobLeads.Areas.FillPerfect.Models.ContactUsResponses;
+using MyJobLeads.DomainModel.ViewModels.Admin;
 
 namespace MyJobLeads.Areas.FillPerfect.Controllers
 {
@@ -20,14 +21,17 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
     {
         protected IProcess<FetchFpContactResponseEmailsParams, GeneralSuccessResultViewModel> _fetchResponseProc;
         protected IProcess<GetFpContactResponsesParams, SearchResultsViewModel<FillPerfectContactResponse>> _getDbFpContactResponseProc;
+        protected IProcess<CreateDemoAccountParams, CreatedDemoAccountViewModel> _createDemoActProc;
 
         public FpContactResponseController(MyJobLeadsDbContext context, 
                                             IProcess<FetchFpContactResponseEmailsParams, GeneralSuccessResultViewModel> fetchResponseProc,
-                                            IProcess<GetFpContactResponsesParams, SearchResultsViewModel<FillPerfectContactResponse>> getDbFpContactResponseProc)
+                                            IProcess<GetFpContactResponsesParams, SearchResultsViewModel<FillPerfectContactResponse>> getDbFpContactResponseProc,
+                                            IProcess<CreateDemoAccountParams, CreatedDemoAccountViewModel> createDemoActProc)
         {
             _context = context;
             _fetchResponseProc = fetchResponseProc;
             _getDbFpContactResponseProc = getDbFpContactResponseProc;
+            _createDemoActProc = createDemoActProc;
         }
 
         public virtual ActionResult Index()
@@ -99,13 +103,57 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //public virtual ActionResult CreateAccount(ContactUsCreateAccountViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return View(model);
+        [HttpPost]
+        public virtual ActionResult CreateAccount(ContactUsCreateAccountViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
 
+            var result = _createDemoActProc.Execute(new CreateDemoAccountParams
+            {
+                RequestingUserID = CurrentUserId,
+                Name = model.CreateAccountModel.Name,
+                Email = model.CreateAccountModel.Email,
+                OrganizationName = model.CreateAccountModel.OrganizationName,
+                Password = model.CreateAccountModel.Password
+            });
 
-        //}
+            return RedirectToAction(
+                MVC.FillPerfect.FpContactResponse.SendReply(
+                    model.CreateAccountModel.Name,
+                    model.CreateAccountModel.Email,
+                    model.CreateAccountModel.Password,
+                    model.CreateAccountModel.OrganizationName,
+                    model.FpContactResponseId));
+        }
+
+        public virtual ActionResult SendReply(string toName, string toEmail, string password, string orgName, int responseId, string emailContent = "")
+        {
+            var model = new ContactUsSendReplyViewModel
+            {
+                ResponseId = responseId,
+                ToName = toName,
+                ToEmail = toEmail,
+                ToOrgName = orgName,
+                ToPassword = password,
+                EmailContent = emailContent
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public virtual ActionResult SendReply(ContactUsSendReplyViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            return RedirectToAction(MVC.FillPerfect.FpContactResponse.SendReplyConfirm(model));
+        }
+
+        public virtual ActionResult SendReplyConfirm(ContactUsSendReplyViewModel model)
+        {
+            return View(model);
+        }
     }
 }

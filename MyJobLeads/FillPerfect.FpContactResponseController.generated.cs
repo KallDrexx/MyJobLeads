@@ -41,6 +41,11 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
         public System.Web.Mvc.ActionResult CreateAccount() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.CreateAccount);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult SendReply() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.SendReply);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public FpContactResponseController Actions { get { return MVC.FillPerfect.FpContactResponse; } }
@@ -58,6 +63,7 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
             public readonly string GetNewFpContactResponses = "GetNewFpContactResponses";
             public readonly string DeleteResponse = "DeleteResponse";
             public readonly string CreateAccount = "CreateAccount";
+            public readonly string SendReply = "SendReply";
         }
 
 
@@ -93,6 +99,29 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
         public override System.Web.Mvc.ActionResult CreateAccount(int responseId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateAccount);
             callInfo.RouteValueDictionary.Add("responseId", responseId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CreateAccount(MyJobLeads.Areas.FillPerfect.Models.ContactUsResponses.ContactUsCreateAccountViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateAccount);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SendReply(string toName, string toEmail, string password, string orgName, int responseId, string emailContent) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SendReply);
+            callInfo.RouteValueDictionary.Add("toName", toName);
+            callInfo.RouteValueDictionary.Add("toEmail", toEmail);
+            callInfo.RouteValueDictionary.Add("password", password);
+            callInfo.RouteValueDictionary.Add("orgName", orgName);
+            callInfo.RouteValueDictionary.Add("responseId", responseId);
+            callInfo.RouteValueDictionary.Add("emailContent", emailContent);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SendReply(MyJobLeads.Areas.FillPerfect.Models.ContactUsResponses.ContactUsSendReplyViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SendReply);
+            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 
