@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -15,6 +16,11 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <MvcBuildViews>true</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -113,12 +119,8 @@
       <Private>True</Private>
       <HintPath>..\packages\RazorEngine.3.0.8\lib\net40\System.Web.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.WebPages">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.Helpers">
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL " />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -305,8 +307,6 @@
     <Compile Include="Areas\Admin\Controllers\EditOrganizationController.cs" />
     <Compile Include="Areas\Admin\Models\CreateOrganizationWithAdminViewModel.cs" />
     <Compile Include="Areas\Admin\Models\DemoAccountCreation\CreateDemoAccountSuccessViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\DemoAccountCreation\CreateDemoAccountViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\DemoAccountCreation\DemoCreationValues.cs" />
     <Compile Include="Areas\Admin\Models\Mappings\OrganizationMappings.cs" />
     <Compile Include="Areas\Admin\Views\CreateDemoAccount\Index.generated.cs">
       <AutoGen>True</AutoGen>
@@ -416,6 +416,7 @@
     <Compile Include="Areas\FillPerfect\Controllers\OrgPilotDashboardController.cs" />
     <Compile Include="Areas\FillPerfect\Controllers\StatsController.cs" />
     <Compile Include="Areas\FillPerfect\FillPerfectAreaRegistration.cs" />
+    <Compile Include="Areas\FillPerfect\Models\ContactUsResponses\ContactUsCreateAccountViewModel.cs" />
     <Compile Include="Areas\FillPerfect\Models\Pilot\OrgDashboardViewModel.cs" />
     <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurveyPost2WeeksViewModel.cs" />
     <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurveyPost10ViewModel.cs" />
@@ -664,6 +665,7 @@
     <Compile Include="ViewModels\Accounts\AccountMembershipService.cs" />
     <Compile Include="ViewModels\Accounts\IMembershipService.cs" />
     <Compile Include="ViewModels\Accounts\OrganizationRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\Admin\CreateDemoAccountViewModel.cs" />
     <Compile Include="ViewModels\Companies\CompanyDisplayViewModel.cs" />
     <Compile Include="ViewModels\Companies\EditCompanyViewModel.cs" />
     <Compile Include="ViewModels\Companies\JobSearchCompanyListViewModel.cs" />
@@ -1562,10 +1564,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Areas\Admin\Views\CreateDemoAccount\Index.cshtml">
+    <DesignDataWithDesignTimeCreatableTypes Include="Areas\Admin\Views\CreateDemoAccount\Index.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
-    </Content>
+    </DesignDataWithDesignTimeCreatableTypes>
     <Content Include="Areas\Admin\Views\CreateDemoAccount\Success.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Success.generated.cs</LastGenOutput>
@@ -1797,8 +1799,13 @@
       <LastGenOutput>EditorLocalization.bg-BG.designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

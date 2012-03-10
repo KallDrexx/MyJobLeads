@@ -10,6 +10,8 @@ using MyJobLeads.DomainModel.Entities.EF;
 using MyJobLeads.DomainModel.Entities.Admin;
 using MyJobLeads.DomainModel.ProcessParams.FillPerfect;
 using MyJobLeads.Infrastructure.Attributes;
+using System.Configuration;
+using MyJobLeads.Areas.FillPerfect.Models.ContactUsResponses;
 
 namespace MyJobLeads.Areas.FillPerfect.Controllers
 {
@@ -30,7 +32,10 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
 
         public virtual ActionResult Index()
         {
-            _fetchResponseProc.Execute(new FetchFpContactResponseEmailsParams());
+            // Only get new emails from the email box if running on production
+            if (Convert.ToBoolean(ConfigurationManager.AppSettings["IsProduction"]))
+                _fetchResponseProc.Execute(new FetchFpContactResponseEmailsParams());
+
             return View();
         }
 
@@ -59,5 +64,48 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
                                 .ToArray()
             }, JsonRequestBehavior.AllowGet);
         }
+
+        public virtual ActionResult DeleteResponse(int id)
+        {
+            var response = _context.FillPerfectContactResponses
+                                   .Where(x => x.Id == id)
+                                   .SingleOrDefault();
+            if (response != null)
+            {
+                _context.FillPerfectContactResponses.Remove(response);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction(MVC.FillPerfect.FpContactResponse.Index());
+        }
+
+        public virtual ActionResult CreateAccount(int responseId)
+        {
+            var response = _context.FillPerfectContactResponses
+                                   .Where(x => x.Id == responseId)
+                                   .SingleOrDefault();
+            if (response == null)
+                return RedirectToAction(MVC.FillPerfect.FpContactResponse.Index());
+
+            var model = new ContactUsCreateAccountViewModel
+            {
+                FpContactResponseId = responseId,
+                ResponseName = response.Name,
+                ResponseEmail = response.Email,
+                ResponseProgram = response.Program,
+                ResponseSchool = response.School
+            };
+
+            return View(model);
+        }
+
+        //[HttpPost]
+        //public virtual ActionResult CreateAccount(ContactUsCreateAccountViewModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return View(model);
+
+
+        //}
     }
 }

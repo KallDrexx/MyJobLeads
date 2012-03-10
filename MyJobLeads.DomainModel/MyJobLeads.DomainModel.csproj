@@ -137,6 +137,7 @@
     <Compile Include="Data\IProcess.cs" />
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
+    <Compile Include="Data\Sample\DemoCreationValues.cs" />
     <Compile Include="Entities\Admin\FillPerfectContactResponse.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\EF\Configuration\MilestoneConfig.cs" />
@@ -212,8 +213,10 @@
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Processes\Admin\FillPerfectAdminProcesses.cs" />
     <Compile Include="Processes\Admin\OrganizationAdminProcesses.cs" />
+    <Compile Include="Processes\Admin\UserAdminProcesses.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
     <Compile Include="Processes\CompanySearching\JigsawCompanySearchProcesses.cs" />
+    <Compile Include="ProcessParams\Admin\CreateDemoAccountParams.cs" />
     <Compile Include="ProcessParams\Admin\FetchFpContactResponseEmailsParams.cs" />
     <Compile Include="ProcessParams\CompanySearching\Jigsaw\AddJigsawCompanyParams.cs" />
     <Compile Include="ProcessParams\CompanySearching\Jigsaw\MergeJigsawCompanyParams.cs" />
@@ -289,6 +292,7 @@
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQuery.cs" />
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="Utilities\EncryptionUtils.cs" />
+    <Compile Include="ViewModels\Admin\CreatedDemoAccountViewModel.cs" />
     <Compile Include="ViewModels\Authorizations\AuthorizationResultViewModel.cs" />
     <Compile Include="ViewModels\Companies\CompanySummaryViewModel.cs" />
     <Compile Include="ViewModels\CompanySearching\CompanyAddedViewResult.cs" />

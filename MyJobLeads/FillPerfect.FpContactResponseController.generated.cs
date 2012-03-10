@@ -31,6 +31,16 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult DeleteResponse() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.DeleteResponse);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult CreateAccount() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.CreateAccount);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public FpContactResponseController Actions { get { return MVC.FillPerfect.FpContactResponse; } }
@@ -46,6 +56,8 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
         public class ActionNamesClass {
             public readonly string Index = "Index";
             public readonly string GetNewFpContactResponses = "GetNewFpContactResponses";
+            public readonly string DeleteResponse = "DeleteResponse";
+            public readonly string CreateAccount = "CreateAccount";
         }
 
 
@@ -69,6 +81,18 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
 
         public override System.Web.Mvc.JsonResult GetNewFpContactResponses() {
             var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetNewFpContactResponses);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult DeleteResponse(int id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.DeleteResponse);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CreateAccount(int responseId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateAccount);
+            callInfo.RouteValueDictionary.Add("responseId", responseId);
             return callInfo;
         }
 

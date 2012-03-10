@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='_ConversionReport_Files/ConversionReport.xslt'?>
+<UpgradeLog>
+  <Properties>
+    <Property Name="Project" Value="MyJobLeads.Database" />
+    <Property Name="Project File" Value="C:\Users\Matthew\Documents\Projects\MyJobLeads\MyJobLeads.Database\MyJobLeads.Database.dbproj" />
+    <Property Name="Date" Value="Friday, March 09, 2012" />
+    <Property Name="Time" Value="9:05 PM" />
+  </Properties>
+  <Event ErrorLevel="0" Project="C:\Users\Matthew\Documents\Projects\MyJobLeads\MyJobLeads.Database\MyJobLeads.Database.dbproj" Source="..\MyJobLeads.Database.dbproj" Description="Project was successfully converted: 'C:\Users\Matthew\Documents\Projects\MyJobLeads\MyJobLeads.Database\MyJobLeads.Database.dbproj' to 'C:\Users\Matthew\Documents\Projects\MyJobLeads\MyJobLeads.Database\MyJobLeads.Database.sqlproj'" />
+  <Event ErrorLevel="3" Project="C:\Users\Matthew\Documents\Projects\MyJobLeads\MyJobLeads.Database\MyJobLeads.Database.dbproj" Source="..\MyJobLeads.Database.dbproj" Description="Converted" />
+</UpgradeLog>
