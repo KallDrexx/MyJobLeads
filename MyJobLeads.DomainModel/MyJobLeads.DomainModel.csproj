@@ -242,6 +242,7 @@
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\GetUserJigsawCredentialsParams.cs" />
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\SaveJigsawUserCredentialsParams.cs" />
     <Compile Include="ProcessParams\FillPerfect\GetFpContactResponsesParams.cs" />
+    <Compile Include="ProcessParams\FillPerfect\SendFpReplyParams.cs" />
     <Compile Include="ProcessParams\JobSearches\ByJobSearchParams.cs" />
     <Compile Include="ProcessParams\JobSearches\JobSearchMilestonePropogationParams.cs" />
     <Compile Include="ProcessParams\Milestones\MilestoneIdParams.cs" />
