@@ -89,9 +89,9 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
     public class T4MVC_FeedbackController: MyJobLeads.Areas.FillPerfect.Controllers.FeedbackController {
         public T4MVC_FeedbackController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult SurveyCompleted(bool previouslyCompleted) {
+        public override System.Web.Mvc.ActionResult SurveyCompleted(int surveysCompleted) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SurveyCompleted);
-            callInfo.RouteValueDictionary.Add("previouslyCompleted", previouslyCompleted);
+            callInfo.RouteValueDictionary.Add("surveysCompleted", surveysCompleted);
             return callInfo;
         }
 
