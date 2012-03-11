@@ -153,6 +153,26 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
 
         public virtual ActionResult SendReplyConfirm(ContactUsSendReplyViewModel model)
         {
+            if (Request.HttpMethod == "GET")
+                return View(model);
+
+            else
+            {
+                // Send the reply
+
+                return RedirectToAction(MVC.FillPerfect.FpContactResponse.ReplySent(model.ToName));
+            }
+        }
+
+        [HttpPost]
+        public virtual ActionResult EditReply(ContactUsSendReplyViewModel model)
+        {
+            return View(MVC.FillPerfect.FpContactResponse.Views.SendReply, model);
+        }
+
+        public virtual ActionResult ReplySent(string toName)
+        {
+            var model = new ContactUsReplySentViewModel { SentToName = toName };
             return View(model);
         }
     }

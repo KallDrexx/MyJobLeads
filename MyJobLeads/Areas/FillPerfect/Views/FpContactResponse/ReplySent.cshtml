@@ -1,0 +1,24 @@
+﻿@model MyJobLeads.Areas.FillPerfect.Models.ContactUsResponses.ContactUsReplySentViewModel
+
+@{
+    ViewBag.Title = "FillPerfect Reply Sent";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        <h3>FillPerfect Reply Successfully Sent</h3>
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>
+                You have successfully sent a reply to @Model.SentToName.  
+                @Html.ActionLink("Return to the Admin area", MVC.Admin.Dashboard.Index(), new { @class = "inlineBlue" })
+            </p>
+        }
+    }
+}

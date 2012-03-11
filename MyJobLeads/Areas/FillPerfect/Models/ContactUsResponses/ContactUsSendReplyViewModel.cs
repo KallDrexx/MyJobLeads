@@ -13,5 +13,6 @@ namespace MyJobLeads.Areas.FillPerfect.Models.ContactUsResponses
         public string ToPassword { get; set; }
         public string ToOrgName { get; set; }
         public string EmailContent { get; set; }
+        public bool ShowEditView { get; set; }
     }
 }

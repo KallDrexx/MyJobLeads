@@ -46,6 +46,21 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
         public System.Web.Mvc.ActionResult SendReply() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.SendReply);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult SendReplyConfirm() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.SendReplyConfirm);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult EditReply() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.EditReply);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ReplySent() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ReplySent);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public FpContactResponseController Actions { get { return MVC.FillPerfect.FpContactResponse; } }
@@ -64,6 +79,9 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
             public readonly string DeleteResponse = "DeleteResponse";
             public readonly string CreateAccount = "CreateAccount";
             public readonly string SendReply = "SendReply";
+            public readonly string SendReplyConfirm = "SendReplyConfirm";
+            public readonly string EditReply = "EditReply";
+            public readonly string ReplySent = "ReplySent";
         }
 
 
@@ -72,7 +90,10 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string CreateAccount = "~/Areas/FillPerfect/Views/FpContactResponse/CreateAccount.cshtml";
             public readonly string Index = "~/Areas/FillPerfect/Views/FpContactResponse/Index.cshtml";
+            public readonly string SendReply = "~/Areas/FillPerfect/Views/FpContactResponse/SendReply.cshtml";
+            public readonly string SendReplyConfirm = "~/Areas/FillPerfect/Views/FpContactResponse/SendReplyConfirm.cshtml";
         }
     }
 
@@ -122,6 +143,24 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
         public override System.Web.Mvc.ActionResult SendReply(MyJobLeads.Areas.FillPerfect.Models.ContactUsResponses.ContactUsSendReplyViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SendReply);
             callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SendReplyConfirm(MyJobLeads.Areas.FillPerfect.Models.ContactUsResponses.ContactUsSendReplyViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SendReplyConfirm);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult EditReply(MyJobLeads.Areas.FillPerfect.Models.ContactUsResponses.ContactUsSendReplyViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditReply);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ReplySent(string toName) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ReplySent);
+            callInfo.RouteValueDictionary.Add("toName", toName);
             return callInfo;
         }
 

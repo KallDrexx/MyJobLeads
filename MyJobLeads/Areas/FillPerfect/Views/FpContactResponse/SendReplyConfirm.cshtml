@@ -1,0 +1,62 @@
+﻿@model MyJobLeads.Areas.FillPerfect.Models.ContactUsResponses.ContactUsSendReplyViewModel         
+
+@{
+    ViewBag.Title = "Confirm FP Reply";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        <h3>Confirm FillPerfect Trial Reply</h3>
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>
+                Please review the email and confirm it is correct
+            </p>
+    
+            <p>
+                Sending Email To: <span class="bold">@Model.ToEmail</span>
+            </p>
+    
+            <p>
+                <span class="bold">Email Content:</span><br />
+                @MarkupSanitizer.Sanitizer.SanitizeMarkup(Model.EmailContent).MarkupText
+            </p>        
+        }
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.FormButtonArea())
+        {
+            using (Html.BeginForm())
+            {
+                @Html.HiddenFor(x => x.ResponseId)
+                @Html.HiddenFor(x => x.ToEmail)
+                @Html.HiddenFor(x => x.ToName)
+                @Html.HiddenFor(x => x.ToOrgName)
+                @Html.HiddenFor(x => x.ToPassword)
+                @Html.HiddenFor(x => x.EmailContent)
+                <input type="submit" value="Send Email" />
+            }
+
+            @:&nbsp; &nbsp;
+
+            using (Html.BeginForm(MVC.FillPerfect.FpContactResponse.EditReply()))
+            {
+                @Html.HiddenFor(x => x.ResponseId)
+                @Html.HiddenFor(x => x.ToEmail)
+                @Html.HiddenFor(x => x.ToName)
+                @Html.HiddenFor(x => x.ToOrgName)
+                @Html.HiddenFor(x => x.ToPassword)
+                @Html.HiddenFor(x => x.EmailContent)
+                <input type="submit" value="Edit Email" />
+            }
+        }
+    }
+}
