@@ -17,7 +17,8 @@ using MyJobLeads.DomainModel.Exceptions;
 namespace MyJobLeads.DomainModel.Processes.Admin
 {
     public class FillPerfectAdminProcesses : IProcess<FetchFpContactResponseEmailsParams, GeneralSuccessResultViewModel>,
-                                             IProcess<GetFpContactResponsesParams, SearchResultsViewModel<FillPerfectContactResponse>>
+                                             IProcess<GetFpContactResponsesParams, SearchResultsViewModel<FillPerfectContactResponse>>,
+                                             IProcess<SendFpReplyParams, GeneralSuccessResultViewModel>
     {
         protected MyJobLeadsDbContext _context;
         protected IProcess<SiteAdminAuthorizationParams, AuthorizationResultViewModel> _adminAuthProc;
@@ -115,6 +116,20 @@ namespace MyJobLeads.DomainModel.Processes.Admin
                                .ThenBy(x => x.ReceivedDate)
                                .ToList()
             };
+        }
+
+        /// <summary>
+        /// Sends a FillPerfect information reply to a specific person
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        public GeneralSuccessResultViewModel Execute(SendFpReplyParams procParams)
+        {
+            // Make sure the user is a site administrator
+            if (!_adminAuthProc.Execute(new SiteAdminAuthorizationParams { UserId = procParams.RequestingUserId }).UserAuthorized)
+                throw new UserNotAuthorizedForProcessException(procParams.RequestingUserId, typeof(SendFpReplyParams), typeof(GeneralSuccessResultViewModel));
+
+
         }
     }
 }
