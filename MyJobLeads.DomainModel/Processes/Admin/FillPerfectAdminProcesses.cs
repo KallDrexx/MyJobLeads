@@ -129,7 +129,7 @@ namespace MyJobLeads.DomainModel.Processes.Admin
             if (!_adminAuthProc.Execute(new SiteAdminAuthorizationParams { UserId = procParams.RequestingUserId }).UserAuthorized)
                 throw new UserNotAuthorizedForProcessException(procParams.RequestingUserId, typeof(SendFpReplyParams), typeof(GeneralSuccessResultViewModel));
 
-
+            return new GeneralSuccessResultViewModel { WasSuccessful = true };
         }
     }
 }

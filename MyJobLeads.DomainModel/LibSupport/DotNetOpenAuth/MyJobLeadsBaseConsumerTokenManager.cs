@@ -24,9 +24,6 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
             if (context == null)
                 throw new ArgumentNullException("context");
 
-            if (tokenProvider == null)
-                throw new ArgumentNullException("tokenProvider");
-
             if (string.IsNullOrWhiteSpace(consumerKeyAppSetting))
                 throw new ArgumentNullException("consumerKeyAppSetting");
 

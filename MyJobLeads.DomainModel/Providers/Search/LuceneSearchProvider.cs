@@ -171,8 +171,8 @@ namespace MyJobLeads.DomainModel.Providers.Search
         public SearchProviderResult SearchByJobSearchId(string searchString, int jobSearchId)
         {
             const int MAX_RESULTS = 10000;
-            const float MIN_SIMILARITY = 0.5f;
-            const int PREFIX_LENGTH = 3;
+            //const float MIN_SIMILARITY = 0.5f;
+            //const int PREFIX_LENGTH = 3;
 
             if (string.IsNullOrWhiteSpace(searchString))
                 throw new ArgumentException("Provided search string is empty");
