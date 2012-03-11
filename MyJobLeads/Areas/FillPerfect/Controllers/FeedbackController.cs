@@ -23,12 +23,12 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
         public virtual ActionResult Student01(string fpUserId)
         {
             var model = new StudentSurveyPost3ViewModel { FpUserId = fpUserId };
-            if (string.IsNullOrWhiteSpace(fpUserId) || _context.FpSurveyResponses.Any(x => x.FpUserId == fpUserId && x.SurveyId == model.QuestionId))
+            if (HasUserFilledOutSurvey(model.QuestionId, fpUserId))
                 return RedirectToAction(MVC.FillPerfect.Feedback.SurveyCompleted(GetFpCompletedSurveyCount(fpUserId)));
 
             return View(model);
         }
-
+        
         [HttpPost]
         public virtual ActionResult Student01(StudentSurveyPost3ViewModel model)
         {
@@ -44,7 +44,7 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
         public virtual ActionResult Student02(string fpUserId)
         {
             var model = new StudentSurveyPost5ViewModel { FpUserId = fpUserId };
-            if (string.IsNullOrWhiteSpace(fpUserId) || _context.FpSurveyResponses.Any(x => x.FpUserId == fpUserId && x.SurveyId == model.QuestionId))
+            if (HasUserFilledOutSurvey(model.QuestionId, fpUserId))
                 return RedirectToAction(MVC.FillPerfect.Feedback.SurveyCompleted(GetFpCompletedSurveyCount(fpUserId)));
 
             return View(model);
@@ -65,7 +65,7 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
         public virtual ActionResult Student03(string fpUserId)
         {
             var model = new StudentSurveyPost10ViewModel { FpUserId = fpUserId };
-            if (string.IsNullOrWhiteSpace(fpUserId) || _context.FpSurveyResponses.Any(x => x.FpUserId == fpUserId && x.SurveyId == model.QuestionId))
+            if (HasUserFilledOutSurvey(model.QuestionId, fpUserId))
                 return RedirectToAction(MVC.FillPerfect.Feedback.SurveyCompleted(GetFpCompletedSurveyCount(fpUserId)));
 
             return View(model);
@@ -86,7 +86,7 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
         public virtual ActionResult Student04(string fpUserId)
         {
             var model = new StudentSurveyPost2WeeksViewModel { FpUserId = fpUserId };
-            if (string.IsNullOrWhiteSpace(fpUserId) || _context.FpSurveyResponses.Any(x => x.FpUserId == fpUserId && x.SurveyId == model.QuestionId))
+            if (HasUserFilledOutSurvey(model.QuestionId, fpUserId))
                 return RedirectToAction(MVC.FillPerfect.Feedback.SurveyCompleted(GetFpCompletedSurveyCount(fpUserId)));
 
             return View(model);
@@ -106,9 +106,28 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
 
         protected int GetFpCompletedSurveyCount(string fpUserId)
         {
+            string userIdWithoutSchool = fpUserId.Contains("|")
+                ? fpUserId.Substring(0, fpUserId.IndexOf('|'))
+                : fpUserId;
+
             return _context.FpSurveyResponses
-                           .Where(x => x.FpUserId == fpUserId)
+                           .Where(x => x.FpUserId.Contains(userIdWithoutSchool))
                            .Count();
+        }
+
+        protected bool HasUserFilledOutSurvey(string surveyId, string fpUserId)
+        {
+            // Consider an empty user id as a filled out survey
+            if (string.IsNullOrWhiteSpace(fpUserId))
+                return true;
+
+            string userIdWithoutSchool = fpUserId.Contains("|")
+                ? fpUserId.Substring(0, fpUserId.IndexOf('|'))
+                : fpUserId;
+
+            return string.IsNullOrWhiteSpace(fpUserId) ||
+                    _context.FpSurveyResponses
+                            .Any(x => x.FpUserId.Contains(userIdWithoutSchool) && x.SurveyId == surveyId);
         }
     }
 }
