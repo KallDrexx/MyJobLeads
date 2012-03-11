@@ -106,13 +106,20 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
 
         protected int GetFpCompletedSurveyCount(string fpUserId)
         {
-            string userIdWithoutSchool = fpUserId.Contains("|")
-                ? fpUserId.Substring(0, fpUserId.IndexOf('|'))
-                : fpUserId;
+            string userIdWithoutSchool = GetFpUserIdWithoutOrg(fpUserId);
 
             return _context.FpSurveyResponses
                            .Where(x => x.FpUserId.Contains(userIdWithoutSchool))
                            .Count();
+        }
+
+        private static string GetFpUserIdWithoutOrg(string fpUserId)
+        {
+            string userIdWithoutSchool = fpUserId.Contains("|")
+                ? fpUserId.Substring(0, fpUserId.IndexOf('|'))
+                : fpUserId;
+
+            return userIdWithoutSchool;
         }
 
         protected bool HasUserFilledOutSurvey(string surveyId, string fpUserId)
@@ -121,10 +128,7 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
             if (string.IsNullOrWhiteSpace(fpUserId))
                 return true;
 
-            string userIdWithoutSchool = fpUserId.Contains("|")
-                ? fpUserId.Substring(0, fpUserId.IndexOf('|'))
-                : fpUserId;
-
+            string userIdWithoutSchool = GetFpUserIdWithoutOrg(fpUserId);
             return string.IsNullOrWhiteSpace(fpUserId) ||
                     _context.FpSurveyResponses
                             .Any(x => x.FpUserId.Contains(userIdWithoutSchool) && x.SurveyId == surveyId);
