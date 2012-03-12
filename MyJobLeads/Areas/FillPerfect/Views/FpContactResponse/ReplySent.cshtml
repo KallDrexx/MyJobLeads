@@ -16,7 +16,7 @@
         using (Html.ContentArea())
         {
             <p>
-                You have successfully sent a reply to @Model.SentToName.  
+                You have successfully sent a reply to @Model.SentToName.  <br />
                 @Html.ActionLink("Return to the Admin area", MVC.Admin.Dashboard.Index(), new { @class = "inlineBlue" })
             </p>
         }

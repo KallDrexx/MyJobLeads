@@ -13,6 +13,7 @@ using MyJobLeads.DomainModel.ProcessParams.FillPerfect;
 using MyJobLeads.DomainModel.ViewModels.Authorizations;
 using MyJobLeads.DomainModel.ProcessParams.Security;
 using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Mail;
 
 namespace MyJobLeads.DomainModel.Processes.Admin
 {
@@ -128,6 +129,20 @@ namespace MyJobLeads.DomainModel.Processes.Admin
             // Make sure the user is a site administrator
             if (!_adminAuthProc.Execute(new SiteAdminAuthorizationParams { UserId = procParams.RequestingUserId }).UserAuthorized)
                 throw new UserNotAuthorizedForProcessException(procParams.RequestingUserId, typeof(SendFpReplyParams), typeof(GeneralSuccessResultViewModel));
+
+            // Retrieve the response the reply is for
+            var response = _context.FillPerfectContactResponses
+                                   .Where(x => x.Id == procParams.ResponseId)
+                                   .SingleOrDefault();
+            if (response == null)
+                throw new MJLEntityNotFoundException(typeof(FillPerfectContactResponse), procParams.RequestingUserId);
+
+            // Sanitize the html content
+            procParams.EmailContent = MerchantTribe.Web.HtmlSanitizer.MakeHtmlSafe(procParams.EmailContent);
+
+            response.RepliedDate = DateTime.Now;
+            new FillPerfectMailController().SendContactReplyEmail(procParams);
+            _context.SaveChanges();
 
             return new GeneralSuccessResultViewModel { WasSuccessful = true };
         }

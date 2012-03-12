@@ -22,16 +22,19 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
         protected IProcess<FetchFpContactResponseEmailsParams, GeneralSuccessResultViewModel> _fetchResponseProc;
         protected IProcess<GetFpContactResponsesParams, SearchResultsViewModel<FillPerfectContactResponse>> _getDbFpContactResponseProc;
         protected IProcess<CreateDemoAccountParams, CreatedDemoAccountViewModel> _createDemoActProc;
+        protected IProcess<SendFpReplyParams, GeneralSuccessResultViewModel> _sendFpReplyProc;
 
         public FpContactResponseController(MyJobLeadsDbContext context, 
                                             IProcess<FetchFpContactResponseEmailsParams, GeneralSuccessResultViewModel> fetchResponseProc,
                                             IProcess<GetFpContactResponsesParams, SearchResultsViewModel<FillPerfectContactResponse>> getDbFpContactResponseProc,
-                                            IProcess<CreateDemoAccountParams, CreatedDemoAccountViewModel> createDemoActProc)
+                                            IProcess<CreateDemoAccountParams, CreatedDemoAccountViewModel> createDemoActProc,
+                                            IProcess<SendFpReplyParams, GeneralSuccessResultViewModel> sendFpReplyProc)
         {
             _context = context;
             _fetchResponseProc = fetchResponseProc;
             _getDbFpContactResponseProc = getDbFpContactResponseProc;
             _createDemoActProc = createDemoActProc;
+            _sendFpReplyProc = sendFpReplyProc;
         }
 
         public virtual ActionResult Index()
@@ -51,10 +54,7 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
                 GetNewResponses = true
             });
 
-            return Json(new
-            {
-                iTotalRecords = results.TotalResultsCount,
-                aaData = results.Results
+            var data = results.Results
                                 .Select(x => new object[]
                                 {
                                     x.Id,
@@ -63,9 +63,14 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
                                     HttpUtility.HtmlEncode(x.School),
                                     HttpUtility.HtmlEncode(x.Program),
                                     x.ReceivedDate.ToLongDateString(),
-                                    x.RepliedDate != null ? x.RepliedDate.Value.ToLongDateString() : ""
-                                })
-                                .ToArray()
+                                    x.RepliedDate != null ? x.RepliedDate.Value.ToLongDateString() : "",
+                                    string.Format("<a href=\"{0}\" class=\"inlineBlue\">Reply</a>", Url.Action(MVC.FillPerfect.FpContactResponse.CreateAccount(x.Id))),
+                                    string.Format("<a href=\"{0}\" class=\"inlineBlue\">Delete</a>", Url.Action(MVC.FillPerfect.FpContactResponse.DeleteResponse(x.Id)))
+                                });
+            return Json(new
+            {
+                iTotalRecords = results.TotalResultsCount,
+                aaData = data.ToArray()
             }, JsonRequestBehavior.AllowGet);
         }
 
@@ -129,6 +134,12 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
 
         public virtual ActionResult SendReply(string toName, string toEmail, string password, string orgName, int responseId, string emailContent = "")
         {
+            // Get the email for the current user
+            var email = _context.Users
+                                .Where(x => x.Id == CurrentUserId)
+                                .Select(x => x.Email)
+                                .Single();
+
             var model = new ContactUsSendReplyViewModel
             {
                 ResponseId = responseId,
@@ -136,37 +147,60 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
                 ToEmail = toEmail,
                 ToOrgName = orgName,
                 ToPassword = password,
-                EmailContent = emailContent
+                EmailContent = emailContent,
+                FromAddress = email
             };
 
             return View(model);
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public virtual ActionResult SendReply(ContactUsSendReplyViewModel model)
         {
+            // Perform validation
+            if (string.IsNullOrWhiteSpace(model.EmailSubject))
+                ModelState.AddModelError("EmailSubject", "Email subject cannot be empty");
+
             if (!ModelState.IsValid)
                 return View(model);
 
-            return RedirectToAction(MVC.FillPerfect.FpContactResponse.SendReplyConfirm(model));
-        }
+            // Convert newlines into <br /> tags
+            model.EmailContent = model.EmailContent.Replace(Environment.NewLine, "<br />");
 
-        public virtual ActionResult SendReplyConfirm(ContactUsSendReplyViewModel model)
-        {
-            if (Request.HttpMethod == "GET")
-                return View(model);
-
-            else
-            {
-                // Send the reply
-
-                return RedirectToAction(MVC.FillPerfect.FpContactResponse.ReplySent(model.ToName));
-            }
+            // Show confirmation view
+            return View(MVC.FillPerfect.FpContactResponse.Views.SendReplyConfirm, model);
         }
 
         [HttpPost]
+        [ValidateInput(false)]
+        public virtual ActionResult SendReplyConfirm(ContactUsSendReplyViewModel model)
+        {
+            // Convert newlines into <br /> tags
+            model.EmailContent = model.EmailContent.Replace(Environment.NewLine, "<br />");
+
+            // Send the reply
+            _sendFpReplyProc.Execute(new SendFpReplyParams
+            {
+                RequestingUserId = CurrentUserId,
+                ResponseId = model.ResponseId,
+                FromAddress = model.FromAddress,
+                ToAddress = model.ToEmail,
+                Subject = model.EmailSubject,
+                EmailContent = model.EmailContent
+            });
+            return RedirectToAction(MVC.FillPerfect.FpContactResponse.ReplySent(model.ToName));
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
         public virtual ActionResult EditReply(ContactUsSendReplyViewModel model)
         {
+            // Convert <br /> tags into newlines, to make editing easier
+            model.EmailContent = model.EmailContent
+                                      .Replace("<br />", Environment.NewLine)
+                                      .Replace("<br>", Environment.NewLine);
+
             return View(MVC.FillPerfect.FpContactResponse.Views.SendReply, model);
         }
 

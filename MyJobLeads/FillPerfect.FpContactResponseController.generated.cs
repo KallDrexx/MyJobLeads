@@ -92,6 +92,7 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
         public class ViewNames {
             public readonly string CreateAccount = "~/Areas/FillPerfect/Views/FpContactResponse/CreateAccount.cshtml";
             public readonly string Index = "~/Areas/FillPerfect/Views/FpContactResponse/Index.cshtml";
+            public readonly string ReplySent = "~/Areas/FillPerfect/Views/FpContactResponse/ReplySent.cshtml";
             public readonly string SendReply = "~/Areas/FillPerfect/Views/FpContactResponse/SendReply.cshtml";
             public readonly string SendReplyConfirm = "~/Areas/FillPerfect/Views/FpContactResponse/SendReplyConfirm.cshtml";
         }

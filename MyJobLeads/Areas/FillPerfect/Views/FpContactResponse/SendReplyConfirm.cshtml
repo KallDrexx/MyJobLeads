@@ -25,8 +25,18 @@
     
             <p>
                 <span class="bold">Email Content:</span><br />
-                @MarkupSanitizer.Sanitizer.SanitizeMarkup(Model.EmailContent).MarkupText
+                <div class="contentPreview">
+                    @Html.Raw(MerchantTribe.Web.HtmlSanitizer.MakeHtmlSafe(Model.EmailContent))
+                </div>
             </p>        
+        }
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>&nbsp;</p>
         }
     }
 
@@ -34,7 +44,7 @@
     {
         using (Html.FormButtonArea())
         {
-            using (Html.BeginForm())
+            using (Html.BeginForm(MVC.FillPerfect.FpContactResponse.SendReplyConfirm()))
             {
                 @Html.HiddenFor(x => x.ResponseId)
                 @Html.HiddenFor(x => x.ToEmail)
@@ -42,6 +52,8 @@
                 @Html.HiddenFor(x => x.ToOrgName)
                 @Html.HiddenFor(x => x.ToPassword)
                 @Html.HiddenFor(x => x.EmailContent)
+                @Html.HiddenFor(x => x.FromAddress)
+                @Html.HiddenFor(x => x.EmailSubject)
                 <input type="submit" value="Send Email" />
             }
 
@@ -55,6 +67,8 @@
                 @Html.HiddenFor(x => x.ToOrgName)
                 @Html.HiddenFor(x => x.ToPassword)
                 @Html.HiddenFor(x => x.EmailContent)
+                @Html.HiddenFor(x => x.FromAddress)
+                @Html.HiddenFor(x => x.EmailSubject)
                 <input type="submit" value="Edit Email" />
             }
         }

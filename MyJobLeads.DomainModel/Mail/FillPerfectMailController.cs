@@ -28,10 +28,10 @@ namespace MyJobLeads.DomainModel.Mail
         public void SendContactReplyEmail(SendFpReplyParams model)
         {
             string body = ParseTemplate("Mail/Templates/FillPerfect/FpContactReplyEmail.cshtml", model);
-            new EmailUtils().Send(model.ToAddress, model.Subject, body, true);
+            new EmailUtils().Send(model.ToAddress, model.Subject, body, true, model.FromAddress);
         }
 
-        protected string ParseTemplate(string templateFilename, object model)
+        protected string ParseTemplate<TModel>(string templateFilename, TModel model) where TModel : class
         {
             string baseDir = AppDomain.CurrentDomain.BaseDirectory;
             string template = File.OpenText(string.Concat(baseDir, "bin/", templateFilename)).ReadToEnd();
