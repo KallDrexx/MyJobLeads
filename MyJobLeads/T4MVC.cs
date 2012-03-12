@@ -78,6 +78,7 @@ namespace T4MVC {
         public MyJobLeads.Areas.FillPerfect.Controllers.FpContactResponseController FpContactResponse = new MyJobLeads.Areas.FillPerfect.Controllers.T4MVC_FpContactResponseController();
         public MyJobLeads.Areas.FillPerfect.Controllers.OrgPilotDashboardController OrgPilotDashboard = new MyJobLeads.Areas.FillPerfect.Controllers.T4MVC_OrgPilotDashboardController();
         public MyJobLeads.Areas.FillPerfect.Controllers.StatsController Stats = new MyJobLeads.Areas.FillPerfect.Controllers.T4MVC_StatsController();
+        public MyJobLeads.Areas.FillPerfect.Controllers.UpdateOrgTrialKeyController UpdateOrgTrialKey = new MyJobLeads.Areas.FillPerfect.Controllers.T4MVC_UpdateOrgTrialKeyController();
         public T4MVC.FillPerfect.SharedController Shared = new T4MVC.FillPerfect.SharedController();
     }
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
