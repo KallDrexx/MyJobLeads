@@ -18,7 +18,7 @@ namespace MyJobLeads.DomainModel.Utilities
         /// <param name="toAddress"></param>
         /// <param name="subject"></param>
         /// <param name="messageBody"></param>
-        public virtual void Send(string toAddress, string subject, string messageBody, bool isHtml = false)
+        public virtual void Send(string toAddress, string subject, string messageBody, bool isHtml = false, string fromAddres = null)
         {
             // Create a SmtpClient using the parameters from app.config
             var client = new SmtpClient();
@@ -29,6 +29,8 @@ namespace MyJobLeads.DomainModel.Utilities
             msg.Subject = subject;
             msg.Body = messageBody;
             msg.IsBodyHtml = isHtml;
+            if (!string.IsNullOrWhiteSpace(fromAddres))
+                msg.From = new MailAddress(fromAddres);
 
             // Send the email
             client.Send(msg);

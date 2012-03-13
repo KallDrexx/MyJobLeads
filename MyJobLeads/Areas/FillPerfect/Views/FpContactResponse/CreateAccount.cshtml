@@ -1,0 +1,65 @@
+﻿@model MyJobLeads.Areas.FillPerfect.Models.ContactUsResponses.ContactUsCreateAccountViewModel
+
+@{
+    ViewBag.Title = "Create CS Account";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        <h3>Create CS Account</h3>
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>
+               Use this form to create an account for the user that filled out the FP Contact Us page.
+            </p>
+    
+            <p>
+                The following is the data the user specified when filing out the form: <br />
+                Name: <span class="bold">@Model.ResponseName</span> <br />
+                Email: <span class="bold">@Model.ResponseEmail</span> <br />
+                School: <span class="bold">@Model.ResponseSchool</span> <br />
+                Program: <span class="bold">@Model.ResponseProgram</span> <br />
+            </p>
+        }
+    }
+
+    using (Html.BeginForm())
+    {
+        @Html.HiddenFor(x => x.FpContactResponseId)
+        @Html.HiddenFor(x => x.ResponseEmail)
+        @Html.HiddenFor(x => x.ResponseName)
+        @Html.HiddenFor(x => x.ResponseProgram)
+        @Html.HiddenFor(x => x.ResponseSchool)
+        
+        using (Html.OuterRow())
+        {
+            using (Html.ValidationArea())
+            {
+                @Html.ValidationSummary()
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            Html.FormField(new HtmlString("Name:"), Html.TextBoxFor(x => x.CreateAccountModel.Name, new { @class = "info" }));
+            Html.FormField(new HtmlString("Email:"), Html.TextBoxFor(x => x.CreateAccountModel.Email, new { @class = "info" }));
+            Html.FormField(new HtmlString("Organization:"), Html.TextBoxFor(x => x.CreateAccountModel.OrganizationName, new { @class = "info" }));
+            Html.FormField(new HtmlString("Password:"), Html.PasswordFor(x => x.CreateAccountModel.Password, new { @class = "info" }));
+            Html.FormField(new HtmlString("Confirm Password:"), Html.PasswordFor(x => x.CreateAccountModel.ConfirmPassword, new { @class = "info" }));
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.FormButtonArea())
+            {
+                <input type="submit" value="Create" />
+            }
+        }
+    }
+}

@@ -27,10 +27,11 @@ namespace MyJobLeads.Areas.Admin.Views.CreateDemoAccount
     using System.Web.UI;
     using System.Web.WebPages;
     using MyJobLeads.Infrastructure.HtmlHelpers;
+    using MyJobLeads.ViewModels.Admin;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.3.2.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/Admin/Views/CreateDemoAccount/Index.cshtml")]
-    public class Index : System.Web.Mvc.WebViewPage<MyJobLeads.Areas.Admin.Models.DemoAccountCreation.CreateDemoAccountViewModel>
+    public class Index : System.Web.Mvc.WebViewPage<CreateDemoAccountViewModel>
     {
         public Index()
         {

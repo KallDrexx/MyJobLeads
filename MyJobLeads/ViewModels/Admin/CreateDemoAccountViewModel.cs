@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 
-namespace MyJobLeads.Areas.Admin.Models.DemoAccountCreation
+namespace MyJobLeads.ViewModels.Admin
 {
     public class CreateDemoAccountViewModel
     {

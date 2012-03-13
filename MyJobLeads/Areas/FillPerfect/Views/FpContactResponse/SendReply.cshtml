@@ -1,0 +1,63 @@
+﻿@model MyJobLeads.Areas.FillPerfect.Models.ContactUsResponses.ContactUsSendReplyViewModel
+
+@{
+    ViewBag.Title = "Send Reply";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        <h3>Send CS A Reply</h3>
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>
+                From here you can send an email to the CS rep with their new account details
+            </p>
+    
+            <p>
+                Name: <span class="bold">@Model.ToName</span> <br />
+                Email: <span class="bold">@Model.ToEmail</span> <br />
+                School: <span class="bold">@Model.ToOrgName</span> <br />
+                Password: <span class="bold">@Model.ToPassword</span>
+            </p>
+        }
+    }
+
+    using (Html.BeginForm(MVC.FillPerfect.FpContactResponse.SendReply()))
+    {
+        @Html.HiddenFor(x => x.ToEmail)
+        @Html.HiddenFor(x => x.ToName)
+        @Html.HiddenFor(x => x.ToOrgName)
+        @Html.HiddenFor(x => x.ToPassword)
+        @Html.HiddenFor(x => x.ResponseId)
+        
+        using (Html.OuterRow())
+        {
+            using (Html.ValidationArea())
+            {
+                @Html.ValidationSummary()
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            Html.FormField(new HtmlString("Send From Address:"), Html.TextBoxFor(x => x.FromAddress, new { @class = "info" }));
+            Html.FormField(new HtmlString("Email Subject:"), Html.TextBoxFor(x => x.EmailSubject, new { @class = "info" }));
+            Html.FormField(new HtmlString("Email Content"),
+                Html.TextAreaFor(x => x.EmailContent, new { @class = "textAreaInfo" }));
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.FormButtonArea())
+            {
+                <input type="submit" value="Send" />
+            }
+        }
+    }
+}

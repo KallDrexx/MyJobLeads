@@ -8,6 +8,7 @@ using MyJobLeads.DomainModel.ViewModels.Mail;
 using System.IO;
 using RazorEngine;
 using MyJobLeads.DomainModel.Utilities;
+using MyJobLeads.DomainModel.ProcessParams.FillPerfect;
 
 namespace MyJobLeads.DomainModel.Mail
 {
@@ -19,11 +20,22 @@ namespace MyJobLeads.DomainModel.Mail
             string subject = "Welcome to the InterviewTools FillPerfect Pilot Program!";
             
             // Open the template and form the message
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            string template = File.OpenText(baseDir + "bin/Mail/Templates/PilotStudentLicenseEmail.cshtml").ReadToEnd();
-            string body = Razor.Parse(template, model);
+            string body = ParseTemplate("Mail/Templates/PilotStudentLicenseEmail.cshtml", model);
 
             new EmailUtils().Send(license.Email, subject, body, true);
+        }
+
+        public void SendContactReplyEmail(SendFpReplyParams model)
+        {
+            string body = ParseTemplate("Mail/Templates/FillPerfect/FpContactReplyEmail.cshtml", model);
+            new EmailUtils().Send(model.ToAddress, model.Subject, body, true, model.FromAddress);
+        }
+
+        protected string ParseTemplate<TModel>(string templateFilename, TModel model) where TModel : class
+        {
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string template = File.OpenText(string.Concat(baseDir, "bin/", templateFilename)).ReadToEnd();
+            return Razor.Parse(template, model);
         }
     }
 }

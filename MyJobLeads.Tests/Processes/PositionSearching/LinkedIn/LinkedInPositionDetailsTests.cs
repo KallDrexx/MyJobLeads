@@ -61,7 +61,7 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
             string expTitle = "Research Manager supporting Forbes.com worldwide online ad sales team";
             string expLocation = "Greater New York City Area";
             string expCompanyName = "Forbes.com Inc.";
-            string expCompanyId = "21836";
+            //string expCompanyId = "21836";
             DateTime expPostDate = new DateTime(2007, 1, 14);
             string expExperience = "Mid-Senior level";
             string expJobType = "Full-time";

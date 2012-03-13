@@ -73,7 +73,7 @@ namespace MyJobLeads.Areas.Admin.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Index(MyJobLeads.Areas.Admin.Models.DemoAccountCreation.CreateDemoAccountViewModel model) {
+        public override System.Web.Mvc.ActionResult Index(MyJobLeads.ViewModels.Admin.CreateDemoAccountViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;

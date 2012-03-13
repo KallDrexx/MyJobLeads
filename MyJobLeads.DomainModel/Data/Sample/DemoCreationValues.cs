@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MyJobLeads.Areas.Admin.Models.DemoAccountCreation
+namespace MyJobLeads.DomainModel.Data.Sample
 {
     public class DemoCreationValues
     {

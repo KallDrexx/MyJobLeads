@@ -75,7 +75,8 @@ namespace MyJobLeads.Tests.Commands.Users
             _mock.Verify(x => x.Send(It.Is<string>(y => y == _user.Email), 
                                      It.IsAny<string>(), 
                                      It.Is<string>(y => y.Contains(newPass)),
-                                     It.IsAny<bool>()), 
+                                     It.IsAny<bool>(),
+                                     It.IsAny<string>()), 
                         Times.Once());
         }
 
