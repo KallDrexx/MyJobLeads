@@ -1,0 +1,56 @@
+﻿@model MyJobLeads.Areas.FillPerfect.Models.UpdateOrgTrialKey.OrgTrialViewModel
+
+@{
+    ViewBag.Title = "Edit Organization FP Pilot Key";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        <h3>Edit FilPerfect FP Pilot Key</h3>
+    }
+
+    using (Html.BeginForm())
+    {
+        @Html.HiddenFor(x => x.OrganizationName)
+        @Html.HiddenFor(x => x.OrganizationId)
+        @Html.HiddenFor(x => x.OrigTrialCount)
+        <input type="hidden" name="ZeroCountConfirm" value="@Model.ZeroCountConfirm" />
+
+        using (Html.OuterRow())
+        {
+            using (Html.ContentArea())
+            {
+                <p>
+                    Update the FillPerfect pilot keys for <span class="bold">@Model.OrganizationName</span>
+                </p>   
+            }
+        }
+    
+        using (Html.OuterRow())
+        {
+            using (Html.ValidationArea())
+            {
+                @Html.ValidationSummary()
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            Html.FormField(new HtmlString("FillPerfect Key"),
+                Html.TextBoxFor(x => x.FillPerfectKey, new { @class = "info" }));
+            Html.FormField(new HtmlString("License Count"),
+                Html.TextBoxFor(x => x.TotaltrialCount, new { @class = "info" }));
+        }
+        
+        using (Html.OuterRow())
+        {
+           using (Html.FormButtonArea())
+           {
+                <input type="submit" value="Update" />@: &nbsp;
+                @Html.ActionLink("Back to Admin Dashboard", MVC.Admin.Dashboard.Index())
+           }
+        }
+    }
+}

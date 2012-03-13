@@ -1,0 +1,38 @@
+﻿@model MyJobLeads.Areas.FillPerfect.Models.UpdateOrgTrialKey.OrgSelectionViewModel
+
+@{
+    ViewBag.Title = "Select FillPerfect Pilot Organization";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        <h3>Select Organization To Edit FillPerfect Pilot Key</h3>
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>Select the organization to edit the FillPerfect pilot key for</p>
+        }
+    }
+
+    using (Html.BeginForm(MVC.FillPerfect.UpdateOrgTrialKey.Edit(), FormMethod.Get))
+    {
+        using (Html.OuterRow())
+        {
+            Html.FormField(new HtmlString("Select Organization"), 
+                Html.DropDownListFor(x => x.SelectedOrgId, Model.OrganizationList));
+        }
+        
+        using (Html.OuterRow())
+        {
+            using (Html.FormButtonArea())
+            {   
+                <input type="submit" value="Select" />
+            }
+        }
+    }
+}

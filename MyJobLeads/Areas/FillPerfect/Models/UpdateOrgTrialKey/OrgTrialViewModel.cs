@@ -11,5 +11,7 @@ namespace MyJobLeads.Areas.FillPerfect.Models.UpdateOrgTrialKey
         public string OrganizationName { get; set; }
         public string FillPerfectKey { get; set; }
         public int TotaltrialCount { get; set; }
+        public int OrigTrialCount { get; set; }
+        public bool ZeroCountConfirm { get; set; }
     }
 }

@@ -36,7 +36,8 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
                 OrganizationId = org.Id,
                 OrganizationName = org.Name,
                 FillPerfectKey = org.FillPerfectPilotKey,
-                TotaltrialCount = org.FpPilotLicenseCount
+                TotaltrialCount = org.FpPilotLicenseCount,
+                OrigTrialCount = org.FpPilotLicenseCount
             };
 
             return View(model);
@@ -45,6 +46,14 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
         [HttpPost]
         public virtual ActionResult Edit(OrgTrialViewModel model)
         {
+            if (model.TotaltrialCount == 0 && !model.ZeroCountConfirm)
+            {
+                model.ZeroCountConfirm = true;
+                ModelState.AddModelError("", "Trial license count set to zero.  Submit again to confirm");
+            }
+            else if (model.ZeroCountConfirm)
+                model.ZeroCountConfirm = false;
+
             if (!ModelState.IsValid)
                 return View(model);
 
