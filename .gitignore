@@ -31,3 +31,4 @@ _ReSharper*/
 *.publish.xml
 *.swp
 *.swp
+*.pubxml

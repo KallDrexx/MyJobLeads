@@ -1319,6 +1319,7 @@
     <Folder Include="Areas\Organization\Models\" />
     <Folder Include="Areas\Organization\Views\Shared\" />
     <Folder Include="Areas\PositionSearch\Views\Shared\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="ViewModels\Search\" />
   </ItemGroup>
   <ItemGroup>
