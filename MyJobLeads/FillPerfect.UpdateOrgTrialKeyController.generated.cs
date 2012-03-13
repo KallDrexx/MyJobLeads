@@ -59,6 +59,8 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string Edit = "~/Areas/FillPerfect/Views/UpdateOrgTrialKey/Edit.cshtml";
+            public readonly string Index = "~/Areas/FillPerfect/Views/UpdateOrgTrialKey/Index.cshtml";
         }
     }
 

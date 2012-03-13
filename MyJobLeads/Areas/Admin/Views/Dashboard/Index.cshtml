@@ -10,7 +10,16 @@
 
         <div class="grid3 marginBottom_10 marginAuto floatLeft">
             <ul class="decoratedList">
+                <li>@Html.ActionLink("Create Demo Account", MVC.Admin.CreateDemoAccount.Index(), new { @class = "inlineBlue" })</li>
                 <li>@Html.ActionLink("Create Organization", MVC.Admin.EditOrganization.CreateOrganization(), new { @class = "inlineBlue", title = "Create Organization" })</li>
+                <li>
+                    @Html.ActionLink("Edit Organization's FillPerfect Pilot License",
+                        MVC.FillPerfect.UpdateOrgTrialKey.Index(), new { @class = "inlineBlue" })
+                </li>
+                <li>
+                    @Html.ActionLink("View FillPerfect Contact Form Responses",
+                       MVC.FillPerfect.FpContactResponse.Index(), new { @class = "inlineBlue" })
+                </li>
             </ul>
         </div>
         <div class="clear"></div>
