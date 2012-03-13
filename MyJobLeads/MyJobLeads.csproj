@@ -426,6 +426,7 @@
     <Compile Include="Areas\FillPerfect\Controllers\FpContactResponseController.cs" />
     <Compile Include="Areas\FillPerfect\Controllers\OrgPilotDashboardController.cs" />
     <Compile Include="Areas\FillPerfect\Controllers\StatsController.cs" />
+    <Compile Include="Areas\FillPerfect\Controllers\UpdateOrgTrialKeyController.cs" />
     <Compile Include="Areas\FillPerfect\FillPerfectAreaRegistration.cs" />
     <Compile Include="Areas\FillPerfect\Models\ContactUsResponses\ContactUsCreateAccountViewModel.cs" />
     <Compile Include="Areas\FillPerfect\Models\ContactUsResponses\ContactUsReplySentViewModel.cs" />
@@ -436,6 +437,8 @@
     <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurveyPost3ViewModel.cs" />
     <Compile Include="Areas\FillPerfect\Models\Surveys\StudentSurveyPost5ViewModel.cs" />
     <Compile Include="Areas\FillPerfect\Models\Surveys\SurveyCompletedViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Models\UpdateOrgTrialKey\OrgSelectionViewModel.cs" />
+    <Compile Include="Areas\FillPerfect\Models\UpdateOrgTrialKey\OrgTrialViewModel.cs" />
     <Compile Include="Areas\FillPerfect\Views\Feedback\Student01.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -586,6 +589,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="FillPerfect.StatsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FillPerfect.UpdateOrgTrialKeyController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">

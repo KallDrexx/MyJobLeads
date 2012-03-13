@@ -56,7 +56,7 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
             org.FpPilotLicenseCount = model.TotaltrialCount;
             _context.SaveChanges();
 
-            return RedirectToAction(MVC.Admin.Dashboard());
+            return RedirectToAction(MVC.Admin.Dashboard.Index());
         }
     }
 }
