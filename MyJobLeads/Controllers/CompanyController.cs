@@ -94,6 +94,7 @@ namespace MyJobLeads.Controllers
                                                                           .SetPhone(model.Phone)
                                                                           .SetState(model.State)
                                                                           .SetZip(model.Zip)
+                                                                          .SetWebsite(model.Website)
                                                                           .CalledByUserId(CurrentUserId)
                                                                           .Execute();
                 }
@@ -109,6 +110,7 @@ namespace MyJobLeads.Controllers
                                                                           .SetState(model.State)
                                                                           .SetZip(model.Zip)
                                                                           .SetLeadStatus(model.LeadStatus)
+                                                                          .SetWebsite(model.Website)
                                                                           .RequestedByUserId(CurrentUserId)
                                                                           .Execute();
                 }
