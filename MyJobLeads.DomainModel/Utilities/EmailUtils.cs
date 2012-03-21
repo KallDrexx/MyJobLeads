@@ -29,8 +29,12 @@ namespace MyJobLeads.DomainModel.Utilities
             msg.Subject = subject;
             msg.Body = messageBody;
             msg.IsBodyHtml = isHtml;
+
             if (!string.IsNullOrWhiteSpace(fromAddres))
+            {
                 msg.From = new MailAddress(fromAddres);
+                msg.Headers.Add("Reply-To", fromAddres);
+            }
 
             // Send the email
             client.Send(msg);
