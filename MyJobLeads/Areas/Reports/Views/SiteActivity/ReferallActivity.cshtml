@@ -1,0 +1,53 @@
+﻿@model MyJobLeads.Areas.Reports.Models.SiteActivityViewModels.KnownVisitorActivityViewModel
+
+@{
+    ViewBag.Title = "ReferallActivity";
+        Html.Telerik().ScriptRegistrar().Scripts(script => script.Add("~/Scripts/plugins/DataTables/js/jquery.dataTables.min.js"));
+}
+
+@{Html.Telerik().ScriptRegistrar().OnDocumentReady(
+@<text>
+    $('#siteActivityTable').dataTable({
+        sDom: '<>rt<flpi><"clear">',
+        aoColumnDefs: [
+            { bSortable: false, aTargets: [ 0 ] }
+        ],
+        bFilter: false,
+    });
+</text>
+);}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        <h3>Activity for @Model.Name</h3>
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <div class="pageInfoTable">
+                <table id="siteActivityTable" class="display">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Url</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var activity in Model.Activity)
+                        {
+                            <tr>
+                                <td>@activity.VisitDate.ToLongDateString() @activity.VisitDate.ToLongTimeString()</td>
+                                <td>@activity.Url</td>
+                            </tr>   
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+}

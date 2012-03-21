@@ -543,6 +543,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_SearchForm.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Reports\Controllers\SiteActivityController.cs" />
+    <Compile Include="Areas\Reports\Models\SiteActivityViewModels\KnownSiteUsersViewModel.cs" />
+    <Compile Include="Areas\Reports\Models\SiteActivityViewModels\KnownVisitorActivityViewModel.cs" />
+    <Compile Include="Areas\Reports\ReportsAreaRegistration.cs" />
     <Compile Include="CompanyController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -657,6 +661,12 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="PositionSearch.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports.SiteActivityController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ResearchCenterController.generated.cs">
@@ -1318,6 +1328,7 @@
     <Folder Include="Areas\Organization\Models\" />
     <Folder Include="Areas\Organization\Views\Shared\" />
     <Folder Include="Areas\PositionSearch\Views\Shared\" />
+    <Folder Include="Areas\Reports\Views\Shared\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="ViewModels\Search\" />
   </ItemGroup>
@@ -1598,6 +1609,10 @@
     <Content Include="Areas\FillPerfect\Views\FpContactResponse\ReplySent.cshtml" />
     <Content Include="Areas\FillPerfect\Views\UpdateOrgTrialKey\Index.cshtml" />
     <Content Include="Areas\FillPerfect\Views\UpdateOrgTrialKey\Edit.cshtml" />
+    <Content Include="Areas\Reports\Views\Web.config" />
+    <Content Include="Areas\Reports\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Reports\Views\SiteActivity\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\SiteActivity\ReferallActivity.cshtml" />
     <None Include="Scripts\plugins\DataTables\images\Sorting icons.psd" />
     <None Include="Scripts\plugins\DataTables\js\jquery.dataTables.min.js.gz" />
     <None Include="T4MVC.tt.settings.t4" />

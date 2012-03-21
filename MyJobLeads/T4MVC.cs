@@ -35,6 +35,8 @@ public static class MVC {
     public static OrganizationClass Organization { get { return s_Organization; } }
     static readonly PositionSearchClass s_PositionSearch = new PositionSearchClass();
     public static PositionSearchClass PositionSearch { get { return s_PositionSearch; } }
+    static readonly ReportsClass s_Reports = new ReportsClass();
+    public static ReportsClass Reports { get { return s_Reports; } }
     public static MyJobLeads.Controllers.AccountController Account = new MyJobLeads.Controllers.T4MVC_AccountController();
     public static MyJobLeads.Controllers.CompanyController Company = new MyJobLeads.Controllers.T4MVC_CompanyController();
     public static MyJobLeads.Controllers.ContactController Contact = new MyJobLeads.Controllers.T4MVC_ContactController();
@@ -95,6 +97,12 @@ namespace T4MVC {
         public readonly string Name = "PositionSearch";
         public MyJobLeads.Areas.PositionSearch.Controllers.LinkedInController LinkedIn = new MyJobLeads.Areas.PositionSearch.Controllers.T4MVC_LinkedInController();
         public T4MVC.PositionSearch.SharedController Shared = new T4MVC.PositionSearch.SharedController();
+    }
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public class ReportsClass {
+        public readonly string Name = "Reports";
+        public MyJobLeads.Areas.Reports.Controllers.SiteActivityController SiteActivity = new MyJobLeads.Areas.Reports.Controllers.T4MVC_SiteActivityController();
+        public T4MVC.Reports.SharedController Shared = new T4MVC.Reports.SharedController();
     }
 }
 

@@ -1,0 +1,40 @@
+﻿@model MyJobLeads.Areas.Reports.Models.SiteActivityViewModels.KnownSiteUsersViewModel
+
+@{
+    ViewBag.Title = "Site Activity Report";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        <h3>Site Visitors</h3>
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>
+                This page shows known users who have visited the CMS.  Select a user to see their activity
+            </p>
+        }
+    }
+
+    using (Html.BeginForm())
+    {
+        using (Html.OuterRow())
+        {
+            Html.FormField(new HtmlString("Known Visitor"),
+                Html.DropDownListFor(x => x.SelectedUserIp, Model.KnownUsersList));
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.FormButtonArea())
+            {
+                <input type="submit" value="View Report" />
+            }
+        }
+    }
+}
