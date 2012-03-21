@@ -30,7 +30,6 @@
 
     using (Html.BeginForm(MVC.FillPerfect.FpContactResponse.SendReply()))
     {
-        @Html.HiddenFor(x => x.ToEmail)
         @Html.HiddenFor(x => x.ToName)
         @Html.HiddenFor(x => x.ToOrgName)
         @Html.HiddenFor(x => x.ToPassword)
@@ -47,6 +46,7 @@
         using (Html.OuterRow())
         {
             Html.FormField(new HtmlString("Send From Address:"), Html.TextBoxFor(x => x.FromAddress, new { @class = "info" }));
+            Html.FormField(new HtmlString("Send To:"), Html.TextBoxFor(x => x.ToEmail, new { @class = "info" }));
             Html.FormField(new HtmlString("Email Subject:"), Html.TextBoxFor(x => x.EmailSubject, new { @class = "info" }));
             Html.FormField(new HtmlString("Email Content"),
                 Html.TextAreaFor(x => x.EmailContent, new { @class = "textAreaInfo" }));

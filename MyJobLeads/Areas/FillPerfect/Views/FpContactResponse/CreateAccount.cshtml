@@ -16,7 +16,11 @@
         using (Html.ContentArea())
         {
             <p>
-               Use this form to create an account for the user that filled out the FP Contact Us page.
+               Use this form to create an account for the user that filled out the FP Contact Us page. <br />
+                If this person already has an account, you can 
+                @Html.ActionLink("bypass this step", MVC.FillPerfect.FpContactResponse.SendReply(Model.ResponseName, Model.ResponseEmail, "none", "none", Model.FpContactResponseId),
+                    new { @class = "inlineBlue" })
+                    
             </p>
     
             <p>
