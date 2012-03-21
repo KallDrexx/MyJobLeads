@@ -96,13 +96,24 @@ namespace MyJobLeads.Areas.FillPerfect.Controllers
             if (response == null)
                 return RedirectToAction(MVC.FillPerfect.FpContactResponse.Index());
 
+            // Try and remove the identifiers from the response fields
+            response.Email = response.Email.Replace("Email: ", "");
+            response.Name = response.Name.Replace("Name: ", "");
+            response.School = response.School.Replace("School: ", "");
+
             var model = new ContactUsCreateAccountViewModel
             {
                 FpContactResponseId = responseId,
                 ResponseName = response.Name,
                 ResponseEmail = response.Email,
                 ResponseProgram = response.Program,
-                ResponseSchool = response.School
+                ResponseSchool = response.School,
+                CreateAccountModel = new ViewModels.Admin.CreateDemoAccountViewModel
+                {
+                    Name = response.Name,
+                    Email = response.Email,
+                    OrganizationName = response.School
+                }
             };
 
             return View(model);
