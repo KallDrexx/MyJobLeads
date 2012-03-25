@@ -33,7 +33,7 @@ namespace MyJobLeads.DomainModel.Processes.Admin
             var knownUsers = _context.SiteReferrals
                                     .Where(x => ips.Contains(x.IpAddress))
                                     .Where(x => !string.IsNullOrEmpty(x.ReferralCode))
-                                    .OrderBy(x => x.IpAddress)
+                                    .OrderByDescending(x => x.Date)
                                     .Select(x => new
                                     {
                                         Ip = x.IpAddress,
@@ -44,38 +44,34 @@ namespace MyJobLeads.DomainModel.Processes.Admin
 
             // Format the data into excel
             var workbook = new XLWorkbook();
-            var ipMapSheet = workbook.Worksheets.Add("Known Users");
-            var activitySheet = workbook.Worksheets.Add("Activity");
-
-            // Create the ip mapping sheet
-            ipMapSheet.Cell("A1").Value = "IP Address";
-            ipMapSheet.Cell("B1").Value = "User Code";
-
-            for (int x = 0; x < knownUsers.Count; x++)
-            {
-                int row = x + 2;
-                ipMapSheet.Cell(row, "A").Value = knownUsers[x].Ip;
-                ipMapSheet.Cell(row, "B").Value = knownUsers[x].Name;
-                ipMapSheet.Cell(row, "A").DataType = XLCellValues.Text;
-                ipMapSheet.Cell(row, "B").DataType = XLCellValues.Text;
-            }
+            var sheet = workbook.Worksheets.Add("Activity");
 
             // Create the activity sheet
-            activitySheet.Cells("A1").Value = "Date";
-            activitySheet.Cells("B1").Value = "IP Address";
-            activitySheet.Cells("C1").Value = "Site Address";
+            sheet.Cells("A1").Value = "Date";
+            sheet.Cells("B1").Value = "IP Address";
+            sheet.Cells("C1").Value = "Inferred user";
+            sheet.Cells("D1").Value = "Is Email Click?";
+            sheet.Cells("E1").Value = "Site Address";
 
+            int row = 2;
             for (int x = 0; x < activity.Count; x++)
             {
-                int row = x + 2;
-                activitySheet.Cell(row, "A").Value = activity[x].Date;
-                activitySheet.Cell(row, "B").Value = activity[x].IpAddress;
-                activitySheet.Cell(row, "C").Value = activity[x].Url;
+                if (knownUsers.Any(y => y.Ip == activity[x].IpAddress))
+                {
+                    sheet.Cell(row, "A").Value = activity[x].Date;
+                    sheet.Cell(row, "B").Value = activity[x].IpAddress;
+                    sheet.Cell(row, "C").Value = knownUsers.Where(y => y.Ip == activity[x].IpAddress).Select(y => y.Name).First();
+                    sheet.Cell(row, "D").Value = activity[x].Url.Contains("refId=");
+                    sheet.Cell(row, "E").Value = activity[x].Url;
 
-                activitySheet.Cell(row, "A").DataType = XLCellValues.DateTime;
-                activitySheet.Cell(row, "B").DataType = XLCellValues.Text;
-                activitySheet.Cell(row, "C").DataType = XLCellValues.Text;
+                    sheet.Cell(row, "A").DataType = XLCellValues.DateTime;
+                    sheet.Cell(row, "D").DataType = XLCellValues.Boolean;
+
+                    row++;
+                }
             }
+
+            sheet.Rows().AdjustToContents(1, 4);
 
             // Save it to the memory string and return it
             var stream = new MemoryStream();
