@@ -31,11 +31,6 @@ namespace MyJobLeads.Areas.Reports.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult ReferallActivity() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.ReferallActivity);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public SiteActivityController Actions { get { return MVC.Reports.SiteActivity; } }
@@ -50,7 +45,6 @@ namespace MyJobLeads.Areas.Reports.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string Index = "Index";
-            public readonly string ReferallActivity = "ReferallActivity";
         }
 
 
@@ -73,9 +67,9 @@ namespace MyJobLeads.Areas.Reports.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult ReferallActivity(string ip) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ReferallActivity);
-            callInfo.RouteValueDictionary.Add("ip", ip);
+        public override System.Web.Mvc.ActionResult Index(MyJobLeads.Areas.Reports.Models.SiteActivityViewModels.ExportSiteActivityViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 

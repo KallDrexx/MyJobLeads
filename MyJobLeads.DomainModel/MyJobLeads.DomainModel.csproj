@@ -224,10 +224,12 @@
     <Compile Include="MJLConstants.cs" />
     <Compile Include="Processes\Admin\FillPerfectAdminProcesses.cs" />
     <Compile Include="Processes\Admin\OrganizationAdminProcesses.cs" />
+    <Compile Include="Processes\Admin\SiteActivityProcesses.cs" />
     <Compile Include="Processes\Admin\UserAdminProcesses.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
     <Compile Include="Processes\CompanySearching\JigsawCompanySearchProcesses.cs" />
     <Compile Include="ProcessParams\Admin\CreateDemoAccountParams.cs" />
+    <Compile Include="ProcessParams\Admin\ExportSiteActivityReportParams.cs" />
     <Compile Include="ProcessParams\Admin\FetchFpContactResponseEmailsParams.cs" />
     <Compile Include="ProcessParams\CompanySearching\Jigsaw\AddJigsawCompanyParams.cs" />
     <Compile Include="ProcessParams\CompanySearching\Jigsaw\MergeJigsawCompanyParams.cs" />
@@ -315,6 +317,7 @@
     <Compile Include="ViewModels\Exports\JobsearchExportViewModel.cs" />
     <Compile Include="ViewModels\ExternalAuth\JigsawCredentialsViewModel.cs" />
     <Compile Include="ViewModels\GeneralSuccessResultViewModel.cs" />
+    <Compile Include="ViewModels\General\FileContentViewModel.cs" />
     <Compile Include="ViewModels\JobSearches\JigsawUserPointsViewModel.cs" />
     <Compile Include="ViewModels\JobSearches\JobSearchMilestoneChangedResultViewModel.cs" />
     <Compile Include="ViewModels\JobSearchMilestoneProgress.cs" />

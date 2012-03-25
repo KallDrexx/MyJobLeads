@@ -42,6 +42,7 @@ namespace MyJobLeads.Infrastructure.Installers
             // Register all command and query classes
             var classes = Assembly.GetAssembly(typeof(MJLConstants))
                               .GetTypes()
+                              .Where(x => !x.IsDefined(typeof (CompilerGeneratedAttribute), false))
                               .Where(x => x.Namespace.StartsWith("MyJobLeads.DomainModel.Commands") || x.Namespace.StartsWith("MyJobLeads.DomainModel.Queries"))
                               .Where(x => x.IsClass && !x.IsDefined(typeof(CompilerGeneratedAttribute), false))
                               .Distinct()

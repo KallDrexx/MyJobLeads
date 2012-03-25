@@ -544,6 +544,7 @@
       <DependentUpon>_SearchForm.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Areas\Reports\Controllers\SiteActivityController.cs" />
+    <Compile Include="Areas\Reports\Models\SiteActivityViewModels\ExportSiteActivityViewModel.cs" />
     <Compile Include="Areas\Reports\Models\SiteActivityViewModels\KnownSiteUsersViewModel.cs" />
     <Compile Include="Areas\Reports\Models\SiteActivityViewModels\KnownVisitorActivityViewModel.cs" />
     <Compile Include="Areas\Reports\ReportsAreaRegistration.cs" />

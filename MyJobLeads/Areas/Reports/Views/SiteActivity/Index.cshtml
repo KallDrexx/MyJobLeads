@@ -1,4 +1,4 @@
-﻿@model MyJobLeads.Areas.Reports.Models.SiteActivityViewModels.KnownSiteUsersViewModel
+﻿@model MyJobLeads.Areas.Reports.Models.SiteActivityViewModels.ExportSiteActivityViewModel
 
 @{
     ViewBag.Title = "Site Activity Report";
@@ -16,7 +16,7 @@
         using (Html.ContentArea())
         {
             <p>
-                This page shows known users who have visited the CMS.  Select a user to see their activity
+                This page shows known users who have visited the CMS.  Select a starting and end date to generate a report for.
             </p>
         }
     }
@@ -25,15 +25,30 @@
     {
         using (Html.OuterRow())
         {
-            Html.FormField(new HtmlString("Known Visitor"),
-                Html.DropDownListFor(x => x.SelectedUserIp, Model.KnownUsersList));
+            using (Html.ValidationArea())
+            {
+                @Html.ValidationSummary()
+            }
+        }
+        
+        using (Html.OuterRow())
+        {
+            using (Html.FormFieldArea(new HtmlString("Start Date")))
+            {
+                @Html.Telerik().DatePickerFor(x => x.StartDate)
+            }
+            
+            using (Html.FormFieldArea(new HtmlString("End Date")))
+            {
+                @Html.Telerik().DatePickerFor(x => x.EndDate)
+            }
         }
 
         using (Html.OuterRow())
         {
             using (Html.FormButtonArea())
             {
-                <input type="submit" value="View Report" />
+                <input type="submit" value="Download Report" />
             }
         }
     }

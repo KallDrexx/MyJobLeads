@@ -4,7 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyJobLeads.Areas.Reports.Models.SiteActivityViewModels;
+using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.Entities.EF;
+using MyJobLeads.DomainModel.ProcessParams.Admin;
+using MyJobLeads.DomainModel.ViewModels.General;
 using MyJobLeads.Infrastructure.Attributes;
 
 namespace MyJobLeads.Areas.Reports.Controllers
@@ -12,63 +15,32 @@ namespace MyJobLeads.Areas.Reports.Controllers
     [RequiresSiteAdmin]
     public partial class SiteActivityController : MyJobLeadsBaseController
     {
-        public SiteActivityController(MyJobLeadsDbContext context)
+        protected IProcess<ExportSiteActivityReportParams, FileContentViewModel> _exportActivityProc;
+
+        public SiteActivityController(MyJobLeadsDbContext context, IProcess<ExportSiteActivityReportParams, FileContentViewModel> exportActivityProc)
         {
             _context = context;
+            _exportActivityProc = exportActivityProc;
         }
 
         public virtual ActionResult Index()
         {
-            var users = _context.SiteReferrals
-                                .Where(x => !string.IsNullOrEmpty(x.ReferralCode))
-                                .Select(x => new
-                                {
-                                    Ip = x.IpAddress,
-                                    Name = x.ReferralCode,
-                                    LastSeenOn = _context.SiteReferrals
-                                                         .Where(y => y.IpAddress == x.IpAddress)
-                                                         .Max(y => y.Date)
-                                })
-                                .Distinct()
-                                .OrderByDescending(x => x.LastSeenOn)
-                                .ToList();
-
-            var model = new KnownSiteUsersViewModel
-            {
-                KnownUsersList = users.Select(x => new SelectListItem
-                {
-                    Text = string.Concat(x.Name, " (Last seen ", Math.Round((DateTime.Now - x.LastSeenOn).TotalDays, 0), " days ago)"),
-                    Value = x.Ip
-                }).ToList()
-            };
-
-            return View(model);
+            return View(new ExportSiteActivityViewModel());
         }
 
         [HttpPost]
-        public virtual ActionResult index(KnownSiteUsersViewModel model)
+        public virtual ActionResult Index(ExportSiteActivityViewModel model)
         {
-            return RedirectToAction(MVC.Reports.SiteActivity.ReferallActivity(model.SelectedUserIp));
-        }
+            if (!ModelState.IsValid)
+                return View(model);
 
-        public virtual ActionResult ReferallActivity(string ip)
-        {
-            var activity = _context.SiteReferrals
-                                   .Where(x => x.IpAddress == ip)
-                                   .OrderByDescending(x => x.Date)
-                                   .Select(x => new KnownVisitorActivityViewModel.VisitorActivityViewModel
-                                   {
-                                       Url = x.Url,
-                                       VisitDate = x.Date
-                                   })
-                                   .ToList();
-            var model = new KnownVisitorActivityViewModel
+            var content = _exportActivityProc.Execute(new ExportSiteActivityReportParams
             {
-                Name = _context.SiteReferrals.Where(x => !string.IsNullOrEmpty(x.ReferralCode)).Select(x => x.ReferralCode).FirstOrDefault(),
-                Activity = activity
-            };
+                StartDate = model.StartDate,
+                EndDate = model.EndDate
+            });
 
-            return View(model);
+            return File(content.ExportFileContents, content.Mimetype, content.FileName);
         }
     }
 }
