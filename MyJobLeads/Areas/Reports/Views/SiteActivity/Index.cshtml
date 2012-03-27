@@ -43,6 +43,16 @@
                 @Html.Telerik().DatePickerFor(x => x.EndDate)
             }
         }
+        
+        using (Html.OuterRow())
+        {
+            Html.FormField(new HtmlString("Sort results by date, in descending order?"), Html.CheckBoxFor(x => x.SortByDescending));
+        }
+        
+        using (Html.OuterRow())
+        {
+            Html.FormField(new HtmlString("Ignored emails (one per line):"), Html.TextAreaFor(x => x.IgnoredUserList, new { @class = "textAreaInfo" }));
+        }
 
         using (Html.OuterRow())
         {

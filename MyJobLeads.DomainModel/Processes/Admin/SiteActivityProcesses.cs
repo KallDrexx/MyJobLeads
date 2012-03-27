@@ -23,16 +23,19 @@ namespace MyJobLeads.DomainModel.Processes.Admin
         public FileContentViewModel Execute(ExportSiteActivityReportParams procParams)
         {
             // Get site activity and names for the ip addresses
-            var activity = _context.SiteReferrals
-                                   .Where(x => x.Date >= procParams.StartDate && x.Date <= procParams.EndDate)
-                                   .OrderBy(x => x.Date)
-                                   .ToList();
+            var activityQuery = _context.SiteReferrals.Where(x => x.Date >= procParams.StartDate && x.Date <= procParams.EndDate);
+            if (procParams.SortDateDescending)
+                activityQuery = activityQuery.OrderByDescending(x => x.Date);
+            else
+                activityQuery = activityQuery.OrderBy(x => x.Date);
 
+            var activity = activityQuery.ToList();
             var ips = activity.Select(x => x.IpAddress).Distinct().ToList();
 
             var knownUsers = _context.SiteReferrals
                                     .Where(x => ips.Contains(x.IpAddress))
                                     .Where(x => !string.IsNullOrEmpty(x.ReferralCode))
+                                    .Where(x => !procParams.IgnoredUsers.Contains(x.ReferralCode))
                                     .OrderByDescending(x => x.Date)
                                     .Select(x => new
                                     {

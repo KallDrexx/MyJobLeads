@@ -13,5 +13,9 @@ namespace MyJobLeads.Areas.Reports.Models.SiteActivityViewModels
 
         [Required(ErrorMessage = "A valid end date is required")]
         public DateTime EndDate { get; set; }
+
+        public string IgnoredUserList { get; set; }
+
+        public bool SortByDescending { get; set; }
     }
 }
