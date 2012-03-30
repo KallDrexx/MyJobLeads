@@ -20,7 +20,7 @@ namespace MyJobLeads.DomainModel.Mail
             string subject = "Welcome to the InterviewTools FillPerfect Pilot Program!";
             
             // Open the template and form the message
-            string body = ParseTemplate("Mail/Templates/PilotStudentLicenseEmail.cshtml", model);
+            string body = ParseTemplate("Mail/Templates/FillPerfect/PilotStudentLicenseEmail.cshtml", model);
 
             new EmailUtils().Send(license.Email, subject, body, true);
         }
