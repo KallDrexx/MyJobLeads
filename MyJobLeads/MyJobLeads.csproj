@@ -318,11 +318,6 @@
     <Compile Include="Areas\Admin\Models\CreateOrganizationWithAdminViewModel.cs" />
     <Compile Include="Areas\Admin\Models\DemoAccountCreation\CreateDemoAccountSuccessViewModel.cs" />
     <Compile Include="Areas\Admin\Models\Mappings\OrganizationMappings.cs" />
-    <Compile Include="Areas\Admin\Views\CreateDemoAccount\Index.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Index.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Areas\Admin\Views\CreateDemoAccount\Success.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1595,10 +1590,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
     </Content>
-    <DesignDataWithDesignTimeCreatableTypes Include="Areas\Admin\Views\CreateDemoAccount\Index.cshtml">
-      <Generator>RazorGenerator</Generator>
+    <Content Include="Areas\Admin\Views\CreateDemoAccount\Index.cshtml">
       <LastGenOutput>Index.generated.cs</LastGenOutput>
-    </DesignDataWithDesignTimeCreatableTypes>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Areas\Admin\Views\CreateDemoAccount\Success.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Success.generated.cs</LastGenOutput>
