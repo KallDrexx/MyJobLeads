@@ -9,6 +9,7 @@ namespace MyJobLeads.DomainModel.ViewModels.Mail
     {
         public string Name { get; set; }
         public string FpKey { get; set; }
+        public string FullName { get; set; }
         public string OrganizationName { get; set; }
     }
 }

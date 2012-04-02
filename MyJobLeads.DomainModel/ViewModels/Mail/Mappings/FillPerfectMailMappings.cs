@@ -15,6 +15,7 @@ namespace MyJobLeads.DomainModel.ViewModels.Mail.Mappings
             Mapper.CreateMap<FpOrgPilotUsedLicense, FillPerfectPilotStudentLicenceEmailViewModel>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.FullName))
                 .ForMember(dest => dest.OrganizationName, opt => opt.MapFrom(src => src.Organization.Name))
+                .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName))
                 .ForMember(dest => dest.FpKey, opt => opt.MapFrom(src => src.Organization.FillPerfectPilotKey));
         }
     }
