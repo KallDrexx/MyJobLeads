@@ -21,6 +21,9 @@ namespace MyJobLeads.ViewModels.Users
                 UserType = UserSidebarViewModel.AccountType.OrganizationAdmin;
             else
                 UserType = UserSidebarViewModel.AccountType.User;
+
+            if (user.IsSiteAdmin)
+                IsSiteAdmin = true;
         }
 
         public int Id { get; set; }
@@ -28,6 +31,7 @@ namespace MyJobLeads.ViewModels.Users
         public AccountType UserType { get; set; }
         public ActiveSidebarLink ActiveLink { get; set; }
         public bool HasCurrentJobSearchId { get; set; }
+        public bool IsSiteAdmin { get; set; }
 
         public enum AccountType { User, OrganizationAdmin, SiteAdmin }
     }

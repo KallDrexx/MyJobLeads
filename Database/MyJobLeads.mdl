@@ -1,0 +1,6 @@
+migration "MyJobLeads" revision => 1:
+    defaults:
+        default-primary-key ID type => Int32, primary-key => true, nullable => false
+
+    version 20120402034014:
+        /* Start writing migrations */

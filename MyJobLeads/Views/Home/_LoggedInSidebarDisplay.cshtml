@@ -27,5 +27,10 @@
         {
             <li>@Html.ActionLink("University Dashboard", MVC.Organization.Dashboard.Index(), new { @class = Model.ActiveLink == ActiveSidebarLink.OrgAdmin ? "active" : "" })</li>
         }
+        
+        @if (Model.IsSiteAdmin)
+        {
+            <li>@Html.ActionLink("Admin Dashboard", MVC.Admin.Dashboard.Index()) </li>
+        }
     </ul>
 </div>

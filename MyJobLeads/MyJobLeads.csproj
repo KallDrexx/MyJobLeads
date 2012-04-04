@@ -811,11 +811,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_AnonymousUserSidebarDisplay.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home\_LoggedInSidebarDisplay.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_LoggedInSidebarDisplay.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Views\JobSearch\Edit.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1617,8 +1612,7 @@
       <LastGenOutput>Test.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Home\_LoggedInSidebarDisplay.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_LoggedInSidebarDisplay.generated.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Home\_AnonymousUserSidebarDisplay.cshtml">
       <Generator>RazorGenerator</Generator>
