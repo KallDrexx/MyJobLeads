@@ -170,6 +170,9 @@
     <Compile Include="Entities\EF\MyJobLeadsDbContext.cs" />
     <Compile Include="Entities\EF\MyJobLeadsDbInitializer.cs" />
     <Compile Include="Entities\Metrics\JobSearchMetrics.cs" />
+    <Compile Include="Entities\Ordering\Order.cs" />
+    <Compile Include="Entities\Ordering\OrderedProduct.cs" />
+    <Compile Include="Entities\Ordering\Product.cs" />
     <Compile Include="Entities\Organization.cs" />
     <Compile Include="Entities\EF\Configuration\OrganizationEmailDomain.cs" />
     <Compile Include="Entities\Position.cs" />
@@ -190,6 +193,8 @@
     <Compile Include="EntityMapping\Mappings\UserMappings.cs" />
     <Compile Include="Enums\ExternalDataSource.cs" />
     <Compile Include="Enums\FillPerfectLicenseType.cs" />
+    <Compile Include="Enums\OrderStatus.cs" />
+    <Compile Include="Enums\ProductType.cs" />
     <Compile Include="Enums\TokenProvider.cs" />
     <Compile Include="Exceptions\InvalidEmailDomainForOrganizationException.cs" />
     <Compile Include="Exceptions\InvalidOrganizationRegistrationTokenException.cs" />

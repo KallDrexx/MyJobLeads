@@ -14,6 +14,7 @@ namespace MyJobLeads.DomainModel.Entities
         public string FullName { get; set; }
         public bool IsOrganizationAdmin { get; set; }
         public bool IsSiteAdmin { get; set; }
+        public Guid? FillPerfectKey { get; set; }
 
         public int? OrganizationId { get; set; }
         public virtual Organization Organization { get; set; }
