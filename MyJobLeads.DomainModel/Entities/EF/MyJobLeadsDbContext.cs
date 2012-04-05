@@ -9,6 +9,7 @@ using MyJobLeads.DomainModel.Entities.Configuration;
 using MyJobLeads.DomainModel.Entities.Surveys;
 using MyJobLeads.DomainModel.Entities.FillPerfect;
 using MyJobLeads.DomainModel.Entities.Admin;
+using MyJobLeads.DomainModel.Entities.Ordering;
 
 namespace MyJobLeads.DomainModel.Entities.EF
 {
@@ -41,6 +42,13 @@ namespace MyJobLeads.DomainModel.Entities.EF
 
         // Configuration Tables
         public DbSet<MilestoneConfig> MilestoneConfigs { get; set; }
+
+        // Licenses
+        public DbSet<FpUserLicense> FpUserLicenses { get; set; }
+
+        // Ordering
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         /// <summary>
         /// Contains the Entity Framework database configuration rules
