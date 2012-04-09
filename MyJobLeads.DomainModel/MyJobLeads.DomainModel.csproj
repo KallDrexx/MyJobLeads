@@ -151,8 +151,9 @@
     <Compile Include="Data\Sample\DemoCreationValues.cs" />
     <Compile Include="Entities\Admin\FillPerfectContactResponse.cs" />
     <Compile Include="Entities\Company.cs" />
-    <Compile Include="Entities\EF\Configuration\MilestoneConfig.cs" />
+    <Compile Include="Entities\Configuration\MilestoneConfig.cs" />
     <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\EF\Configuration\UserConfiguration.cs" />
     <Compile Include="Entities\FillPerfect\FpOrgPilotUsedLicense.cs" />
     <Compile Include="Entities\FillPerfect\FpUserLicense.cs" />
     <Compile Include="Entities\FpJobApplyBasicStat.cs" />
@@ -174,7 +175,7 @@
     <Compile Include="Entities\Ordering\OrderedProduct.cs" />
     <Compile Include="Entities\Ordering\Product.cs" />
     <Compile Include="Entities\Organization.cs" />
-    <Compile Include="Entities\EF\Configuration\OrganizationEmailDomain.cs" />
+    <Compile Include="Entities\Configuration\OrganizationEmailDomain.cs" />
     <Compile Include="Entities\Position.cs" />
     <Compile Include="Entities\SiteReferral.cs" />
     <Compile Include="Entities\SiteReferralCode.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="EntityMapping\Mappings\Processes\JigsawMappings.cs" />
     <Compile Include="EntityMapping\Mappings\UserMappings.cs" />
     <Compile Include="Enums\ExternalDataSource.cs" />
+    <Compile Include="Enums\FillPerfectLicenseError.cs" />
     <Compile Include="Enums\FillPerfectLicenseType.cs" />
     <Compile Include="Enums\OrderStatus.cs" />
     <Compile Include="Enums\ProductType.cs" />
@@ -235,6 +237,7 @@
     <Compile Include="Processes\Admin\UserAdminProcesses.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
     <Compile Include="Processes\CompanySearching\JigsawCompanySearchProcesses.cs" />
+    <Compile Include="Processes\FillPerfect\FillPerfectLicenseProcesses.cs" />
     <Compile Include="ProcessParams\Admin\CreateDemoAccountParams.cs" />
     <Compile Include="ProcessParams\Admin\ExportSiteActivityReportParams.cs" />
     <Compile Include="ProcessParams\Admin\FetchFpContactResponseEmailsParams.cs" />
@@ -261,6 +264,7 @@
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\GetJigsawUserPointsParams.cs" />
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\GetUserJigsawCredentialsParams.cs" />
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\SaveJigsawUserCredentialsParams.cs" />
+    <Compile Include="ProcessParams\FillPerfect\GetFillPerfectLicenseByKeyParams.cs" />
     <Compile Include="ProcessParams\FillPerfect\GetFpContactResponsesParams.cs" />
     <Compile Include="ProcessParams\FillPerfect\SendFpReplyParams.cs" />
     <Compile Include="ProcessParams\JobSearches\ByJobSearchParams.cs" />
@@ -323,6 +327,7 @@
     <Compile Include="ViewModels\ContactSearching\ExternalContactSearchResultsViewModel.cs" />
     <Compile Include="ViewModels\Exports\JobsearchExportViewModel.cs" />
     <Compile Include="ViewModels\ExternalAuth\JigsawCredentialsViewModel.cs" />
+    <Compile Include="ViewModels\FillPerfect\FillPerfectLicenseViewModel.cs" />
     <Compile Include="ViewModels\GeneralSuccessResultViewModel.cs" />
     <Compile Include="ViewModels\General\FileContentViewModel.cs" />
     <Compile Include="ViewModels\JobSearches\JigsawUserPointsViewModel.cs" />

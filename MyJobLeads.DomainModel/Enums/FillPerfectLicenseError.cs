@@ -5,12 +5,11 @@ using System.Text;
 
 namespace MyJobLeads.DomainModel.Enums
 {
-    public enum FillPerfectLicenseType
+    public enum FillPerfectLicenseError
     {
         None = 0,
-        Trial = 1,
-        IndividualPaid = 2,
-        OrganizationGranted = 3,
-        AdminGranted = 4
+        InvalidKey = 1,
+        KeyNotActivated = 2,
+        NoLicense = 3
     }
 }

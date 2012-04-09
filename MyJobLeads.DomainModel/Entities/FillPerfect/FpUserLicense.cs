@@ -11,6 +11,7 @@ namespace MyJobLeads.DomainModel.Entities.FillPerfect
     {
         public int Id { get; set; }
         public FillPerfectLicenseType LicenseType { get; set; }
+        public string ActivatedComputerId { get; set; }
         public DateTime EffectiveDate { get; set; }
         public DateTime ExpirationDate { get; set; }
 

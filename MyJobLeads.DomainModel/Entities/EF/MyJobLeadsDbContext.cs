@@ -10,6 +10,8 @@ using MyJobLeads.DomainModel.Entities.Surveys;
 using MyJobLeads.DomainModel.Entities.FillPerfect;
 using MyJobLeads.DomainModel.Entities.Admin;
 using MyJobLeads.DomainModel.Entities.Ordering;
+using System.Reflection;
+using MyJobLeads.DomainModel.Entities.EF.Configuration;
 
 namespace MyJobLeads.DomainModel.Entities.EF
 {
@@ -60,6 +62,19 @@ namespace MyJobLeads.DomainModel.Entities.EF
             modelBuilder.Entity<OAuthData>().HasOptional(x => x.LinkedInUser).WithOptionalDependent(x => x.LinkedInOAuthData);
             modelBuilder.Entity<User>().HasOptional(x => x.JigsawAccountDetails).WithRequired(x => x.AssociatedUser);
             modelBuilder.Entity<JobSearch>().HasMany(x => x.LastVisitedUsers).WithOptional(x => x.LastVisitedJobSearch);
+
+            // Load all entity configuration classes dynamically
+            //Culture is a class defined in the assembly where my Entity models reside
+            var typesToRegister = Assembly.GetAssembly(typeof(UserConfiguration))
+                                          .GetTypes()
+                                          .Where(type => type.Namespace != null && type.Namespace.Equals(typeof(UserConfiguration).Namespace))
+                                          .Where(type => type.BaseType.IsGenericType && type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>));
+
+            foreach (var type in typesToRegister)
+            {
+                dynamic configurationInstance = Activator.CreateInstance(type);
+                modelBuilder.Configurations.Add(configurationInstance);
+            }
         }
     }
 }

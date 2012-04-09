@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using MyJobLeads.DomainModel.Entities.Ordering;
 
 namespace MyJobLeads.DomainModel.Entities
 {
@@ -20,6 +21,8 @@ namespace MyJobLeads.DomainModel.Entities
         public virtual Organization Organization { get; set; }
 
         public virtual ICollection<JobSearch> JobSearches { get; set; }
+        public virtual ICollection<Order> CreatedOrders { get; set; }
+        public virtual ICollection<Order> OwnedOrders { get; set; }
         
         public int? LastVisitedJobSearchId { get; set; }
         public virtual JobSearch LastVisitedJobSearch { get; set; }
@@ -28,5 +31,6 @@ namespace MyJobLeads.DomainModel.Entities
         public virtual OAuthData LinkedInOAuthData { get; set; }
 
         public virtual JigsawAccountDetails JigsawAccountDetails { get; set; }
+
     }
 }
