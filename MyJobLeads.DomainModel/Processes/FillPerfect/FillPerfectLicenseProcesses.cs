@@ -8,6 +8,7 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.ProcessParams.FillPerfect;
 using MyJobLeads.DomainModel.Entities.EF;
 using MyJobLeads.DomainModel.Enums;
+using System.Xml.Linq;
 
 namespace MyJobLeads.DomainModel.Processes.FillPerfect
 {
@@ -46,7 +47,15 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
             if (string.IsNullOrEmpty(license.ActivatedComputerId))
                 return new FillPerfectLicenseViewModel { Error = FillPerfectLicenseError.KeyNotActivated };
 
-            return new FillPerfectLicenseViewModel();
+            // Generate XML from the license
+            var xml = new XElement("FillPerfectLicense",
+                        new XElement("LicenseType", license.LicenseType),
+                        new XElement("LicensedFor", user.FullName),
+                        new XElement("LicenseForMachine", license.ActivatedComputerId),
+                        new XElement("EffectiveDate", license.EffectiveDate.ToLongDateString()),
+                        new XElement("ExpirationDate", license.ExpirationDate.ToLongDateString()));
+
+            return new FillPerfectLicenseViewModel { LicenseXml = xml.ToString() };
         }
     }
 }

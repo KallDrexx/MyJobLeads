@@ -27,13 +27,14 @@ namespace MyJobLeads.Tests.Processes.FillPerfect
             _getKeyProc = new FillPerfectLicenseProcesses(_context);
 
             // Db Entities
-            _user = new User { FillPerfectKey = Guid.NewGuid() };
+            _user = new User { FillPerfectKey = Guid.NewGuid(), FullName = "Test Name" };
             var order = new Order { OrderDate = DateTime.Now };
             order.FillPerfectLicenses.Add(new FpUserLicense
             {
                 ActivatedComputerId = "1234",
                 EffectiveDate = DateTime.Now.AddMonths(-1),
-                ExpirationDate = DateTime.Now.AddMonths(1)
+                ExpirationDate = DateTime.Now.AddMonths(1),
+                LicenseType = FillPerfectLicenseType.IndividualPaid
             });
 
             _user.OwnedOrders.Add(order);
@@ -95,6 +96,16 @@ namespace MyJobLeads.Tests.Processes.FillPerfect
             // Test the xml
             var xml = XDocument.Parse(result.LicenseXml);
             Assert.IsTrue(xml.Root.Name == "FillPerfectLicense", "Root node was incorrect");
+            Assert.AreEqual(1, xml.Descendants("LicenseType").Count(), "LicenseType descendent count incorrect");
+            Assert.AreEqual("IndividualPaid", xml.Descendants("LicenseType").First().Value, "License type was incorrect");
+            Assert.AreEqual(1, xml.Descendants("LicensedFor").Count(), "LicensedFor node count incorrect");
+            Assert.AreEqual("Test Name", xml.Descendants("LicensedFor").First().Value, "LicensedFor value was incorrect");
+            Assert.AreEqual(1, xml.Descendants("LicenseForMachine").Count(), "LicenseForMachine node count was incorrect");
+            Assert.AreEqual("1234", xml.Descendants("LicenseForMachine").First().Value, "LicenseForMachine value was incorrect");
+            Assert.AreEqual(1, xml.Descendants("EffectiveDate").Count(), "EffectiveDate node count was incorrect");
+            Assert.AreEqual(license.EffectiveDate.ToLongDateString(), xml.Descendants("EffectiveDate").First().Value, "EffectiveDate value was incorrect");
+            Assert.AreEqual(1, xml.Descendants("ExpirationDate").Count(), "ExpirationDate node count was incorrect");
+            Assert.AreEqual(license.ExpirationDate.ToLongDateString(), xml.Descendants("ExpirationDate").First().Value, "ExpirationDate value was incorrect");
         }
     }
 }
