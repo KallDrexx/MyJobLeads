@@ -37,10 +37,11 @@ namespace MyJobLeads.Tests.Processes.FillPerfect
 
             _user.OwnedOrders.Add(order);
             _context.Users.Add(_user);
+            _context.SaveChanges();
         }
 
         [TestMethod]
-        public void LicenseRequestReturnsInvalidKeyWhenNoUserHasSpecifiedKey()
+        public void License_Request_Returns_InvalidKey_When_No_User_Has_Specified_Key()
         {
             // Act
             var result = _getKeyProc.Execute(new GetFillPerfectLicenseByKeyParams { FillPerfectKey = Guid.NewGuid() });
@@ -50,7 +51,7 @@ namespace MyJobLeads.Tests.Processes.FillPerfect
         }
 
         [TestMethod]
-        public void LicenseRequestReturnsNotActivatedWhenLicenseHasNoActivatedMachineId()
+        public void License_Request_Returns_Not_Activated_When_License_Has_No_ActivatedMachineId()
         {
             // Setup
             _user.OwnedOrders
@@ -60,10 +61,20 @@ namespace MyJobLeads.Tests.Processes.FillPerfect
             _context.SaveChanges();
 
             // Act
-            var result = _getKeyProc.Execute(new GetFillPerfectLicenseByKeyParams { FillPerfectKey = Guid.NewGuid() });
+            var result = _getKeyProc.Execute(new GetFillPerfectLicenseByKeyParams { FillPerfectKey = (Guid)_user.FillPerfectKey });
 
             // Verify
-            Assert.AreEqual(FillPerfectLicenseError.InvalidKey, result.Error, "Incorrect license error returned");
+            Assert.AreEqual(FillPerfectLicenseError.KeyNotActivated, result.Error, "Incorrect license error returned");
+        }
+
+        [TestMethod]
+        public void License_Request_Returns_No_License_Error_When_User_Has_Activated_Licene()
+        {
+            // Act
+            var result = _getKeyProc.Execute(new GetFillPerfectLicenseByKeyParams { FillPerfectKey = (Guid)_user.FillPerfectKey });
+
+            // Verify
+            Assert.AreEqual(FillPerfectLicenseError.None, result.Error, "Incorrect license error returned");
         }
     }
 }

@@ -46,7 +46,7 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
             if (string.IsNullOrEmpty(license.ActivatedComputerId))
                 return new FillPerfectLicenseViewModel { Error = FillPerfectLicenseError.KeyNotActivated };
 
-            return null;
+            return new FillPerfectLicenseViewModel();
         }
     }
 }
