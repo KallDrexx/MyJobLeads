@@ -9,6 +9,9 @@ using MyJobLeads.DomainModel.ProcessParams.FillPerfect;
 using MyJobLeads.DomainModel.Entities.EF;
 using MyJobLeads.DomainModel.Enums;
 using System.Xml.Linq;
+using System.Security.Cryptography;
+using System.Security.Cryptography.Xml;
+using System.Xml;
 
 namespace MyJobLeads.DomainModel.Processes.FillPerfect
 {
@@ -48,14 +51,39 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
                 return new FillPerfectLicenseViewModel { Error = FillPerfectLicenseError.KeyNotActivated };
 
             // Generate XML from the license
-            var xml = new XElement("FillPerfectLicense",
-                        new XElement("LicenseType", license.LicenseType),
-                        new XElement("LicensedFor", user.FullName),
-                        new XElement("LicenseForMachine", license.ActivatedComputerId),
-                        new XElement("EffectiveDate", license.EffectiveDate.ToLongDateString()),
-                        new XElement("ExpirationDate", license.ExpirationDate.ToLongDateString()));
+            var xml = new XDocument(
+                        new XElement("FillPerfectLicense",
+                            new XElement("LicenseType", license.LicenseType),
+                            new XElement("LicensedFor", user.FullName),
+                            new XElement("LicenseForMachine", license.ActivatedComputerId),
+                            new XElement("EffectiveDate", license.EffectiveDate.ToLongDateString()),
+                            new XElement("ExpirationDate", license.ExpirationDate.ToLongDateString())));
 
-            return new FillPerfectLicenseViewModel { LicenseXml = xml.ToString() };
+            // Convert from an XDocument to XmlDocument for processing
+            var xmlDocument = new XmlDocument();
+            using (var reader = xml.CreateReader())
+                xmlDocument.Load(reader);
+            
+            // Sign the xml
+            var key = new RSACryptoServiceProvider();
+            var signedXml = new SignedXml(xmlDocument);
+            signedXml.SigningKey = key;
+
+            var reference = new Reference { Uri = "" };
+            reference.AddTransform(new XmlDsigEnvelopedSignatureTransform());
+            signedXml.AddReference(reference);
+
+            signedXml.ComputeSignature();
+            var signature = signedXml.GetXml();
+            xmlDocument.DocumentElement.AppendChild(xmlDocument.ImportNode(signature, true));
+            if (xmlDocument.FirstChild is XmlDeclaration)
+                xmlDocument.RemoveChild(xmlDocument.FirstChild);
+
+            // Return the license 
+            return new FillPerfectLicenseViewModel 
+            { 
+                LicenseXml = xmlDocument.InnerXml
+            };
         }
     }
 }

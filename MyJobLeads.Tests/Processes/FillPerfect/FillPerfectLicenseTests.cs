@@ -107,5 +107,17 @@ namespace MyJobLeads.Tests.Processes.FillPerfect
             Assert.AreEqual(1, xml.Descendants("ExpirationDate").Count(), "ExpirationDate node count was incorrect");
             Assert.AreEqual(license.ExpirationDate.ToLongDateString(), xml.Descendants("ExpirationDate").First().Value, "ExpirationDate value was incorrect");
         }
+
+        [TestMethod]
+        public void License_Contains_Xml_Signature()
+        {
+            // Act
+            var result = _getKeyProc.Execute(new GetFillPerfectLicenseByKeyParams { FillPerfectKey = (Guid)_user.FillPerfectKey });
+
+            // Verify
+            var xml = XDocument.Parse(result.LicenseXml);
+            XNamespace ns = "http://www.w3.org/2000/09/xmldsig#";
+            Assert.AreEqual(1, xml.Descendants(ns + "Signature").Count(), "Incorrect number of signature nodes found");
+        }
     }
 }
