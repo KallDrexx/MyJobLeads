@@ -11,6 +11,7 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.ViewModels.FillPerfect;
 using MyJobLeads.DomainModel.ProcessParams.FillPerfect;
 using MyJobLeads.DomainModel.Enums;
+using System.Xml.Linq;
 
 namespace MyJobLeads.Tests.Processes.FillPerfect
 {
@@ -75,6 +76,25 @@ namespace MyJobLeads.Tests.Processes.FillPerfect
 
             // Verify
             Assert.AreEqual(FillPerfectLicenseError.None, result.Error, "Incorrect license error returned");
+        }
+
+        [TestMethod]
+        public void License_Contains_Expected_Xml()
+        {
+            // Act
+            var result = _getKeyProc.Execute(new GetFillPerfectLicenseByKeyParams { FillPerfectKey = (Guid)_user.FillPerfectKey });
+
+            // Verify
+            var license = _user.OwnedOrders
+                               .SelectMany(x => x.FillPerfectLicenses)
+                               .OrderByDescending(x => x.EffectiveDate)
+                               .First();
+
+            Assert.IsFalse(string.IsNullOrWhiteSpace(result.LicenseXml), "License XML is null or empty");
+            
+            // Test the xml
+            var xml = XDocument.Parse(result.LicenseXml);
+            Assert.IsTrue(xml.Root.Name == "FillPerfectLicense", "Root node was incorrect");
         }
     }
 }
