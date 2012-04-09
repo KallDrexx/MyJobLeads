@@ -9,6 +9,12 @@ namespace MyJobLeads.DomainModel.Entities.Ordering
 {
     public class Order
     {
+        public Order()
+        {
+            OrderedProducts = new List<OrderedProduct>();
+            FillPerfectLicenses = new List<FpUserLicense>();
+        }
+
         public int Id { get; set; }
         public DateTime OrderDate { get; set; }
         public OrderStatus OrderStatus { get; set; }

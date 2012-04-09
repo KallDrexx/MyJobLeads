@@ -10,8 +10,8 @@ namespace MyJobLeads.DomainModel.Entities.EF.Configuration
     {
         public UserConfiguration()
         {
-            HasMany(x => x.CreatedOrders).WithRequired(x => x.OrderedBy).HasForeignKey(x => x.OrderedById);
-            HasMany(x => x.OwnedOrders).WithRequired(x => x.OrderedFor).HasForeignKey(x => x.OrderedForId);
+            HasMany(x => x.CreatedOrders).WithRequired(x => x.OrderedBy).HasForeignKey(x => x.OrderedById).WillCascadeOnDelete(false);
+            HasMany(x => x.OwnedOrders).WithRequired(x => x.OrderedFor).HasForeignKey(x => x.OrderedForId).WillCascadeOnDelete(false);
         }
     }
 }

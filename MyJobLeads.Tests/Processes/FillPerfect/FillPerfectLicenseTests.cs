@@ -26,21 +26,38 @@ namespace MyJobLeads.Tests.Processes.FillPerfect
             _getKeyProc = new FillPerfectLicenseProcesses(_context);
 
             // Db Entities
-            var user = new User { FillPerfectKey = Guid.NewGuid() };
-            var order = new Order();
+            _user = new User { FillPerfectKey = Guid.NewGuid() };
+            var order = new Order { OrderDate = DateTime.Now };
             order.FillPerfectLicenses.Add(new FpUserLicense
             {
+                ActivatedComputerId = "1234",
                 EffectiveDate = DateTime.Now.AddMonths(-1),
                 ExpirationDate = DateTime.Now.AddMonths(1)
             });
 
-            user.OwnedOrders.Add(order);
-            _context.Users.Add(user);
+            _user.OwnedOrders.Add(order);
+            _context.Users.Add(_user);
         }
 
         [TestMethod]
         public void LicenseRequestReturnsInvalidKeyWhenNoUserHasSpecifiedKey()
         {
+            // Act
+            var result = _getKeyProc.Execute(new GetFillPerfectLicenseByKeyParams { FillPerfectKey = Guid.NewGuid() });
+
+            // Verify
+            Assert.AreEqual(FillPerfectLicenseError.InvalidKey, result.Error, "Incorrect license error returned");
+        }
+
+        [TestMethod]
+        public void LicenseRequestReturnsNotActivatedWhenLicenseHasNoActivatedMachineId()
+        {
+            // Setup
+            _user.OwnedOrders
+                 .SelectMany(x => x.FillPerfectLicenses)
+                 .OrderByDescending(x => x.EffectiveDate)
+                 .First().ActivatedComputerId = null;
+            _context.SaveChanges();
 
             // Act
             var result = _getKeyProc.Execute(new GetFillPerfectLicenseByKeyParams { FillPerfectKey = Guid.NewGuid() });

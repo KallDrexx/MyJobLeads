@@ -9,6 +9,13 @@ namespace MyJobLeads.DomainModel.Entities
 {
     public class User
     {
+        public User()
+        {
+            JobSearches = new List<JobSearch>();
+            CreatedOrders = new List<Order>();
+            OwnedOrders = new List<Order>();
+        }
+
         public int Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }

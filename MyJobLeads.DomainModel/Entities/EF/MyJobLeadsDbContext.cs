@@ -58,13 +58,7 @@ namespace MyJobLeads.DomainModel.Entities.EF
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // Set up the 1:1 connections that can't be automatically determined
-            modelBuilder.Entity<OAuthData>().HasOptional(x => x.LinkedInUser).WithOptionalDependent(x => x.LinkedInOAuthData);
-            modelBuilder.Entity<User>().HasOptional(x => x.JigsawAccountDetails).WithRequired(x => x.AssociatedUser);
-            modelBuilder.Entity<JobSearch>().HasMany(x => x.LastVisitedUsers).WithOptional(x => x.LastVisitedJobSearch);
-
             // Load all entity configuration classes dynamically
-            //Culture is a class defined in the assembly where my Entity models reside
             var typesToRegister = Assembly.GetAssembly(typeof(UserConfiguration))
                                           .GetTypes()
                                           .Where(type => type.Namespace != null && type.Namespace.Equals(typeof(UserConfiguration).Namespace))
@@ -75,6 +69,11 @@ namespace MyJobLeads.DomainModel.Entities.EF
                 dynamic configurationInstance = Activator.CreateInstance(type);
                 modelBuilder.Configurations.Add(configurationInstance);
             }
+
+            // Set up the 1:1 connections that can't be automatically determined
+            modelBuilder.Entity<OAuthData>().HasOptional(x => x.LinkedInUser).WithOptionalDependent(x => x.LinkedInOAuthData);
+            modelBuilder.Entity<User>().HasOptional(x => x.JigsawAccountDetails).WithRequired(x => x.AssociatedUser);
+            modelBuilder.Entity<JobSearch>().HasMany(x => x.LastVisitedUsers).WithOptional(x => x.LastVisitedJobSearch);
         }
     }
 }
