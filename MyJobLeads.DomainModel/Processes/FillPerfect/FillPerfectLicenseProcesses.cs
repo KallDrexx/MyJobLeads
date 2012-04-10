@@ -12,10 +12,12 @@ using System.Xml.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
 using System.Xml;
+using MyJobLeads.DomainModel.Enums.FillPerfect;
 
 namespace MyJobLeads.DomainModel.Processes.FillPerfect
 {
-    public class FillPerfectLicenseProcesses : IProcess<GetFillPerfectLicenseByKeyParams, FillPerfectLicenseViewModel>
+    public class FillPerfectLicenseProcesses : IProcess<GetFillPerfectLicenseByKeyParams, FillPerfectLicenseViewModel>,
+                                               IProcess<ActivateFillPerfectKeyParams, FillPerfectKeyActivationViewModel>
     {
         public MyJobLeadsDbContext _context;
 
@@ -87,6 +89,34 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
                 KeyXml = key.ToXmlString(false),
                 RequestDate = DateTime.Now
             };
+        }
+
+        /// <summary>
+        /// Activates the specified key for the machine identifier
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        public FillPerfectKeyActivationViewModel Execute(ActivateFillPerfectKeyParams procParams)
+        {
+            var user = _context.Users.Where(x => x.FillPerfectKey == procParams.FillPerfectKey).FirstOrDefault();
+            if (user == null)
+                return new FillPerfectKeyActivationViewModel { Result = FillPerfectActivationResult.InvalidKey };
+
+            // Get the user's FP license
+            var license = user.OwnedOrders
+                              .SelectMany(x => x.FillPerfectLicenses)
+                              .OrderByDescending(x => x.EffectiveDate)
+                              .FirstOrDefault();
+            if (license == null)
+                return new FillPerfectKeyActivationViewModel { Result = FillPerfectActivationResult.NoLicense };
+
+            if (!string.IsNullOrEmpty(license.ActivatedComputerId))
+                return new FillPerfectKeyActivationViewModel { Result = FillPerfectActivationResult.KeyAlreadyActivated };
+
+            license.ActivatedComputerId = procParams.MachineId;
+            _context.SaveChanges();
+
+            return new FillPerfectKeyActivationViewModel { Result = FillPerfectActivationResult.ActivationSuccessful };
         }
     }
 }

@@ -19,7 +19,7 @@ using System.Security.Cryptography;
 namespace MyJobLeads.Tests.Processes.FillPerfect
 {
     [TestClass]
-    public class FillPerfectLicenseTests : EFTestBase
+    public class FillPerfectLicenseGenerationTests : EFTestBase
     {
         protected IProcess<GetFillPerfectLicenseByKeyParams, FillPerfectLicenseViewModel> _getKeyProc;
         protected User _user;

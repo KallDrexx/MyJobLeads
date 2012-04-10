@@ -194,8 +194,9 @@
     <Compile Include="EntityMapping\Mappings\Processes\JigsawMappings.cs" />
     <Compile Include="EntityMapping\Mappings\UserMappings.cs" />
     <Compile Include="Enums\ExternalDataSource.cs" />
-    <Compile Include="Enums\FillPerfectLicenseError.cs" />
-    <Compile Include="Enums\FillPerfectLicenseType.cs" />
+    <Compile Include="Enums\FillPerfect\FillPerfectActivationResult.cs" />
+    <Compile Include="Enums\FillPerfect\FillPerfectLicenseError.cs" />
+    <Compile Include="Enums\FillPerfect\FillPerfectLicenseType.cs" />
     <Compile Include="Enums\OrderStatus.cs" />
     <Compile Include="Enums\ProductType.cs" />
     <Compile Include="Enums\TokenProvider.cs" />
@@ -265,6 +266,7 @@
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\GetJigsawUserPointsParams.cs" />
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\GetUserJigsawCredentialsParams.cs" />
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\SaveJigsawUserCredentialsParams.cs" />
+    <Compile Include="ProcessParams\FillPerfect\ActivateFillPerfectKeyParams.cs" />
     <Compile Include="ProcessParams\FillPerfect\GetFillPerfectLicenseByKeyParams.cs" />
     <Compile Include="ProcessParams\FillPerfect\GetFpContactResponsesParams.cs" />
     <Compile Include="ProcessParams\FillPerfect\SendFpReplyParams.cs" />
@@ -328,6 +330,7 @@
     <Compile Include="ViewModels\ContactSearching\ExternalContactSearchResultsViewModel.cs" />
     <Compile Include="ViewModels\Exports\JobsearchExportViewModel.cs" />
     <Compile Include="ViewModels\ExternalAuth\JigsawCredentialsViewModel.cs" />
+    <Compile Include="ViewModels\FillPerfect\FillPerfectKeyActivationViewModel.cs" />
     <Compile Include="ViewModels\FillPerfect\FillPerfectLicenseViewModel.cs" />
     <Compile Include="ViewModels\GeneralSuccessResultViewModel.cs" />
     <Compile Include="ViewModels\General\FileContentViewModel.cs" />
