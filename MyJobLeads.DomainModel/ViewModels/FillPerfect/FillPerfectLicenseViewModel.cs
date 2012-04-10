@@ -11,5 +11,6 @@ namespace MyJobLeads.DomainModel.ViewModels.FillPerfect
         public FillPerfectLicenseError Error { get; set; }
         public string LicenseXml { get; set; }
         public string KeyXml { get; set; }
+        public DateTime RequestDate { get; set; }
     }
 }

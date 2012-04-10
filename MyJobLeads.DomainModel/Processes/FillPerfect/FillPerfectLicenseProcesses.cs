@@ -55,6 +55,7 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
                         new XElement("FillPerfectLicense",
                             new XElement("LicenseType", license.LicenseType),
                             new XElement("LicensedFor", user.FullName),
+                            new XElement("Email", user.Email),
                             new XElement("LicenseForMachine", license.ActivatedComputerId),
                             new XElement("EffectiveDate", license.EffectiveDate.ToLongDateString()),
                             new XElement("ExpirationDate", license.ExpirationDate.ToLongDateString())));
@@ -83,7 +84,8 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
             return new FillPerfectLicenseViewModel 
             { 
                 LicenseXml = xmlDocument.InnerXml,
-                KeyXml = key.ToXmlString(false)
+                KeyXml = key.ToXmlString(false),
+                RequestDate = DateTime.Now
             };
         }
     }
