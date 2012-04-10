@@ -12,6 +12,9 @@ using MyJobLeads.DomainModel.ViewModels.FillPerfect;
 using MyJobLeads.DomainModel.ProcessParams.FillPerfect;
 using MyJobLeads.DomainModel.Enums;
 using System.Xml.Linq;
+using System.Xml;
+using System.Security.Cryptography.Xml;
+using System.Security.Cryptography;
 
 namespace MyJobLeads.Tests.Processes.FillPerfect
 {
@@ -118,6 +121,28 @@ namespace MyJobLeads.Tests.Processes.FillPerfect
             var xml = XDocument.Parse(result.LicenseXml);
             XNamespace ns = "http://www.w3.org/2000/09/xmldsig#";
             Assert.AreEqual(1, xml.Descendants(ns + "Signature").Count(), "Incorrect number of signature nodes found");
+        }
+
+        [TestMethod]
+        public void License_Can_Be_Verified()
+        {
+            // Act
+            var result = _getKeyProc.Execute(new GetFillPerfectLicenseByKeyParams { FillPerfectKey = (Guid)_user.FillPerfectKey });
+
+            // Verify
+            var xml = XDocument.Parse(result.LicenseXml);
+            var xmlDocument = new XmlDocument();
+            using (var reader = xml.CreateReader())
+                xmlDocument.Load(reader);
+
+            var key = new RSACryptoServiceProvider();
+            key.FromXmlString(result.KeyXml);
+
+            var signedXml = new SignedXml(xmlDocument);
+            XmlNodeList nodeList = xmlDocument.GetElementsByTagName("Signature");
+            signedXml.LoadXml((XmlElement)nodeList[0]);
+
+            Assert.IsTrue(signedXml.CheckSignature(key), "Signed xml failed verification");
         }
     }
 }

@@ -82,7 +82,8 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
             // Return the license 
             return new FillPerfectLicenseViewModel 
             { 
-                LicenseXml = xmlDocument.InnerXml
+                LicenseXml = xmlDocument.InnerXml,
+                KeyXml = key.ToXmlString(false)
             };
         }
     }
