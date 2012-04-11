@@ -27,12 +27,13 @@ namespace MyJobLeads.Tests.WebInfrastructure
         {
             // Setup
             Assembly asm = Assembly.GetAssembly(typeof(IUnitOfWork));
-            IList<Type> classTypes = asm.GetTypes()
-                                        .Where(x => x.Namespace.StartsWith("MyJobLeads.DomainModel.Commands") || x.Namespace.StartsWith("MyJobLeads.DomainModel.Queries"))
-                                        .Where(x => x.IsClass)
-                                        .Where(x => x.GetCustomAttributes(typeof(CompilerGeneratedAttribute), true).Length == 0)
-                                        .OrderBy(x => x.FullName)
-                                        .ToList();
+            IList<Type> classTypes = Assembly.GetAssembly(typeof(MJLConstants))
+                              .GetTypes()
+                              .Where(x => !x.IsDefined(typeof(CompilerGeneratedAttribute), false))
+                              .Where(x => x.Namespace.StartsWith("MyJobLeads.DomainModel.Commands") || x.Namespace.StartsWith("MyJobLeads.DomainModel.Queries"))
+                              .Where(x => x.IsClass && !x.IsDefined(typeof(CompilerGeneratedAttribute), false))
+                              .Distinct()
+                              .ToList();
 
             IWindsorContainer container = new WindsorContainer();
             container.Kernel.ComponentModelBuilder.AddContributor(new SingletonLifestyleEqualizer());
