@@ -107,6 +107,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -151,9 +152,11 @@
     <Compile Include="Data\Sample\DemoCreationValues.cs" />
     <Compile Include="Entities\Admin\FillPerfectContactResponse.cs" />
     <Compile Include="Entities\Company.cs" />
-    <Compile Include="Entities\EF\Configuration\MilestoneConfig.cs" />
+    <Compile Include="Entities\Configuration\MilestoneConfig.cs" />
     <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\EF\Configuration\UserConfiguration.cs" />
     <Compile Include="Entities\FillPerfect\FpOrgPilotUsedLicense.cs" />
+    <Compile Include="Entities\FillPerfect\FpUserLicense.cs" />
     <Compile Include="Entities\FpJobApplyBasicStat.cs" />
     <Compile Include="Entities\JigsawAccountDetails.cs" />
     <Compile Include="Entities\OAuthData.cs" />
@@ -169,8 +172,11 @@
     <Compile Include="Entities\EF\MyJobLeadsDbContext.cs" />
     <Compile Include="Entities\EF\MyJobLeadsDbInitializer.cs" />
     <Compile Include="Entities\Metrics\JobSearchMetrics.cs" />
+    <Compile Include="Entities\Ordering\Order.cs" />
+    <Compile Include="Entities\Ordering\OrderedProduct.cs" />
+    <Compile Include="Entities\Ordering\Product.cs" />
     <Compile Include="Entities\Organization.cs" />
-    <Compile Include="Entities\EF\Configuration\OrganizationEmailDomain.cs" />
+    <Compile Include="Entities\Configuration\OrganizationEmailDomain.cs" />
     <Compile Include="Entities\Position.cs" />
     <Compile Include="Entities\SiteReferral.cs" />
     <Compile Include="Entities\SiteReferralCode.cs" />
@@ -188,6 +194,11 @@
     <Compile Include="EntityMapping\Mappings\Processes\JigsawMappings.cs" />
     <Compile Include="EntityMapping\Mappings\UserMappings.cs" />
     <Compile Include="Enums\ExternalDataSource.cs" />
+    <Compile Include="Enums\FillPerfect\FillPerfectActivationResult.cs" />
+    <Compile Include="Enums\FillPerfect\FillPerfectLicenseError.cs" />
+    <Compile Include="Enums\FillPerfect\FillPerfectLicenseType.cs" />
+    <Compile Include="Enums\OrderStatus.cs" />
+    <Compile Include="Enums\ProductType.cs" />
     <Compile Include="Enums\TokenProvider.cs" />
     <Compile Include="Exceptions\InvalidEmailDomainForOrganizationException.cs" />
     <Compile Include="Exceptions\InvalidOrganizationRegistrationTokenException.cs" />
@@ -228,6 +239,7 @@
     <Compile Include="Processes\Admin\UserAdminProcesses.cs" />
     <Compile Include="Processes\Authorization\AuthorizationProcesses.cs" />
     <Compile Include="Processes\CompanySearching\JigsawCompanySearchProcesses.cs" />
+    <Compile Include="Processes\FillPerfect\FillPerfectLicenseProcesses.cs" />
     <Compile Include="ProcessParams\Admin\CreateDemoAccountParams.cs" />
     <Compile Include="ProcessParams\Admin\ExportSiteActivityReportParams.cs" />
     <Compile Include="ProcessParams\Admin\FetchFpContactResponseEmailsParams.cs" />
@@ -254,6 +266,8 @@
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\GetJigsawUserPointsParams.cs" />
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\GetUserJigsawCredentialsParams.cs" />
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\SaveJigsawUserCredentialsParams.cs" />
+    <Compile Include="ProcessParams\FillPerfect\ActivateFillPerfectKeyParams.cs" />
+    <Compile Include="ProcessParams\FillPerfect\GetFillPerfectLicenseByKeyParams.cs" />
     <Compile Include="ProcessParams\FillPerfect\GetFpContactResponsesParams.cs" />
     <Compile Include="ProcessParams\FillPerfect\SendFpReplyParams.cs" />
     <Compile Include="ProcessParams\JobSearches\ByJobSearchParams.cs" />
@@ -316,6 +330,8 @@
     <Compile Include="ViewModels\ContactSearching\ExternalContactSearchResultsViewModel.cs" />
     <Compile Include="ViewModels\Exports\JobsearchExportViewModel.cs" />
     <Compile Include="ViewModels\ExternalAuth\JigsawCredentialsViewModel.cs" />
+    <Compile Include="ViewModels\FillPerfect\FillPerfectKeyActivationViewModel.cs" />
+    <Compile Include="ViewModels\FillPerfect\FillPerfectLicenseViewModel.cs" />
     <Compile Include="ViewModels\GeneralSuccessResultViewModel.cs" />
     <Compile Include="ViewModels\General\FileContentViewModel.cs" />
     <Compile Include="ViewModels\JobSearches\JigsawUserPointsViewModel.cs" />

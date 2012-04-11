@@ -9,6 +9,9 @@ using MyJobLeads.DomainModel.Entities.Configuration;
 using MyJobLeads.DomainModel.Entities.Surveys;
 using MyJobLeads.DomainModel.Entities.FillPerfect;
 using MyJobLeads.DomainModel.Entities.Admin;
+using MyJobLeads.DomainModel.Entities.Ordering;
+using System.Reflection;
+using MyJobLeads.DomainModel.Entities.EF.Configuration;
 
 namespace MyJobLeads.DomainModel.Entities.EF
 {
@@ -42,12 +45,31 @@ namespace MyJobLeads.DomainModel.Entities.EF
         // Configuration Tables
         public DbSet<MilestoneConfig> MilestoneConfigs { get; set; }
 
+        // Licenses
+        public DbSet<FpUserLicense> FpUserLicenses { get; set; }
+
+        // Ordering
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Product> Products { get; set; }
+
         /// <summary>
         /// Contains the Entity Framework database configuration rules
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // Load all entity configuration classes dynamically
+            var typesToRegister = Assembly.GetAssembly(typeof(UserConfiguration))
+                                          .GetTypes()
+                                          .Where(type => type.Namespace != null && type.Namespace.Equals(typeof(UserConfiguration).Namespace))
+                                          .Where(type => type.BaseType.IsGenericType && type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>));
+
+            foreach (var type in typesToRegister)
+            {
+                dynamic configurationInstance = Activator.CreateInstance(type);
+                modelBuilder.Configurations.Add(configurationInstance);
+            }
+
             // Set up the 1:1 connections that can't be automatically determined
             modelBuilder.Entity<OAuthData>().HasOptional(x => x.LinkedInUser).WithOptionalDependent(x => x.LinkedInOAuthData);
             modelBuilder.Entity<User>().HasOptional(x => x.JigsawAccountDetails).WithRequired(x => x.AssociatedUser);

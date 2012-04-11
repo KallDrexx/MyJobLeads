@@ -115,6 +115,7 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -164,6 +165,8 @@
     <Compile Include="Processes\Export\JobSearchExportProcessTests.cs" />
     <Compile Include="Processes\ExternalAuth\GetUserJigsawCredentialTests.cs" />
     <Compile Include="Processes\ExternalAuth\SaveJigsawCredentialsTests.cs" />
+    <Compile Include="Processes\FillPerfect\FillPerfectLicenseActivationTests.cs" />
+    <Compile Include="Processes\FillPerfect\FillPerfectLicenseGenerationTests.cs" />
     <Compile Include="Processes\JobSearches\PropogateMilestoneToJobSearchTests.cs" />
     <Compile Include="Processes\Milestones\MilestoneQueryProcessTests.cs" />
     <Compile Include="Processes\Milestones\MilestoneNonQueryProcessTests.cs" />
