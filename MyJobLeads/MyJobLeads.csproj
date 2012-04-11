@@ -463,6 +463,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Licensing\Controllers\FillPerfectController.cs" />
     <Compile Include="Areas\Licensing\LicensingAreaRegistration.cs" />
     <Compile Include="Areas\Organization\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Organization\Controllers\EditOrganizationController.cs" />
@@ -1317,7 +1318,6 @@
     <Folder Include="Areas\CompanySearch\Views\Shared\" />
     <Folder Include="Areas\ContactSearch\Views\Shared\" />
     <Folder Include="Areas\FillPerfect\Views\Shared\" />
-    <Folder Include="Areas\Licensing\Controllers\" />
     <Folder Include="Areas\Licensing\Models\" />
     <Folder Include="Areas\Licensing\Views\Shared\" />
     <Folder Include="Areas\Organization\Models\" />

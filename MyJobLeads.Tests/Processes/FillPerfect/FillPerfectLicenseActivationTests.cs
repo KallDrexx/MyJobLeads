@@ -74,5 +74,15 @@ namespace MyJobLeads.Tests.Processes.FillPerfect
             Assert.AreEqual(FillPerfectActivationResult.ActivationSuccessful, result.Result, "Incorrect activation result was returned");
             Assert.AreEqual("1234", _user.OwnedOrders.First().FillPerfectLicenses.First().ActivatedComputerId, "Activated computer id was incorrect");
         }
+
+        [TestMethod]
+        public void InvalidMachineId_When_Id_Is_Empty()
+        {
+            // Act
+            var result = _activationProc.Execute(new ActivateFillPerfectKeyParams { FillPerfectKey = (Guid)_user.FillPerfectKey, MachineId = "" });
+
+            // Verify
+            Assert.AreEqual(FillPerfectActivationResult.InvalidMachineId, result.Result, "Incorrect activation result was returned");
+        }
     }
 }

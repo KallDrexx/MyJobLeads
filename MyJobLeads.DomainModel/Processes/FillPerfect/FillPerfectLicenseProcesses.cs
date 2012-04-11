@@ -102,6 +102,9 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
             if (user == null)
                 return new FillPerfectKeyActivationViewModel { Result = FillPerfectActivationResult.InvalidKey };
 
+            if (string.IsNullOrWhiteSpace(procParams.MachineId))
+                return new FillPerfectKeyActivationViewModel { Result = FillPerfectActivationResult.InvalidMachineId };
+
             // Get the user's FP license
             var license = user.OwnedOrders
                               .SelectMany(x => x.FillPerfectLicenses)

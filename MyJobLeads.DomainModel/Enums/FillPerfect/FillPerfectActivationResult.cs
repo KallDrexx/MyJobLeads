@@ -10,6 +10,7 @@ namespace MyJobLeads.DomainModel.Enums.FillPerfect
         InvalidKey = 0,
         NoLicense = 1,
         KeyAlreadyActivated = 2,
-        ActivationSuccessful = 3
+        ActivationSuccessful = 3,
+        InvalidMachineId = 4
     }
 }
