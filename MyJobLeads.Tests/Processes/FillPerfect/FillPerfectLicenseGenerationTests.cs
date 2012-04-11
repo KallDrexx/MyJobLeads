@@ -23,6 +23,7 @@ namespace MyJobLeads.Tests.Processes.FillPerfect
     {
         protected IProcess<GetFillPerfectLicenseByKeyParams, FillPerfectLicenseViewModel> _getKeyProc;
         protected User _user;
+        protected string _orgName = "Test Org";
 
         [TestInitialize]
         public void Init()
@@ -31,6 +32,7 @@ namespace MyJobLeads.Tests.Processes.FillPerfect
 
             // Db Entities
             _user = new User { FillPerfectKey = Guid.NewGuid(), FullName = "Test Name", Email = "test@blah.com" };
+            _user.Organization = new Organization { Name = _orgName };
             var order = new Order { OrderDate = DateTime.Now };
             order.FillPerfectLicenses.Add(new FpUserLicense
             {
@@ -159,6 +161,22 @@ namespace MyJobLeads.Tests.Processes.FillPerfect
             signedXml.LoadXml((XmlElement)nodeList[0]);
 
             Assert.IsTrue(signedXml.CheckSignature(key), "Signed xml failed verification");
+        }
+
+        [TestMethod]
+        public void Org_License_Contains_Organization_Name()
+        {
+            // Setup
+            _user.OwnedOrders.First().FillPerfectLicenses.First().LicenseType = FillPerfectLicenseType.OrganizationGranted;
+            _context.SaveChanges();
+
+            // Act
+            var result = _getKeyProc.Execute(new GetFillPerfectLicenseByKeyParams { FillPerfectKey = (Guid)_user.FillPerfectKey });
+
+            // Verify
+            var xml = XDocument.Parse(result.LicenseXml);
+            Assert.AreEqual(1, xml.Descendants("Organization").Count(), "Incorrect number of organization nodes found");
+            Assert.AreEqual(_orgName, xml.Descendants("Organization").First().Value, "Incorrect organization name");
         }
     }
 }

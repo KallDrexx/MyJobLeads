@@ -58,6 +58,9 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
                             new XElement("LicenseType", license.LicenseType),
                             new XElement("LicensedFor", user.FullName),
                             new XElement("Email", user.Email),
+                            new XElement("Organization", license.LicenseType == FillPerfectLicenseType.OrganizationGranted && user.Organization != null
+                                                            ? user.Organization.Name
+                                                            : string.Empty),
                             new XElement("LicenseForMachine", license.ActivatedComputerId),
                             new XElement("EffectiveDate", license.EffectiveDate.ToLongDateString()),
                             new XElement("ExpirationDate", license.ExpirationDate.ToLongDateString())));
