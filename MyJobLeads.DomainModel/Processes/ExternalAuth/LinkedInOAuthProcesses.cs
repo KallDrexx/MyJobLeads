@@ -97,7 +97,9 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
             // Get the access token and associate the OAuthData record with the user
             string accessToken = accessTokenResponse.AccessToken;
             var oAuthRecord = _context.OAuthData
-                                      .Where(x => x.Token == accessToken && x.TokenTypeValue == (int)TokenType.AccessToken && x.TokenProviderValue == (int)TokenProvider.LinkedIn)
+                                      .Where(x => x.Token == accessToken && x.TokenTypeValue == (int)TokenType.AccessToken)
+                                      .Where(x => x.TokenProviderValue == (int)TokenProvider.LinkedIn)
+                                      .Where(x => x.LinkedInUser == user)
                                       .SingleOrDefault();
             if (oAuthRecord == null)
                 throw new MJLEntityNotFoundException(typeof(OAuthData), accessToken);

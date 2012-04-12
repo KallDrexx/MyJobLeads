@@ -12,6 +12,8 @@ namespace MyJobLeads.DomainModel.Entities.EF.Configuration
         {
             HasMany(x => x.CreatedOrders).WithRequired(x => x.OrderedBy).HasForeignKey(x => x.OrderedById).WillCascadeOnDelete(false);
             HasMany(x => x.OwnedOrders).WithRequired(x => x.OrderedFor).HasForeignKey(x => x.OrderedForId).WillCascadeOnDelete(false);
+            HasOptional(x => x.LinkedInOAuthData).WithRequired(x => x.LinkedInUser);
+            HasOptional(x => x.JigsawAccountDetails).WithRequired(x => x.AssociatedUser);
         }
     }
 }

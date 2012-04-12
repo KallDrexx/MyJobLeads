@@ -71,8 +71,6 @@ namespace MyJobLeads.DomainModel.Entities.EF
             }
 
             // Set up the 1:1 connections that can't be automatically determined
-            modelBuilder.Entity<OAuthData>().HasOptional(x => x.LinkedInUser).WithOptionalDependent(x => x.LinkedInOAuthData);
-            modelBuilder.Entity<User>().HasOptional(x => x.JigsawAccountDetails).WithRequired(x => x.AssociatedUser);
             modelBuilder.Entity<JobSearch>().HasMany(x => x.LastVisitedUsers).WithOptional(x => x.LastVisitedJobSearch);
         }
     }
