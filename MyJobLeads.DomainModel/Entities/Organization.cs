@@ -16,6 +16,7 @@ namespace MyJobLeads.DomainModel.Entities
             MemberOfficialDocuments = new List<OfficialDocument>();
             MilestoneConfigurations = new List<MilestoneConfig>();
             FpUsedPilotLicenses = new List<FpOrgPilotUsedLicense>();
+            FillPerfectLicenses = new List<FpOrgLicense>();
         }
 
         public int Id { get; set; }
@@ -30,5 +31,6 @@ namespace MyJobLeads.DomainModel.Entities
         public virtual ICollection<OfficialDocument> MemberOfficialDocuments { get; set; }
         public virtual ICollection<MilestoneConfig> MilestoneConfigurations { get; set; }
         public virtual ICollection<FpOrgPilotUsedLicense> FpUsedPilotLicenses { get; set; }
+        public virtual ICollection<FpOrgLicense> FillPerfectLicenses { get; set; }
     }
 }

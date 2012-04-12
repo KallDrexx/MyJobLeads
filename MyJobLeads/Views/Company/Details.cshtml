@@ -166,7 +166,7 @@
                                 @Html.ActionLink(contact.Name, MVC.Contact.Details(contact.Id))
                                 @if (!string.IsNullOrWhiteSpace(contact.Title))
                                 {
-                                    <span>- @Html.ActionLink(contact.Title, MVC.Contact.Details(Model.Id))</span>
+                                    <span>- @Html.ActionLink(contact.Title, MVC.Contact.Details(contact.Id))</span>
                                 }
                             </div> 
                             <p><span class="greyHighlight">Direct:</span> @contact.DirectPhoneWithExtension</p>

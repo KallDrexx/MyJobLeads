@@ -48,6 +48,7 @@ namespace MyJobLeads.DomainModel.Entities.EF
 
         // Licenses
         public DbSet<FpUserLicense> FpUserLicenses { get; set; }
+        public DbSet<FpOrgLicense> FpOrgLicenses { get; set; }
 
         // Ordering
         public DbSet<Order> Orders { get; set; }
