@@ -52,12 +52,12 @@ WriteLiteral(@"
     <meta name=""description"" content=""Your description goes here"" />
 	<meta name=""keywords"" content=""your,keywords,goes,here"" />
 	<meta name=""author"" content=""Your Name"" />
-    <title>MyLeads: ");
+    <title>InterviewTools Portal: ");
 
 
             
             #line 10 "..\..\Views\Shared\_Layout.cshtml"
-               Write(ViewBag.Title);
+                             Write(ViewBag.Title);
 
             
             #line default
