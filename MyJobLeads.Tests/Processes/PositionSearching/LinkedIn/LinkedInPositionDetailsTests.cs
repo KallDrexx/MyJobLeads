@@ -44,9 +44,9 @@ namespace MyJobLeads.Tests.Processes.PositionSearching.LinkedIn
                 Secret = "f66673b2-5877-4fbf-80e0-3826ca9f7eed",
                 TokenProvider = TokenProvider.LinkedIn,
                 TokenType = TokenType.AccessToken,
-                LinkedInUser = _user
             };
 
+            oauth.LinkedInUsers.Add(_user);
             _user.LinkedInOAuthData = oauth;
             _context.Users.Add(_user);
             _context.OAuthData.Add(oauth);

@@ -12,6 +12,7 @@ using MyJobLeads.DomainModel.Entities.Admin;
 using MyJobLeads.DomainModel.Entities.Ordering;
 using System.Reflection;
 using MyJobLeads.DomainModel.Entities.EF.Configuration;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyJobLeads.DomainModel.Entities.EF
 {
@@ -72,6 +73,7 @@ namespace MyJobLeads.DomainModel.Entities.EF
 
             // Set up the 1:1 connections that can't be automatically determined
             modelBuilder.Entity<JobSearch>().HasMany(x => x.LastVisitedUsers).WithOptional(x => x.LastVisitedJobSearch);
+            //modelBuilder.Entity<OAuthData>().Has.HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }
 }

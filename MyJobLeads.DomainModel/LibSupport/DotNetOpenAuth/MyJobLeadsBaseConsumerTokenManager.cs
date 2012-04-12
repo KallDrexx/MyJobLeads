@@ -50,7 +50,7 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
         {
             var data = _context.OAuthData
                                 .Where(x => x.Token == accessToken && x.TokenProviderValue == (int)_tokenProvider)
-                                .Include(x => x.LinkedInUser)
+                                .Include(x => x.LinkedInUsers)
                                 .SingleOrDefault();
 
             if (data == null)
@@ -58,10 +58,7 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
 
             // Make sure the user is no longer associated with the token
             if (_tokenProvider == TokenProvider.LinkedIn)
-            {
-                var user = data.LinkedInUser;
-                user.LinkedInOAuthData = null;
-            }
+                data.LinkedInUsers.Clear();
 
             _context.OAuthData.Remove(data);
             _context.SaveChanges();
@@ -89,16 +86,19 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
 
             _context.OAuthData.Remove(oldData);
 
-            // Create the access token
-            _context.OAuthData.Add(new OAuthData
+            // Create the access token if one doesn't already exist 
+            if (!_context.OAuthData.Any(x => x.Token == accessToken && x.TokenProviderValue == (int)_tokenProvider))
             {
-                Token = accessToken,
-                Secret = accessTokenSecret,
-                TokenType = TokenType.AccessToken,
-                TokenProvider = _tokenProvider
-            });
+                _context.OAuthData.Add(new OAuthData
+                {
+                    Token = accessToken,
+                    Secret = accessTokenSecret,
+                    TokenType = TokenType.AccessToken,
+                    TokenProvider = _tokenProvider
+                });
 
-            _context.SaveChanges();
+                _context.SaveChanges();
+            }
         }
 
         public string GetTokenSecret(string token)

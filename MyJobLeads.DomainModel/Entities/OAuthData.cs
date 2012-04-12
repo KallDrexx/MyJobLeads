@@ -10,13 +10,18 @@ namespace MyJobLeads.DomainModel.Entities
 {
     public class OAuthData
     {
+        public OAuthData()
+        {
+            LinkedInUsers = new List<User>();
+        }
+
         public int Id { get; set; }
         public string Token { get; set; }
         public string Secret { get; set; }
         public int TokenTypeValue { get; set; }
         public int TokenProviderValue { get; set; }
 
-        public virtual User LinkedInUser { get; set; }
+        public virtual ICollection<User> LinkedInUsers { get; set; }
 
         public TokenType TokenType
         {

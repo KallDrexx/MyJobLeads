@@ -99,7 +99,6 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
             var oAuthRecord = _context.OAuthData
                                       .Where(x => x.Token == accessToken && x.TokenTypeValue == (int)TokenType.AccessToken)
                                       .Where(x => x.TokenProviderValue == (int)TokenProvider.LinkedIn)
-                                      .Where(x => x.LinkedInUser == user)
                                       .SingleOrDefault();
             if (oAuthRecord == null)
                 throw new MJLEntityNotFoundException(typeof(OAuthData), accessToken);
