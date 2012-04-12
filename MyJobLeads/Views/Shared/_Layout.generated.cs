@@ -110,7 +110,7 @@ WriteLiteral(@"
 
             
             #line 42 "..\..\Views\Shared\_Layout.cshtml"
-                        Write(Html.ActionLink("MyLeads", MVC.Home.Index()));
+                        Write(Html.ActionLink("Portal", MVC.Home.Index()));
 
             
             #line default
