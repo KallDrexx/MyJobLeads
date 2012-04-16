@@ -10,6 +10,7 @@ namespace MyJobLeads.DomainModel.ViewModels.FillPerfect
     {
         public IList<AvailableFpLicense> Licenses { get; set; }
         public bool OrganizationLicenseAvailable { get; set; }
+        public string OrgName { get; set; }
 
         public class AvailableFpLicense
         {

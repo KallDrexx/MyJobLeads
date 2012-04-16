@@ -170,7 +170,8 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
             return new FpLicensesAvailableForOrderingViewModel
             {
                 Licenses = publicProducts.OrderBy(x => x.ProductType).ToList(),
-                OrganizationLicenseAvailable = orgLicenseAvailable
+                OrganizationLicenseAvailable = orgLicenseAvailable,
+                OrgName = user.OrganizationId != null ? user.Organization.Name : string.Empty
             };
         }
     }
