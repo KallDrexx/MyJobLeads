@@ -105,7 +105,8 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
 
             // If the user is already associated with an OAuthData record, delete that recor
             if (user.LinkedInOAuthData != null)
-                _context.OAuthData.Remove(user.LinkedInOAuthData);
+                if (user.LinkedInOAuthData.Token != accessToken)
+                    _context.OAuthData.Remove(user.LinkedInOAuthData);
 
             user.LinkedInOAuthData = oAuthRecord;
             _context.SaveChanges();
