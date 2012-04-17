@@ -1,0 +1,58 @@
+﻿@model MyJobLeads.DomainModel.ViewModels.FillPerfect.FpLicensesAvailableForOrderingViewModel
+
+@{
+    ViewBag.Title = "FillPerfect Products";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <h3>Available FillPerfect Licenses</h3>
+        }
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>
+                InterviewTools FillPerfect is the premier tool to allow you to quickly and efficiently fill out online job applications
+            </p>
+        }
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <ul class="decoratedList">
+                @if (Model.Licenses.Count == 0 && !Model.OrganizationLicenseAvailable)
+                {
+                    <li>No licenses are available for you at this time</li>   
+                }
+                else
+                {
+                    foreach (var license in Model.Licenses.OrderBy(x => x.Price))
+                    {
+                        if (license.PurchasedTooManyTimes)
+                        {
+                            <li>You have already used the maximum number of @license.ProductType licenses</li>
+                        }   
+                        else
+                        {
+                            <li>
+                                @(license.Price == 0 ? "Activate" : "Purchase")
+                                @(license.DurationInWeeks == 0? "unlimited" : license.DurationInWeeks.ToString() + " week")
+                                @license.ProductType license - 
+                                @(license.Price == 0 ? "FREE!" : license.Price.ToString("C"))
+                            </li>
+                        }
+                    }
+                }
+            </ul>
+        }
+    }
+}

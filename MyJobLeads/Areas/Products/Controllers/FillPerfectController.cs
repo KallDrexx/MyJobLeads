@@ -8,7 +8,7 @@ using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.ViewModels.FillPerfect;
 using MyJobLeads.DomainModel.ProcessParams.FillPerfect;
 
-namespace MyJobLeads.Areas.Ordering.Controllers
+namespace MyJobLeads.Areas.Products.Controllers
 {
     [Authorize]
     public class FillPerfectController : MyJobLeadsBaseController
@@ -16,10 +16,10 @@ namespace MyJobLeads.Areas.Ordering.Controllers
         protected IProcess<GetOrderableFillPerfectLicensesParams, FpLicensesAvailableForOrderingViewModel> _getFpLicensesProc;
 
         public FillPerfectController(MyJobLeadsDbContext context, 
-            IProcess<GetOrderableFillPerfectLicensesParams, FpLicensesAvailableForOrderingViewModel> getfpLicensesProc )
+                IProcess<GetOrderableFillPerfectLicensesParams, FpLicensesAvailableForOrderingViewModel> getFpLicensesProc)
         {
             _context = context;
-            _getFpLicensesProc = getfpLicensesProc;
+            _getFpLicensesProc = getFpLicensesProc;
         }
 
         public ActionResult Index()

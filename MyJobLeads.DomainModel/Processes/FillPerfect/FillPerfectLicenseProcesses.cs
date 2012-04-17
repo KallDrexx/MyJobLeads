@@ -144,17 +144,26 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
             // Retrieve all public products
             var publicProducts = _context.Products
                                          .Where(x => x.IsPublic)
+                                         .ToList()
                                          .Select(x => new FpLicensesAvailableForOrderingViewModel.AvailableFpLicense
                                          {
-                                             ProductId = x.Id,
-                                             ProductType = x.Type,
-                                             Price = x.Price,
-                                             PurchasedTooManyTimes = _context.Orders
-                                                                             .Where(y => y.OrderedForId == user.Id)
-                                                                             .Where(y => y.OrderedProducts.Any(z => z.ProductId == x.Id))
-                                                                             .Where(y => y.OrderStatus == OrderStatus.Paid)
-                                                                             .Count() >= x.MaxPurchaseTimes
+                                                 ProductId = x.Id,
+                                                 Price = x.Price,
+                                                 DurationInWeeks = x.TimeRestricted ? x.DurationInWeeks : 0,
+                                                 ProductType = x.Type == ProductType.FillPerfectTrialLicense
+                                                                ? "trial"
+                                                                : x.Type == ProductType.FillPerfectIndividualLicense
+                                                                    ? "personal"
+                                                                    : "",
+                                                 PurchasedTooManyTimes = x.MaxPurchaseTimes == 0 
+                                                                         ? false
+                                                                         :   _context.Orders
+                                                                                 .Where(y => y.OrderedForId == user.Id)
+                                                                                 .Where(y => y.OrderedProducts.Any(z => z.ProductId == x.Id))
+                                                                                 .Where(y => y.OrderStatusValue == (int)OrderStatus.Paid)
+                                                                                 .Count() >= x.MaxPurchaseTimes
                                          })
+                                         .OrderBy(x => x.Price)
                                          .ToList();
 
             // Determine if the user's 
