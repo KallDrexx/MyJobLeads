@@ -159,6 +159,7 @@ namespace MyJobLeads.Areas.PositionSearch.Controllers
         {
             _startLiAuthProcess.Execute(new StartLinkedInUserAuthParams
             {
+                RequestingUserId = CurrentUserId,
                 ReturnUrl = new Uri(Request.Url.Scheme + "://" + Request.Url.Authority + Url.Action(MVC.PositionSearch.LinkedIn.ProcessAuthorization()))
             });
 

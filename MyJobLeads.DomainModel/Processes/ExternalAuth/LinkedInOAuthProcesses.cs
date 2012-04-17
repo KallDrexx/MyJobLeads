@@ -48,7 +48,7 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
                 return new UserAccessTokenResultViewModel { AccessTokenValid = false };
 
             // Attempt to query for the current user's profile to determine if the profile is valid
-            var consumer = new WebConsumer(GetLiDescription(), new LinkedInTokenManager(_context));
+            var consumer = new WebConsumer(GetLiDescription(), new LinkedInTokenManager(_context, procParams.UserId));
             var endpoint = new MessageReceivingEndpoint("http://api.linkedin.com/v1/people/~", HttpDeliveryMethods.GetRequest);
             var request = consumer.PrepareAuthorizedRequest(endpoint, user.LinkedInOAuthData.Token);
             try { var response = request.GetResponse(); }
@@ -70,7 +70,7 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
         /// <returns></returns>
         public GeneralSuccessResultViewModel Execute(StartLinkedInUserAuthParams procParams)
         {
-            var consumer = new WebConsumer(GetLiDescription(), new LinkedInTokenManager(_context));
+            var consumer = new WebConsumer(GetLiDescription(), new LinkedInTokenManager(_context, procParams.RequestingUserId));
             consumer.Channel.Send(consumer.PrepareRequestUserAuthorization(procParams.ReturnUrl, null, null));
             return new GeneralSuccessResultViewModel();
         }
@@ -88,7 +88,7 @@ namespace MyJobLeads.DomainModel.Processes.ExternalAuth
                 throw new MJLEntityNotFoundException(typeof(User), procParams.UserId);
 
             // Process the completed Linked In Auth
-            var consumer = new WebConsumer(GetLiDescription(), new LinkedInTokenManager(_context));
+            var consumer = new WebConsumer(GetLiDescription(), new LinkedInTokenManager(_context, procParams.UserId));
             var accessTokenResponse = consumer.ProcessUserAuthorization();
 
             if (accessTokenResponse == null)

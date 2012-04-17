@@ -18,8 +18,10 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
         private string _consumerSecretAppSettingName;
         private MyJobLeadsDbContext _context;
         private TokenProvider _tokenProvider;
+        private int _requestingUserId;
 
-        public MyJobLeadsBaseConsumerTokenManager(MyJobLeadsDbContext context, TokenProvider tokenProvider, string consumerKeyAppSetting, string consumerSecretAppSetting)
+        public MyJobLeadsBaseConsumerTokenManager(MyJobLeadsDbContext context, TokenProvider tokenProvider, 
+                                                string consumerKeyAppSetting, string consumerSecretAppSetting, int requestingUserId)
         {
             if (context == null)
                 throw new ArgumentNullException("context");
@@ -34,6 +36,7 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
             _tokenProvider = tokenProvider;
             _consumerKeyAppSettingName = consumerKeyAppSetting;
             _consumerSecretAppSettingName = consumerSecretAppSetting;
+            _requestingUserId = requestingUserId;
         }
 
         public string ConsumerKey
@@ -82,19 +85,23 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
             var oldData = _context.OAuthData.Where(x => x.Token == requestToken)
                                   .Where(x => x.TokenTypeValue == (int)TokenType.RequestToken)
                                   .Where(x => x.TokenProviderValue == (int)_tokenProvider)
+                                  .Where(x => x.LinkedInUsers.Any(y => y.Id == _requestingUserId))
                                   .Single();
 
             _context.OAuthData.Remove(oldData);
+            _context.SaveChanges();
 
             // Create the access token if one doesn't already exist 
             if (!_context.OAuthData.Any(x => x.Token == accessToken && x.TokenProviderValue == (int)_tokenProvider))
             {
+                var user = _context.Users.Where(x => x.Id == _requestingUserId).First();
                 _context.OAuthData.Add(new OAuthData
                 {
                     Token = accessToken,
                     Secret = accessTokenSecret,
                     TokenType = TokenType.AccessToken,
-                    TokenProvider = _tokenProvider
+                    TokenProvider = _tokenProvider,
+                    LinkedInUsers = new List<User> { user }
                 });
 
                 _context.SaveChanges();
@@ -120,6 +127,7 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
 
             var data = _context.OAuthData.Where(x => x.Token == token)
                                          .Where(x => x.TokenProviderValue == (int)_tokenProvider)
+                                         .Where(x => x.LinkedInUsers.Any(y => y.Id == _requestingUserId))
                                          .SingleOrDefault();
             if (data == null)
                 throw new ArgumentException("No secret found for the given token");
@@ -135,12 +143,14 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
             if (response == null)
                 throw new ArgumentNullException("response");
 
+            var user = _context.Users.Where(x => x.Id == _requestingUserId).First();
             var data = new OAuthData
             {
                 Token = response.Token,
                 Secret = response.TokenSecret,
                 TokenType = TokenType.RequestToken,
-                TokenProvider = _tokenProvider
+                TokenProvider = _tokenProvider,
+                LinkedInUsers = new List<User> { user }
             };
 
             _context.OAuthData.Add(data);

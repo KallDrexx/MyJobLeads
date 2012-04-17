@@ -12,8 +12,8 @@ namespace MyJobLeads.DomainModel.LibSupport.DotNetOpenAuth
         private const string LINKED_IN_KEY_APPSETTINGS = "LiApiKey";
         private const string LINKED_IN_SECRET_APPSETTINGS = "LiApiSecret";
 
-        public LinkedInTokenManager(MyJobLeadsDbContext context)
-            : base(context, TokenProvider.LinkedIn, LINKED_IN_KEY_APPSETTINGS, LINKED_IN_SECRET_APPSETTINGS)
+        public LinkedInTokenManager(MyJobLeadsDbContext context, int requestedingUserId)
+            : base(context, TokenProvider.LinkedIn, LINKED_IN_KEY_APPSETTINGS, LINKED_IN_SECRET_APPSETTINGS, requestedingUserId)
         {
         }
     }

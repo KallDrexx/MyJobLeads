@@ -85,7 +85,7 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
                 apiUrl += "&postal-code=" + procParams.ZipCode;
 
             // Perform the search
-            var consumer = new WebConsumer(LinkedInOAuthProcesses.GetLiDescription(), new LinkedInTokenManager(_context));
+            var consumer = new WebConsumer(LinkedInOAuthProcesses.GetLiDescription(), new LinkedInTokenManager(_context, procParams.RequestingUserId));
             var endpoint = new MessageReceivingEndpoint(apiUrl, HttpDeliveryMethods.GetRequest);
             var request = consumer.PrepareAuthorizedRequest(endpoint, user.LinkedInOAuthData.Token);
             var response = request.GetResponse();
@@ -133,7 +133,7 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
                                .Include(x => x.LinkedInOAuthData)
                                .SingleOrDefault();
 
-            return GetPositionDetails(procParams.PositionId.ToString(), user.LinkedInOAuthData.Token);
+            return GetPositionDetails(procParams.PositionId.ToString(), user.LinkedInOAuthData.Token, procParams.RequestingUserId);
         }
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
                 throw new UserHasNoValidOAuthAccessTokenException(user.Id, TokenProvider.LinkedIn);
 
             // Retrieve the position details
-            var positionDetails = GetPositionDetails(procParams.PositionId, user.LinkedInOAuthData.Token);
+            var positionDetails = GetPositionDetails(procParams.PositionId, user.LinkedInOAuthData.Token, procParams.RequestingUserId);
             if (positionDetails == null)
                 throw new MJLEntityNotFoundException(typeof(ExternalPositionDetailsViewModel), procParams.PositionId);
 
@@ -213,7 +213,7 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
             }   
         }
 
-        protected ExternalPositionDetailsViewModel GetPositionDetails(string positionId, string userOAuthToken)
+        protected ExternalPositionDetailsViewModel GetPositionDetails(string positionId, string userOAuthToken, int userId)
         {
             // Form the API Url based on the criteria
             string apiUrl =
@@ -223,7 +223,7 @@ namespace MyJobLeads.DomainModel.Processes.PositionSearching
                     "title,location,job-functions,industries,job-type,experience-level");
 
             // Perform the search
-            var consumer = new WebConsumer(LinkedInOAuthProcesses.GetLiDescription(), new LinkedInTokenManager(_context));
+            var consumer = new WebConsumer(LinkedInOAuthProcesses.GetLiDescription(), new LinkedInTokenManager(_context, userId));
             var endpoint = new MessageReceivingEndpoint(apiUrl, HttpDeliveryMethods.GetRequest);
             var request = consumer.PrepareAuthorizedRequest(endpoint, userOAuthToken);
 
