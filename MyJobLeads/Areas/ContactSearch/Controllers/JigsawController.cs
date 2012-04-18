@@ -105,6 +105,10 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
                                    .Include(x => x.Company)
                                    .ToList();
 
+            var companies = _context.Companies
+                                    .Where(x => x.JobSearch.User.Id == CurrentUserId)
+                                    .ToList();
+
             var model = new ImportContactViewModel
             {
                 CompanyName = jsCompanyName,
@@ -115,7 +119,7 @@ namespace MyJobLeads.Areas.ContactSearch.Controllers
                 JigsawUpdatedDate = lastUpdated
             };
 
-            model.SetDropdownListValues(contacts, contacts.Select(x => x.Company).Distinct().ToList());
+            model.SetDropdownListValues(contacts, companies);
 
             return View(model);
         }
