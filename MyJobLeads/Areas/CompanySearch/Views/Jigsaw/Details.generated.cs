@@ -85,7 +85,7 @@ WriteLiteral("\r\n\r\n");
             #line hidden
             
             #line 17 "..\..\Areas\CompanySearch\Views\Jigsaw\Details.cshtml"
-       Write(Html.ActionLink("Add To MyLeads", MVC.CompanySearch.Jigsaw.AddCompany(Convert.ToInt32(Model.CompanyId), Model.CompanyName),
+       Write(Html.ActionLink("Add To Portal", MVC.CompanySearch.Jigsaw.AddCompany(Convert.ToInt32(Model.CompanyId), Model.CompanyName),
                             new { @class = "floatRight blueLinks", title = "Add company to Portal" }));
 
             
@@ -104,7 +104,7 @@ WriteLiteral("\r\n\r\n");
             #line hidden
             
             #line 23 "..\..\Areas\CompanySearch\Views\Jigsaw\Details.cshtml"
-       Write(Html.ActionLink("Sync With MyLeads Company", MVC.CompanySearch.Jigsaw.Sync((int)ViewBag.MergeCompanyId, Convert.ToInt32(Model.CompanyId)),
+       Write(Html.ActionLink("Sync With Portal", MVC.CompanySearch.Jigsaw.Sync((int)ViewBag.MergeCompanyId, Convert.ToInt32(Model.CompanyId)),
                             new { @class = "floatRight blueLinks", title = "Sync company with Portal" }));
 
             

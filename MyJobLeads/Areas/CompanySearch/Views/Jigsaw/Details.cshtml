@@ -14,13 +14,13 @@
     {
         if (ViewBag.MergeCompanyId == null)
         {
-            @Html.ActionLink("Add To MyLeads", MVC.CompanySearch.Jigsaw.AddCompany(Convert.ToInt32(Model.CompanyId), Model.CompanyName),
+            @Html.ActionLink("Add To Portal", MVC.CompanySearch.Jigsaw.AddCompany(Convert.ToInt32(Model.CompanyId), Model.CompanyName),
                             new { @class = "floatRight blueLinks", title = "Add company to Portal" })
         }
 
         else
         {
-            @Html.ActionLink("Sync With MyLeads Company", MVC.CompanySearch.Jigsaw.Sync((int)ViewBag.MergeCompanyId, Convert.ToInt32(Model.CompanyId)),
+            @Html.ActionLink("Sync With Portal", MVC.CompanySearch.Jigsaw.Sync((int)ViewBag.MergeCompanyId, Convert.ToInt32(Model.CompanyId)),
                             new { @class = "floatRight blueLinks", title = "Sync company with Portal" })
         }
                          

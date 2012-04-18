@@ -65,16 +65,16 @@
 
                         @if (Model.Query.MergedContactId <= 0)
                         {
-                            @Html.ActionLink("Add To MyLeads",
+                            @Html.ActionLink("Add To Portal",
                                 MVC.ContactSearch.Jigsaw.ImportContact(Convert.ToInt32(contact.ContactId), contact.CompanyId, contact.Company, string.Concat(contact.FirstName, " ", contact.LastName), contact.Headline, contact.LastUpdatedDate),
                                 new { @class = "inlineBlue", title = string.Concat("Add ", contact.FirstName, " ", contact.LastName, " to your job search") })
                         }
 
                         else
                         {
-                            @Html.ActionLink("Sync With MyLeads",
+                            @Html.ActionLink("Sync With Portal",
                                 MVC.ContactSearch.Sync.Jigsaw(Model.Query.MergedContactId, Convert.ToInt32(contact.ContactId), string.Concat(contact.FirstName, " ", contact.LastName), contact.Headline, contact.LastUpdatedDate, contact.Email, contact.Phone),
-                                new { @class = "inlineBlue", title = "Sync With MyLeads" })
+                                new { @class = "inlineBlue", title = "Sync With Portal" })
                         }
                     </li>
                 }
