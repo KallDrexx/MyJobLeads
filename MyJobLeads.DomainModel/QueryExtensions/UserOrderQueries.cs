@@ -26,6 +26,16 @@ namespace MyJobLeads.DomainModel.QueryExtensions
             return query.Where(x => x.OrderedForId == userId && x.OrderStatusValue == (int)OrderStatus.Completed);
         }
 
+        public static IQueryable<FpUserLicense> UserActiveLicense(this IQueryable<Order> query, int userId)
+        {
+            if (query == null)
+                throw new ArgumentNullException("query");
+
+            return query.Where(x => x.OrderedForId == userId)
+                        .SelectMany(x => x.FillPerfectLicenses)
+                        .Where(x => x.EffectiveDate <= DateTime.Today && x.ExpirationDate > DateTime.Today);
+        }
+
         public static DateTime UserLatestFillPerfectActivatedLicenseExpirationDate(this IQueryable<FpUserLicense> query, int userId)
         {
             if (query == null)

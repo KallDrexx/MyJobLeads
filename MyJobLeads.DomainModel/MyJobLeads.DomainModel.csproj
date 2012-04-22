@@ -322,7 +322,7 @@
     <Compile Include="Queries\Positions\PositionByIdQuery.cs" />
     <Compile Include="Queries\Search\EntitySearchQuery.cs" />
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQuery.cs" />
-    <Compile Include="QueryExtensions\Ordering\UserOrderQueries.cs" />
+    <Compile Include="QueryExtensions\UserOrderQueries.cs" />
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="Utilities\EncryptionUtils.cs" />
     <Compile Include="ViewModels\Admin\CreatedDemoAccountViewModel.cs" />

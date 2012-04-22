@@ -46,10 +46,7 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
                 return new FillPerfectLicenseViewModel { Error = FillPerfectLicenseError.InvalidKey };
 
             // Get the latest FillPerfect license for the user
-            var license = user.OwnedOrders
-                              .SelectMany(x => x.FillPerfectLicenses)
-                              .OrderByDescending(x => x.EffectiveDate)
-                              .FirstOrDefault();
+            var license = _context.Orders.UserActiveLicense(user.Id).FirstOrDefault();
             if (license == null)
                 return new FillPerfectLicenseViewModel { Error = FillPerfectLicenseError.NoLicense };
 
