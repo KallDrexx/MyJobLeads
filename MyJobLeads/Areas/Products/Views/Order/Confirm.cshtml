@@ -1,0 +1,60 @@
+﻿@model MyJobLeads.ViewModels.Ordering.OrderConfirmViewModel
+
+@{
+    ViewBag.Title = "Confirm Order";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        <h3>License Confirmation</h3>
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>
+                Here are the details for the license you are about to activate
+            </p>
+    
+            <ul class="decoratedList">
+                <li><span class="bold">License Type: </span> @Model.LicenseType</li>
+                <li>
+                    <span class="bold">Effective From: </span> @(Model.LicenseEffectiveDate.Date < DateTime.Today ? "Today" : Model.LicenseEffectiveDate.ToShortDateString())
+                </li>
+                <li><span class="bold">License Duration: </span> @Model.LicenseDurationInWeeks weeks</li>
+                <li>
+                    <span class="bold">Price: </span> @(Model.Price == 0 ? "FREE!" : Model.Price.ToString("C"))
+                </li>
+            </ul>
+        }
+    }
+
+    using (Html.BeginForm())
+    {
+        @Html.HiddenFor(x => x.ProductId)
+        
+        using (Html.OuterRow())
+        {
+            using (Html.ValidationArea())
+            {
+                @Html.ValidationSummary();
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            Html.FormField(new HtmlString("Confirm activation of this license"), Html.CheckBoxFor(x => x.OrderConfirmed));
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.FormButtonArea())
+            {
+                <input type="submit" value="Confirm Activation" />
+            }
+        }
+    }
+}

@@ -7,11 +7,12 @@ using MyJobLeads.DomainModel.Entities.EF;
 using MyJobLeads.DomainModel.Data;
 using MyJobLeads.DomainModel.ViewModels.FillPerfect;
 using MyJobLeads.DomainModel.ProcessParams.FillPerfect;
+using MyJobLeads.Areas.Products.Models;
 
 namespace MyJobLeads.Areas.Products.Controllers
 {
     [Authorize]
-    public class FillPerfectController : MyJobLeadsBaseController
+    public partial class FillPerfectController : MyJobLeadsBaseController
     {
         protected IProcess<GetOrderableFillPerfectLicensesParams, FpLicensesAvailableForOrderingViewModel> _getFpLicensesProc;
 
@@ -22,11 +23,22 @@ namespace MyJobLeads.Areas.Products.Controllers
             _getFpLicensesProc = getFpLicensesProc;
         }
 
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {
             var model = _getFpLicensesProc.Execute(new GetOrderableFillPerfectLicensesParams { RequestingUserID = CurrentUserId });
             return View(model);
         }
 
+        public virtual ActionResult LicenseActivated(Guid fpKey, DateTime LicenseStart, DateTime LicenseEnd, string LicenseType)
+        {
+            var model = new ActivatedFillPerfectLicenseViewModel
+            {
+                UserFpKey = fpKey,
+                LicenseEffectiveDate = LicenseStart,
+                LicenseExpirationDate = LicenseEnd,
+                LicenseType = LicenseType
+            };
+            return View(model);
+        }
     }
 }

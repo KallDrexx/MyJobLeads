@@ -542,6 +542,7 @@
     </Compile>
     <Compile Include="Areas\Products\Controllers\FillPerfectController.cs" />
     <Compile Include="Areas\Products\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Products\Models\ActivatedFillPerfectLicenseViewModel.cs" />
     <Compile Include="Areas\Products\ProductsAreaRegistration.cs" />
     <Compile Include="Areas\Reports\Controllers\SiteActivityController.cs" />
     <Compile Include="Areas\Reports\Models\SiteActivityViewModels\ExportSiteActivityViewModel.cs" />
@@ -637,6 +638,12 @@
     <Compile Include="JobSearchController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Licensing.FillPerfectController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Licensing.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Organization.DashboardController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -662,6 +669,15 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="PositionSearch.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Products.FillPerfectController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Products.OrderController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Products.SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Reports.SharedController.generated.cs">
@@ -1327,7 +1343,6 @@
     <Folder Include="Areas\Organization\Models\" />
     <Folder Include="Areas\Organization\Views\Shared\" />
     <Folder Include="Areas\PositionSearch\Views\Shared\" />
-    <Folder Include="Areas\Products\Models\" />
     <Folder Include="Areas\Products\Views\Shared\" />
     <Folder Include="Areas\Reports\Views\Shared\" />
     <Folder Include="Properties\PublishProfiles\" />
@@ -1619,6 +1634,8 @@
     <Content Include="Areas\Products\Views\Web.config" />
     <Content Include="Areas\Products\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Products\Views\FillPerfect\Index.cshtml" />
+    <Content Include="Areas\Products\Views\Order\Confirm.cshtml" />
+    <Content Include="Areas\Products\Views\FillPerfect\LicenseActivated.cshtml" />
     <None Include="Scripts\plugins\DataTables\images\Sorting icons.psd" />
     <None Include="Scripts\plugins\DataTables\js\jquery.dataTables.min.js.gz" />
     <None Include="T4MVC.tt.settings.t4" />

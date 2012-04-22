@@ -43,11 +43,12 @@
                         }   
                         else
                         {
-                            <li>
-                                @(license.Price == 0 ? "Activate" : "Purchase")
-                                @(license.DurationInWeeks == 0? "unlimited" : license.DurationInWeeks.ToString() + " week")
-                                @license.ProductType license - 
-                                @(license.Price == 0 ? "FREE!" : license.Price.ToString("C"))
+                            <li><a href="@Url.Action(MVC.Products.Order.Confirm(license.ProductId))" class="inlineBlue">
+                                    @(license.Price == 0 ? "Activate" : "Purchase")
+                                    @(license.DurationInWeeks == 0? "unlimited" : license.DurationInWeeks.ToString() + " week")
+                                    @license.ProductType license - 
+                                    @(license.Price == 0 ? "FREE!" : license.Price.ToString("C"))
+                                </a>
                             </li>
                         }
                     }

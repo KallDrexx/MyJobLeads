@@ -15,6 +15,7 @@ using System.Xml;
 using MyJobLeads.DomainModel.Enums.FillPerfect;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.QueryExtensions;
 
 namespace MyJobLeads.DomainModel.Processes.FillPerfect
 {
@@ -158,15 +159,15 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
                                                  PurchasedTooManyTimes = x.MaxPurchaseTimes == 0 
                                                                          ? false
                                                                          :   _context.Orders
-                                                                                 .Where(y => y.OrderedForId == user.Id)
-                                                                                 .Where(y => y.OrderedProducts.Any(z => z.ProductId == x.Id))
-                                                                                 .Where(y => y.OrderStatusValue == (int)OrderStatus.Paid)
-                                                                                 .Count() >= x.MaxPurchaseTimes
+                                                                                     .AsQueryable()
+                                                                                     .UserCompletedOrders(procParams.RequestingUserID)
+                                                                                     .Where(y => y.OrderedProducts.Any(z => z.ProductId == x.Id))
+                                                                                     .Count() >= x.MaxPurchaseTimes
                                          })
                                          .OrderBy(x => x.Price)
                                          .ToList();
 
-            // Determine if the user's 
+            // Determine if the user's organization has an active blanket license
             if (user.OrganizationId != null &&
                 _context.FpOrgLicenses
                         .Where(x => x.OrganizationId == user.OrganizationId)

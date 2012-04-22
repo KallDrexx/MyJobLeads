@@ -10,7 +10,7 @@ using MyJobLeads.DomainModel.ProcessParams.FillPerfect;
 
 namespace MyJobLeads.Areas.Licensing.Controllers
 {
-    public class FillPerfectController : MyJobLeadsBaseController
+    public partial class FillPerfectController : MyJobLeadsBaseController
     {
         protected IProcess<GetFillPerfectLicenseByKeyParams, FillPerfectLicenseViewModel> _getFpLicenseProc;
         protected IProcess<ActivateFillPerfectKeyParams, FillPerfectKeyActivationViewModel> _activateFpProc;
@@ -25,7 +25,7 @@ namespace MyJobLeads.Areas.Licensing.Controllers
         }
 
 
-        public JsonResult Activate(string key, string machineId)
+        public virtual JsonResult Activate(string key, string machineId)
         {
             var result = new FillPerfectKeyActivationViewModel();
             Guid parsedKey;
@@ -42,7 +42,7 @@ namespace MyJobLeads.Areas.Licensing.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetLicense(string key)
+        public virtual JsonResult GetLicense(string key)
         {
             var result = new FillPerfectLicenseViewModel { Error = DomainModel.Enums.FillPerfectLicenseError.InvalidKey };
             Guid parsedKey;

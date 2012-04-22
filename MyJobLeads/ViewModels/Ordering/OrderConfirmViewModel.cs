@@ -11,8 +11,10 @@ namespace MyJobLeads.ViewModels.Ordering
         public decimal Price { get; set; }
         public int LicenseDurationInWeeks { get; set; }
         public string LicenseType { get; set; }
-        public DateTime? LicenseEffectiveDate { get; set; }
+        public DateTime LicenseEffectiveDate { get; set; }
         public bool AnotherLicenseAlreadyActive { get; set; }
         public bool MaxPurchaseExceeded { get; set; }
+
+        public bool OrderConfirmed { get; set; }
     }
 }
