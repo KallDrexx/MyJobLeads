@@ -58,6 +58,7 @@ namespace MyJobLeads.Controllers {
             public readonly string ResetPassword = "ResetPassword";
             public readonly string ResetPasswordResult = "ResetPasswordResult";
             public readonly string Edit = "Edit";
+            public readonly string Details = "Details";
         }
 
 
@@ -69,6 +70,7 @@ namespace MyJobLeads.Controllers {
             public readonly string ChangePassword = "~/Views/Account/ChangePassword.cshtml";
             public readonly string ChangePasswordSuccess = "~/Views/Account/ChangePasswordSuccess.cshtml";
             public readonly string ClosedRegistrationView = "~/Views/Account/ClosedRegistrationView.cshtml";
+            public readonly string Details = "~/Views/Account/Details.cshtml";
             public readonly string Edit = "~/Views/Account/Edit.cshtml";
             public readonly string InvalidOrgRegistrationTokenView = "~/Views/Account/InvalidOrgRegistrationTokenView.cshtml";
             public readonly string LogOn = "~/Views/Account/LogOn.cshtml";
@@ -163,6 +165,11 @@ namespace MyJobLeads.Controllers {
         public override System.Web.Mvc.ActionResult Edit(MyJobLeads.DomainModel.ProcessParams.Users.EditUserDetailsParams model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
             callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Details() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
             return callInfo;
         }
 

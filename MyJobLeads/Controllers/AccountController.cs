@@ -19,6 +19,7 @@ using MyJobLeads.DomainModel.ProcessParams.Users;
 using MyJobLeads.DomainModel.Entities;
 using MyJobLeads.DomainModel.Data;
 using FluentValidation;
+using MyJobLeads.DomainModel.Entities.EF;
 
 namespace MyJobLeads.Controllers
 {
@@ -28,12 +29,11 @@ namespace MyJobLeads.Controllers
         public IFormsAuthenticationService FormsService { get; set; }
         public IMembershipService MembershipService { get; set; }
 
-        public AccountController(IServiceFactory factory, EditUserCommand editUserCmd)
+        public AccountController(IServiceFactory factory, EditUserCommand editUserCmd, MyJobLeadsDbContext context)
         {
             _serviceFactory = factory;
             _editUserCmd = editUserCmd;
-
-
+            _context = context;
         }
 
         protected override void Initialize(RequestContext requestContext)
@@ -246,17 +246,15 @@ namespace MyJobLeads.Controllers
             return View();
         }
 
+        [Authorize]
         public virtual ActionResult Edit()
         {
-            // If the user isn't logged in, redirect to home
-            if (!User.Identity.IsAuthenticated)
-                return RedirectToAction(MVC.Home.Index());
-
             var user = _serviceFactory.GetService<UserByIdQuery>().WithUserId(CurrentUserId).Execute();
             var model = Mapper.Map<User, EditUserDetailsParams>(user);
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
         public virtual ActionResult Edit(EditUserDetailsParams model)
         {
@@ -289,6 +287,23 @@ namespace MyJobLeads.Controllers
                 return View(model);
 
             return RedirectToAction(MVC.Home.Index());
+        }
+
+        [Authorize]
+        public virtual ActionResult Details()
+        {
+            var model = _context.Users
+                                .Where(x => x.Id == CurrentUserId)
+                                .Select(x => new MyAccountDetailsViewModel
+                                {
+                                    Email = x.Email,
+                                    FullName = x.FullName,
+                                    OrganizationName = x.Organization.Name,
+                                    FillPerfectKey = x.FillPerfectKey,
+                                    FillPerfectActivated = x.OwnedOrders.Any(y => y.FillPerfectLicenses.Any(z => !string.IsNullOrEmpty(z.ActivatedComputerId)))
+                                })
+                                .Single();
+            return View(model);
         }
     }
 }
