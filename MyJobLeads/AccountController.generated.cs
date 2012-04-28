@@ -59,6 +59,7 @@ namespace MyJobLeads.Controllers {
             public readonly string ResetPasswordResult = "ResetPasswordResult";
             public readonly string Edit = "Edit";
             public readonly string Details = "Details";
+            public readonly string DeactivateFpActivation = "DeactivateFpActivation";
         }
 
 
@@ -170,6 +171,11 @@ namespace MyJobLeads.Controllers {
 
         public override System.Web.Mvc.ActionResult Details() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult DeactivateFpActivation() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.DeactivateFpActivation);
             return callInfo;
         }
 

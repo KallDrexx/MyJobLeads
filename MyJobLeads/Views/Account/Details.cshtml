@@ -40,15 +40,19 @@
             {
                 @(Model.FillPerfectKey == null ? "None" : Model.FillPerfectKey.Value.ToString()) 
     
-                using (Html.FieldValueDisplay(" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "))
+                if (Model.FillPerfectKey != null)
                 {
-                    if (Model.FillPerfectActivated)
+                    using (Html.FieldValueDisplay("FillPerfect Activation Status:"))
                     {
-                        @:Your key has been activated for one computer
-                    }
-                    else
-                    {
-                        @:Your key has not been tied to a specific computer yet
+                        if (Model.FillPerfectActivated)
+                        {
+                            @: Your key has been activated for one computer - 
+                            @Html.ActionLink("Deactivate", MVC.Account.DeactivateFpActivation(), new { @class = "inlineBlue", title = "Untie license from the current computer" })
+                        }
+                        else
+                        {
+                            @: Your key has not been tied to a specific computer
+                        }
                     }
                 }
             }

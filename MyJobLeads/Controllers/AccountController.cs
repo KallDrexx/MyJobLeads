@@ -305,5 +305,18 @@ namespace MyJobLeads.Controllers
                                 .Single();
             return View(model);
         }
+
+        [Authorize]
+        public virtual ActionResult DeactivateFpActivation()
+        {
+            var licenses = _context.FpUserLicenses
+                                   .Where(x => x.Order.OrderedForId == CurrentUserId)
+                                   .ToList();
+            foreach (var lic in licenses)
+                lic.ActivatedComputerId = string.Empty;
+
+            _context.SaveChanges();
+            return RedirectToAction(MVC.Account.Details());
+        }
     }
 }
