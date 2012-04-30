@@ -37,8 +37,13 @@ namespace MyJobLeads.DomainModel.Processes.JobSearches
             if (search == null)
                 throw new MJLEntityNotFoundException(typeof(JobSearch), procParams.JobSearchId);
 
+
             if (!search.MilestonesCompleted && search.CurrentMilestone == null)
             {
+                // If this user doesn't have an organization, then ignore them, as only organization users have milestones for now
+                if (search.User.Organization == null)
+                    return new JobSearchMilestoneChangedResultViewModel { JobSearchMilestoneChanged = false };
+
                 var startingMilestone = search.User.Organization.MilestoneConfigurations.Where(x => x.IsStartingMilestone).SingleOrDefault();
                 search.CurrentMilestone = startingMilestone;
                 _context.SaveChanges();

@@ -52,7 +52,7 @@ namespace MyJobLeads.Controllers
             if (user.LastVisitedJobSearchId == null)
                 return RedirectToAction(MVC.JobSearch.Add());
 
-            // Update the job search's current milestone if required
+            // Update the job search's current milestone if required            
             var result = _jobsearchPropogationProcess.Execute(new JobSearchMilestonePropogationParams { JobSearchId = (int)user.LastVisitedJobSearchId });
 
             // If the job search's current milestone was updated, we need to reload the job search
