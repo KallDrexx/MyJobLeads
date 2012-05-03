@@ -1,0 +1,67 @@
+﻿@model MyJobLeads.ViewModels.Ordering.FillPerfectOrgLicenseConfirmViewModel
+
+@{
+    ViewBag.Title = "ConfirmFillPerfectOrgOrder";
+}
+
+@{
+    ViewBag.Title = "Confirm Order";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        <h3>License Confirmation</h3>
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>
+                Here are the details for the license you are about to activate
+            </p>
+    
+            <ul class="decoratedList">
+                <li><span class="bold">Organization Granted By: </span> @Model.OrganizationName</li>
+                <li>
+                    <span class="bold">Effective From: </span> 
+                        @if (Model.EffectiveLicenseDate <= Model.ActivatedLicenseExpiratioDate)
+                        {
+                            @Model.ActivatedLicenseExpiratioDate @:(License begins after your current license expires)
+                        }
+                        else
+                        {
+                            @(Model.EffectiveLicenseDate <= DateTime.Today ? "Today" : Model.EffectiveLicenseDate.ToShortDateString())
+                        }
+                </li>
+                <li><span class="bold">Expires: </span> @Model.ExpirationDate.ToShortDateString()</li>
+            </ul>
+        }
+    }
+
+    using (Html.BeginForm())
+    {       
+        using (Html.OuterRow())
+        {
+            using (Html.ValidationArea())
+            {
+                @Html.ValidationSummary();
+            }
+        }
+
+        using (Html.OuterRow())
+        {
+            Html.FormField(new HtmlString("Confirm activation of this license"), Html.CheckBoxFor(x => x.OrderConfirmed));
+        }
+
+        using (Html.OuterRow())
+        {
+            using (Html.FormButtonArea())
+            {
+                <input type="submit" value="Confirm Activation" />
+            }
+        }
+    }
+}

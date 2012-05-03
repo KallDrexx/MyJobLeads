@@ -50,6 +50,7 @@ namespace MyJobLeads.Areas.Products.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string Confirm = "Confirm";
+            public readonly string ConfirmFillPerfectOrgOrder = "ConfirmFillPerfectOrgOrder";
         }
 
 
@@ -59,6 +60,7 @@ namespace MyJobLeads.Areas.Products.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string Confirm = "~/Areas/Products/Views/Order/Confirm.cshtml";
+            public readonly string ConfirmFillPerfectOrgOrder = "~/Areas/Products/Views/Order/ConfirmFillPerfectOrgOrder.cshtml";
         }
     }
 
@@ -74,6 +76,17 @@ namespace MyJobLeads.Areas.Products.Controllers {
 
         public override System.Web.Mvc.ActionResult Confirm(MyJobLeads.ViewModels.Ordering.OrderConfirmViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Confirm);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ConfirmFillPerfectOrgOrder() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ConfirmFillPerfectOrgOrder);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ConfirmFillPerfectOrgOrder(MyJobLeads.ViewModels.Ordering.FillPerfectOrgLicenseConfirmViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ConfirmFillPerfectOrgOrder);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }

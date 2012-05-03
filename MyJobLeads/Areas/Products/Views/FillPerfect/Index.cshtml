@@ -35,6 +35,14 @@
                 }
                 else
                 {
+                    if (Model.OrganizationLicenseAvailable)
+                    {
+                        <li>
+                            @Html.ActionLink("You are eligible for a free license through " + Model.OrgName,
+                                                MVC.Products.Order.ConfirmFillPerfectOrgOrder(),
+                                                new { @class = "inlineBlue" })
+                        </li>   
+                    }
                     foreach (var license in Model.Licenses.OrderBy(x => x.Price))
                     {
                         if (license.PurchasedTooManyTimes)
