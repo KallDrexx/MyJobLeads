@@ -11,6 +11,14 @@
                 <div class="grid3 marginBottom_10 marginAuto floatLeft"> 
                         <h3 class="floatLeft">Edit  Company</h3> 
                 </div> 
+                
+                using (Html.OuterRow())
+                {
+                    using (Html.ValidationArea())
+                    {
+                        @Html.ValidationSummary()
+                    }
+                }
 
                 <div class="grid3 marginBottom_10 floatLeft"> 
                     <div class="floatLeft"><p class="greyHighlight">Name:</p>
