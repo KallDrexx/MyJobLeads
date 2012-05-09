@@ -9,7 +9,9 @@ namespace MyJobLeads.ViewModels.Companies
     public class EditCompanyViewModel
     {
         public EditCompanyViewModel() 
-        { 
+        {
+            AvailableLeadStatuses = new List<string>();
+
             // Set the Lead Status to default to Prospective Employer
             LeadStatus = "Prospective Employer";
         }
@@ -32,6 +34,7 @@ namespace MyJobLeads.ViewModels.Companies
             Website = company.Website;
 
             JobSearchId = Convert.ToInt32(company.JobSearchID);
+            AvailableLeadStatuses = new List<string>();
         }
 
         public int Id { get; set; }

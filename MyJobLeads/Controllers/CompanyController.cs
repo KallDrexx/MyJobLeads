@@ -123,6 +123,7 @@ namespace MyJobLeads.Controllers
                 foreach (var error in ex.Errors)
                     ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
 
+                model.AvailableLeadStatuses = _serviceFactory.GetService<LeadStatusesAvailableForCompaniesQuery>().Execute();
                 return View(model);
             }
         }
