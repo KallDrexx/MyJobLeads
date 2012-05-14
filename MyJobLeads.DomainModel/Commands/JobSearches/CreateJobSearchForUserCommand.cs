@@ -10,6 +10,7 @@ using MyJobLeads.DomainModel.Entities.History;
 using MyJobLeads.DomainModel.Queries.MilestoneConfigs;
 using MyJobLeads.DomainModel.Providers;
 using FluentValidation;
+using MyJobLeads.DomainModel.Entities.EF;
 
 namespace MyJobLeads.DomainModel.Commands.JobSearches
 {
@@ -67,16 +68,16 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
         /// <exception cref="MJLEntityNotFoundException">Thrown when the specified user is not found</exception>
         public virtual JobSearch Execute()
         {
-            var unitOfWork = _serviceFactory.GetService<IUnitOfWork>();
+            var context = _serviceFactory.GetService<MyJobLeadsDbContext>();
 
             // Retrieve the user
-            var user = new UserByIdQuery(unitOfWork).WithUserId(_userId).Execute();
+            var user = context.Users.Where(x => x.Id == _userId).FirstOrDefault();
             if (user == null)
                 throw new MJLEntityNotFoundException(typeof(User), _userId);
 
             // Retrieve the milestone this job search should start with
-            var milestone = _serviceFactory.GetService<StartingMilestoneQuery>()
-                                           .Execute(new StartingMilestoneQueryParams { OrganizationId = user.OrganizationId });
+            //var milestone = _serviceFactory.GetService<StartingMilestoneQuery>()
+            //                               .Execute(new StartingMilestoneQueryParams { OrganizationId = user.OrganizationId });
 
             // Create the job search
             var search = new JobSearch
@@ -84,7 +85,6 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
                 Name = _name,
                 Description = _description,
                 User = user,
-                CurrentMilestone = milestone,
 
                 Companies = new List<Company>(),
                 History = new List<JobSearchHistory>()
@@ -104,8 +104,8 @@ namespace MyJobLeads.DomainModel.Commands.JobSearches
             var validator = _serviceFactory.GetService<IValidator<JobSearch>>();
             validator.ValidateAndThrow(search);
 
-            unitOfWork.JobSearches.Add(search);
-            unitOfWork.Commit();
+            context.JobSearches.Add(search);
+            context.SaveChanges();
 
             return search;
         }
