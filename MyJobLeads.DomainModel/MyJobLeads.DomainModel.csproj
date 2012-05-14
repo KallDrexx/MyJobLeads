@@ -155,6 +155,7 @@
     <Compile Include="Entities\Configuration\MilestoneConfig.cs" />
     <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\EF\Configuration\UserConfiguration.cs" />
+    <Compile Include="Entities\FillPerfect\FpOrgLicense.cs" />
     <Compile Include="Entities\FillPerfect\FpOrgPilotUsedLicense.cs" />
     <Compile Include="Entities\FillPerfect\FpUserLicense.cs" />
     <Compile Include="Entities\FpJobApplyBasicStat.cs" />
@@ -220,6 +221,8 @@
     <Compile Include="EntityMapping\IEntityMapConfiguration.cs" />
     <Compile Include="Exceptions\OAuth\OAuthResponseNotAvailableException.cs" />
     <Compile Include="Exceptions\OAuth\UserHasNoValidOAuthAccessTokenException.cs" />
+    <Compile Include="Exceptions\Ordering\OrderLicensesAlreadyActivatedException.cs" />
+    <Compile Include="Exceptions\Ordering\ProductOrderCountExceededException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForEntityException.cs" />
     <Compile Include="Exceptions\UserNotAuthorizedForProcessException.cs" />
     <Compile Include="Json\Converters\JigsawDateTimeConverter.cs" />
@@ -267,6 +270,7 @@
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\GetUserJigsawCredentialsParams.cs" />
     <Compile Include="ProcessParams\ExternalAuth\Jigsaw\SaveJigsawUserCredentialsParams.cs" />
     <Compile Include="ProcessParams\FillPerfect\ActivateFillPerfectKeyParams.cs" />
+    <Compile Include="ProcessParams\FillPerfect\GetOrderableFillPerfectLicensesParams.cs" />
     <Compile Include="ProcessParams\FillPerfect\GetFillPerfectLicenseByKeyParams.cs" />
     <Compile Include="ProcessParams\FillPerfect\GetFpContactResponsesParams.cs" />
     <Compile Include="ProcessParams\FillPerfect\SendFpReplyParams.cs" />
@@ -318,6 +322,7 @@
     <Compile Include="Queries\Positions\PositionByIdQuery.cs" />
     <Compile Include="Queries\Search\EntitySearchQuery.cs" />
     <Compile Include="Queries\Tasks\CategoriesAvailableForTasksQuery.cs" />
+    <Compile Include="QueryExtensions\UserOrderQueries.cs" />
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="Utilities\EncryptionUtils.cs" />
     <Compile Include="ViewModels\Admin\CreatedDemoAccountViewModel.cs" />
@@ -332,6 +337,7 @@
     <Compile Include="ViewModels\ExternalAuth\JigsawCredentialsViewModel.cs" />
     <Compile Include="ViewModels\FillPerfect\FillPerfectKeyActivationViewModel.cs" />
     <Compile Include="ViewModels\FillPerfect\FillPerfectLicenseViewModel.cs" />
+    <Compile Include="ViewModels\FillPerfect\FpLicensesAvailableForOrderingViewModel.cs" />
     <Compile Include="ViewModels\GeneralSuccessResultViewModel.cs" />
     <Compile Include="ViewModels\General\FileContentViewModel.cs" />
     <Compile Include="ViewModels\JobSearches\JigsawUserPointsViewModel.cs" />

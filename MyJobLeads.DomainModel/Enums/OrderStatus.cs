@@ -8,10 +8,10 @@ namespace MyJobLeads.DomainModel.Enums
     public enum OrderStatus
     {
         None = 0,
-        NotConfirmed = 1,
-        Processing = 2,
-        Paid = 3,
-        Refunded = 4,
-        Cancelled = 5
+        AwaitingPayment = 1,
+        PaymentFailed = 2,
+        Completed = 3,
+        Cancelled = 4,
+        Refunded = 5
     }
 }

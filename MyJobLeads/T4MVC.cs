@@ -31,10 +31,14 @@ public static class MVC {
     public static ContactSearchClass ContactSearch { get { return s_ContactSearch; } }
     static readonly FillPerfectClass s_FillPerfect = new FillPerfectClass();
     public static FillPerfectClass FillPerfect { get { return s_FillPerfect; } }
+    static readonly LicensingClass s_Licensing = new LicensingClass();
+    public static LicensingClass Licensing { get { return s_Licensing; } }
     static readonly OrganizationClass s_Organization = new OrganizationClass();
     public static OrganizationClass Organization { get { return s_Organization; } }
     static readonly PositionSearchClass s_PositionSearch = new PositionSearchClass();
     public static PositionSearchClass PositionSearch { get { return s_PositionSearch; } }
+    static readonly ProductsClass s_Products = new ProductsClass();
+    public static ProductsClass Products { get { return s_Products; } }
     static readonly ReportsClass s_Reports = new ReportsClass();
     public static ReportsClass Reports { get { return s_Reports; } }
     public static MyJobLeads.Controllers.AccountController Account = new MyJobLeads.Controllers.T4MVC_AccountController();
@@ -84,6 +88,12 @@ namespace T4MVC {
         public T4MVC.FillPerfect.SharedController Shared = new T4MVC.FillPerfect.SharedController();
     }
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public class LicensingClass {
+        public readonly string Name = "Licensing";
+        public MyJobLeads.Areas.Licensing.Controllers.FillPerfectController FillPerfect = new MyJobLeads.Areas.Licensing.Controllers.T4MVC_FillPerfectController();
+        public T4MVC.Licensing.SharedController Shared = new T4MVC.Licensing.SharedController();
+    }
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class OrganizationClass {
         public readonly string Name = "Organization";
         public MyJobLeads.Areas.Organization.Controllers.DashboardController Dashboard = new MyJobLeads.Areas.Organization.Controllers.T4MVC_DashboardController();
@@ -97,6 +107,13 @@ namespace T4MVC {
         public readonly string Name = "PositionSearch";
         public MyJobLeads.Areas.PositionSearch.Controllers.LinkedInController LinkedIn = new MyJobLeads.Areas.PositionSearch.Controllers.T4MVC_LinkedInController();
         public T4MVC.PositionSearch.SharedController Shared = new T4MVC.PositionSearch.SharedController();
+    }
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public class ProductsClass {
+        public readonly string Name = "Products";
+        public MyJobLeads.Areas.Products.Controllers.FillPerfectController FillPerfect = new MyJobLeads.Areas.Products.Controllers.T4MVC_FillPerfectController();
+        public MyJobLeads.Areas.Products.Controllers.OrderController Order = new MyJobLeads.Areas.Products.Controllers.T4MVC_OrderController();
+        public T4MVC.Products.SharedController Shared = new T4MVC.Products.SharedController();
     }
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class ReportsClass {

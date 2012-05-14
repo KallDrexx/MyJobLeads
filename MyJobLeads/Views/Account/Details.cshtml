@@ -1,0 +1,61 @@
+﻿@model MyJobLeads.ViewModels.Accounts.MyAccountDetailsViewModel
+
+@{
+    ViewBag.Title = "Account Details";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <h3>Your Account</h3>
+        }
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>
+                The following are your account details.  @Html.ActionLink("Edit Your Account", MVC.Account.Edit(), new { @class = "inlineBlue" })
+            </p>
+        }
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            using (Html.FieldValueDisplay("Name:")) { @Model.FullName }
+            using (Html.FieldValueDisplay("Email:")) { @Model.Email }
+            
+            if (!string.IsNullOrWhiteSpace(Model.OrganizationName))
+            {
+                using (Html.FieldValueDisplay("Associated Organization:")) { @Model.OrganizationName }
+            }
+
+            using (Html.FieldValueDisplay("FillPerfect Key:"))
+            {
+                @(Model.FillPerfectKey == null ? "None" : Model.FillPerfectKey.Value.ToString()) 
+    
+                if (Model.FillPerfectKey != null)
+                {
+                    using (Html.FieldValueDisplay("FillPerfect Activation Status:"))
+                    {
+                        if (Model.FillPerfectActivated)
+                        {
+                            @: Your key has been activated for one computer - 
+                            @Html.ActionLink("Deactivate", MVC.Account.DeactivateFpActivation(), new { @class = "inlineBlue", title = "Untie license from the current computer" })
+                        }
+                        else
+                        {
+                            @: Your key has not been tied to a specific computer
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

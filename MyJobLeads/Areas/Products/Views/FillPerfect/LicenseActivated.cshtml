@@ -1,0 +1,47 @@
+﻿@model MyJobLeads.Areas.Products.Models.ActivatedFillPerfectLicenseViewModel
+
+@{
+    ViewBag.Title = "LicenseActivated";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <h3>Your FillPerfect License Has Been Activated</h3>
+        }
+    }
+
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <p>
+                You have successfully activated your FillPerfect license.  
+                The FillPerfect client can be downloaded from XXXXX.
+            </p>
+        }
+    }
+
+    using (Html.OuterRow())
+    {
+        Html.FormField(new HtmlString("FillPerfect Key:"), new HtmlString(Model.UserFpKey.ToString()));
+    }
+
+    using (Html.OuterRow())
+    {
+        Html.FormField(new HtmlString("Effective Date:"), new HtmlString(Model.LicenseEffectiveDate.ToLongDateString()));
+    }
+
+    using (Html.OuterRow())
+    {
+        Html.FormField(new HtmlString("Expiration Date:"), new HtmlString(Model.LicenseExpirationDate.ToLongDateString()));
+    }
+
+    using (Html.OuterRow())
+    {
+        Html.FormField(new HtmlString("License Type:"), new HtmlString(Model.LicenseType));
+    }
+}

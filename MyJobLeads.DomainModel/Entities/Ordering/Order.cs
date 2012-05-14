@@ -17,8 +17,8 @@ namespace MyJobLeads.DomainModel.Entities.Ordering
 
         public int Id { get; set; }
         public DateTime OrderDate { get; set; }
-        public OrderStatus OrderStatus { get; set; }
         public decimal TotalPrice { get; set; }
+        public int OrderStatusValue { get; set; }
 
         public virtual ICollection<OrderedProduct> OrderedProducts { get; set; }
         public virtual ICollection<FpUserLicense> FillPerfectLicenses { get; set; }
@@ -28,5 +28,11 @@ namespace MyJobLeads.DomainModel.Entities.Ordering
 
         public virtual User OrderedFor { get; set; }
         public int OrderedForId { get; set; }
+
+        public OrderStatus OrderStatus
+        {
+            get { return (OrderStatus)OrderStatusValue; }
+            set { OrderStatusValue = (int)value; }
+        }
     }
 }

@@ -540,6 +540,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_SearchForm.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Products\Controllers\FillPerfectController.cs" />
+    <Compile Include="Areas\Products\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Products\Models\ActivatedFillPerfectLicenseViewModel.cs" />
+    <Compile Include="Areas\Products\ProductsAreaRegistration.cs" />
     <Compile Include="Areas\Reports\Controllers\SiteActivityController.cs" />
     <Compile Include="Areas\Reports\Models\SiteActivityViewModels\ExportSiteActivityViewModel.cs" />
     <Compile Include="Areas\Reports\Models\SiteActivityViewModels\KnownSiteUsersViewModel.cs" />
@@ -634,6 +638,12 @@
     <Compile Include="JobSearchController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Licensing.FillPerfectController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Licensing.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Organization.DashboardController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -659,6 +669,15 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="PositionSearch.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Products.FillPerfectController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Products.OrderController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Products.SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Reports.SharedController.generated.cs">
@@ -690,6 +709,7 @@
     <Compile Include="ViewModels\Accounts\AccountModels.cs" />
     <Compile Include="ViewModels\Accounts\AccountMembershipService.cs" />
     <Compile Include="ViewModels\Accounts\IMembershipService.cs" />
+    <Compile Include="ViewModels\Accounts\MyAccountDetailsViewModel.cs" />
     <Compile Include="ViewModels\Accounts\OrganizationRegistrationViewModel.cs" />
     <Compile Include="ViewModels\Admin\CreateDemoAccountViewModel.cs" />
     <Compile Include="ViewModels\Companies\CompanyDisplayViewModel.cs" />
@@ -700,6 +720,8 @@
     <Compile Include="ViewModels\Contacts\EditContactViewModel.cs" />
     <Compile Include="ViewModels\JobSearches\JobSearchDetailsViewModel.cs" />
     <Compile Include="ViewModels\Milestones\EditMilestoneViewModel.cs" />
+    <Compile Include="ViewModels\Ordering\FillPerfectOrgLicenseConfirmViewModel.cs" />
+    <Compile Include="ViewModels\Ordering\OrderConfirmViewModel.cs" />
     <Compile Include="ViewModels\Organizations\EditOrganizationViewModel.cs" />
     <Compile Include="ViewModels\PerformedSearchViewModel.cs" />
     <Compile Include="ViewModels\Tasks\EditTaskViewModel.cs" />
@@ -1319,6 +1341,7 @@
     <Folder Include="Areas\Organization\Models\" />
     <Folder Include="Areas\Organization\Views\Shared\" />
     <Folder Include="Areas\PositionSearch\Views\Shared\" />
+    <Folder Include="Areas\Products\Views\Shared\" />
     <Folder Include="Areas\Reports\Views\Shared\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="ViewModels\Search\" />
@@ -1606,6 +1629,12 @@
     <Content Include="Areas\Reports\Views\SiteActivity\ReferallActivity.cshtml" />
     <Content Include="Areas\Licensing\Views\Web.config" />
     <Content Include="Areas\Licensing\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Products\Views\Web.config" />
+    <Content Include="Areas\Products\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Products\Views\FillPerfect\Index.cshtml" />
+    <Content Include="Areas\Products\Views\Order\Confirm.cshtml" />
+    <Content Include="Areas\Products\Views\FillPerfect\LicenseActivated.cshtml" />
+    <Content Include="Areas\Products\Views\Order\ConfirmFillPerfectOrgOrder.cshtml" />
     <None Include="Scripts\plugins\DataTables\images\Sorting icons.psd" />
     <None Include="Scripts\plugins\DataTables\js\jquery.dataTables.min.js.gz" />
     <None Include="T4MVC.tt.settings.t4" />
@@ -1680,6 +1709,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>JigsawError.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Account\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.ru-RU.resx">

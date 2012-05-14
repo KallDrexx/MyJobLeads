@@ -13,11 +13,15 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
 using System.Xml;
 using MyJobLeads.DomainModel.Enums.FillPerfect;
+using MyJobLeads.DomainModel.Exceptions;
+using MyJobLeads.DomainModel.Entities;
+using MyJobLeads.DomainModel.QueryExtensions;
 
 namespace MyJobLeads.DomainModel.Processes.FillPerfect
 {
     public class FillPerfectLicenseProcesses : IProcess<GetFillPerfectLicenseByKeyParams, FillPerfectLicenseViewModel>,
-                                               IProcess<ActivateFillPerfectKeyParams, FillPerfectKeyActivationViewModel>
+                                               IProcess<ActivateFillPerfectKeyParams, FillPerfectKeyActivationViewModel>,
+                                               IProcess<GetOrderableFillPerfectLicensesParams, FpLicensesAvailableForOrderingViewModel>
     {
         public MyJobLeadsDbContext _context;
 
@@ -42,10 +46,7 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
                 return new FillPerfectLicenseViewModel { Error = FillPerfectLicenseError.InvalidKey };
 
             // Get the latest FillPerfect license for the user
-            var license = user.OwnedOrders
-                              .SelectMany(x => x.FillPerfectLicenses)
-                              .OrderByDescending(x => x.EffectiveDate)
-                              .FirstOrDefault();
+            var license = _context.Orders.UserActiveLicense(user.Id).FirstOrDefault();
             if (license == null)
                 return new FillPerfectLicenseViewModel { Error = FillPerfectLicenseError.NoLicense };
 
@@ -123,6 +124,62 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
             _context.SaveChanges();
 
             return new FillPerfectKeyActivationViewModel { Result = FillPerfectActivationResult.ActivationSuccessful };
+        }
+
+        /// <summary>
+        /// Retrieves FillPerfect licenses available for purchase by the user
+        /// </summary>
+        /// <param name="procParams"></param>
+        /// <returns></returns>
+        public FpLicensesAvailableForOrderingViewModel Execute(GetOrderableFillPerfectLicensesParams procParams)
+        {
+            bool orgLicenseAvailable = false;
+
+            var user = _context.Users.Find(procParams.RequestingUserID);
+            if (user == null)
+                throw new MJLEntityNotFoundException(typeof(User), procParams.RequestingUserID);
+
+            // Retrieve all public products
+            var publicProducts = _context.Products
+                                         .Where(x => x.IsPublic)
+                                         .ToList()
+                                         .Select(x => new FpLicensesAvailableForOrderingViewModel.AvailableFpLicense
+                                         {
+                                                 ProductId = x.Id,
+                                                 Price = x.Price,
+                                                 DurationInWeeks = x.TimeRestricted ? x.DurationInWeeks : 0,
+                                                 ProductType = x.Type == ProductType.FillPerfectTrialLicense
+                                                                ? "trial"
+                                                                : x.Type == ProductType.FillPerfectIndividualLicense
+                                                                    ? "personal"
+                                                                    : "",
+                                                 PurchasedTooManyTimes = x.MaxPurchaseTimes == 0 
+                                                                         ? false
+                                                                         :   _context.Orders
+                                                                                     .AsQueryable()
+                                                                                     .UserCompletedOrders(procParams.RequestingUserID)
+                                                                                     .Where(y => y.OrderedProducts.Any(z => z.ProductId == x.Id))
+                                                                                     .Count() >= x.MaxPurchaseTimes
+                                         })
+                                         .OrderBy(x => x.Price)
+                                         .ToList();
+
+            // Determine if the user's organization has an active blanket license
+            if (user.OrganizationId != null &&
+                _context.FpOrgLicenses
+                        .Where(x => x.OrganizationId == user.OrganizationId)
+                        .Where(x => x.EffectiveDate <= DateTime.Now && x.ExpirationDate >= DateTime.Now)
+                        .Count() > 0)
+            {
+                orgLicenseAvailable = true;
+            }
+
+            return new FpLicensesAvailableForOrderingViewModel
+            {
+                Licenses = publicProducts.OrderBy(x => x.ProductType).ToList(),
+                OrganizationLicenseAvailable = orgLicenseAvailable,
+                OrgName = user.OrganizationId != null ? user.Organization.Name : string.Empty
+            };
         }
     }
 }
