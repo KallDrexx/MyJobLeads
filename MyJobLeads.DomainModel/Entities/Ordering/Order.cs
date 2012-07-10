@@ -19,6 +19,7 @@ namespace MyJobLeads.DomainModel.Entities.Ordering
         public DateTime OrderDate { get; set; }
         public decimal TotalPrice { get; set; }
         public int OrderStatusValue { get; set; }
+        public Guid? PayPalToken { get; set; }
 
         public virtual ICollection<OrderedProduct> OrderedProducts { get; set; }
         public virtual ICollection<FpUserLicense> FillPerfectLicenses { get; set; }

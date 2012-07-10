@@ -113,6 +113,7 @@ namespace T4MVC {
         public readonly string Name = "Products";
         public MyJobLeads.Areas.Products.Controllers.FillPerfectController FillPerfect = new MyJobLeads.Areas.Products.Controllers.T4MVC_FillPerfectController();
         public MyJobLeads.Areas.Products.Controllers.OrderController Order = new MyJobLeads.Areas.Products.Controllers.T4MVC_OrderController();
+        public MyJobLeads.Areas.Products.Controllers.PayController Pay = new MyJobLeads.Areas.Products.Controllers.T4MVC_PayController();
         public T4MVC.Products.SharedController Shared = new T4MVC.Products.SharedController();
     }
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

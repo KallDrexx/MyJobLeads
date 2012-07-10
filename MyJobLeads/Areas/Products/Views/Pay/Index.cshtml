@@ -1,0 +1,44 @@
+﻿@model MyJobLeads.ViewModels.Ordering.OrderConfirmViewModel
+
+@{
+    ViewBag.Title = "Pay For License";
+}
+
+@using (Html.PageInfoBox(false))
+{
+    using (Html.OuterRow())
+    {
+        using (Html.ContentArea())
+        {
+            <h3>License Payment</h3>
+        }
+    }
+
+    using (Html.BeginForm())
+    {
+        @Html.HiddenFor(x => x.OrderId);
+                                       
+        using (Html.OuterRow())
+        {
+            <p>
+                Here are the details for the license you are about to purchase
+            </p>
+    
+            <ul class="decoratedList">
+                <li><span class="bold">License Type: </span> @Model.LicenseType</li>
+                <li>
+                    <span class="bold">Effective From: </span> @(Model.LicenseEffectiveDate.Date < DateTime.Today ? "Today" : Model.LicenseEffectiveDate.ToShortDateString())
+                </li>
+                <li><span class="bold">License Duration: </span> @(Model.LicenseDurationInWeeks > 0 ? Model.LicenseDurationInWeeks + " weeks" : "Lifetime!") </li>
+                <li>
+                    <span class="bold">Price: </span> @(Model.Price == 0 ? "FREE!" : Model.Price.ToString("C"))
+                </li>
+            </ul>    
+        }
+
+        using (Html.FormButtonArea())
+        {
+            <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" alt="Access PayPal" />
+        }
+    }
+}

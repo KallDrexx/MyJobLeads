@@ -91,6 +91,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FluentValidation.3.0.0.1\lib\Net40\FluentValidation.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="MerchantTribe.Web">
       <HintPath>..\packages\MerchantTribe.Web.1.4.1.0\lib\net4\MerchantTribe.Web.dll</HintPath>
     </Reference>
@@ -98,12 +101,22 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="PayPal">
+      <HintPath>..\packages\PayPal.Helper.1.0.1\lib\PayPal.dll</HintPath>
+    </Reference>
+    <Reference Include="paypal_base">
+      <HintPath>..\packages\PayPal.Helper.1.0.1\lib\paypal_base.dll</HintPath>
+    </Reference>
     <Reference Include="PrecompiledMvcViewEngine, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PrecompiledMvcViewEngine.1.1\lib\net40\PrecompiledMvcViewEngine.dll</HintPath>
     </Reference>
     <Reference Include="RazorEngine, Version=3.0.8.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <HintPath>..\packages\RazorEngine.3.0.8\lib\net40\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=103.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RestSharp.103.2\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="Simple.Data, Version=0.7.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -542,7 +555,9 @@
     </Compile>
     <Compile Include="Areas\Products\Controllers\FillPerfectController.cs" />
     <Compile Include="Areas\Products\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Products\Controllers\PayController.cs" />
     <Compile Include="Areas\Products\Models\ActivatedFillPerfectLicenseViewModel.cs" />
+    <Compile Include="Areas\Products\Models\OrderUtils.cs" />
     <Compile Include="Areas\Products\ProductsAreaRegistration.cs" />
     <Compile Include="Areas\Reports\Controllers\SiteActivityController.cs" />
     <Compile Include="Areas\Reports\Models\SiteActivityViewModels\ExportSiteActivityViewModel.cs" />
@@ -675,6 +690,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Products.OrderController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Products.PayController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Products.SharedController.generated.cs">
@@ -1151,6 +1169,29 @@
     <Content Include="crossdomain.xml" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="PayPalHelper\Docs\startHere.htm" />
+    <Content Include="PayPalHelper\Docs\startHere.html\html\DocSet_default.html" />
+    <Content Include="PayPalHelper\Docs\startHere.html\html\images\19fb5f20-19a2-4d76-a2b0-fd753895da1e.png" />
+    <Content Include="PayPalHelper\Docs\startHere.html\html\images\45d9257f-f452-491c-a16e-20d3cd1370db.png" />
+    <Content Include="PayPalHelper\Docs\startHere.html\html\images\8b52f348-d854-4a8f-9132-863e0fce5da9.png" />
+    <Content Include="PayPalHelper\Docs\startHere.html\html\images\c3431829-bc93-4403-921f-b35745aedb75.png" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\Classic.css" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\collall.gif" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\collapse_all.gif" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\copycode.gif" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\copycodeHighlight.gif" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\Dropdown.js" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\drpdown.gif" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\drpdown_orange.gif" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\EventUtilities.js" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\exp.gif" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\expall.gif" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\expand_all.gif" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\note.gif" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\samples.js" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\script.js" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\script_chm.js" />
+    <Content Include="PayPalHelper\Docs\startHere.html\local\SplitScreen.js" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\2011.1.315\jquery-1.5.1.min.js" />
     <Content Include="Scripts\2011.1.315\jquery.validate.min.js" />
@@ -1635,6 +1676,9 @@
     <Content Include="Areas\Products\Views\Order\Confirm.cshtml" />
     <Content Include="Areas\Products\Views\FillPerfect\LicenseActivated.cshtml" />
     <Content Include="Areas\Products\Views\Order\ConfirmFillPerfectOrgOrder.cshtml" />
+    <Content Include="Areas\Products\Views\Pay\Index.cshtml" />
+    <None Include="PayPalHelper\Docs\startHere.docx" />
+    <None Include="PayPalHelper\Docs\startHere.pdf" />
     <None Include="Scripts\plugins\DataTables\images\Sorting icons.psd" />
     <None Include="Scripts\plugins\DataTables\js\jquery.dataTables.min.js.gz" />
     <None Include="T4MVC.tt.settings.t4" />

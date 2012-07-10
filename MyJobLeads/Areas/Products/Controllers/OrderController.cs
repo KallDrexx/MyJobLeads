@@ -11,10 +11,12 @@ using MyJobLeads.DomainModel.QueryExtensions;
 using MyJobLeads.DomainModel.Exceptions;
 using MyJobLeads.DomainModel.Exceptions.Ordering;
 using MyJobLeads.DomainModel.Entities.FillPerfect;
+using MyJobLeads.Infrastructure.Attributes;
+using MyJobLeads.Areas.Products.Models;
 
 namespace MyJobLeads.Areas.Products.Controllers
 {
-    [Authorize]
+    [MJLAuthorize]
     public partial class OrderController : MyJobLeadsBaseController
     {
         public OrderController(MyJobLeadsDbContext context)
@@ -24,7 +26,8 @@ namespace MyJobLeads.Areas.Products.Controllers
 
         public virtual ActionResult Confirm(int productId)
         {
-            var model = GetConfirmModel(productId);
+            var orderUtils = new OrderUtils(_context, CurrentUserId);
+            var model = orderUtils.GetConfirmModel(productId);
             if (model == null)
                 throw new InvalidOperationException(
                     string.Format("Product id {0} was not found", productId));
@@ -39,24 +42,26 @@ namespace MyJobLeads.Areas.Products.Controllers
         [HttpPost]
         public virtual ActionResult Confirm(OrderConfirmViewModel model)
         {
+            var orderUtils = new OrderUtils(_context, CurrentUserId);
+
             if (!model.OrderConfirmed)
             {
                 // Regenerate the model
-                model = GetConfirmModel(model.ProductId);
+                model = orderUtils.GetConfirmModel(model.ProductId);
                 ModelState.AddModelError("OrderConfirmed", "You must check the confirmation box to activate this license");
                 return View(model);
             }
 
-            var createdOrder = CreateOrder(model.ProductId);
-
+            var createdOrder = orderUtils.CreateOrder(model.ProductId);
             if (createdOrder.OrderStatus == OrderStatus.AwaitingPayment)
-                throw new NotImplementedException("Pay orders not implemented yet");
+                return RedirectToAction(MVC.Products.Pay.Index(createdOrder.Id));
+
             else if (createdOrder.OrderStatus != OrderStatus.Completed)
                 throw new InvalidOperationException(
                     string.Format("Order status of {0} is not supported", createdOrder.OrderStatus.ToString()));
 
             // Order was completed as it was free
-            ActivateOrderedLicenses(createdOrder);
+            orderUtils.ActivateOrderedLicenses(createdOrder);
             string LicenseType;
             switch (createdOrder.FillPerfectLicenses.First().LicenseType)
             {
@@ -91,7 +96,8 @@ namespace MyJobLeads.Areas.Products.Controllers
 
         public virtual ActionResult ConfirmFillPerfectOrgOrder()
         {
-            var model = GetFpOrgConfirmModel();
+            var orderUtils = new OrderUtils(_context, CurrentUserId);
+            var model = orderUtils.GetFpOrgConfirmModel();
             if (model == null)
                 throw new InvalidOperationException("Organization does not have a FP license");
 
@@ -101,19 +107,21 @@ namespace MyJobLeads.Areas.Products.Controllers
         [HttpPost]
         public virtual ActionResult ConfirmFillPerfectOrgOrder(FillPerfectOrgLicenseConfirmViewModel model)
         {
+            var orderUtils = new OrderUtils(_context, CurrentUserId);
+
             if (!model.OrderConfirmed)
             {
                 // Regenerate the model
-                model = GetFpOrgConfirmModel();
+                model = orderUtils.GetFpOrgConfirmModel();
                 ModelState.AddModelError("OrderConfirmed", "You must check the confirmation box to activate this license");
                 return View(model);
             }
 
             // Regenerate the model for license details
-            model = GetFpOrgConfirmModel();
+            model = orderUtils.GetFpOrgConfirmModel();
 
             // Create the order and automatically activate the license
-            var order = CreateOrder();
+            var order = orderUtils.CreateOrder();
             order.FillPerfectLicenses.Add(new FpUserLicense
             {
                 LicenseType = FillPerfectLicenseType.OrganizationGranted,
@@ -131,148 +139,6 @@ namespace MyJobLeads.Areas.Products.Controllers
                     order.FillPerfectLicenses.First().EffectiveDate,
                     order.FillPerfectLicenses.First().ExpirationDate,
                     "License granted by " + orgName));
-        }
-
-        protected OrderConfirmViewModel GetConfirmModel(int productId)
-        {
-            var model = _context.Products
-                                .Where(x => x.Id == productId)
-                                .ToList()
-                                .Select(x => new OrderConfirmViewModel
-                                {
-                                    ProductId = x.Id,
-                                    Price = x.Price,
-                                    LicenseType = x.Type == DomainModel.Enums.ProductType.FillPerfectTrialLicense
-                                        ? "FillPerfect trial" : x.Type == ProductType.FillPerfectIndividualLicense
-                                            ? "FillPerfect personal" : "",
-                                    LicenseDurationInWeeks = x.TimeRestricted ? x.DurationInWeeks : 0,
-                                    AnotherLicenseAlreadyActive = _context.FpUserLicenses
-                                                                          .AsQueryable()
-                                                                          .UserActivatedLicenses(CurrentUserId)
-                                                                          .Any(y => y.EffectiveDate <= DateTime.Now && y.ExpirationDate >= DateTime.Now),
-                                    LicenseEffectiveDate = _context.FpUserLicenses
-                                                                   .AsQueryable()
-                                                                   .UserLatestFillPerfectActivatedLicenseExpirationDate(CurrentUserId),
-                                    MaxPurchaseExceeded = x.MaxPurchaseTimes == 0
-                                        ? false
-                                        : _context.Orders
-                                                  .AsQueryable()
-                                                  .UserCompletedOrders(CurrentUserId)
-                                                  .Where(y => y.OrderedProducts.Any(z => z.ProductId == x.Id)).Count() >= x.MaxPurchaseTimes
-                                })
-                                .FirstOrDefault();
-            return model;
-        }
-
-        protected FillPerfectOrgLicenseConfirmViewModel GetFpOrgConfirmModel()
-        {
-            return _context.Users
-                           .Where(x => x.Id == CurrentUserId)
-                           .SelectMany(x => x.Organization.FillPerfectLicenses)
-                           .Where(x => x.EffectiveDate <= DateTime.Today && x.ExpirationDate >= DateTime.Now)
-                           .ToList()
-                           .Select(x => new FillPerfectOrgLicenseConfirmViewModel
-                           {
-                               EffectiveLicenseDate = x.EffectiveDate,
-                               ExpirationDate = x.ExpirationDate,
-                               ActivatedLicenseExpiratioDate = _context.FpUserLicenses
-                                                                       .AsQueryable()
-                                                                       .UserLatestFillPerfectActivatedLicenseExpirationDate(CurrentUserId),
-                               OrganizationName = x.Organization.Name
-                           })
-                           .FirstOrDefault();
-        }
-
-        protected Order CreateOrder(int productId = 0)
-        {
-            var order = new Order
-            {
-                OrderDate = DateTime.Now,
-                OrderedById = CurrentUserId,
-                OrderedForId = CurrentUserId,
-                OrderStatus = OrderStatus.AwaitingPayment
-            };
-
-            if (productId > 0)
-            {
-                var product = _context.Products.Where(x => x.Id == productId).FirstOrDefault();
-                if (product == null)
-                    throw new MJLEntityNotFoundException(typeof(Product), productId);
-
-                // Make sure the user hasn't exceeded activation count for this product
-                if (_context.Orders
-                            .AsQueryable()
-                            .UserCompletedOrders(CurrentUserId)
-                            .Where(x => x.OrderedProducts.Any(y => y.ProductId == productId))
-                            .Count() >= product.MaxPurchaseTimes)
-                {
-                    throw new ProductOrderCountExceededException(CurrentUserId, productId);
-                }
-
-                order.TotalPrice = product.Price;
-                order.OrderedProducts.Add(new OrderedProduct { Product = product, Price = product.Price });
-            }
-
-            if (order.TotalPrice == 0)
-                order.OrderStatus = OrderStatus.Completed;
-
-            _context.Orders.Add(order);
-            _context.SaveChanges();
-
-            return order;
-        }
-
-        protected void ActivateOrderedLicenses(Order order)
-        {
-            if (order == null)
-                throw new ArgumentNullException("order");
-
-            if (order.OrderStatus != OrderStatus.Completed)
-                throw new InvalidOperationException("Cannot activate licenses for an incomplete order");
-
-            // Make sure a license hasn't been activated for this order 
-            if (order.FillPerfectLicenses.Count > 0)
-                throw new OrderLicensesAlreadyActivatedException(order.Id);
-
-            // Get the next available license activation date
-            var startDate = _context.FpUserLicenses.AsQueryable().UserLatestFillPerfectActivatedLicenseExpirationDate(CurrentUserId);
-            if (startDate < DateTime.Today)
-                startDate = DateTime.Today;
-
-            // Assume only one product per order
-            FillPerfectLicenseType licenseType;
-            switch (order.OrderedProducts.First().Product.Type)
-            {
-                case ProductType.FillPerfectTrialLicense:
-                    licenseType = FillPerfectLicenseType.Trial;
-                    break;
-
-                case ProductType.FillPerfectIndividualLicense:
-                    licenseType = FillPerfectLicenseType.IndividualPaid;
-                    break;
-
-                case ProductType.FillPerfectOrgLicense:
-                    licenseType = FillPerfectLicenseType.OrganizationGranted;
-                    break;
-
-                default:
-                    licenseType = FillPerfectLicenseType.None;
-                    break;
-            }
-
-            order.FillPerfectLicenses.Add(new FpUserLicense
-            {
-                EffectiveDate = startDate,
-                ExpirationDate = startDate.AddDays((order.OrderedProducts.First().Product.DurationInWeeks * 7) + 1),
-                LicenseType = licenseType
-            });
-
-            // If the user doesn't have a FP key, assign them one
-            var user = _context.Users.Where(x => x.Id == order.OrderedForId).FirstOrDefault();
-            if (user.FillPerfectKey == null)
-                user.FillPerfectKey = Guid.NewGuid();
-
-            _context.SaveChanges();
         }
     }
 }
