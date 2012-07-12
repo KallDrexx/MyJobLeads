@@ -18,10 +18,10 @@ namespace MyJobLeads.Areas.Products.Models
         protected MyJobLeadsDbContext _context;
         protected int _currentUserId;
 
-        public OrderUtils(MyJobLeadsDbContext context, int _currentUserId)
+        public OrderUtils(MyJobLeadsDbContext context, int currentUserId)
         {
             _context = context;
-            _currentUserId = _currentUserId;
+            _currentUserId = currentUserId;
         }
 
         public OrderConfirmViewModel GetConfirmModel(int productId)
