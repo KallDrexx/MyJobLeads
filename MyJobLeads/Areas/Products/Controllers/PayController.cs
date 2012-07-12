@@ -8,6 +8,8 @@ using MyJobLeads.DomainModel.Entities.EF;
 using MyJobLeads.ViewModels.Ordering;
 using MyJobLeads.Areas.Products.Models;
 using RestSharp;
+using MyJobLeads.Paypal;
+using MyJobLeads.DomainModel.Enums;
 
 namespace MyJobLeads.Areas.Products.Controllers
 {
@@ -43,28 +45,130 @@ namespace MyJobLeads.Areas.Products.Controllers
             if (order == null || order.OrderStatus != DomainModel.Enums.OrderStatus.AwaitingPayment)
                 return RedirectToAction(MVC.Home.Index());
 
-            // Generate a paypal token
-            order.PayPalToken = Guid.NewGuid();
+            // Form long parameters
+            string returnUrl = string.Concat(Request.Url.Scheme, "://", Request.Url.DnsSafeHost, ":", Request.Url.Port, Url.Action(MVC.Products.Pay.ProcessPayPal()));
+            returnUrl = returnUrl.Replace(":80/", "/");
+
+            string cancelUrl = string.Concat(Request.Url.Scheme, "://", Request.Url.DnsSafeHost, ":", Request.Url.Port, Url.Action(MVC.Products.Pay.Index(model.OrderId)));
+            cancelUrl = cancelUrl.Replace(":80/", "/");
+
+            // Start the workflow for paypal
+            string tokenResponse = GetPaypalTransactionToken(order.TotalPrice, returnUrl, cancelUrl);
+
+            if (string.IsNullOrWhiteSpace(tokenResponse))
+                throw new InvalidOperationException("No paypal token was received");
+
+            tokenResponse = HttpUtility.UrlDecode(tokenResponse).Replace("TOKEN=", "");
+            order.PayPalToken = tokenResponse;
             _context.SaveChanges();
 
-            
+            // Redirect to paypal with the token
+            string paypalUrl = "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&useraction=commit&token=" + HttpUtility.UrlEncode(tokenResponse);
+            return Redirect(paypalUrl);
+        }
 
-            //var client = new RestClient("https://api-3t.sandbox.paypal.com/nvp");
-            //var request = new RestRequest();
-            //request.Parameters.Add(new Parameter { Name = "METHOD", Value = "DoExpressCheckoutPayment", Type = ParameterType.GetOrPost });
-            //request.Parameters.Add(new Parameter { Name = "VERSION", Value = "92.0", Type = ParameterType.GetOrPost });
-            //request.Parameters.Add(new Parameter { Name = "USER", Value = "seller_1341169691_biz_api1.interviewtools.net", Type = ParameterType.GetOrPost });
-            //request.Parameters.Add(new Parameter { Name = "PWD", Value = "1341169715", Type = ParameterType.GetOrPost });
-            //request.Parameters.Add(new Parameter { Name = "SIGNATURE", Value = "An5ns1Kso7MWUdW4ErQKJJJ4qi4-AMtzjW-w.HYrGhqS0OHTpv3HH3L2", Type = ParameterType.GetOrPost });
-            //request.Parameters.Add(new Parameter { Name = "TOKEN", Value = order.PayPalToken.ToString(), Type = ParameterType.GetOrPost });
-            //request.Parameters.Add(new Parameter { Name = "PAYMENTREQUEST_0_AMT", Value = order.TotalPrice.ToString(), Type = ParameterType.GetOrPost });
-            //request.Parameters.Add(new Parameter { Name = "PAYMENTREQUEST_0_PAYMENTACTION", Value = "Sale", Type = ParameterType.GetOrPost });
-            //request.Parameters.Add(new Parameter { Name = "RETURNURL", Value = Url.Action(MVC.Products.Pay.Index()), Type = ParameterType.GetOrPost });
-            //request.Parameters.Add(new Parameter { Name = "CANCELURL", Value = "http://localhost:53744/cancel", Type = ParameterType.GetOrPost });
+        public virtual ActionResult ProcessPayPal(string token, string payerId)
+        {
+            var order = _context.Orders
+                                .Where(x => x.PayPalToken == token && x.OrderedForId == CurrentUserId)
+                                .FirstOrDefault();
 
-            //var result = client.Execute(request);
+            if (order == null || order.OrderStatus != DomainModel.Enums.OrderStatus.AwaitingPayment)
+                return RedirectToAction(MVC.Home.Index());
 
-            return Redirect("www.google.com");
+            // Perform the payment
+            string transactionId = ProcessPaypalTransaction(token, payerId, order.TotalPrice);
+            order.PayPalTransactionId = transactionId;
+            order.OrderStatus = OrderStatus.Completed;
+            _context.SaveChanges();
+
+            var utils = new OrderUtils(_context, CurrentUserId);
+            utils.ActivateOrderedLicenses(order);
+            string license = utils.GetLicenseDescription(order.FillPerfectLicenses.First().LicenseType);
+
+            return RedirectToAction(MVC.Products.FillPerfect.LicenseActivated(
+                (Guid)_context.Users.Find(order.OrderedForId).FillPerfectKey,
+                order.FillPerfectLicenses.First().EffectiveDate,
+                order.FillPerfectLicenses.First().ExpirationDate,
+                license));
+        }
+
+        protected string GetPaypalTransactionToken(decimal price, string returnUrl, string cancelUrl)
+        {
+            var client = new PayPalAPIAAInterfaceClient();
+            var credentials = GetPaypalCredentials();
+            var request = new SetExpressCheckoutReq
+            {
+                SetExpressCheckoutRequest = new SetExpressCheckoutRequestType
+                {
+                    Version = "89.0",
+                    SetExpressCheckoutRequestDetails = new SetExpressCheckoutRequestDetailsType
+                    {
+                        PaymentAction = PaymentActionCodeType.Sale,
+                        OrderTotal = new BasicAmountType { Value = price.ToString(), currencyID = CurrencyCodeType.USD },
+                        PaymentActionSpecified = true,
+                        ReturnURL = returnUrl,
+                        CancelURL = cancelUrl
+                    }
+                }
+            };
+
+            var response = client.SetExpressCheckout(ref credentials, request);
+            if (response.Ack == AckCodeType.Failure)
+                throw new InvalidOperationException("Paypal returned the following error: " + response.Errors.FirstOrDefault().LongMessage);
+
+            return response.Token;
+        }
+
+        protected string ProcessPaypalTransaction(string token, string payerId, decimal total)
+        {
+            var client = new PayPalAPIAAInterfaceClient();
+            var credentials = GetPaypalCredentials();
+            var request = new DoExpressCheckoutPaymentReq
+            {
+                DoExpressCheckoutPaymentRequest = new DoExpressCheckoutPaymentRequestType
+                {
+                    Version = "89.0",
+                    DoExpressCheckoutPaymentRequestDetails = new DoExpressCheckoutPaymentRequestDetailsType
+                    {
+                        Token = token,
+                        PayerID = payerId,
+                        PaymentAction = PaymentActionCodeType.Sale,
+                        PaymentDetails = new PaymentDetailsType[]
+                        {
+                            new PaymentDetailsType
+                            {
+                                OrderTotal = new BasicAmountType { Value = total.ToString(), currencyID = CurrencyCodeType.USD }
+                            }
+                        }
+                    }
+                }
+            };
+            var response = client.DoExpressCheckoutPayment(ref credentials, request);
+
+            if (response.Ack == AckCodeType.Failure)
+                throw new InvalidOperationException("Paypal returned the following error: " + response.Errors.FirstOrDefault().LongMessage);
+
+            if (response.DoExpressCheckoutPaymentResponseDetails.PaymentInfo.Count() == 0)
+                throw new InvalidOperationException("No payment transaction returned from paypal");
+
+            if (string.IsNullOrWhiteSpace(response.DoExpressCheckoutPaymentResponseDetails.PaymentInfo.First().TransactionID))
+                throw new InvalidOperationException("No payment transaction ID returned");
+
+            return response.DoExpressCheckoutPaymentResponseDetails.PaymentInfo.First().TransactionID;
+        }
+
+        protected CustomSecurityHeaderType GetPaypalCredentials()
+        {
+            return new CustomSecurityHeaderType
+            {
+                Credentials = new UserIdPasswordType
+                {
+                    Username = "seller_1341169691_biz_api1.interviewtools.net",
+                    Password = "1341169715",
+                    Signature = "An5ns1Kso7MWUdW4ErQKJJJ4qi4-AMtzjW-w.HYrGhqS0OHTpv3HH3L2"
+                }
+            };
         }
     }
 }

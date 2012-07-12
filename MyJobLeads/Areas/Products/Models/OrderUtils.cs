@@ -167,5 +167,26 @@ namespace MyJobLeads.Areas.Products.Models
 
             _context.SaveChanges();
         }
+
+        public string GetLicenseDescription(FillPerfectLicenseType licenseType)
+        {
+            switch (licenseType)
+            {
+                case FillPerfectLicenseType.Trial:
+                    return "Trial";
+
+                case FillPerfectLicenseType.IndividualPaid:
+                    return "Individual";
+
+                case FillPerfectLicenseType.OrganizationGranted:
+                    return "Organization";
+
+                case FillPerfectLicenseType.AdminGranted:
+                    return "Granted by Administration";
+
+                default:
+                    return "Other";
+            }
+        }
     }
 }

@@ -101,12 +101,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="PayPal">
-      <HintPath>..\packages\PayPal.Helper.1.0.1\lib\PayPal.dll</HintPath>
-    </Reference>
-    <Reference Include="paypal_base">
-      <HintPath>..\packages\PayPal.Helper.1.0.1\lib\paypal_base.dll</HintPath>
-    </Reference>
     <Reference Include="PrecompiledMvcViewEngine, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PrecompiledMvcViewEngine.1.1\lib\net40\PrecompiledMvcViewEngine.dll</HintPath>
@@ -131,6 +125,8 @@
     </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -710,6 +706,11 @@
     <Compile Include="SearchController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Service References\Paypal\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -1169,29 +1170,6 @@
     <Content Include="crossdomain.xml" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="PayPalHelper\Docs\startHere.htm" />
-    <Content Include="PayPalHelper\Docs\startHere.html\html\DocSet_default.html" />
-    <Content Include="PayPalHelper\Docs\startHere.html\html\images\19fb5f20-19a2-4d76-a2b0-fd753895da1e.png" />
-    <Content Include="PayPalHelper\Docs\startHere.html\html\images\45d9257f-f452-491c-a16e-20d3cd1370db.png" />
-    <Content Include="PayPalHelper\Docs\startHere.html\html\images\8b52f348-d854-4a8f-9132-863e0fce5da9.png" />
-    <Content Include="PayPalHelper\Docs\startHere.html\html\images\c3431829-bc93-4403-921f-b35745aedb75.png" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\Classic.css" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\collall.gif" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\collapse_all.gif" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\copycode.gif" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\copycodeHighlight.gif" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\Dropdown.js" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\drpdown.gif" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\drpdown_orange.gif" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\EventUtilities.js" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\exp.gif" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\expall.gif" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\expand_all.gif" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\note.gif" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\samples.js" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\script.js" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\script_chm.js" />
-    <Content Include="PayPalHelper\Docs\startHere.html\local\SplitScreen.js" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\2011.1.315\jquery-1.5.1.min.js" />
     <Content Include="Scripts\2011.1.315\jquery.validate.min.js" />
@@ -1258,6 +1236,183 @@
     <Content Include="Scripts\plugins\DataTables\js\jquery.dataTables.js" />
     <Content Include="Scripts\plugins\DataTables\js\jquery.dataTables.min.js" />
     <Content Include="Scripts\plugins\DataTables\js\jquery.js" />
+    <None Include="Service References\Paypal\configuration91.svcinfo" />
+    <None Include="Service References\Paypal\configuration.svcinfo" />
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.AddressVerifyResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.BAUpdateResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.BillOutstandingAmountResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.BillUserResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.BMButtonSearchResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.BMCreateButtonResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.BMGetButtonDetailsResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.BMGetInventoryResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.BMManageButtonStatusResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.BMSetInventoryResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.BMUpdateButtonResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.CancelRecoupResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.CompleteRecoupResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.CreateBillingAgreementResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.CreateMobilePaymentResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.CreateRecurringPaymentsProfileResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.CustomSecurityHeaderType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.DoAuthorizationResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.DoCancelResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.DoCaptureResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.DoDirectPaymentResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.DoExpressCheckoutPaymentResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.DoMobileCheckoutPaymentResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.DoNonReferencedCreditResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.DoReauthorizationResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.DoReferenceTransactionResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.DoUATPAuthorizationResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.DoUATPExpressCheckoutPaymentResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.DoVoidResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.EnterBoardingResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.ExecuteCheckoutOperationsResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.ExternalRememberMeOptOutResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.GetAccessPermissionDetailsResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.GetAuthDetailsResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.GetBalanceResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.GetBillingAgreementCustomerDetailsResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.GetBoardingDetailsResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.GetExpressCheckoutDetailsResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.GetIncentiveEvaluationResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.GetMobileStatusResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.GetPalDetailsResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.GetRecurringPaymentsProfileDetailsResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.GetTransactionDetailsResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.InitiateRecoupResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.ManagePendingTransactionStatusResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.ManageRecurringPaymentsProfileStatusResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.MassPayResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.RefundTransactionResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.ReverseTransactionResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.SetAccessPermissionsResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.SetAuthFlowParamResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.SetCustomerBillingAgreementResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.SetExpressCheckoutResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.SetMobileCheckoutResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.TransactionSearchResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.UpdateAccessPermissionsResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\MyJobLeads.Paypal.UpdateRecurringPaymentsProfileResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Paypal\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="ViewModels\Companies\Scripts\2011.1.315\jquery-1.5.1.min.js" />
     <Content Include="ViewModels\Companies\Scripts\2011.1.315\jquery.validate.min.js" />
     <Content Include="ViewModels\Companies\Scripts\2011.2.712\jquery-1.5.1.min.js" />
@@ -1677,10 +1832,18 @@
     <Content Include="Areas\Products\Views\FillPerfect\LicenseActivated.cshtml" />
     <Content Include="Areas\Products\Views\Order\ConfirmFillPerfectOrgOrder.cshtml" />
     <Content Include="Areas\Products\Views\Pay\Index.cshtml" />
-    <None Include="PayPalHelper\Docs\startHere.docx" />
-    <None Include="PayPalHelper\Docs\startHere.pdf" />
     <None Include="Scripts\plugins\DataTables\images\Sorting icons.psd" />
     <None Include="Scripts\plugins\DataTables\js\jquery.dataTables.min.js.gz" />
+    <None Include="Service References\Paypal\CoreComponentTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Paypal\eBLBaseComponents.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Paypal\EnhancedDataTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Paypal\PayPalSvc.wsdl" />
     <None Include="T4MVC.tt.settings.t4" />
     <Content Include="Views\Home\Test.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -1904,6 +2067,12 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>EditorLocalization.bg-BG.designer.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Paypal\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

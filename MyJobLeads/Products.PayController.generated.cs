@@ -36,6 +36,11 @@ namespace MyJobLeads.Areas.Products.Controllers {
         public System.Web.Mvc.ActionResult Index() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Index);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ProcessPayPal() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ProcessPayPal);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public PayController Actions { get { return MVC.Products.Pay; } }
@@ -50,6 +55,7 @@ namespace MyJobLeads.Areas.Products.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string Index = "Index";
+            public readonly string ProcessPayPal = "ProcessPayPal";
         }
 
 
@@ -58,6 +64,7 @@ namespace MyJobLeads.Areas.Products.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string Index = "~/Areas/Products/Views/Pay/Index.cshtml";
         }
     }
 
@@ -68,6 +75,19 @@ namespace MyJobLeads.Areas.Products.Controllers {
         public override System.Web.Mvc.ActionResult Index(int orderId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
             callInfo.RouteValueDictionary.Add("orderId", orderId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Index(MyJobLeads.ViewModels.Ordering.OrderConfirmViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ProcessPayPal(string token, string payerId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ProcessPayPal);
+            callInfo.RouteValueDictionary.Add("token", token);
+            callInfo.RouteValueDictionary.Add("payerId", payerId);
             return callInfo;
         }
 

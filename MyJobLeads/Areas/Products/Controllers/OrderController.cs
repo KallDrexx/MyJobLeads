@@ -62,30 +62,8 @@ namespace MyJobLeads.Areas.Products.Controllers
 
             // Order was completed as it was free
             orderUtils.ActivateOrderedLicenses(createdOrder);
-            string LicenseType;
-            switch (createdOrder.FillPerfectLicenses.First().LicenseType)
-            {
-                case FillPerfectLicenseType.Trial:
-                    LicenseType = "Trial";
-                    break;
-
-                case FillPerfectLicenseType.IndividualPaid:
-                    LicenseType = "Individual";
-                    break;
-
-                case FillPerfectLicenseType.OrganizationGranted:
-                    LicenseType = "Organization";
-                    break;
-
-                case FillPerfectLicenseType.AdminGranted:
-                    LicenseType = "Granted by Administration";
-                    break;
-
-                default:
-                    LicenseType = "Other";
-                    break;
-            }
-
+            string LicenseType = orderUtils.GetLicenseDescription(createdOrder.FillPerfectLicenses.First().LicenseType);
+           
             return RedirectToAction(
                 MVC.Products.FillPerfect.LicenseActivated(
                     (Guid)_context.Users.Find(createdOrder.OrderedForId).FillPerfectKey,
