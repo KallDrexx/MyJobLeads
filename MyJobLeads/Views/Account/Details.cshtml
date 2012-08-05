@@ -56,6 +56,24 @@
                     }
                 }
             }
+
+            if (Model.FpExpirationDate != null)
+            {
+                if (Model.FpExpirationDate < DateTime.Now)
+                {
+                    using (Html.FieldValueDisplay("FillPerfect License Expired: "))
+                    {
+                        @Model.FpExpirationDate.Value.ToShortDateString();
+                    }
+                }
+                else
+                {
+                    using (Html.FieldValueDisplay("FillPerfect License Expires: "))
+                    {
+                        @Model.FpExpirationDate.Value.ToShortDateString();
+                    }
+                }
+            }
         }
     }
 }

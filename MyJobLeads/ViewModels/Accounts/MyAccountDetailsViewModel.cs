@@ -12,5 +12,6 @@ namespace MyJobLeads.ViewModels.Accounts
         public Guid? FillPerfectKey { get; set; }
         public bool FillPerfectActivated { get; set; }
         public string OrganizationName { get; set; }
+        public DateTime? FpExpirationDate { get; set; }
     }
 }

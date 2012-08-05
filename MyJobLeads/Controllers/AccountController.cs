@@ -300,7 +300,10 @@ namespace MyJobLeads.Controllers
                                     FullName = x.FullName,
                                     OrganizationName = x.Organization.Name,
                                     FillPerfectKey = x.FillPerfectKey,
-                                    FillPerfectActivated = x.OwnedOrders.Any(y => y.FillPerfectLicenses.Any(z => !string.IsNullOrEmpty(z.ActivatedComputerId)))
+                                    FillPerfectActivated = x.OwnedOrders.Any(y => y.FillPerfectLicenses.Any(z => !string.IsNullOrEmpty(z.ActivatedComputerId))),
+                                    FpExpirationDate = x.OwnedOrders
+                                                        .SelectMany(y => y.FillPerfectLicenses)
+                                                        .Max(y => y.ExpirationDate)
                                 })
                                 .Single();
             return View(model);
