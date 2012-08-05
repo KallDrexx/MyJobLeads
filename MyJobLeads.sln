@@ -7,10 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyJobLeads.Tests", "MyJobLe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyJobLeads.DomainModel", "MyJobLeads.DomainModel\MyJobLeads.DomainModel.csproj", "{B8CE5C58-BADC-4504-93FB-CFA05F8DAC6F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{67C96F0E-DE4F-46BE-A679-2866AE320F36}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7CC73BAB-07E8-4B98-B2F7-CBF93320111D}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\nuget.exe = .nuget\nuget.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject

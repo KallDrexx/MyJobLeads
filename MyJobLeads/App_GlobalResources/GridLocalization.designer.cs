@@ -19,7 +19,7 @@ namespace Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option or rebuild the Visual Studio project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Web.Application.StronglyTypedResourceProxyBuilder", "11.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Web.Application.StronglyTypedResourceProxyBuilder", "10.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class GridLocalization {
@@ -243,6 +243,24 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Is equal to.
         /// </summary>
+        internal static string FilterForeignKeyEq {
+            get {
+                return ResourceManager.GetString("FilterForeignKeyEq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is not equal to.
+        /// </summary>
+        internal static string FilterForeignKeyNe {
+            get {
+                return ResourceManager.GetString("FilterForeignKeyNe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is equal to.
+        /// </summary>
         internal static string FilterNumberEq {
             get {
                 return ResourceManager.GetString("FilterNumberEq", resourceCulture);
@@ -295,6 +313,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Or.
+        /// </summary>
+        internal static string FilterOr {
+            get {
+                return ResourceManager.GetString("FilterOr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -Select value-.
         /// </summary>
         internal static string FilterSelectValue {
@@ -336,6 +363,15 @@ namespace Resources {
         internal static string FilterStringNe {
             get {
                 return ResourceManager.GetString("FilterStringNe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Does not contain.
+        /// </summary>
+        internal static string FilterStringNotSubstringOf {
+            get {
+                return ResourceManager.GetString("FilterStringNotSubstringOf", resourceCulture);
             }
         }
         
