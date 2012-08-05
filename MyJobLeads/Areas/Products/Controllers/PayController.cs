@@ -10,6 +10,7 @@ using MyJobLeads.Areas.Products.Models;
 using RestSharp;
 using MyJobLeads.Paypal;
 using MyJobLeads.DomainModel.Enums;
+using System.Configuration;
 
 namespace MyJobLeads.Areas.Products.Controllers
 {
@@ -38,6 +39,10 @@ namespace MyJobLeads.Areas.Products.Controllers
         [HttpPost]
         public virtual ActionResult Index(OrderConfirmViewModel model)
         {
+            string paypalUrl = ConfigurationManager.AppSettings["PayPalRedirectUrl"];
+            if (string.IsNullOrWhiteSpace(paypalUrl))
+                throw new InvalidOperationException("No paypal redirect url specified");
+
             var order = _context.Orders
                                 .Where(x => x.Id == model.OrderId && x.OrderedForId == CurrentUserId)
                                 .FirstOrDefault();
@@ -63,7 +68,7 @@ namespace MyJobLeads.Areas.Products.Controllers
             _context.SaveChanges();
 
             // Redirect to paypal with the token
-            string paypalUrl = "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&useraction=commit&token=" + HttpUtility.UrlEncode(tokenResponse);
+            paypalUrl = string.Concat(paypalUrl, "?cmd=_express-checkout&useraction=commit&token=", HttpUtility.UrlEncode(tokenResponse));
             return Redirect(paypalUrl);
         }
 
@@ -160,13 +165,26 @@ namespace MyJobLeads.Areas.Products.Controllers
 
         protected CustomSecurityHeaderType GetPaypalCredentials()
         {
+            string username = ConfigurationManager.AppSettings["PayPalUsername"];
+            string password = ConfigurationManager.AppSettings["PayPalPassword"];
+            string signature = ConfigurationManager.AppSettings["PayPalApiSignature"];
+
+            if (username == null)
+                throw new InvalidOperationException("No paypal username specified");
+
+            if (password == null)
+                throw new InvalidOperationException("No paypal password specified");
+
+            if (signature == null)
+                throw new InvalidOperationException("No paypal api secret specified");
+
             return new CustomSecurityHeaderType
             {
                 Credentials = new UserIdPasswordType
                 {
-                    Username = "seller_1341169691_biz_api1.interviewtools.net",
-                    Password = "1341169715",
-                    Signature = "An5ns1Kso7MWUdW4ErQKJJJ4qi4-AMtzjW-w.HYrGhqS0OHTpv3HH3L2"
+                    Username = username,
+                    Password = password,
+                    Signature = signature
                 }
             };
         }
