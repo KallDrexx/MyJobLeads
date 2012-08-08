@@ -74,6 +74,11 @@
                     }
                 }
             }
+
+            using (Html.FieldValueDisplay(""))
+            {
+                @Html.ActionLink("Activate New FillPerfect License", MVC.Products.FillPerfect.Index(), new { @class = "inlineBlue" })
+            }
         }
     }
 }
