@@ -165,11 +165,7 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
                                          .ToList();
 
             // Determine if the user's organization has an active blanket license
-            if (user.OrganizationId != null &&
-                _context.FpOrgLicenses
-                        .Where(x => x.OrganizationId == user.OrganizationId)
-                        .Where(x => x.EffectiveDate <= DateTime.Now && x.ExpirationDate >= DateTime.Now)
-                        .Count() > 0)
+            if (UserEligibleForOrgLicense(user))
             {
                 orgLicenseAvailable = true;
             }
@@ -180,6 +176,29 @@ namespace MyJobLeads.DomainModel.Processes.FillPerfect
                 OrganizationLicenseAvailable = orgLicenseAvailable,
                 OrgName = user.OrganizationId != null ? user.Organization.Name : string.Empty
             };
+        }
+
+        protected bool UserEligibleForOrgLicense(User user)
+        {
+            if (user.OrganizationId == null)
+                return false;
+
+            // Make sure the organization has a license
+            var orgLicense = _context.FpOrgLicenses
+                                     .Where(x => x.OrganizationId == user.OrganizationId)
+                                     .Where(x => x.EffectiveDate <= DateTime.Now && x.ExpirationDate >= DateTime.Now)
+                                     .FirstOrDefault();
+            if (orgLicense == null)
+                return false;
+        
+
+            // Make sure the user does not have a license that ends after the organization license
+            var activeLicenses = _context.Orders.Where(x => x.OrderedForId == user.Id);
+            if (activeLicenses.Count(x => x.FillPerfectLicenses.Any(y => y.ExpirationDate >= orgLicense.ExpirationDate)) > 0)
+                return false;
+
+            return true;
+                
         }
     }
 }
