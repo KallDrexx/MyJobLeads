@@ -16,7 +16,9 @@ namespace MyJobLeads.DomainModel.EntityMapping.Mappings.CustomConverters
             var result = (OrganizationMemberStatisticsViewModel)context.DestinationValue ?? new OrganizationMemberStatisticsViewModel();
             result.MemberStats = new List<OrganizationMemberStatisticsViewModel.MemberStatistic>();
 
-            foreach (var user in (IList<User>)context.SourceValue)
+            var users = ((IList<User>)context.SourceValue).Where(x => x.LastVisitedJobSearchId != null);
+
+            foreach (var user in users)
             {
                 var stat = new OrganizationMemberStatisticsViewModel.MemberStatistic
                 {

@@ -32,3 +32,5 @@ _ReSharper*/
 *.swp
 *.swp
 *.pubxml
+data/
+!.nuget/nuget.exe

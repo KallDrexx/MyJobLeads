@@ -14,7 +14,7 @@ namespace MyJobLeads.ViewModels.Ordering
         public DateTime LicenseEffectiveDate { get; set; }
         public bool AnotherLicenseAlreadyActive { get; set; }
         public bool MaxPurchaseExceeded { get; set; }
-
+        public int OrderId { get; set; }
         public bool OrderConfirmed { get; set; }
     }
 }
