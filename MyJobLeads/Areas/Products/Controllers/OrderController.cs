@@ -106,6 +106,12 @@ namespace MyJobLeads.Areas.Products.Controllers
                 EffectiveDate = model.ActivatedLicenseExpiratioDate >= model.EffectiveLicenseDate ? model.ActivatedLicenseExpiratioDate : model.EffectiveLicenseDate,
                 ExpirationDate = model.ExpirationDate
             });
+
+            // Make sure the user has a FP key
+            var user = _context.Users.Find(order.OrderedForId);
+            if (user.FillPerfectKey == null)
+                user.FillPerfectKey = Guid.NewGuid();
+
             _context.SaveChanges();
 
             // Show the user confirmation
@@ -113,7 +119,7 @@ namespace MyJobLeads.Areas.Products.Controllers
 
             return RedirectToAction(
                 MVC.Products.FillPerfect.LicenseActivated(
-                    (Guid)_context.Users.Find(order.OrderedForId).FillPerfectKey,
+                    (Guid)user.FillPerfectKey,
                     order.FillPerfectLicenses.First().EffectiveDate,
                     order.FillPerfectLicenses.First().ExpirationDate,
                     "License granted by " + orgName));
