@@ -63,14 +63,14 @@
                 {
                     using (Html.FieldValueDisplay("FillPerfect License Expired: "))
                     {
-                        @Model.FpExpirationDate.Value.ToShortDateString();
+                        <span class="expired">@Model.FpExpirationDate.Value.ToShortDateString()</span>
                     }
                 }
                 else
                 {
                     using (Html.FieldValueDisplay("FillPerfect License Expires: "))
                     {
-                        @Model.FpExpirationDate.Value.ToShortDateString();
+                        @Model.FpExpirationDate.Value.ToShortDateString()
                     }
                 }
             }
